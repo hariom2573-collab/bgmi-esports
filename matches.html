@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,189 +11,548 @@ content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no
 
 <meta name="theme-color" content="#050B18">
 
-<title>BGMI Matches</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<title>My Matches</title>
 
 <style>
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
--webkit-tap-highlight-color:transparent;
-}
-
-html{
-scroll-behavior:smooth;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Inter,Arial,sans-serif;
 }
 
 body{
+    min-height:100vh;
+    background:
+    radial-gradient(circle at top,#17233d 0%,#07101f 38%,#02050b 100%);
+    color:#fff;
+    padding:18px;
+}
 
-background:#050B18;
-color:#fff;
-overflow-x:hidden;
+.container{
+    width:100%;
+    max-width:520px;
+    margin:auto;
+}
+
+/* HEADER */
+
+.header{
+    margin-bottom:20px;
+}
+
+.header-title{
+    font-size:24px;
+    font-weight:800;
+}
+
+.header-subtitle{
+    color:#8795aa;
+    font-size:12px;
+    margin-top:5px;
+}
+
+
+/* TABS */
+
+.tabs{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    padding:5px;
+    background:#0b1424;
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:15px;
+    margin-bottom:18px;
+}
+
+.tab{
+    border:0;
+    padding:12px 8px;
+    border-radius:11px;
+    background:transparent;
+    color:#8c99ad;
+    font-size:14px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.tab.active{
+    background:linear-gradient(135deg,#1d4ed8,#2563eb);
+    color:#fff;
+    box-shadow:0 6px 20px rgba(37,99,235,.22);
+}
+
+
+/* COUNT */
+
+.count-card{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 16px;
+    margin-bottom:15px;
+    background:
+    linear-gradient(135deg,rgba(20,32,54,.95),rgba(7,14,26,.98));
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:16px;
+}
+
+.count-label{
+    color:#8f9db1;
+    font-size:12px;
+}
+
+.count-number{
+    font-size:21px;
+    font-weight:800;
+}
+
+
+/* MATCH CARD */
+
+.match-card{
+    position:relative;
+    background:
+    linear-gradient(145deg,rgba(19,31,52,.98),rgba(5,10,19,.98));
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;
+    padding:17px;
+    margin-bottom:13px;
+    overflow:hidden;
+    box-shadow:0 12px 30px rgba(0,0,0,.22);
+    cursor:pointer;
+    transition:.18s ease;
+}
+
+.match-card:active{
+    transform:scale(.98);
+}
+
+.match-card::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:4px;
+    height:100%;
+    background:#2563eb;
+}
+
+.match-card.played::before{
+    background:#64748b;
+}
+
+
+/* TOP */
+
+.match-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:10px;
+    margin-bottom:13px;
+}
+
+.match-name{
+    font-size:17px;
+    font-weight:800;
+}
+
+.match-type{
+    color:#8390a4;
+    font-size:11px;
+    margin-top:4px;
+}
+
+.status{
+    padding:6px 9px;
+    border-radius:8px;
+    font-size:10px;
+    font-weight:800;
+    white-space:nowrap;
+}
+
+.status.upcoming{
+    color:#86efac;
+    background:rgba(34,197,94,.10);
+    border:1px solid rgba(34,197,94,.20);
+}
+
+.status.played{
+    color:#aeb8c8;
+    background:rgba(100,116,139,.12);
+    border:1px solid rgba(100,116,139,.20);
+}
+
+
+/* DETAILS */
+
+.details{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+}
+
+.detail{
+    padding:10px;
+    background:rgba(255,255,255,.035);
+    border-radius:11px;
+}
+
+.detail-label{
+    color:#78869a;
+    font-size:10px;
+    margin-bottom:4px;
+}
+
+.detail-value{
+    color:#e8edf5;
+    font-size:12px;
+    font-weight:700;
+}
+
+
+/* BOTTOM */
+
+.slot-box{
+    margin-top:12px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-top:12px;
+    border-top:1px solid rgba(255,255,255,.06);
+}
+
+.slot-label{
+    color:#8290a4;
+    font-size:11px;
+}
+
+.slot-value{
+    color:#FFD700;
+    font-size:14px;
+    font-weight:800;
+}
+
+.tap-text{
+    margin-top:12px;
+    color:#64748b;
+    font-size:10px;
+    text-align:right;
+}
+
+
+/* EMPTY */
+
+.empty{
+    text-align:center;
+    padding:55px 20px;
+    color:#7d8a9e;
+}
+
+.empty-icon{
+    font-size:42px;
+    margin-bottom:12px;
+}
+
+.empty-title{
+    color:#d9e0eb;
+    font-size:16px;
+    font-weight:700;
+    margin-bottom:6px;
+}
+
+.empty-text{
+    font-size:12px;
+    line-height:1.5;
+}
+
+
+/* LOADING */
+
+.loading{
+    text-align:center;
+    padding:50px 20px;
+    color:#8997ab;
+    font-size:13px;
+}
+
+.spinner{
+    width:30px;
+    height:30px;
+    border:3px solid rgba(255,255,255,.10);
+    border-top-color:#2563eb;
+    border-radius:50%;
+    margin:0 auto 12px;
+    animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+
+/* MODAL */
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+
+    display:none;
+    align-items:flex-end;
+    justify-content:center;
+
+    background:rgba(0,0,0,.72);
+    backdrop-filter:blur(7px);
+
+    padding:15px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+    max-width:520px;
+    max-height:90vh;
+    overflow-y:auto;
+
+    background:
+    linear-gradient(
+        145deg,
+        #101c30,
+        #050b15
+    );
+
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:24px 24px 18px 18px;
+
+    padding:20px;
+
+    box-shadow:0 -10px 50px rgba(0,0,0,.55);
+
+    animation:slideUp .22s ease;
+}
+
+@keyframes slideUp{
+
+    from{
+        transform:translateY(30px);
+        opacity:0;
+    }
+
+    to{
+        transform:translateY(0);
+        opacity:1;
+    }
 
 }
 
-/* Background */
 
-body::before{
+/* MODAL HEADER */
 
-content:"";
-position:fixed;
-inset:0;
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
 
-background:
-
-radial-gradient(circle at top left,
-rgba(34,197,94,.18),
-transparent 35%),
-
-radial-gradient(circle at top right,
-rgba(37,99,235,.18),
-transparent 35%),
-
-radial-gradient(circle at bottom,
-rgba(168,85,247,.15),
-transparent 40%),
-
-#050B18;
-
-z-index:-10;
-
+    margin-bottom:18px;
 }
 
-/* Glow */
-
-.glow{
-
-position:fixed;
-border-radius:50%;
-filter:blur(90px);
-opacity:.45;
-z-index:-9;
-animation:moveGlow 10s linear infinite alternate;
-
+.modal-title{
+    font-size:20px;
+    font-weight:800;
 }
 
-.glow1{
-
-width:230px;
-height:230px;
-background:#22c55e;
-top:-80px;
-left:-80px;
-
+.modal-subtitle{
+    color:#8190a5;
+    font-size:11px;
+    margin-top:5px;
 }
 
-.glow2{
+.close-btn{
+    width:36px;
+    height:36px;
 
-width:220px;
-height:220px;
-background:#2563eb;
-right:-80px;
-top:120px;
-animation-delay:2s;
+    border:0;
+    border-radius:11px;
 
+    background:#182338;
+    color:#fff;
+
+    font-size:20px;
+    cursor:pointer;
 }
 
-.glow3{
 
-width:220px;
-height:220px;
-background:#9333ea;
-left:35%;
-bottom:-70px;
-animation-delay:4s;
+/* ROOM BOX */
 
+.room-box{
+    padding:17px;
+    border-radius:17px;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(37,99,235,.16),
+        rgba(20,35,60,.55)
+    );
+
+    border:1px solid rgba(59,130,246,.25);
+
+    margin-bottom:14px;
 }
 
-@keyframes moveGlow{
-
-100%{
-
-transform:translate(40px,40px);
-
+.room-title{
+    font-size:12px;
+    color:#8ea0ba;
+    margin-bottom:13px;
 }
 
+.room-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+
+    padding:11px 0;
+
+    border-bottom:1px solid rgba(255,255,255,.07);
 }
 
-/* Splash */
-
-#splash{
-
-position:fixed;
-inset:0;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-background:#050B18;
-z-index:999999;
-
+.room-row:last-child{
+    border-bottom:0;
 }
 
-.logo{
-
-width:120px;
-height:120px;
-border-radius:50%;
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:55px;
-
-background:linear-gradient(135deg,#16a34a,#22c55e);
-
-box-shadow:
-
-0 0 40px rgba(34,197,94,.55),
-
-0 0 80px rgba(34,197,94,.20);
-
-animation:pulse 1.5s infinite;
-
+.room-label{
+    color:#8190a5;
+    font-size:11px;
 }
 
-@keyframes pulse{
-
-50%{
-
-transform:scale(1.08);
-
+.room-value{
+    color:#fff;
+    font-size:15px;
+    font-weight:800;
+    word-break:break-all;
+    text-align:right;
 }
 
+.password{
+    color:#FFD700;
 }
 
-.logoTitle{
 
-margin-top:22px;
-font-size:28px;
-font-weight:800;
+/* COPY */
 
+.copy-btn{
+    margin-top:7px;
+
+    width:100%;
+
+    padding:12px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:12px;
+
+    background:#121d30;
+
+    color:#dce5f3;
+
+    font-size:12px;
+    font-weight:700;
+
+    cursor:pointer;
 }
 
-.logoSub{
-
-margin-top:8px;
-font-size:13px;
-color:#94a3b8;
-
+.copy-btn:active{
+    transform:scale(.98);
 }
 
-.app{
 
-display:none;
-width:100%;
-max-width:500px;
-margin:auto;
-padding-bottom:100px;
+/* OPEN ROOM */
+
+.open-room{
+    display:none;
+
+    width:100%;
+
+    padding:13px;
+
+    margin-top:9px;
+
+    border:0;
+    border-radius:13px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #22c55e,
+        #16a34a
+    );
+
+    color:#fff;
+
+    font-size:13px;
+    font-weight:800;
+
+    cursor:pointer;
+
+    text-align:center;
+    text-decoration:none;
+}
+
+
+/* INFO */
+
+.info-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+}
+
+.info{
+    padding:12px;
+    background:rgba(255,255,255,.035);
+    border-radius:12px;
+}
+
+.info-label{
+    color:#718096;
+    font-size:10px;
+    margin-bottom:5px;
+}
+
+.info-value{
+    color:#e8edf5;
+    font-size:12px;
+    font-weight:700;
+}
+
+
+/* MOBILE */
+
+@media(max-width:360px){
+
+    body{
+        padding:13px;
+    }
+
+    .match-name{
+        font-size:15px;
+    }
+
+    .status{
+        font-size:9px;
+        padding:5px 7px;
+    }
 
 }
 
@@ -200,749 +560,1366 @@ padding-bottom:100px;
 
 </head>
 
+
 <body>
 
-<div class="glow glow1"></div>
-<div class="glow glow2"></div>
-<div class="glow glow3"></div>
 
-<div id="splash">
+<div class="container">
 
-<div class="logo">
-🎮
-</div>
 
-<div class="logoTitle">
-BGMI MATCHES
-</div>
+    <!-- HEADER -->
 
-<div class="logoSub">
-Loading Matches...
-</div>
+    <div class="header">
 
-</div>
+        <div class="header-title">
+            My Matches
+        </div>
 
-<div class="app" id="app">
-    <!-- ==========================
-PART 1B
-HEADER + TABS + FILTER
-========================== -->
+        <div class="header-subtitle">
+            Your joined & played matches
+        </div>
 
-<style>
+    </div>
 
-.header{
 
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:18px;
+    <!-- TABS -->
 
-}
+    <div class="tabs">
 
-.profile{
+        <button
+            id="upcomingTab"
+            class="tab active"
+            onclick="showTab('upcoming')">
 
-display:flex;
-align-items:center;
-gap:12px;
+            🟢 Upcoming
 
-}
+        </button>
 
-.avatar{
 
-width:58px;
-height:58px;
-border-radius:50%;
-overflow:hidden;
-border:2px solid #22c55e;
-background:#1e293b;
+        <button
+            id="playedTab"
+            class="tab"
+            onclick="showTab('played')">
 
-}
+            🎮 Played
 
-.avatar img{
+        </button>
 
-width:100%;
-height:100%;
-object-fit:cover;
+    </div>
 
-}
 
-.userInfo h2{
+    <!-- COUNT -->
 
-font-size:19px;
-font-weight:700;
+    <div class="count-card">
 
-}
+        <div>
 
-.userInfo p{
+            <div class="count-label">
+                TOTAL MATCHES
+            </div>
 
-font-size:12px;
-color:#94a3b8;
-margin-top:4px;
+            <div style="margin-top:3px;font-size:13px;">
+                Your match history
+            </div>
 
-}
+        </div>
 
-.walletBox{
 
-display:flex;
-align-items:center;
-gap:8px;
-padding:10px 16px;
-border-radius:30px;
-background:#111827;
-border:1px solid rgba(255,255,255,.08);
-font-weight:700;
-color:#22c55e;
+        <div
+            id="totalCount"
+            class="count-number">
 
-}
+            0
 
-.tabs{
+        </div>
 
-display:flex;
-gap:12px;
-padding:0 18px;
-margin-top:10px;
-overflow-x:auto;
+    </div>
 
-}
 
-.tabs::-webkit-scrollbar{
+    <!-- MATCH LIST -->
 
-display:none;
+    <div id="matchesContainer">
 
-}
+        <div class="loading">
 
-.tabBtn{
+            <div class="spinner"></div>
 
-flex:0 0 auto;
-padding:11px 20px;
-border:none;
-border-radius:30px;
-background:#111827;
-color:#fff;
-font-size:14px;
-font-weight:700;
-cursor:pointer;
+            Loading your matches...
 
-}
+        </div>
 
-.tabBtn.active{
+    </div>
 
-background:#22c55e;
-color:#000;
-
-}
-
-.categoryBar{
-
-display:flex;
-gap:10px;
-padding:18px;
-overflow-x:auto;
-
-}
-
-.categoryBar::-webkit-scrollbar{
-
-display:none;
-
-}
-
-.categoryBtn{
-
-flex:0 0 auto;
-padding:10px 18px;
-border:none;
-border-radius:30px;
-background:#111827;
-color:#fff;
-font-weight:700;
-cursor:pointer;
-
-}
-
-.categoryBtn.active{
-
-background:#22c55e;
-color:#000;
-
-}
-
-.sectionTitle{
-
-padding:0 18px;
-margin-top:5px;
-margin-bottom:15px;
-font-size:22px;
-font-weight:700;
-
-}
-
-</style>
-
-<!-- HEADER -->
-
-<div class="header">
-
-<div class="profile">
-
-<div class="avatar">
-
-<img
-id="profilePhoto"
-src="https://i.imgur.com/6VBx3io.png">
 
 </div>
 
-<div class="userInfo">
 
-<h2 id="playerName">
-Loading...
-</h2>
+<!-- MATCH DETAILS MODAL -->
 
-<p id="playerEmail">
-Loading...
-</p>
+<div
+    id="matchModal"
+    class="modal"
+    onclick="closeOutside(event)">
+
+
+    <div
+        class="modal-box"
+        onclick="event.stopPropagation()">
+
+
+        <div class="modal-header">
+
+            <div>
+
+                <div
+                    id="modalTitle"
+                    class="modal-title">
+
+                    Match Details
+
+                </div>
+
+                <div
+                    id="modalSubtitle"
+                    class="modal-subtitle">
+
+                    Match information
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="close-btn"
+                onclick="closeModal()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <!-- ROOM -->
+
+        <div
+            id="roomSection"
+            class="room-box">
+
+
+            <div class="room-title">
+                🎮 ROOM INFORMATION
+            </div>
+
+
+            <div class="room-row">
+
+                <div class="room-label">
+                    ROOM ID
+                </div>
+
+                <div
+                    id="modalRoomId"
+                    class="room-value">
+
+                    --
+
+                </div>
+
+            </div>
+
+
+            <div class="room-row">
+
+                <div class="room-label">
+                    PASSWORD
+                </div>
+
+                <div
+                    id="modalPassword"
+                    class="room-value password">
+
+                    --
+
+                </div>
+
+            </div>
+
+
+            <button
+                id="copyRoomBtn"
+                class="copy-btn"
+                onclick="copyRoomDetails()">
+
+                📋 Copy Room ID & Password
+
+            </button>
+
+
+            <a
+                id="openRoomBtn"
+                class="open-room"
+                href="#"
+                target="_blank"
+                rel="noopener">
+
+                🎮 Open Room
+
+            </a>
+
+
+        </div>
+
+
+        <!-- MATCH INFO -->
+
+        <div class="info-grid">
+
+
+            <div class="info">
+
+                <div class="info-label">
+                    MATCH
+                </div>
+
+                <div
+                    id="modalMatchName"
+                    class="info-value">
+
+                    --
+
+                </div>
+
+            </div>
+
+
+            <div class="info">
+
+                <div class="info-label">
+                    TYPE
+                </div>
+
+                <div
+                    id="modalType"
+                    class="info-value">
+
+                    --
+
+                </div>
+
+            </div>
+
+
+            <div class="info">
+
+                <div class="info-label">
+                    DATE
+                </div>
+
+                <div
+                    id="modalDate"
+                    class="info-value">
+
+                    --
+
+                </div>
+
+            </div>
+
+
+            <div class="info">
+
+                <div class="info-label">
+                    TIME
+                </div>
+
+                <div
+                    id="modalTime"
+                    class="info-value">
+
+                    --
+
+                </div>
+
+            </div>
+
+
+            <div class="info">
+
+                <div class="info-label">
+                    MAP
+                </div>
+
+                <div
+                    id="modalMap"
+                    class="info-value">
+
+                    --
+
+                </div>
+
+            </div>
+
+
+            <div class="info">
+
+                <div class="info-label">
+                    YOUR SLOT
+                </div>
+
+                <div
+                    id="modalSlot"
+                    class="info-value">
+
+                    --
+
+                </div>
+
+            </div>
+
+
+            <div class="info">
+
+                <div class="info-label">
+                    ENTRY FEE
+                </div>
+
+                <div
+                    id="modalEntry"
+                    class="info-value">
+
+                    --
+
+                </div>
+
+            </div>
+
+
+            <div class="info">
+
+                <div class="info-label">
+                    STATUS
+                </div>
+
+                <div
+                    id="modalStatus"
+                    class="info-value">
+
+                    --
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
 
 </div>
 
-</div>
-
-<div class="walletBox">
-
-💰 ₹<span id="walletAmount">0</span>
-
-</div>
-
-</div>
-
-<!-- MATCH STATUS -->
-
-<div class="tabs">
-
-<button
-class="tabBtn active"
-onclick="changeStatus('upcoming',this)">
-Upcoming
-</button>
-
-<button
-class="tabBtn"
-onclick="changeStatus('live',this)">
-Live
-</button>
-
-<button
-class="tabBtn"
-onclick="changeStatus('completed',this)">
-Completed
-</button>
-
-</div>
-
-<!-- CATEGORY -->
-
-<div class="categoryBar">
-
-<button
-class="categoryBtn active"
-onclick="filterCategory('all',this)">
-ALL
-</button>
-
-<button
-class="categoryBtn"
-onclick="filterCategory('solo',this)">
-SOLO
-</button>
-
-<button
-class="categoryBtn"
-onclick="filterCategory('duo',this)">
-DUO
-</button>
-
-<button
-class="categoryBtn"
-onclick="filterCategory('squad',this)">
-SQUAD
-</button>
-
-<button
-class="categoryBtn"
-onclick="filterCategory('tdm',this)">
-TDM
-</button>
-
-</div>
-
-<h2 class="sectionTitle">
-
-🔥 BGMI Matches
-
-</h2>
-
-<div id="matchesContainer">
-
-</div>
-
-<script>
-
-let currentStatus="upcoming";
-
-let currentCategory="all";
-
-function changeStatus(status,btn){
-
-currentStatus=status;
-
-document.querySelectorAll(".tabBtn")
-.forEach(x=>x.classList.remove("active"));
-
-btn.classList.add("active");
-
-applyFilter();
-
-}
-
-function filterCategory(type,btn){
-
-currentCategory=type;
-
-document.querySelectorAll(".categoryBtn")
-.forEach(x=>x.classList.remove("active"));
-
-btn.classList.add("active");
-
-applyFilter();
-
-}
-
-</script>
-<!-- ==========================
-PART 1C
-MATCH CARD + FILTER SYSTEM
-========================== -->
-
-<style>
-
-.matchCard{
-
-margin:18px;
-background:#111827;
-border-radius:22px;
-overflow:hidden;
-border:1px solid rgba(255,255,255,.08);
-display:none;
-box-shadow:0 15px 30px rgba(0,0,0,.25);
-
-}
-
-.matchCard.show{
-
-display:block;
-
-}
-
-.matchBanner{
-
-width:100%;
-height:190px;
-position:relative;
-overflow:hidden;
-
-}
-
-.matchBanner img{
-
-width:100%;
-height:100%;
-object-fit:cover;
-
-}
-
-.bannerOverlay{
-
-position:absolute;
-left:0;
-right:0;
-bottom:0;
-padding:16px;
-
-background:linear-gradient(
-
-transparent,
-
-rgba(0,0,0,.88)
-
-);
-
-}
-
-.bannerOverlay h2{
-
-font-size:21px;
-font-weight:700;
-
-}
-
-.bannerOverlay p{
-
-margin-top:5px;
-font-size:13px;
-color:#d1d5db;
-
-}
-
-.matchBody{
-
-padding:18px;
-
-}
-
-.matchRow{
-
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin:12px 0;
-
-}
-
-.matchRow span{
-
-color:#9ca3af;
-font-size:14px;
-
-}
-
-.matchRow b{
-
-font-size:15px;
-
-}
-
-.progress{
-
-height:8px;
-border-radius:30px;
-background:#1f2937;
-overflow:hidden;
-margin:18px 0;
-
-}
-
-.progressFill{
-
-height:100%;
-width:0%;
-background:#22c55e;
-
-}
-
-.joinBtn{
-
-width:100%;
-height:50px;
-border:none;
-border-radius:14px;
-background:#22c55e;
-color:#000;
-font-size:16px;
-font-weight:700;
-cursor:pointer;
-transition:.25s;
-
-}
-
-.joinBtn:hover{
-
-transform:scale(1.02);
-
-}
-
-.emptyBox{
-
-padding:60px 20px;
-text-align:center;
-color:#94a3b8;
-
-}
-
-</style>
-
-<script>
-
-function applyFilter(){
-
-document.querySelectorAll(".matchCard").forEach(card=>{
-
-const status=card.dataset.status;
-
-const category=card.dataset.type;
-
-let visible=true;
-
-if(currentStatus!=="all"){
-
-visible=status===currentStatus;
-
-}
-
-if(currentCategory!=="all"){
-
-visible=visible && category===currentCategory;
-
-}
-
-card.classList.toggle("show",visible);
-
-});
-
-}
-
-</script>
-<!-- ==========================
-PART 2A
-FIREBASE + LOGIN + PROFILE
-========================== -->
 
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 
 import {
-getAuth,
-onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
 
 import {
-getDatabase,
-ref,
-onValue
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    getAuth,
+    onAuthStateChanged
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-/* Firebase Config */
 
-const firebaseConfig={
+import {
+    getDatabase,
+    ref,
+    onValue
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-apiKey:"AIzaSyDsJUtZdIXcsB0w_2MQhMBXxIgbI3ijOvg",
 
-authDomain:"incoinpaysliveearning.firebaseapp.com",
+const firebaseConfig = {
 
-databaseURL:"https://incoinpaysliveearning-default-rtdb.firebaseio.com",
+    apiKey:
+        "AIzaSyDsJUtZdIXcsB0w_2MQhMBXxIgbI3ijOvg",
 
-projectId:"incoinpaysliveearning",
+    authDomain:
+        "incoinpaysliveearning.firebaseapp.com",
 
-storageBucket:"incoinpaysliveearning.firebasestorage.app",
+    databaseURL:
+        "https://incoinpaysliveearning-default-rtdb.firebaseio.com",
 
-messagingSenderId:"971873814750",
+    projectId:
+        "incoinpaysliveearning",
 
-appId:"1:971873814750:web:7418c7da119e4725ed9a4f"
+    storageBucket:
+        "incoinpaysliveearning.firebasestorage.app",
+
+    messagingSenderId:
+        "971873814750",
+
+    appId:
+        "1:971873814750:web:7418c7da119e4725ed9a4f"
 
 };
 
-const app=initializeApp(firebaseConfig);
 
-const auth=getAuth(app);
+const app =
+    initializeApp(firebaseConfig);
 
-const db=getDatabase(app);
 
-let currentUser=null;
+const auth =
+    getAuth(app);
 
-/* Login Check */
 
-onAuthStateChanged(auth,(user)=>{
+const db =
+    getDatabase(app);
 
-if(!user){
 
-location.href="index.html";
+const container =
+    document.getElementById(
+        "matchesContainer"
+    );
 
-return;
+
+const totalCount =
+    document.getElementById(
+        "totalCount"
+    );
+
+
+let allMatches = [];
+
+let currentTab = "upcoming";
+
+let selectedMatch = null;
+
+
+/* AUTH */
+
+onAuthStateChanged(
+    auth,
+    (user) => {
+
+
+        if(!user){
+
+            location.href =
+                "index.html";
+
+            return;
+
+        }
+
+
+        /*
+         * USER MATCHES
+         *
+         * users
+         *   UID
+         *      matches
+         *          MATCH_ID
+         */
+
+        const matchesRef =
+            ref(
+                db,
+                "users/" +
+                user.uid +
+                "/matches"
+            );
+
+
+        onValue(
+            matchesRef,
+            (snapshot) => {
+
+
+                allMatches = [];
+
+
+                if(snapshot.exists()){
+
+
+                    const data =
+                        snapshot.val();
+
+
+                    Object.keys(data)
+                        .forEach(
+                            (id) => {
+
+
+                                const match =
+                                    data[id] || {};
+
+
+                                allMatches.push({
+
+                                    id:id,
+
+                                    ...match
+
+                                });
+
+
+                            }
+                        );
+
+                }
+
+
+                /*
+                 * Latest first
+                 */
+
+                allMatches.sort(
+                    (a,b) => {
+
+
+                        const aTime =
+                            Number(
+                                a.timestamp ||
+                                a.joinedAt ||
+                                0
+                            );
+
+
+                        const bTime =
+                            Number(
+                                b.timestamp ||
+                                b.joinedAt ||
+                                0
+                            );
+
+
+                        return bTime - aTime;
+
+                    }
+                );
+
+
+                totalCount.innerText =
+                    allMatches.length;
+
+
+                renderMatches();
+
+            }
+        );
+
+
+    }
+);
+
+
+/* TAB */
+
+window.showTab =
+function(tab){
+
+
+    currentTab =
+        tab;
+
+
+    document
+        .getElementById(
+            "upcomingTab"
+        )
+        .classList.toggle(
+            "active",
+            tab === "upcoming"
+        );
+
+
+    document
+        .getElementById(
+            "playedTab"
+        )
+        .classList.toggle(
+            "active",
+            tab === "played"
+        );
+
+
+    renderMatches();
+
+};
+
+
+/* PLAYED CHECK */
+
+function isPlayed(match){
+
+
+    if(
+        match.played === true ||
+        match.played === "true"
+    ){
+
+        return true;
+
+    }
+
+
+    const status =
+        String(
+            match.status || ""
+        ).toLowerCase();
+
+
+    if(
+        status === "completed" ||
+        status === "played" ||
+        status === "finished"
+    ){
+
+        return true;
+
+    }
+
+
+    if(
+        match.matchPlayed === true ||
+        match.matchPlayed === "true"
+    ){
+
+        return true;
+
+    }
+
+
+    return false;
 
 }
 
-currentUser=user;
 
-loadProfile(user.uid);
+/* RENDER */
 
-});
+function renderMatches(){
 
-/* Load Profile */
 
-function loadProfile(uid){
+    container.innerHTML =
+        "";
 
-onValue(ref(db,"users/"+uid),(snap)=>{
 
-if(!snap.exists()) return;
+    const filtered =
+        allMatches.filter(
+            (match) => {
 
-const data=snap.val();
 
-document.getElementById("playerName").innerHTML=
-data.name || "Player";
+                const played =
+                    isPlayed(match);
 
-document.getElementById("playerEmail").innerHTML=
-data.email || "";
 
-document.getElementById("walletAmount").innerHTML=
-Math.floor(Number(data.wallet || 0));
+                if(
+                    currentTab ===
+                    "played"
+                ){
 
-if(data.photo){
+                    return played;
 
-document.getElementById("profilePhoto").src=data.photo;
+                }
 
-}
 
-});
+                return !played;
 
-}
-/* ==========================
-PART 2B
-LOAD MATCHES FROM FIREBASE
-========================== */
+            }
+        );
 
-onValue(ref(db,"matches"),(snap)=>{
 
-const container=document.getElementById("matchesContainer");
+    if(
+        filtered.length === 0
+    ){
 
-container.innerHTML="";
 
-if(!snap.exists()){
+        container.innerHTML = `
 
-container.innerHTML=`
-<div class="emptyBox">
-No Matches Available
-</div>
-`;
+            <div class="empty">
 
-return;
+                <div class="empty-icon">
 
-}
+                    ${
+                        currentTab === "played"
+                        ? "🎮"
+                        : "🏆"
+                    }
 
-snap.forEach((item)=>{
+                </div>
 
-const m=item.val();
 
-const booked=Number(m.booked || 0);
-const total=Number(m.total || 100);
+                <div class="empty-title">
 
-const percent=Math.min((booked/total)*100,100);
+                    ${
+                        currentTab === "played"
+                        ? "No Played Matches"
+                        : "No Upcoming Matches"
+                    }
 
-container.innerHTML+=`
+                </div>
 
-<div class="matchCard show"
 
-data-status="${m.status || 'upcoming'}"
+                <div class="empty-text">
 
-data-type="${m.type || 'solo'}">
+                    ${
+                        currentTab === "played"
+                        ? "Aapne abhi tak koi match complete nahi kiya."
+                        : "Aapne abhi tak koi upcoming match join nahi kiya."
+                    }
 
-<div class="matchBanner">
+                </div>
 
-<img src="${
-match.image && match.image.includes('pexels.com/photo/')
-?
-'https://images.pexels.com/photos/'+match.image.split('-').pop().replace('/','')+'/pexels-photo-'+match.image.split('-').pop().replace('/','')+'.jpeg'
-:
-(match.image || 'https://via.placeholder.com/700x350')
-}">
+            </div>
 
-<div class="bannerOverlay">
+        `;
 
-<h2>${m.title || 'BGMI MATCH'}</h2>
 
-<p>${m.date || ''} • ${m.time || ''}</p>
+        return;
 
-</div>
+    }
 
-</div>
 
-<div class="matchBody">
+    filtered.forEach(
+        (match) => {
 
-<div class="matchRow">
-<span>Mode</span>
-<b>${(m.type || "solo").toUpperCase()}</b>
-</div>
 
-<div class="matchRow">
-<span>Entry Fee</span>
-<b>₹${m.entry || 0}</b>
-</div>
+            container.appendChild(
+                createMatchCard(match)
+            );
 
-<div class="matchRow">
-<span>Prize Pool</span>
-<b>₹${m.prize || 0}</b>
-</div>
 
-<div class="matchRow">
-<span>Booked Slots</span>
-<b>${booked}/${total}</b>
-</div>
-
-<div class="progress">
-
-<div class="progressFill"
-
-style="width:${percent}%">
-
-</div>
-
-</div>
-
-<button class="joinBtn"
-
-onclick="location.href='match.html?id=${item.key}'">
-
-JOIN MATCH
-
-</button>
-
-</div>
-
-</div>
-
-`;
-
-});
-
-applyFilter();
-
-});
-/* ==========================
-PART 2C
-MATCH BUTTON + SPLASH + END
-========================== */
-
-/* ROOM FULL */
-
-document.addEventListener("click",(e)=>{
-
-if(!e.target.classList.contains("joinBtn")) return;
-
-if(e.target.dataset.full==="true"){
-
-alert("Room Full");
+        }
+    );
 
 }
 
-});
 
-/* Hide Splash */
+/* CARD */
 
-window.addEventListener("load",()=>{
+function createMatchCard(
+    match
+){
 
-setTimeout(()=>{
 
-document.getElementById("splash").style.display="none";
+    const played =
+        isPlayed(match);
 
-document.getElementById("app").style.display="block";
 
-},1800);
+    const card =
+        document.createElement(
+            "div"
+        );
 
-});
+
+    card.className =
+        "match-card" +
+        (
+            played
+            ? " played"
+            : ""
+        );
+
+
+    const name =
+        escapeHTML(
+            match.name ||
+            match.title ||
+            match.matchName ||
+            "BGMI Match"
+        );
+
+
+    const type =
+        escapeHTML(
+            match.type ||
+            match.matchType ||
+            "Match"
+        );
+
+
+    const date =
+        escapeHTML(
+            match.date ||
+            match.matchDate ||
+            "--"
+        );
+
+
+    const time =
+        escapeHTML(
+            match.time ||
+            match.matchTime ||
+            "--"
+        );
+
+
+    const room =
+        escapeHTML(
+            match.roomId ||
+            match.room ||
+            "--"
+        );
+
+
+    const map =
+        escapeHTML(
+            match.map ||
+            "Erangel"
+        );
+
+
+    const slot =
+        escapeHTML(
+            String(
+                match.slot ||
+                match.slotNumber ||
+                "--"
+            )
+        );
+
+
+    const entry =
+        escapeHTML(
+            match.entryFee !==
+            undefined
+            ? "₹" +
+              match.entryFee
+            : "--"
+        );
+
+
+    card.innerHTML = `
+
+        <div class="match-top">
+
+            <div>
+
+                <div class="match-name">
+                    ${name}
+                </div>
+
+                <div class="match-type">
+                    ${type}
+                </div>
+
+            </div>
+
+
+            <div class="status ${
+                played
+                ? "played"
+                : "upcoming"
+            }">
+
+                ${
+                    played
+                    ? "✓ PLAYED"
+                    : "● UPCOMING"
+                }
+
+            </div>
+
+        </div>
+
+
+        <div class="details">
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    DATE
+                </div>
+
+                <div class="detail-value">
+                    📅 ${date}
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    TIME
+                </div>
+
+                <div class="detail-value">
+                    ⏰ ${time}
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    MAP
+                </div>
+
+                <div class="detail-value">
+                    🗺️ ${map}
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    ROOM ID
+                </div>
+
+                <div class="detail-value">
+                    ${room}
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="slot-box">
+
+            <div>
+
+                <div class="slot-label">
+                    YOUR SLOT
+                </div>
+
+                <div class="slot-value">
+                    Slot ${slot}
+                </div>
+
+            </div>
+
+
+            <div style="text-align:right;">
+
+                <div class="slot-label">
+                    ENTRY
+                </div>
+
+                <div
+                    class="detail-value"
+                    style="color:#22c55e;">
+
+                    ${entry}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="tap-text">
+
+            Tap to view match details →
+
+        </div>
+
+    `;
+
+
+    card.onclick =
+        function(){
+
+            openMatchDetails(
+                match
+            );
+
+        };
+
+
+    return card;
+
+}
+
+
+/* OPEN DETAILS */
+
+window.openMatchDetails =
+function(match){
+
+
+    selectedMatch =
+        match;
+
+
+    const name =
+        match.name ||
+        match.title ||
+        match.matchName ||
+        "BGMI Match";
+
+
+    const type =
+        match.type ||
+        match.matchType ||
+        "Match";
+
+
+    const date =
+        match.date ||
+        match.matchDate ||
+        "--";
+
+
+    const time =
+        match.time ||
+        match.matchTime ||
+        "--";
+
+
+    const map =
+        match.map ||
+        "Erangel";
+
+
+    const slot =
+        match.slot ||
+        match.slotNumber ||
+        "--";
+
+
+    const entry =
+        match.entryFee !==
+        undefined
+        ? "₹" +
+          match.entryFee
+        : "--";
+
+
+    const roomId =
+        match.roomId ||
+        match.room ||
+        "--";
+
+
+    const password =
+        match.password ||
+        match.roomPassword ||
+        match.pass ||
+        "--";
+
+
+    const status =
+        isPlayed(match)
+        ? "✓ Played"
+        : "● Upcoming";
+
+
+    document.getElementById(
+        "modalTitle"
+    ).innerText =
+        name;
+
+
+    document.getElementById(
+        "modalSubtitle"
+    ).innerText =
+        "Match ID: " +
+        match.id;
+
+
+    document.getElementById(
+        "modalRoomId"
+    ).innerText =
+        roomId;
+
+
+    document.getElementById(
+        "modalPassword"
+    ).innerText =
+        password;
+
+
+    document.getElementById(
+        "modalMatchName"
+    ).innerText =
+        name;
+
+
+    document.getElementById(
+        "modalType"
+    ).innerText =
+        type;
+
+
+    document.getElementById(
+        "modalDate"
+    ).innerText =
+        date;
+
+
+    document.getElementById(
+        "modalTime"
+    ).innerText =
+        time;
+
+
+    document.getElementById(
+        "modalMap"
+    ).innerText =
+        map;
+
+
+    document.getElementById(
+        "modalSlot"
+    ).innerText =
+        "Slot " + slot;
+
+
+    document.getElementById(
+        "modalEntry"
+    ).innerText =
+        entry;
+
+
+    document.getElementById(
+        "modalStatus"
+    ).innerText =
+        status;
+
+
+    /*
+     * Room link
+     */
+
+    const openBtn =
+        document.getElementById(
+            "openRoomBtn"
+        );
+
+
+    const roomLink =
+        match.roomLink ||
+        match.link ||
+        match.joinLink ||
+        "";
+
+
+    if(
+        roomLink &&
+        !isPlayed(match)
+    ){
+
+        openBtn.href =
+            roomLink;
+
+        openBtn.style.display =
+            "block";
+
+    }else{
+
+        openBtn.style.display =
+            "none";
+
+    }
+
+
+    /*
+     * Room section
+     *
+     * Played match me bhi
+     * details visible rahenge,
+     * lekin Open Room hide hoga.
+     */
+
+    document.getElementById(
+        "roomSection"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "matchModal"
+    ).classList.add(
+        "show"
+    );
+
+
+    document.body.style.overflow =
+        "hidden";
+
+};
+
+
+/* CLOSE */
+
+window.closeModal =
+function(){
+
+
+    document.getElementById(
+        "matchModal"
+    ).classList.remove(
+        "show"
+    );
+
+
+    document.body.style.overflow =
+        "";
+
+};
+
+
+window.closeOutside =
+function(event){
+
+
+    if(
+        event.target.id ===
+        "matchModal"
+    ){
+
+        closeModal();
+
+    }
+
+};
+
+
+/* COPY */
+
+window.copyRoomDetails =
+async function(){
+
+
+    if(!selectedMatch){
+        return;
+    }
+
+
+    const roomId =
+        selectedMatch.roomId ||
+        selectedMatch.room ||
+        "--";
+
+
+    const password =
+        selectedMatch.password ||
+        selectedMatch.roomPassword ||
+        selectedMatch.pass ||
+        "--";
+
+
+    const text =
+        "Room ID: " +
+        roomId +
+        "\nPassword: " +
+        password;
+
+
+    try{
+
+
+        await navigator.clipboard.writeText(
+            text
+        );
+
+
+        document.getElementById(
+            "copyRoomBtn"
+        ).innerText =
+            "✓ Copied";
+
+
+        setTimeout(
+            () => {
+
+                document.getElementById(
+                    "copyRoomBtn"
+                ).innerText =
+                    "📋 Copy Room ID & Password";
+
+            },
+            1500
+        );
+
+
+    }catch(error){
+
+        alert(
+            "Copy failed. Room ID: " +
+            roomId +
+            " | Password: " +
+            password
+        );
+
+    }
+
+};
+
+
+/* ESCAPE HTML */
+
+function escapeHTML(value){
+
+    return String(value)
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+/* ESC KEY */
+
+document.addEventListener(
+    "keydown",
+    (event) => {
+
+        if(
+            event.key ===
+            "Escape"
+        ){
+
+            closeModal();
+
+        }
+
+    }
+);
 
 </script>
-
-</div>
 
 </body>
 
 </html>
+
