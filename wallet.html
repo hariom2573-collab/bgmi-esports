@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<meta name="theme-color" content="#050B18">
+
+<title>Premium Wallet</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+-webkit-tap-highlight-color:transparent;
+}
+
+
+body{
+
+background:#050B18;
+color:white;
+min-height:100vh;
+overflow-x:hidden;
+
+}
+
+
+body::before{
+
+content:"";
+
+position:fixed;
+
+inset:0;
+
+background:
+radial-gradient(circle at top left,#22c55e33,transparent 35%),
+radial-gradient(circle at top right,#2563eb33,transparent 35%),
+#050B18;
+
+z-index:-1;
+
+}
+
+
+
+.app{
+
+width:100%;
+max-width:500px;
+margin:auto;
+padding:18px;
+padding-bottom:100px;
+
+}
+
+
+
+/* WALLET CARD */
+
+
+.walletCard{
+
+background:
+linear-gradient(135deg,#16a34a,#22c55e);
+
+border-radius:25px;
+
+padding:25px;
+
+box-shadow:
+0 20px 40px #0008;
+
+margin-bottom:20px;
+
+}
+
+
+.label{
+
+font-size:14px;
+opacity:.9;
+
+}
+
+
+.balance{
+
+font-size:42px;
+font-weight:800;
+
+margin-top:10px;
+
+}
+
+
+.walletRow{
+
+display:flex;
+justify-content:space-between;
+
+margin-top:30px;
+
+}
+
+
+.small{
+
+font-size:12px;
+opacity:.8;
+
+}
+
+
+.smallValue{
+
+font-size:18px;
+font-weight:700;
+
+}
+
+
+
+/* CARD */
+
+.card{
+
+background:#111827;
+
+border-radius:20px;
+
+padding:20px;
+
+margin-bottom:20px;
+
+border:1px solid #ffffff15;
+
+}
+
+
+
+.title{
+
+font-size:20px;
+
+font-weight:700;
+
+margin-bottom:15px;
+
+}
+
+
+
+/* BUTTON */
+
+
+.btn{
+
+width:100%;
+
+height:55px;
+
+border:none;
+
+border-radius:14px;
+
+font-size:16px;
+
+font-weight:700;
+
+cursor:pointer;
+
+}
+
+
+.green{
+
+background:#22c55e;
+color:#000;
+
+}
+
+
+.blue{
+
+background:#2563eb;
+color:white;
+
+}
+
+
+
+.grid{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:12px;
+
+}
+
+
+
+/* HISTORY */
+
+
+.history{
+
+display:flex;
+
+justify-content:space-between;
+
+padding:15px 0;
+
+border-bottom:1px solid #ffffff12;
+
+}
+
+
+.credit{
+
+color:#22c55e;
+
+}
+
+
+.debit{
+
+color:#ef4444;
+
+}
+
+
+.time{
+
+font-size:12px;
+
+color:#94a3b8;
+
+}
+
+
+
+/* MODAL */
+
+
+.modal{
+
+display:none;
+
+position:fixed;
+
+inset:0;
+
+background:#000b;
+
+justify-content:center;
+
+align-items:center;
+
+padding:20px;
+
+z-index:999;
+
+
+}
+
+
+.box{
+
+background:#111827;
+
+width:100%;
+
+max-width:400px;
+
+border-radius:22px;
+
+padding:22px;
+
+}
+
+
+.close{
+
+float:right;
+
+font-size:30px;
+
+cursor:pointer;
+
+}
+
+
+
+input{
+
+width:100%;
+
+height:50px;
+
+margin-top:12px;
+
+background:#1f2937;
+
+border:none;
+
+border-radius:12px;
+
+padding:0 15px;
+
+color:white;
+
+font-size:15px;
+
+outline:none;
+
+}
+
+
+
+.qr{
+
+width:220px;
+
+height:220px;
+
+background:white;
+
+display:block;
+
+margin:20px auto;
+
+border-radius:15px;
+
+}
+
+
+
+.text{
+
+text-align:center;
+
+color:#22c55e;
+
+font-weight:600;
+
+}
+
+
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+
+<div class="app">
+
+
+
+<!-- WALLET -->
+
+
+<div class="walletCard">
+
+
+<div class="label">
+Available Balance
+</div>
+
+
+<div class="balance" id="walletBalance">
+
+₹0
+
+</div>
+
+
+
+<div class="walletRow">
+
+
+<div>
+
+<div class="small">
+Bonus Balance
+</div>
+
+
+<div class="smallValue" id="bonusBalance">
+₹0
+</div>
+
+</div>
+
+
+
+<div style="text-align:right">
+
+
+<div class="small">
+Withdrawable
+</div>
+
+
+<div class="smallValue" id="withdrawableBalance">
+₹0
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- ACTION -->
+
+
+<div class="card">
+
+
+<div class="title">
+Wallet Action
+</div>
+
+
+<div class="grid">
+
+
+<button class="btn green"
+onclick="openAddMoney()">
+
+Add Money
+
+</button>
+
+
+
+<button class="btn blue"
+onclick="openWithdraw()">
+
+Withdraw
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- HISTORY -->
+
+
+<div class="card">
+
+
+<div class="title">
+
+Transaction History
+
+</div>
+
+
+<div id="historyList">
+
+
+<center style="color:#94a3b8">
+
+No Transaction
+
+</center>
+
+
+</div>
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- ADD MONEY MODAL -->
+
+
+<div class="modal" id="addModal">
+
+
+<div class="box">
+
+
+<span class="close"
+onclick="closeAddMoney()">
+
+×
+
+</span>
+
+
+<h2>
+Add Money
+</h2>
+
+
+
+<img id="adminQR"
+class="qr"
+src="">
+
+
+
+<div class="text"
+id="adminUPI">
+
+Loading UPI...
+
+</div>
+
+
+
+<input
+id="depositAmount"
+type="number"
+placeholder="Enter Amount">
+
+
+
+<input
+id="utr"
+placeholder="Enter Transaction ID">
+
+
+
+<button
+class="btn green"
+style="margin-top:15px"
+onclick="submitDeposit()">
+
+Submit Payment
+
+</button>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- WITHDRAW MODAL -->
+
+
+<div class="modal" id="withdrawModal">
+
+
+<div class="box">
+
+
+<span class="close"
+onclick="closeWithdraw()">
+
+×
+
+</span>
+
+
+<h2>
+Withdraw Money
+</h2>
+
+
+
+<input
+id="withdrawAmount"
+type="number"
+placeholder="Enter Amount">
+
+
+
+<input
+id="withdrawUPI"
+placeholder="Enter UPI ID">
+
+
+
+<button
+class="btn blue"
+style="margin-top:15px"
+onclick="submitWithdraw()">
+
+Submit Withdraw
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<script>
+
+
+function openAddMoney(){
+
+document.getElementById("addModal").style.display="flex";
+
+}
+
+
+
+function closeAddMoney(){
+
+document.getElementById("addModal").style.display="none";
+
+}
+
+
+
+function openWithdraw(){
+
+document.getElementById("withdrawModal").style.display="flex";
+
+}
+
+
+
+function closeWithdraw(){
+
+document.getElementById("withdrawModal").style.display="none";
+
+}
+
+
+
+</script>
+
+
+
+
+
+<!-- PART 2 FIREBASE CODE WILL COME HERE -->
+ <script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+import {
+getAuth,
+onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+import {
+getDatabase,
+ref,
+set,
+push,
+get,
+onValue
+}
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+/* FIREBASE CONFIG */
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyDsJUtZdIXcsB0w_2MQhMBXxIgbI3ijOvg",
+
+authDomain:"incoinpaysliveearning.firebaseapp.com",
+
+databaseURL:"https://incoinpaysliveearning-default-rtdb.firebaseio.com",
+
+projectId:"incoinpaysliveearning",
+
+storageBucket:"incoinpaysliveearning.firebasestorage.app",
+
+messagingSenderId:"971873814750",
+
+appId:"1:971873814750:web:7418c7da119e4725ed9a4f"
+
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getDatabase(app);
+
+let UID = "";
+
+window.db = db;
+
+onAuthStateChanged(auth, (user) => {
+
+    if (!user) {
+        location.replace("index.html");
+        return;
+    }
+
+    UID = user.uid;
+    window.UID = UID;
+
+    loadWallet();
+    loadHistory();
+    loadAdminPayment();
+
+});
+
+/*
+LIVE WALLET
+*/
+
+function loadWallet(){
+
+    onValue(ref(db,"users/"+UID),(snapshot)=>{
+
+        if(!snapshot.exists()) return;
+
+        const data = snapshot.val();
+
+        const wallet = Number(data.wallet || 0);
+        const bonus = Number(data.bonus || 0);
+
+        document.getElementById("walletBalance").innerHTML =
+        "₹"+Math.floor(wallet);
+
+        document.getElementById("bonusBalance").innerHTML =
+        "₹"+Math.floor(bonus);
+
+        document.getElementById("withdrawableBalance").innerHTML =
+        "₹"+Math.floor(wallet);
+
+    });
+
+}
+
+/*
+TRANSACTION HISTORY
+*/
+
+function loadHistory(){
+
+    onValue(ref(db,"users/"+UID+"/transactions"),(snapshot)=>{
+
+        const box = document.getElementById("historyList");
+
+        box.innerHTML = "";
+
+        if(!snapshot.exists()){
+
+            box.innerHTML =
+            `<center style="color:#94a3b8">No Transaction</center>`;
+
+            return;
+        }
+
+        let data = [];
+
+        snapshot.forEach((item)=>{
+            data.push(item.val());
+        });
+
+        data.reverse();
+
+        data.forEach((tx)=>{
+
+            const type = tx.type || "credit";
+
+            box.innerHTML += `
+            <div class="history">
+
+                <div>
+                    <b>${tx.title || "Transaction"}</b>
+                    <div class="time">
+                        ${new Date(tx.time).toLocaleString()}
+                    </div>
+                </div>
+
+                <div class="${type}">
+                    ${type==="credit" ? "+" : "-"}₹${tx.amount}
+                </div>
+
+            </div>
+            `;
+
+        });
+
+    });
+
+}
+
+
+
+
+
+
+
+
+
+/*
+ADMIN QR + UPI
+*/
+
+
+function loadAdminPayment(){
+
+onValue(ref(db,"settings/payment"),(snapshot)=>{
+
+if(!snapshot.exists()){
+    document.getElementById("adminUPI").innerHTML="UPI Not Found";
+    return;
+}
+
+const data=snapshot.val();
+
+const upi = data.upi || "";
+
+document.getElementById("adminUPI").innerHTML = "UPI : " + upi;
+
+// Auto Generate QR
+document.getElementById("adminQR").src =
+"https://quickchart.io/qr?size=250&text=" +
+encodeURIComponent("upi://pay?pa=" + upi);
+
+});
+
+}
+
+
+/*
+SUBMIT DEPOSIT REQUEST
+*/
+
+
+window.submitDeposit = async function(){
+
+
+const amount =
+Number(document.getElementById("depositAmount").value);
+
+
+
+const utr =
+document.getElementById("utr").value.trim();
+
+
+
+if(!amount || amount<=0){
+
+alert("Enter valid amount");
+
+return;
+
+}
+
+
+
+if(utr==""){
+
+alert("Enter Transaction ID");
+
+return;
+
+}
+
+
+
+
+
+/*
+CHECK DUPLICATE UTR
+*/
+
+
+const utrSnap =
+await get(ref(db,"depositRequests"));
+
+
+
+let duplicate=false;
+
+
+
+if(utrSnap.exists()){
+
+
+utrSnap.forEach((item)=>{
+
+
+if(item.val().utr===utr){
+
+duplicate=true;
+
+}
+
+
+});
+
+
+}
+
+
+
+if(duplicate){
+
+alert("Transaction ID already used");
+
+return;
+
+}
+
+
+
+
+
+/*
+SAVE REQUEST
+*/
+
+
+const requestID =
+push(ref(db,"depositRequests")).key;
+
+
+
+await set(
+ref(db,"depositRequests/"+requestID),
+{
+
+
+uid:window.UID,
+
+
+amount:amount,
+
+
+utr:utr,
+
+
+status:"pending",
+
+
+time:Date.now()
+
+
+});
+
+
+
+alert("Payment Submitted. Waiting for Admin Approval");
+
+
+
+closeAddMoney();
+
+
+
+document.getElementById("depositAmount").value="";
+
+document.getElementById("utr").value="";
+
+
+
+};
+
+
+
+/*
+SUBMIT WITHDRAW REQUEST
+*/
+
+
+let withdrawSubmitting = false;
+
+window.submitWithdraw = async function(){
+
+    // Prevent double click / double submit
+    if(withdrawSubmitting){
+        return;
+    }
+
+    const amount = Number(
+        document.getElementById("withdrawAmount").value
+    );
+
+    const upi =
+        document.getElementById("withdrawUPI").value.trim();
+
+
+    if(!amount || amount <= 0){
+
+        alert("Enter valid amount");
+        return;
+
+    }
+
+
+    if(upi === ""){
+
+        alert("Enter UPI ID");
+        return;
+
+    }
+
+
+    withdrawSubmitting = true;
+
+    const button =
+        document.querySelector('#withdrawModal button[onclick="submitWithdraw()"]');
+
+    if(button){
+
+        button.disabled = true;
+        button.innerText = "Submitting...";
+
+    }
+
+
+    try{
+
+        /*
+        CHECK USER BALANCE
+        */
+
+        const userSnap =
+            await get(
+                ref(db,"users/"+window.UID)
+            );
+
+
+        if(!userSnap.exists()){
+
+            throw new Error("User not found");
+
+        }
+
+
+        const wallet =
+            Number(userSnap.val().wallet || 0);
+
+
+        if(wallet < amount){
+
+            throw new Error("Insufficient Balance");
+
+        }
+
+
+        /*
+        CREATE REQUEST ID
+        */
+
+        const withdrawRef =
+            push(ref(db,"withdrawRequests"));
+
+        const withdrawID =
+            withdrawRef.key;
+
+
+        /*
+        SAVE WITHDRAW REQUEST
+        */
+
+        await set(
+
+            withdrawRef,
+
+            {
+                uid: window.UID,
+
+                amount: amount,
+
+                upi: upi,
+
+                status: "pending",
+
+                time: Date.now()
+            }
+
+        );
+
+
+        /*
+        SUCCESS — ONLY ONE ALERT
+        */
+
+
+        closeWithdraw();
+
+
+        document.getElementById("withdrawAmount").value = "";
+
+        document.getElementById("withdrawUPI").value = "";
+
+
+    }catch(error){
+
+        console.error("Withdraw Error:",error);
+
+        alert("Withdraw Error: " + error.message);
+
+
+    }finally{
+
+        withdrawSubmitting = false;
+
+        if(button){
+
+            button.disabled = false;
+            button.innerText = "Submit Withdraw";
+
+        }
+
+    }
+
+};
+
+
+
+
+
+</script>
+
+</body>
+
+</html>
