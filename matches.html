@@ -13,545 +13,701 @@ content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no
 
 <title>My Matches</title>
 
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+
 <style>
+
+/* =====================================================
+   RESET
+===================================================== */
 
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Inter,Arial,sans-serif;
+    font-family:Poppins,sans-serif;
+    -webkit-tap-highlight-color:transparent;
 }
+
+
+html{
+    scroll-behavior:smooth;
+}
+
 
 body{
-    min-height:100vh;
-    background:
-    radial-gradient(circle at top,#17233d 0%,#07101f 38%,#02050b 100%);
+    background:#050B18;
     color:#fff;
-    padding:18px;
+    min-height:100vh;
+    overflow-x:hidden;
 }
 
-.container{
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+        radial-gradient(
+            circle at top left,
+            #22c55e25,
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at top right,
+            #2563eb22,
+            transparent 35%
+        ),
+        #050B18;
+    z-index:-1;
+}
+
+
+/* =====================================================
+   APP
+===================================================== */
+
+.app{
     width:100%;
-    max-width:520px;
+    max-width:500px;
     margin:auto;
+    padding:20px 16px 50px;
 }
 
-/* HEADER */
+
+/* =====================================================
+   HEADER
+===================================================== */
 
 .header{
-    margin-bottom:20px;
+    padding:10px 2px 20px;
 }
+
 
 .header-title{
     font-size:24px;
     font-weight:800;
+    color:#fff;
 }
+
 
 .header-subtitle{
-    color:#8795aa;
+    margin-top:4px;
+    color:#64748b;
     font-size:12px;
-    margin-top:5px;
 }
 
 
-/* TABS */
+/* =====================================================
+   TABS
+===================================================== */
 
 .tabs{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px;
-    padding:5px;
-    background:#0b1424;
-    border:1px solid rgba(255,255,255,.07);
-    border-radius:15px;
+    display:flex;
+    gap:10px;
     margin-bottom:18px;
 }
 
+
 .tab{
-    border:0;
-    padding:12px 8px;
-    border-radius:11px;
-    background:transparent;
-    color:#8c99ad;
-    font-size:14px;
-    font-weight:700;
+    flex:1;
+    height:48px;
+    border:none;
+    border-radius:14px;
+    background:#111827;
+    color:#94a3b8;
+    border:1px solid rgba(255,255,255,.07);
+    font-size:13px;
+    font-weight:800;
     cursor:pointer;
 }
+
 
 .tab.active{
-    background:linear-gradient(135deg,#1d4ed8,#2563eb);
-    color:#fff;
-    box-shadow:0 6px 20px rgba(37,99,235,.22);
+    background:linear-gradient(
+        135deg,
+        #22c55e,
+        #16a34a
+    );
+    color:#03100a;
+    border-color:transparent;
+    box-shadow:
+        0 0 22px rgba(34,197,94,.22);
 }
 
 
-/* COUNT */
+.tab:active{
+    transform:scale(.97);
+}
 
-.count-card{
+
+/* =====================================================
+   COUNT
+===================================================== */
+
+.count-box{
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    padding:14px 16px;
-    margin-bottom:15px;
-    background:
-    linear-gradient(135deg,rgba(20,32,54,.95),rgba(7,14,26,.98));
+    justify-content:space-between;
+    gap:15px;
+
+    padding:16px;
+    margin-bottom:18px;
+
+    background:linear-gradient(
+        145deg,
+        #111827,
+        #0b1220
+    );
+
     border:1px solid rgba(255,255,255,.07);
-    border-radius:16px;
+    border-radius:18px;
 }
+
 
 .count-label{
-    color:#8f9db1;
     font-size:12px;
+    font-weight:800;
+    color:#fff;
 }
+
 
 .count-number{
-    font-size:21px;
+    min-width:45px;
+    text-align:center;
+
+    font-size:24px;
     font-weight:800;
+    color:#22c55e;
 }
 
 
-/* MATCH CARD */
+/* =====================================================
+   LOADING
+===================================================== */
+
+.loading{
+    padding:35px 10px;
+    text-align:center;
+    color:#94a3b8;
+    font-size:13px;
+}
+
+
+.spinner{
+    width:28px;
+    height:28px;
+    margin:0 auto 12px;
+
+    border:3px solid #1e293b;
+    border-top-color:#22c55e;
+
+    border-radius:50%;
+
+    animation:spin .8s linear infinite;
+}
+
+
+@keyframes spin{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+
+/* =====================================================
+   MATCH CARD
+===================================================== */
 
 .match-card{
-    position:relative;
-    background:
-    linear-gradient(145deg,rgba(19,31,52,.98),rgba(5,10,19,.98));
+
+    background:linear-gradient(
+        145deg,
+        #111827,
+        #0b1220
+    );
+
     border:1px solid rgba(255,255,255,.08);
+
     border-radius:20px;
+
     padding:17px;
-    margin-bottom:13px;
-    overflow:hidden;
-    box-shadow:0 12px 30px rgba(0,0,0,.22);
+
+    margin-bottom:14px;
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.22);
+
     cursor:pointer;
-    transition:.18s ease;
+
+    transition:.2s;
 }
+
 
 .match-card:active{
     transform:scale(.98);
 }
 
-.match-card::before{
-    content:"";
-    position:absolute;
-    left:0;
-    top:0;
-    width:4px;
-    height:100%;
-    background:#2563eb;
+
+.match-card.played{
+    opacity:.85;
 }
 
-.match-card.played::before{
-    background:#64748b;
-}
-
-
-/* TOP */
 
 .match-top{
     display:flex;
     justify-content:space-between;
     align-items:flex-start;
     gap:10px;
-    margin-bottom:13px;
+
+    margin-bottom:16px;
 }
+
 
 .match-name{
-    font-size:17px;
+    font-size:16px;
     font-weight:800;
+    line-height:1.3;
 }
 
+
 .match-type{
-    color:#8390a4;
-    font-size:11px;
     margin-top:4px;
+    color:#64748b;
+    font-size:11px;
+    font-weight:600;
 }
+
 
 .status{
     padding:6px 9px;
-    border-radius:8px;
-    font-size:10px;
+    border-radius:20px;
+
+    font-size:9px;
     font-weight:800;
+
     white-space:nowrap;
 }
 
+
 .status.upcoming{
+    background:#052e16;
     color:#86efac;
-    background:rgba(34,197,94,.10);
-    border:1px solid rgba(34,197,94,.20);
+    border:1px solid rgba(34,197,94,.2);
 }
+
 
 .status.played{
-    color:#aeb8c8;
-    background:rgba(100,116,139,.12);
-    border:1px solid rgba(100,116,139,.20);
+    background:#1e293b;
+    color:#cbd5e1;
+    border:1px solid rgba(255,255,255,.08);
 }
 
 
-/* DETAILS */
+/* =====================================================
+   DETAILS
+===================================================== */
 
 .details{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:9px;
+    gap:12px;
+
+    padding-bottom:15px;
+
+    border-bottom:1px solid #1f2937;
 }
 
-.detail{
-    padding:10px;
-    background:rgba(255,255,255,.035);
-    border-radius:11px;
-}
 
 .detail-label{
-    color:#78869a;
-    font-size:10px;
+    color:#64748b;
+    font-size:9px;
+    font-weight:700;
     margin-bottom:4px;
 }
 
+
 .detail-value{
-    color:#e8edf5;
+    color:#e2e8f0;
     font-size:12px;
+    font-weight:700;
+
+    word-break:break-word;
+}
+
+
+/* =====================================================
+   SLOT BOX
+===================================================== */
+
+.slot-box{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding-top:15px;
+}
+
+
+.slot-label{
+    color:#64748b;
+    font-size:9px;
     font-weight:700;
 }
 
 
-/* BOTTOM */
-
-.slot-box{
-    margin-top:12px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding-top:12px;
-    border-top:1px solid rgba(255,255,255,.06);
-}
-
-.slot-label{
-    color:#8290a4;
-    font-size:11px;
-}
-
 .slot-value{
-    color:#FFD700;
+    margin-top:3px;
+    color:#22c55e;
     font-size:14px;
     font-weight:800;
 }
 
+
 .tap-text{
-    margin-top:12px;
-    color:#64748b;
-    font-size:10px;
+    margin-top:14px;
+
     text-align:right;
+
+    color:#475569;
+
+    font-size:10px;
+    font-weight:600;
 }
 
 
-/* EMPTY */
+/* =====================================================
+   EMPTY
+===================================================== */
 
 .empty{
+    padding:45px 20px;
+
     text-align:center;
-    padding:55px 20px;
-    color:#7d8a9e;
+
+    background:#0b1220;
+
+    border:1px solid rgba(255,255,255,.06);
+
+    border-radius:20px;
 }
+
 
 .empty-icon{
-    font-size:42px;
-    margin-bottom:12px;
+    font-size:38px;
+    margin-bottom:10px;
 }
+
 
 .empty-title{
-    color:#d9e0eb;
     font-size:16px;
-    font-weight:700;
-    margin-bottom:6px;
+    font-weight:800;
 }
+
 
 .empty-text{
-    font-size:12px;
-    line-height:1.5;
+    margin-top:5px;
+
+    color:#64748b;
+
+    font-size:11px;
+    line-height:1.6;
 }
 
 
-/* LOADING */
-
-.loading{
-    text-align:center;
-    padding:50px 20px;
-    color:#8997ab;
-    font-size:13px;
-}
-
-.spinner{
-    width:30px;
-    height:30px;
-    border:3px solid rgba(255,255,255,.10);
-    border-top-color:#2563eb;
-    border-radius:50%;
-    margin:0 auto 12px;
-    animation:spin .8s linear infinite;
-}
-
-@keyframes spin{
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-
-/* MODAL */
+/* =====================================================
+   MODAL
+===================================================== */
 
 .modal{
     position:fixed;
     inset:0;
-    z-index:9999;
 
     display:none;
     align-items:flex-end;
     justify-content:center;
 
-    background:rgba(0,0,0,.72);
-    backdrop-filter:blur(7px);
+    padding:12px;
 
-    padding:15px;
+    background:rgba(0,0,0,.75);
+
+    backdrop-filter:blur(8px);
+
+    z-index:9999;
 }
+
 
 .modal.show{
     display:flex;
 }
 
+
 .modal-box{
+
     width:100%;
-    max-width:520px;
+    max-width:480px;
+
     max-height:90vh;
+
     overflow-y:auto;
 
-    background:
-    linear-gradient(
-        145deg,
-        #101c30,
-        #050b15
-    );
+    background:#111827;
 
-    border:1px solid rgba(255,255,255,.10);
-    border-radius:24px 24px 18px 18px;
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:24px;
 
     padding:20px;
 
-    box-shadow:0 -10px 50px rgba(0,0,0,.55);
-
-    animation:slideUp .22s ease;
-}
-
-@keyframes slideUp{
-
-    from{
-        transform:translateY(30px);
-        opacity:0;
-    }
-
-    to{
-        transform:translateY(0);
-        opacity:1;
-    }
-
+    box-shadow:
+        0 -20px 60px rgba(0,0,0,.45);
 }
 
 
-/* MODAL HEADER */
+/* =====================================================
+   MODAL HEADER
+===================================================== */
 
 .modal-header{
+
     display:flex;
+
     justify-content:space-between;
+
     align-items:flex-start;
-    gap:12px;
+
+    gap:15px;
 
     margin-bottom:18px;
 }
 
+
 .modal-title{
-    font-size:20px;
+    font-size:19px;
     font-weight:800;
 }
 
+
 .modal-subtitle{
-    color:#8190a5;
-    font-size:11px;
-    margin-top:5px;
+    margin-top:4px;
+
+    color:#64748b;
+
+    font-size:10px;
 }
 
+
 .close-btn{
-    width:36px;
-    height:36px;
 
-    border:0;
-    border-radius:11px;
+    width:38px;
+    height:38px;
 
-    background:#182338;
+    flex-shrink:0;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#1f2937;
+
     color:#fff;
 
-    font-size:20px;
+    font-size:24px;
+
     cursor:pointer;
 }
 
 
-/* ROOM BOX */
+.close-btn:active{
+    transform:scale(.94);
+}
+
+
+/* =====================================================
+   WHATSAPP ROOM SECTION
+===================================================== */
 
 .room-box{
-    padding:17px;
-    border-radius:17px;
 
-    background:
-    linear-gradient(
-        135deg,
-        rgba(37,99,235,.16),
-        rgba(20,35,60,.55)
-    );
+    padding:16px;
 
-    border:1px solid rgba(59,130,246,.25);
+    margin-bottom:16px;
+
+    background:#07111f;
+
+    border:1px solid rgba(34,197,94,.20);
+
+    border-radius:18px;
+}
+
+
+.room-title{
+
+    font-size:13px;
+
+    font-weight:800;
+
+    color:#fff;
+
+    margin-bottom:6px;
+}
+
+
+.room-help{
+
+    color:#94a3b8;
+
+    font-size:11px;
+
+    line-height:1.6;
 
     margin-bottom:14px;
 }
 
-.room-title{
-    font-size:12px;
-    color:#8ea0ba;
-    margin-bottom:13px;
-}
-
-.room-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:10px;
-
-    padding:11px 0;
-
-    border-bottom:1px solid rgba(255,255,255,.07);
-}
-
-.room-row:last-child{
-    border-bottom:0;
-}
-
-.room-label{
-    color:#8190a5;
-    font-size:11px;
-}
-
-.room-value{
-    color:#fff;
-    font-size:15px;
-    font-weight:800;
-    word-break:break-all;
-    text-align:right;
-}
-
-.password{
-    color:#FFD700;
-}
-
-
-/* COPY */
-
-.copy-btn{
-    margin-top:7px;
-
-    width:100%;
-
-    padding:12px;
-
-    border:1px solid rgba(255,255,255,.08);
-
-    border-radius:12px;
-
-    background:#121d30;
-
-    color:#dce5f3;
-
-    font-size:12px;
-    font-weight:700;
-
-    cursor:pointer;
-}
-
-.copy-btn:active{
-    transform:scale(.98);
-}
-
-
-/* OPEN ROOM */
 
 .open-room{
-    display:none;
+
+    display:block;
 
     width:100%;
 
-    padding:13px;
+    text-align:center;
 
-    margin-top:9px;
+    padding:15px;
 
-    border:0;
-    border-radius:13px;
+    border-radius:15px;
 
-    background:
-    linear-gradient(
+    background:linear-gradient(
         135deg,
         #22c55e,
         #16a34a
     );
 
-    color:#fff;
+    color:#03100a;
 
-    font-size:13px;
+    font-size:14px;
+
     font-weight:800;
 
-    cursor:pointer;
+    text-decoration:none;
+
+    box-shadow:
+        0 0 22px rgba(34,197,94,.25);
+}
+
+
+.open-room:active{
+    transform:scale(.97);
+}
+
+
+.whatsapp-unavailable{
+
+    display:none;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    background:#0f172a;
+
+    color:#94a3b8;
 
     text-align:center;
-    text-decoration:none;
+
+    font-size:11px;
+
+    line-height:1.5;
 }
 
 
-/* INFO */
+/* =====================================================
+   INFO GRID
+===================================================== */
 
 .info-grid{
+
     display:grid;
+
     grid-template-columns:1fr 1fr;
-    gap:9px;
+
+    gap:10px;
 }
+
 
 .info{
-    padding:12px;
-    background:rgba(255,255,255,.035);
-    border-radius:12px;
+
+    padding:13px;
+
+    background:#0f172a;
+
+    border:1px solid rgba(255,255,255,.05);
+
+    border-radius:14px;
+
+    min-width:0;
 }
 
+
 .info-label{
-    color:#718096;
-    font-size:10px;
+
+    color:#64748b;
+
+    font-size:9px;
+
+    font-weight:700;
+
     margin-bottom:5px;
 }
 
+
 .info-value{
-    color:#e8edf5;
+
+    color:#e2e8f0;
+
     font-size:12px;
+
     font-weight:700;
+
+    word-break:break-word;
 }
 
 
-/* MOBILE */
+/* =====================================================
+   MOBILE
+===================================================== */
 
-@media(max-width:360px){
+@media(max-width:500px){
 
-    body{
-        padding:13px;
+    .app{
+        padding-left:14px;
+        padding-right:14px;
     }
 
-    .match-name{
-        font-size:15px;
+    .header-title{
+        font-size:22px;
     }
 
-    .status{
-        font-size:9px;
-        padding:5px 7px;
+    .modal{
+        padding:8px;
+    }
+
+    .modal-box{
+        padding:17px;
+        border-radius:22px;
     }
 
 }
@@ -564,7 +720,7 @@ body{
 <body>
 
 
-<div class="container">
+<div class="app">
 
 
     <!-- HEADER -->
@@ -610,7 +766,7 @@ body{
 
     <!-- COUNT -->
 
-    <div class="count-card">
+    <div class="count-box">
 
         <div>
 
@@ -618,8 +774,15 @@ body{
                 TOTAL MATCHES
             </div>
 
-            <div style="margin-top:3px;font-size:13px;">
-                Your match history
+            <div
+                style="
+                    margin-top:3px;
+                    font-size:11px;
+                    color:#94a3b8;
+                ">
+
+                Your joined match history
+
             </div>
 
         </div>
@@ -636,7 +799,7 @@ body{
     </div>
 
 
-    <!-- MATCH LIST -->
+    <!-- MATCH CONTAINER -->
 
     <div id="matchesContainer">
 
@@ -654,7 +817,10 @@ body{
 </div>
 
 
-<!-- MATCH DETAILS MODAL -->
+
+<!-- =====================================================
+     MATCH MODAL
+===================================================== -->
 
 <div
     id="matchModal"
@@ -662,10 +828,10 @@ body{
     onclick="closeOutside(event)">
 
 
-    <div
-        class="modal-box"
-        onclick="event.stopPropagation()">
+    <div class="modal-box">
 
+
+        <!-- HEADER -->
 
         <div class="modal-header">
 
@@ -701,75 +867,49 @@ body{
         </div>
 
 
-        <!-- ROOM -->
+
+        <!-- WHATSAPP ROOM -->
 
         <div
             id="roomSection"
             class="room-box">
 
-
             <div class="room-title">
-                🎮 ROOM INFORMATION
+                🎮 MATCH ROOM ACCESS
             </div>
 
 
-            <div class="room-row">
+            <div class="room-help">
 
-                <div class="room-label">
-                    ROOM ID
-                </div>
-
-                <div
-                    id="modalRoomId"
-                    class="room-value">
-
-                    --
-
-                </div>
+                Room ID & Password WhatsApp Group
+                me milega.
 
             </div>
-
-
-            <div class="room-row">
-
-                <div class="room-label">
-                    PASSWORD
-                </div>
-
-                <div
-                    id="modalPassword"
-                    class="room-value password">
-
-                    --
-
-                </div>
-
-            </div>
-
-
-            <button
-                id="copyRoomBtn"
-                class="copy-btn"
-                onclick="copyRoomDetails()">
-
-                📋 Copy Room ID & Password
-
-            </button>
 
 
             <a
-                id="openRoomBtn"
+                id="whatsappRoomBtn"
                 class="open-room"
                 href="#"
                 target="_blank"
-                rel="noopener">
+                rel="noopener noreferrer">
 
-                🎮 Open Room
+                🟢 JOIN WHATSAPP GROUP
 
             </a>
 
 
+            <div
+                id="whatsappUnavailable"
+                class="whatsapp-unavailable">
+
+                WhatsApp Group link abhi available
+                nahi hai.
+
+            </div>
+
         </div>
+
 
 
         <!-- MATCH INFO -->
@@ -921,6 +1061,11 @@ body{
 </div>
 
 
+
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
+
 <script type="module">
 
 
@@ -948,6 +1093,11 @@ from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 
+
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
+
 const firebaseConfig = {
 
     apiKey:
@@ -974,6 +1124,11 @@ const firebaseConfig = {
 };
 
 
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
 const app =
     initializeApp(firebaseConfig);
 
@@ -985,6 +1140,11 @@ const auth =
 const db =
     getDatabase(app);
 
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
 
 const container =
     document.getElementById(
@@ -998,174 +1158,345 @@ const totalCount =
     );
 
 
+
+/* =====================================================
+   GLOBAL
+===================================================== */
+
 let allMatches = [];
 
-let currentTab = "upcoming";
+let currentTab =
+    "upcoming";
 
-let selectedMatch = null;
+let selectedMatch =
+    null;
+
+let currentUID =
+    "";
 
 
-/* AUTH */
+
+/* =====================================================
+   AUTH
+===================================================== */
 
 onAuthStateChanged(
     auth,
     (user) => {
 
-
         if(!user){
 
-            location.href =
-                "index.html";
+            location.replace(
+                "index.html"
+            );
 
             return;
 
         }
 
 
-        /*
-         * USER MATCHES
-         *
-         * users
-         *   UID
-         *      matches
-         *          MATCH_ID
-         */
-
-        const matchesRef =
-            ref(
-                db,
-                "users/" +
-                user.uid +
-                "/matches"
-            );
+        currentUID =
+            user.uid;
 
 
-        onValue(
-            matchesRef,
-            (snapshot) => {
-
-
-                allMatches = [];
-
-
-                if(snapshot.exists()){
-
-
-                    const data =
-                        snapshot.val();
-
-
-                    Object.keys(data)
-                        .forEach(
-                            (id) => {
-
-
-                                const match =
-                                    data[id] || {};
-
-
-                                allMatches.push({
-
-                                    id:id,
-
-                                    ...match
-
-                                });
-
-
-                            }
-                        );
-
-                }
-
-
-                /*
-                 * Latest first
-                 */
-
-                allMatches.sort(
-                    (a,b) => {
-
-
-                        const aTime =
-                            Number(
-                                a.timestamp ||
-                                a.joinedAt ||
-                                0
-                            );
-
-
-                        const bTime =
-                            Number(
-                                b.timestamp ||
-                                b.joinedAt ||
-                                0
-                            );
-
-
-                        return bTime - aTime;
-
-                    }
-                );
-
-
-                totalCount.innerText =
-                    allMatches.length;
-
-
-                renderMatches();
-
-            }
-        );
-
+        loadUserMatches();
 
     }
 );
 
 
-/* TAB */
 
-window.showTab =
-function(tab){
+/* =====================================================
+   LOAD USER MATCHES
+===================================================== */
 
+function loadUserMatches(){
 
-    currentTab =
-        tab;
-
-
-    document
-        .getElementById(
-            "upcomingTab"
-        )
-        .classList.toggle(
-            "active",
-            tab === "upcoming"
+    const userMatchesRef =
+        ref(
+            db,
+            "users/" +
+            currentUID +
+            "/matches"
         );
 
 
-    document
-        .getElementById(
-            "playedTab"
-        )
-        .classList.toggle(
-            "active",
-            tab === "played"
+    onValue(
+        userMatchesRef,
+        (snapshot) => {
+
+            const userMatches =
+                [];
+
+
+            if(snapshot.exists()){
+
+                snapshot.forEach(
+                    (child) => {
+
+                        const value =
+                            child.val() || {};
+
+
+                        userMatches.push({
+
+                            id:
+                                child.key,
+
+                            ...value
+
+                        });
+
+                    }
+                );
+
+            }
+
+
+            loadGlobalMatches(
+                userMatches
+            );
+
+        },
+        (error) => {
+
+            console.error(
+                "User matches error:",
+                error
+            );
+
+            loadGlobalMatches([]);
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   LOAD GLOBAL MATCHES
+===================================================== */
+
+function loadGlobalMatches(
+    userMatches
+){
+
+    const matchesRef =
+        ref(
+            db,
+            "matches"
         );
 
 
-    renderMatches();
+    onValue(
+        matchesRef,
+        (snapshot) => {
 
-};
+            const result =
+                [...userMatches];
 
 
-/* PLAYED CHECK */
+            if(snapshot.exists()){
 
-function isPlayed(match){
+                snapshot.forEach(
+                    (child) => {
+
+                        const match =
+                            child.val() || {};
+
+
+                        const matchId =
+                            child.key;
+
+
+                        /*
+                         * IMPORTANT:
+                         *
+                         * Your join code saves:
+                         *
+                         * matchPlayers/
+                         *     matchId/
+                         *         uid
+                         *
+                         * So check that path too.
+                         */
+
+                        if(
+                            userJoinedMatch(
+                                match,
+                                matchId
+                            )
+                        ){
+
+                            const already =
+                                result.some(
+                                    (item) =>
+                                        String(item.id) ===
+                                        String(matchId)
+                                );
+
+
+                            if(!already){
+
+                                const booking =
+                                    getUserBooking(
+                                        match
+                                    );
+
+
+                                result.push({
+
+                                    id:
+                                        matchId,
+
+                                    ...match,
+
+                                    ...(booking || {})
+
+                                });
+
+                            }
+
+                        }
+
+                    }
+                );
+
+            }
+
+
+            const unique = {};
+
+
+            result.forEach(
+                (item) => {
+
+                    if(item.id){
+
+                        unique[item.id] =
+                            item;
+
+                    }
+
+                }
+            );
+
+
+            allMatches =
+                Object.values(
+                    unique
+                );
+
+
+            allMatches.sort(
+                (a,b) => {
+
+                    const aTime =
+                        Number(
+                            a.joinedAt ||
+                            a.timestamp ||
+                            a.createdAt ||
+                            0
+                        );
+
+
+                    const bTime =
+                        Number(
+                            b.joinedAt ||
+                            b.timestamp ||
+                            b.createdAt ||
+                            0
+                        );
+
+
+                    return bTime - aTime;
+
+                }
+            );
+
+
+            totalCount.innerText =
+                allMatches.length;
+
+
+            renderMatches();
+
+        },
+        (error) => {
+
+            console.error(
+                "Global matches error:",
+                error
+            );
+
+            container.innerHTML = `
+
+                <div class="empty">
+
+                    <div class="empty-icon">
+                        ⚠️
+                    </div>
+
+                    <div class="empty-title">
+                        Unable to Load Matches
+                    </div>
+
+                    <div class="empty-text">
+                        Firebase permission ya connection
+                        problem hai.
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   CHECK USER JOINED
+===================================================== */
+
+function userJoinedMatch(
+    match,
+    matchId
+){
+
+    if(!match){
+
+        return false;
+
+    }
+
+
+    /*
+     * MOST IMPORTANT:
+     *
+     * Your current join code writes:
+     *
+     * matchPlayers/{matchId}/{uid}
+     *
+     * But this function cannot synchronously
+     * read that Firebase path.
+     *
+     * Therefore we check cached/local structures
+     * first. The actual matchPlayers check is
+     * loaded separately below.
+     */
 
 
     if(
-        match.played === true ||
-        match.played === "true"
+        match.players &&
+        typeof match.players === "object" &&
+        Object.prototype.hasOwnProperty.call(
+            match.players,
+            currentUID
+        )
     ){
 
         return true;
@@ -1173,16 +1504,423 @@ function isPlayed(match){
     }
 
 
-    const status =
-        String(
-            match.status || ""
-        ).toLowerCase();
+    if(
+        match.users &&
+        typeof match.users === "object" &&
+        Object.prototype.hasOwnProperty.call(
+            match.users,
+            currentUID
+        )
+    ){
+
+        return true;
+
+    }
 
 
     if(
-        status === "completed" ||
-        status === "played" ||
-        status === "finished"
+        match.joinedUsers &&
+        typeof match.joinedUsers === "object" &&
+        Object.prototype.hasOwnProperty.call(
+            match.joinedUsers,
+            currentUID
+        )
+    ){
+
+        return true;
+
+    }
+
+
+    if(
+        match.bookings &&
+        typeof match.bookings === "object" &&
+        Object.prototype.hasOwnProperty.call(
+            match.bookings,
+            currentUID
+        )
+    ){
+
+        return true;
+
+    }
+
+
+    if(
+        Array.isArray(
+            match.joinedUIDs
+        ) &&
+        match.joinedUIDs.includes(
+            currentUID
+        )
+    ){
+
+        return true;
+
+    }
+
+
+    if(
+        Array.isArray(
+            match.participants
+        )
+    ){
+
+        const found =
+            match.participants.some(
+                (player) => {
+
+                    if(
+                        typeof player ===
+                        "string"
+                    ){
+
+                        return player ===
+                            currentUID;
+
+                    }
+
+
+                    if(
+                        player &&
+                        typeof player ===
+                        "object"
+                    ){
+
+                        return (
+                            player.uid ===
+                            currentUID ||
+
+                            player.userId ===
+                            currentUID
+                        );
+
+                    }
+
+
+                    return false;
+
+                }
+            );
+
+
+        if(found){
+
+            return true;
+
+        }
+
+    }
+
+
+    return false;
+
+}
+
+
+
+/* =====================================================
+   GET USER BOOKING
+===================================================== */
+
+function getUserBooking(
+    match
+){
+
+    const collections = [
+
+        match.players,
+        match.users,
+        match.joinedUsers,
+        match.bookings
+
+    ];
+
+
+    for(
+        const collection
+        of collections
+    ){
+
+        if(
+            collection &&
+            typeof collection === "object" &&
+            collection[currentUID]
+        ){
+
+            const value =
+                collection[currentUID];
+
+
+            if(
+                value &&
+                typeof value === "object"
+            ){
+
+                return value;
+
+            }
+
+
+            return {};
+
+        }
+
+    }
+
+
+    return null;
+
+}
+
+
+
+/* =====================================================
+   LOAD matchPlayers/{matchId}/{uid}
+===================================================== */
+
+function loadDirectJoinedMatches(){
+
+    const matchesRef =
+        ref(
+            db,
+            "matches"
+        );
+
+
+    onValue(
+        matchesRef,
+        (matchesSnapshot) => {
+
+            if(
+                !matchesSnapshot.exists()
+            ){
+
+                return;
+
+            }
+
+
+            const matchIds = [];
+
+
+            matchesSnapshot.forEach(
+                (child) => {
+
+                    matchIds.push(
+                        child.key
+                    );
+
+                }
+            );
+
+
+            /*
+             * Listen to each user's
+             * matchPlayers record.
+             */
+
+            matchIds.forEach(
+                (matchId) => {
+
+                    const playerRef =
+                        ref(
+                            db,
+                            "matchPlayers/" +
+                            matchId +
+                            "/" +
+                            currentUID
+                        );
+
+
+                    onValue(
+                        playerRef,
+                        (playerSnapshot) => {
+
+                            if(
+                                !playerSnapshot.exists()
+                            ){
+
+                                return;
+
+                            }
+
+
+                            const matchSnapshot =
+                                matchesSnapshot.child(
+                                    matchId
+                                );
+
+
+                            if(
+                                !matchSnapshot.exists()
+                            ){
+
+                                return;
+
+                            }
+
+
+                            const match =
+                                matchSnapshot.val() ||
+                                {};
+
+
+                            const playerData =
+                                playerSnapshot.val() ||
+                                {};
+
+
+                            const existingIndex =
+                                allMatches.findIndex(
+                                    (item) =>
+                                        String(item.id) ===
+                                        String(matchId)
+                                );
+
+
+                            const finalMatch = {
+
+                                ...match,
+
+                                ...playerData,
+
+                                id:
+                                    matchId,
+
+                                /*
+                                 * Keep match fields
+                                 * when playerData has
+                                 * no matching value.
+                                 */
+
+                                title:
+                                    match.title ||
+                                    match.name ||
+                                    "BGMI Match",
+
+                                name:
+                                    match.name ||
+                                    match.title ||
+                                    "BGMI Match"
+
+                            };
+
+
+                            if(
+                                existingIndex >= 0
+                            ){
+
+                                allMatches[
+                                    existingIndex
+                                ] =
+                                    {
+                                        ...allMatches[
+                                            existingIndex
+                                        ],
+
+                                        ...finalMatch
+                                    };
+
+                            }else{
+
+                                allMatches.push(
+                                    finalMatch
+                                );
+
+                            }
+
+
+                            allMatches.sort(
+                                (a,b) => {
+
+                                    return Number(
+                                        b.joinedAt ||
+                                        b.timestamp ||
+                                        b.createdAt ||
+                                        0
+                                    )
+                                    -
+                                    Number(
+                                        a.joinedAt ||
+                                        a.timestamp ||
+                                        a.createdAt ||
+                                        0
+                                    );
+
+                                }
+                            );
+
+
+                            totalCount.innerText =
+                                allMatches.length;
+
+
+                            renderMatches();
+
+                        },
+                        (error) => {
+
+                            console.error(
+                                "matchPlayers error:",
+                                matchId,
+                                error
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+
+/*
+ * Start direct joined-match listener.
+ *
+ * This is required for the join code:
+ *
+ * matchPlayers/{matchId}/{uid}
+ */
+
+function startDirectMatchListener(){
+
+    loadDirectJoinedMatches();
+
+}
+
+
+
+/* =====================================================
+   START
+===================================================== */
+
+function startMatchLoading(){
+
+    loadUserMatches();
+
+    startDirectMatchListener();
+
+}
+
+
+
+/* =====================================================
+   PLAYED CHECK
+===================================================== */
+
+function isPlayed(
+    match
+){
+
+    if(
+        match.played === true ||
+        match.played === "true"
     ){
 
         return true;
@@ -1200,15 +1938,35 @@ function isPlayed(match){
     }
 
 
+    const status =
+        String(
+            match.status || ""
+        ).toLowerCase();
+
+
+    if(
+        status === "completed" ||
+        status === "played" ||
+        status === "finished" ||
+        status === "cancelled"
+    ){
+
+        return true;
+
+    }
+
+
     return false;
 
 }
 
 
-/* RENDER */
+
+/* =====================================================
+   RENDER
+===================================================== */
 
 function renderMatches(){
-
 
     container.innerHTML =
         "";
@@ -1217,7 +1975,6 @@ function renderMatches(){
     const filtered =
         allMatches.filter(
             (match) => {
-
 
                 const played =
                     isPlayed(match);
@@ -1242,7 +1999,6 @@ function renderMatches(){
     if(
         filtered.length === 0
     ){
-
 
         container.innerHTML = `
 
@@ -1275,7 +2031,7 @@ function renderMatches(){
                     ${
                         currentTab === "played"
                         ? "Aapne abhi tak koi match complete nahi kiya."
-                        : "Aapne abhi tak koi upcoming match join nahi kiya."
+                        : "Aapne abhi tak koi match join nahi kiya."
                     }
 
                 </div>
@@ -1283,7 +2039,6 @@ function renderMatches(){
             </div>
 
         `;
-
 
         return;
 
@@ -1293,11 +2048,11 @@ function renderMatches(){
     filtered.forEach(
         (match) => {
 
-
             container.appendChild(
-                createMatchCard(match)
+                createMatchCard(
+                    match
+                )
             );
-
 
         }
     );
@@ -1305,12 +2060,14 @@ function renderMatches(){
 }
 
 
-/* CARD */
+
+/* =====================================================
+   CREATE CARD
+===================================================== */
 
 function createMatchCard(
     match
 ){
-
 
     const played =
         isPlayed(match);
@@ -1344,7 +2101,7 @@ function createMatchCard(
         escapeHTML(
             match.type ||
             match.matchType ||
-            "Match"
+            "SQUAD"
         );
 
 
@@ -1364,14 +2121,6 @@ function createMatchCard(
         );
 
 
-    const room =
-        escapeHTML(
-            match.roomId ||
-            match.room ||
-            "--"
-        );
-
-
     const map =
         escapeHTML(
             match.map ||
@@ -1379,23 +2128,35 @@ function createMatchCard(
         );
 
 
+    const room =
+        "Hidden";
+
+
     const slot =
         escapeHTML(
             String(
                 match.slot ||
                 match.slotNumber ||
+                match.slotNo ||
                 "--"
             )
         );
 
 
+    const entryValue =
+        match.entryFee !== undefined
+        ? match.entryFee
+        : (
+            match.entry !== undefined
+            ? match.entry
+            : 0
+        );
+
+
     const entry =
-        escapeHTML(
-            match.entryFee !==
-            undefined
-            ? "₹" +
-              match.entryFee
-            : "--"
+        "₹" +
+        formatNumber(
+            entryValue
         );
 
 
@@ -1434,7 +2195,6 @@ function createMatchCard(
 
 
         <div class="details">
-
 
             <div class="detail">
 
@@ -1478,15 +2238,14 @@ function createMatchCard(
             <div class="detail">
 
                 <div class="detail-label">
-                    ROOM ID
+                    ROOM
                 </div>
 
                 <div class="detail-value">
-                    ${room}
+                    🔒 WhatsApp
                 </div>
 
             </div>
-
 
         </div>
 
@@ -1526,16 +2285,14 @@ function createMatchCard(
 
 
         <div class="tap-text">
-
             Tap to view match details →
-
         </div>
 
     `;
 
 
     card.onclick =
-        function(){
+        () => {
 
             openMatchDetails(
                 match
@@ -1549,11 +2306,13 @@ function createMatchCard(
 }
 
 
-/* OPEN DETAILS */
+
+/* =====================================================
+   OPEN DETAILS
+===================================================== */
 
 window.openMatchDetails =
 function(match){
-
 
     selectedMatch =
         match;
@@ -1569,7 +2328,7 @@ function(match){
     const type =
         match.type ||
         match.matchType ||
-        "Match";
+        "SQUAD";
 
 
     const date =
@@ -1592,34 +2351,22 @@ function(match){
     const slot =
         match.slot ||
         match.slotNumber ||
+        match.slotNo ||
         "--";
 
 
-    const entry =
-        match.entryFee !==
-        undefined
-        ? "₹" +
-          match.entryFee
-        : "--";
+    const entryValue =
+        match.entryFee !== undefined
+        ? match.entryFee
+        : (
+            match.entry !== undefined
+            ? match.entry
+            : 0
+        );
 
 
-    const roomId =
-        match.roomId ||
-        match.room ||
-        "--";
-
-
-    const password =
-        match.password ||
-        match.roomPassword ||
-        match.pass ||
-        "--";
-
-
-    const status =
-        isPlayed(match)
-        ? "✓ Played"
-        : "● Upcoming";
+    const played =
+        isPlayed(match);
 
 
     document.getElementById(
@@ -1632,19 +2379,7 @@ function(match){
         "modalSubtitle"
     ).innerText =
         "Match ID: " +
-        match.id;
-
-
-    document.getElementById(
-        "modalRoomId"
-    ).innerText =
-        roomId;
-
-
-    document.getElementById(
-        "modalPassword"
-    ).innerText =
-        password;
+        (match.id || "--");
 
 
     document.getElementById(
@@ -1680,69 +2415,130 @@ function(match){
     document.getElementById(
         "modalSlot"
     ).innerText =
-        "Slot " + slot;
+        "Slot " +
+        slot;
 
 
     document.getElementById(
         "modalEntry"
     ).innerText =
-        entry;
+        "₹" +
+        formatNumber(
+            entryValue
+        );
 
 
     document.getElementById(
         "modalStatus"
     ).innerText =
-        status;
+        played
+        ? "✓ Played"
+        : "● Upcoming";
 
 
-    /*
-     * Room link
-     */
 
-    const openBtn =
+    /* =================================================
+       WHATSAPP LINK
+    ================================================= */
+
+
+    const whatsappBtn =
         document.getElementById(
-            "openRoomBtn"
+            "whatsappRoomBtn"
         );
 
 
-    const roomLink =
-        match.roomLink ||
-        match.link ||
-        match.joinLink ||
+    const whatsappUnavailable =
+        document.getElementById(
+            "whatsappUnavailable"
+        );
+
+
+    /*
+     * Supports multiple Firebase field names:
+     *
+     * whatsappLink
+     * groupLink
+     * whatsapp
+     * whatsappGroup
+     * whatsappGroupLink
+     * group
+     */
+
+    const whatsappLink =
+        match.whatsappLink ||
+        match.groupLink ||
+        match.whatsappGroupLink ||
+        match.whatsapp ||
+        match.whatsappGroup ||
+        match.group ||
         "";
 
 
     if(
-        roomLink &&
-        !isPlayed(match)
+        whatsappLink &&
+        !played
     ){
 
-        openBtn.href =
-            roomLink;
+        whatsappBtn.href =
+            String(
+                whatsappLink
+            );
 
-        openBtn.style.display =
+
+        whatsappBtn.style.display =
             "block";
+
+
+        whatsappUnavailable.style.display =
+            "none";
 
     }else{
 
-        openBtn.style.display =
+        whatsappBtn.href =
+            "#";
+
+
+        whatsappBtn.style.display =
             "none";
+
+
+        whatsappUnavailable.style.display =
+            "block";
 
     }
 
 
+
     /*
-     * Room section
+     * Played match ke liye bhi WhatsApp
+     * link ho sakta hai.
      *
-     * Played match me bhi
-     * details visible rahenge,
-     * lekin Open Room hide hoga.
+     * Agar aap chahte ho ki played match
+     * me bhi group button dikhe, to neeche
+     * wali condition hata sakte ho.
      */
 
-    document.getElementById(
-        "roomSection"
-    ).style.display =
-        "block";
+    if(
+        whatsappLink &&
+        played
+    ){
+
+        whatsappBtn.href =
+            String(
+                whatsappLink
+            );
+
+
+        whatsappBtn.style.display =
+            "block";
+
+
+        whatsappUnavailable.style.display =
+            "none";
+
+    }
+
 
 
     document.getElementById(
@@ -1758,11 +2554,13 @@ function(match){
 };
 
 
-/* CLOSE */
+
+/* =====================================================
+   CLOSE MODAL
+===================================================== */
 
 window.closeModal =
 function(){
-
 
     document.getElementById(
         "matchModal"
@@ -1777,9 +2575,13 @@ function(){
 };
 
 
+
+/* =====================================================
+   CLOSE OUTSIDE
+===================================================== */
+
 window.closeOutside =
 function(event){
-
 
     if(
         event.target.id ===
@@ -1793,113 +2595,100 @@ function(event){
 };
 
 
-/* COPY */
 
-window.copyRoomDetails =
-async function(){
+/* =====================================================
+   TAB
+===================================================== */
 
+window.showTab =
+function(tab){
 
-    if(!selectedMatch){
-        return;
-    }
-
-
-    const roomId =
-        selectedMatch.roomId ||
-        selectedMatch.room ||
-        "--";
+    currentTab =
+        tab;
 
 
-    const password =
-        selectedMatch.password ||
-        selectedMatch.roomPassword ||
-        selectedMatch.pass ||
-        "--";
+    document.getElementById(
+        "upcomingTab"
+    ).classList.toggle(
+        "active",
+        tab === "upcoming"
+    );
 
 
-    const text =
-        "Room ID: " +
-        roomId +
-        "\nPassword: " +
-        password;
+    document.getElementById(
+        "playedTab"
+    ).classList.toggle(
+        "active",
+        tab === "played"
+    );
 
 
-    try{
-
-
-        await navigator.clipboard.writeText(
-            text
-        );
-
-
-        document.getElementById(
-            "copyRoomBtn"
-        ).innerText =
-            "✓ Copied";
-
-
-        setTimeout(
-            () => {
-
-                document.getElementById(
-                    "copyRoomBtn"
-                ).innerText =
-                    "📋 Copy Room ID & Password";
-
-            },
-            1500
-        );
-
-
-    }catch(error){
-
-        alert(
-            "Copy failed. Room ID: " +
-            roomId +
-            " | Password: " +
-            password
-        );
-
-    }
+    renderMatches();
 
 };
 
 
-/* ESCAPE HTML */
 
-function escapeHTML(value){
+/* =====================================================
+   FORMAT NUMBER
+===================================================== */
 
-    return String(value)
+function formatNumber(
+    value
+){
 
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
-
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
-
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
-
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
-
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
+    return Number(
+        value || 0
+    ).toLocaleString(
+        "en-IN",
+        {
+            maximumFractionDigits:0
+        }
+    );
 
 }
 
 
-/* ESC KEY */
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(
+    value
+){
+
+    return String(
+        value ?? ""
+    )
+    .replaceAll(
+        "&",
+        "&amp;"
+    )
+    .replaceAll(
+        "<",
+        "&lt;"
+    )
+    .replaceAll(
+        ">",
+        "&gt;"
+    )
+    .replaceAll(
+        '"',
+        "&quot;"
+    )
+    .replaceAll(
+        "'",
+        "&#039;"
+    );
+
+}
+
+
+
+/* =====================================================
+   ESC KEY
+===================================================== */
 
 document.addEventListener(
     "keydown",
@@ -1917,9 +2706,22 @@ document.addEventListener(
     }
 );
 
+
+
+/* =====================================================
+   START APP
+===================================================== */
+
+function startApp(){
+
+    startMatchLoading();
+
+}
+
+
 </script>
+
 
 </body>
 
 </html>
-
