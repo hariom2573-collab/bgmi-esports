@@ -1,0 +1,2840 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+
+<meta name="theme-color" content="#050B18">
+
+<title>BGMI Admin Dashboard</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Poppins,sans-serif;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    background:#050B18;
+    color:#fff;
+    overflow-x:hidden;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-2;
+
+    background:
+    radial-gradient(
+        circle at 0% 0%,
+        #22c55e22,
+        transparent 32%
+    ),
+    radial-gradient(
+        circle at 100% 0%,
+        #2563eb22,
+        transparent 32%
+    ),
+    radial-gradient(
+        circle at 50% 100%,
+        #9333ea18,
+        transparent 35%
+    ),
+    #050B18;
+}
+
+/* ================================
+   LOADING
+================================ */
+
+#loadingScreen{
+
+    position:fixed;
+    inset:0;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    background:#050B18;
+
+    z-index:99999;
+
+    opacity:1;
+    visibility:visible;
+
+    transition:
+    opacity .3s ease,
+    visibility .3s ease;
+}
+
+#loadingScreen.hide{
+
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+
+}
+
+.loading-logo{
+
+    width:78px;
+    height:78px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:24px;
+
+    background:
+    linear-gradient(
+        145deg,
+        #22c55e22,
+        #2563eb22
+    );
+
+    border:1px solid #ffffff18;
+
+    font-size:38px;
+
+    box-shadow:
+    0 0 35px #22c55e18;
+
+    animation:pulseLogo 1.3s infinite;
+}
+
+@keyframes pulseLogo{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.06);
+    }
+
+}
+
+.loading-text{
+
+    margin-top:18px;
+
+    color:#94a3b8;
+
+    font-size:13px;
+    font-weight:600;
+}
+
+.spinner{
+
+    width:30px;
+    height:30px;
+
+    margin-top:18px;
+
+    border:3px solid #ffffff12;
+    border-top-color:#22c55e;
+
+    border-radius:50%;
+
+    animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+/* ================================
+   APP
+================================ */
+
+.app{
+
+    width:100%;
+    max-width:520px;
+
+    margin:auto;
+
+    padding:
+    16px
+    16px
+    45px;
+
+}
+
+/* ================================
+   HEADER
+================================ */
+
+.header{
+
+    background:
+    linear-gradient(
+        145deg,
+        #111827,
+        #0b1220
+    );
+
+    border:1px solid #ffffff12;
+
+    border-radius:24px;
+
+    padding:20px;
+
+    box-shadow:
+    0 15px 40px #0005;
+
+    margin-bottom:14px;
+}
+
+.header-top{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    justify-content:space-between;
+
+    gap:12px;
+}
+
+.header-title{
+
+    font-size:22px;
+
+    font-weight:800;
+
+    letter-spacing:.3px;
+}
+
+.header-subtitle{
+
+    margin-top:4px;
+
+    color:#94a3b8;
+
+    font-size:11px;
+}
+
+.admin-badge{
+
+    flex-shrink:0;
+
+    padding:7px 11px;
+
+    border-radius:20px;
+
+    background:#22c55e18;
+
+    border:1px solid #22c55e55;
+
+    color:#22c55e;
+
+    font-size:10px;
+
+    font-weight:800;
+}
+
+.header-status{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-top:15px;
+
+    padding-top:13px;
+
+    border-top:1px solid #ffffff0d;
+
+    color:#94a3b8;
+
+    font-size:10px;
+}
+
+.live-dot{
+
+    width:8px;
+    height:8px;
+
+    border-radius:50%;
+
+    background:#22c55e;
+
+    box-shadow:
+    0 0 10px #22c55e;
+
+    animation:livePulse 1.5s infinite;
+}
+
+@keyframes livePulse{
+
+    50%{
+        opacity:.4;
+    }
+
+}
+
+/* ================================
+   LOGOUT
+================================ */
+
+.logout-btn{
+
+    width:100%;
+
+    height:48px;
+
+    margin-bottom:16px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #ef4444,
+        #dc2626
+    );
+
+    color:#fff;
+
+    font-size:14px;
+    font-weight:800;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 8px 20px #ef444422;
+
+    transition:.2s;
+}
+
+.logout-btn:active{
+
+    transform:scale(.98);
+
+}
+
+/* ================================
+   STATS
+================================ */
+
+.stats-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:12px;
+
+    margin-bottom:14px;
+}
+
+.stat-card{
+
+    min-height:145px;
+
+    padding:17px;
+
+    border-radius:20px;
+
+    background:
+    linear-gradient(
+        145deg,
+        #111827,
+        #0d1524
+    );
+
+    border:1px solid #ffffff10;
+
+    box-shadow:
+    0 10px 25px #0003;
+}
+
+.stat-icon{
+
+    font-size:24px;
+
+    margin-bottom:12px;
+}
+
+.stat-label{
+
+    color:#94a3b8;
+
+    font-size:9px;
+
+    font-weight:700;
+
+    letter-spacing:.6px;
+}
+
+.stat-value{
+
+    margin-top:5px;
+
+    font-size:27px;
+
+    font-weight:800;
+}
+
+.green{
+    color:#22c55e;
+}
+
+.blue{
+    color:#3b82f6;
+}
+
+.red{
+    color:#ef4444;
+}
+
+.purple{
+    color:#a855f7;
+}
+
+.orange{
+    color:#f59e0b;
+}
+
+/* ================================
+   SECTION
+================================ */
+
+.section{
+
+    margin-top:14px;
+
+    background:
+    linear-gradient(
+        145deg,
+        #111827,
+        #0d1524
+    );
+
+    border:1px solid #ffffff10;
+
+    border-radius:22px;
+
+    padding:18px;
+
+    box-shadow:
+    0 10px 30px #0003;
+}
+
+.section-title{
+
+    font-size:15px;
+
+    font-weight:800;
+
+    margin-bottom:16px;
+}
+
+/* ================================
+   ANALYTICS
+================================ */
+
+.analytics-row{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    border:1px solid #ffffff0c;
+
+    border-radius:16px;
+
+    overflow:hidden;
+
+    background:#0b1220;
+}
+
+.analytics-item{
+
+    text-align:center;
+
+    padding:14px 5px;
+
+    border-right:1px solid #ffffff0c;
+}
+
+.analytics-item:last-child{
+
+    border-right:none;
+
+}
+
+.analytics-number{
+
+    font-size:20px;
+
+    font-weight:800;
+}
+
+.analytics-label{
+
+    margin-top:3px;
+
+    color:#64748b;
+
+    font-size:8px;
+
+    font-weight:700;
+}
+
+/* ================================
+   PROGRESS
+================================ */
+
+.progress-wrap{
+
+    margin-top:17px;
+}
+
+.progress-head{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    color:#94a3b8;
+
+    font-size:10px;
+
+    font-weight:600;
+
+    margin-bottom:8px;
+}
+
+.progress{
+
+    width:100%;
+    height:9px;
+
+    background:#020617;
+
+    border-radius:20px;
+
+    overflow:hidden;
+}
+
+.progress-bar{
+
+    width:0%;
+    height:100%;
+
+    background:
+    linear-gradient(
+        90deg,
+        #22c55e,
+        #3b82f6
+    );
+
+    border-radius:20px;
+
+    transition:width .5s ease;
+}
+
+/* ================================
+   REVENUE
+================================ */
+
+.revenue-box{
+
+    text-align:center;
+
+    padding:24px 15px;
+
+    border-radius:18px;
+
+    background:
+    radial-gradient(
+        circle at center,
+        #22c55e16,
+        transparent 70%
+    );
+
+    border:1px solid #22c55e12;
+}
+
+.revenue-label{
+
+    color:#94a3b8;
+
+    font-size:10px;
+
+    font-weight:700;
+}
+
+.revenue-value{
+
+    margin-top:5px;
+
+    color:#22c55e;
+
+    font-size:32px;
+
+    font-weight:800;
+}
+
+.revenue-sub{
+
+    margin-top:4px;
+
+    color:#64748b;
+
+    font-size:9px;
+}
+
+/* ================================
+   REQUESTS
+================================ */
+
+.request-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:12px;
+}
+
+.request-card{
+
+    padding:16px;
+
+    border-radius:18px;
+
+    background:#0b1220;
+
+    border:1px solid #ffffff0d;
+}
+
+.request-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.request-icon{
+
+    font-size:23px;
+}
+
+.pending-badge{
+
+    font-size:8px;
+
+    font-weight:800;
+
+    color:#f59e0b;
+
+    background:#f59e0b16;
+
+    border:1px solid #f59e0b30;
+
+    padding:5px 7px;
+
+    border-radius:15px;
+}
+
+.request-number{
+
+    margin-top:13px;
+
+    font-size:28px;
+
+    font-weight:800;
+}
+
+.request-label{
+
+    margin-top:2px;
+
+    color:#64748b;
+
+    font-size:9px;
+
+    font-weight:600;
+}
+
+/* ================================
+   SLOTS
+================================ */
+
+.slot-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:12px;
+}
+
+/* ================================
+   ACTIONS
+================================ */
+
+.actions-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:12px;
+}
+
+.action{
+
+    min-height:130px;
+
+    padding:16px;
+
+    border-radius:18px;
+
+    background:#0b1220;
+
+    border:1px solid #ffffff0d;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.action:active{
+
+    transform:scale(.97);
+
+    background:#111c30;
+}
+
+.action-icon{
+
+    font-size:27px;
+
+    margin-bottom:12px;
+}
+
+.action-title{
+
+    font-size:13px;
+
+    font-weight:800;
+}
+
+.action-sub{
+
+    margin-top:4px;
+
+    color:#64748b;
+
+    font-size:9px;
+
+    line-height:1.4;
+}
+
+/* ================================
+   ACTIVITY
+================================ */
+
+.activity{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:12px 0;
+
+    border-bottom:1px solid #ffffff09;
+}
+
+.activity:last-child{
+
+    border-bottom:none;
+}
+
+.activity-icon{
+
+    width:40px;
+    height:40px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    border-radius:13px;
+
+    background:#ffffff08;
+
+    font-size:19px;
+}
+
+.activity-main{
+
+    flex:1;
+
+    min-width:0;
+}
+
+.activity-title{
+
+    font-size:11px;
+
+    font-weight:700;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+.activity-time{
+
+    margin-top:3px;
+
+    color:#64748b;
+
+    font-size:9px;
+}
+
+.activity-amount{
+
+    color:#22c55e;
+
+    font-size:11px;
+
+    font-weight:800;
+}
+
+/* ================================
+   FOOTER
+================================ */
+
+.footer{
+
+    padding:25px 10px 5px;
+
+    text-align:center;
+
+    color:#475569;
+
+    font-size:9px;
+}
+
+/* ================================
+   TOAST
+================================ */
+
+.toast{
+
+    position:fixed;
+
+    left:50%;
+
+    bottom:25px;
+
+    transform:
+    translate(-50%,20px);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    z-index:100000;
+
+    min-width:220px;
+
+    max-width:90%;
+
+    padding:13px 17px;
+
+    text-align:center;
+
+    border-radius:13px;
+
+    background:#111827;
+
+    border:1px solid #ffffff15;
+
+    box-shadow:0 15px 35px #0007;
+
+    color:#fff;
+
+    font-size:11px;
+
+    font-weight:600;
+
+    transition:.25s;
+}
+
+.toast.show{
+
+    opacity:1;
+
+    transform:
+    translate(-50%,0);
+
+}
+
+/* ================================
+   MOBILE
+================================ */
+
+@media(max-width:380px){
+
+    .app{
+        padding-left:12px;
+        padding-right:12px;
+    }
+
+    .header-title{
+        font-size:19px;
+    }
+
+    .stat-card{
+        min-height:135px;
+    }
+
+    .analytics-number{
+        font-size:17px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ================================
+     LOADING SCREEN
+================================ -->
+
+<div id="loadingScreen">
+
+<div class="loading-logo">
+    🎮
+</div>
+
+<div class="loading-text" id="loadingText">
+    Checking Admin Access...
+</div>
+
+<div class="spinner"></div>
+
+
+</div>
+
+<div class="app" id="app">
+
+<!-- ================================
+     HEADER
+================================ -->
+
+<div class="header">
+
+
+<div class="header-top">
+
+    <div>
+
+        <div class="header-title">
+            🎮 BGMI ADMIN
+        </div>
+
+        <div class="header-subtitle">
+            Tournament Management Dashboard
+        </div>
+
+    </div>
+
+    <div class="admin-badge">
+        ADMIN
+    </div>
+
+</div>
+
+<div class="header-status">
+
+    <span class="live-dot"></span>
+
+    Firebase Live Database Connected
+
+</div>
+
+
+</div>
+
+<!-- ================================
+     LOGOUT
+================================ -->
+
+<button
+type="button"
+id="logoutBtn"
+class="logout-btn">
+
+
+🚪 Logout 
+
+
+</button>
+
+<!-- ================================
+     USER STATS
+================================ -->
+
+<div class="stats-grid">
+
+
+<div class="stat-card">
+
+    <div class="stat-icon">
+        👥
+    </div>
+
+    <div class="stat-label">
+        TOTAL USERS
+    </div>
+
+    <div
+    id="totalUsers"
+    class="stat-value green">
+        0
+    </div>
+
+</div>
+
+
+<div class="stat-card">
+
+    <div class="stat-icon">
+        🟢
+    </div>
+
+    <div class="stat-label">
+        ACTIVE USERS
+    </div>
+
+    <div
+    id="activeUsers"
+    class="stat-value blue">
+        0
+    </div>
+
+</div>
+
+
+<div class="stat-card">
+
+    <div class="stat-icon">
+        🚫
+    </div>
+
+    <div class="stat-label">
+        BLOCKED USERS
+    </div>
+
+    <div
+    id="blockedUsers"
+    class="stat-value red">
+        0
+    </div>
+
+</div>
+
+
+<div class="stat-card">
+
+    <div class="stat-icon">
+        🆕
+    </div>
+
+    <div class="stat-label">
+        NEW TODAY
+    </div>
+
+    <div
+    id="newUsers"
+    class="stat-value purple">
+        0
+    </div>
+
+</div>
+
+
+</div>
+
+<!-- ================================
+     TOURNAMENT ANALYTICS
+================================ -->
+
+<div class="section">
+
+
+<div class="section-title">
+    📊 Tournament Analytics
+</div>
+
+<div class="analytics-row">
+
+    <div class="analytics-item">
+
+        <div
+        id="totalMatches"
+        class="analytics-number">
+            0
+        </div>
+
+        <div class="analytics-label">
+            TOTAL
+        </div>
+
+    </div>
+
+
+    <div class="analytics-item">
+
+        <div
+        id="liveTournament"
+        class="analytics-number green">
+            0
+        </div>
+
+        <div class="analytics-label">
+            LIVE
+        </div>
+
+    </div>
+
+
+    <div class="analytics-item">
+
+        <div
+        id="upcomingTournament"
+        class="analytics-number blue">
+            0
+        </div>
+
+        <div class="analytics-label">
+            UPCOMING
+        </div>
+
+    </div>
+
+
+    <div class="analytics-item">
+
+        <div
+        id="completedTournament"
+        class="analytics-number purple">
+            0
+        </div>
+
+        <div class="analytics-label">
+            COMPLETED
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="progress-wrap">
+
+    <div class="progress-head">
+
+        <span>
+            Tournament Completion
+        </span>
+
+        <span id="completionPercent">
+            0%
+        </span>
+
+    </div>
+
+    <div class="progress">
+
+        <div
+        id="completionBar"
+        class="progress-bar">
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>
+
+<!-- ================================
+     REVENUE
+================================ -->
+
+<div class="section">
+
+
+<div class="section-title">
+    💰 Revenue
+</div>
+
+<div class="revenue-box">
+
+    <div class="revenue-label">
+        TOTAL WALLET REVENUE
+    </div>
+
+    <div
+    id="walletRevenue"
+    class="revenue-value">
+        ₹0
+    </div>
+
+    <div class="revenue-sub">
+        Based on debit transactions
+    </div>
+
+</div>
+
+
+</div>
+
+<!-- ================================
+     SLOTS
+================================ -->
+
+<div class="section">
+
+
+<div class="section-title">
+    🎟️ Slot Overview
+</div>
+
+<div class="slot-grid">
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            🎟️
+        </div>
+
+        <div class="stat-label">
+            TOTAL SLOTS
+        </div>
+
+        <div
+        id="totalSlots"
+        class="stat-value green">
+            0
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            📌
+        </div>
+
+        <div class="stat-label">
+            BOOKED SLOTS
+        </div>
+
+        <div
+        id="bookedSlots"
+        class="stat-value orange">
+            0
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>
+
+<!-- ================================
+     REQUESTS
+================================ -->
+
+<div class="section">
+
+
+<div class="section-title">
+    💳 Wallet Requests
+</div>
+
+<div class="request-grid">
+
+    <div class="request-card">
+
+        <div class="request-top">
+
+            <div class="request-icon">
+                📥
+            </div>
+
+            <div class="pending-badge">
+                PENDING
+            </div>
+
+        </div>
+
+        <div
+        id="pendingDeposits"
+        class="request-number green">
+            0
+        </div>
+
+        <div class="request-label">
+            Deposit Requests
+        </div>
+
+    </div>
+
+
+    <div class="request-card">
+
+        <div class="request-top">
+
+            <div class="request-icon">
+                📤
+            </div>
+
+            <div class="pending-badge">
+                PENDING
+            </div>
+
+        </div>
+
+        <div
+        id="pendingWithdrawals"
+        class="request-number orange">
+            0
+        </div>
+
+        <div class="request-label">
+            Withdraw Requests
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>
+
+<!-- ================================
+     QUICK ACTIONS
+================================ -->
+
+<div class="section">
+
+
+<div class="section-title">
+    ⚡ Quick Actions
+</div>
+
+<div class="actions-grid">
+
+
+    <div
+    class="action"
+    onclick="location.href='admin-tournaments.html'">
+
+        <div class="action-icon">
+            🏆
+        </div>
+
+        <div class="action-title">
+            Manage Matches
+        </div>
+
+        <div class="action-sub">
+            Edit & control tournaments
+        </div>
+
+    </div>
+
+
+    <div
+    class="action"
+    onclick="location.href='admin-create-tournament.html'">
+
+        <div class="action-icon">
+            ➕
+        </div>
+
+        <div class="action-title">
+            Create Match
+        </div>
+
+        <div class="action-sub">
+            Add new BGMI match
+        </div>
+
+    </div>
+
+
+    <div
+    class="action"
+    onclick="location.href='admin-wallet-request.html'">
+
+        <div class="action-icon">
+            💳
+        </div>
+
+        <div class="action-title">
+            Wallet Requests
+        </div>
+
+        <div class="action-sub">
+            Deposit & withdrawal
+        </div>
+
+    </div>
+
+
+    <div
+    class="action"
+    onclick="location.href='admin-payment.html'">
+
+        <div class="action-icon">
+            📱
+        </div>
+
+        <div class="action-title">
+            Payment Settings
+        </div>
+
+        <div class="action-sub">
+            UPI & QR management
+        </div>
+
+    </div>
+
+
+    <div
+    class="action"
+    onclick="location.href='admin-users.html'">
+
+        <div class="action-icon">
+            👤
+        </div>
+
+        <div class="action-title">
+            Manage Users
+        </div>
+
+        <div class="action-sub">
+            Users & wallet control
+        </div>
+
+    </div>
+
+
+    <div
+    class="action"
+    onclick="location.href='admin-broadcast.html'">
+
+        <div class="action-icon">
+            📢
+        </div>
+
+        <div class="action-title">
+            Broadcast
+        </div>
+
+        <div class="action-sub">
+            Send announcement
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>
+
+<!-- ================================
+     ACTIVITY
+================================ -->
+
+<div class="section">
+
+<div class="section-title">
+    🔔 Recent Activity
+</div>
+
+<div id="activityBox">
+
+    <div class="activity">
+
+        <div class="activity-icon">
+            ⏳
+        </div>
+
+        <div class="activity-main">
+
+            <div class="activity-title">
+                Loading activity...
+            </div>
+
+            <div class="activity-time">
+                Please wait
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>
+
+<div class="footer">
+
+
+BGMI Admin Panel • Firebase Realtime Dashboard
+
+
+</div>
+
+</div>
+
+<!-- ================================
+     TOAST
+================================ -->
+
+<div
+id="toast"
+class="toast">
+
+
+
+</div>
+
+<script type="module">
+
+/* =================================
+   FIREBASE IMPORTS
+================================= */
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+
+import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+
+import {
+    getDatabase,
+    ref,
+    onValue
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+
+/* =================================
+   FIREBASE CONFIG
+================================= */
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyDsJUtZdIXcsB0w_2MQhMBXxIgbI3ijOvg",
+
+    authDomain:
+    "incoinpaysliveearning.firebaseapp.com",
+
+    databaseURL:
+    "https://incoinpaysliveearning-default-rtdb.firebaseio.com",
+
+    projectId:
+    "incoinpaysliveearning",
+
+    storageBucket:
+    "incoinpaysliveearning.firebasestorage.app",
+
+    messagingSenderId:
+    "971873814750",
+
+    appId:
+    "1:971873814750:web:7418c7da119e4725ed9a4f"
+
+};
+
+
+/* =================================
+   INITIALIZE
+================================= */
+
+let app;
+let auth;
+let db;
+
+try{
+
+    app = initializeApp(firebaseConfig);
+
+    auth = getAuth(app);
+
+    db = getDatabase(app);
+
+}
+catch(error){
+
+    console.error(error);
+
+    showError(
+        "Firebase initialization failed"
+    );
+
+}
+
+
+/* =================================
+   ADMIN UID
+================================= */
+
+const ADMIN_UID =
+"VIAP56vYwndWPhJxktn0lRPTWnS2";
+
+
+/* =================================
+   DOM
+================================= */
+
+const loadingScreen =
+document.getElementById(
+    "loadingScreen"
+);
+
+const loadingText =
+document.getElementById(
+    "loadingText"
+);
+
+const activityBox =
+document.getElementById(
+    "activityBox"
+);
+
+const toast =
+document.getElementById(
+    "toast"
+);
+
+
+/* =================================
+   LOADING CONTROL
+================================= */
+
+function hideLoading(){
+
+    if(!loadingScreen){
+        return;
+    }
+
+    loadingScreen.classList.add(
+        "hide"
+    );
+
+}
+
+
+function showError(message){
+
+    if(loadingText){
+
+        loadingText.innerText =
+        message;
+
+    }
+
+    setTimeout(
+        hideLoading,
+        1200
+    );
+
+}
+
+
+/* =================================
+   TOAST
+================================= */
+
+function showToast(message){
+
+    if(!toast){
+        return;
+    }
+
+    toast.innerText =
+    message;
+
+    toast.classList.add(
+        "show"
+    );
+
+    clearTimeout(
+        window.toastTimer
+    );
+
+    window.toastTimer =
+    setTimeout(
+        () => {
+
+            toast.classList.remove(
+                "show"
+            );
+
+        },
+        2500
+    );
+
+}
+
+
+/* =================================
+   AUTH
+================================= */
+
+if(auth){
+
+    onAuthStateChanged(
+        auth,
+        (user) => {
+
+            if(!user){
+
+                location.replace(
+                    "admin.html"
+                );
+
+                return;
+
+            }
+
+
+            if(user.uid !== ADMIN_UID){
+
+                if(loadingText){
+
+                    loadingText.innerText =
+                    "Access Denied";
+
+                }
+
+                alert(
+                    "Access Denied"
+                );
+
+                location.replace(
+                    "index.html"
+                );
+
+                return;
+
+            }
+
+
+            if(loadingText){
+
+                loadingText.innerText =
+                "Loading Dashboard...";
+            }
+
+
+            loadDashboard();
+
+        },
+        (error) => {
+
+            console.error(
+                "Auth error:",
+                error
+            );
+
+            showError(
+                "Authentication error"
+            );
+
+        }
+    );
+
+}
+
+
+/* =================================
+   LOAD DASHBOARD
+================================= */
+
+function loadDashboard(){
+
+    try{
+
+        loadUsers();
+
+        loadMatches();
+
+        loadDepositRequests();
+
+        loadWithdrawRequests();
+
+        loadRevenue();
+
+
+        setTimeout(
+            hideLoading,
+            500
+        );
+
+    }
+    catch(error){
+
+        console.error(
+            "Dashboard error:",
+            error
+        );
+
+        showError(
+            "Dashboard loading error"
+        );
+
+    }
+
+}
+
+
+/* =================================
+   USERS
+================================= */
+
+function loadUsers(){
+
+    onValue(
+        ref(db,"users"),
+
+        (snap) => {
+
+            let total = 0;
+            let blocked = 0;
+            let active = 0;
+            let newToday = 0;
+
+            const today =
+            new Date();
+
+            today.setHours(
+                0,
+                0,
+                0,
+                0
+            );
+
+
+            if(snap.exists()){
+
+                snap.forEach(
+                    (item) => {
+
+                        total++;
+
+                        const data =
+                        item.val() || {};
+
+
+                        const isBlocked =
+                        data.blocked === true ||
+                        data.blocked === "true" ||
+                        String(
+                            data.status || ""
+                        ).toLowerCase()
+                        === "blocked";
+
+
+                        if(isBlocked){
+
+                            blocked++;
+
+                        }
+                        else{
+
+                            active++;
+
+                        }
+
+
+                        const created =
+                        Number(
+                            data.createdAt ||
+                            data.timestamp ||
+                            data.joinedAt ||
+                            data.time ||
+                            0
+                        );
+
+
+                        if(
+                            created >=
+                            today.getTime()
+                        ){
+
+                            newToday++;
+
+                        }
+
+                    }
+                );
+
+            }
+
+
+            setText(
+                "totalUsers",
+                total
+            );
+
+            setText(
+                "activeUsers",
+                active
+            );
+
+            setText(
+                "blockedUsers",
+                blocked
+            );
+
+            setText(
+                "newUsers",
+                newToday
+            );
+
+        },
+
+        (error) => {
+
+            console.error(
+                "Users error:",
+                error
+            );
+
+            showToast(
+                "Users data error"
+            );
+
+        }
+    );
+
+}
+
+
+/* =================================
+   MATCHES
+================================= */
+
+function loadMatches(){
+
+    onValue(
+        ref(db,"matches"),
+
+        (snap) => {
+
+            let total = 0;
+            let live = 0;
+            let upcoming = 0;
+            let completed = 0;
+
+            let totalSlots = 0;
+            let bookedSlots = 0;
+
+            let activities = [];
+
+
+            if(snap.exists()){
+
+                snap.forEach(
+                    (item) => {
+
+                        total++;
+
+                        const data =
+                        item.val() || {};
+
+
+                        const status =
+                        String(
+                            data.status || ""
+                        ).toLowerCase();
+
+
+                        if(status === "live"){
+
+                            live++;
+
+                        }
+                        else if(
+                            status === "upcoming"
+                        ){
+
+                            upcoming++;
+
+                        }
+                        else if(
+                            status === "completed" ||
+                            status === "played" ||
+                            status === "finished" ||
+                            status === "cancelled"
+                        ){
+
+                            completed++;
+
+                        }
+
+
+                        const maxSlots =
+                        Number(
+                            data.maxSlots ||
+                            data.totalSlots ||
+                            0
+                        );
+
+                        totalSlots +=
+                        Number.isFinite(
+                            maxSlots
+                        )
+                        ? maxSlots
+                        : 0;
+
+
+                        const players =
+                        data.players ||
+                        data.users ||
+                        data.joinedUsers ||
+                        data.bookings ||
+                        null;
+
+
+                        if(
+                            players &&
+                            typeof players ===
+                            "object"
+                        ){
+
+                            bookedSlots +=
+                            Object.keys(
+                                players
+                            ).length;
+
+                        }
+
+
+                        const matchName =
+                        data.name ||
+                        data.title ||
+                        data.matchName ||
+                        "BGMI Match";
+
+
+                        const timestamp =
+                        Number(
+                            data.createdAt ||
+                            data.updatedAt ||
+                            data.timestamp ||
+                            data.time ||
+                            0
+                        );
+
+
+                        activities.push({
+
+                            icon:
+                            status === "live"
+                            ? "🔥"
+                            : "🏆",
+
+                            title:
+                            matchName,
+
+                            time:
+                            timestamp,
+
+                            type:
+                            "match"
+
+                        });
+
+                    }
+                );
+
+            }
+
+
+            setText(
+                "totalMatches",
+                total
+            );
+
+            setText(
+                "liveTournament",
+                live
+            );
+
+            setText(
+                "upcomingTournament",
+                upcoming
+            );
+
+            setText(
+                "completedTournament",
+                completed
+            );
+
+
+            setText(
+                "totalSlots",
+                totalSlots
+            );
+
+            setText(
+                "bookedSlots",
+                bookedSlots
+            );
+
+
+            let percent = 0;
+
+            if(total > 0){
+
+                percent =
+                Math.round(
+                    (
+                        completed /
+                        total
+                    ) * 100
+                );
+
+            }
+
+
+            setText(
+                "completionPercent",
+                percent + "%"
+            );
+
+
+            const bar =
+            document.getElementById(
+                "completionBar"
+            );
+
+            if(bar){
+
+                bar.style.width =
+                Math.min(
+                    100,
+                    percent
+                ) + "%";
+
+            }
+
+
+            activityData.match =
+            activities;
+
+            rebuildActivities();
+
+        },
+
+        (error) => {
+
+            console.error(
+                "Matches error:",
+                error
+            );
+
+            showToast(
+                "Matches data error"
+            );
+
+        }
+    );
+
+}
+
+
+/* =================================
+   DEPOSITS
+================================= */
+
+function loadDepositRequests(){
+
+    onValue(
+        ref(db,"depositRequests"),
+
+        (snap) => {
+
+            let pending = 0;
+
+            let activities = [];
+
+
+            if(snap.exists()){
+
+                snap.forEach(
+                    (item) => {
+
+                        const data =
+                        item.val() || {};
+
+
+                        const status =
+                        String(
+                            data.status || ""
+                        ).toLowerCase();
+
+
+                        if(status === "pending"){
+
+                            pending++;
+
+                        }
+
+
+                        activities.push({
+
+                            icon:"📥",
+
+                            title:
+                            "Deposit request",
+
+                            time:
+                            Number(
+                                data.time ||
+                                data.createdAt ||
+                                data.timestamp ||
+                                0
+                            ),
+
+                            amount:
+                            data.amount,
+
+                            type:
+                            "deposit"
+
+                        });
+
+                    }
+                );
+
+            }
+
+
+            setText(
+                "pendingDeposits",
+                pending
+            );
+
+
+            activityData.deposit =
+            activities;
+
+            rebuildActivities();
+
+        },
+
+        (error) => {
+
+            console.error(
+                "Deposit error:",
+                error
+            );
+
+            showToast(
+                "Deposit data error"
+            );
+
+        }
+    );
+
+}
+
+
+/* =================================
+   WITHDRAW
+================================= */
+
+function loadWithdrawRequests(){
+
+    onValue(
+        ref(db,"withdrawRequests"),
+
+        (snap) => {
+
+            let pending = 0;
+
+            let activities = [];
+
+
+            if(snap.exists()){
+
+                snap.forEach(
+                    (item) => {
+
+                        const data =
+                        item.val() || {};
+
+
+                        const status =
+                        String(
+                            data.status || ""
+                        ).toLowerCase();
+
+
+                        if(status === "pending"){
+
+                            pending++;
+
+                        }
+
+
+                        activities.push({
+
+                            icon:"📤",
+
+                            title:
+                            "Withdrawal request",
+
+                            time:
+                            Number(
+                                data.time ||
+                                data.createdAt ||
+                                data.timestamp ||
+                                0
+                            ),
+
+                            amount:
+                            data.amount,
+
+                            type:
+                            "withdraw"
+
+                        });
+
+                    }
+                );
+
+            }
+
+
+            setText(
+                "pendingWithdrawals",
+                pending
+            );
+
+
+            activityData.withdraw =
+            activities;
+
+            rebuildActivities();
+
+        },
+
+        (error) => {
+
+            console.error(
+                "Withdraw error:",
+                error
+            );
+
+            showToast(
+                "Withdraw data error"
+            );
+
+        }
+    );
+
+}
+
+
+/* =================================
+   REVENUE
+================================= */
+
+function loadRevenue(){
+
+    onValue(
+        ref(db,"users"),
+
+        (snap) => {
+
+            let revenue = 0;
+
+
+            if(snap.exists()){
+
+                snap.forEach(
+                    (user) => {
+
+                        const data =
+                        user.val() || {};
+
+
+                        const transactions =
+                        data.transactions;
+
+
+                        if(
+                            transactions &&
+                            typeof transactions ===
+                            "object"
+                        ){
+
+                            Object.values(
+                                transactions
+                            ).forEach(
+                                (tx) => {
+
+                                    if(
+                                        String(
+                                            tx.type || ""
+                                        ).toLowerCase()
+                                        === "debit"
+                                    ){
+
+                                        revenue +=
+                                        Number(
+                                            tx.amount || 0
+                                        );
+
+                                    }
+
+                                }
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+
+
+            setText(
+                "walletRevenue",
+                "₹" +
+                formatMoney(revenue)
+            );
+
+        },
+
+        (error) => {
+
+            console.error(
+                "Revenue error:",
+                error
+            );
+
+            showToast(
+                "Revenue data error"
+            );
+
+        }
+    );
+
+}
+
+
+/* =================================
+   ACTIVITY DATA
+================================= */
+
+const activityData = {
+
+    match:[],
+    deposit:[],
+    withdraw:[]
+
+};
+
+
+/* =================================
+   REBUILD ACTIVITIES
+================================= */
+
+function rebuildActivities(){
+
+    let all = [
+
+        ...activityData.match,
+        ...activityData.deposit,
+        ...activityData.withdraw
+
+    ];
+
+
+    renderActivities(all);
+
+}
+
+
+/* =================================
+   RENDER ACTIVITIES
+================================= */
+
+function renderActivities(items){
+
+    if(!activityBox){
+        return;
+    }
+
+
+    const valid =
+    items
+    .filter(
+        item =>
+        item &&
+        item.title
+    )
+    .sort(
+        (a,b) =>
+        Number(
+            b.time || 0
+        ) -
+        Number(
+            a.time || 0
+        )
+    )
+    .slice(
+        0,
+        8
+    );
+
+
+    if(valid.length === 0){
+
+        activityBox.innerHTML = `
+
+            <div class="activity">
+
+                <div class="activity-icon">
+                    📭
+                </div>
+
+                <div class="activity-main">
+
+                    <div class="activity-title">
+                        No recent activity
+                    </div>
+
+                    <div class="activity-time">
+                        No records found
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    activityBox.innerHTML = "";
+
+
+    valid.forEach(
+        (item) => {
+
+            const row =
+            document.createElement(
+                "div"
+            );
+
+            row.className =
+            "activity";
+
+
+            const amount =
+            item.amount !== undefined &&
+            item.amount !== null &&
+            item.amount !== ""
+            ? "₹" +
+              formatMoney(
+                  item.amount
+              )
+            : "";
+
+
+            row.innerHTML = `
+
+                <div class="activity-icon">
+
+                    ${escapeHTML(
+                        item.icon || "🔔"
+                    )}
+
+                </div>
+
+                <div class="activity-main">
+
+                    <div class="activity-title">
+
+                        ${escapeHTML(
+                            item.title
+                        )}
+
+                    </div>
+
+                    <div class="activity-time">
+
+                        ${formatTime(
+                            item.time
+                        )}
+
+                    </div>
+
+                </div>
+
+                <div class="activity-amount">
+
+                    ${amount}
+
+                </div>
+
+            `;
+
+
+            activityBox.appendChild(
+                row
+            );
+
+        }
+    );
+
+}
+
+
+/* =================================
+   LOGOUT
+================================= */
+
+document.getElementById(
+    "logoutBtn"
+).addEventListener(
+    "click",
+    async () => {
+
+        const confirmed =
+        confirm(
+            "Are you sure you want to logout?"
+        );
+
+
+        if(!confirmed){
+            return;
+        }
+
+
+        try{
+
+            await signOut(auth);
+
+            location.replace(
+                "admin.html"
+            );
+
+        }
+        catch(error){
+
+            console.error(
+                "Logout error:",
+                error
+            );
+
+            showToast(
+                "Logout failed"
+            );
+
+        }
+
+    }
+);
+
+
+/* =================================
+   HELPERS
+================================= */
+
+function setText(id,value){
+
+    const element =
+    document.getElementById(id);
+
+    if(element){
+
+        element.innerText =
+        value;
+
+    }
+
+}
+
+
+function formatMoney(value){
+
+    const number =
+    Number(value || 0);
+
+
+    if(!Number.isFinite(number)){
+        return "0";
+    }
+
+
+    return number.toLocaleString(
+        "en-IN",
+        {
+            maximumFractionDigits:0
+        }
+    );
+
+}
+
+
+function formatTime(timestamp){
+
+    const time =
+    Number(timestamp || 0);
+
+
+    if(
+        !time ||
+        time <= 0
+    ){
+
+        return "Recently";
+
+    }
+
+
+    const date =
+    new Date(time);
+
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+
+        return "Recently";
+
+    }
+
+
+    return date.toLocaleString(
+        "en-IN",
+        {
+            day:"2-digit",
+            month:"short",
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    );
+
+}
+
+
+function escapeHTML(value){
+
+    return String(
+        value ?? ""
+    )
+    .replaceAll(
+        "&",
+        "&amp;"
+    )
+    .replaceAll(
+        "<",
+        "&lt;"
+    )
+    .replaceAll(
+        ">",
+        "&gt;"
+    )
+    .replaceAll(
+        '"',
+        "&quot;"
+    )
+    .replaceAll(
+        "'",
+        "&#039;"
+    );
+
+}
+
+</script>
+
+</body>
+</html>
