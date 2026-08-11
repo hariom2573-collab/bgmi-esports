@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<meta name="theme-color" content="#050B18">
+
+<title>Admin Broadcast</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Poppins,sans-serif;
+}
+
+body{
+    background:#050B18;
+    color:#fff;
+    min-height:100vh;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+    radial-gradient(circle at top left,#22c55e30,transparent 35%),
+    radial-gradient(circle at top right,#2563eb30,transparent 35%),
+    #050B18;
+    z-index:-1;
+}
+
+.app{
+    width:100%;
+    max-width:520px;
+    margin:auto;
+    padding:16px;
+    padding-bottom:40px;
+}
+
+/* HEADER */
+
+.header{
+    background:#111827;
+    border:1px solid #ffffff12;
+    border-radius:22px;
+    padding:20px;
+    margin-bottom:16px;
+    box-shadow:0 15px 40px #0005;
+}
+
+.back{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:42px;
+    height:42px;
+    border-radius:13px;
+    background:#1f2937;
+    color:#fff;
+    text-decoration:none;
+    font-size:20px;
+    margin-bottom:15px;
+}
+
+.header h1{
+    font-size:24px;
+    font-weight:800;
+    color:#22c55e;
+}
+
+.header p{
+    color:#94a3b8;
+    font-size:12px;
+    margin-top:5px;
+}
+
+/* COMPOSE */
+
+.card{
+    background:#111827;
+    border:1px solid #ffffff12;
+    border-radius:22px;
+    padding:18px;
+    margin-bottom:16px;
+    box-shadow:0 15px 40px #0004;
+}
+
+.card-title{
+    font-size:17px;
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.label{
+    display:block;
+    color:#94a3b8;
+    font-size:12px;
+    font-weight:600;
+    margin-bottom:7px;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    background:#050B18;
+    border:1px solid #ffffff15;
+    color:#fff;
+    outline:none;
+    border-radius:14px;
+    padding:13px;
+    font-size:13px;
+    margin-bottom:14px;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:#22c55e;
+}
+
+textarea{
+    min-height:120px;
+    resize:none;
+}
+
+select{
+    appearance:none;
+}
+
+/* BUTTON */
+
+.send-btn{
+    width:100%;
+    border:0;
+    border-radius:15px;
+    padding:14px;
+    background:linear-gradient(135deg,#22c55e,#16a34a);
+    color:#001b09;
+    font-size:14px;
+    font-weight:800;
+    cursor:pointer;
+    box-shadow:0 10px 25px #22c55e30;
+}
+
+.send-btn:active{
+    transform:scale(.98);
+}
+
+.send-btn:disabled{
+    opacity:.5;
+}
+
+/* STATUS */
+
+.status-box{
+    display:none;
+    padding:12px;
+    border-radius:13px;
+    margin-top:12px;
+    font-size:12px;
+    text-align:center;
+}
+
+.status-box.success{
+    display:block;
+    background:#22c55e18;
+    border:1px solid #22c55e40;
+    color:#4ade80;
+}
+
+.status-box.error{
+    display:block;
+    background:#ef444418;
+    border:1px solid #ef444440;
+    color:#f87171;
+}
+
+/* BROADCAST LIST */
+
+.broadcast-item{
+    background:#050B18;
+    border:1px solid #ffffff10;
+    border-radius:17px;
+    padding:15px;
+    margin-bottom:12px;
+}
+
+.broadcast-top{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    align-items:flex-start;
+}
+
+.broadcast-title{
+    font-size:15px;
+    font-weight:700;
+}
+
+.badge{
+    flex-shrink:0;
+    padding:4px 9px;
+    border-radius:20px;
+    font-size:9px;
+    font-weight:700;
+}
+
+.badge.active{
+    background:#22c55e20;
+    color:#4ade80;
+}
+
+.badge.inactive{
+    background:#ef444420;
+    color:#f87171;
+}
+
+.broadcast-message{
+    color:#cbd5e1;
+    font-size:12px;
+    line-height:1.6;
+    margin-top:9px;
+    white-space:pre-wrap;
+    word-break:break-word;
+}
+
+.broadcast-meta{
+    color:#64748b;
+    font-size:10px;
+    margin-top:12px;
+}
+
+.broadcast-actions{
+    display:flex;
+    gap:8px;
+    margin-top:12px;
+}
+
+.small-btn{
+    flex:1;
+    border:0;
+    border-radius:11px;
+    padding:9px;
+    font-size:11px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.toggle-btn{
+    background:#1d4ed8;
+    color:#fff;
+}
+
+.delete-btn{
+    background:#7f1d1d;
+    color:#fecaca;
+}
+
+.empty{
+    text-align:center;
+    padding:35px 15px;
+    color:#64748b;
+}
+
+.empty-icon{
+    font-size:35px;
+    margin-bottom:8px;
+}
+
+.loading{
+    text-align:center;
+    padding:30px;
+    color:#64748b;
+}
+
+.spinner{
+    width:25px;
+    height:25px;
+    border:3px solid #ffffff15;
+    border-top-color:#22c55e;
+    border-radius:50%;
+    margin:0 auto 10px;
+    animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* LIVE PREVIEW */
+
+.preview{
+    background:#07111f;
+    border:1px solid #22c55e30;
+    border-radius:16px;
+    padding:14px;
+    margin-top:5px;
+    margin-bottom:15px;
+}
+
+.preview-label{
+    font-size:9px;
+    color:#22c55e;
+    font-weight:700;
+    margin-bottom:6px;
+}
+
+.preview-title{
+    font-size:14px;
+    font-weight:700;
+}
+
+.preview-message{
+    color:#94a3b8;
+    font-size:11px;
+    margin-top:5px;
+    line-height:1.5;
+}
+
+/* MOBILE */
+
+@media(max-width:380px){
+
+    .app{
+        padding:12px;
+    }
+
+    .header h1{
+        font-size:21px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <a href="admin-dashboard.html"
+           class="back">
+            ←
+        </a>
+
+        <h1>
+            📢 Broadcast
+        </h1>
+
+        <p>
+            Send live announcements to all users
+        </p>
+
+    </div>
+
+
+    <!-- CREATE BROADCAST -->
+
+    <div class="card">
+
+        <div class="card-title">
+            📢 Create Announcement
+        </div>
+
+
+        <label class="label">
+            TITLE
+        </label>
+
+        <input
+            id="title"
+            type="text"
+            maxlength="80"
+            placeholder="Example: Match Room Released">
+
+
+        <label class="label">
+            MESSAGE
+        </label>
+
+        <textarea
+            id="message"
+            maxlength="500"
+            placeholder="Write your announcement here..."></textarea>
+
+
+        <label class="label">
+            TYPE
+        </label>
+
+        <select id="type">
+
+            <option value="info">
+                ℹ️ Information
+            </option>
+
+            <option value="success">
+                ✅ Success
+            </option>
+
+            <option value="warning">
+                ⚠️ Warning
+            </option>
+
+            <option value="match">
+                🎮 Match Update
+            </option>
+
+            <option value="important">
+                🔥 Important
+            </option>
+
+        </select>
+
+
+        <label class="label">
+            STATUS
+        </label>
+
+        <select id="active">
+
+            <option value="true">
+                🟢 Active
+            </option>
+
+            <option value="false">
+                🔴 Inactive
+            </option>
+
+        </select>
+
+
+        <!-- PREVIEW -->
+
+        <div class="preview">
+
+            <div class="preview-label">
+                LIVE PREVIEW
+            </div>
+
+            <div
+                id="previewTitle"
+                class="preview-title">
+
+                Your announcement title
+
+            </div>
+
+            <div
+                id="previewMessage"
+                class="preview-message">
+
+                Your announcement message will appear here.
+
+            </div>
+
+        </div>
+
+
+        <button
+            id="sendBtn"
+            class="send-btn"
+            onclick="createBroadcast()">
+
+            📢 Publish Broadcast
+
+        </button>
+
+
+        <div
+            id="statusBox"
+            class="status-box">
+        </div>
+
+    </div>
+
+
+    <!-- BROADCAST HISTORY -->
+
+    <div class="card">
+
+        <div class="card-title">
+            📋 Broadcast History
+        </div>
+
+        <div
+            id="broadcastList"
+            class="loading">
+
+            <div class="spinner"></div>
+
+            Loading broadcasts...
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script type="module">
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+
+import {
+    getAuth,
+    onAuthStateChanged
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+
+import {
+    getDatabase,
+    ref,
+    push,
+    set,
+    onValue,
+    update,
+    remove
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyDsJUtZdIXcsB0w_2MQhMBXxIgbI3ijOvg",
+
+    authDomain:
+        "incoinpaysliveearning.firebaseapp.com",
+
+    databaseURL:
+        "https://incoinpaysliveearning-default-rtdb.firebaseio.com",
+
+    projectId:
+        "incoinpaysliveearning",
+
+    storageBucket:
+        "incoinpaysliveearning.firebasestorage.app",
+
+    messagingSenderId:
+        "971873814750",
+
+    appId:
+        "1:971873814750:web:7418c7da119e4725ed9a4f"
+
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+
+const auth =
+    getAuth(app);
+
+
+const db =
+    getDatabase(app);
+
+
+/* =====================================================
+   ADMIN UID
+===================================================== */
+
+const ADMIN_UID =
+    "VIAP56vYwndWPhJxktn0lRPTWnS2";
+
+
+let currentUser = null;
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const titleInput =
+    document.getElementById("title");
+
+const messageInput =
+    document.getElementById("message");
+
+const typeInput =
+    document.getElementById("type");
+
+const activeInput =
+    document.getElementById("active");
+
+const previewTitle =
+    document.getElementById("previewTitle");
+
+const previewMessage =
+    document.getElementById("previewMessage");
+
+const sendBtn =
+    document.getElementById("sendBtn");
+
+const statusBox =
+    document.getElementById("statusBox");
+
+const broadcastList =
+    document.getElementById("broadcastList");
+
+
+/* =====================================================
+   AUTH CHECK
+===================================================== */
+
+onAuthStateChanged(
+    auth,
+    (user) => {
+
+        if(!user){
+
+            location.replace(
+                "admin.html"
+            );
+
+            return;
+
+        }
+
+
+        if(
+            user.uid !==
+            ADMIN_UID
+        ){
+
+            alert(
+                "Access Denied"
+            );
+
+            location.replace(
+                "index.html"
+            );
+
+            return;
+
+        }
+
+
+        currentUser =
+            user;
+
+
+        loadBroadcasts();
+
+    }
+);
+
+
+/* =====================================================
+   LIVE PREVIEW
+===================================================== */
+
+titleInput.addEventListener(
+    "input",
+    updatePreview
+);
+
+messageInput.addEventListener(
+    "input",
+    updatePreview
+);
+
+
+function updatePreview(){
+
+    previewTitle.innerText =
+        titleInput.value.trim() ||
+        "Your announcement title";
+
+
+    previewMessage.innerText =
+        messageInput.value.trim() ||
+        "Your announcement message will appear here.";
+
+}
+
+
+/* =====================================================
+   CREATE BROADCAST
+===================================================== */
+
+window.createBroadcast =
+async function(){
+
+    const title =
+        titleInput.value.trim();
+
+    const message =
+        messageInput.value.trim();
+
+    const type =
+        typeInput.value;
+
+    const active =
+        activeInput.value === "true";
+
+
+    if(!title){
+
+        showStatus(
+            "Please enter broadcast title.",
+            "error"
+        );
+
+        titleInput.focus();
+
+        return;
+
+    }
+
+
+    if(!message){
+
+        showStatus(
+            "Please enter broadcast message.",
+            "error"
+        );
+
+        messageInput.focus();
+
+        return;
+
+    }
+
+
+    if(!currentUser){
+
+        showStatus(
+            "Admin authentication not ready.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    sendBtn.disabled =
+        true;
+
+    sendBtn.innerText =
+        "Publishing...";
+
+
+    try{
+
+        const broadcastRef =
+            push(
+                ref(
+                    db,
+                    "broadcasts"
+                )
+            );
+
+
+        const now =
+            Date.now();
+
+
+        await set(
+            broadcastRef,
+            {
+
+                title:
+                    title,
+
+                message:
+                    message,
+
+                type:
+                    type,
+
+                active:
+                    active,
+
+                createdAt:
+                    now,
+
+                updatedAt:
+                    now,
+
+                createdBy:
+                    currentUser.uid,
+
+                adminEmail:
+                    currentUser.email || ""
+
+            }
+        );
+
+
+        showStatus(
+            "✓ Broadcast published successfully.",
+            "success"
+        );
+
+
+        titleInput.value =
+            "";
+
+        messageInput.value =
+            "";
+
+        typeInput.value =
+            "info";
+
+        activeInput.value =
+            "true";
+
+
+        updatePreview();
+
+
+    }catch(error){
+
+        console.error(
+            error
+        );
+
+
+        showStatus(
+            "Failed to publish: " +
+            error.message,
+            "error"
+        );
+
+    }
+
+
+    sendBtn.disabled =
+        false;
+
+    sendBtn.innerText =
+        "📢 Publish Broadcast";
+
+};
+
+
+/* =====================================================
+   LOAD BROADCASTS
+===================================================== */
+
+function loadBroadcasts(){
+
+    const broadcastsRef =
+        ref(
+            db,
+            "broadcasts"
+        );
+
+
+    onValue(
+        broadcastsRef,
+        (snapshot) => {
+
+            if(
+                !snapshot.exists()
+            ){
+
+                broadcastList.innerHTML = `
+
+                    <div class="empty">
+
+                        <div class="empty-icon">
+                            📢
+                        </div>
+
+                        No broadcasts yet.
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            const list = [];
+
+
+            snapshot.forEach(
+                (child) => {
+
+                    list.push({
+
+                        id:
+                            child.key,
+
+                        ...(
+                            child.val() || {}
+                        )
+
+                    });
+
+                }
+            );
+
+
+            list.sort(
+                (a,b) => {
+
+                    return Number(
+                        b.createdAt || 0
+                    )
+                    -
+                    Number(
+                        a.createdAt || 0
+                    );
+
+                }
+            );
+
+
+            renderBroadcasts(
+                list
+            );
+
+        },
+        (error) => {
+
+            console.error(
+                error
+            );
+
+
+            broadcastList.innerHTML = `
+
+                <div class="empty">
+
+                    ❌ Unable to load broadcasts.
+
+                </div>
+
+            `;
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   RENDER
+===================================================== */
+
+function renderBroadcasts(
+    list
+){
+
+    broadcastList.innerHTML =
+        "";
+
+
+    list.forEach(
+        (item) => {
+
+            const box =
+                document.createElement(
+                    "div"
+                );
+
+
+            box.className =
+                "broadcast-item";
+
+
+            const title =
+                escapeHTML(
+                    item.title ||
+                    "Untitled"
+                );
+
+
+            const message =
+                escapeHTML(
+                    item.message ||
+                    ""
+                );
+
+
+            const active =
+                item.active === true ||
+                item.active === "true";
+
+
+            const type =
+                escapeHTML(
+                    item.type ||
+                    "info"
+                );
+
+
+            const date =
+                formatDate(
+                    item.createdAt
+                );
+
+
+            box.innerHTML = `
+
+                <div class="broadcast-top">
+
+                    <div class="broadcast-title">
+
+                        ${title}
+
+                    </div>
+
+                    <div class="badge ${
+                        active
+                        ? "active"
+                        : "inactive"
+                    }">
+
+                        ${
+                            active
+                            ? "ACTIVE"
+                            : "INACTIVE"
+                        }
+
+                    </div>
+
+                </div>
+
+
+                <div class="broadcast-message">
+
+                    ${message}
+
+                </div>
+
+
+                <div class="broadcast-meta">
+
+                    📌 Type: ${type}
+                    &nbsp; • &nbsp;
+                    🕒 ${date}
+
+                </div>
+
+
+                <div class="broadcast-actions">
+
+                    <button
+                        class="small-btn toggle-btn"
+                        onclick="toggleBroadcast(
+                            '${item.id}',
+                            ${active}
+                        )">
+
+                        ${
+                            active
+                            ? "🔴 Disable"
+                            : "🟢 Activate"
+                        }
+
+                    </button>
+
+
+                    <button
+                        class="small-btn delete-btn"
+                        onclick="deleteBroadcast(
+                            '${item.id}'
+                        )">
+
+                        🗑 Delete
+
+                    </button>
+
+                </div>
+
+            `;
+
+
+            broadcastList.appendChild(
+                box
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   TOGGLE
+===================================================== */
+
+window.toggleBroadcast =
+async function(
+    id,
+    currentState
+){
+
+    if(!id){
+        return;
+    }
+
+
+    try{
+
+        await update(
+            ref(
+                db,
+                "broadcasts/" +
+                id
+            ),
+            {
+
+                active:
+                    !currentState,
+
+                updatedAt:
+                    Date.now()
+
+            }
+        );
+
+
+        showStatus(
+            !currentState
+            ? "✓ Broadcast activated."
+            : "✓ Broadcast disabled.",
+            "success"
+        );
+
+
+    }catch(error){
+
+        console.error(
+            error
+        );
+
+
+        showStatus(
+            "Unable to update broadcast.",
+            "error"
+        );
+
+    }
+
+};
+
+
+/* =====================================================
+   DELETE
+===================================================== */
+
+window.deleteBroadcast =
+async function(id){
+
+    if(!id){
+        return;
+    }
+
+
+    const confirmed =
+        confirm(
+            "Delete this broadcast?"
+        );
+
+
+    if(!confirmed){
+        return;
+    }
+
+
+    try{
+
+        await remove(
+            ref(
+                db,
+                "broadcasts/" +
+                id
+            )
+        );
+
+
+        showStatus(
+            "✓ Broadcast deleted.",
+            "success"
+        );
+
+
+    }catch(error){
+
+        console.error(
+            error
+        );
+
+
+        showStatus(
+            "Unable to delete broadcast.",
+            "error"
+        );
+
+    }
+
+};
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+function showStatus(
+    message,
+    type
+){
+
+    statusBox.innerText =
+        message;
+
+    statusBox.className =
+        "status-box " +
+        type;
+
+
+    setTimeout(
+        () => {
+
+            statusBox.className =
+                "status-box";
+
+            statusBox.innerText =
+                "";
+
+        },
+        3000
+    );
+
+}
+
+
+/* =====================================================
+   DATE
+===================================================== */
+
+function formatDate(
+    timestamp
+){
+
+    if(!timestamp){
+        return "--";
+    }
+
+
+    const date =
+        new Date(
+            Number(timestamp)
+        );
+
+
+    return date.toLocaleString(
+        "en-IN",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric",
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    );
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(
+    value
+){
+
+    return String(
+        value ?? ""
+    )
+
+    .replaceAll(
+        "&",
+        "&amp;"
+    )
+
+    .replaceAll(
+        "<",
+        "&lt;"
+    )
+
+    .replaceAll(
+        ">",
+        "&gt;"
+    )
+
+    .replaceAll(
+        '"',
+        "&quot;"
+    )
+
+    .replaceAll(
+        "'",
+        "&#039;"
+    );
+
+}
+
+</script>
+
+</body>
+</html>
