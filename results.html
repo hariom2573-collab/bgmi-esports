@@ -1,0 +1,2401 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+
+<meta name="theme-color" content="#050B18">
+
+<title>BGMI Results</title>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Poppins,sans-serif;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    background:#050B18;
+    color:#fff;
+    overflow-x:hidden;
+    padding-bottom:88px;
+}
+
+
+/* =====================================================
+   BACKGROUND
+===================================================== */
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+    inset:0;
+
+    background:
+    radial-gradient(
+        circle at top left,
+        rgba(34,197,94,.15),
+        transparent 35%
+    ),
+
+    radial-gradient(
+        circle at top right,
+        rgba(37,99,235,.14),
+        transparent 35%
+    ),
+
+    #050B18;
+
+    z-index:-2;
+}
+
+body::after{
+
+    content:"";
+
+    position:fixed;
+    inset:0;
+
+    background:
+    linear-gradient(
+        180deg,
+        rgba(5,11,24,.15),
+        rgba(5,11,24,.82)
+    );
+
+    z-index:-1;
+}
+
+
+/* =====================================================
+   APP
+===================================================== */
+
+.app{
+
+    width:100%;
+    max-width:520px;
+
+    margin:auto;
+
+    padding:0 15px 20px;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header{
+
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    padding:18px 2px 15px;
+}
+
+.headerLeft{
+
+    display:flex;
+    align-items:center;
+    gap:11px;
+}
+
+.logo{
+
+    width:46px;
+    height:46px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:15px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #16a34a,
+        #22c55e
+    );
+
+    color:#031008;
+
+    font-size:21px;
+
+    box-shadow:
+    0 10px 25px rgba(34,197,94,.18);
+}
+
+.headerTitle h1{
+
+    font-size:19px;
+    font-weight:800;
+}
+
+.headerTitle p{
+
+    margin-top:2px;
+
+    color:#728197;
+
+    font-size:8px;
+    font-weight:600;
+
+    letter-spacing:.7px;
+}
+
+.homeBtn{
+
+    width:40px;
+    height:40px;
+
+    border:1px solid rgba(255,255,255,.07);
+
+    border-radius:13px;
+
+    background:#101a2b;
+
+    color:#fff;
+
+    font-size:18px;
+
+    cursor:pointer;
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:19px;
+
+    border-radius:22px;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(22,163,74,.88),
+        rgba(5,11,24,.96)
+    );
+
+    border:1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+    0 18px 40px rgba(0,0,0,.3);
+}
+
+.hero::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:170px;
+    height:170px;
+
+    right:-70px;
+    top:-75px;
+
+    border-radius:50%;
+
+    background:
+    rgba(255,255,255,.08);
+}
+
+.heroContent{
+
+    position:relative;
+    z-index:2;
+}
+
+.heroSmall{
+
+    color:rgba(255,255,255,.7);
+
+    font-size:8px;
+    font-weight:700;
+
+    letter-spacing:1px;
+}
+
+.heroTitle{
+
+    margin-top:5px;
+
+    font-size:21px;
+    font-weight:800;
+}
+
+.heroText{
+
+    margin-top:5px;
+
+    max-width:290px;
+
+    color:rgba(255,255,255,.7);
+
+    font-size:9px;
+    line-height:1.6;
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:8px;
+
+    margin-top:13px;
+}
+
+.stat{
+
+    padding:13px 7px;
+
+    text-align:center;
+
+    border-radius:15px;
+
+    background:#0d1728;
+
+    border:1px solid rgba(255,255,255,.06);
+}
+
+.statValue{
+
+    color:#22c55e;
+
+    font-size:17px;
+    font-weight:800;
+}
+
+.statLabel{
+
+    margin-top:2px;
+
+    color:#66758a;
+
+    font-size:7px;
+
+    font-weight:600;
+
+    text-transform:uppercase;
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.searchBox{
+
+    position:relative;
+
+    margin-top:16px;
+}
+
+.searchBox input{
+
+    width:100%;
+    height:48px;
+
+    padding:0 45px 0 16px;
+
+    border:1px solid rgba(255,255,255,.07);
+
+    border-radius:14px;
+
+    outline:none;
+
+    background:#0d1728;
+
+    color:#fff;
+
+    font-size:10px;
+}
+
+.searchBox input::placeholder{
+
+    color:#59677b;
+}
+
+.searchIcon{
+
+    position:absolute;
+
+    top:50%;
+    right:15px;
+
+    transform:translateY(-50%);
+
+    color:#64748b;
+
+    font-size:17px;
+}
+
+
+/* =====================================================
+   FILTER
+===================================================== */
+
+.filterBar{
+
+    display:flex;
+
+    gap:7px;
+
+    overflow-x:auto;
+
+    margin-top:12px;
+
+    padding-bottom:3px;
+}
+
+.filterBar::-webkit-scrollbar{
+    display:none;
+}
+
+.filterBtn{
+
+    flex-shrink:0;
+
+    padding:9px 15px;
+
+    border:1px solid rgba(255,255,255,.06);
+
+    border-radius:25px;
+
+    background:#101a2b;
+
+    color:#8b98aa;
+
+    font-size:8px;
+
+    font-weight:800;
+
+    cursor:pointer;
+}
+
+.filterBtn.active{
+
+    background:#22c55e;
+
+    border-color:#22c55e;
+
+    color:#031008;
+}
+
+
+/* =====================================================
+   SECTION
+===================================================== */
+
+.sectionHeader{
+
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    margin:20px 2px 10px;
+}
+
+.sectionHeader h2{
+
+    font-size:15px;
+    font-weight:800;
+}
+
+.sectionHeader span{
+
+    color:#607087;
+
+    font-size:8px;
+}
+
+
+/* =====================================================
+   RESULT CARD
+===================================================== */
+
+.resultCard{
+
+    position:relative;
+
+    margin-bottom:12px;
+
+    padding:15px;
+
+    border-radius:19px;
+
+    background:#0d1728;
+
+    border:1px solid rgba(255,255,255,.07);
+
+    box-shadow:
+    0 12px 28px rgba(0,0,0,.16);
+}
+
+.resultTop{
+
+    display:flex;
+
+    justify-content:space-between;
+    align-items:flex-start;
+
+    gap:10px;
+}
+
+.matchName{
+
+    min-width:0;
+}
+
+.matchName h3{
+
+    font-size:14px;
+    font-weight:800;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.matchName p{
+
+    margin-top:3px;
+
+    color:#68778c;
+
+    font-size:7px;
+}
+
+.resultStatus{
+
+    flex-shrink:0;
+
+    padding:6px 9px;
+
+    border-radius:8px;
+
+    background:rgba(34,197,94,.1);
+
+    color:#4ade80;
+
+    font-size:7px;
+
+    font-weight:800;
+}
+
+.resultMeta{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:7px;
+
+    margin-top:13px;
+}
+
+.meta{
+
+    padding:10px 5px;
+
+    text-align:center;
+
+    border-radius:11px;
+
+    background:#111d30;
+}
+
+.meta span{
+
+    display:block;
+
+    color:#637187;
+
+    font-size:7px;
+
+    text-transform:uppercase;
+}
+
+.meta strong{
+
+    display:block;
+
+    margin-top:3px;
+
+    color:#dbe4ef;
+
+    font-size:11px;
+}
+
+.meta strong.green{
+
+    color:#22c55e;
+}
+
+.meta strong.gold{
+
+    color:#fbbf24;
+}
+
+
+/* =====================================================
+   PLAYER RESULT
+===================================================== */
+
+.playerResult{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    margin-top:12px;
+
+    padding:12px;
+
+    border-radius:13px;
+
+    background:
+    linear-gradient(
+        90deg,
+        rgba(34,197,94,.08),
+        rgba(17,29,48,.7)
+    );
+
+    border:1px solid rgba(34,197,94,.09);
+}
+
+.rankBox{
+
+    width:40px;
+    height:40px;
+
+    flex-shrink:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:12px;
+
+    background:#17253a;
+
+    color:#fbbf24;
+
+    font-size:14px;
+    font-weight:900;
+}
+
+.playerInfo{
+
+    min-width:0;
+    flex:1;
+}
+
+.playerInfo h4{
+
+    font-size:10px;
+    font-weight:800;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.playerInfo p{
+
+    margin-top:2px;
+
+    color:#66758a;
+
+    font-size:7px;
+}
+
+.points{
+
+    text-align:right;
+}
+
+.points strong{
+
+    display:block;
+
+    color:#22c55e;
+
+    font-size:17px;
+    font-weight:900;
+}
+
+.points span{
+
+    color:#66758a;
+
+    font-size:7px;
+}
+
+
+/* =====================================================
+   TOP 3
+===================================================== */
+
+.topThree{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:8px;
+
+    margin-top:12px;
+}
+
+.topPlayer{
+
+    padding:12px 6px;
+
+    text-align:center;
+
+    border-radius:14px;
+
+    background:#111d30;
+
+    border:1px solid rgba(255,255,255,.05);
+}
+
+.medal{
+
+    font-size:22px;
+}
+
+.topRank{
+
+    margin-top:3px;
+
+    color:#cbd5e1;
+
+    font-size:8px;
+    font-weight:800;
+}
+
+.topPoints{
+
+    margin-top:2px;
+
+    color:#22c55e;
+
+    font-size:11px;
+    font-weight:900;
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.empty{
+
+    padding:50px 15px;
+
+    text-align:center;
+
+    border-radius:19px;
+
+    background:#0d1728;
+
+    border:1px solid rgba(255,255,255,.05);
+}
+
+.emptyIcon{
+
+    font-size:38px;
+}
+
+.emptyTitle{
+
+    margin-top:8px;
+
+    color:#aab6c8;
+
+    font-size:12px;
+    font-weight:800;
+}
+
+.emptyText{
+
+    margin-top:4px;
+
+    color:#617086;
+
+    font-size:8px;
+    line-height:1.6;
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.loader{
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:6px;
+
+    padding:40px;
+}
+
+.dot{
+
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#22c55e;
+
+    animation:bounce .8s infinite alternate;
+}
+
+.dot:nth-child(2){
+    animation-delay:.15s;
+}
+
+.dot:nth-child(3){
+    animation-delay:.3s;
+}
+
+@keyframes bounce{
+
+    from{
+        transform:translateY(0);
+        opacity:.35;
+    }
+
+    to{
+        transform:translateY(-7px);
+        opacity:1;
+    }
+
+}
+
+
+/* =====================================================
+   BOTTOM NAV
+===================================================== */
+
+.bottomNav{
+
+    position:fixed;
+
+    left:50%;
+    bottom:0;
+
+    transform:translateX(-50%);
+
+    width:100%;
+    max-width:520px;
+
+    height:72px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+
+    padding:5px 8px;
+
+    background:rgba(9,17,31,.97);
+
+    border-top:1px solid rgba(255,255,255,.07);
+
+    box-shadow:
+    0 -10px 30px rgba(0,0,0,.25);
+
+    backdrop-filter:blur(15px);
+
+    z-index:9999;
+}
+
+.navBtn{
+
+    flex:1;
+
+    height:62px;
+
+    border:0;
+
+    background:none;
+
+    color:#65748a;
+
+    font-size:8px;
+
+    font-weight:700;
+
+    cursor:pointer;
+}
+
+.navIcon{
+
+    width:34px;
+    height:31px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    margin:auto;
+
+    border-radius:11px;
+
+    font-size:18px;
+}
+
+.navBtn.active{
+
+    color:#22c55e;
+}
+
+.navBtn.active .navIcon{
+
+    background:rgba(34,197,94,.11);
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:360px){
+
+    .app{
+        padding-left:12px;
+        padding-right:12px;
+    }
+
+    .heroTitle{
+        font-size:19px;
+    }
+
+    .resultMeta{
+        gap:5px;
+    }
+
+}
+/* =====================================================
+   COMING SOON OVERLAY
+===================================================== */
+
+.comingSoonOverlay{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:999999;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:22px;
+
+    background:
+    rgba(3,8,18,.94);
+
+    backdrop-filter:blur(12px);
+
+    -webkit-backdrop-filter:blur(12px);
+}
+
+
+.comingSoonBox{
+
+    width:100%;
+
+    max-width:370px;
+
+    padding:30px 22px;
+
+    text-align:center;
+
+    border-radius:26px;
+
+    background:
+    linear-gradient(
+        145deg,
+        #111d31,
+        #07101f
+    );
+
+    border:1px solid
+    rgba(34,197,94,.25);
+
+    box-shadow:
+    0 30px 80px
+    rgba(0,0,0,.65),
+
+    0 0 40px
+    rgba(34,197,94,.08);
+
+    animation:
+    comingPopup .35s ease;
+}
+
+
+@keyframes comingPopup{
+
+    from{
+
+        opacity:0;
+
+        transform:
+        scale(.88)
+        translateY(15px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+        scale(1)
+        translateY(0);
+
+    }
+
+}
+
+
+.comingIcon{
+
+    width:76px;
+
+    height:76px;
+
+    margin:auto;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:23px;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(34,197,94,.16),
+        rgba(37,99,235,.12)
+    );
+
+    border:1px solid
+    rgba(34,197,94,.18);
+
+    font-size:38px;
+
+    box-shadow:
+    0 0 30px
+    rgba(34,197,94,.10);
+}
+
+
+.comingBadge{
+
+    display:inline-block;
+
+    margin-top:18px;
+
+    padding:7px 13px;
+
+    border-radius:20px;
+
+    background:
+    rgba(34,197,94,.12);
+
+    border:1px solid
+    rgba(34,197,94,.22);
+
+    color:#4ade80;
+
+    font-size:8px;
+
+    font-weight:900;
+
+    letter-spacing:1.5px;
+}
+
+
+.comingSoonBox h1{
+
+    margin-top:13px;
+
+    color:#fff;
+
+    font-size:22px;
+
+    font-weight:800;
+}
+
+
+.comingSoonBox p{
+
+    margin-top:8px;
+
+    color:#7f8da3;
+
+    font-size:9px;
+
+    line-height:1.8;
+}
+
+
+.comingLine{
+
+    width:100%;
+
+    height:5px;
+
+    margin-top:20px;
+
+    overflow:hidden;
+
+    border-radius:20px;
+
+    background:#172235;
+}
+
+
+.comingLine span{
+
+    display:block;
+
+    width:45%;
+
+    height:100%;
+
+    border-radius:20px;
+
+    background:
+    linear-gradient(
+        90deg,
+        #16a34a,
+        #4ade80
+    );
+
+    animation:
+    comingProgress 1.6s
+    ease-in-out infinite;
+}
+
+
+@keyframes comingProgress{
+
+    0%{
+        transform:translateX(-120%);
+    }
+
+    100%{
+        transform:translateX(300%);
+    }
+
+}
+
+
+.comingHomeBtn{
+
+    width:100%;
+
+    height:48px;
+
+    margin-top:20px;
+
+    border:0;
+
+    border-radius:14px;
+
+    background:#22c55e;
+
+    color:#031008;
+
+    font-size:10px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 10px 25px
+    rgba(34,197,94,.15);
+}
+
+
+.comingHomeBtn:active{
+
+    transform:scale(.97);
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+<!-- ===================================================
+     COMING SOON OVERLAY
+=================================================== -->
+
+<div class="comingSoonOverlay">
+
+    <div class="comingSoonBox">
+
+        <div class="comingIcon">
+            🏆
+        </div>
+
+        <div class="comingBadge">
+            COMING SOON
+        </div>
+
+        <h1>
+            Results Coming Soon
+        </h1>
+
+        <p>
+            Tournament results are currently
+            under preparation.
+            <br>
+            Stay tuned for the latest updates.
+        </p>
+
+        <div class="comingLine">
+            <span></span>
+        </div>
+
+        <button
+            class="comingHomeBtn"
+            onclick="location.href='dashboard.html'">
+
+            🏠 Back to Home
+
+        </button>
+
+    </div>
+
+</div>
+<div class="app">
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div class="headerLeft">
+
+            <div class="logo">
+                🏆
+            </div>
+
+            <div class="headerTitle">
+
+                <h1>
+                    Match Results
+                </h1>
+
+                <p>
+                    BGMI ESPORTS
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="homeBtn"
+            onclick="location.href='dashboard.html'">
+
+            🏠
+
+        </button>
+
+    </div>
+
+
+    <!-- HERO -->
+
+    <div class="hero">
+
+        <div class="heroContent">
+
+            <div class="heroSmall">
+                TOURNAMENT PERFORMANCE
+            </div>
+
+            <div class="heroTitle">
+                Match Results 🏆
+            </div>
+
+            <div class="heroText">
+                Check tournament rankings,
+                kills and total points.
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- STATS -->
+
+    <div class="stats">
+
+
+        <div class="stat">
+
+            <div
+                class="statValue"
+                id="totalResults">
+
+                0
+
+            </div>
+
+            <div class="statLabel">
+                Matches
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div
+                class="statValue"
+                id="totalKills">
+
+                0
+
+            </div>
+
+            <div class="statLabel">
+                Kills
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div
+                class="statValue"
+                id="totalPoints">
+
+                0
+
+            </div>
+
+            <div class="statLabel">
+                Points
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <div class="searchBox">
+
+        <input
+            id="searchInput"
+            type="text"
+            placeholder="Search team or match..."
+            autocomplete="off">
+
+        <div class="searchIcon">
+            🔍
+        </div>
+
+    </div>
+
+
+    <!-- FILTER -->
+
+    <div class="filterBar">
+
+
+        <button
+            class="filterBtn active"
+            onclick="filterResults('all',this)">
+
+            ALL
+
+        </button>
+
+
+        <button
+            class="filterBtn"
+            onclick="filterResults('solo',this)">
+
+            SOLO
+
+        </button>
+
+
+        <button
+            class="filterBtn"
+            onclick="filterResults('duo',this)">
+
+            DUO
+
+        </button>
+
+
+        <button
+            class="filterBtn"
+            onclick="filterResults('squad',this)">
+
+            SQUAD
+
+        </button>
+
+
+        <button
+            class="filterBtn"
+            onclick="filterResults('tdm',this)">
+
+            TDM
+
+        </button>
+
+
+    </div>
+
+
+    <!-- SECTION -->
+
+    <div class="sectionHeader">
+
+        <h2>
+            🏆 Tournament Results
+        </h2>
+
+        <span id="resultCount">
+            0 RESULTS
+        </span>
+
+    </div>
+
+
+    <!-- RESULTS -->
+
+    <div id="resultsContainer">
+
+        <div class="loader">
+
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<!-- ===================================================
+     BOTTOM NAV
+=================================================== -->
+
+<div class="bottomNav">
+
+
+    <button
+        class="navBtn"
+        onclick="location.href='dashboard.html'">
+
+        <div class="navIcon">
+            🏠
+        </div>
+
+        Home
+
+    </button>
+
+
+    <button
+        class="navBtn"
+        onclick="location.href='matches.html'">
+
+        <div class="navIcon">
+            🎮
+        </div>
+
+        Matches
+
+    </button>
+
+
+    <button
+        class="navBtn"
+        onclick="location.href='wallet.html'">
+
+        <div class="navIcon">
+            💰
+        </div>
+
+        Wallet
+
+    </button>
+
+
+    <button
+        class="navBtn active"
+        onclick="location.href='results.html'">
+
+        <div class="navIcon">
+            🏆
+        </div>
+
+        Results
+
+    </button>
+
+
+</div>
+
+
+<!-- ===================================================
+     FIREBASE
+===================================================== -->
+
+<script type="module">
+
+
+import {
+
+    initializeApp
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+
+import {
+
+    getDatabase,
+    ref,
+    onValue
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+
+/* =====================================================
+   CONFIG
+===================================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyDsJUtZdIXcsB0w_2MQhMBXxIgbI3ijOvg",
+
+    authDomain:
+    "incoinpaysliveearning.firebaseapp.com",
+
+    databaseURL:
+    "https://incoinpaysliveearning-default-rtdb.firebaseio.com",
+
+    projectId:
+    "incoinpaysliveearning",
+
+    storageBucket:
+    "incoinpaysliveearning.firebasestorage.app",
+
+    messagingSenderId:
+    "971873814750",
+
+    appId:
+    "1:971873814750:web:7418c7da119e4725ed9a4f"
+
+};
+
+
+const app =
+    initializeApp(
+        firebaseConfig
+    );
+
+
+const db =
+    getDatabase(app);
+
+
+let allResults = [];
+
+let currentFilter = "all";
+
+
+/* =====================================================
+   LOAD RESULTS
+===================================================== */
+
+onValue(
+
+    ref(
+        db,
+        "results"
+    ),
+
+    (snapshot) => {
+
+
+        allResults = [];
+
+
+        if(
+            snapshot.exists()
+        ){
+
+            snapshot.forEach(
+                (child) => {
+
+                    allResults.push({
+
+                        id:
+                        child.key,
+
+                        data:
+                        child.val() || {}
+
+                    });
+
+                }
+            );
+
+        }
+
+
+        allResults.reverse();
+
+
+        renderResults();
+
+    },
+
+    (error) => {
+
+        console.error(
+            "Results error:",
+            error
+        );
+
+        showError();
+
+    }
+
+);
+
+
+/* =====================================================
+   RENDER
+===================================================== */
+
+function renderResults(){
+
+
+    const container =
+        document.getElementById(
+            "resultsContainer"
+        );
+
+
+    const search =
+        document
+        .getElementById(
+            "searchInput"
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    let results =
+        [...allResults];
+
+
+    /* FILTER */
+
+    if(
+        currentFilter !==
+        "all"
+    ){
+
+        results =
+            results.filter(
+                item => {
+
+                    const type =
+                        String(
+                            item.data.type ||
+                            item.data.mode ||
+                            ""
+                        )
+                        .toLowerCase();
+
+                    return (
+                        type ===
+                        currentFilter
+                    );
+
+                }
+            );
+
+    }
+
+
+    /* SEARCH */
+
+    if(
+        search
+    ){
+
+        results =
+            results.filter(
+                item => {
+
+                    const data =
+                        item.data;
+
+                    const text =
+                        [
+                            data.title,
+                            data.matchName,
+                            data.teamName,
+                            data.name,
+                            data.playerName,
+                            data.map
+                        ]
+                        .join(" ")
+                        .toLowerCase();
+
+                    return text.includes(
+                        search
+                    );
+
+                }
+            );
+
+    }
+
+
+    document
+        .getElementById(
+            "resultCount"
+        )
+        .innerText =
+        results.length +
+        " RESULTS";
+
+
+    updateStats(
+        results
+    );
+
+
+    container.innerHTML =
+        "";
+
+
+    if(
+        results.length ===
+        0
+    ){
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <div class="emptyIcon">
+                    🏆
+                </div>
+
+                <div class="emptyTitle">
+                    No Results Found
+                </div>
+
+                <div class="emptyText">
+                    Results will appear here
+                    after tournaments are completed.
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    results.forEach(
+        item => {
+
+            container.appendChild(
+                createResultCard(
+                    item.id,
+                    item.data
+                )
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   RESULT CARD
+===================================================== */
+
+function createResultCard(
+    id,
+    data
+){
+
+
+    const card =
+        document.createElement(
+            "div"
+        );
+
+
+    card.className =
+        "resultCard";
+
+
+    const title =
+        data.title ||
+        data.matchName ||
+        "BGMI Tournament";
+
+
+    const type =
+        String(
+            data.type ||
+            data.mode ||
+            "SQUAD"
+        ).toUpperCase();
+
+
+    const map =
+        data.map ||
+        "Erangel";
+
+
+    const prize =
+        Number(
+            data.prize ||
+            0
+        );
+
+
+    /*
+     * If admin stores one result/player
+     */
+
+    const teamName =
+        data.teamName ||
+        data.playerName ||
+        data.name ||
+        "Player";
+
+
+    const rank =
+        data.rank ||
+        data.position ||
+        "-";
+
+
+    const kills =
+        Number(
+            data.kills ||
+            data.killPoints ||
+            0
+        );
+
+
+    const points =
+        Number(
+            data.points ||
+            data.totalPoints ||
+            data.total ||
+            0
+        );
+
+
+    const date =
+        formatDate(
+            data.date ||
+            data.time ||
+            data.createdAt
+        );
+
+
+    /*
+     * Optional top 3
+     */
+
+    let topThreeHTML =
+        "";
+
+
+    if(
+        Array.isArray(
+            data.topPlayers
+        ) &&
+        data.topPlayers.length
+    ){
+
+        topThreeHTML =
+            createTopThree(
+                data.topPlayers
+            );
+
+    }
+
+
+    card.innerHTML = `
+
+        <div class="resultTop">
+
+            <div class="matchName">
+
+                <h3>
+                    ${escapeHTML(title)}
+                </h3>
+
+                <p>
+                    ${escapeHTML(type)}
+                    •
+                    ${escapeHTML(map)}
+                    ${date ? " • " + escapeHTML(date) : ""}
+                </p>
+
+            </div>
+
+
+            <div class="resultStatus">
+                COMPLETED
+            </div>
+
+        </div>
+
+
+        <div class="resultMeta">
+
+
+            <div class="meta">
+
+                <span>
+                    PRIZE
+                </span>
+
+                <strong class="gold">
+                    ₹${formatNumber(prize)}
+                </strong>
+
+            </div>
+
+
+            <div class="meta">
+
+                <span>
+                    RANK
+                </span>
+
+                <strong>
+                    #${escapeHTML(rank)}
+                </strong>
+
+            </div>
+
+
+            <div class="meta">
+
+                <span>
+                    KILLS
+                </span>
+
+                <strong>
+                    ${kills}
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="playerResult">
+
+
+            <div class="rankBox">
+
+                #${escapeHTML(rank)}
+
+            </div>
+
+
+            <div class="playerInfo">
+
+                <h4>
+                    ${escapeHTML(teamName)}
+                </h4>
+
+                <p>
+                    ${escapeHTML(type)}
+                    •
+                    ${escapeHTML(map)}
+                </p>
+
+            </div>
+
+
+            <div class="points">
+
+                <strong>
+                    ${points}
+                </strong>
+
+                <span>
+                    TOTAL POINTS
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+        ${topThreeHTML}
+
+    `;
+
+
+    return card;
+
+}
+
+
+/* =====================================================
+   TOP THREE
+===================================================== */
+
+function createTopThree(
+    players
+){
+
+    const medals =
+        ["🥇","🥈","🥉"];
+
+
+    return `
+
+        <div class="topThree">
+
+            ${
+                players
+                .slice(0,3)
+                .map(
+                    (player,index) => {
+
+                        const name =
+                            player.teamName ||
+                            player.name ||
+                            player.playerName ||
+                            "Player";
+
+                        const points =
+                            Number(
+                                player.points ||
+                                player.totalPoints ||
+                                0
+                            );
+
+
+                        return `
+
+                            <div class="topPlayer">
+
+                                <div class="medal">
+                                    ${medals[index]}
+                                </div>
+
+                                <div class="topRank">
+                                    ${escapeHTML(name)}
+                                </div>
+
+                                <div class="topPoints">
+                                    ${points} PTS
+                                </div>
+
+                            </div>
+
+                        `;
+
+                    }
+                )
+                .join("")
+            }
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+function updateStats(
+    results
+){
+
+    let kills = 0;
+
+    let points = 0;
+
+
+    results.forEach(
+        item => {
+
+            const data =
+                item.data;
+
+
+            kills +=
+                Number(
+                    data.kills ||
+                    data.killPoints ||
+                    0
+                );
+
+
+            points +=
+                Number(
+                    data.points ||
+                    data.totalPoints ||
+                    data.total ||
+                    0
+                );
+
+        }
+    );
+
+
+    document
+        .getElementById(
+            "totalResults"
+        )
+        .innerText =
+        results.length;
+
+
+    document
+        .getElementById(
+            "totalKills"
+        )
+        .innerText =
+        kills;
+
+
+    document
+        .getElementById(
+            "totalPoints"
+        )
+        .innerText =
+        points;
+
+}
+
+
+/* =====================================================
+   FILTER
+===================================================== */
+
+window.filterResults =
+function(
+    type,
+    button
+){
+
+    currentFilter =
+        type;
+
+
+    document
+        .querySelectorAll(
+            ".filterBtn"
+        )
+        .forEach(
+            btn => {
+
+                btn.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+
+    button.classList.add(
+        "active"
+    );
+
+
+    renderResults();
+
+};
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+document
+.getElementById(
+    "searchInput"
+)
+.addEventListener(
+    "input",
+    () => {
+
+        renderResults();
+
+    }
+);
+
+
+/* =====================================================
+   FORMAT NUMBER
+===================================================== */
+
+function formatNumber(
+    number
+){
+
+    return Number(
+        number || 0
+    )
+    .toLocaleString(
+        "en-IN",
+        {
+            maximumFractionDigits:0
+        }
+    );
+
+}
+
+
+/* =====================================================
+   FORMAT DATE
+===================================================== */
+
+function formatDate(
+    value
+){
+
+    if(
+        !value
+    ){
+
+        return "";
+
+    }
+
+
+    const date =
+        new Date(
+            value
+        );
+
+
+    if(
+        isNaN(
+            date.getTime()
+        )
+    ){
+
+        return String(
+            value
+        );
+
+    }
+
+
+    return date.toLocaleDateString(
+        "en-IN",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
+        }
+    );
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(
+    value
+){
+
+    return String(
+        value ?? ""
+    )
+
+    .replaceAll(
+        "&",
+        "&amp;"
+    )
+
+    .replaceAll(
+        "<",
+        "&lt;"
+    )
+
+    .replaceAll(
+        ">",
+        "&gt;"
+    )
+
+    .replaceAll(
+        '"',
+        "&quot;"
+    )
+
+    .replaceAll(
+        "'",
+        "&#039;"
+    );
+
+}
+
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+function showError(){
+
+    document
+        .getElementById(
+            "resultsContainer"
+        )
+        .innerHTML = `
+
+        <div class="empty">
+
+            <div class="emptyIcon">
+                ⚠️
+            </div>
+
+            <div class="emptyTitle">
+                Unable to Load Results
+            </div>
+
+            <div class="emptyText">
+                Please check your internet
+                connection and try again.
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+</script>
+
+
+</body>
+
+</html>
