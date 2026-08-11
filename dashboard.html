@@ -1723,41 +1723,25 @@ body::before{
 
 <script type="module">
 
+/* =====================================================
+   FIREBASE
+===================================================== */
 
 import {
-
     initializeApp
-
-}
-
-from
-
-"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 
 import {
-
     getAuth,
     onAuthStateChanged
-
-}
-
-from
-
-"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 import {
-
     getDatabase,
     ref,
-    onValue
-
-}
-
-from
-
-"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    onValue,
+    update
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 
 /* =====================================================
@@ -1767,223 +1751,391 @@ from
 const firebaseConfig = {
 
     apiKey:
-    "AIzaSyDsJUtZdIXcsB0w_2MQhMBXxIgbI3ijOvg",
+        "AIzaSyDsJUtZdIXcsB0w_2MQhMBXxIgbI3ijOvg",
 
     authDomain:
-    "incoinpaysliveearning.firebaseapp.com",
+        "incoinpaysliveearning.firebaseapp.com",
 
     databaseURL:
-    "https://incoinpaysliveearning-default-rtdb.firebaseio.com",
+        "https://incoinpaysliveearning-default-rtdb.firebaseio.com",
 
     projectId:
-    "incoinpaysliveearning",
+        "incoinpaysliveearning",
 
     storageBucket:
-    "incoinpaysliveearning.firebasestorage.app",
+        "incoinpaysliveearning.firebasestorage.app",
 
     messagingSenderId:
-    "971873814750",
+        "971873814750",
 
     appId:
-    "1:971873814750:web:7418c7da119e4725ed9a4f"
+        "1:971873814750:web:7418c7da119e4725ed9a4f"
 
 };
 
 
-const app =
-    initializeApp(
-        firebaseConfig
-    );
+/* =====================================================
+   INITIALIZE
+===================================================== */
 
+const app = initializeApp(firebaseConfig);
 
-const auth =
-    getAuth(app);
+const auth = getAuth(app);
 
+const db = getDatabase(app);
 
-const db =
-    getDatabase(app);
-
-
-window.auth =
-    auth;
-
-window.db =
-    db;
-
-
-let currentUID =
-    "";
-
-
-let allMatches =
-    [];
-
-
-let currentFilter =
-    "all";
+window.auth = auth;
+window.db = db;
 
 
 /* =====================================================
-   AUTH
+   GLOBAL
 ===================================================== */
 
-onAuthStateChanged(
-    auth,
-    (user) => {
+let currentUID = "";
+
+let allMatches = [];
+
+let currentFilter = "all";
 
 
-        if(!user){
+/* =====================================================
+   AUTH STATE
+===================================================== */
 
-            setTimeout(
-                () => {
+onAuthStateChanged(auth, async (user) => {
 
-                    if(
-                        !auth.currentUser
-                    ){
+    if (!user) {
 
-                        location.replace(
-                            "index.html"
-                        );
+        console.log("No Firebase user logged in.");
 
-                    }
+        setTimeout(() => {
 
-                },
-                1500
-            );
+            if (!auth.currentUser) {
 
-            return;
+                location.replace("index.html");
 
-        }
+            }
 
+        }, 1500);
 
-        currentUID =
-            user.uid;
+        return;
+    }
 
 
-        loadUser();
+    currentUID = user.uid;
 
-        loadMatches();
+    console.log("Logged in UID:", currentUID);
+    console.log("Email:", user.email);
 
-        loadMission();
 
-        loadAnnouncement();
+    /*
+       IMPORTANT:
+       Make sure users/{uid} exists.
+    */
+
+    await ensureUserAccount(user);
+
+
+    /*
+       Load dashboard
+    */
+
+    loadUser();
+
+    loadMatches();
+
+    loadMission();
+
+    loadAnnouncement();
+
+});
+
+
+/* =====================================================
+   ENSURE USER ACCOUNT
+===================================================== */
+
+async function ensureUserAccount(user) {
+
+    try {
+
+        const userRef = ref(
+            db,
+            "users/" + user.uid
+        );
+
+
+        /*
+           onValue is used here only to check
+           whether the profile exists.
+        */
+
+        onValue(
+            userRef,
+            async (snapshot) => {
+
+                if (snapshot.exists()) {
+
+                    console.log(
+                        "User account found:",
+                        user.uid
+                    );
+
+                    return;
+                }
+
+
+                /*
+                   USER NODE DOES NOT EXIST
+                   Create it automatically.
+                */
+
+                const name =
+                    user.displayName ||
+                    "Player";
+
+
+                const photo =
+                    user.photoURL ||
+                    "";
+
+
+                const newUser = {
+
+                    uid: user.uid,
+
+                    name: name,
+
+                    email:
+                        user.email || "",
+
+                    wallet: 0,
+
+                    photo: photo,
+
+                    photoURL: photo,
+
+                    missionMatches: 0,
+
+                    matchCount: 0,
+
+                    matchesJoined: 0,
+
+                    joinedMatches: 0,
+
+                    createdAt:
+                        Date.now()
+
+                };
+
+
+                await update(
+                    userRef,
+                    newUser
+                );
+
+
+                console.log(
+                    "New user account created:",
+                    user.uid
+                );
+
+            },
+            (error) => {
+
+                console.error(
+                    "User account read error:",
+                    error
+                );
+
+            },
+            {
+                onlyOnce: true
+            }
+        );
 
     }
-);
+    catch (error) {
+
+        console.error(
+            "ensureUserAccount error:",
+            error
+        );
+
+    }
+
+}
 
 
 /* =====================================================
-   USER
+   LOAD USER
 ===================================================== */
 
-function loadUser(){
+function loadUser() {
+
+    if (!currentUID) {
+        return;
+    }
 
 
     onValue(
 
         ref(
             db,
-            "users/" +
-            currentUID
+            "users/" + currentUID
         ),
 
         (snapshot) => {
 
+            /*
+               USER NODE NOT FOUND
+            */
 
-            if(
-                !snapshot.exists()
-            ){
+            if (!snapshot.exists()) {
+
+                console.log(
+                    "users/" + currentUID +
+                    " does not exist yet."
+                );
 
                 setDefaultUser();
 
                 return;
-
             }
 
 
             const data =
-                snapshot.val();
+                snapshot.val() || {};
 
+
+            /* =========================
+               NAME
+            ========================= */
 
             const name =
                 data.name ||
+                data.displayName ||
+                auth.currentUser?.displayName ||
                 "Player";
 
 
-            document
-                .getElementById(
+            const nameElement =
+                document.getElementById(
                     "playerName"
-                )
-                .innerText =
-                name;
+                );
 
+
+            if (nameElement) {
+
+                nameElement.innerText =
+                    name;
+
+            }
+
+
+            /* =========================
+               WALLET
+            ========================= */
 
             const wallet =
                 Number(
-                    data.wallet ||
-                    0
+                    data.wallet ?? 0
                 );
 
 
-            document
-                .getElementById(
+            const walletElement =
+                document.getElementById(
                     "walletAmount"
-                )
-                .innerText =
-                Math.floor(
-                    wallet
-                ).toLocaleString(
-                    "en-IN"
                 );
 
+
+            if (walletElement) {
+
+                walletElement.innerText =
+                    Math.floor(wallet)
+                    .toLocaleString("en-IN");
+
+            }
+
+
+            /* =========================
+               PROFILE PHOTO
+            ========================= */
 
             const photo =
                 data.photo ||
                 data.photoURL ||
+                auth.currentUser?.photoURL ||
                 "";
 
 
-            if(
-                photo
-            ){
+            const photoElement =
+                document.getElementById(
+                    "profilePhoto"
+                );
 
-                document
-                    .getElementById(
-                        "profilePhoto"
-                    )
-                    .src =
-                    photo;
 
-            }
-            else{
+            if (photoElement) {
 
-                document
-                    .getElementById(
-                        "profilePhoto"
-                    )
-                    .src =
-                    "https://ui-avatars.com/api/?name=" +
-                    encodeURIComponent(
-                        name
-                    ) +
-                    "&background=111827&color=22c55e&bold=true";
+                if (photo) {
+
+                    photoElement.src =
+                        photo;
+
+                }
+                else {
+
+                    photoElement.src =
+                        "https://ui-avatars.com/api/?name=" +
+                        encodeURIComponent(name) +
+                        "&background=111827&color=22c55e&bold=true";
+
+                }
 
             }
 
 
-           /* =====================================================
-   MISSION COUNT
-===================================================== */
+            /* =========================
+               MISSION
+            ========================= */
 
-const count = Number(
-    data.missionMatches ||
-    data.matchCount ||
-    data.matchesJoined ||
-    data.joinedMatches ||
-    0
-);
+            const count =
+                Number(
+                    data.missionMatches ??
+                    data.matchCount ??
+                    data.matchesJoined ??
+                    data.joinedMatches ??
+                    0
+                );
 
-updateMission(count);
+
+            updateMission(count);
+
+        },
+
+        (error) => {
+
+            console.error(
+                "LOAD USER ERROR:",
+                error
+            );
+
+            /*
+               Firebase Rules error
+            */
+
+            if (
+                error.code ===
+                "PERMISSION_DENIED"
+            ) {
+
+                console.error(
+                    "Firebase Database Rules are blocking users/" +
+                    currentUID
+                );
+
+            }
 
         }
 
@@ -1992,21 +2144,52 @@ updateMission(count);
 }
 
 
-function setDefaultUser(){
+/* =====================================================
+   DEFAULT USER
+===================================================== */
 
-    document
-        .getElementById(
+function setDefaultUser() {
+
+    const nameElement =
+        document.getElementById(
             "playerName"
-        )
-        .innerText =
-        "Player";
+        );
 
-    document
-        .getElementById(
+
+    const walletElement =
+        document.getElementById(
             "walletAmount"
-        )
-        .innerText =
-        "0";
+        );
+
+
+    const photoElement =
+        document.getElementById(
+            "profilePhoto"
+        );
+
+
+    if (nameElement) {
+
+        nameElement.innerText =
+            "Player";
+
+    }
+
+
+    if (walletElement) {
+
+        walletElement.innerText =
+            "0";
+
+    }
+
+
+    if (photoElement) {
+
+        photoElement.src =
+            "https://ui-avatars.com/api/?name=Player&background=111827&color=22c55e&bold=true";
+
+    }
 
 }
 
@@ -2015,8 +2198,7 @@ function setDefaultUser(){
    ANNOUNCEMENT
 ===================================================== */
 
-function loadAnnouncement(){
-
+function loadAnnouncement() {
 
     onValue(
 
@@ -2027,13 +2209,8 @@ function loadAnnouncement(){
 
         (snapshot) => {
 
-
-            if(
-                !snapshot.exists()
-            ){
-
+            if (!snapshot.exists()) {
                 return;
-
             }
 
 
@@ -2041,20 +2218,22 @@ function loadAnnouncement(){
                 snapshot.val();
 
 
-            let text =
-                "";
+            let text = "";
 
 
-            if(
+            if (
                 typeof value ===
                 "string"
-            ){
+            ) {
 
-                text =
-                    value;
+                text = value;
 
             }
-            else{
+            else if (
+                value &&
+                typeof value ===
+                "object"
+            ) {
 
                 text =
                     value.text ||
@@ -2065,18 +2244,30 @@ function loadAnnouncement(){
             }
 
 
-            if(
-                text
-            ){
+            const element =
+                document.getElementById(
+                    "announcementText"
+                );
 
-                document
-                    .getElementById(
-                        "announcementText"
-                    )
-                    .innerText =
+
+            if (
+                element &&
+                text
+            ) {
+
+                element.innerText =
                     text;
 
             }
+
+        },
+
+        (error) => {
+
+            console.error(
+                "Announcement error:",
+                error
+            );
 
         }
 
@@ -2089,7 +2280,11 @@ function loadAnnouncement(){
    MISSION
 ===================================================== */
 
-function loadMission(){
+function loadMission() {
+
+    if (!currentUID) {
+        return;
+    }
 
 
     onValue(
@@ -2103,31 +2298,24 @@ function loadMission(){
 
         (snapshot) => {
 
-
-            if(
-                !snapshot.exists()
-            ){
-
+            if (!snapshot.exists()) {
                 return;
-
             }
 
 
             const data =
-                snapshot.val();
+                snapshot.val() || {};
 
 
             const count =
                 Number(
-                    data.matchesJoined ||
-                    data.matchCount ||
+                    data.matchesJoined ??
+                    data.matchCount ??
                     0
                 );
 
 
-            updateMission(
-                count
-            );
+            updateMission(count);
 
         }
 
@@ -2136,40 +2324,48 @@ function loadMission(){
 }
 
 
-function updateMission(
-    count
-){
+/* =====================================================
+   UPDATE MISSION
+===================================================== */
 
-    count =
-        Math.max(
-            0,
-            Math.min(
-                100,
-                Number(count) || 0
-            )
+function updateMission(count) {
+
+    count = Math.max(
+        0,
+        Math.min(
+            100,
+            Number(count) || 0
+        )
+    );
+
+
+    const fill =
+        document.getElementById(
+            "missionFill"
         );
 
 
-    const percent =
-        count;
-
-
-    document
-        .getElementById(
-            "missionFill"
-        )
-        .style.width =
-        percent +
-        "%";
-
-
-    document
-        .getElementById(
+    const progress =
+        document.getElementById(
             "missionProgress"
-        )
-        .innerText =
-        count +
-        " / 100 Matches";
+        );
+
+
+    if (fill) {
+
+        fill.style.width =
+            count + "%";
+
+    }
+
+
+    if (progress) {
+
+        progress.innerText =
+            count +
+            " / 100 Matches";
+
+    }
 
 }
 
@@ -2178,8 +2374,7 @@ function updateMission(
    MATCHES
 ===================================================== */
 
-function loadMatches(){
-
+function loadMatches() {
 
     onValue(
 
@@ -2190,33 +2385,27 @@ function loadMatches(){
 
         (snapshot) => {
 
-
-            allMatches =
-                [];
+            allMatches = [];
 
 
-            if(
-                !snapshot.exists()
-            ){
+            if (!snapshot.exists()) {
 
                 renderMatches();
 
                 return;
-
             }
 
 
             snapshot.forEach(
                 (child) => {
 
-
                     allMatches.push({
 
                         id:
-                        child.key,
+                            child.key,
 
                         data:
-                        child.val() || {}
+                            child.val() || {}
 
                     });
 
@@ -2224,14 +2413,18 @@ function loadMatches(){
             );
 
 
-            /*
-             * Newest/admin-created order
-             */
-
             allMatches.reverse();
 
-
             renderMatches();
+
+        },
+
+        (error) => {
+
+            console.error(
+                "Matches error:",
+                error
+            );
 
         }
 
@@ -2244,8 +2437,7 @@ function loadMatches(){
    RENDER MATCHES
 ===================================================== */
 
-function renderMatches(){
-
+function renderMatches() {
 
     const box =
         document.getElementById(
@@ -2253,18 +2445,22 @@ function renderMatches(){
         );
 
 
-    box.innerHTML =
-        "";
+    if (!box) {
+        return;
+    }
+
+
+    box.innerHTML = "";
 
 
     let list =
         [...allMatches];
 
 
-    if(
+    if (
         currentFilter !==
         "all"
-    ){
+    ) {
 
         list =
             list.filter(
@@ -2274,8 +2470,8 @@ function renderMatches(){
                         String(
                             item.data.type ||
                             "squad"
-                        )
-                        .toLowerCase();
+                        ).toLowerCase();
+
 
                     return (
                         type ===
@@ -2288,60 +2484,43 @@ function renderMatches(){
     }
 
 
-    /*
-     * Hide completed/disabled matches
-     * from upcoming dashboard.
-     */
-
     list =
         list.filter(
             (item) => {
 
-                const match =
-                    item.data;
-
-
                 const status =
                     String(
-                        match.status ||
+                        item.data.status ||
                         ""
-                    )
-                    .toLowerCase();
+                    ).toLowerCase();
 
 
-                if(
-                    status ===
-                    "completed" ||
-                    status ===
-                    "cancelled" ||
-                    status ===
+                return ![
+                    "completed",
+                    "cancelled",
                     "closed"
-                ){
-
-                    return false;
-
-                }
-
-
-                return true;
+                ].includes(status);
 
             }
         );
 
 
-    document
-        .getElementById(
+    const countElement =
+        document.getElementById(
             "matchCount"
-        )
-        .innerText =
-        list.length +
-        " MATCHES";
+        );
 
 
-    if(
-        list.length ===
-        0
-    ){
+    if (countElement) {
+
+        countElement.innerText =
+            list.length +
+            " MATCHES";
+
+    }
+
+
+    if (list.length === 0) {
 
         box.innerHTML = `
 
@@ -2364,7 +2543,6 @@ function renderMatches(){
         `;
 
         return;
-
     }
 
 
@@ -2391,8 +2569,7 @@ function renderMatch(
     box,
     id,
     match
-){
-
+) {
 
     const type =
         String(
@@ -2417,22 +2594,19 @@ function renderMatch(
 
     const prize =
         Number(
-            match.prize ||
-            0
+            match.prize ?? 0
         );
 
 
     const entry =
         Number(
-            match.entry ||
-            0
+            match.entry ?? 0
         );
 
 
     const total =
         Number(
-            match.total ||
-            25
+            match.total ?? 25
         );
 
 
@@ -2440,21 +2614,18 @@ function renderMatch(
         Math.max(
             0,
             Number(
-                match.booked ||
-                0
+                match.booked ?? 0
             )
         );
 
 
     const percent =
         total > 0
-        ? Math.min(
-            100,
-            (booked /
-            total) *
-            100
-        )
-        : 0;
+            ? Math.min(
+                100,
+                (booked / total) * 100
+            )
+            : 0;
 
 
     const image =
@@ -2492,9 +2663,7 @@ function renderMatch(
     card.onclick =
         () => {
 
-            openMatch(
-                id
-            );
+            openMatch(id);
 
         };
 
@@ -2512,45 +2681,32 @@ function renderMatch(
 
             <div class="imageShade"></div>
 
-
             <span class="mode">
-
                 ${escapeHTML(type)}
-
             </span>
-
 
             <span class="status">
-
                 ${escapeHTML(timer)}
-
             </span>
-
 
             ${
                 joined
-                ?
-                `<span class="joinedBadge">
-                    ✓ JOINED
-                </span>`
-                :
-                ``
+                ? `
+                    <span class="joinedBadge">
+                        ✓ JOINED
+                    </span>
+                  `
+                : ""
             }
-
 
             <div class="matchOverlay">
 
                 <div class="matchTitle">
-
                     ${escapeHTML(title)}
-
                 </div>
 
-
                 <div class="matchMap">
-
                     📍 ${escapeHTML(map)}
-
                 </div>
 
             </div>
@@ -2559,7 +2715,6 @@ function renderMatch(
 
 
         <div class="matchInfo">
-
 
             <div class="infoBox">
 
@@ -2599,7 +2754,6 @@ function renderMatch(
 
             </div>
 
-
         </div>
 
 
@@ -2608,7 +2762,6 @@ function renderMatch(
             <div
                 class="progress-fill"
                 style="width:${percent}%">
-
             </div>
 
         </div>
@@ -2616,9 +2769,7 @@ function renderMatch(
     `;
 
 
-    box.appendChild(
-        card
-    );
+    box.appendChild(card);
 
 }
 
@@ -2627,30 +2778,23 @@ function renderMatch(
    MATCH TIMER
 ===================================================== */
 
-function getMatchTimer(
-    match
-){
+function getMatchTimer(match) {
 
-
-    if(
+    if (
         String(
-            match.status ||
-            ""
-        )
-        .toLowerCase()
-        ===
-        "live"
-    ){
+            match.status || ""
+        ).toLowerCase() === "live"
+    ) {
 
         return "🟢 LIVE";
 
     }
 
 
-    if(
+    if (
         !match.date ||
         !match.time
-    ){
+    ) {
 
         return "UPCOMING";
 
@@ -2665,11 +2809,11 @@ function getMatchTimer(
         );
 
 
-    if(
+    if (
         isNaN(
             start.getTime()
         )
-    ){
+    ) {
 
         return "UPCOMING";
 
@@ -2681,9 +2825,7 @@ function getMatchTimer(
         Date.now();
 
 
-    if(
-        diff <= 0
-    ){
+    if (diff <= 0) {
 
         return "🟢 STARTED";
 
@@ -2692,96 +2834,82 @@ function getMatchTimer(
 
     const hours =
         Math.floor(
-            diff /
-            3600000
+            diff / 3600000
         );
 
 
     const minutes =
         Math.floor(
-            (diff %
-            3600000) /
+            (diff % 3600000) /
             60000
         );
 
 
-    if(
-        hours >= 24
-    ){
+    if (hours >= 24) {
 
         const days =
             Math.floor(
-                hours /
-                24
+                hours / 24
             );
 
 
-        return "⏰ " +
+        return (
+            "⏰ " +
             days +
             "d " +
             (hours % 24) +
-            "h";
+            "h"
+        );
 
     }
 
 
-    return "⏰ " +
+    return (
+        "⏰ " +
         hours +
         "h " +
         minutes +
-        "m";
+        "m"
+    );
 
 }
 
 
 /* =====================================================
-   CHECK JOINED MATCH
+   CHECK JOINED
 ===================================================== */
 
-function isUserJoined(
-    match
-){
+function isUserJoined(match) {
 
-
-    if(
-        !currentUID
-    ){
-
+    if (!currentUID) {
         return false;
-
     }
 
-
-    /*
-     * Supports common structures:
-     *
-     * match.players[uid]
-     * match.users[uid]
-     * match.joinedUsers[uid]
-     * match.bookings[uid]
-     */
 
     const collections = [
 
         match.players,
+
         match.users,
+
         match.joinedUsers,
+
         match.bookings
 
     ];
 
 
-    for(
+    for (
         const collection
         of collections
-    ){
+    ) {
 
-        if(
+        if (
             collection &&
             typeof collection ===
             "object" &&
             collection[currentUID]
-        ){
+        ) {
 
             return true;
 
@@ -2790,20 +2918,15 @@ function isUserJoined(
     }
 
 
-    /*
-     * Optional direct joined UID list
-     */
-
-    if(
+    if (
         Array.isArray(
             match.joinedUIDs
         )
-    ){
+    ) {
 
-        return match.joinedUIDs
-            .includes(
-                currentUID
-            );
+        return match.joinedUIDs.includes(
+            currentUID
+        );
 
     }
 
@@ -2817,35 +2940,26 @@ function isUserJoined(
    IMAGE
 ===================================================== */
 
-function getImage(
-    imageUrl
-){
+function getImage(imageUrl) {
+
+    const fallback =
+        "https://images.pexels.com/photos/7915357/pexels-photo-7915357.jpeg";
 
 
-    if(
-        !imageUrl
-    ){
-
-        return "https://images.pexels.com/photos/7915357/pexels-photo-7915357.jpeg";
-
+    if (!imageUrl) {
+        return fallback;
     }
 
 
     let url =
-        String(
-            imageUrl
-        );
+        String(imageUrl);
 
 
-    /*
-     * Convert Pexels page URL
-     */
-
-    if(
+    if (
         url.includes(
             "pexels.com/photo/"
         )
-    ){
+    ) {
 
         const match =
             url.match(
@@ -2853,9 +2967,7 @@ function getImage(
             );
 
 
-        if(
-            match
-        ){
+        if (match) {
 
             url =
                 "https://images.pexels.com/photos/" +
@@ -2879,11 +2991,7 @@ function getImage(
 ===================================================== */
 
 window.filterMatches =
-function(
-    type,
-    button
-){
-
+function(type, button) {
 
     currentFilter =
         type;
@@ -2904,9 +3012,13 @@ function(
         );
 
 
-    button.classList.add(
-        "active"
-    );
+    if (button) {
+
+        button.classList.add(
+            "active"
+        );
+
+    }
 
 
     renderMatches();
@@ -2919,39 +3031,41 @@ function(
 ===================================================== */
 
 window.openMatch =
-function(
-    id
-){
+function(id) {
 
     location.href =
         "match.html?id=" +
-        encodeURIComponent(
-            id
-        );
+        encodeURIComponent(id);
 
 };
 
 
 /* =====================================================
-   SCROLL MATCH
+   SCROLL
 ===================================================== */
 
 window.scrollToMatches =
-function(){
+function() {
 
-    document
-        .getElementById(
+    const section =
+        document.getElementById(
             "matchesSection"
-        )
-        .scrollIntoView({
+        );
+
+
+    if (section) {
+
+        section.scrollIntoView({
 
             behavior:
-            "smooth",
+                "smooth",
 
             block:
-            "start"
+                "start"
 
         });
+
+    }
 
 };
 
@@ -2960,19 +3074,14 @@ function(){
    WELCOME
 ===================================================== */
 
-function showWelcome(){
-
+function showWelcome() {
 
     const user =
         auth.currentUser;
 
 
-    if(
-        !user
-    ){
-
+    if (!user) {
         return;
-
     }
 
 
@@ -2981,18 +3090,22 @@ function showWelcome(){
         user.uid;
 
 
-    if(
-        !localStorage.getItem(
-            key
-        )
-    ){
+    if (
+        !localStorage.getItem(key)
+    ) {
 
-        document
-            .getElementById(
+        const popup =
+            document.getElementById(
                 "welcomePopup"
-            )
-            .style.display =
-            "flex";
+            );
+
+
+        if (popup) {
+
+            popup.style.display =
+                "flex";
+
+        }
 
 
         localStorage.setItem(
@@ -3006,14 +3119,20 @@ function showWelcome(){
 
 
 window.closeWelcome =
-function(){
+function() {
 
-    document
-        .getElementById(
+    const popup =
+        document.getElementById(
             "welcomePopup"
-        )
-        .style.display =
-        "none";
+        );
+
+
+    if (popup) {
+
+        popup.style.display =
+            "none";
+
+    }
 
 };
 
@@ -3035,51 +3154,41 @@ window.addEventListener(
    HELPERS
 ===================================================== */
 
-function formatNumber(
-    number
-){
+function formatNumber(number) {
 
     return Number(
         number || 0
-    )
-    .toLocaleString(
+    ).toLocaleString(
         "en-IN",
         {
-            maximumFractionDigits:0
+            maximumFractionDigits: 0
         }
     );
 
 }
 
 
-function escapeHTML(
-    value
-){
+function escapeHTML(value) {
 
     return String(
         value ?? ""
     )
-
     .replaceAll(
         "&",
         "&amp;"
     )
-
     .replaceAll(
         "<",
         "&lt;"
     )
-
     .replaceAll(
         ">",
         "&gt;"
     )
-
     .replaceAll(
         '"',
         "&quot;"
     )
-
     .replaceAll(
         "'",
         "&#039;"
@@ -3089,15 +3198,15 @@ function escapeHTML(
 
 
 /* =====================================================
-   LIVE COUNTDOWN REFRESH
+   COUNTDOWN REFRESH
 ===================================================== */
 
 setInterval(
     () => {
 
-        if(
+        if (
             allMatches.length
-        ){
+        ) {
 
             renderMatches();
 
@@ -3107,8 +3216,8 @@ setInterval(
     30000
 );
 
-
 </script>
+
 
 
 </body>
