@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,6 +29,10 @@ font-family:Poppins,sans-serif;
 -webkit-tap-highlight-color:transparent;
 }
 
+html{
+scroll-behavior:smooth;
+}
+
 body{
 background:#050B18;
 color:#fff;
@@ -40,8 +45,8 @@ content:"";
 position:fixed;
 inset:0;
 background:
-radial-gradient(circle at top left,#22c55e33,transparent 35%),
-radial-gradient(circle at top right,#2563eb33,transparent 35%),
+radial-gradient(circle at top left,#22c55e25,transparent 35%),
+radial-gradient(circle at top right,#2563eb22,transparent 35%),
 #050B18;
 z-index:-1;
 }
@@ -50,8 +55,12 @@ z-index:-1;
 width:100%;
 max-width:500px;
 margin:auto;
-padding-bottom:40px;
+padding-bottom:50px;
 }
+
+/* =========================
+HEADER
+========================= */
 
 .header{
 display:flex;
@@ -62,34 +71,85 @@ padding:18px;
 
 .title{
 font-size:20px;
-font-weight:700;
+font-weight:800;
 }
+
+.backBtn{
+width:42px;
+height:42px;
+border-radius:14px;
+border:1px solid rgba(255,255,255,.08);
+background:#111827;
+color:#fff;
+font-size:20px;
+cursor:pointer;
+}
+
+/* =========================
+BANNER
+========================= */
 
 .banner{
 margin:0 18px;
 height:210px;
 border-radius:22px;
 overflow:hidden;
+position:relative;
+border:1px solid rgba(255,255,255,.08);
+box-shadow:0 15px 40px rgba(0,0,0,.35);
 }
 
 .banner img{
 width:100%;
 height:100%;
 object-fit:cover;
+display:block;
 }
+
+.bannerShade{
+position:absolute;
+inset:0;
+background:linear-gradient(
+to top,
+rgba(0,0,0,.65),
+transparent 60%
+);
+}
+
+.liveBadge{
+position:absolute;
+top:14px;
+left:14px;
+padding:7px 12px;
+border-radius:20px;
+background:#22c55e;
+color:#000;
+font-size:11px;
+font-weight:800;
+}
+
+/* =========================
+MATCH CARD
+========================= */
 
 .card{
 margin:18px;
-background:#111827;
+background:linear-gradient(
+145deg,
+#111827,
+#0b1220
+);
 border-radius:22px;
 padding:20px;
 border:1px solid rgba(255,255,255,.08);
+box-shadow:0 15px 35px rgba(0,0,0,.25);
 }
 
 .matchTitle{
-font-size:24px;
+font-size:23px;
 font-weight:800;
 margin-bottom:18px;
+line-height:1.3;
 }
 
 .row{
@@ -101,31 +161,137 @@ gap:15px;
 
 .row span{
 color:#94a3b8;
+font-size:14px;
 }
 
 .row b{
 color:#fff;
 text-align:right;
+font-size:14px;
 }
+
+.prizeValue{
+color:#22c55e !important;
+font-size:16px !important;
+}
+
+/* =========================
+WALLET
+========================= */
+
+.walletInfo{
+margin-top:18px;
+padding:15px;
+border-radius:16px;
+background:#07111f;
+border:1px solid rgba(34,197,94,.2);
+}
+
+.walletTop{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+}
+
+.walletLabel{
+color:#94a3b8;
+font-size:12px;
+}
+
+.walletBalance{
+font-size:20px;
+font-weight:800;
+color:#22c55e;
+}
+
+.walletAfter{
+margin-top:6px;
+font-size:11px;
+color:#64748b;
+}
+
+/* =========================
+JOIN BUTTON
+========================= */
 
 .joinBtn{
 width:100%;
-height:55px;
+height:58px;
 margin-top:20px;
 border:none;
-border-radius:15px;
-background:#22c55e;
-color:#000;
+border-radius:16px;
+background:linear-gradient(
+135deg,
+#22c55e,
+#16a34a
+);
+color:#03100a;
 font-size:17px;
 font-weight:800;
 cursor:pointer;
+box-shadow:0 0 25px rgba(34,197,94,.28);
+transition:.2s;
+}
+
+.joinBtn:active{
+transform:scale(.97);
 }
 
 .joinBtn:disabled{
 background:#374151;
 color:#94a3b8;
+box-shadow:none;
 cursor:not-allowed;
 }
+
+.joinBtn.insufficient{
+background:linear-gradient(
+135deg,
+#f59e0b,
+#d97706
+);
+color:#000;
+}
+
+/* =========================
+ADD MONEY
+========================= */
+
+.addMoneyBtn{
+display:none;
+width:100%;
+height:50px;
+margin-top:10px;
+border:none;
+border-radius:14px;
+background:#2563eb;
+color:#fff;
+font-size:15px;
+font-weight:800;
+cursor:pointer;
+}
+
+/* =========================
+JOIN STATUS
+========================= */
+
+.joinStatus{
+display:none;
+margin-top:12px;
+padding:13px;
+border-radius:14px;
+text-align:center;
+background:#052e16;
+border:1px solid rgba(34,197,94,.25);
+color:#86efac;
+font-size:13px;
+font-weight:700;
+}
+
+/* =========================
+ROOM
+========================= */
 
 .roomBox{
 margin:18px;
@@ -147,8 +313,8 @@ padding:20px;
 border-radius:15px;
 text-align:center;
 color:#facc15;
-font-size:14px;
-line-height:1.6;
+font-size:13px;
+line-height:1.7;
 }
 
 .roomRow{
@@ -156,10 +322,12 @@ display:flex;
 justify-content:space-between;
 margin:15px 0;
 gap:15px;
+align-items:center;
 }
 
 .roomRow span{
 color:#94a3b8;
+font-size:13px;
 }
 
 .roomRow b{
@@ -167,34 +335,30 @@ color:#22c55e;
 text-align:right;
 }
 
-.players{
-margin:18px;
-background:#111827;
-padding:20px;
-border-radius:22px;
+/* =========================
+ROOM DATA
+========================= */
+
+.roomCodeBox{
+background:#07111f;
+border:1px solid rgba(34,197,94,.2);
+border-radius:16px;
+padding:16px;
+margin-bottom:15px;
 }
 
-.player{
-padding:12px 0;
-border-bottom:1px solid #1f2937;
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:10px;
-}
-
-.player:last-child{
-border-bottom:none;
-}
-
-.badge{
-background:#22c55e;
-color:#000;
-padding:5px 10px;
-border-radius:20px;
+.roomCodeTitle{
 font-size:12px;
-font-weight:700;
-white-space:nowrap;
+color:#94a3b8;
+margin-bottom:6px;
+}
+
+.roomCode{
+font-size:22px;
+font-weight:800;
+letter-spacing:2px;
+color:#22c55e;
+word-break:break-all;
 }
 
 .groupBtn{
@@ -203,13 +367,21 @@ width:100%;
 text-align:center;
 padding:16px;
 border-radius:15px;
-background:linear-gradient(90deg,#22c55e,#16a34a);
-color:#fff;
-font-size:17px;
+background:linear-gradient(
+90deg,
+#22c55e,
+#16a34a
+);
+color:#03100a;
+font-size:15px;
 font-weight:800;
 text-decoration:none;
-box-shadow:0 0 20px rgba(34,197,94,.35);
+box-shadow:0 0 20px rgba(34,197,94,.25);
 }
+
+/* =========================
+PRIZE
+========================= */
 
 .prizeBox{
 background:#0f172a;
@@ -226,10 +398,227 @@ font-size:18px;
 text-align:center;
 }
 
+.prizeRow{
+display:flex;
+justify-content:space-between;
+padding:10px 0;
+border-bottom:1px solid #1f2937;
+}
+
+.prizeRow:last-child{
+border-bottom:none;
+}
+
+.prizeRow span{
+color:#cbd5e1;
+font-size:13px;
+}
+
+.prizeRow b{
+color:#FFD700;
+}
+
+/* =========================
+PLAYERS
+========================= */
+
+.players{
+margin-top:18px;
+background:#0f172a;
+padding:18px;
+border-radius:18px;
+}
+
+.player{
+padding:13px 0;
+border-bottom:1px solid #1f2937;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+}
+
+.player:last-child{
+border-bottom:none;
+}
+
+.playerName{
+font-size:14px;
+font-weight:700;
+}
+
+.playerId{
+color:#64748b;
+font-size:11px;
+margin-top:3px;
+}
+
+.badge{
+background:#22c55e;
+color:#000;
+padding:5px 10px;
+border-radius:20px;
+font-size:10px;
+font-weight:800;
+white-space:nowrap;
+}
+
 .loading{
 color:#94a3b8;
 text-align:center;
 padding:15px 0;
+font-size:13px;
+}
+
+/* =========================
+EMPTY
+========================= */
+
+.empty{
+padding:20px;
+text-align:center;
+color:#64748b;
+font-size:13px;
+}
+
+/* =========================
+MODAL
+========================= */
+
+.modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.72);
+backdrop-filter:blur(8px);
+display:none;
+align-items:flex-end;
+justify-content:center;
+z-index:9999;
+padding:15px;
+}
+
+.modalBox{
+width:100%;
+max-width:470px;
+background:#111827;
+border:1px solid rgba(255,255,255,.08);
+border-radius:24px;
+padding:22px;
+box-shadow:0 -20px 60px rgba(0,0,0,.45);
+}
+
+.modalTitle{
+font-size:20px;
+font-weight:800;
+margin-bottom:8px;
+}
+
+.modalText{
+color:#94a3b8;
+font-size:13px;
+line-height:1.6;
+margin-bottom:18px;
+}
+
+.confirmAmount{
+background:#07111f;
+border-radius:16px;
+padding:16px;
+margin-bottom:15px;
+text-align:center;
+}
+
+.confirmAmount small{
+display:block;
+color:#64748b;
+font-size:11px;
+}
+
+.confirmAmount strong{
+display:block;
+color:#22c55e;
+font-size:28px;
+margin-top:4px;
+}
+
+.modalActions{
+display:flex;
+gap:10px;
+}
+
+.modalBtn{
+flex:1;
+height:50px;
+border:none;
+border-radius:14px;
+font-weight:800;
+cursor:pointer;
+}
+
+.cancelBtn{
+background:#374151;
+color:#fff;
+}
+
+.confirmBtn{
+background:#22c55e;
+color:#000;
+}
+
+/* =========================
+TOAST
+========================= */
+
+.toast{
+position:fixed;
+left:50%;
+bottom:25px;
+transform:translateX(-50%) translateY(100px);
+background:#111827;
+border:1px solid rgba(255,255,255,.1);
+color:#fff;
+padding:13px 18px;
+border-radius:14px;
+font-size:12px;
+font-weight:700;
+z-index:10000;
+opacity:0;
+transition:.3s;
+max-width:90%;
+text-align:center;
+}
+
+.toast.show{
+opacity:1;
+transform:translateX(-50%) translateY(0);
+}
+
+.toast.success{
+border-color:rgba(34,197,94,.4);
+}
+
+.toast.error{
+border-color:rgba(239,68,68,.4);
+}
+
+/* =========================
+MOBILE
+========================= */
+
+@media(max-width:500px){
+
+.banner{
+height:190px;
+}
+
+.card{
+padding:18px;
+}
+
+.matchTitle{
+font-size:21px;
+}
+
 }
 
 </style>
@@ -240,16 +629,28 @@ padding:15px 0;
 
 <div class="app">
 
+<!-- HEADER -->
+
 <div class="header">
+
+<button
+class="backBtn"
+onclick="history.back()">
+
+‹
+
+</button>
 
 <div class="title">
 Match Details
 </div>
 
-<div></div>
+<div style="width:42px;"></div>
 
 </div>
 
+
+<!-- BANNER -->
 
 <div class="banner">
 
@@ -258,12 +659,25 @@ id="matchImage"
 src="https://via.placeholder.com/700x350"
 alt="Match">
 
+<div class="bannerShade"></div>
+
+<div
+id="liveBadge"
+class="liveBadge">
+
+UPCOMING
+
+</div>
+
 </div>
 
 
+<!-- MATCH CARD -->
+
 <div class="card">
 
-<div class="matchTitle"
+<div
+class="matchTitle"
 id="matchTitle">
 
 Loading...
@@ -302,14 +716,20 @@ Loading...
 
 <span>Prize Pool</span>
 
-<b id="prize">₹0</b>
+<b
+id="prize"
+class="prizeValue">
+
+₹0
+
+</b>
 
 </div>
 
 
 <div class="row">
 
-<span>Entry</span>
+<span>Entry Fee</span>
 
 <b id="entry">₹0</b>
 
@@ -325,13 +745,78 @@ Loading...
 </div>
 
 
+<!-- WALLET -->
+
+<div class="walletInfo">
+
+<div class="walletTop">
+
+<div>
+
+<div class="walletLabel">
+YOUR WALLET
+</div>
+
+<div
+id="walletBalance"
+class="walletBalance">
+
+₹0
+
+</div>
+
+</div>
+
+<div
+id="walletStatus"
+class="walletLabel">
+
+Checking...
+
+</div>
+
+</div>
+
+
+<div
+id="walletAfter"
+class="walletAfter">
+
+After joining: ₹0
+
+</div>
+
+</div>
+
+
+<!-- JOIN -->
+
 <button
 id="joinBtn"
 class="joinBtn">
 
-JOIN MATCH
+🎮 JOIN MATCH
 
 </button>
+
+
+<button
+id="addMoneyBtn"
+class="addMoneyBtn"
+onclick="location.href='wallet.html'">
+
+💰 ADD MONEY TO WALLET
+
+</button>
+
+
+<div
+id="joinStatus"
+class="joinStatus">
+
+✓ You have already joined this match.
+
+</div>
 
 </div>
 
@@ -345,7 +830,8 @@ JOIN MATCH
 </div>
 
 
-<div id="roomLocked"
+<div
+id="roomLocked"
 class="lock">
 
 🔒 Match join karne ke baad ID PASS / Group Link milega.
@@ -353,11 +839,56 @@ class="lock">
 </div>
 
 
-<div id="roomData"
+<div
+id="roomData"
 style="display:none;">
 
 
-<!-- PRIZE DETAILS -->
+<!-- ROOM ID -->
+
+<div
+id="roomIdBox"
+class="roomCodeBox"
+style="display:none;">
+
+<div class="roomCodeTitle">
+ROOM ID
+</div>
+
+<div
+id="roomId"
+class="roomCode">
+
+--
+
+</div>
+
+</div>
+
+
+<!-- ROOM PASSWORD -->
+
+<div
+id="roomPassBox"
+class="roomCodeBox"
+style="display:none;">
+
+<div class="roomCodeTitle">
+ROOM PASSWORD
+</div>
+
+<div
+id="roomPassword"
+class="roomCode">
+
+--
+
+</div>
+
+</div>
+
+
+<!-- PRIZE -->
 
 <div class="prizeBox">
 
@@ -365,7 +896,8 @@ style="display:none;">
 🏆 Prize Details
 </h3>
 
-<div class="roomRow">
+
+<div class="prizeRow">
 
 <span>🥇 1st Prize</span>
 
@@ -375,7 +907,8 @@ style="display:none;">
 
 </div>
 
-<div class="roomRow">
+
+<div class="prizeRow">
 
 <span>🥈 2nd Prize</span>
 
@@ -385,7 +918,8 @@ style="display:none;">
 
 </div>
 
-<div class="roomRow">
+
+<div class="prizeRow">
 
 <span>🥉 3rd Prize</span>
 
@@ -400,13 +934,9 @@ style="display:none;">
 
 <!-- GROUP -->
 
-<div class="roomRow">
-
-<span>
-🎮 Group
-</span>
-
-<b style="width:100%;">
+<div
+id="groupBox"
+style="display:none;">
 
 <a
 id="groupLink"
@@ -417,8 +947,6 @@ class="groupBtn">
 🟢 JOIN WHATSAPP GROUP
 
 </a>
-
-</b>
 
 </div>
 
@@ -448,9 +976,95 @@ Loading...
 </div>
 
 
-<!-- =========================
-FIREBASE
-========================= -->
+<!-- CONFIRM MODAL -->
+
+<div
+id="confirmModal"
+class="modal">
+
+<div class="modalBox">
+
+<div class="modalTitle">
+🎮 Confirm Match Join
+</div>
+
+<div class="modalText">
+
+Aapke wallet se entry fee deduct hogi aur aapka slot confirm ho jayega.
+
+</div>
+
+
+<div class="confirmAmount">
+
+<small>ENTRY FEE</small>
+
+<strong id="confirmEntry">
+₹0
+</strong>
+
+</div>
+
+
+<div class="row">
+
+<span>Current Wallet</span>
+
+<b id="confirmWallet">
+₹0
+</b>
+
+</div>
+
+
+<div class="row">
+
+<span>Balance After Join</span>
+
+<b
+id="confirmAfter"
+style="color:#22c55e;">
+
+₹0
+
+</b>
+
+</div>
+
+
+<div class="modalActions">
+
+<button
+class="modalBtn cancelBtn"
+onclick="closeConfirm()">
+
+CANCEL
+
+</button>
+
+<button
+id="confirmJoinBtn"
+class="modalBtn confirmBtn">
+
+✓ CONFIRM JOIN
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div
+id="toast"
+class="toast">
+
+</div>
+
+
+<!-- FIREBASE -->
 
 <script type="module">
 
@@ -472,16 +1086,17 @@ from
 import {
 getDatabase,
 ref,
-onValue,
-set,
 get,
-push
+onValue,
+update
 }
 from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 
-/* FIREBASE CONFIG */
+/* =========================
+FIREBASE CONFIG
+========================= */
 
 const firebaseConfig = {
 
@@ -509,6 +1124,10 @@ appId:
 };
 
 
+/* =========================
+INITIALIZE
+========================= */
+
 const app =
 initializeApp(firebaseConfig);
 
@@ -519,37 +1138,92 @@ const db =
 getDatabase(app);
 
 
-window.db = db;
+/* =========================
+ADMIN
+========================= */
 
+const ADMIN_UID =
+"VIAP56vYwndWPhJxktn0lRPTWnS2";
+
+
+/* =========================
+GLOBAL
+========================= */
 
 let user = null;
-
+let matchId = null;
+let currentMatch = null;
+let currentWallet = 0;
 let joining = false;
 
 
-/* GET MATCH ID */
+/* =========================
+MATCH ID
+========================= */
 
 const params =
-new URLSearchParams(location.search);
+new URLSearchParams(
+location.search
+);
 
-const matchId =
+matchId =
 params.get("id");
-
-window.matchId = matchId;
 
 
 if(!matchId){
 
-alert("Match Not Found");
+showToast(
+"Match ID missing",
+"error"
+);
 
+setTimeout(
+()=>{
 location.href="dashboard.html";
+},
+800
+);
 
 }
 
 
-/* LOGIN CHECK */
+/* =========================
+ELEMENTS
+========================= */
 
-onAuthStateChanged(auth,(u)=>{
+const joinBtn =
+document.getElementById(
+"joinBtn"
+);
+
+const addMoneyBtn =
+document.getElementById(
+"addMoneyBtn"
+);
+
+const joinStatus =
+document.getElementById(
+"joinStatus"
+);
+
+const confirmModal =
+document.getElementById(
+"confirmModal"
+);
+
+const confirmJoinBtn =
+document.getElementById(
+"confirmJoinBtn"
+);
+
+
+/* =========================
+AUTH
+========================= */
+
+onAuthStateChanged(
+auth,
+async (u)=>{
 
 if(!u){
 
@@ -563,13 +1237,220 @@ user = u;
 
 window.currentUser = u;
 
+
+/* LOAD EVERYTHING */
+
 loadMatch();
+
+loadWallet();
 
 loadPlayers();
 
 checkRoomAccess();
 
-});
+}
+);
+
+
+/* =========================
+LOAD WALLET
+========================= */
+
+function loadWallet(){
+
+if(!user){
+return;
+}
+
+onValue(
+
+ref(
+db,
+"users/" +
+user.uid +
+"/wallet"
+),
+
+(snapshot)=>{
+
+if(!snapshot.exists()){
+
+currentWallet = 0;
+
+updateWalletUI();
+
+return;
+
+}
+
+
+const wallet =
+snapshot.val();
+
+
+/*
+SUPPORT:
+
+wallet:
+{
+    balance: 500
+}
+
+OR OLD:
+
+wallet: 500
+*/
+
+if(
+wallet &&
+typeof wallet === "object"
+){
+
+currentWallet =
+Number(
+wallet.balance || 0
+);
+
+}else{
+
+currentWallet =
+Number(wallet || 0);
+
+}
+
+
+if(
+!Number.isFinite(
+currentWallet
+)
+){
+
+currentWallet = 0;
+
+}
+
+
+updateWalletUI();
+
+},
+
+(error)=>{
+
+console.error(
+"Wallet error:",
+error
+);
+
+currentWallet = 0;
+
+updateWalletUI();
+
+}
+
+);
+
+}
+
+
+/* =========================
+WALLET UI
+========================= */
+
+function updateWalletUI(){
+
+const balance =
+document.getElementById(
+"walletBalance"
+);
+
+const status =
+document.getElementById(
+"walletStatus"
+);
+
+const after =
+document.getElementById(
+"walletAfter"
+);
+
+const entry =
+currentMatch
+?
+Number(
+currentMatch.entry || 0
+)
+:
+0;
+
+const remaining =
+Math.max(
+0,
+currentWallet - entry
+);
+
+
+if(balance){
+
+balance.innerText =
+"₹" +
+formatNumber(
+currentWallet
+);
+
+}
+
+
+if(after){
+
+after.innerText =
+"After joining: ₹" +
+formatNumber(
+remaining
+);
+
+}
+
+
+if(status){
+
+if(entry <= 0){
+
+status.innerText =
+"Invalid Entry Fee";
+
+status.style.color =
+"#f59e0b";
+
+}
+
+else if(
+currentWallet < entry
+){
+
+status.innerText =
+"Insufficient Balance";
+
+status.style.color =
+"#f59e0b";
+
+}
+
+else{
+
+status.innerText =
+"Ready to Join";
+
+status.style.color =
+"#22c55e";
+
+}
+
+}
+
+
+updateJoinButton();
+
+}
 
 
 /* =========================
@@ -578,58 +1459,106 @@ LOAD MATCH
 
 function loadMatch(){
 
+if(!matchId){
+return;
+}
+
 onValue(
 
-ref(db,"matches/"+matchId),
+ref(
+db,
+"matches/" +
+matchId
+),
 
 (snapshot)=>{
 
 if(!snapshot.exists()){
 
-alert("Match Not Found");
+showToast(
+"Match Not Found",
+"error"
+);
 
-location.href="dashboard.html";
+setTimeout(
+()=>{
+location.href=
+"dashboard.html";
+},
+900
+);
 
 return;
 
 }
 
 
-const m =
-snapshot.val();
+currentMatch =
+snapshot.val() || {};
 
 
-/* IMAGE */
+renderMatch(
+currentMatch
+);
+
+},
+
+(error)=>{
+
+console.error(
+"Match load error:",
+error
+);
+
+showToast(
+"Unable to load match",
+"error"
+);
+
+}
+
+);
+
+}
+
+
+/* =========================
+RENDER MATCH
+========================= */
+
+function renderMatch(m){
 
 const img =
-document.getElementById("matchImage");
+document.getElementById(
+"matchImage"
+);
 
-
-if(m.image){
 
 let imageUrl =
-m.image;
+m.image ||
+"https://via.placeholder.com/700x350";
 
 
 /* PEXELS URL FIX */
 
-if(imageUrl.includes("pexels.com/photo/")){
+if(
+imageUrl.includes(
+"pexels.com/photo/"
+)
+){
 
 const matchData =
-imageUrl.match(/photo\/(?:.*-)?(\d+)\/?$/);
-
+imageUrl.match(
+/photo\/(?:.*-)?(\d+)\/?$/
+);
 
 if(matchData){
 
 imageUrl =
-"https://images.pexels.com/photos/"
-+
-matchData[1]
-+
-"/pexels-photo-"
-+
-matchData[1]
-+
+"https://images.pexels.com/photos/" +
+matchData[1] +
+"/pexels-photo-" +
+matchData[1] +
 ".jpeg";
 
 }
@@ -637,119 +1566,1247 @@ matchData[1]
 }
 
 
-img.src = imageUrl;
+img.src =
+imageUrl;
 
 
-img.onerror=function(){
+img.onerror =
+()=>{
 
-img.src=
+img.src =
 "https://via.placeholder.com/700x350";
 
 };
 
-}else{
 
-img.src=
-"https://via.placeholder.com/700x350";
+document.getElementById(
+"matchTitle"
+).innerText =
+m.title ||
+"BGMI MATCH";
+
+
+document.getElementById(
+"mode"
+).innerText =
+String(
+m.type ||
+"SQUAD"
+).toUpperCase();
+
+
+document.getElementById(
+"date"
+).innerText =
+m.date ||
+"-";
+
+
+document.getElementById(
+"time"
+).innerText =
+m.time ||
+"-";
+
+
+document.getElementById(
+"prize"
+).innerText =
+"₹" +
+formatNumber(
+Number(
+m.prize || 0
+)
+);
+
+
+document.getElementById(
+"entry"
+).innerText =
+"₹" +
+formatNumber(
+Number(
+m.entry || 0
+)
+);
+
+
+/* SLOT COUNT */
+
+updateSlotCount();
+
+
+/* LIVE STATUS */
+
+const status =
+String(
+m.status || ""
+).toLowerCase();
+
+
+const badge =
+document.getElementById(
+"liveBadge"
+);
+
+
+if(status === "live"){
+
+badge.innerText =
+"🟢 LIVE";
+
+}
+
+else if(
+status === "completed" ||
+status === "closed" ||
+status === "cancelled"
+){
+
+badge.innerText =
+status.toUpperCase();
+
+}
+
+else{
+
+badge.innerText =
+"UPCOMING";
 
 }
 
 
-/* DETAILS */
+/* PRIZES */
 
-document.getElementById("matchTitle").innerText =
-m.title || "BGMI MATCH";
-
-
-document.getElementById("mode").innerText =
-(m.type || "SQUAD").toUpperCase();
-
-
-document.getElementById("date").innerText =
-m.date || "-";
-
-
-document.getElementById("time").innerText =
-m.time || "-";
+document.getElementById(
+"firstPrize"
+).innerText =
+"₹" +
+formatNumber(
+Number(
+m.firstPrize || 0
+)
+);
 
 
-document.getElementById("prize").innerText =
-"₹"+Number(m.prize || 0);
+document.getElementById(
+"secondPrize"
+).innerText =
+"₹" +
+formatNumber(
+Number(
+m.secondPrize || 0
+)
+);
 
 
-document.getElementById("entry").innerText =
-"₹"+Number(m.entry || 0);
+document.getElementById(
+"thirdPrize"
+).innerText =
+"₹" +
+formatNumber(
+Number(
+m.thirdPrize || 0
+)
+);
 
 
-document.getElementById("slots").innerText =
-Number(m.booked || 0)
-+
-"/"
-+
-Number(m.total || 0);
+updateWalletUI();
+
+checkAlreadyJoined();
+
+}
 
 
-document.getElementById("firstPrize").innerText =
-"₹"+Number(m.firstPrize || 0);
+/* =========================
+LIVE SLOT COUNT
+========================= */
+
+async function updateSlotCount(){
+
+if(
+!matchId ||
+!currentMatch
+){
+
+return;
+
+}
 
 
-document.getElementById("secondPrize").innerText =
-"₹"+Number(m.secondPrize || 0);
+try{
 
+const snap =
+await get(
+ref(
+db,
+"matchPlayers/" +
+matchId
+)
+);
 
-document.getElementById("thirdPrize").innerText =
-"₹"+Number(m.thirdPrize || 0);
-
-
-/* CHECK FULL */
-
-const joinBtn =
-document.getElementById("joinBtn");
 
 const booked =
-Number(m.booked || 0);
+snap.exists()
+?
+snap.size
+:
+0;
+
 
 const total =
-Number(m.total || 0);
+Number(
+currentMatch.total || 0
+);
 
-if(total > 0 && booked >= total){
 
-joinBtn.disabled=true;
+document.getElementById(
+"slots"
+).innerText =
+booked +
+"/" +
+total;
 
-joinBtn.innerText=
-"MATCH FULL";
 
-}else{
+}
+catch(error){
 
-joinBtn.disabled=false;
+console.error(
+"Slot count error:",
+error
+);
 
-joinBtn.innerText=
-"JOIN MATCH";
+document.getElementById(
+"slots"
+).innerText =
+"0/" +
+Number(
+currentMatch.total || 0
+);
+
+}
 
 }
 
 
-/* CHECK ALREADY JOINED */
+/* =========================
+UPDATE JOIN BUTTON
+========================= */
+
+async function updateJoinButton(){
+
+if(!joinBtn){
+return;
+}
+
+
+if(!currentMatch){
+
+joinBtn.disabled = true;
+
+joinBtn.innerText =
+"LOADING...";
+
+return;
+
+}
+
+
+/* ALREADY JOINED */
 
 if(user){
 
-get(
-ref(db,"matchPlayers/"+matchId+"/"+user.uid)
-).then((snap)=>{
+try{
+
+const joinedSnap =
+await get(
+ref(
+db,
+"matchPlayers/" +
+matchId +
+"/" +
+user.uid
+)
+);
+
+
+if(joinedSnap.exists()){
+
+joinBtn.style.display =
+"none";
+
+joinStatus.style.display =
+"block";
+
+addMoneyBtn.style.display =
+"none";
+
+return;
+
+}
+
+}catch(error){
+
+console.error(
+"Joined check:",
+error
+);
+
+}
+
+}
+
+
+/* STATUS */
+
+const status =
+String(
+currentMatch.status || ""
+).toLowerCase();
+
+
+if(
+[
+"completed",
+"closed",
+"cancelled"
+].includes(status)
+){
+
+joinBtn.disabled = true;
+
+joinBtn.innerText =
+status === "completed"
+?
+"MATCH COMPLETED"
+:
+"MATCH CLOSED";
+
+return;
+
+}
+
+
+/* GET CURRENT PLAYER COUNT */
+
+let booked = 0;
+
+try{
+
+const playersSnap =
+await get(
+ref(
+db,
+"matchPlayers/" +
+matchId
+)
+);
+
+booked =
+playersSnap.exists()
+?
+playersSnap.size
+:
+0;
+
+}
+catch(error){
+
+console.error(
+"Player count:",
+error
+);
+
+}
+
+
+/* FULL */
+
+const total =
+Number(
+currentMatch.total || 0
+);
+
+
+if(
+total > 0 &&
+booked >= total
+){
+
+joinBtn.disabled = true;
+
+joinBtn.innerText =
+"MATCH FULL";
+
+addMoneyBtn.style.display =
+"none";
+
+return;
+
+}
+
+
+/* ENTRY */
+
+const entry =
+Number(
+currentMatch.entry || 0
+);
+
+
+if(entry <= 0){
+
+joinBtn.disabled = true;
+
+joinBtn.innerText =
+"ENTRY FEE INVALID";
+
+return;
+
+}
+
+
+/* WALLET */
+
+if(
+currentWallet < entry
+){
+
+joinBtn.disabled = true;
+
+joinBtn.classList.add(
+"insufficient"
+);
+
+joinBtn.innerText =
+"💰 INSUFFICIENT BALANCE";
+
+addMoneyBtn.style.display =
+"block";
+
+return;
+
+}
+
+
+/* READY */
+
+joinBtn.disabled = false;
+
+joinBtn.classList.remove(
+"insufficient"
+);
+
+joinBtn.innerText =
+"🎮 JOIN MATCH • ₹" +
+formatNumber(
+entry
+);
+
+addMoneyBtn.style.display =
+"none";
+
+}
+
+
+/* =========================
+CHECK ALREADY JOINED
+========================= */
+
+async function checkAlreadyJoined(){
+
+if(!user){
+return false;
+}
+
+try{
+
+const snap =
+await get(
+ref(
+db,
+"matchPlayers/" +
+matchId +
+"/" +
+user.uid
+)
+);
+
 
 if(snap.exists()){
 
-joinBtn.style.display="none";
+joinBtn.style.display =
+"none";
+
+joinStatus.style.display =
+"block";
+
+return true;
 
 }
 
-});
-
 }
+catch(error){
 
-}
-
+console.error(
+"Already joined check:",
+error
 );
+
+}
+
+return false;
+
+}
+
+
+/* =========================
+JOIN BUTTON
+========================= */
+
+joinBtn.onclick =
+function(){
+
+if(joining){
+return;
+}
+
+openConfirm();
+
+};
+
+
+/* =========================
+OPEN CONFIRM
+========================= */
+
+async function openConfirm(){
+
+if(!user){
+
+showToast(
+"Please login first",
+"error"
+);
+
+return;
+
+}
+
+
+if(!currentMatch){
+
+showToast(
+"Match loading...",
+"error"
+);
+
+return;
+
+}
+
+
+/* GET FRESH USER WALLET */
+
+const freshUserSnap =
+await get(
+ref(
+db,
+"users/" +
+user.uid
+)
+);
+
+
+if(
+!freshUserSnap.exists()
+){
+
+showToast(
+"User account not found",
+"error"
+);
+
+return;
+
+}
+
+
+const freshUser =
+freshUserSnap.val() || {};
+
+
+if(
+freshUser.wallet &&
+typeof freshUser.wallet === "object"
+){
+
+currentWallet =
+Number(
+freshUser.wallet.balance || 0
+);
+
+}else{
+
+currentWallet =
+Number(
+freshUser.wallet || 0
+);
+
+}
+
+
+const entry =
+Number(
+currentMatch.entry || 0
+);
+
+
+if(entry <= 0){
+
+showToast(
+"Invalid entry fee",
+"error"
+);
+
+return;
+
+}
+
+
+if(
+currentWallet < entry
+){
+
+showToast(
+"Wallet balance insufficient",
+"error"
+);
+
+addMoneyBtn.style.display =
+"block";
+
+return;
+
+}
+
+
+/* REFRESH MATCH */
+
+const latest =
+await get(
+ref(
+db,
+"matches/" +
+matchId
+)
+);
+
+
+if(latest.exists()){
+
+currentMatch =
+latest.val();
+
+}
+
+
+/* CURRENT PLAYER COUNT */
+
+const playersSnap =
+await get(
+ref(
+db,
+"matchPlayers/" +
+matchId
+)
+);
+
+
+const booked =
+playersSnap.exists()
+?
+playersSnap.size
+:
+0;
+
+
+const total =
+Number(
+currentMatch.total || 0
+);
+
+
+if(
+total > 0 &&
+booked >= total
+){
+
+showToast(
+"Match is full",
+"error"
+);
+
+return;
+
+}
+
+
+/* ALREADY JOINED */
+
+const already =
+await get(
+ref(
+db,
+"matchPlayers/" +
+matchId +
+"/" +
+user.uid
+)
+);
+
+
+if(already.exists()){
+
+showToast(
+"Already joined",
+"error"
+);
+
+joinBtn.style.display =
+"none";
+
+joinStatus.style.display =
+"block";
+
+return;
+
+}
+
+
+/* MODAL */
+
+document.getElementById(
+"confirmEntry"
+).innerText =
+"₹" +
+formatNumber(
+entry
+);
+
+
+document.getElementById(
+"confirmWallet"
+).innerText =
+"₹" +
+formatNumber(
+currentWallet
+);
+
+
+document.getElementById(
+"confirmAfter"
+).innerText =
+"₹" +
+formatNumber(
+currentWallet - entry
+);
+
+
+confirmModal.style.display =
+"flex";
+
+}
+
+
+/* =========================
+CLOSE CONFIRM
+========================= */
+
+window.closeConfirm =
+function(){
+
+confirmModal.style.display =
+"none";
+
+};
+
+
+/* =========================
+CONFIRM JOIN
+========================= */
+
+confirmJoinBtn.onclick =
+async function(){
+
+if(joining){
+return;
+}
+
+joining = true;
+
+confirmJoinBtn.disabled = true;
+
+confirmJoinBtn.innerText =
+"JOINING...";
+
+
+try{
+
+await performJoin();
+
+}
+catch(error){
+
+console.error(
+"JOIN ERROR:",
+error
+);
+
+showToast(
+error.message ||
+"Unable to join match",
+"error"
+);
+
+}
+finally{
+
+joining = false;
+
+confirmJoinBtn.disabled = false;
+
+confirmJoinBtn.innerText =
+"✓ CONFIRM JOIN";
+
+}
+
+};
+
+
+/* =========================
+PERFORM JOIN - FIXED
+========================= */
+
+async function performJoin(){
+
+if(!user){
+
+throw new Error(
+"Login Required"
+);
+
+}
+
+
+/* =========================
+GET USER
+========================= */
+
+const userSnap =
+await get(
+ref(
+db,
+"users/" +
+user.uid
+)
+);
+
+
+if(
+!userSnap.exists()
+){
+
+throw new Error(
+"User account not found"
+);
+
+}
+
+
+const u =
+userSnap.val() || {};
+
+
+/* =========================
+GET MATCH
+========================= */
+
+const matchSnap =
+await get(
+ref(
+db,
+"matches/" +
+matchId
+)
+);
+
+
+if(
+!matchSnap.exists()
+){
+
+throw new Error(
+"Match not found"
+);
+
+}
+
+
+const match =
+matchSnap.val() || {};
+
+
+currentMatch =
+match;
+
+
+/* =========================
+STATUS
+========================= */
+
+const status =
+String(
+match.status || ""
+).toLowerCase();
+
+
+if(
+[
+"completed",
+"closed",
+"cancelled"
+].includes(status)
+){
+
+throw new Error(
+"Match is closed"
+);
+
+}
+
+
+/* =========================
+ENTRY FEE
+========================= */
+
+const entryFee =
+Number(
+match.entry || 0
+);
+
+
+if(
+!Number.isFinite(entryFee) ||
+entryFee <= 0
+){
+
+throw new Error(
+"Invalid entry fee"
+);
+
+}
+
+
+/* =========================
+ALREADY JOINED
+========================= */
+
+const already =
+await get(
+ref(
+db,
+"matchPlayers/" +
+matchId +
+"/" +
+user.uid
+)
+);
+
+
+if(already.exists()){
+
+throw new Error(
+"Already Joined"
+);
+
+}
+
+
+/* =========================
+PLAYER COUNT
+========================= */
+
+const playersSnap =
+await get(
+ref(
+db,
+"matchPlayers/" +
+matchId
+)
+);
+
+
+const booked =
+playersSnap.exists()
+?
+playersSnap.size
+:
+0;
+
+
+const total =
+Number(
+match.total || 0
+);
+
+
+if(
+total > 0 &&
+booked >= total
+){
+
+throw new Error(
+"Match is full"
+);
+
+}
+
+
+/* =========================
+WALLET
+========================= */
+
+let walletBalance = 0;
+
+
+if(
+u.wallet &&
+typeof u.wallet === "object"
+){
+
+walletBalance =
+Number(
+u.wallet.balance || 0
+);
+
+}else{
+
+walletBalance =
+Number(
+u.wallet || 0
+);
+
+}
+
+
+if(
+!Number.isFinite(walletBalance) ||
+walletBalance < entryFee
+){
+
+throw new Error(
+"Insufficient Wallet Balance"
+);
+
+}
+
+
+/* =========================
+NEW BALANCE
+========================= */
+
+const newBalance =
+walletBalance - entryFee;
+
+
+/* =========================
+PLAYER DATA
+========================= */
+
+const playerData = {
+
+uid:
+user.uid,
+
+name:
+u.name ||
+u.displayName ||
+user.displayName ||
+"Player",
+
+bgmiId:
+u.bgmiId ||
+u.bgmiID ||
+"-",
+
+joinedAt:
+Date.now()
+
+};
+
+
+/* =========================
+TRANSACTION ID
+========================= */
+
+const transactionId =
+"txn_" +
+Date.now() +
+"_" +
+user.uid.slice(0,6);
+
+
+/* =========================
+MULTI LOCATION UPDATE
+========================= */
+
+const updates = {};
+
+
+/* PLAYER */
+
+updates[
+"matchPlayers/" +
+matchId +
+"/" +
+user.uid
+] =
+playerData;
+
+
+/* WALLET BALANCE */
+
+updates[
+"users/" +
+user.uid +
+"/wallet/balance"
+] =
+newBalance;
+
+
+/* TRANSACTION */
+
+updates[
+"users/" +
+user.uid +
+"/transactions/" +
+transactionId
+] = {
+
+title:
+"Match Entry Fee",
+
+amount:
+entryFee,
+
+type:
+"debit",
+
+time:
+Date.now(),
+
+matchId:
+matchId,
+
+matchTitle:
+match.title ||
+"BGMI Match",
+
+balanceBefore:
+walletBalance,
+
+balanceAfter:
+newBalance
+
+};
+
+
+/* MISSION COUNT */
+
+const missionCount =
+Math.min(
+100,
+Number(
+u.missionMatches || 0
+) + 1
+);
+
+
+updates[
+"users/" +
+user.uid +
+"/missionMatches"
+] =
+missionCount;
+
+
+/*
+IMPORTANT:
+
+NO:
+
+matches/{matchId}/booked
+
+Yahan write nahi hoga.
+
+Isliye admin-only matches rule se
+permission denied nahi aayega.
+*/
+
+
+/* =========================
+WRITE
+========================= */
+
+await update(
+ref(db),
+updates
+);
+
+
+/* =========================
+SUCCESS
+========================= */
+
+confirmModal.style.display =
+"none";
+
+
+showToast(
+"✓ Match Joined Successfully!",
+"success"
+);
+
+
+joinBtn.style.display =
+"none";
+
+
+joinStatus.style.display =
+"block";
+
+
+addMoneyBtn.style.display =
+"none";
+
+
+/* LOCAL BALANCE UPDATE */
+
+currentWallet =
+newBalance;
+
+
+updateWalletUI();
+
+
+/* REFRESH */
+
+await updateSlotCount();
+
+loadPlayers();
+
+checkRoomAccess();
 
 }
 
@@ -760,22 +2817,36 @@ LOAD PLAYERS
 
 function loadPlayers(){
 
+if(!matchId){
+return;
+}
+
 onValue(
 
-ref(db,"matchPlayers/"+matchId),
+ref(
+db,
+"matchPlayers/" +
+matchId
+),
 
 (snapshot)=>{
 
 const box =
-document.getElementById("playerList");
+document.getElementById(
+"playerList"
+);
 
-box.innerHTML="";
+box.innerHTML = "";
 
 
-if(!snapshot.exists()){
+if(
+!snapshot.exists()
+){
 
-box.innerHTML=
-"No Players Joined";
+box.innerHTML =
+'<div class="empty">No Players Joined</div>';
+
+updateSlotCount();
 
 return;
 
@@ -785,391 +2856,140 @@ return;
 let no = 1;
 
 
-snapshot.forEach((item)=>{
+snapshot.forEach(
+(item)=>{
 
 const p =
-item.val();
+item.val() || {};
 
 
-box.innerHTML += `
+const div =
+document.createElement(
+"div"
+);
 
-<div class="player">
+div.className =
+"player";
 
-<div>
 
-<b>${no++}. ${escapeHTML(p.name || "Player")}</b>
+const left =
+document.createElement(
+"div"
+);
 
-<br>
 
-<small>${escapeHTML(p.bgmiId || "-")}</small>
+const name =
+document.createElement(
+"div"
+);
 
-</div>
+name.className =
+"playerName";
 
-<div class="badge">
-JOINED
-</div>
 
-</div>
+name.innerText =
+no +
+". " +
+(
+p.name ||
+"Player"
+);
 
-`;
+
+const id =
+document.createElement(
+"div"
+);
+
+id.className =
+"playerId";
+
+
+id.innerText =
+"BGMI ID: " +
+(
+p.bgmiId ||
+"-"
+);
+
+
+left.appendChild(
+name
+);
+
+left.appendChild(
+id
+);
+
+
+const badge =
+document.createElement(
+"div"
+);
+
+badge.className =
+"badge";
+
+badge.innerText =
+"JOINED";
+
+
+div.appendChild(
+left
+);
+
+div.appendChild(
+badge
+);
+
+box.appendChild(
+div
+);
+
+
+no++;
 
 });
 
+
+updateSlotCount();
+
 }
 
 );
 
 }
-
-
-/* =========================
-HTML ESCAPE
-========================= */
-
-function escapeHTML(value){
-
-return String(value)
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
-
-}
-
-
-/* =========================
-JOIN MATCH
-========================= */
-
-document.getElementById("joinBtn").onclick =
-async function(){
-
-if(joining){
-
-return;
-
-}
-
-
-if(!user){
-
-alert("Login Required");
-
-return;
-
-}
-
-
-joining = true;
-
-
-const button =
-document.getElementById("joinBtn");
-
-button.disabled=true;
-
-button.innerText=
-"JOINING...";
-
-
-try{
-
-
-/* =========================
-GET USER
-========================= */
-
-const userSnap =
-await get(
-ref(db,"users/"+user.uid)
-);
-
-
-if(!userSnap.exists()){
-
-throw new Error("User account not found");
-
-}
-
-
-const u =
-userSnap.val();
-
-
-/* =========================
-GET MATCH
-========================= */
-
-const matchSnap =
-await get(
-ref(db,"matches/"+matchId)
-);
-
-
-if(!matchSnap.exists()){
-
-throw new Error("Match not found");
-
-}
-
-
-const match =
-matchSnap.val();
-
-
-const entryFee =
-Number(match.entry || 0);
-
-
-/* =========================
-CHECK ALREADY JOINED
-========================= */
-
-const already =
-await get(
-ref(db,"matchPlayers/"+matchId+"/"+user.uid)
-);
-
-
-if(already.exists()){
-
-alert("Already Joined");
-
-button.style.display="none";
-
-return;
-
-}
-
-
-/* =========================
-CHECK MATCH FULL
-========================= */
-
-const booked =
-Number(match.booked || 0);
-
-const total =
-Number(match.total || 0);
-
-
-if(total > 0 && booked >= total){
-
-throw new Error("Match is full");
-
-}
-
-
-/* =========================
-CHECK WALLET
-========================= */
-
-const wallet =
-Number(u.wallet || 0);
-
-
-if(wallet < entryFee){
-
-throw new Error(
-"Insufficient Wallet Balance"
-);
-
-}
-
-
-/* =========================
-NEW WALLET BALANCE
-========================= */
-
-const newWallet =
-wallet - entryFee;
-
-
-/* =========================
-ADD PLAYER
-========================= */
-
-await set(
-
-ref(
-db,
-"matchPlayers/"+matchId+"/"+user.uid
-),
-
-{
-
-uid:user.uid,
-
-name:u.name || "Player",
-
-bgmiId:u.bgmiId || "-",
-
-joinedAt:Date.now()
-
-}
-
-);
-
-
-/* =========================
-DEDUCT WALLET
-========================= */
-
-await set(
-
-ref(
-db,
-"users/"+user.uid+"/wallet"
-),
-
-newWallet
-
-);
-
-
-/* =========================
-SAVE TRANSACTION HISTORY
-========================= */
-
-const transactionRef =
-push(
-ref(
-db,
-"users/"+user.uid+"/transactions"
-)
-);
-
-
-await set(
-
-transactionRef,
-
-{
-
-title:"Match Entry Fee",
-
-amount:entryFee,
-
-type:"debit",
-
-time:Date.now(),
-
-matchId:matchId,
-
-matchTitle:match.title || "BGMI Match"
-
-}
-
-);
-
-
-/* =========================
-UPDATE BOOKED
-========================= */
-
-await set(
-
-ref(
-db,
-"matches/"+matchId+"/booked"
-),
-
-booked + 1
-
-);
-
-
-/* =========================
-SUCCESS
-========================= */
-
-alert(
-"Match Joined Successfully"
-);
-
-
-/* HIDE BUTTON */
-
-button.style.display="none";
-
-
-/* CHECK ROOM */
-
-setTimeout(()=>{
-
-checkRoomAccess();
-
-},500);
-
-
-}catch(error){
-
-console.error(
-"JOIN MATCH ERROR:",
-error
-);
-
-alert(
-error.message ||
-"Unable to join match"
-);
-
-button.disabled=false;
-
-button.innerText=
-"JOIN MATCH";
-
-
-}finally{
-
-joining=false;
-
-}
-
-};
 
 
 /* =========================
 ROOM ACCESS
 ========================= */
 
-const ADMIN_UID =
-"VIAP56vYwndWPhJxktn0lRPTWnS2";
-
-
 function checkRoomAccess(){
 
 if(
-!window.db ||
-!window.matchId ||
-!window.currentUser
+!user ||
+!matchId
 ){
-
-setTimeout(
-checkRoomAccess,
-500
-);
 
 return;
 
 }
 
 
-const uid =
-window.currentUser.uid;
-
-
 onValue(
 
 ref(
 db,
-"matches/"+matchId
+"matches/" +
+matchId
 ),
 
-(matchSnap)=>{
+async(snapshot)=>{
 
-if(!matchSnap.exists()){
+if(
+!snapshot.exists()
+){
 
 return;
 
@@ -1177,34 +2997,14 @@ return;
 
 
 const match =
-matchSnap.val();
+snapshot.val() || {};
 
 
-/* NO GROUP LINK */
+/* ADMIN */
 
-if(!match.groupLink){
-
-document.getElementById(
-"roomLocked"
-).style.display="block";
-
-document.getElementById(
-"roomData"
-).style.display="none";
-
-document.getElementById(
-"roomLocked"
-).innerHTML=
-"⏳ Room details abhi admin ne add nahi ki hai.";
-
-return;
-
-}
-
-
-/* ADMIN ACCESS */
-
-if(uid === ADMIN_UID){
+if(
+user.uid === ADMIN_UID
+){
 
 openRoom(match);
 
@@ -1213,52 +3013,75 @@ return;
 }
 
 
-/* PLAYER ACCESS */
+/* PLAYER */
 
-onValue(
-
+const playerSnap =
+await get(
 ref(
 db,
-"matchPlayers/"+matchId+"/"+uid
-),
+"matchPlayers/" +
+matchId +
+"/" +
+user.uid
+)
+);
 
-(playerSnap)=>{
 
-if(playerSnap.exists()){
+if(
+playerSnap.exists()
+){
 
 openRoom(match);
 
 }else{
 
+lockRoom();
+
+}
+
+}
+
+);
+
+}
+
+
+/* =========================
+LOCK ROOM
+========================= */
+
+function lockRoom(){
+
+const lock =
 document.getElementById(
 "roomLocked"
-).style.display="block";
+);
 
+const data =
 document.getElementById(
 "roomData"
-).style.display="none";
-
-document.getElementById(
-"roomLocked"
-).innerHTML=`
-
-⚠️ Aapne ye match join nahi kiya hai.
-
-<br><br>
-
-Room details sirf joined players ke liye hai.
-
-`;
-
-}
-
-}
-
 );
 
+if(
+!lock ||
+!data
+){
+
+return;
+
 }
 
-);
+
+lock.style.display =
+"block";
+
+
+data.style.display =
+"none";
+
+
+lock.innerHTML =
+"🔒 Match join karne ke baad ID PASS / Group Link milega.";
 
 }
 
@@ -1270,49 +3093,231 @@ OPEN ROOM
 function openRoom(match){
 
 const lock =
-document.getElementById("roomLocked");
+document.getElementById(
+"roomLocked"
+);
 
 const data =
-document.getElementById("roomData");
+document.getElementById(
+"roomData"
+);
 
-
-if(!lock || !data){
+if(
+!lock ||
+!data
+){
 
 return;
 
 }
 
 
-lock.style.display="none";
-
-data.style.display="block";
-
-
-const link =
-document.getElementById("groupLink");
+lock.style.display =
+"none";
 
 
-if(match.groupLink){
+data.style.display =
+"block";
 
-link.href =
-match.groupLink;
 
-link.innerText =
-"🟢 JOIN ID PASS / GROUP";
+/* ROOM ID */
+
+const roomId =
+match.roomId ||
+match.roomID ||
+match.id ||
+"";
+
+
+const roomPassword =
+match.roomPassword ||
+match.password ||
+match.roomPass ||
+"";
+
+
+const idBox =
+document.getElementById(
+"roomIdBox"
+);
+
+const passBox =
+document.getElementById(
+"roomPassBox"
+);
+
+
+if(roomId){
+
+idBox.style.display =
+"block";
+
+
+document.getElementById(
+"roomId"
+).innerText =
+roomId;
 
 }else{
 
-link.href="#";
+idBox.style.display =
+"none";
 
-link.innerText =
-"Group Link Not Added";
+}
+
+
+if(roomPassword){
+
+passBox.style.display =
+"block";
+
+
+document.getElementById(
+"roomPassword"
+).innerText =
+roomPassword;
+
+}else{
+
+passBox.style.display =
+"none";
+
+}
+
+
+/* GROUP */
+
+const groupBox =
+document.getElementById(
+"groupBox"
+);
+
+const groupLink =
+document.getElementById(
+"groupLink"
+);
+
+
+if(
+match.groupLink
+){
+
+groupBox.style.display =
+"block";
+
+
+groupLink.href =
+match.groupLink;
+
+
+groupLink.innerText =
+"🟢 JOIN WHATSAPP GROUP";
+
+}else{
+
+groupBox.style.display =
+"none";
 
 }
 
 }
 
 
-/* GLOBAL */
+/* =========================
+FORMAT NUMBER
+========================= */
+
+function formatNumber(value){
+
+const number =
+Number(value || 0);
+
+
+if(
+!Number.isFinite(number)
+){
+
+return "0";
+
+}
+
+
+return number.toLocaleString(
+"en-IN",
+{
+maximumFractionDigits:0
+}
+);
+
+}
+
+
+/* =========================
+TOAST
+========================= */
+
+function showToast(
+message,
+type=""
+){
+
+const toast =
+document.getElementById(
+"toast"
+);
+
+
+toast.innerText =
+message;
+
+
+toast.className =
+"toast show " +
+type;
+
+
+clearTimeout(
+window.toastTimer
+);
+
+
+window.toastTimer =
+setTimeout(
+()=>{
+
+toast.className =
+"toast";
+
+},
+2500
+);
+
+}
+
+
+/* =========================
+CLOSE MODAL ON BACKDROP
+========================= */
+
+confirmModal.addEventListener(
+"click",
+(e)=>{
+
+if(
+e.target ===
+confirmModal
+){
+
+closeConfirm();
+
+}
+
+});
+
+
+/* =========================
+GLOBAL
+========================= */
 
 window.checkRoomAccess =
 checkRoomAccess;
@@ -1322,4 +3327,3 @@ checkRoomAccess;
 </body>
 
 </html>
-
