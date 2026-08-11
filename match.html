@@ -85,6 +85,10 @@ font-size:20px;
 cursor:pointer;
 }
 
+.backBtn:active{
+transform:scale(.94);
+}
+
 /* =========================
 BANNER
 ========================= */
@@ -272,6 +276,10 @@ font-weight:800;
 cursor:pointer;
 }
 
+.addMoneyBtn:active{
+transform:scale(.97);
+}
+
 /* =========================
 JOIN STATUS
 ========================= */
@@ -336,7 +344,7 @@ text-align:right;
 }
 
 /* =========================
-ROOM DATA
+ROOM PASSWORD
 ========================= */
 
 .roomCodeBox{
@@ -361,22 +369,237 @@ color:#22c55e;
 word-break:break-all;
 }
 
-.groupBtn{
-display:block;
-width:100%;
-text-align:center;
+/* =========================
+PREMIUM WHATSAPP GROUP
+========================= */
+
+.whatsappGroupBox{
+margin-top:18px;
 padding:16px;
-border-radius:15px;
-background:linear-gradient(
-90deg,
-#22c55e,
+border-radius:20px;
+
+background:
+linear-gradient(
+145deg,
+#0b2418,
+#071b13
+);
+
+border:1px solid rgba(34,197,94,.22);
+
+box-shadow:
+0 12px 30px rgba(0,0,0,.28),
+inset 0 1px 0 rgba(255,255,255,.04);
+
+position:relative;
+overflow:hidden;
+}
+
+.whatsappGroupBox::before{
+content:"";
+position:absolute;
+width:150px;
+height:150px;
+right:-65px;
+top:-70px;
+border-radius:50%;
+background:rgba(34,197,94,.10);
+pointer-events:none;
+}
+
+.whatsappGroupBox::after{
+content:"";
+position:absolute;
+width:90px;
+height:90px;
+left:-45px;
+bottom:-45px;
+border-radius:50%;
+background:rgba(37,211,102,.06);
+pointer-events:none;
+}
+
+.whatsappHeader{
+display:flex;
+align-items:center;
+gap:12px;
+margin-bottom:14px;
+position:relative;
+z-index:1;
+}
+
+.whatsappIcon{
+width:46px;
+height:46px;
+flex-shrink:0;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:14px;
+
+background:
+linear-gradient(
+135deg,
+#25D366,
 #16a34a
 );
-color:#03100a;
+
+box-shadow:
+0 8px 22px rgba(37,211,102,.25);
+}
+
+.whatsappIcon span{
+font-size:22px;
+}
+
+.whatsappText{
+flex:1;
+min-width:0;
+}
+
+.whatsappTitle{
 font-size:15px;
 font-weight:800;
+color:#f8fafc;
+}
+
+.whatsappSubtitle{
+margin-top:3px;
+color:#86efac;
+font-size:10px;
+line-height:1.45;
+}
+
+.whatsappArrow{
+width:30px;
+height:30px;
+flex-shrink:0;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+border-radius:10px;
+
+background:rgba(34,197,94,.10);
+
+color:#4ade80;
+
+font-size:18px;
+font-weight:800;
+}
+
+/* =========================
+WHATSAPP BUTTON
+========================= */
+
+.groupBtn{
+width:100%;
+min-height:56px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+gap:9px;
+
+padding:0 15px;
+
+border-radius:16px;
+
+background:
+linear-gradient(
+135deg,
+#25D366,
+#16a34a
+);
+
+color:#03100a;
+
 text-decoration:none;
-box-shadow:0 0 20px rgba(34,197,94,.25);
+
+font-size:14px;
+font-weight:800;
+
+box-shadow:
+0 9px 25px rgba(37,211,102,.22);
+
+transition:
+transform .18s ease,
+box-shadow .18s ease,
+filter .18s ease;
+
+position:relative;
+z-index:2;
+
+overflow:hidden;
+}
+
+.groupBtn::before{
+content:"";
+position:absolute;
+top:0;
+left:-120%;
+width:70%;
+height:100%;
+
+background:
+linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.28),
+transparent
+);
+
+transform:skewX(-20deg);
+
+animation:whatsappShine 3.2s infinite;
+}
+
+@keyframes whatsappShine{
+
+0%{
+left:-120%;
+}
+
+35%{
+left:140%;
+}
+
+100%{
+left:140%;
+}
+
+}
+
+.groupBtn:hover{
+filter:brightness(1.06);
+
+box-shadow:
+0 12px 30px rgba(37,211,102,.32);
+}
+
+.groupBtn:active{
+transform:scale(.96);
+}
+
+.groupBtnIcon{
+font-size:17px;
+position:relative;
+z-index:2;
+}
+
+.groupBtnText{
+position:relative;
+z-index:2;
+}
+
+.groupBtnArrow{
+font-size:18px;
+font-weight:900;
+margin-left:2px;
+position:relative;
+z-index:2;
 }
 
 /* =========================
@@ -619,6 +842,45 @@ padding:18px;
 font-size:21px;
 }
 
+.roomBox{
+margin:18px;
+padding:18px;
+}
+
+.whatsappGroupBox{
+padding:15px;
+}
+
+.whatsappTitle{
+font-size:14px;
+}
+
+.groupBtn{
+min-height:54px;
+font-size:13px;
+}
+
+}
+
+@media(max-width:360px){
+
+.whatsappHeader{
+gap:9px;
+}
+
+.whatsappIcon{
+width:42px;
+height:42px;
+}
+
+.whatsappSubtitle{
+font-size:9px;
+}
+
+.groupBtn{
+font-size:12px;
+}
+
 }
 
 </style>
@@ -629,7 +891,9 @@ font-size:21px;
 
 <div class="app">
 
-<!-- HEADER -->
+<!-- =========================
+HEADER
+========================= -->
 
 <div class="header">
 
@@ -650,7 +914,9 @@ Match Details
 </div>
 
 
-<!-- BANNER -->
+<!-- =========================
+BANNER
+========================= -->
 
 <div class="banner">
 
@@ -672,7 +938,9 @@ UPCOMING
 </div>
 
 
-<!-- MATCH CARD -->
+<!-- =========================
+MATCH CARD
+========================= -->
 
 <div class="card">
 
@@ -745,7 +1013,9 @@ class="prizeValue">
 </div>
 
 
-<!-- WALLET -->
+<!-- =========================
+WALLET
+========================= -->
 
 <div class="walletInfo">
 
@@ -777,7 +1047,6 @@ Checking...
 
 </div>
 
-
 <div
 id="walletAfter"
 class="walletAfter">
@@ -789,7 +1058,9 @@ After joining: ₹0
 </div>
 
 
-<!-- JOIN -->
+<!-- =========================
+JOIN
+========================= -->
 
 <button
 id="joinBtn"
@@ -821,7 +1092,9 @@ class="joinStatus">
 </div>
 
 
-<!-- ROOM -->
+<!-- =========================
+ROOM
+========================= -->
 
 <div class="roomBox">
 
@@ -844,29 +1117,9 @@ id="roomData"
 style="display:none;">
 
 
-<!-- ROOM ID -->
-
-<div
-id="roomIdBox"
-class="roomCodeBox"
-style="display:none;">
-
-<div class="roomCodeTitle">
-ROOM ID
-</div>
-
-<div
-id="roomId"
-class="roomCode">
-
---
-
-</div>
-
-</div>
-
-
-<!-- ROOM PASSWORD -->
+<!-- =========================
+ROOM PASSWORD
+========================= -->
 
 <div
 id="roomPassBox"
@@ -888,7 +1141,9 @@ class="roomCode">
 </div>
 
 
-<!-- PRIZE -->
+<!-- =========================
+PRIZE
+========================= -->
 
 <div class="prizeBox">
 
@@ -932,26 +1187,66 @@ class="roomCode">
 </div>
 
 
-<!-- GROUP -->
+<!-- =========================
+PREMIUM WHATSAPP GROUP
+========================= -->
 
 <div
 id="groupBox"
+class="whatsappGroupBox"
 style="display:none;">
+
+<div class="whatsappHeader">
+
+<div class="whatsappIcon">
+<span>💬</span>
+</div>
+
+<div class="whatsappText">
+
+<div class="whatsappTitle">
+Join Match Group
+</div>
+
+<div class="whatsappSubtitle">
+Get match updates & room notifications
+</div>
+
+</div>
+
+<div class="whatsappArrow">
+→
+</div>
+
+</div>
+
 
 <a
 id="groupLink"
 target="_blank"
-rel="noopener"
+rel="noopener noreferrer"
 class="groupBtn">
 
-🟢 JOIN WHATSAPP GROUP
+<span class="groupBtnIcon">
+🟢
+</span>
+
+<span class="groupBtnText">
+JOIN WHATSAPP GROUP
+</span>
+
+<span class="groupBtnArrow">
+↗
+</span>
 
 </a>
 
 </div>
 
 
-<!-- PLAYERS -->
+<!-- =========================
+PLAYERS
+========================= -->
 
 <div class="players">
 
@@ -976,7 +1271,9 @@ Loading...
 </div>
 
 
-<!-- CONFIRM MODAL -->
+<!-- =========================
+CONFIRM MODAL
+========================= -->
 
 <div
 id="confirmModal"
@@ -1064,7 +1361,9 @@ class="toast">
 </div>
 
 
-<!-- FIREBASE -->
+<!-- =========================
+FIREBASE
+========================= -->
 
 <script type="module">
 
@@ -1151,9 +1450,13 @@ GLOBAL
 ========================= */
 
 let user = null;
+
 let matchId = null;
+
 let currentMatch = null;
+
 let currentWallet = 0;
+
 let joining = false;
 
 
@@ -1289,14 +1592,12 @@ snapshot.val();
 
 
 /*
-SUPPORT:
-
 wallet:
 {
     balance: 500
 }
 
-OR OLD:
+OR:
 
 wallet: 500
 */
@@ -1422,7 +1723,6 @@ status.style.color =
 "#f59e0b";
 
 }
-
 else if(
 currentWallet < entry
 ){
@@ -1434,7 +1734,6 @@ status.style.color =
 "#f59e0b";
 
 }
-
 else{
 
 status.innerText =
@@ -1656,7 +1955,6 @@ badge.innerText =
 "🟢 LIVE";
 
 }
-
 else if(
 status === "completed" ||
 status === "closed" ||
@@ -1667,7 +1965,6 @@ badge.innerText =
 status.toUpperCase();
 
 }
-
 else{
 
 badge.innerText =
@@ -1845,7 +2142,8 @@ return;
 
 }
 
-}catch(error){
+}
+catch(error){
 
 console.error(
 "Joined check:",
@@ -2385,7 +2683,7 @@ confirmJoinBtn.innerText =
 
 
 /* =========================
-PERFORM JOIN - FIXED
+PERFORM JOIN
 ========================= */
 
 async function performJoin(){
@@ -2399,9 +2697,7 @@ throw new Error(
 }
 
 
-/* =========================
-GET USER
-========================= */
+/* GET USER */
 
 const userSnap =
 await get(
@@ -2428,9 +2724,7 @@ const u =
 userSnap.val() || {};
 
 
-/* =========================
-GET MATCH
-========================= */
+/* GET MATCH */
 
 const matchSnap =
 await get(
@@ -2461,9 +2755,7 @@ currentMatch =
 match;
 
 
-/* =========================
-STATUS
-========================= */
+/* STATUS */
 
 const status =
 String(
@@ -2486,9 +2778,7 @@ throw new Error(
 }
 
 
-/* =========================
-ENTRY FEE
-========================= */
+/* ENTRY FEE */
 
 const entryFee =
 Number(
@@ -2508,9 +2798,7 @@ throw new Error(
 }
 
 
-/* =========================
-ALREADY JOINED
-========================= */
+/* ALREADY JOINED */
 
 const already =
 await get(
@@ -2533,9 +2821,7 @@ throw new Error(
 }
 
 
-/* =========================
-PLAYER COUNT
-========================= */
+/* PLAYER COUNT */
 
 const playersSnap =
 await get(
@@ -2573,9 +2859,7 @@ throw new Error(
 }
 
 
-/* =========================
-WALLET
-========================= */
+/* WALLET */
 
 let walletBalance = 0;
 
@@ -2612,17 +2896,13 @@ throw new Error(
 }
 
 
-/* =========================
-NEW BALANCE
-========================= */
+/* NEW BALANCE */
 
 const newBalance =
 walletBalance - entryFee;
 
 
-/* =========================
-PLAYER DATA
-========================= */
+/* PLAYER DATA */
 
 const playerData = {
 
@@ -2646,9 +2926,7 @@ Date.now()
 };
 
 
-/* =========================
-TRANSACTION ID
-========================= */
+/* TRANSACTION ID */
 
 const transactionId =
 "txn_" +
@@ -2657,9 +2935,7 @@ Date.now() +
 user.uid.slice(0,6);
 
 
-/* =========================
-MULTI LOCATION UPDATE
-========================= */
+/* MULTI LOCATION UPDATE */
 
 const updates = {};
 
@@ -2741,23 +3017,7 @@ user.uid +
 missionCount;
 
 
-/*
-IMPORTANT:
-
-NO:
-
-matches/{matchId}/booked
-
-Yahan write nahi hoga.
-
-Isliye admin-only matches rule se
-permission denied nahi aayega.
-*/
-
-
-/* =========================
-WRITE
-========================= */
+/* WRITE */
 
 await update(
 ref(db),
@@ -2765,9 +3025,7 @@ updates
 );
 
 
-/* =========================
-SUCCESS
-========================= */
+/* SUCCESS */
 
 confirmModal.style.display =
 "none";
@@ -2791,11 +3049,10 @@ addMoneyBtn.style.display =
 "none";
 
 
-/* LOCAL BALANCE UPDATE */
+/* LOCAL BALANCE */
 
 currentWallet =
 newBalance;
-
 
 updateWalletUI();
 
@@ -2886,7 +3143,6 @@ document.createElement(
 name.className =
 "playerName";
 
-
 name.innerText =
 no +
 ". " +
@@ -2903,7 +3159,6 @@ document.createElement(
 
 id.className =
 "playerId";
-
 
 id.innerText =
 "BGMI ID: " +
@@ -3120,14 +3375,11 @@ data.style.display =
 "block";
 
 
-/* ROOM ID */
+/* ROOM ID REMOVED */
 
-const roomId =
-match.roomId ||
-match.roomID ||
-match.id ||
-"";
-
+/* =========================
+ROOM PASSWORD
+========================= */
 
 const roomPassword =
 match.roomPassword ||
@@ -3136,34 +3388,10 @@ match.roomPass ||
 "";
 
 
-const idBox =
-document.getElementById(
-"roomIdBox"
-);
-
 const passBox =
 document.getElementById(
 "roomPassBox"
 );
-
-
-if(roomId){
-
-idBox.style.display =
-"block";
-
-
-document.getElementById(
-"roomId"
-).innerText =
-roomId;
-
-}else{
-
-idBox.style.display =
-"none";
-
-}
 
 
 if(roomPassword){
@@ -3185,7 +3413,9 @@ passBox.style.display =
 }
 
 
-/* GROUP */
+/* =========================
+WHATSAPP GROUP
+========================= */
 
 const groupBox =
 document.getElementById(
@@ -3209,9 +3439,6 @@ groupBox.style.display =
 groupLink.href =
 match.groupLink;
 
-
-groupLink.innerText =
-"🟢 JOIN WHATSAPP GROUP";
 
 }else{
 
@@ -3296,7 +3523,7 @@ toast.className =
 
 
 /* =========================
-CLOSE MODAL ON BACKDROP
+CLOSE MODAL
 ========================= */
 
 confirmModal.addEventListener(
