@@ -1,187 +1,1697 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 
 <title>Help Center</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Poppins,sans-serif;
--webkit-tap-highlight-color:transparent;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Poppins,sans-serif;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-background:#050B18;
-color:#fff;
+    background:#050B18;
+    color:#fff;
+    min-height:100vh;
+    overflow-x:hidden;
 }
 
 body::before{
-content:"";
-position:fixed;
-inset:0;
-background:
-radial-gradient(circle at top left,rgba(34,197,94,.15),transparent 35%),
-radial-gradient(circle at top right,rgba(37,99,235,.15),transparent 35%),
-#050B18;
-z-index:-1;
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+    radial-gradient(
+        circle at 0% 0%,
+        rgba(34,197,94,.16),
+        transparent 32%
+    ),
+    radial-gradient(
+        circle at 100% 10%,
+        rgba(37,99,235,.16),
+        transparent 32%
+    ),
+    radial-gradient(
+        circle at 50% 100%,
+        rgba(168,85,247,.10),
+        transparent 35%
+    ),
+    #050B18;
+    z-index:-2;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    background-image:
+    linear-gradient(
+        rgba(255,255,255,.015) 1px,
+        transparent 1px
+    ),
+    linear-gradient(
+        90deg,
+        rgba(255,255,255,.015) 1px,
+        transparent 1px
+    );
+    background-size:35px 35px;
+    pointer-events:none;
+    z-index:-1;
+}
+
+button,
+input{
+    font-family:inherit;
 }
 
 .app{
-max-width:500px;
-margin:auto;
-padding:20px;
-padding-bottom:40px;
+    width:100%;
+    max-width:500px;
+    margin:auto;
+    padding:18px;
+    padding-bottom:45px;
 }
+
+/* =========================
+   HEADER
+========================= */
 
 .header{
-display:flex;
-align-items:center;
-gap:12px;
-margin-bottom:25px;
-}
-.title{
-font-size:26px;
-font-weight:700;
+    position:relative;
+    padding:22px;
+    border-radius:24px;
+    margin-bottom:18px;
+    overflow:hidden;
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(17,24,39,.98),
+        rgba(8,15,30,.98)
+    );
+
+    border:1px solid rgba(255,255,255,.09);
+
+    box-shadow:
+    0 18px 45px rgba(0,0,0,.28);
 }
 
+.header::before{
+    content:"";
+    position:absolute;
+    width:130px;
+    height:130px;
+    right:-55px;
+    top:-60px;
+    border-radius:50%;
+    background:rgba(34,197,94,.18);
+    filter:blur(5px);
+}
+
+.header-content{
+    position:relative;
+    z-index:2;
+}
+
+.header-icon{
+    width:52px;
+    height:52px;
+    border-radius:16px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:27px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #22c55e,
+        #16a34a
+    );
+
+    box-shadow:
+    0 10px 25px rgba(34,197,94,.25);
+
+    margin-bottom:14px;
+}
+
+.title{
+    font-size:25px;
+    font-weight:800;
+    letter-spacing:-.5px;
+}
+
+.subtitle{
+    margin-top:6px;
+    color:#94a3b8;
+    font-size:13px;
+    line-height:20px;
+}
+
+.online{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    margin-top:14px;
+
+    padding:7px 11px;
+    border-radius:20px;
+
+    background:rgba(34,197,94,.10);
+    border:1px solid rgba(34,197,94,.18);
+
+    color:#86efac;
+    font-size:11px;
+    font-weight:700;
+}
+
+.online-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#22c55e;
+
+    box-shadow:
+    0 0 10px #22c55e;
+
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+
+    0%,100%{
+        opacity:1;
+        transform:scale(1);
+    }
+
+    50%{
+        opacity:.5;
+        transform:scale(.75);
+    }
+
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-box{
+    position:relative;
+    margin-bottom:18px;
+}
+
+.search-box input{
+    width:100%;
+    height:54px;
+
+    padding:0 48px 0 48px;
+
+    border:none;
+    outline:none;
+
+    border-radius:17px;
+
+    background:#111827;
+    color:#fff;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    font-size:14px;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.15);
+}
+
+.search-box input::placeholder{
+    color:#64748b;
+}
+
+.search-icon{
+    position:absolute;
+    left:17px;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:19px;
+    color:#94a3b8;
+}
+
+.clear-search{
+    position:absolute;
+    right:13px;
+    top:50%;
+    transform:translateY(-50%);
+
+    width:30px;
+    height:30px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#1f2937;
+    color:#94a3b8;
+
+    display:none;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+}
+
+/* =========================
+   QUICK HELP
+========================= */
+
+.section-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    margin:20px 2px 12px;
+}
+
+.section-title h2{
+    font-size:15px;
+    font-weight:800;
+}
+
+.section-title span{
+    color:#64748b;
+    font-size:11px;
+}
+
+.quick-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.quick-card{
+    padding:15px;
+
+    border-radius:18px;
+
+    background:#111827;
+    border:1px solid rgba(255,255,255,.07);
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.quick-card:active{
+    transform:scale(.97);
+}
+
+.quick-icon{
+    width:40px;
+    height:40px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:13px;
+
+    background:#1f2937;
+
+    font-size:20px;
+
+    margin-bottom:10px;
+}
+
+.quick-title{
+    font-size:13px;
+    font-weight:700;
+}
+
+.quick-text{
+    margin-top:3px;
+    color:#64748b;
+    font-size:10px;
+}
+
+/* =========================
+   HELP CARDS
+========================= */
+
 .card{
-background:#111827;
-border-radius:18px;
-padding:18px;
-margin-bottom:18px;
-border:1px solid rgba(255,255,255,.08);
+    background:
+    linear-gradient(
+        145deg,
+        rgba(17,24,39,.98),
+        rgba(13,20,34,.98)
+    );
+
+    border-radius:20px;
+    padding:18px;
+
+    margin-bottom:13px;
+
+    border:1px solid rgba(255,255,255,.07);
+
+    box-shadow:
+    0 12px 30px rgba(0,0,0,.15);
+}
+
+.card-head{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:14px;
+}
+
+.card-icon{
+    width:44px;
+    height:44px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:14px;
+
+    background:#1f2937;
+
+    font-size:21px;
 }
 
 .card h3{
-color:#22c55e;
-margin-bottom:10px;
+    font-size:15px;
+    font-weight:800;
 }
 
-.card p{
-color:#cbd5e1;
-font-size:14px;
-line-height:24px;
+.card-subtitle{
+    color:#64748b;
+    font-size:10px;
+    margin-top:2px;
+}
+
+.help-list{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.help-item{
+    display:flex;
+    gap:10px;
+    padding:11px;
+
+    border-radius:13px;
+
+    background:rgba(255,255,255,.025);
+
+    border:1px solid rgba(255,255,255,.04);
+}
+
+.help-number{
+    min-width:24px;
+    height:24px;
+
+    border-radius:8px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:rgba(34,197,94,.12);
+    color:#4ade80;
+
+    font-size:11px;
+    font-weight:800;
+}
+
+.help-item p{
+    color:#cbd5e1;
+    font-size:12px;
+    line-height:19px;
+}
+
+/* =========================
+   FAQ
+========================= */
+
+.faq{
+    border-radius:15px;
+    background:rgba(255,255,255,.025);
+    border:1px solid rgba(255,255,255,.05);
+
+    overflow:hidden;
+}
+
+.faq + .faq{
+    margin-top:9px;
+}
+
+.faq-question{
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+    outline:none;
+
+    background:transparent;
+    color:#fff;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    text-align:left;
+
+    font-size:12px;
+    font-weight:700;
+
+    cursor:pointer;
+}
+
+.faq-arrow{
+    color:#64748b;
+    transition:.25s;
+    font-size:15px;
+}
+
+.faq-answer{
+    max-height:0;
+    overflow:hidden;
+
+    color:#94a3b8;
+    font-size:11px;
+    line-height:19px;
+
+    transition:max-height .3s ease;
+}
+
+.faq-answer-inner{
+    padding:0 15px 15px;
+}
+
+.faq.open .faq-answer{
+    max-height:180px;
+}
+
+.faq.open .faq-arrow{
+    transform:rotate(180deg);
+    color:#22c55e;
+}
+
+/* =========================
+   SUPPORT
+========================= */
+
+.support-card{
+    position:relative;
+    overflow:hidden;
+
+    padding:20px;
+
+    border-radius:20px;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(34,197,94,.15),
+        rgba(17,24,39,.98) 55%
+    );
+
+    border:1px solid rgba(34,197,94,.16);
+
+    margin-top:18px;
+}
+
+.support-card::after{
+    content:"💬";
+
+    position:absolute;
+    right:-7px;
+    bottom:-18px;
+
+    font-size:95px;
+
+    opacity:.06;
+}
+
+.support-title{
+    font-size:16px;
+    font-weight:800;
+}
+
+.support-text{
+    margin-top:5px;
+    color:#94a3b8;
+    font-size:11px;
+    line-height:18px;
+    max-width:310px;
+}
+
+.support-status{
+    display:flex;
+    align-items:center;
+    gap:7px;
+
+    margin-top:12px;
+
+    color:#86efac;
+    font-size:10px;
+    font-weight:700;
+}
+
+.support-buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+
+    margin-top:15px;
 }
 
 .btn{
-width:100%;
-padding:15px;
-border:none;
-border-radius:14px;
-background:#22c55e;
-color:#000;
-font-size:16px;
-font-weight:700;
-margin-top:12px;
-cursor:pointer;
+    height:46px;
+
+    border:none;
+    border-radius:13px;
+
+    font-size:12px;
+    font-weight:800;
+
+    cursor:pointer;
 }
 
+.whatsapp-btn{
+    background:#22c55e;
+    color:#001b08;
+}
+
+.issue-btn{
+    background:#1f2937;
+    color:#fff;
+    border:1px solid rgba(255,255,255,.08);
+}
+
+/* =========================
+   NO RESULT
+========================= */
+
+.no-result{
+    display:none;
+
+    text-align:center;
+
+    padding:30px 15px;
+
+    color:#64748b;
+}
+
+.no-result-icon{
+    font-size:35px;
+    margin-bottom:8px;
+}
+
+.no-result-title{
+    color:#cbd5e1;
+    font-size:13px;
+    font-weight:700;
+}
+
+.no-result-text{
+    margin-top:4px;
+    font-size:11px;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+    position:fixed;
+
+    left:50%;
+    bottom:20px;
+
+    transform:
+    translate(-50%,20px);
+
+    width:calc(100% - 40px);
+    max-width:460px;
+
+    padding:13px 16px;
+
+    border-radius:13px;
+
+    background:#1e293b;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    color:#fff;
+
+    font-size:12px;
+    font-weight:600;
+
+    text-align:center;
+
+    opacity:0;
+    pointer-events:none;
+
+    transition:.3s;
+
+    z-index:9999;
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,.35);
+}
+
+.toast.show{
+    opacity:1;
+    transform:
+    translate(-50%,0);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
 .footer{
-text-align:center;
-margin-top:25px;
-color:#94a3b8;
-font-size:13px;
+    text-align:center;
+
+    margin-top:28px;
+
+    color:#475569;
+
+    font-size:10px;
+
+    line-height:18px;
+}
+
+/* =========================
+   SEARCH HIGHLIGHT
+========================= */
+
+.hidden-item{
+    display:none !important;
 }
 
 </style>
+
 </head>
 
 <body>
 
 <div class="app">
 
+<!-- HEADER -->
+
 <div class="header">
-<div class="title">❓ Help Center</div>
-</div>
 
-<div class="card">
-<h3>🎮 Tournament Help</h3>
+    <div class="header-content">
 
-<p>
+        <div class="header-icon">
+            ❓
+        </div>
 
-• Register button dabakar tournament join karein.<br><br>
+        <div class="title">
+            Help Center
+        </div>
 
-• Wallet me sufficient balance hona chahiye.<br><br>
+        <div class="subtitle">
+            Need help? Find answers quickly or contact our support team.
+        </div>
 
-• Match start hone se pehle Room ID aur Password mil jayega.<br><br>
+        <div class="online">
 
-• Agar slot full ho gaya hai to registration automatically close ho jayega.
+            <span class="online-dot"></span>
 
-</p>
+            SUPPORT ONLINE
 
-</div>
+        </div>
 
-<div class="card">
-
-<h3>💰 Wallet Help</h3>
-
-<p>
-
-• Wallet recharge karne ke baad balance automatically update ho jayega.<br><br>
-
-• Agar balance update na ho to kuch minute wait karein.<br><br>
-
-• Kisi bhi payment issue ke liye Support se contact karein.
-
-</p>
+    </div>
 
 </div>
 
-<div class="card">
 
-<h3>📞 Contact Support</h3>
+<!-- SEARCH -->
 
-<p>
+<div class="search-box">
 
-Need help?<br><br>
+    <span class="search-icon">
+        🔍
+    </span>
 
-WhatsApp Support available 24×7.
+    <input
+        id="searchInput"
+        type="search"
+        placeholder="Search your problem..."
+        autocomplete="off">
 
-</p>
+    <button
+        id="clearSearch"
+        class="clear-search"
+        type="button">
+        ✕
+    </button>
 
-<button class="btn"
-onclick="window.open('https://wa.me/917970882743?text=Hello%20BGMI%20Esports%20Support,%20I%20need%20help.','_blank')">
+</div>
 
-💬 WhatsApp Support
 
-</button>
+<!-- QUICK HELP -->
+
+<div class="section-title">
+
+    <h2>
+        Quick Help
+    </h2>
+
+    <span>
+        Tap to contact
+    </span>
 
 </div>
 
-<div class="card">
 
-<h3>❓ Frequently Asked Questions</h3>
+<div class="quick-grid">
 
-<p>
+    <div
+        class="quick-card"
+        onclick="openSupport('Tournament Issue')">
 
-<b>Q.</b> Room ID kab milega?<br>
-<b>A.</b> Match start hone se thodi der pehle.<br><br>
+        <div class="quick-icon">
+            🎮
+        </div>
 
-<b>Q.</b> Paisa deduct ho gaya lekin slot nahi mila?<br>
-<b>A.</b> Support se contact karein.<br><br>
+        <div class="quick-title">
+            Tournament
+        </div>
 
-<b>Q.</b> Refund milega?<br>
-<b>A.</b> Tournament policy ke according.
+        <div class="quick-text">
+            Match & slot issues
+        </div>
 
-</p>
+    </div>
+
+
+    <div
+        class="quick-card"
+        onclick="openSupport('Payment Issue')">
+
+        <div class="quick-icon">
+            💳
+        </div>
+
+        <div class="quick-title">
+            Payment
+        </div>
+
+        <div class="quick-text">
+            Deposit problems
+        </div>
+
+    </div>
+
+
+    <div
+        class="quick-card"
+        onclick="openSupport('Withdrawal Issue')">
+
+        <div class="quick-icon">
+            💸
+        </div>
+
+        <div class="quick-title">
+            Withdrawal
+        </div>
+
+        <div class="quick-text">
+            Withdrawal problems
+        </div>
+
+    </div>
+
+
+    <div
+        class="quick-card"
+        onclick="openSupport('Account Issue')">
+
+        <div class="quick-icon">
+            👤
+        </div>
+
+        <div class="quick-title">
+            Account
+        </div>
+
+        <div class="quick-text">
+            Login & profile
+        </div>
+
+    </div>
 
 </div>
+
+
+<!-- TOURNAMENT -->
+
+<div
+    class="help-section"
+    data-search="tournament register slot room id password match game">
+
+    <div class="section-title">
+
+        <h2>
+            Tournament Help
+        </h2>
+
+        <span>
+            🎮 Matches
+        </span>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-head">
+
+            <div class="card-icon">
+                🎮
+            </div>
+
+            <div>
+
+                <h3>
+                    Tournament Guide
+                </h3>
+
+                <div class="card-subtitle">
+                    Registration & match information
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="help-list">
+
+            <div class="help-item">
+
+                <div class="help-number">
+                    1
+                </div>
+
+                <p>
+                    Register button dabakar available tournament select karein.
+                </p>
+
+            </div>
+
+
+            <div class="help-item">
+
+                <div class="help-number">
+                    2
+                </div>
+
+                <p>
+                    Registration ke liye wallet mein sufficient balance hona chahiye.
+                </p>
+
+            </div>
+
+
+            <div class="help-item">
+
+                <div class="help-number">
+                    3
+                </div>
+
+                <p>
+                    Successful registration ke baad aapka slot tournament mein reserve ho jayega.
+                </p>
+
+            </div>
+
+
+            <div class="help-item">
+
+                <div class="help-number">
+                    4
+                </div>
+
+                <p>
+                    Room ID aur Password available hone par tournament/match section mein show kiya jayega.
+                </p>
+
+            </div>
+
+
+            <div class="help-item">
+
+                <div class="help-number">
+                    5
+                </div>
+
+                <p>
+                    Tournament ke slots full hone par registration close ho sakta hai.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- WALLET -->
+
+<div
+    class="help-section"
+    data-search="wallet balance recharge deposit money payment">
+
+    <div class="section-title">
+
+        <h2>
+            Wallet Help
+        </h2>
+
+        <span>
+            💰 Balance
+        </span>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-head">
+
+            <div class="card-icon">
+                💰
+            </div>
+
+            <div>
+
+                <h3>
+                    Wallet & Deposit
+                </h3>
+
+                <div class="card-subtitle">
+                    Balance and payment guidance
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="help-list">
+
+            <div class="help-item">
+
+                <div class="help-number">
+                    1
+                </div>
+
+                <p>
+                    Wallet recharge karne ke liye available payment option ka use karein.
+                </p>
+
+            </div>
+
+
+            <div class="help-item">
+
+                <div class="help-number">
+                    2
+                </div>
+
+                <p>
+                    Payment complete karne ke baad required transaction/UTR details correctly submit karein.
+                </p>
+
+            </div>
+
+
+            <div class="help-item">
+
+                <div class="help-number">
+                    3
+                </div>
+
+                <p>
+                    Deposit verification ke baad wallet balance update kiya jayega.
+                </p>
+
+            </div>
+
+
+            <div class="help-item">
+
+                <div class="help-number">
+                    4
+                </div>
+
+                <p>
+                    Balance update na ho to same payment baar-baar submit na karein. Support se contact karein.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- WITHDRAW -->
+
+<div
+    class="help-section"
+    data-search="withdraw withdrawal money upi bank payout">
+
+    <div class="section-title">
+
+        <h2>
+            Withdrawal Help
+        </h2>
+
+        <span>
+            💸 Payout
+        </span>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-head">
+
+            <div class="card-icon">
+                💸
+            </div>
+
+            <div>
+
+                <h3>
+                    Withdrawal Guide
+                </h3>
+
+                <div class="card-subtitle">
+                    Withdrawal request information
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="help-list">
+
+            <div class="help-item">
+
+                <div class="help-number">
+                    1
+                </div>
+
+                <p>
+                    Withdrawal request submit karne se pehle apni payment details carefully check karein.
+                </p>
+
+            </div>
+
+
+            <div class="help-item">
+
+                <div class="help-number">
+                    2
+                </div>
+
+                <p>
+                    Request submit hone ke baad admin verification/process complete karega.
+                </p>
+
+            </div>
+
+
+            <div class="help-item">
+
+                <div class="help-number">
+                    3
+                </div>
+
+                <p>
+                    Galat UPI/payment details dene se payout delay ho sakta hai.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- FAQ -->
+
+<div
+    class="help-section"
+    data-search="faq frequently asked questions room id refund slot payment account">
+
+    <div class="section-title">
+
+        <h2>
+            Frequently Asked Questions
+        </h2>
+
+    </div>
+
+
+    <div class="card">
+
+
+        <div class="faq">
+
+            <button
+                class="faq-question"
+                type="button">
+
+                <span>
+                    Room ID aur Password kab milega?
+                </span>
+
+                <span class="faq-arrow">
+                    ▼
+                </span>
+
+            </button>
+
+            <div class="faq-answer">
+
+                <div class="faq-answer-inner">
+                    Room details admin ke match setup ke according available hone par tournament section mein show ki ja sakti hain.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="faq">
+
+            <button
+                class="faq-question"
+                type="button">
+
+                <span>
+                    Paisa deduct ho gaya lekin slot nahi mila?
+                </span>
+
+                <span class="faq-arrow">
+                    ▼
+                </span>
+
+            </button>
+
+            <div class="faq-answer">
+
+                <div class="faq-answer-inner">
+                    Transaction details aur tournament information ke saath Support Team se contact karein. Duplicate payment submit na karein.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="faq">
+
+            <button
+                class="faq-question"
+                type="button">
+
+                <span>
+                    Deposit pending kyun hai?
+                </span>
+
+                <span class="faq-arrow">
+                    ▼
+                </span>
+
+            </button>
+
+            <div class="faq-answer">
+
+                <div class="faq-answer-inner">
+                    Deposit verification pending hone ki wajah se request pending ho sakti hai. Agar unusual delay ho to payment proof/UTR ke saath support se contact karein.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="faq">
+
+            <button
+                class="faq-question"
+                type="button">
+
+                <span>
+                    Withdrawal pending hai, kya karein?
+                </span>
+
+                <span class="faq-arrow">
+                    ▼
+                </span>
+
+            </button>
+
+            <div class="faq-answer">
+
+                <div class="faq-answer-inner">
+                    Withdrawal request processing mein ho sakti hai. Request details check karein aur unnecessary duplicate request create na karein.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="faq">
+
+            <button
+                class="faq-question"
+                type="button">
+
+                <span>
+                    Refund milega?
+                </span>
+
+                <span class="faq-arrow">
+                    ▼
+                </span>
+
+            </button>
+
+            <div class="faq-answer">
+
+                <div class="faq-answer-inner">
+                    Refund tournament ki applicable policy aur request ki situation par depend karega. Specific case ke liye Support Team se contact karein.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="faq">
+
+            <button
+                class="faq-question"
+                type="button">
+
+                <span>
+                    Account mein login nahi ho raha?
+                </span>
+
+                <span class="faq-arrow">
+                    ▼
+                </span>
+
+            </button>
+
+            <div class="faq-answer">
+
+                <div class="faq-answer-inner">
+                    Apna registered account check karein. Agar login issue continue rahe to Support Team ko account-related details ke saath message karein.
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- SEARCH RESULT -->
+
+<div
+    id="noResult"
+    class="no-result">
+
+    <div class="no-result-icon">
+        🔎
+    </div>
+
+    <div class="no-result-title">
+        No Help Found
+    </div>
+
+    <div class="no-result-text">
+        Try another keyword or contact support.
+    </div>
+
+</div>
+
+
+<!-- SUPPORT -->
+
+<div class="support-card">
+
+    <div class="support-title">
+        📞 Need More Help?
+    </div>
+
+    <div class="support-text">
+        Agar aapko answer nahi mila, directly Support Team ko WhatsApp par message karein.
+    </div>
+
+    <div class="support-status">
+
+        <span class="online-dot"></span>
+
+        Support available
+
+    </div>
+
+
+    <div class="support-buttons">
+
+        <button
+            class="btn whatsapp-btn"
+            type="button"
+            onclick="openSupport('General Help')">
+
+            💬 WhatsApp
+
+        </button>
+
+
+        <button
+            class="btn issue-btn"
+            type="button"
+            onclick="openSupport('Payment Issue')">
+
+            🚨 Report Issue
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- FOOTER -->
 
 <div class="footer">
 
-BGMI ESPORTS © 2026
+    BGMI ESPORTS © 2026
+    <br>
+    Help Center • Support • Tournament Assistance
 
 </div>
 
 </div>
+
+<!-- TOAST -->
+
+<div
+    id="toast"
+    class="toast">
+
+
+</div>
+
+<script>
+
+/* =========================
+   FAQ ACCORDION
+========================= */
+
+const faqButtons =
+document.querySelectorAll(".faq-question");
+
+faqButtons.forEach((button)=>{
+
+    button.addEventListener("click",()=>{
+
+        const faq =
+        button.closest(".faq");
+
+        const isOpen =
+        faq.classList.contains("open");
+
+
+        document
+        .querySelectorAll(".faq.open")
+        .forEach((item)=>{
+
+            item.classList.remove("open");
+
+        });
+
+
+        if(!isOpen){
+
+            faq.classList.add("open");
+
+        }
+
+    });
+
+});
+
+
+/* =========================
+   SEARCH
+========================= */
+
+const searchInput =
+document.getElementById("searchInput");
+
+const clearSearch =
+document.getElementById("clearSearch");
+
+const sections =
+document.querySelectorAll(".help-section");
+
+const noResult =
+document.getElementById("noResult");
+
+
+searchInput.addEventListener(
+"input",
+function(){
+
+    const query =
+    this.value
+    .trim()
+    .toLowerCase();
+
+
+    clearSearch.style.display =
+    query
+    ? "flex"
+    : "none";
+
+
+    if(!query){
+
+        sections.forEach(
+        section=>{
+
+            section.classList.remove(
+                "hidden-item"
+            );
+
+        });
+
+        noResult.style.display =
+        "none";
+
+        return;
+
+    }
+
+
+    let found = false;
+
+
+    sections.forEach(
+    section=>{
+
+        const text =
+        (
+            section.innerText +
+            " " +
+            section.dataset.search
+        ).toLowerCase();
+
+
+        if(text.includes(query)){
+
+            section.classList.remove(
+                "hidden-item"
+            );
+
+            found = true;
+
+        }else{
+
+            section.classList.add(
+                "hidden-item"
+            );
+
+        }
+
+    });
+
+
+    noResult.style.display =
+    found
+    ? "none"
+    : "block";
+
+});
+
+
+/* =========================
+   CLEAR SEARCH
+========================= */
+
+clearSearch.addEventListener(
+"click",
+function(){
+
+    searchInput.value="";
+
+    searchInput.dispatchEvent(
+        new Event("input")
+    );
+
+    searchInput.focus();
+
+});
+
+
+/* =========================
+   WHATSAPP SUPPORT
+========================= */
+
+function openSupport(issue){
+
+    const phone =
+    "917970882743";
+
+
+    const message =
+    "Hello BGMI Esports Support,%0A%0A" +
+    "I need help regarding: " +
+    issue +
+    "%0A%0APlease assist me.";
+
+
+    const url =
+    "https://wa.me/" +
+    phone +
+    "?text=" +
+    message;
+
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+function showToast(message){
+
+    const toast =
+    document.getElementById("toast");
+
+
+    toast.innerText =
+    message;
+
+
+    toast.classList.add("show");
+
+
+    clearTimeout(
+        window.toastTimer
+    );
+
+
+    window.toastTimer =
+    setTimeout(()=>{
+
+        toast.classList.remove("show");
+
+    },2500);
+
+}
+
+
+/* =========================
+   PREVENT DOUBLE TAP ZOOM
+========================= */
+
+let lastTouchEnd=0;
+
+document.addEventListener(
+"touchend",
+function(event){
+
+    const now =
+    Date.now();
+
+    if(now-lastTouchEnd<=300){
+
+        event.preventDefault();
+
+    }
+
+    lastTouchEnd=now;
+
+},
+false
+);
+
+</script>
 
 </body>
 </html>
