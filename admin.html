@@ -1,168 +1,1107 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Admin Login</title>
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+
+<meta name="theme-color" content="#050B18">
+
+<title>BGMI Admin Login</title>
 
 <style>
+
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Poppins,sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Poppins,sans-serif;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
 }
 
 body{
-background:#050B18;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-color:#fff;
+
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:20px;
+
+    color:#fff;
+
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(34,197,94,.16),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 85% 85%,
+            rgba(59,130,246,.13),
+            transparent 32%
+        ),
+        #050B18;
+
+    overflow:hidden;
+
 }
 
-.box{
-width:90%;
-max-width:400px;
-background:#111827;
-padding:25px;
-border-radius:20px;
+
+/* =========================
+   BACKGROUND GLOW
+========================= */
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    width:260px;
+    height:260px;
+
+    left:-120px;
+    top:-120px;
+
+    background:rgba(34,197,94,.12);
+
+    filter:blur(70px);
+
+    border-radius:50%;
+
+    pointer-events:none;
+
 }
 
-h2{
-text-align:center;
-margin-bottom:20px;
-color:#22c55e;
+body::after{
+
+    content:"";
+
+    position:fixed;
+
+    width:260px;
+    height:260px;
+
+    right:-120px;
+    bottom:-120px;
+
+    background:rgba(37,99,235,.12);
+
+    filter:blur(70px);
+
+    border-radius:50%;
+
+    pointer-events:none;
+
+}
+
+
+/* =========================
+   LOGIN BOX
+========================= */
+
+.login-box{
+
+    width:100%;
+    max-width:410px;
+
+    padding:25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(17,24,39,.98),
+            rgba(10,15,28,.98)
+        );
+
+    border:1px solid rgba(255,255,255,.09);
+
+    border-radius:24px;
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.45),
+        inset 0 1px 0 rgba(255,255,255,.04);
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.logo-wrap{
+
+    width:72px;
+    height:72px;
+
+    margin:0 auto 15px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #22c55e,
+            #16a34a
+        );
+
+    box-shadow:
+        0 0 35px rgba(34,197,94,.28);
+
+    font-size:34px;
+
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.title{
+
+    text-align:center;
+
+    font-size:25px;
+
+    font-weight:800;
+
+    color:#fff;
+
+}
+
+.subtitle{
+
+    text-align:center;
+
+    margin-top:7px;
+
+    color:#94a3b8;
+
+    font-size:13px;
+
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.firebase-status{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:7px;
+
+    margin:17px 0 22px;
+
+    color:#86efac;
+
+    font-size:12px;
+
+}
+
+.status-dot{
+
+    width:8px;
+    height:8px;
+
+    border-radius:50%;
+
+    background:#22c55e;
+
+    box-shadow:
+        0 0 10px rgba(34,197,94,.8);
+
+}
+
+
+/* =========================
+   INPUT GROUP
+========================= */
+
+.input-group{
+
+    margin-top:15px;
+
+}
+
+.input-label{
+
+    display:block;
+
+    margin-bottom:7px;
+
+    color:#cbd5e1;
+
+    font-size:12px;
+
+    font-weight:600;
+
+}
+
+.input-wrap{
+
+    position:relative;
+
+}
+
+.input-icon{
+
+    position:absolute;
+
+    left:14px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    font-size:17px;
+
+    opacity:.8;
+
+    pointer-events:none;
+
 }
 
 input{
-width:100%;
-height:50px;
-margin-bottom:15px;
-padding:0 15px;
-background:#1f2937;
-border:none;
-border-radius:10px;
-color:#fff;
-font-size:15px;
+
+    width:100%;
+
+    height:52px;
+
+    padding:0 45px;
+
+    border:1px solid rgba(255,255,255,.07);
+
+    outline:none;
+
+    border-radius:14px;
+
+    background:#0f172a;
+
+    color:#fff;
+
+    font-size:14px;
+
+    transition:.2s;
+
 }
 
-button{
-width:100%;
-height:50px;
-background:#22c55e;
-border:none;
-border-radius:10px;
-font-size:16px;
-font-weight:700;
-cursor:pointer;
+input::placeholder{
+
+    color:#64748b;
+
 }
+
+input:focus{
+
+    border-color:rgba(34,197,94,.65);
+
+    box-shadow:
+        0 0 0 3px rgba(34,197,94,.08);
+
+}
+
+
+/* =========================
+   PASSWORD BUTTON
+========================= */
+
+.password-toggle{
+
+    position:absolute;
+
+    right:6px;
+
+    top:6px;
+
+    width:40px;
+    height:40px;
+
+    border:none;
+
+    background:transparent;
+
+    color:#94a3b8;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:17px;
+
+}
+
+
+/* =========================
+   LOGIN BUTTON
+========================= */
+
+.login-btn{
+
+    width:100%;
+
+    height:54px;
+
+    margin-top:23px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #22c55e,
+            #16a34a
+        );
+
+    color:#02130a;
+
+    font-size:15px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 10px 25px rgba(34,197,94,.18);
+
+    transition:.2s;
+
+}
+
+.login-btn:active{
+
+    transform:scale(.98);
+
+}
+
+.login-btn:disabled{
+
+    opacity:.65;
+
+    cursor:not-allowed;
+
+}
+
+
+/* =========================
+   LOGIN SPINNER
+========================= */
+
+.spinner{
+
+    display:inline-block;
+
+    width:18px;
+    height:18px;
+
+    border:2px solid rgba(0,0,0,.25);
+
+    border-top-color:#000;
+
+    border-radius:50%;
+
+    animation:spin .7s linear infinite;
+
+    vertical-align:middle;
+
+}
+
+@keyframes spin{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
 
 #msg{
-margin-top:15px;
-text-align:center;
-color:#f87171;
+
+    min-height:20px;
+
+    margin-top:14px;
+
+    text-align:center;
+
+    font-size:12px;
+
+    line-height:18px;
+
 }
+
+.msg-error{
+
+    color:#f87171;
+
+}
+
+.msg-success{
+
+    color:#4ade80;
+
+}
+
+.msg-info{
+
+    color:#60a5fa;
+
+}
+
+
+/* =========================
+   SECURITY BOX
+========================= */
+
+.security-box{
+
+    margin-top:20px;
+
+    padding:12px 13px;
+
+    border-radius:13px;
+
+    background:rgba(15,23,42,.7);
+
+    border:1px solid rgba(255,255,255,.05);
+
+    color:#94a3b8;
+
+    font-size:11px;
+
+    line-height:18px;
+
+    text-align:center;
+
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+
+    text-align:center;
+
+    margin-top:18px;
+
+    color:#475569;
+
+    font-size:10px;
+
+}
+
 </style>
+
 </head>
 
 <body>
 
-<div class="box">
+<div class="login-box">
 
-<h2>BGMI Admin Login</h2>
 
-<input
-type="email"
-id="email"
-placeholder="Admin Email">
+<div class="logo-wrap">
+    🎮
+</div>
 
-<input
-type="password"
-id="password"
-placeholder="Password">
 
-<button id="loginBtn">
-LOGIN
+<div class="title">
+    BGMI ADMIN
+</div>
+
+
+<div class="subtitle">
+    Secure Tournament Management
+</div>
+
+
+<div class="firebase-status">
+
+    <span class="status-dot"></span>
+
+    Firebase Authentication Ready
+
+</div>
+
+
+
+<!-- EMAIL -->
+
+<div class="input-group">
+
+    <label class="input-label">
+        ADMIN EMAIL
+    </label>
+
+    <div class="input-wrap">
+
+        <span class="input-icon">
+            ✉️
+        </span>
+
+        <input
+            type="email"
+            id="email"
+            autocomplete="username"
+            placeholder="Enter admin email">
+
+    </div>
+
+</div>
+
+
+
+<!-- PASSWORD -->
+
+<div class="input-group">
+
+    <label class="input-label">
+        PASSWORD
+    </label>
+
+    <div class="input-wrap">
+
+        <span class="input-icon">
+            🔐
+        </span>
+
+        <input
+            type="password"
+            id="password"
+            autocomplete="current-password"
+            placeholder="Enter password">
+
+        <button
+            type="button"
+            class="password-toggle"
+            id="togglePassword">
+
+            👁️
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<button
+    type="button"
+    class="login-btn"
+    id="loginBtn">
+
+    LOGIN TO ADMIN PANEL
+
 </button>
 
+
+
 <div id="msg"></div>
+
+
+
+<div class="security-box">
+
+    🛡️ Admin access is restricted to the authorized
+    Firebase Admin account.
+
+</div>
+
+
+<div class="footer">
+
+    BGMI ESPORTS • ADMIN PANEL • 2026
+
+</div>
+
 
 </div>
 
 <script type="module">
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+/* =========================
+   FIREBASE IMPORT
+========================= */
 
 import {
-getAuth,
-signInWithEmailAndPassword
+    initializeApp
 }
-from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 
-const firebaseConfig={
 
-apiKey:"AIzaSyDsJUtZdIXcsB0w_2MQhMBXxIgbI3ijOvg",
-authDomain:"incoinpaysliveearning.firebaseapp.com",
-databaseURL:"https://incoinpaysliveearning-default-rtdb.firebaseio.com",
-projectId:"incoinpaysliveearning",
-storageBucket:"incoinpaysliveearning.firebasestorage.app",
-messagingSenderId:"971873814750",
-appId:"1:971873814750:web:7418c7da119e4725ed9a4f"
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyDsJUtZdIXcsB0w_2MQhMBXxIgbI3ijOvg",
+
+    authDomain:
+    "incoinpaysliveearning.firebaseapp.com",
+
+    databaseURL:
+    "https://incoinpaysliveearning-default-rtdb.firebaseio.com",
+
+    projectId:
+    "incoinpaysliveearning",
+
+    storageBucket:
+    "incoinpaysliveearning.firebasestorage.app",
+
+    messagingSenderId:
+    "971873814750",
+
+    appId:
+    "1:971873814750:web:7418c7da119e4725ed9a4f"
 
 };
 
-const app=initializeApp(firebaseConfig);
 
-const auth=getAuth(app);
 
-const ADMIN_UID="VIAP56vYwndWPhJxktn0lRPTWnS2";
+/* =========================
+   FIREBASE INIT
+========================= */
 
-document.getElementById("loginBtn").onclick=async()=>{
+const app =
+initializeApp(firebaseConfig);
 
-const email=document.getElementById("email").value.trim();
+const auth =
+getAuth(app);
 
-const password=document.getElementById("password").value.trim();
 
-if(!email || !password){
 
-document.getElementById("msg").innerHTML="Enter Email & Password";
+/* =========================
+   ADMIN UID
+========================= */
 
-return;
+const ADMIN_UID =
+"VIAP56vYwndWPhJxktn0lRPTWnS2";
+
+
+
+/* =========================
+   DOM
+========================= */
+
+const emailInput =
+document.getElementById("email");
+
+const passwordInput =
+document.getElementById("password");
+
+const loginBtn =
+document.getElementById("loginBtn");
+
+const msg =
+document.getElementById("msg");
+
+const togglePassword =
+document.getElementById("togglePassword");
+
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+function showMessage(
+    text,
+    type="error"
+){
+
+    msg.textContent = text;
+
+    msg.className =
+        type === "success"
+        ? "msg-success"
+        : type === "info"
+        ? "msg-info"
+        : "msg-error";
 
 }
 
-try{
 
-const result=await signInWithEmailAndPassword(
-auth,
-email,
-password
+
+/* =========================
+   PASSWORD SHOW / HIDE
+========================= */
+
+togglePassword.addEventListener(
+    "click",
+    ()=>{
+
+        if(
+            passwordInput.type ===
+            "password"
+        ){
+
+            passwordInput.type =
+            "text";
+
+            togglePassword.textContent =
+            "🙈";
+
+        }
+        else{
+
+            passwordInput.type =
+            "password";
+
+            togglePassword.textContent =
+            "👁️";
+
+        }
+
+    }
 );
 
-if(result.user.uid!==ADMIN_UID){
 
-await auth.signOut();
 
-document.getElementById("msg").innerHTML="Access Denied";
+/* =========================
+   AUTH STATE
+========================= */
 
-return;
+onAuthStateChanged(
+    auth,
+    (user)=>{
+
+        if(!user){
+
+            return;
+
+        }
+
+
+        /*
+         * Already logged-in ADMIN
+         */
+
+        if(
+            user.uid ===
+            ADMIN_UID
+        ){
+
+            showMessage(
+                "Admin session found. Opening dashboard...",
+                "success"
+            );
+
+            setTimeout(
+                ()=>{
+                    location.replace(
+                        "admin-dashboard.html"
+                    );
+                },
+                500
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * Logged-in non-admin
+         */
+
+        signOut(auth)
+        .catch(()=>{});
+
+    }
+);
+
+
+
+/* =========================
+   LOGIN
+========================= */
+
+async function login(){
+
+    if(loginBtn.disabled){
+        return;
+    }
+
+
+    const email =
+        emailInput.value.trim();
+
+    const password =
+        passwordInput.value;
+
+
+    if(!email){
+
+        showMessage(
+            "Please enter admin email."
+        );
+
+        emailInput.focus();
+
+        return;
+
+    }
+
+
+    if(!password){
+
+        showMessage(
+            "Please enter password."
+        );
+
+        passwordInput.focus();
+
+        return;
+
+    }
+
+
+    loginBtn.disabled = true;
+
+    loginBtn.innerHTML =
+        '<span class="spinner"></span> Checking...';
+
+
+    showMessage(
+        "Authenticating admin account...",
+        "info"
+    );
+
+
+    try{
+
+
+        const result =
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+
+        const user =
+        result.user;
+
+
+        /*
+         * UID SECURITY CHECK
+         */
+
+        if(
+            user.uid !==
+            ADMIN_UID
+        ){
+
+            await signOut(auth);
+
+            showMessage(
+                "Access denied. This account is not authorized as admin."
+            );
+
+            return;
+
+        }
+
+
+        showMessage(
+            "Login successful. Opening admin dashboard...",
+            "success"
+        );
+
+
+        loginBtn.innerHTML =
+            "✓ ADMIN VERIFIED";
+
+
+        setTimeout(
+            ()=>{
+
+                location.replace(
+                    "admin-dashboard.html"
+                );
+
+            },
+            500
+        );
+
+
+    }
+    catch(error){
+
+        console.error(
+            "Admin login error:",
+            error
+        );
+
+
+        let message =
+            "Login failed. Please try again.";
+
+
+        switch(error.code){
+
+            case "auth/invalid-credential":
+
+                message =
+                "Invalid email or password.";
+
+                break;
+
+
+            case "auth/invalid-email":
+
+                message =
+                "Please enter a valid email address.";
+
+                break;
+
+
+            case "auth/user-disabled":
+
+                message =
+                "This admin account is disabled.";
+
+                break;
+
+
+            case "auth/too-many-requests":
+
+                message =
+                "Too many attempts. Please try again later.";
+
+                break;
+
+
+            case "auth/network-request-failed":
+
+                message =
+                "Network error. Check your internet connection.";
+
+                break;
+
+
+            case "auth/operation-not-allowed":
+
+                message =
+                "Email/password login is disabled in Firebase.";
+
+                break;
+
+        }
+
+
+        showMessage(message);
+
+
+        loginBtn.disabled = false;
+
+        loginBtn.textContent =
+            "LOGIN TO ADMIN PANEL";
+
+    }
 
 }
 
-location.href="admin-dashboard.html";
 
-}catch(e){
 
-document.getElementById("msg").innerHTML=e.message;
+/* =========================
+   LOGIN CLICK
+========================= */
 
-}
+loginBtn.addEventListener(
+    "click",
+    login
+);
 
-};
+
+
+/* =========================
+   ENTER KEY LOGIN
+========================= */
+
+emailInput.addEventListener(
+    "keydown",
+    (event)=>{
+
+        if(
+            event.key ===
+            "Enter"
+        ){
+
+            login();
+
+        }
+
+    }
+);
+
+
+passwordInput.addEventListener(
+    "keydown",
+    (event)=>{
+
+        if(
+            event.key ===
+            "Enter"
+        ){
+
+            login();
+
+        }
+
+    }
+);
+
 
 </script>
 
 </body>
+
 </html>
