@@ -1,0 +1,540 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+
+<meta name="theme-color" content="#050B18">
+
+<title>Mission</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:
+        radial-gradient(circle at top,#13213d 0%,#050B18 45%,#02050b 100%);
+    color:#fff;
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    max-width:500px;
+    margin:auto;
+}
+
+/* HEADER */
+
+.header{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.back{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.12);
+    background:#101827;
+    color:#fff;
+    font-size:20px;
+    cursor:pointer;
+}
+
+.header h1{
+    font-size:22px;
+}
+
+/* MISSION CARD */
+
+.mission-card{
+    position:relative;
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(25,40,70,.95),
+            rgba(5,11,24,.98)
+        );
+
+    border:1px solid rgba(255,215,0,.25);
+
+    border-radius:22px;
+
+    padding:24px 20px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.4),
+        inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+.mission-icon{
+    width:65px;
+    height:65px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:18px;
+
+    background:
+        linear-gradient(135deg,#FFD700,#ff9d00);
+
+    font-size:32px;
+
+    margin-bottom:18px;
+
+    box-shadow:
+        0 8px 25px rgba(255,190,0,.25);
+}
+
+.mission-title{
+    font-size:24px;
+    font-weight:800;
+    margin-bottom:8px;
+}
+
+.mission-description{
+    color:#aeb9cc;
+    font-size:14px;
+    line-height:1.5;
+}
+
+/* REWARD */
+
+.reward{
+    margin-top:20px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:15px;
+
+    background:rgba(255,215,0,.07);
+
+    border:1px solid rgba(255,215,0,.18);
+
+    border-radius:15px;
+}
+
+.reward-label{
+    color:#9da9bb;
+    font-size:12px;
+}
+
+.reward-value{
+    color:#FFD700;
+    font-size:24px;
+    font-weight:800;
+}
+
+/* COUNT */
+
+.count-box{
+    margin-top:20px;
+}
+
+.count-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+}
+
+.count-title{
+    font-size:14px;
+    color:#c9d2e2;
+}
+
+.count{
+    font-size:16px;
+    font-weight:800;
+    color:#fff;
+}
+
+.progress{
+    width:100%;
+    height:12px;
+
+    background:#111a2a;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    border:1px solid rgba(255,255,255,.06);
+}
+
+.progress-bar{
+    width:0%;
+    height:100%;
+
+    background:
+        linear-gradient(90deg,#22c55e,#FFD700);
+
+    border-radius:20px;
+
+    transition:width .5s ease;
+}
+
+/* STATUS */
+
+.status{
+    margin-top:20px;
+
+    padding:14px;
+
+    border-radius:14px;
+
+    text-align:center;
+
+    background:rgba(34,197,94,.08);
+
+    border:1px solid rgba(34,197,94,.2);
+
+    color:#86efac;
+
+    font-size:14px;
+}
+
+.status.completed{
+    background:rgba(255,215,0,.08);
+    border-color:rgba(255,215,0,.25);
+    color:#FFD700;
+}
+
+/* NOTE */
+
+.note{
+    margin-top:18px;
+
+    color:#7f8ca1;
+
+    font-size:12px;
+
+    line-height:1.5;
+
+    text-align:center;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <div class="header">
+
+        <button
+            class="back"
+            onclick="history.back()">
+            ←
+        </button>
+
+        <h1>🎯 Mission</h1>
+
+    </div>
+
+
+    <div class="mission-card">
+
+
+        <div class="mission-icon">
+            🎯
+        </div>
+
+
+        <div class="mission-title">
+            Match Master
+        </div>
+
+
+        <div class="mission-description">
+            100 matches join karo aur ₹50 cashback reward pao.
+            Har successful match registration mission progress
+            mein count hoga.
+        </div>
+
+
+        <div class="reward">
+
+            <div>
+                <div class="reward-label">
+                    CASHBACK REWARD
+                </div>
+
+                <div class="reward-value">
+                    ₹50
+                </div>
+            </div>
+
+            <div style="font-size:28px;">
+                🎁
+            </div>
+
+        </div>
+
+
+        <div class="count-box">
+
+            <div class="count-row">
+
+                <div class="count-title">
+                    Matches Joined
+                </div>
+
+                <div class="count">
+                    <span id="matchCount">0</span>/100
+                </div>
+
+            </div>
+
+
+            <div class="progress">
+
+                <div
+                    id="progressBar"
+                    class="progress-bar">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="status"
+            class="status">
+
+            🔄 Loading mission...
+
+        </div>
+
+
+        <div class="note">
+
+            Cashback mission complete hone par reward
+            automatically wallet mein add kiya ja sakta hai.
+            Ek user ko reward sirf ek baar milega.
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<script type="module">
+
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+
+import {
+    getAuth,
+    onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+
+import {
+    getDatabase,
+    ref,
+    onValue
+}
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyDsJUtZdIXcsB0w_2MQhMBXxIgbI3ijOvg",
+
+    authDomain:
+        "incoinpaysliveearning.firebaseapp.com",
+
+    databaseURL:
+        "https://incoinpaysliveearning-default-rtdb.firebaseio.com",
+
+    projectId:
+        "incoinpaysliveearning",
+
+    storageBucket:
+        "incoinpaysliveearning.firebasestorage.app",
+
+    messagingSenderId:
+        "971873814750",
+
+    appId:
+        "1:971873814750:web:7418c7da119e4725ed9a4f"
+
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+
+const auth =
+    getAuth(app);
+
+
+const db =
+    getDatabase(app);
+
+
+const matchCount =
+    document.getElementById("matchCount");
+
+
+const progressBar =
+    document.getElementById("progressBar");
+
+
+const status =
+    document.getElementById("status");
+
+
+onAuthStateChanged(auth, (user) => {
+
+
+    if (!user) {
+
+        location.href = "index.html";
+
+        return;
+
+    }
+
+
+    const userRef =
+        ref(db, "users/" + user.uid);
+
+
+    onValue(userRef, (snapshot) => {
+
+
+        if (!snapshot.exists()) {
+
+            matchCount.innerText = "0";
+
+            progressBar.style.width = "0%";
+
+            status.innerHTML =
+                "⚠️ User data not found.";
+
+            return;
+
+        }
+
+
+        const data =
+            snapshot.val();
+
+
+        /*
+         * Mission count
+         *
+         * Firebase:
+         * users/UID/missionMatches
+         */
+
+        let count =
+            Number(data.missionMatches || 0);
+
+
+        /*
+         * Maximum 100
+         */
+
+        if (count < 0)
+            count = 0;
+
+        if (count > 100)
+            count = 100;
+
+
+        matchCount.innerText =
+            count;
+
+
+        const percentage =
+            count;
+
+
+        progressBar.style.width =
+            percentage + "%";
+
+
+        /*
+         * Mission completed
+         */
+
+        if (count >= 100) {
+
+
+            status.classList.add("completed");
+
+
+            status.innerHTML =
+                "🎉 Mission Completed — ₹50 Cashback Earned";
+
+
+        } else {
+
+
+            status.classList.remove("completed");
+
+
+            const remaining =
+                100 - count;
+
+
+            status.innerHTML =
+                "🔥 " +
+                remaining +
+                " more match join karo aur ₹50 cashback pao";
+
+
+        }
+
+
+    });
+
+
+});
+
+
+</script>
+
+
+</body>
+
+</html>
+
