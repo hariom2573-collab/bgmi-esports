@@ -1,0 +1,2782 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+
+<meta name="theme-color" content="#050B18">
+
+<title>Manage Users</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+-webkit-tap-highlight-color:transparent;
+}
+
+body{
+background:#050B18;
+color:#fff;
+min-height:100vh;
+overflow-x:hidden;
+}
+
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at top left,#22c55e30,transparent 35%),
+radial-gradient(circle at top right,#2563eb30,transparent 35%),
+#050B18;
+z-index:-1;
+}
+
+button,
+input{
+font-family:inherit;
+}
+
+button{
+cursor:pointer;
+}
+
+/* APP */
+
+.app{
+width:100%;
+max-width:520px;
+margin:auto;
+padding:16px;
+padding-bottom:45px;
+}
+
+/* HEADER */
+
+.header{
+background:#111827;
+border:1px solid #ffffff12;
+border-radius:22px;
+padding:20px;
+margin-bottom:15px;
+box-shadow:0 15px 40px #0005;
+}
+
+.back{
+display:inline-flex;
+width:42px;
+height:42px;
+align-items:center;
+justify-content:center;
+background:#1f2937;
+border-radius:13px;
+color:#fff;
+text-decoration:none;
+font-size:21px;
+margin-bottom:14px;
+}
+
+.header h1{
+font-size:24px;
+font-weight:800;
+color:#22c55e;
+}
+
+.header p{
+font-size:12px;
+color:#94a3b8;
+margin-top:5px;
+}
+
+/* STATS */
+
+.stats{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-bottom:15px;
+}
+
+.stat{
+background:#111827;
+border:1px solid #ffffff10;
+border-radius:18px;
+padding:15px;
+}
+
+.stat-icon{
+font-size:21px;
+}
+
+.stat-label{
+font-size:11px;
+color:#94a3b8;
+margin-top:7px;
+}
+
+.stat-value{
+font-size:23px;
+font-weight:800;
+margin-top:2px;
+color:#22c55e;
+}
+
+.stat.wallet-stat{
+grid-column:span 2;
+}
+
+.stat.wallet-stat .stat-value{
+font-size:25px;
+}
+
+/* SEARCH */
+
+.search{
+position:relative;
+margin-bottom:12px;
+}
+
+.search input{
+width:100%;
+height:52px;
+background:#111827;
+border:1px solid #ffffff15;
+border-radius:15px;
+outline:none;
+color:#fff;
+padding:0 15px 0 45px;
+font-size:13px;
+}
+
+.search input:focus{
+border-color:#22c55e;
+}
+
+.search input::placeholder{
+color:#64748b;
+}
+
+.search-icon{
+position:absolute;
+left:15px;
+top:50%;
+transform:translateY(-50%);
+font-size:17px;
+color:#64748b;
+}
+
+/* FILTERS */
+
+.filters{
+display:flex;
+gap:8px;
+overflow-x:auto;
+margin-bottom:16px;
+padding-bottom:2px;
+}
+
+.filters::-webkit-scrollbar{
+display:none;
+}
+
+.filter{
+border:1px solid #ffffff12;
+background:#111827;
+color:#94a3b8;
+border-radius:12px;
+padding:9px 14px;
+font-size:11px;
+font-weight:700;
+white-space:nowrap;
+}
+
+.filter.active{
+background:#22c55e;
+border-color:#22c55e;
+color:#001b09;
+}
+
+/* RESULT */
+
+.result-info{
+font-size:11px;
+color:#64748b;
+margin:0 3px 10px;
+}
+
+/* USER CARD */
+
+.user-card{
+background:#111827;
+border:1px solid #ffffff12;
+border-radius:21px;
+padding:16px;
+margin-bottom:12px;
+box-shadow:0 12px 35px #0003;
+}
+
+.user-top{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+}
+
+.user-left{
+display:flex;
+align-items:center;
+gap:12px;
+min-width:0;
+}
+
+.avatar{
+width:53px;
+height:53px;
+border-radius:50%;
+object-fit:cover;
+background:#1f2937;
+border:2px solid #22c55e40;
+}
+
+.user-main{
+min-width:0;
+}
+
+.user-name{
+font-size:15px;
+font-weight:700;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+}
+
+.user-bgmi{
+font-size:10px;
+color:#94a3b8;
+margin-top:2px;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+}
+
+.status{
+padding:5px 9px;
+border-radius:20px;
+font-size:9px;
+font-weight:800;
+white-space:nowrap;
+}
+
+.status.active{
+background:#22c55e20;
+color:#4ade80;
+border:1px solid #22c55e35;
+}
+
+.status.blocked{
+background:#ef444420;
+color:#f87171;
+border:1px solid #ef444435;
+}
+
+/* USER INFO */
+
+.user-info{
+margin-top:14px;
+background:#050B18;
+border-radius:14px;
+padding:10px 12px;
+}
+
+.info-row{
+display:flex;
+justify-content:space-between;
+gap:10px;
+padding:7px 0;
+border-bottom:1px solid #ffffff09;
+}
+
+.info-row:last-child{
+border-bottom:0;
+}
+
+.info-label{
+font-size:10px;
+color:#64748b;
+}
+
+.info-value{
+font-size:11px;
+font-weight:700;
+text-align:right;
+word-break:break-all;
+}
+
+.wallet-value{
+color:#22c55e;
+font-size:14px;
+}
+
+/* BUTTONS */
+
+.actions{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin-top:12px;
+}
+
+.btn{
+height:43px;
+border:0;
+border-radius:11px;
+font-size:11px;
+font-weight:800;
+}
+
+.green{
+background:#22c55e;
+color:#001b09;
+}
+
+.blue{
+background:#2563eb;
+color:#fff;
+}
+
+.orange{
+background:#f59e0b;
+color:#000;
+}
+
+.red{
+background:#ef4444;
+color:#fff;
+}
+
+.dark{
+background:#1f2937;
+color:#fff;
+border:1px solid #ffffff12;
+}
+
+.full{
+grid-column:span 2;
+}
+
+/* EMPTY */
+
+.empty{
+background:#111827;
+border:1px solid #ffffff10;
+border-radius:20px;
+padding:45px 20px;
+text-align:center;
+color:#64748b;
+font-size:12px;
+}
+
+.empty-icon{
+font-size:35px;
+margin-bottom:8px;
+}
+
+/* MODAL */
+
+.modal{
+display:none;
+position:fixed;
+inset:0;
+background:#000b;
+backdrop-filter:blur(8px);
+align-items:center;
+justify-content:center;
+padding:16px;
+z-index:9999;
+}
+
+.modal.show{
+display:flex;
+}
+
+.modal-box{
+width:100%;
+max-width:410px;
+max-height:90vh;
+overflow-y:auto;
+background:#111827;
+border:1px solid #ffffff15;
+border-radius:22px;
+padding:18px;
+box-shadow:0 25px 80px #0008;
+}
+
+.modal-box::-webkit-scrollbar{
+display:none;
+}
+
+.modal-head{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:17px;
+}
+
+.modal-title{
+font-size:19px;
+font-weight:800;
+}
+
+.close{
+width:36px;
+height:36px;
+border:0;
+border-radius:11px;
+background:#1f2937;
+color:#fff;
+font-size:20px;
+}
+
+.modal-label{
+font-size:10px;
+font-weight:700;
+color:#94a3b8;
+margin-bottom:6px;
+display:block;
+}
+
+.modal-input,
+.modal-select{
+width:100%;
+height:48px;
+border:1px solid #ffffff12;
+border-radius:12px;
+background:#050B18;
+color:#fff;
+outline:none;
+padding:0 13px;
+margin-bottom:12px;
+font-size:12px;
+}
+
+.modal-input:focus{
+border-color:#22c55e;
+}
+
+.modal-buttons{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin-top:5px;
+}
+
+.modal-button{
+height:45px;
+border:0;
+border-radius:12px;
+font-size:12px;
+font-weight:800;
+}
+
+/* USER DETAIL */
+
+.detail-profile{
+text-align:center;
+padding:5px 0 15px;
+}
+
+.detail-avatar{
+width:75px;
+height:75px;
+border-radius:50%;
+object-fit:cover;
+border:3px solid #22c55e;
+}
+
+.detail-name{
+font-size:18px;
+font-weight:800;
+margin-top:8px;
+}
+
+.detail-bgmi{
+font-size:11px;
+color:#94a3b8;
+margin-top:2px;
+}
+
+/* TRANSACTION */
+
+.transaction{
+background:#050B18;
+border-radius:12px;
+padding:10px;
+margin-top:8px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.transaction-left{
+min-width:0;
+}
+
+.transaction-title{
+font-size:10px;
+font-weight:700;
+}
+
+.transaction-date{
+font-size:9px;
+color:#64748b;
+margin-top:2px;
+}
+
+.transaction-amount{
+font-size:12px;
+font-weight:800;
+}
+
+.transaction-amount.add{
+color:#4ade80;
+}
+
+.transaction-amount.deduct{
+color:#f87171;
+}
+
+/* LOADING */
+
+.loading{
+text-align:center;
+padding:30px;
+color:#64748b;
+font-size:11px;
+}
+
+.spinner{
+width:25px;
+height:25px;
+border:3px solid #ffffff12;
+border-top-color:#22c55e;
+border-radius:50%;
+margin:0 auto 9px;
+animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+to{
+transform:rotate(360deg);
+}
+}
+
+/* TOAST */
+
+.toast{
+position:fixed;
+left:50%;
+bottom:25px;
+transform:translate(-50%,120px);
+background:#111827;
+border:1px solid #ffffff15;
+border-radius:14px;
+padding:12px 16px;
+font-size:11px;
+font-weight:700;
+z-index:10000;
+box-shadow:0 15px 40px #0008;
+transition:.3s;
+white-space:nowrap;
+}
+
+.toast.show{
+transform:translate(-50%,0);
+}
+
+.toast.success{
+border-color:#22c55e50;
+color:#4ade80;
+}
+
+.toast.error{
+border-color:#ef444450;
+color:#f87171;
+}
+
+@media(max-width:380px){
+
+.app{
+padding:12px;
+}
+
+.header h1{
+font-size:21px;
+}
+
+.stat-value{
+font-size:20px;
+}
+
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- HEADER -->
+
+<div class="header">
+
+<a href="admin-dashboard.html"
+class="back">
+
+←
+
+</a>
+
+<h1>
+👥 Manage Users
+</h1>
+
+<p>
+Users • Wallet • Security • Search
+</p>
+
+</div>
+
+<!-- STATS -->
+
+<div class="stats">
+
+<div class="stat">
+
+<div class="stat-icon">
+👥
+</div>
+
+<div class="stat-label">
+TOTAL USERS
+</div>
+
+<div
+id="totalUsers"
+class="stat-value">
+
+0
+
+</div>
+
+</div>
+
+<div class="stat">
+
+<div class="stat-icon">
+🟢
+</div>
+
+<div class="stat-label">
+ACTIVE USERS
+</div>
+
+<div
+id="activeUsers"
+class="stat-value">
+
+0
+
+</div>
+
+</div>
+
+<div class="stat">
+
+<div class="stat-icon">
+🚫
+</div>
+
+<div class="stat-label">
+BLOCKED USERS
+</div>
+
+<div
+id="blockedUsers"
+class="stat-value">
+
+0
+
+</div>
+
+</div>
+
+<div class="stat">
+
+<div class="stat-icon">
+💰
+</div>
+
+<div class="stat-label">
+USERS BALANCE
+</div>
+
+<div
+id="totalWallet"
+class="stat-value">
+
+₹0
+
+</div>
+
+</div>
+
+</div>
+
+<!-- SEARCH -->
+
+<div class="search">
+
+<div class="search-icon">
+🔍
+</div>
+
+<input
+id="searchInput"
+type="search"
+autocomplete="off"
+placeholder="Search name, BGMI ID, mobile, email or UID">
+
+</div>
+
+<!-- FILTERS -->
+
+<div class="filters">
+
+<button
+class="filter active"
+data-filter="all">
+
+All
+
+</button>
+
+<button
+class="filter"
+data-filter="active">
+
+🟢 Active
+
+</button>
+
+<button
+class="filter"
+data-filter="blocked">
+
+🚫 Blocked
+
+</button>
+
+</div>
+
+<div
+id="resultInfo"
+class="result-info">
+
+Loading users...
+
+</div>
+
+<!-- USERS -->
+
+<div id="usersContainer">
+
+<div class="empty">
+
+<div class="empty-icon">
+⏳
+</div>
+
+Loading Users...
+
+</div>
+
+</div>
+
+</div>
+
+<!-- WALLET MODAL -->
+
+<div
+id="walletModal"
+class="modal"
+onclick="closeOutside(event,'walletModal')">
+
+<div class="modal-box">
+
+<div class="modal-head">
+
+<div class="modal-title">
+💰 Wallet Control
+</div>
+
+<button
+class="close"
+onclick="closeModal('walletModal')">
+
+× </button>
+
+</div>
+
+<label class="modal-label">
+CURRENT BALANCE
+</label>
+
+<div
+id="currentBalance"
+style="
+font-size:24px;
+font-weight:800;
+color:#22c55e;
+margin-bottom:15px;">
+
+₹0
+
+</div>
+
+<label class="modal-label">
+AMOUNT
+</label>
+
+<input
+id="walletAmount"
+class="modal-input"
+type="number"
+min="1"
+step="1"
+placeholder="Enter amount">
+
+<label class="modal-label">
+REASON
+</label>
+
+<input
+id="walletReason"
+class="modal-input"
+type="text"
+maxlength="100"
+placeholder="Example: Tournament refund">
+
+<div class="modal-buttons">
+
+<button
+id="addWalletBtn"
+class="modal-button green">
+
+＋ Add
+
+</button>
+
+<button
+id="deductWalletBtn"
+class="modal-button blue">
+
+− Deduct
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- USER DETAIL MODAL -->
+
+<div
+id="detailModal"
+class="modal"
+onclick="closeOutside(event,'detailModal')">
+
+<div class="modal-box">
+
+<div class="modal-head">
+
+<div class="modal-title">
+👤 User Details
+</div>
+
+<button
+class="close"
+onclick="closeModal('detailModal')">
+
+× </button>
+
+</div>
+
+<div class="detail-profile">
+
+<img
+id="detailAvatar"
+class="detail-avatar"
+src="">
+
+<div
+id="detailName"
+class="detail-name">
+
+Player
+
+</div>
+
+<div
+id="detailBgmi"
+class="detail-bgmi">
+
+BGMI ID: --
+
+</div>
+
+</div>
+
+<div class="user-info">
+
+<div class="info-row">
+
+<span class="info-label">
+UID
+</span>
+
+<span
+id="detailUID"
+class="info-value">
+
+--
+
+</span>
+
+</div>
+
+<div class="info-row">
+
+<span class="info-label">
+Mobile
+</span>
+
+<span
+id="detailMobile"
+class="info-value">
+
+--
+
+</span>
+
+</div>
+
+<div class="info-row">
+
+<span class="info-label">
+Email
+</span>
+
+<span
+id="detailEmail"
+class="info-value">
+
+--
+
+</span>
+
+</div>
+
+<div class="info-row">
+
+<span class="info-label">
+Wallet
+</span>
+
+<span
+id="detailWallet"
+class="info-value wallet-value">
+
+₹0
+
+</span>
+
+</div>
+
+<div class="info-row">
+
+<span class="info-label">
+Status
+</span>
+
+<span
+id="detailStatus"
+class="info-value">
+
+--
+
+</span>
+
+</div>
+
+</div>
+
+<div style="
+font-size:13px;
+font-weight:800;
+margin-top:18px;">
+
+Wallet History
+
+</div>
+
+<div
+id="transactionList">
+
+<div class="loading">
+No transactions
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- DELETE MODAL -->
+
+<div
+id="deleteModal"
+class="modal"
+onclick="closeOutside(event,'deleteModal')">
+
+<div class="modal-box">
+
+<div class="modal-head">
+
+<div class="modal-title">
+⚠️ Delete User
+</div>
+
+<button
+class="close"
+onclick="closeModal('deleteModal')">
+
+× </button>
+
+</div>
+
+<p style="
+color:#94a3b8;
+font-size:12px;
+line-height:1.6;
+margin-bottom:18px;">
+
+This will permanently remove the user's
+Realtime Database profile. This action
+cannot be undone.
+
+</p>
+
+<div
+id="deleteUserName"
+style="
+font-size:14px;
+font-weight:800;
+margin-bottom:18px;">
+
+--
+
+</div>
+
+<div class="modal-buttons">
+
+<button
+id="confirmDelete"
+class="modal-button red">
+
+Delete
+
+</button>
+
+<button
+class="modal-button dark"
+onclick="closeModal('deleteModal')">
+
+Cancel
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div
+id="toast"
+class="toast">
+
+Message
+
+</div>
+
+<script type="module">
+
+import {
+initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+import {
+getAuth,
+onAuthStateChanged
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+import {
+getDatabase,
+ref,
+onValue,
+update,
+remove,
+push,
+serverTimestamp
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+
+/* =====================================================
+   FIREBASE
+===================================================== */
+
+const firebaseConfig = {
+
+apiKey:
+"AIzaSyDsJUtZdIXcsB0w_2MQhMBXxIgbI3ijOvg",
+
+authDomain:
+"incoinpaysliveearning.firebaseapp.com",
+
+databaseURL:
+"https://incoinpaysliveearning-default-rtdb.firebaseio.com",
+
+projectId:
+"incoinpaysliveearning",
+
+storageBucket:
+"incoinpaysliveearning.firebasestorage.app",
+
+messagingSenderId:
+"971873814750",
+
+appId:
+"1:971873814750:web:7418c7da119e4725ed9a4f"
+
+};
+
+
+const app =
+initializeApp(firebaseConfig);
+
+const auth =
+getAuth(app);
+
+const db =
+getDatabase(app);
+
+
+/* =====================================================
+   ADMIN
+===================================================== */
+
+const ADMIN_UID =
+"VIAP56vYwndWPhJxktn0lRPTWnS2";
+
+
+/* =====================================================
+   STATE
+===================================================== */
+
+let allUsers = [];
+
+let selectedUID = "";
+
+let selectedUser = null;
+
+let selectedFilter = "all";
+
+
+/* =====================================================
+   AUTH CHECK
+===================================================== */
+
+onAuthStateChanged(
+auth,
+(user) => {
+
+if(!user){
+
+location.replace(
+"admin.html"
+);
+
+return;
+
+}
+
+
+if(
+user.uid !== ADMIN_UID
+){
+
+alert(
+"Access Denied"
+);
+
+location.replace(
+"index.html"
+);
+
+return;
+
+}
+
+
+loadUsers();
+
+}
+);
+
+
+/* =====================================================
+   LOAD USERS
+===================================================== */
+
+function loadUsers(){
+
+const usersRef =
+ref(
+db,
+"users"
+);
+
+
+onValue(
+usersRef,
+(snapshot) => {
+
+allUsers = [];
+
+
+if(
+snapshot.exists()
+){
+
+snapshot.forEach(
+(child) => {
+
+const data =
+child.val() || {};
+
+allUsers.push({
+
+uid:
+child.key,
+
+...data
+
+});
+
+});
+
+}
+
+
+updateStats();
+
+renderUsers();
+
+},
+(error) => {
+
+console.error(error);
+
+document.getElementById(
+"usersContainer"
+).innerHTML = `
+
+<div class="empty">
+
+<div class="empty-icon">
+❌
+</div>
+
+Unable to load users.
+
+</div>
+
+`;
+
+}
+);
+
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+function updateStats(){
+
+let total =
+allUsers.length;
+
+let blocked = 0;
+
+let wallet = 0;
+
+
+allUsers.forEach(
+(user) => {
+
+if(
+user.blocked === true ||
+user.blocked === "true"
+){
+
+blocked++;
+
+}
+
+
+wallet +=
+Number(
+user.wallet || 0
+);
+
+}
+);
+
+
+document.getElementById(
+"totalUsers"
+).innerText =
+total;
+
+
+document.getElementById(
+"blockedUsers"
+).innerText =
+blocked;
+
+
+document.getElementById(
+"activeUsers"
+).innerText =
+total - blocked;
+
+
+document.getElementById(
+"totalWallet"
+).innerText =
+"₹" +
+formatMoney(wallet);
+
+}
+
+
+/* =====================================================
+   FILTER + SEARCH
+===================================================== */
+
+document.getElementById(
+"searchInput"
+).addEventListener(
+"input",
+renderUsers
+);
+
+
+document.querySelectorAll(
+".filter"
+).forEach(
+(button) => {
+
+button.addEventListener(
+"click",
+() => {
+
+selectedFilter =
+button.dataset.filter;
+
+
+document.querySelectorAll(
+".filter"
+).forEach(
+(btn) => {
+
+btn.classList.remove(
+"active"
+);
+
+});
+
+
+button.classList.add(
+"active"
+);
+
+
+renderUsers();
+
+}
+);
+
+}
+);
+
+
+/* =====================================================
+   RENDER USERS
+===================================================== */
+
+function renderUsers(){
+
+const container =
+document.getElementById(
+"usersContainer"
+);
+
+
+const keyword =
+document.getElementById(
+"searchInput"
+).value
+.trim()
+.toLowerCase();
+
+
+let filtered =
+allUsers.filter(
+(user) => {
+
+const blocked =
+user.blocked === true ||
+user.blocked === "true";
+
+
+if(
+selectedFilter === "active" &&
+blocked
+){
+
+return false;
+
+}
+
+
+if(
+selectedFilter === "blocked" &&
+!blocked
+){
+
+return false;
+
+}
+
+
+if(!keyword){
+
+return true;
+
+}
+
+
+const searchable = [
+
+user.name,
+user.displayName,
+user.bgmiId,
+user.bgmiID,
+user.bgid,
+user.mobile,
+user.phone,
+user.email,
+user.uid
+
+]
+.map(
+(value) =>
+String(value || "")
+.toLowerCase()
+)
+.join(" ");
+
+
+return searchable.includes(
+keyword
+);
+
+}
+);
+
+
+document.getElementById(
+"resultInfo"
+).innerText =
+filtered.length +
+" user" +
+(
+filtered.length === 1
+? ""
+: "s"
+) +
+" found";
+
+
+container.innerHTML = "";
+
+
+if(
+filtered.length === 0
+){
+
+container.innerHTML = `
+
+<div class="empty">
+
+<div class="empty-icon">
+🔍
+</div>
+
+No users found.
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+filtered.forEach(
+(user) => {
+
+container.appendChild(
+createUserCard(user)
+);
+
+}
+);
+
+}
+
+
+/* =====================================================
+   USER CARD
+===================================================== */
+
+function createUserCard(
+user
+){
+
+const card =
+document.createElement(
+"div"
+);
+
+card.className =
+"user-card";
+
+
+const blocked =
+user.blocked === true ||
+user.blocked === "true";
+
+
+const name =
+escapeHTML(
+user.name ||
+user.displayName ||
+"Player"
+);
+
+
+const bgmi =
+escapeHTML(
+user.bgmiId ||
+user.bgmiID ||
+user.bgid ||
+"--"
+);
+
+
+const mobile =
+escapeHTML(
+user.mobile ||
+user.phone ||
+"--"
+);
+
+
+const email =
+escapeHTML(
+user.email ||
+"--"
+);
+
+
+const wallet =
+Number(
+user.wallet || 0
+);
+
+
+const photo =
+user.photo ||
+user.photoURL ||
+"https://ui-avatars.com/api/?name=" +
+encodeURIComponent(
+user.name ||
+"User"
+);
+
+
+card.innerHTML = `
+
+<div class="user-top">
+
+<div class="user-left">
+
+<img
+class="avatar"
+src="${escapeAttribute(photo)}"
+onerror="this.src='https://ui-avatars.com/api/?name=User'">
+
+<div class="user-main">
+
+<div class="user-name">
+${name}
+</div>
+
+<div class="user-bgmi">
+BGMI ID: ${bgmi}
+</div>
+
+</div>
+
+</div>
+
+
+<div class="status ${
+blocked
+? "blocked"
+: "active"
+}">
+
+${
+blocked
+? "BLOCKED"
+: "ACTIVE"
+}
+
+</div>
+
+</div>
+
+
+<div class="user-info">
+
+<div class="info-row">
+
+<span class="info-label">
+UID
+</span>
+
+<span class="info-value">
+${escapeHTML(user.uid)}
+</span>
+
+</div>
+
+
+<div class="info-row">
+
+<span class="info-label">
+Mobile
+</span>
+
+<span class="info-value">
+${mobile}
+</span>
+
+</div>
+
+
+<div class="info-row">
+
+<span class="info-label">
+Wallet
+</span>
+
+<span class="info-value wallet-value">
+₹${formatMoney(wallet)}
+</span>
+
+</div>
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="btn green"
+data-action="wallet">
+
+💰 Wallet
+
+</button>
+
+
+<button
+class="btn blue"
+data-action="details">
+
+👤 Details
+
+</button>
+
+
+<button
+class="btn orange"
+data-action="block">
+
+${
+blocked
+? "✅ Unblock"
+: "🚫 Block"
+}
+
+</button>
+
+
+<button
+class="btn red"
+data-action="delete">
+
+🗑 Delete
+
+</button>
+
+</div>
+
+`;
+
+
+card.querySelector(
+'[data-action="wallet"]'
+).onclick =
+() =>
+openWalletModal(user);
+
+
+card.querySelector(
+'[data-action="details"]'
+).onclick =
+() =>
+openDetailModal(user);
+
+
+card.querySelector(
+'[data-action="block"]'
+).onclick =
+() =>
+toggleBlock(
+user.uid,
+blocked
+);
+
+
+card.querySelector(
+'[data-action="delete"]'
+).onclick =
+() =>
+openDeleteModal(user);
+
+
+return card;
+
+}
+
+
+/* =====================================================
+   WALLET MODAL
+===================================================== */
+
+function openWalletModal(
+user
+){
+
+selectedUID =
+user.uid;
+
+selectedUser =
+user;
+
+
+document.getElementById(
+"currentBalance"
+).innerText =
+"₹" +
+formatMoney(
+user.wallet || 0
+);
+
+
+document.getElementById(
+"walletAmount"
+).value =
+"";
+
+
+document.getElementById(
+"walletReason"
+).value =
+"";
+
+
+document.getElementById(
+"walletModal"
+).classList.add(
+"show"
+);
+
+}
+
+
+/* =====================================================
+   ADD WALLET
+===================================================== */
+
+document.getElementById(
+"addWalletBtn"
+).onclick =
+() =>
+changeWallet(
+"add"
+);
+
+
+/* =====================================================
+   DEDUCT WALLET
+===================================================== */
+
+document.getElementById(
+"deductWalletBtn"
+).onclick =
+() =>
+changeWallet(
+"deduct"
+);
+
+
+/* =====================================================
+   CHANGE WALLET
+===================================================== */
+
+async function changeWallet(
+type
+){
+
+if(!selectedUID){
+
+return;
+
+}
+
+
+const input =
+document.getElementById(
+"walletAmount"
+);
+
+
+const reasonInput =
+document.getElementById(
+"walletReason"
+);
+
+
+const amount =
+Number(
+input.value
+);
+
+
+const reason =
+reasonInput.value.trim() ||
+(
+type === "add"
+? "Admin wallet credit"
+: "Admin wallet deduction"
+);
+
+
+if(
+!Number.isFinite(amount) ||
+amount <= 0
+){
+
+showToast(
+"Enter a valid amount.",
+"error"
+);
+
+return;
+
+}
+
+
+const user =
+allUsers.find(
+(item) =>
+item.uid === selectedUID
+);
+
+
+if(!user){
+
+showToast(
+"User not found.",
+"error"
+);
+
+return;
+
+}
+
+
+const oldBalance =
+Number(
+user.wallet || 0
+);
+
+
+let newBalance;
+
+
+if(
+type === "add"
+){
+
+newBalance =
+oldBalance +
+amount;
+
+}else{
+
+newBalance =
+oldBalance -
+amount;
+
+
+if(
+newBalance < 0
+){
+
+showToast(
+"Wallet balance cannot go below ₹0.",
+"error"
+);
+
+return;
+
+}
+
+}
+
+
+try{
+
+const transactionRef =
+push(
+ref(
+db,
+"users/" +
+selectedUID +
+"/transactions"
+)
+);
+
+
+const updates = {};
+
+
+updates[
+"users/" +
+selectedUID +
+"/wallet"
+] =
+newBalance;
+
+
+updates[
+"users/" +
+selectedUID +
+"/transactions/" +
+transactionRef.key
+] = {
+
+type:
+type === "add"
+? "credit"
+: "debit",
+
+amount:
+amount,
+
+oldBalance:
+oldBalance,
+
+newBalance:
+newBalance,
+
+reason:
+reason,
+
+source:
+"admin",
+
+adminUID:
+ADMIN_UID,
+
+createdAt:
+Date.now()
+
+};
+
+
+await update(
+ref(db),
+updates
+);
+
+
+closeModal(
+"walletModal"
+);
+
+
+showToast(
+type === "add"
+? "₹" +
+formatMoney(amount) +
+" added successfully."
+: "₹" +
+formatMoney(amount) +
+" deducted successfully.",
+"success"
+);
+
+
+}catch(error){
+
+console.error(
+error
+);
+
+showToast(
+"Wallet update failed.",
+"error"
+);
+
+}
+
+}
+
+
+/* =====================================================
+   BLOCK / UNBLOCK
+===================================================== */
+
+window.toggleBlock =
+async function(
+uid,
+blocked
+){
+
+try{
+
+await update(
+ref(
+db,
+"users/" +
+uid
+),
+{
+
+blocked:
+!blocked,
+
+blockedAt:
+!blocked
+? Date.now()
+: null,
+
+blockedBy:
+!blocked
+? ADMIN_UID
+: null
+
+}
+);
+
+
+showToast(
+!blocked
+? "User blocked."
+: "User unblocked.",
+"success"
+);
+
+
+}catch(error){
+
+console.error(
+error
+);
+
+showToast(
+"Unable to update user.",
+"error"
+);
+
+}
+
+};
+
+
+/* =====================================================
+   DETAIL MODAL
+===================================================== */
+
+function openDetailModal(
+user
+){
+
+selectedUser =
+user;
+
+
+const photo =
+user.photo ||
+user.photoURL ||
+"https://ui-avatars.com/api/?name=" +
+encodeURIComponent(
+user.name ||
+"User"
+);
+
+
+document.getElementById(
+"detailAvatar"
+).src =
+photo;
+
+
+document.getElementById(
+"detailName"
+).innerText =
+user.name ||
+user.displayName ||
+"Player";
+
+
+document.getElementById(
+"detailBgmi"
+).innerText =
+"BGMI ID: " +
+(
+user.bgmiId ||
+user.bgmiID ||
+user.bgid ||
+"--"
+);
+
+
+document.getElementById(
+"detailUID"
+).innerText =
+user.uid;
+
+
+document.getElementById(
+"detailMobile"
+).innerText =
+user.mobile ||
+user.phone ||
+"--";
+
+
+document.getElementById(
+"detailEmail"
+).innerText =
+user.email ||
+"--";
+
+
+document.getElementById(
+"detailWallet"
+).innerText =
+"₹" +
+formatMoney(
+user.wallet || 0
+);
+
+
+const blocked =
+user.blocked === true ||
+user.blocked === "true";
+
+
+document.getElementById(
+"detailStatus"
+).innerText =
+blocked
+? "🚫 Blocked"
+: "🟢 Active";
+
+
+loadTransactions(
+user.uid
+);
+
+
+document.getElementById(
+"detailModal"
+).classList.add(
+"show"
+);
+
+}
+
+
+/* =====================================================
+   TRANSACTIONS
+===================================================== */
+
+function loadTransactions(
+uid
+){
+
+const box =
+document.getElementById(
+"transactionList"
+);
+
+
+box.innerHTML = `
+
+<div class="loading">
+
+<div class="spinner"></div>
+
+Loading history...
+
+</div>
+
+`;
+
+
+onValue(
+ref(
+db,
+"users/" +
+uid +
+"/transactions"
+),
+(snapshot) => {
+
+box.innerHTML = "";
+
+
+if(
+!snapshot.exists()
+){
+
+box.innerHTML = `
+
+<div style="
+color:#64748b;
+font-size:11px;
+padding:15px 0;">
+
+No wallet transactions found.
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+const transactions = [];
+
+
+snapshot.forEach(
+(child) => {
+
+transactions.push({
+
+id:
+child.key,
+
+...(
+child.val() || {}
+)
+
+});
+
+});
+
+
+transactions.sort(
+(a,b) =>
+Number(
+b.createdAt || 0
+)
+-
+Number(
+a.createdAt || 0
+)
+);
+
+
+transactions
+.slice(0,20)
+.forEach(
+(tx) => {
+
+const type =
+tx.type === "credit" ||
+tx.type === "add";
+
+
+const div =
+document.createElement(
+"div"
+);
+
+div.className =
+"transaction";
+
+
+div.innerHTML = `
+
+<div class="transaction-left">
+
+<div class="transaction-title">
+
+${
+type
+? "＋ Wallet Credit"
+: "− Wallet Deduction"
+}
+
+</div>
+
+<div class="transaction-date">
+
+${formatDate(tx.createdAt)}
+
+<br>
+
+${escapeHTML(
+tx.reason ||
+"Admin transaction"
+)}
+
+</div>
+
+</div>
+
+
+<div class="transaction-amount ${
+type
+? "add"
+: "deduct"
+}">
+
+${
+type
+? "+"
+: "-"
+}₹${formatMoney(tx.amount)}
+
+</div>
+
+`;
+
+
+box.appendChild(
+div
+);
+
+});
+
+},
+(error) => {
+
+console.error(
+error
+);
+
+box.innerHTML = `
+
+<div style="
+color:#f87171;
+font-size:11px;">
+
+Unable to load transactions.
+
+</div>
+
+`;
+
+}
+);
+
+}
+
+
+/* =====================================================
+   DELETE
+===================================================== */
+
+let deleteUID = "";
+
+
+function openDeleteModal(
+user
+){
+
+deleteUID =
+user.uid;
+
+
+document.getElementById(
+"deleteUserName"
+).innerText =
+(
+user.name ||
+user.displayName ||
+"Player"
+) +
+" • " +
+user.uid;
+
+
+document.getElementById(
+"deleteModal"
+).classList.add(
+"show"
+);
+
+}
+
+
+document.getElementById(
+"confirmDelete"
+).onclick =
+async function(){
+
+if(!deleteUID){
+
+return;
+
+}
+
+
+const uid =
+deleteUID;
+
+
+try{
+
+await remove(
+ref(
+db,
+"users/" +
+uid
+)
+);
+
+
+closeModal(
+"deleteModal"
+);
+
+
+showToast(
+"User deleted successfully.",
+"success"
+);
+
+
+}catch(error){
+
+console.error(
+error
+);
+
+showToast(
+"Unable to delete user.",
+"error"
+);
+
+}
+
+};
+
+
+/* =====================================================
+   MODAL HELPERS
+===================================================== */
+
+window.closeModal =
+function(id){
+
+document.getElementById(
+id
+).classList.remove(
+"show"
+);
+
+};
+
+
+window.closeOutside =
+function(
+event,
+id
+){
+
+if(
+event.target.id === id
+){
+
+closeModal(id);
+
+}
+
+};
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(
+message,
+type
+){
+
+const toast =
+document.getElementById(
+"toast"
+);
+
+
+toast.innerText =
+message;
+
+
+toast.className =
+"toast show " +
+type;
+
+
+setTimeout(
+() => {
+
+toast.className =
+"toast";
+
+},
+2500
+);
+
+}
+
+
+/* =====================================================
+   FORMAT MONEY
+===================================================== */
+
+function formatMoney(
+value
+){
+
+const number =
+Number(value || 0);
+
+
+if(
+!Number.isFinite(number)
+){
+
+return "0";
+
+}
+
+
+return number.toLocaleString(
+"en-IN",
+{
+maximumFractionDigits:2
+}
+);
+
+}
+
+
+/* =====================================================
+   DATE
+===================================================== */
+
+function formatDate(
+timestamp
+){
+
+if(!timestamp){
+
+return "--";
+
+}
+
+
+return new Date(
+Number(timestamp)
+).toLocaleString(
+"en-IN",
+{
+day:"2-digit",
+month:"short",
+year:"numeric",
+hour:"2-digit",
+minute:"2-digit"
+}
+);
+
+}
+
+
+/* =====================================================
+   ESCAPE
+===================================================== */
+
+function escapeHTML(
+value
+){
+
+return String(
+value ?? ""
+)
+
+.replaceAll(
+"&",
+"&amp;"
+)
+
+.replaceAll(
+"<",
+"&lt;"
+)
+
+.replaceAll(
+">",
+"&gt;"
+)
+
+.replaceAll(
+'"',
+"&quot;"
+)
+
+.replaceAll(
+"'",
+"&#039;"
+);
+
+}
+
+
+function escapeAttribute(
+value
+){
+
+return String(
+value ?? ""
+)
+
+.replaceAll(
+"&",
+"&amp;"
+)
+
+.replaceAll(
+'"',
+"&quot;"
+)
+
+.replaceAll(
+"'",
+"&#039;"
+)
+
+.replaceAll(
+"<",
+"&lt;"
+)
+
+.replaceAll(
+">",
+"&gt;"
+);
+
+}
+
+</script>
+
+</body>
+
+</html>
