@@ -1,0 +1,1398 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+
+<meta name="theme-color" content="#050B18">
+
+<title>Support - BGMI PAY</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Poppins,sans-serif;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    background:#050B18;
+    color:#fff;
+    overflow-x:hidden;
+}
+
+/* =========================
+   BACKGROUND
+========================= */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background:
+    radial-gradient(
+        circle at 0% 0%,
+        rgba(34,197,94,.18),
+        transparent 32%
+    ),
+
+    radial-gradient(
+        circle at 100% 0%,
+        rgba(37,99,235,.18),
+        transparent 32%
+    ),
+
+    radial-gradient(
+        circle at 50% 100%,
+        rgba(168,85,247,.08),
+        transparent 35%
+    ),
+
+    #050B18;
+
+    z-index:-1;
+}
+
+/* =========================
+   APP
+========================= */
+
+.app{
+    width:100%;
+    max-width:520px;
+    margin:auto;
+    padding:18px;
+    padding-bottom:40px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:18px;
+}
+
+.header-title{
+    font-size:24px;
+    font-weight:800;
+}
+
+.header-subtitle{
+    color:#7f8da3;
+    font-size:10px;
+    margin-top:3px;
+}
+
+.security-badge{
+    padding:7px 10px;
+    border-radius:10px;
+
+    background:rgba(34,197,94,.10);
+    border:1px solid rgba(34,197,94,.20);
+
+    color:#86efac;
+
+    font-size:9px;
+    font-weight:700;
+}
+
+/* =========================
+   SUPPORT HERO
+========================= */
+
+.support-hero{
+    position:relative;
+    overflow:hidden;
+
+    padding:22px;
+    margin-bottom:16px;
+
+    border-radius:23px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #12243b,
+        #07111f
+    );
+
+    border:1px solid rgba(255,255,255,.07);
+
+    box-shadow:
+    0 18px 40px rgba(0,0,0,.28);
+}
+
+.support-hero::before{
+    content:"";
+
+    position:absolute;
+
+    width:170px;
+    height:170px;
+
+    right:-70px;
+    top:-80px;
+
+    border-radius:50%;
+
+    background:rgba(34,197,94,.10);
+}
+
+.support-hero::after{
+    content:"";
+
+    position:absolute;
+
+    width:130px;
+    height:130px;
+
+    left:-70px;
+    bottom:-70px;
+
+    border-radius:50%;
+
+    background:rgba(37,99,235,.08);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+}
+
+.support-icon{
+    width:50px;
+    height:50px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:15px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #22c55e,
+        #15803d
+    );
+
+    font-size:23px;
+
+    margin-bottom:13px;
+
+    box-shadow:
+    0 10px 25px rgba(34,197,94,.20);
+}
+
+.support-hero h2{
+    font-size:20px;
+    font-weight:800;
+}
+
+.support-hero p{
+    margin-top:5px;
+
+    color:#8795aa;
+
+    font-size:10px;
+    line-height:1.6;
+}
+
+/* =========================
+   SECTION TITLE
+========================= */
+
+.section-title{
+    font-size:16px;
+    font-weight:700;
+    margin-bottom:11px;
+}
+
+/* =========================
+   QUICK SUPPORT
+========================= */
+
+.support-options{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:10px;
+
+    margin-bottom:18px;
+}
+
+.support-card{
+    padding:16px;
+
+    border-radius:17px;
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(17,29,49,.96),
+        rgba(7,14,26,.98)
+    );
+
+    border:1px solid rgba(255,255,255,.07);
+
+    cursor:pointer;
+
+    transition:.15s ease;
+}
+
+.support-card:active{
+    transform:scale(.97);
+}
+
+.option-icon{
+    width:38px;
+    height:38px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:11px;
+
+    background:#142238;
+
+    font-size:18px;
+
+    margin-bottom:9px;
+}
+
+.option-title{
+    font-size:11px;
+    font-weight:800;
+}
+
+.option-text{
+    color:#68778d;
+
+    font-size:8px;
+
+    margin-top:3px;
+
+    line-height:1.4;
+}
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact-card{
+    padding:17px;
+
+    border-radius:19px;
+
+    background:#0d1728;
+
+    border:1px solid rgba(255,255,255,.07);
+
+    margin-bottom:16px;
+}
+
+.contact-row{
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+    padding:12px 0;
+
+    border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.contact-row:last-child{
+    border-bottom:0;
+}
+
+.contact-icon{
+    width:40px;
+    height:40px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:12px;
+
+    background:#142238;
+
+    font-size:18px;
+}
+
+.contact-info{
+    flex:1;
+}
+
+.contact-title{
+    font-size:11px;
+    font-weight:700;
+}
+
+.contact-value{
+    color:#718096;
+
+    font-size:8px;
+
+    margin-top:3px;
+}
+
+.contact-btn{
+    padding:7px 10px;
+
+    border:0;
+    border-radius:9px;
+
+    background:#22c55e;
+
+    color:#031108;
+
+    font-size:8px;
+    font-weight:800;
+
+    cursor:pointer;
+}
+
+/* =========================
+   FAQ
+========================= */
+
+.faq-card{
+    padding:17px;
+
+    border-radius:19px;
+
+    background:#0d1728;
+
+    border:1px solid rgba(255,255,255,.07);
+
+    margin-bottom:16px;
+}
+
+.faq{
+    border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.faq:last-child{
+    border-bottom:0;
+}
+
+.faq-question{
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    padding:14px 0;
+
+    border:0;
+
+    background:transparent;
+
+    color:#e5ebf5;
+
+    text-align:left;
+
+    font-size:10px;
+    font-weight:700;
+
+    cursor:pointer;
+}
+
+.faq-arrow{
+    color:#7f8da3;
+
+    font-size:15px;
+
+    transition:.2s ease;
+}
+
+.faq-answer{
+    display:none;
+
+    color:#718096;
+
+    font-size:9px;
+
+    line-height:1.6;
+
+    padding:0 5px 14px 0;
+}
+
+.faq.open .faq-answer{
+    display:block;
+}
+
+.faq.open .faq-arrow{
+    transform:rotate(180deg);
+    color:#22c55e;
+}
+
+/* =========================
+   TICKET
+========================= */
+
+.ticket-card{
+    padding:17px;
+
+    border-radius:19px;
+
+    background:#0d1728;
+
+    border:1px solid rgba(255,255,255,.07);
+
+    margin-bottom:16px;
+}
+
+.input-group{
+    margin-top:11px;
+}
+
+.input-label{
+    color:#7f8da3;
+
+    font-size:9px;
+    font-weight:600;
+}
+
+.input,
+.textarea,
+.select{
+    width:100%;
+
+    margin-top:6px;
+
+    border:1px solid rgba(255,255,255,.06);
+
+    border-radius:12px;
+
+    outline:none;
+
+    background:#172338;
+
+    color:#fff;
+
+    font-size:11px;
+}
+
+.input{
+    height:48px;
+    padding:0 13px;
+}
+
+.select{
+    height:48px;
+    padding:0 13px;
+}
+
+.textarea{
+    min-height:100px;
+
+    resize:none;
+
+    padding:12px 13px;
+}
+
+.input::placeholder,
+.textarea::placeholder{
+    color:#64748b;
+}
+
+.submit-btn{
+    width:100%;
+
+    height:51px;
+
+    margin-top:14px;
+
+    border:0;
+
+    border-radius:13px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #22c55e,
+        #16a34a
+    );
+
+    color:#031108;
+
+    font-size:12px;
+    font-weight:800;
+
+    cursor:pointer;
+}
+
+.submit-btn:active{
+    transform:scale(.98);
+}
+
+/* =========================
+   NOTE
+========================= */
+
+.note{
+    padding:13px 14px;
+
+    border-radius:14px;
+
+    background:rgba(37,99,235,.07);
+
+    border:1px solid rgba(37,99,235,.12);
+
+    color:#8291a8;
+
+    font-size:8px;
+
+    line-height:1.6;
+
+    margin-bottom:16px;
+}
+
+.note b{
+    color:#93c5fd;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+    text-align:center;
+
+    color:#526177;
+
+    font-size:8px;
+
+    padding:10px 0 5px;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+    position:fixed;
+
+    left:50%;
+    bottom:25px;
+
+    transform:translate(-50%,20px);
+
+    z-index:10000;
+
+    width:max-content;
+    max-width:90%;
+
+    padding:11px 15px;
+
+    border-radius:11px;
+
+    background:#172338;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    color:#e5ebf5;
+
+    font-size:10px;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.2s ease;
+}
+
+.toast.show{
+    opacity:1;
+
+    transform:translate(-50%,0);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:360px){
+
+    .app{
+        padding:13px;
+    }
+
+    .header-title{
+        font-size:21px;
+    }
+
+    .support-hero{
+        padding:19px;
+    }
+
+    .support-options{
+        gap:8px;
+    }
+
+    .support-card{
+        padding:14px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div>
+
+            <div class="header-title">
+                Support
+            </div>
+
+            <div class="header-subtitle">
+                We're here to help you
+            </div>
+
+        </div>
+
+        <div class="security-badge">
+            🛡️ SUPPORT
+        </div>
+
+    </div>
+
+
+    <!-- HERO -->
+
+    <div class="support-hero">
+
+        <div class="hero-content">
+
+            <div class="support-icon">
+                🎧
+            </div>
+
+            <h2>
+                How can we help?
+            </h2>
+
+            <p>
+                Wallet, deposit, withdrawal, match entry
+                ya account related problem ke liye support
+                team se contact karein.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- QUICK SUPPORT -->
+
+    <div class="section-title">
+        Quick Support
+    </div>
+
+    <div class="support-options">
+
+        <div
+            class="support-card"
+            onclick="selectIssue('Deposit Problem')">
+
+            <div class="option-icon">
+                💰
+            </div>
+
+            <div class="option-title">
+                Deposit Problem
+            </div>
+
+            <div class="option-text">
+                Payment kiya lekin wallet
+                me balance nahi aaya.
+            </div>
+
+        </div>
+
+
+        <div
+            class="support-card"
+            onclick="selectIssue('Withdrawal Problem')">
+
+            <div class="option-icon">
+                💸
+            </div>
+
+            <div class="option-title">
+                Withdrawal
+            </div>
+
+            <div class="option-text">
+                Withdrawal request ya
+                payment related issue.
+            </div>
+
+        </div>
+
+
+        <div
+            class="support-card"
+            onclick="selectIssue('Match Problem')">
+
+            <div class="option-icon">
+                🎮
+            </div>
+
+            <div class="option-title">
+                Match Problem
+            </div>
+
+            <div class="option-text">
+                Match entry, room ID ya
+                result related issue.
+            </div>
+
+        </div>
+
+
+        <div
+            class="support-card"
+            onclick="selectIssue('Account Problem')">
+
+            <div class="option-icon">
+                👤
+            </div>
+
+            <div class="option-title">
+                Account Problem
+            </div>
+
+            <div class="option-text">
+                Login, profile ya account
+                related problem.
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- CONTACT -->
+
+    <div class="contact-card">
+
+        <div class="section-title">
+            Contact Support
+        </div>
+
+
+        <div class="contact-row">
+
+            <div class="contact-icon">
+                💬
+            </div>
+
+            <div class="contact-info">
+
+                <div class="contact-title">
+                    WhatsApp Support
+                </div>
+
+                <div class="contact-value">
+                    Chat with our support team
+                </div>
+
+            </div>
+
+            <button
+                class="contact-btn"
+                onclick="openWhatsApp()">
+
+                CHAT
+
+            </button>
+
+        </div>
+
+
+        <div class="contact-row">
+
+            <div class="contact-icon">
+                📧
+            </div>
+
+            <div class="contact-info">
+
+                <div class="contact-title">
+                    Email Support
+                </div>
+
+                <div class="contact-value">
+                    Send us your issue
+                </div>
+
+            </div>
+
+            <button
+                class="contact-btn"
+                onclick="openEmail()">
+
+                EMAIL
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- FAQ -->
+
+    <div class="faq-card">
+
+        <div class="section-title">
+            Frequently Asked Questions
+        </div>
+
+
+        <div class="faq">
+
+            <button
+                class="faq-question"
+                onclick="toggleFAQ(this)">
+
+                <span>
+                    Deposit karne ke baad balance kab aayega?
+                </span>
+
+                <span class="faq-arrow">
+                    ⌄
+                </span>
+
+            </button>
+
+            <div class="faq-answer">
+
+                Payment submit karne ke baad transaction
+                Admin verification ke liye pending rahega.
+                Verification complete hone ke baad wallet
+                balance update kiya jayega.
+
+            </div>
+
+        </div>
+
+
+        <div class="faq">
+
+            <button
+                class="faq-question"
+                onclick="toggleFAQ(this)">
+
+                <span>
+                    Minimum deposit kitna hai?
+                </span>
+
+                <span class="faq-arrow">
+                    ⌄
+                </span>
+
+            </button>
+
+            <div class="faq-answer">
+
+                Minimum deposit amount ₹50 hai.
+                ₹50 se kam amount ka deposit request
+                submit nahi kiya ja sakta.
+
+            </div>
+
+        </div>
+
+
+        <div class="faq">
+
+            <button
+                class="faq-question"
+                onclick="toggleFAQ(this)">
+
+                <span>
+                    Minimum withdrawal kitna hai?
+                </span>
+
+                <span class="faq-arrow">
+                    ⌄
+                </span>
+
+            </button>
+
+            <div class="faq-answer">
+
+                Minimum withdrawal amount ₹100 hai.
+                Withdrawal ke liye withdrawable balance
+                me kam se kam ₹100 available hona chahiye.
+
+            </div>
+
+        </div>
+
+
+        <div class="faq">
+
+            <button
+                class="faq-question"
+                onclick="toggleFAQ(this)">
+
+                <span>
+                    Transaction ID galat submit ho gaya?
+                </span>
+
+                <span class="faq-arrow">
+                    ⌄
+                </span>
+
+            </button>
+
+            <div class="faq-answer">
+
+                Agar transaction ID/UTR galat submit ho gaya
+                hai to support team ko transaction details
+                ke saath contact karein.
+
+            </div>
+
+        </div>
+
+
+        <div class="faq">
+
+            <button
+                class="faq-question"
+                onclick="toggleFAQ(this)">
+
+                <span>
+                    Withdrawal pending hai, kya karein?
+                </span>
+
+                <span class="faq-arrow">
+                    ⌄
+                </span>
+
+            </button>
+
+            <div class="faq-answer">
+
+                Pending withdrawal ko process hone me
+                verification ke according time lag sakta hai.
+                Agar request bahut der tak pending rahe to
+                support ticket submit karein.
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- SUPPORT TICKET -->
+
+    <div
+        id="ticket"
+        class="ticket-card">
+
+        <div class="section-title">
+            Submit Support Request
+        </div>
+
+
+        <div class="input-group">
+
+            <div class="input-label">
+                Problem Type
+            </div>
+
+            <select
+                id="issueType"
+                class="select">
+
+                <option value="">
+                    Select Problem
+                </option>
+
+                <option value="Deposit Problem">
+                    Deposit Problem
+                </option>
+
+                <option value="Withdrawal Problem">
+                    Withdrawal Problem
+                </option>
+
+                <option value="Match Problem">
+                    Match Problem
+                </option>
+
+                <option value="Account Problem">
+                    Account Problem
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="input-group">
+
+            <div class="input-label">
+                Transaction ID / UTR
+            </div>
+
+            <input
+                id="ticketUTR"
+                class="input"
+                type="text"
+                maxlength="80"
+                placeholder="Optional">
+
+        </div>
+
+
+        <div class="input-group">
+
+            <div class="input-label">
+                Message
+            </div>
+
+            <textarea
+                id="ticketMessage"
+                class="textarea"
+                maxlength="500"
+                placeholder="Describe your problem..."></textarea>
+
+        </div>
+
+
+        <button
+            class="submit-btn"
+            onclick="submitTicket()">
+
+            Submit Support Request
+
+        </button>
+
+    </div>
+
+
+    <!-- NOTE -->
+
+    <div class="note">
+
+        <b>Important:</b>
+        Payment successful hone ke baad transaction ID /
+        UTR ko safe rakhein. Support se contact karte waqt
+        correct transaction details provide karein.
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+        BGMI PAY • Premium Support
+
+        <br>
+
+        Please never share your OTP, password or PIN.
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+    id="toast"
+    class="toast">
+</div>
+
+
+<script>
+
+/* =========================
+   FAQ
+========================= */
+
+function toggleFAQ(button){
+
+    const faq =
+        button.parentElement;
+
+    document
+        .querySelectorAll(".faq")
+        .forEach(item => {
+
+            if(item !== faq){
+
+                item.classList.remove("open");
+
+            }
+
+        });
+
+    faq.classList.toggle("open");
+
+}
+
+
+/* =========================
+   QUICK ISSUE
+========================= */
+
+function selectIssue(issue){
+
+    const select =
+        document.getElementById(
+            "issueType"
+        );
+
+    select.value =
+        issue;
+
+    document
+        .getElementById("ticket")
+        .scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
+
+}
+
+
+/* =========================
+   WHATSAPP
+========================= */
+
+/*
+   APNA WHATSAPP NUMBER YAHAN DAALEIN.
+   Country code ke saath.
+
+   Example:
+   919876543210
+*/
+
+const SUPPORT_WHATSAPP =
+    "919876543210";
+
+
+function openWhatsApp(){
+
+    const message =
+        "Hello BGMI PAY Support, I need help with my account/wallet.";
+
+    const url =
+        "https://wa.me/" +
+        SUPPORT_WHATSAPP +
+        "?text=" +
+        encodeURIComponent(message);
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+}
+
+
+/* =========================
+   EMAIL
+========================= */
+
+/*
+   APNA SUPPORT EMAIL YAHAN DAALEIN.
+*/
+
+const SUPPORT_EMAIL =
+    "support@example.com";
+
+
+function openEmail(){
+
+    const subject =
+        "BGMI PAY Support Request";
+
+    const body =
+        "Hello Support Team,\n\nI need help regarding my account.\n\nThank you.";
+
+    window.location.href =
+        "mailto:" +
+        SUPPORT_EMAIL +
+        "?subject=" +
+        encodeURIComponent(subject) +
+        "&body=" +
+        encodeURIComponent(body);
+
+}
+
+
+/* =========================
+   SUPPORT REQUEST
+========================= */
+
+function submitTicket(){
+
+    const issue =
+        document
+        .getElementById("issueType")
+        .value;
+
+    const utr =
+        document
+        .getElementById("ticketUTR")
+        .value
+        .trim();
+
+    const message =
+        document
+        .getElementById("ticketMessage")
+        .value
+        .trim();
+
+
+    if(!issue){
+
+        showToast(
+            "Select your problem"
+        );
+
+        return;
+
+    }
+
+
+    if(!message){
+
+        showToast(
+            "Enter your problem"
+        );
+
+        return;
+
+    }
+
+
+    const text =
+        "BGMI PAY Support Request\n\n" +
+
+        "Problem: " +
+        issue +
+        "\n\n" +
+
+        "Transaction ID / UTR: " +
+        (utr || "Not provided") +
+        "\n\n" +
+
+        "Message:\n" +
+        message;
+
+
+    const url =
+        "https://wa.me/" +
+        SUPPORT_WHATSAPP +
+        "?text=" +
+        encodeURIComponent(text);
+
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+
+    showToast(
+        "Support request ready"
+    );
+
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+function showToast(message){
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+    toast.innerText =
+        message;
+
+    toast.classList.add(
+        "show"
+    );
+
+    setTimeout(
+        () => {
+
+            toast.classList.remove(
+                "show"
+            );
+
+        },
+        2200
+    );
+
+}
+
+</script>
+
+</body>
+</html>
+
