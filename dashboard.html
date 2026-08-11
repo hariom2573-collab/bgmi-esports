@@ -1720,28 +1720,25 @@ body::before{
 <!-- ===================================================
      FIREBASE
 =================================================== -->
-
 <script type="module">
 
-/* =====================================================
-   FIREBASE
-===================================================== */
-
-import {
-    initializeApp
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 
 import {
     getAuth,
     onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+}
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 import {
     getDatabase,
     ref,
     onValue,
-    update
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    update,
+    set
+}
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 
 /* =====================================================
@@ -1750,8 +1747,7 @@ import {
 
 const firebaseConfig = {
 
-    apiKey:
-        "AIzaSyDsJUtZdIXcsB0w_2MQhMBXxIgbI3ijOvg",
+    apiKey: "AIzaSyDsJUtZdIXcsB0w_2MQhMBXxIgbI3ijOvg",
 
     authDomain:
         "incoinpaysliveearning.firebaseapp.com",
@@ -1770,7 +1766,6 @@ const firebaseConfig = {
 
     appId:
         "1:971873814750:web:7418c7da119e4725ed9a4f"
-
 };
 
 
@@ -1800,24 +1795,16 @@ let currentFilter = "all";
 
 
 /* =====================================================
-   AUTH STATE
+   AUTH
 ===================================================== */
 
 onAuthStateChanged(auth, async (user) => {
 
     if (!user) {
 
-        console.log("No Firebase user logged in.");
+        console.log("No Firebase user.");
 
-        setTimeout(() => {
-
-            if (!auth.currentUser) {
-
-                location.replace("index.html");
-
-            }
-
-        }, 1500);
+        location.replace("index.html");
 
         return;
     }
@@ -1825,23 +1812,23 @@ onAuthStateChanged(auth, async (user) => {
 
     currentUID = user.uid;
 
-    console.log("Logged in UID:", currentUID);
-    console.log("Email:", user.email);
+    console.log("================================");
+    console.log("LOGIN SUCCESS");
+    console.log("UID:", user.uid);
+    console.log("EMAIL:", user.email);
+    console.log("DISPLAY NAME:", user.displayName);
+    console.log("================================");
 
 
     /*
        IMPORTANT:
-       Make sure users/{uid} exists.
+       User profile load/create MUST happen
+       after Firebase authentication.
     */
 
-    await ensureUserAccount(user);
+    await ensureUser(user);
 
-
-    /*
-       Load dashboard
-    */
-
-    loadUser();
+    loadUser(user);
 
     loadMatches();
 
@@ -1853,153 +1840,177 @@ onAuthStateChanged(auth, async (user) => {
 
 
 /* =====================================================
-   ENSURE USER ACCOUNT
+   ENSURE USER
 ===================================================== */
 
-async function ensureUserAccount(user) {
+async function ensureUser(user) {
 
-    try {
-
-        const userRef = ref(
-            db,
-            "users/" + user.uid
-        );
+    const userRef =
+        ref(db, "users/" + user.uid);
 
 
-        /*
-           onValue is used here only to check
-           whether the profile exists.
-        */
+    return new Promise((resolve) => {
 
         onValue(
             userRef,
+
             async (snapshot) => {
 
-                if (snapshot.exists()) {
+                try {
 
-                    console.log(
-                        "User account found:",
-                        user.uid
+                    if (snapshot.exists()) {
+
+                        console.log(
+                            "USER FOUND:",
+                            snapshot.val()
+                        );
+
+                        resolve();
+
+                        return;
+                    }
+
+
+                    /*
+                       USER DOES NOT EXIST
+                       CREATE PROFILE
+                    */
+
+                    const name =
+                        user.displayName ||
+                        user.email?.split("@")[0] ||
+                        "Player";
+
+
+                    const photo =
+                        user.photoURL || "";
+
+
+                    const newUser = {
+
+                        uid: user.uid,
+
+                        name: name,
+
+                        email:
+                            user.email || "",
+
+                        mobile: "",
+
+                        bgmiId: "",
+
+                        photo: photo,
+
+                        photoURL: photo,
+
+                        status: "active",
+
+                        wallet: 0,
+
+                        missionMatches: 0,
+
+                        matchCount: 0,
+
+                        matchesJoined: 0,
+
+                        joinedMatches: 0,
+
+                        createdAt:
+                            Date.now(),
+
+                        lastLogin:
+                            Date.now()
+
+                    };
+
+
+                    await set(
+                        userRef,
+                        newUser
                     );
 
-                    return;
+
+                    console.log(
+                        "NEW USER CREATED:",
+                        newUser
+                    );
+
+
+                    resolve();
+
+                }
+                catch (error) {
+
+                    console.error(
+                        "CREATE USER ERROR:",
+                        error
+                    );
+
+                    resolve();
+
                 }
 
-
-                /*
-                   USER NODE DOES NOT EXIST
-                   Create it automatically.
-                */
-
-                const name =
-                    user.displayName ||
-                    "Player";
-
-
-                const photo =
-                    user.photoURL ||
-                    "";
-
-
-                const newUser = {
-
-                    uid: user.uid,
-
-                    name: name,
-
-                    email:
-                        user.email || "",
-
-                    wallet: 0,
-
-                    photo: photo,
-
-                    photoURL: photo,
-
-                    missionMatches: 0,
-
-                    matchCount: 0,
-
-                    matchesJoined: 0,
-
-                    joinedMatches: 0,
-
-                    createdAt:
-                        Date.now()
-
-                };
-
-
-                await update(
-                    userRef,
-                    newUser
-                );
-
-
-                console.log(
-                    "New user account created:",
-                    user.uid
-                );
-
             },
-            (error) => {
 
-                console.error(
-                    "User account read error:",
-                    error
-                );
-
-            },
             {
                 onlyOnce: true
             }
+
         );
 
-    }
-    catch (error) {
-
-        console.error(
-            "ensureUserAccount error:",
-            error
-        );
-
-    }
+    });
 
 }
 
 
 /* =====================================================
-   LOAD USER
+   LOAD USER PROFILE
 ===================================================== */
 
-function loadUser() {
+function loadUser(user) {
 
-    if (!currentUID) {
+    if (!user || !user.uid) {
+
         return;
     }
 
 
-    onValue(
-
+    const userRef =
         ref(
             db,
-            "users/" + currentUID
-        ),
+            "users/" + user.uid
+        );
+
+
+    onValue(
+
+        userRef,
 
         (snapshot) => {
 
-            /*
-               USER NODE NOT FOUND
-            */
+            console.log(
+                "USER SNAPSHOT:",
+                snapshot.exists()
+            );
+
 
             if (!snapshot.exists()) {
 
                 console.log(
-                    "users/" + currentUID +
-                    " does not exist yet."
+                    "User profile not found."
                 );
 
-                setDefaultUser();
+                showUser(
+                    user.displayName ||
+                    user.email?.split("@")[0] ||
+                    "Player",
+
+                    user.photoURL || "",
+
+                    0,
+
+                    0
+                );
 
                 return;
             }
@@ -2009,108 +2020,181 @@ function loadUser() {
                 snapshot.val() || {};
 
 
-            /* =========================
+            console.log(
+                "FULL USER DATA:",
+                data
+            );
+
+
+            /* =================================================
                NAME
-            ========================= */
+            ================================================= */
 
-            const name =
-                data.name ||
-                data.displayName ||
-                auth.currentUser?.displayName ||
-                "Player";
+            let name = "";
 
 
-            const nameElement =
-                document.getElementById(
-                    "playerName"
-                );
+            /*
+               First priority:
+               users/{uid}/name
+            */
 
+            if (
+                typeof data.name === "string" &&
+                data.name.trim() !== ""
+            ) {
 
-            if (nameElement) {
-
-                nameElement.innerText =
-                    name;
+                name =
+                    data.name.trim();
 
             }
 
 
-            /* =========================
+            /*
+               Second priority:
+               displayName
+            */
+
+            else if (
+                typeof data.displayName === "string" &&
+                data.displayName.trim() !== ""
+            ) {
+
+                name =
+                    data.displayName.trim();
+
+            }
+
+
+            /*
+               Third priority:
+               Firebase Auth displayName
+            */
+
+            else if (
+                user.displayName &&
+                user.displayName.trim() !== ""
+            ) {
+
+                name =
+                    user.displayName.trim();
+
+            }
+
+
+            /*
+               Fourth priority:
+               Email username
+            */
+
+            else if (user.email) {
+
+                name =
+                    user.email
+                        .split("@")[0];
+
+            }
+
+
+            /*
+               Last fallback
+            */
+
+            else {
+
+                name = "Player";
+
+            }
+
+
+            console.log(
+                "FINAL PLAYER NAME:",
+                name
+            );
+
+
+            /* =================================================
                WALLET
-            ========================= */
+            ================================================= */
 
-            const wallet =
-                Number(
-                    data.wallet ?? 0
-                );
+            let wallet = 0;
 
 
-            const walletElement =
-                document.getElementById(
-                    "walletAmount"
-                );
+            /*
+               Your rules show wallet as an object:
 
+               wallet/
+                  balance
+                  bonus
+                  withdrawable
 
-            if (walletElement) {
+               So first check wallet.balance.
+            */
 
-                walletElement.innerText =
-                    Math.floor(wallet)
-                    .toLocaleString("en-IN");
+            if (
+                data.wallet &&
+                typeof data.wallet === "object"
+            ) {
+
+                wallet =
+                    Number(
+                        data.wallet.balance ??
+                        data.wallet.withdrawable ??
+                        0
+                    );
+
+            }
+
+            /*
+               Old format:
+
+               wallet: 500
+            */
+
+            else {
+
+                wallet =
+                    Number(
+                        data.wallet ?? 0
+                    );
 
             }
 
 
-            /* =========================
-               PROFILE PHOTO
-            ========================= */
+            /* =================================================
+               PHOTO
+            ================================================= */
 
             const photo =
                 data.photo ||
                 data.photoURL ||
-                auth.currentUser?.photoURL ||
+                user.photoURL ||
                 "";
 
 
-            const photoElement =
-                document.getElementById(
-                    "profilePhoto"
-                );
-
-
-            if (photoElement) {
-
-                if (photo) {
-
-                    photoElement.src =
-                        photo;
-
-                }
-                else {
-
-                    photoElement.src =
-                        "https://ui-avatars.com/api/?name=" +
-                        encodeURIComponent(name) +
-                        "&background=111827&color=22c55e&bold=true";
-
-                }
-
-            }
-
-
-            /* =========================
+            /* =================================================
                MISSION
-            ========================= */
+            ================================================= */
 
-            const count =
+            const missionCount =
                 Number(
                     data.missionMatches ??
-                    data.matchCount ??
                     data.matchesJoined ??
+                    data.matchCount ??
                     data.joinedMatches ??
                     0
                 );
 
 
-            updateMission(count);
+            /* =================================================
+               SHOW ON SCREEN
+            ================================================= */
+
+            showUser(
+                name,
+                photo,
+                wallet,
+                missionCount
+            );
 
         },
 
@@ -2121,19 +2205,21 @@ function loadUser() {
                 error
             );
 
+
             /*
-               Firebase Rules error
+               If Firebase rules deny access,
+               don't silently keep showing Player.
             */
 
-            if (
-                error.code ===
-                "PERMISSION_DENIED"
-            ) {
-
-                console.error(
-                    "Firebase Database Rules are blocking users/" +
-                    currentUID
+            const nameElement =
+                document.getElementById(
+                    "playerName"
                 );
+
+            if (nameElement) {
+
+                nameElement.innerText =
+                    "Loading...";
 
             }
 
@@ -2145,10 +2231,20 @@ function loadUser() {
 
 
 /* =====================================================
-   DEFAULT USER
+   SHOW USER
 ===================================================== */
 
-function setDefaultUser() {
+function showUser(
+    name,
+    photo,
+    wallet,
+    missionCount
+) {
+
+
+    /* =================================================
+       NAME
+    ================================================= */
 
     const nameElement =
         document.getElementById(
@@ -2156,11 +2252,37 @@ function setDefaultUser() {
         );
 
 
+    if (nameElement) {
+
+        nameElement.textContent =
+            name || "Player";
+
+    }
+
+
+    /* =================================================
+       WALLET
+    ================================================= */
+
     const walletElement =
         document.getElementById(
             "walletAmount"
         );
 
+
+    if (walletElement) {
+
+        walletElement.textContent =
+            Math.floor(
+                Number(wallet) || 0
+            ).toLocaleString("en-IN");
+
+    }
+
+
+    /* =================================================
+       PHOTO
+    ================================================= */
 
     const photoElement =
         document.getElementById(
@@ -2168,109 +2290,34 @@ function setDefaultUser() {
         );
 
 
-    if (nameElement) {
-
-        nameElement.innerText =
-            "Player";
-
-    }
-
-
-    if (walletElement) {
-
-        walletElement.innerText =
-            "0";
-
-    }
-
-
     if (photoElement) {
 
-        photoElement.src =
-            "https://ui-avatars.com/api/?name=Player&background=111827&color=22c55e&bold=true";
+        if (photo) {
 
-    }
+            photoElement.src =
+                photo;
 
-}
+        }
+        else {
 
-
-/* =====================================================
-   ANNOUNCEMENT
-===================================================== */
-
-function loadAnnouncement() {
-
-    onValue(
-
-        ref(
-            db,
-            "settings/announcement"
-        ),
-
-        (snapshot) => {
-
-            if (!snapshot.exists()) {
-                return;
-            }
-
-
-            const value =
-                snapshot.val();
-
-
-            let text = "";
-
-
-            if (
-                typeof value ===
-                "string"
-            ) {
-
-                text = value;
-
-            }
-            else if (
-                value &&
-                typeof value ===
-                "object"
-            ) {
-
-                text =
-                    value.text ||
-                    value.message ||
-                    value.title ||
-                    "";
-
-            }
-
-
-            const element =
-                document.getElementById(
-                    "announcementText"
-                );
-
-
-            if (
-                element &&
-                text
-            ) {
-
-                element.innerText =
-                    text;
-
-            }
-
-        },
-
-        (error) => {
-
-            console.error(
-                "Announcement error:",
-                error
-            );
+            photoElement.src =
+                "https://ui-avatars.com/api/?name=" +
+                encodeURIComponent(
+                    name || "Player"
+                ) +
+                "&background=111827&color=22c55e&bold=true";
 
         }
 
+    }
+
+
+    /* =================================================
+       MISSION
+    ================================================= */
+
+    updateMission(
+        missionCount
     );
 
 }
@@ -2283,6 +2330,7 @@ function loadAnnouncement() {
 function loadMission() {
 
     if (!currentUID) {
+
         return;
     }
 
@@ -2299,6 +2347,7 @@ function loadMission() {
         (snapshot) => {
 
             if (!snapshot.exists()) {
+
                 return;
             }
 
@@ -2323,10 +2372,6 @@ function loadMission() {
 
 }
 
-
-/* =====================================================
-   UPDATE MISSION
-===================================================== */
 
 function updateMission(count) {
 
@@ -2361,9 +2406,116 @@ function updateMission(count) {
 
     if (progress) {
 
-        progress.innerText =
+        progress.textContent =
             count +
             " / 100 Matches";
+
+    }
+
+}
+
+
+/* =====================================================
+   ANNOUNCEMENT
+===================================================== */
+
+function loadAnnouncement() {
+
+    onValue(
+
+        ref(
+            db,
+            "announcement"
+        ),
+
+        (snapshot) => {
+
+            let value =
+                snapshot.val();
+
+
+            /*
+               If your announcement is actually
+               inside settings/announcement,
+               this fallback handles that too.
+            */
+
+            if (!snapshot.exists()) {
+
+                onValue(
+
+                    ref(
+                        db,
+                        "settings/announcement"
+                    ),
+
+                    (snap) => {
+
+                        setAnnouncement(
+                            snap.val()
+                        );
+
+                    },
+
+                    {
+                        onlyOnce: true
+                    }
+
+                );
+
+                return;
+            }
+
+
+            setAnnouncement(value);
+
+        }
+
+    );
+
+}
+
+
+function setAnnouncement(value) {
+
+    let text = "";
+
+
+    if (
+        typeof value === "string"
+    ) {
+
+        text = value;
+
+    }
+
+    else if (
+        value &&
+        typeof value === "object"
+    ) {
+
+        text =
+            value.text ||
+            value.message ||
+            value.title ||
+            "";
+
+    }
+
+
+    const element =
+        document.getElementById(
+            "announcementText"
+        );
+
+
+    if (
+        element &&
+        text
+    ) {
+
+        element.textContent =
+            text;
 
     }
 
@@ -2422,7 +2574,7 @@ function loadMatches() {
         (error) => {
 
             console.error(
-                "Matches error:",
+                "MATCH LOAD ERROR:",
                 error
             );
 
@@ -2446,6 +2598,7 @@ function renderMatches() {
 
 
     if (!box) {
+
         return;
     }
 
@@ -2458,8 +2611,7 @@ function renderMatches() {
 
 
     if (
-        currentFilter !==
-        "all"
+        currentFilter !== "all"
     ) {
 
         list =
@@ -2471,7 +2623,6 @@ function renderMatches() {
                             item.data.type ||
                             "squad"
                         ).toLowerCase();
-
 
                     return (
                         type ===
@@ -2493,7 +2644,6 @@ function renderMatches() {
                         item.data.status ||
                         ""
                     ).toLowerCase();
-
 
                 return ![
                     "completed",
@@ -2578,10 +2728,6 @@ function renderMatch(
         ).toUpperCase();
 
 
-    const mode =
-        type.toLowerCase();
-
-
     const title =
         match.title ||
         "BGMI MATCH";
@@ -2594,19 +2740,23 @@ function renderMatch(
 
     const prize =
         Number(
-            match.prize ?? 0
+            match.prize ??
+            match.winningAmount ??
+            0
         );
 
 
     const entry =
         Number(
-            match.entry ?? 0
+            match.entry ??
+            0
         );
 
 
     const total =
         Number(
-            match.total ?? 25
+            match.total ??
+            25
         );
 
 
@@ -2614,7 +2764,8 @@ function renderMatch(
         Math.max(
             0,
             Number(
-                match.booked ?? 0
+                match.booked ??
+                0
             )
         );
 
@@ -2640,12 +2791,6 @@ function renderMatch(
         );
 
 
-    const joined =
-        isUserJoined(
-            match
-        );
-
-
     const card =
         document.createElement(
             "div"
@@ -2657,7 +2802,7 @@ function renderMatch(
 
 
     card.dataset.mode =
-        mode;
+        type.toLowerCase();
 
 
     card.onclick =
@@ -2689,16 +2834,6 @@ function renderMatch(
                 ${escapeHTML(timer)}
             </span>
 
-            ${
-                joined
-                ? `
-                    <span class="joinedBadge">
-                        ✓ JOINED
-                    </span>
-                  `
-                : ""
-            }
-
             <div class="matchOverlay">
 
                 <div class="matchTitle">
@@ -2712,7 +2847,6 @@ function renderMatch(
             </div>
 
         </div>
-
 
         <div class="matchInfo">
 
@@ -2728,7 +2862,6 @@ function renderMatch(
 
             </div>
 
-
             <div class="infoBox">
 
                 <span>
@@ -2740,7 +2873,6 @@ function renderMatch(
                 </strong>
 
             </div>
-
 
             <div class="infoBox">
 
@@ -2755,7 +2887,6 @@ function renderMatch(
             </div>
 
         </div>
-
 
         <div class="progress">
 
@@ -2775,14 +2906,15 @@ function renderMatch(
 
 
 /* =====================================================
-   MATCH TIMER
+   TIMER
 ===================================================== */
 
 function getMatchTimer(match) {
 
     if (
         String(
-            match.status || ""
+            match.status ||
+            ""
         ).toLowerCase() === "live"
     ) {
 
@@ -2852,7 +2984,6 @@ function getMatchTimer(match) {
                 hours / 24
             );
 
-
         return (
             "⏰ " +
             days +
@@ -2876,67 +3007,6 @@ function getMatchTimer(match) {
 
 
 /* =====================================================
-   CHECK JOINED
-===================================================== */
-
-function isUserJoined(match) {
-
-    if (!currentUID) {
-        return false;
-    }
-
-
-    const collections = [
-
-        match.players,
-
-        match.users,
-
-        match.joinedUsers,
-
-        match.bookings
-
-    ];
-
-
-    for (
-        const collection
-        of collections
-    ) {
-
-        if (
-            collection &&
-            typeof collection ===
-            "object" &&
-            collection[currentUID]
-        ) {
-
-            return true;
-
-        }
-
-    }
-
-
-    if (
-        Array.isArray(
-            match.joinedUIDs
-        )
-    ) {
-
-        return match.joinedUIDs.includes(
-            currentUID
-        );
-
-    }
-
-
-    return false;
-
-}
-
-
-/* =====================================================
    IMAGE
 ===================================================== */
 
@@ -2947,41 +3017,13 @@ function getImage(imageUrl) {
 
 
     if (!imageUrl) {
+
         return fallback;
-    }
-
-
-    let url =
-        String(imageUrl);
-
-
-    if (
-        url.includes(
-            "pexels.com/photo/"
-        )
-    ) {
-
-        const match =
-            url.match(
-                /photo\/(?:.*-)?(\d+)\/?$/
-            );
-
-
-        if (match) {
-
-            url =
-                "https://images.pexels.com/photos/" +
-                match[1] +
-                "/pexels-photo-" +
-                match[1] +
-                ".jpeg";
-
-        }
 
     }
 
 
-    return url;
+    return String(imageUrl);
 
 }
 
@@ -3057,11 +3099,9 @@ function() {
 
         section.scrollIntoView({
 
-            behavior:
-                "smooth",
+            behavior: "smooth",
 
-            block:
-                "start"
+            block: "start"
 
         });
 
@@ -3081,7 +3121,9 @@ function showWelcome() {
 
 
     if (!user) {
+
         return;
+
     }
 
 
