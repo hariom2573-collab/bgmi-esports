@@ -1,0 +1,2983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+
+<meta name="theme-color" content="#050B18">
+<meta name="color-scheme" content="dark">
+
+<title>Messages • BGMI ESPORTS</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Poppins,sans-serif;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html{
+    width:100%;
+    min-height:100%;
+    scroll-behavior:smooth;
+}
+
+body{
+    width:100%;
+    min-height:100vh;
+    background:#050B18;
+    color:#fff;
+    overflow-x:hidden;
+    padding-bottom:86px;
+}
+
+button,
+input{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+    border:0;
+}
+
+button:active{
+    transform:scale(.96);
+}
+
+::-webkit-scrollbar{
+    width:0;
+    height:0;
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.bgImage{
+    position:fixed;
+    inset:0;
+
+    background-image:url(
+        "https://images.pexels.com/photos/7915357/pexels-photo-7915357.jpeg"
+    );
+
+    background-size:cover;
+    background-position:center;
+
+    opacity:.07;
+
+    z-index:-3;
+}
+
+.bgOverlay{
+    position:fixed;
+    inset:0;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(5,11,24,.94),
+            rgba(5,11,24,.99)
+        );
+
+    z-index:-2;
+}
+
+body::before{
+    content:"";
+
+    position:fixed;
+    inset:0;
+
+    background:
+        radial-gradient(
+            circle at 10% 0%,
+            rgba(34,197,94,.12),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 15%,
+            rgba(37,99,235,.10),
+            transparent 30%
+        );
+
+    pointer-events:none;
+
+    z-index:-1;
+}
+
+
+/* =========================================================
+   APP
+========================================================= */
+
+.app{
+    width:100%;
+    max-width:520px;
+    min-height:100vh;
+    margin:auto;
+    padding:0 14px 100px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:100;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:
+        calc(13px + env(safe-area-inset-top))
+        2px
+        13px;
+
+    background:rgba(5,11,24,.92);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+.headerLeft{
+    display:flex;
+    align-items:center;
+    gap:11px;
+}
+
+.backBtn{
+    width:40px;
+    height:40px;
+
+    border-radius:13px;
+
+    background:#101b2d;
+    color:#fff;
+
+    border:1px solid rgba(255,255,255,.07);
+
+    font-size:19px;
+}
+
+.headerTitleBox{
+    min-width:0;
+}
+
+.headerTitle{
+    font-size:18px;
+    font-weight:800;
+    line-height:1.2;
+}
+
+.headerSubtitle{
+    margin-top:2px;
+
+    color:#64748b;
+
+    font-size:8px;
+    font-weight:700;
+
+    text-transform:uppercase;
+    letter-spacing:.7px;
+}
+
+.headerRight{
+    display:flex;
+    align-items:center;
+}
+
+.headerIcon{
+    position:relative;
+
+    width:40px;
+    height:40px;
+
+    border-radius:13px;
+
+    background:#101b2d;
+    color:#dbe4ef;
+
+    border:1px solid rgba(255,255,255,.06);
+
+    font-size:16px;
+}
+
+.unreadBadge{
+    position:absolute;
+
+    top:-3px;
+    right:-3px;
+
+    min-width:17px;
+    height:17px;
+
+    padding:0 4px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:20px;
+
+    background:#ef4444;
+    color:#fff;
+
+    border:2px solid #050B18;
+
+    font-size:7px;
+    font-weight:900;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.searchBox{
+    position:relative;
+    margin:14px 0 12px;
+}
+
+.searchBox input{
+    width:100%;
+    height:45px;
+
+    padding:0 44px 0 43px;
+
+    border-radius:14px;
+
+    outline:none;
+
+    color:#fff;
+
+    background:#0c1728;
+
+    border:1px solid rgba(255,255,255,.06);
+
+    font-size:10px;
+    font-weight:600;
+}
+
+.searchBox input::placeholder{
+    color:#526177;
+}
+
+.searchIcon{
+    position:absolute;
+
+    left:15px;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:#64748b;
+    font-size:15px;
+
+    pointer-events:none;
+}
+
+.clearSearch{
+    position:absolute;
+
+    right:8px;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:31px;
+    height:31px;
+
+    display:none;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:10px;
+
+    background:#172337;
+    color:#94a3b8;
+
+    font-size:13px;
+}
+
+
+/* =========================================================
+   ADMIN ONLY BADGE
+========================================================= */
+
+.adminOnlyBadge{
+    display:flex;
+    align-items:center;
+    gap:9px;
+
+    margin-bottom:13px;
+    padding:11px 13px;
+
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(34,197,94,.11),
+            rgba(14,25,43,.95)
+        );
+
+    border:1px solid rgba(34,197,94,.14);
+}
+
+.adminOnlyIcon{
+    width:34px;
+    height:34px;
+
+    flex-shrink:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:11px;
+
+    background:rgba(34,197,94,.12);
+
+    font-size:16px;
+}
+
+.adminOnlyTitle{
+    color:#22c55e;
+
+    font-size:9px;
+    font-weight:900;
+
+    text-transform:uppercase;
+}
+
+.adminOnlyText{
+    margin-top:2px;
+
+    color:#64748b;
+
+    font-size:7px;
+    font-weight:600;
+}
+
+
+/* =========================================================
+   ANNOUNCEMENT
+========================================================= */
+
+.announcement{
+    display:flex;
+    align-items:center;
+
+    min-height:52px;
+
+    margin-bottom:14px;
+
+    padding:8px 11px;
+
+    border-radius:17px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(34,197,94,.12),
+            rgba(14,25,43,.96)
+        );
+
+    border:1px solid rgba(34,197,94,.14);
+}
+
+.announcementIcon{
+    width:35px;
+    height:35px;
+
+    flex-shrink:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:11px;
+
+    background:rgba(34,197,94,.12);
+
+    font-size:16px;
+}
+
+.announcementContent{
+    min-width:0;
+    margin-left:9px;
+}
+
+.announcementLabel{
+    color:#22c55e;
+
+    font-size:7px;
+    font-weight:900;
+
+    text-transform:uppercase;
+}
+
+.announcementText{
+    margin-top:2px;
+
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+
+    color:#b8c4d5;
+
+    font-size:8px;
+    font-weight:600;
+}
+
+
+/* =========================================================
+   ADMIN BROADCAST
+========================================================= */
+
+.broadcastCard{
+    display:none;
+
+    position:relative;
+
+    margin-bottom:13px;
+
+    padding:14px;
+
+    overflow:hidden;
+
+    border-radius:18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(245,158,11,.15),
+            rgba(14,25,43,.98)
+        );
+
+    border:1px solid rgba(245,158,11,.18);
+}
+
+.broadcastCard.show{
+    display:block;
+}
+
+.broadcastGlow{
+    position:absolute;
+
+    width:100px;
+    height:100px;
+
+    right:-40px;
+    top:-40px;
+
+    border-radius:50%;
+
+    background:rgba(245,158,11,.08);
+}
+
+.broadcastTop{
+    position:relative;
+
+    display:flex;
+    align-items:center;
+    gap:9px;
+}
+
+.broadcastIcon{
+    width:35px;
+    height:35px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:11px;
+
+    background:rgba(245,158,11,.13);
+
+    font-size:16px;
+}
+
+.broadcastTitle{
+    color:#fbbf24;
+
+    font-size:10px;
+    font-weight:900;
+}
+
+.broadcastDate{
+    margin-top:2px;
+
+    color:#64748b;
+
+    font-size:7px;
+}
+
+.broadcastText{
+    position:relative;
+
+    margin-top:11px;
+
+    color:#d1d9e5;
+
+    font-size:9px;
+    line-height:1.7;
+}
+
+
+/* =========================================================
+   SECTION HEADER
+========================================================= */
+
+.sectionHeader{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    margin:16px 2px 9px;
+}
+
+.sectionHeader h3{
+    font-size:13px;
+    font-weight:800;
+}
+
+.sectionHeader span{
+    color:#55647a;
+
+    font-size:7px;
+    font-weight:800;
+
+    text-transform:uppercase;
+}
+
+
+/* =========================================================
+   MESSAGE LIST
+========================================================= */
+
+.messageList{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+}
+
+.messageItem{
+    position:relative;
+
+    display:flex;
+    align-items:center;
+
+    min-height:82px;
+
+    padding:11px;
+
+    border-radius:18px;
+
+    background:#0b1627;
+
+    border:1px solid rgba(255,255,255,.055);
+
+    transition:.15s;
+
+    overflow:hidden;
+}
+
+.messageItem:active{
+    transform:scale(.985);
+}
+
+.messageItem.unread{
+    background:
+        linear-gradient(
+            135deg,
+            rgba(34,197,94,.10),
+            rgba(11,22,39,.98)
+        );
+
+    border-color:rgba(34,197,94,.18);
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.12);
+}
+
+.messageItem.read{
+    opacity:.82;
+}
+
+.avatarWrap{
+    position:relative;
+    flex-shrink:0;
+}
+
+.avatar{
+    width:52px;
+    height:52px;
+
+    object-fit:cover;
+
+    border-radius:16px;
+
+    background:#172338;
+
+    border:1px solid rgba(34,197,94,.16);
+}
+
+.adminCrown{
+    position:absolute;
+
+    right:-4px;
+    top:-5px;
+
+    width:19px;
+    height:19px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#f59e0b;
+
+    border:2px solid #0b1627;
+
+    font-size:9px;
+}
+
+.messageMain{
+    min-width:0;
+    flex:1;
+
+    margin-left:11px;
+}
+
+.messageTop{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:7px;
+}
+
+.messageName{
+    min-width:0;
+
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+
+    font-size:11px;
+    font-weight:800;
+}
+
+.adminLabel{
+    display:inline-flex;
+    align-items:center;
+
+    margin-left:5px;
+    padding:2px 5px;
+
+    border-radius:5px;
+
+    background:rgba(245,158,11,.12);
+
+    color:#fbbf24;
+
+    font-size:5px;
+    font-weight:900;
+
+    vertical-align:middle;
+}
+
+.messageTime{
+    flex-shrink:0;
+
+    color:#526177;
+
+    font-size:7px;
+    font-weight:600;
+}
+
+.messagePreview{
+    margin-top:5px;
+
+    overflow:hidden;
+
+    white-space:nowrap;
+    text-overflow:ellipsis;
+
+    color:#9aa8ba;
+
+    font-size:8px;
+    font-weight:500;
+}
+
+.messageType{
+    margin-top:5px;
+
+    display:inline-flex;
+
+    padding:2px 6px;
+
+    border-radius:6px;
+
+    background:rgba(34,197,94,.08);
+
+    color:#22c55e;
+
+    font-size:5px;
+    font-weight:900;
+
+    text-transform:uppercase;
+}
+
+.unreadDot{
+    flex-shrink:0;
+
+    width:8px;
+    height:8px;
+
+    margin-left:7px;
+
+    border-radius:50%;
+
+    background:#22c55e;
+
+    box-shadow:0 0 10px rgba(34,197,94,.55);
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty{
+    padding:50px 20px;
+
+    text-align:center;
+
+    border-radius:19px;
+
+    background:#0b1627;
+
+    border:1px solid rgba(255,255,255,.05);
+}
+
+.emptyIcon{
+    width:64px;
+    height:64px;
+
+    margin:auto;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:21px;
+
+    background:#101e32;
+
+    font-size:27px;
+}
+
+.emptyTitle{
+    margin-top:13px;
+
+    font-size:12px;
+    font-weight:800;
+
+    color:#aab6c8;
+}
+
+.emptyText{
+    margin-top:6px;
+
+    color:#536279;
+
+    font-size:8px;
+    line-height:1.6;
+}
+
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+.loader{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    gap:6px;
+
+    padding:40px;
+}
+
+.dot{
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#22c55e;
+
+    animation:loaderBounce .8s infinite alternate;
+}
+
+.dot:nth-child(2){
+    animation-delay:.15s;
+}
+
+.dot:nth-child(3){
+    animation-delay:.3s;
+}
+
+@keyframes loaderBounce{
+
+    from{
+        transform:translateY(0);
+        opacity:.4;
+    }
+
+    to{
+        transform:translateY(-7px);
+        opacity:1;
+    }
+
+}
+
+
+/* =========================================================
+   MESSAGE VIEW MODAL
+========================================================= */
+
+.messageModal{
+    position:fixed;
+    inset:0;
+
+    z-index:99999;
+
+    display:none;
+    align-items:flex-end;
+    justify-content:center;
+
+    background:rgba(0,0,0,.75);
+
+    backdrop-filter:blur(9px);
+    -webkit-backdrop-filter:blur(9px);
+}
+
+.messageModal.show{
+    display:flex;
+}
+
+.messageModalBox{
+    width:100%;
+    max-width:520px;
+
+    padding:
+        17px 15px
+        calc(20px + env(safe-area-inset-bottom));
+
+    border-radius:25px 25px 0 0;
+
+    background:
+        linear-gradient(
+            160deg,
+            #111d31,
+            #07101f
+        );
+
+    border-top:1px solid rgba(34,197,94,.18);
+
+    animation:modalUp .2s ease;
+}
+
+@keyframes modalUp{
+
+    from{
+        transform:translateY(40px);
+        opacity:0;
+    }
+
+    to{
+        transform:translateY(0);
+        opacity:1;
+    }
+
+}
+
+.modalHandle{
+    width:42px;
+    height:4px;
+
+    margin:0 auto 16px;
+
+    border-radius:20px;
+
+    background:#334155;
+}
+
+.messageModalHeader{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    margin-bottom:13px;
+}
+
+.modalAvatar{
+    width:43px;
+    height:43px;
+
+    border-radius:13px;
+
+    object-fit:cover;
+
+    background:#172338;
+}
+
+.modalUser{
+    min-width:0;
+    flex:1;
+}
+
+.modalUserName{
+    font-size:12px;
+    font-weight:800;
+}
+
+.modalUserRole{
+    margin-top:2px;
+
+    color:#fbbf24;
+
+    font-size:7px;
+    font-weight:800;
+
+    text-transform:uppercase;
+}
+
+.modalClose{
+    width:34px;
+    height:34px;
+
+    border-radius:11px;
+
+    background:#18263a;
+    color:#94a3b8;
+
+    font-size:18px;
+}
+
+.fullMessage{
+    padding:13px;
+
+    border-radius:14px;
+
+    background:#0a1526;
+
+    border:1px solid rgba(255,255,255,.06);
+
+    color:#d5deea;
+
+    font-size:10px;
+    line-height:1.7;
+
+    white-space:pre-wrap;
+
+    word-break:break-word;
+}
+
+.fullMessageTime{
+    margin-top:8px;
+
+    text-align:right;
+
+    color:#526177;
+
+    font-size:7px;
+}
+
+
+/* =========================================================
+   BOTTOM NAV
+========================================================= */
+
+.bottomNav{
+    position:fixed;
+
+    left:50%;
+    bottom:0;
+
+    transform:translateX(-50%);
+
+    width:100%;
+    max-width:520px;
+
+    height:72px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+
+    padding:
+        5px 8px
+        calc(5px + env(safe-area-inset-bottom));
+
+    background:rgba(8,17,31,.98);
+
+    border-top:1px solid rgba(255,255,255,.07);
+
+    box-shadow:
+        0 -10px 30px rgba(0,0,0,.25);
+
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
+
+    z-index:9000;
+}
+
+.navBtn{
+    position:relative;
+
+    flex:1;
+
+    height:62px;
+
+    background:none;
+
+    color:#65748a;
+
+    font-size:8px;
+    font-weight:700;
+}
+
+.navIcon{
+    width:34px;
+    height:31px;
+
+    margin:auto;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:11px;
+
+    font-size:18px;
+
+    transition:.15s;
+}
+
+.navBtn.active{
+    color:#22c55e;
+}
+
+.navBtn.active .navIcon{
+    background:rgba(34,197,94,.12);
+}
+
+.navBadge{
+    position:absolute;
+
+    top:2px;
+    right:calc(50% - 19px);
+
+    min-width:14px;
+    height:14px;
+
+    padding:0 3px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:20px;
+
+    background:#ef4444;
+    color:#fff;
+
+    border:2px solid #08111f;
+
+    font-size:6px;
+    font-weight:900;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+    position:fixed;
+
+    left:50%;
+    bottom:87px;
+
+    transform:translate(-50%,20px);
+
+    width:calc(100% - 30px);
+    max-width:450px;
+
+    padding:11px 14px;
+
+    border-radius:13px;
+
+    background:#172337;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    color:#dbe4ef;
+
+    text-align:center;
+
+    font-size:8px;
+    font-weight:700;
+
+    opacity:0;
+    pointer-events:none;
+
+    transition:.25s;
+
+    z-index:100000;
+}
+
+.toast.show{
+    transform:translate(-50%,0);
+    opacity:1;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:360px){
+
+    .app{
+        padding-left:11px;
+        padding-right:11px;
+    }
+
+    .messageItem{
+        min-height:76px;
+    }
+
+    .avatar{
+        width:47px;
+        height:47px;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        transition-duration:.01ms !important;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="bgImage"></div>
+<div class="bgOverlay"></div>
+
+
+<!-- =====================================================
+     MAIN APP
+===================================================== -->
+
+<div class="app">
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="headerLeft">
+
+            <button
+                class="backBtn"
+                onclick="goBack()">
+                ‹
+            </button>
+
+            <div class="headerTitleBox">
+
+                <div class="headerTitle">
+                    Messages
+                </div>
+
+                <div class="headerSubtitle">
+                    OFFICIAL ADMIN UPDATES
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="headerRight">
+
+            <button
+                class="headerIcon"
+                onclick="markAllRead()"
+                aria-label="Mark all read">
+
+                ✓
+
+                <span
+                    id="headerUnread"
+                    class="unreadBadge"
+                    style="display:none">
+                    0
+                </span>
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- SEARCH -->
+
+    <div class="searchBox">
+
+        <span class="searchIcon">
+            🔍
+        </span>
+
+        <input
+            id="searchInput"
+            type="search"
+            placeholder="Search admin messages..."
+            autocomplete="off">
+
+        <button
+            id="clearSearch"
+            class="clearSearch"
+            onclick="clearSearch()">
+
+            ×
+
+        </button>
+
+    </div>
+
+
+    <!-- ADMIN ONLY -->
+
+    <div class="adminOnlyBadge">
+
+        <div class="adminOnlyIcon">
+            🛡️
+        </div>
+
+        <div>
+
+            <div class="adminOnlyTitle">
+                Admin Messages Only
+            </div>
+
+            <div class="adminOnlyText">
+                Only official BGMI ESPORTS admin messages are shown here.
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ANNOUNCEMENT -->
+
+    <div
+        id="announcementCard"
+        class="announcement">
+
+        <div class="announcementIcon">
+            📢
+        </div>
+
+        <div class="announcementContent">
+
+            <div class="announcementLabel">
+                Latest Update
+            </div>
+
+            <div
+                id="announcementText"
+                class="announcementText">
+
+                Welcome to BGMI ESPORTS
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ADMIN BROADCAST -->
+
+    <div
+        id="broadcastCard"
+        class="broadcastCard">
+
+        <div class="broadcastGlow"></div>
+
+        <div class="broadcastTop">
+
+            <div class="broadcastIcon">
+                📣
+            </div>
+
+            <div>
+
+                <div class="broadcastTitle">
+                    ADMIN BROADCAST
+                </div>
+
+                <div
+                    id="broadcastDate"
+                    class="broadcastDate">
+                    Official Announcement
+                </div>
+
+            </div>
+
+        </div>
+
+        <div
+            id="broadcastText"
+            class="broadcastText">
+        </div>
+
+    </div>
+
+
+    <!-- SECTION -->
+
+    <div class="sectionHeader">
+
+        <h3>
+            Official Inbox
+        </h3>
+
+        <span id="messageCount">
+            0 MESSAGES
+        </span>
+
+    </div>
+
+
+    <!-- MESSAGE LIST -->
+
+    <div
+        id="messageList"
+        class="messageList">
+
+        <div class="loader">
+
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MESSAGE DETAIL MODAL
+===================================================== -->
+
+<div
+    id="messageModal"
+    class="messageModal"
+    onclick="closeMessageOutside(event)">
+
+    <div class="messageModalBox">
+
+        <div class="modalHandle"></div>
+
+        <div class="messageModalHeader">
+
+            <img
+                id="modalAvatar"
+                class="modalAvatar"
+                src="https://ui-avatars.com/api/?name=Admin&background=111827&color=fbbf24&bold=true"
+                alt="Admin">
+
+            <div class="modalUser">
+
+                <div
+                    id="modalUserName"
+                    class="modalUserName">
+                    BGMI ESPORTS ADMIN
+                </div>
+
+                <div class="modalUserRole">
+                    Official Administrator
+                </div>
+
+            </div>
+
+            <button
+                class="modalClose"
+                onclick="closeMessageModal()">
+                ×
+            </button>
+
+        </div>
+
+        <div
+            id="fullMessage"
+            class="fullMessage">
+        </div>
+
+        <div
+            id="fullMessageTime"
+            class="fullMessageTime">
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     BOTTOM NAV
+===================================================== -->
+
+<nav class="bottomNav">
+
+    <button
+        class="navBtn"
+        onclick="location.href='dashboard.html'">
+
+        <div class="navIcon">
+            🏠
+        </div>
+
+        Home
+
+    </button>
+
+
+    <button
+        class="navBtn"
+        onclick="location.href='wallet.html'">
+
+        <div class="navIcon">
+            💰
+        </div>
+
+        Wallet
+
+    </button>
+
+
+    <button
+        class="navBtn active"
+        onclick="location.href='message.html'">
+
+        <div class="navIcon">
+            💬
+        </div>
+
+        <span
+            id="bottomBadge"
+            class="navBadge"
+            style="display:none">
+
+            0
+
+        </span>
+
+        Messages
+
+    </button>
+
+
+    <button
+        class="navBtn"
+        onclick="location.href='profile.html'">
+
+        <div class="navIcon">
+            👤
+        </div>
+
+        Profile
+
+    </button>
+
+</nav>
+
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div
+    id="toast"
+    class="toast">
+</div>
+
+
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
+
+<script type="module">
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+import {
+    getAuth,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+import {
+    getDatabase,
+    ref,
+    onValue,
+    update
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+
+/* =========================================================
+   FIREBASE CONFIG
+========================================================= */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyDsJUtZdIXcsB0w_2MQhMBXxIgbI3ijOvg",
+
+    authDomain:
+        "incoinpaysliveearning.firebaseapp.com",
+
+    databaseURL:
+        "https://incoinpaysliveearning-default-rtdb.firebaseio.com",
+
+    projectId:
+        "incoinpaysliveearning",
+
+    storageBucket:
+        "incoinpaysliveearning.firebasestorage.app",
+
+    messagingSenderId:
+        "971873814750",
+
+    appId:
+        "1:971873814750:web:7418c7da119e4725ed9a4f"
+
+};
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
+const app =
+    initializeApp(firebaseConfig);
+
+const auth =
+    getAuth(app);
+
+const db =
+    getDatabase(app);
+
+
+/* =========================================================
+   ADMIN UID
+========================================================= */
+
+const ADMIN_UID =
+    "VIAP56vYwndWPhJxktn0lRPTWnS2";
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let currentUser = null;
+let currentUID = "";
+
+let messages = [];
+
+let messagesListenerStarted = false;
+let announcementListenerStarted = false;
+let broadcastListenerStarted = false;
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const messageList =
+    document.getElementById("messageList");
+
+const searchInput =
+    document.getElementById("searchInput");
+
+const clearSearchButton =
+    document.getElementById("clearSearch");
+
+
+/* =========================================================
+   AUTH
+========================================================= */
+
+onAuthStateChanged(
+    auth,
+    async (user) => {
+
+        if(!user){
+
+            location.replace("index.html");
+
+            return;
+
+        }
+
+        currentUser = user;
+        currentUID = user.uid;
+
+        loadAdminMessages();
+        loadAnnouncement();
+        loadBroadcast();
+
+    }
+);
+
+
+/* =========================================================
+   LOAD ONLY ADMIN MESSAGES
+========================================================= */
+
+function loadAdminMessages(){
+
+    if(
+        !db ||
+        !currentUID ||
+        messagesListenerStarted
+    ){
+        return;
+    }
+
+    messagesListenerStarted = true;
+
+
+    /*
+        Firebase structure:
+
+        messages
+          USER_UID
+            MESSAGE_ID
+              senderId
+              receiverId
+              senderName
+              senderPhoto
+              text
+              timestamp
+              read
+              type
+
+        IMPORTANT:
+
+        Client filters ONLY:
+        senderId === ADMIN_UID
+
+        Therefore messages from normal users
+        will never be rendered.
+    */
+
+    const inboxRef =
+        ref(
+            db,
+            "messages/" + currentUID
+        );
+
+
+    onValue(
+
+        inboxRef,
+
+        (snapshot) => {
+
+            const list = [];
+
+
+            if(snapshot.exists()){
+
+                snapshot.forEach(
+                    (child) => {
+
+                        const data =
+                            child.val() || {};
+
+
+                        /*
+                           HARD ADMIN FILTER
+                        */
+
+                        const senderId =
+                            String(
+                                data.senderId ||
+                                ""
+                            );
+
+
+                        if(
+                            senderId !== ADMIN_UID
+                        ){
+
+                            return;
+
+                        }
+
+
+                        list.push({
+
+                            id:
+                                child.key,
+
+                            ...data
+
+                        });
+
+                    }
+                );
+
+            }
+
+
+            messages =
+                list.sort(
+                    (a,b) =>
+                        Number(
+                            b.timestamp || 0
+                        ) -
+                        Number(
+                            a.timestamp || 0
+                        )
+                );
+
+
+            renderMessages();
+            updateUnread();
+
+        },
+
+        (error) => {
+
+            console.error(
+                "Admin message load error:",
+                error
+            );
+
+            renderEmpty(
+                "Unable to load messages",
+                "Please check your Firebase database rules."
+            );
+
+            showToast(
+                "Unable to load admin messages"
+            );
+
+        }
+
+    );
+
+}
+
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function renderMessages(){
+
+    if(!messageList){
+        return;
+    }
+
+
+    const search =
+        String(
+            searchInput?.value || ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+    let list =
+        [...messages];
+
+
+    /*
+       SECOND SECURITY FILTER.
+
+       Even if something accidentally enters
+       the local array, only ADMIN_UID is allowed.
+    */
+
+    list =
+        list.filter(
+            message =>
+                String(
+                    message.senderId || ""
+                ) === ADMIN_UID
+        );
+
+
+    if(search){
+
+        list =
+            list.filter(
+                message => {
+
+                    const text =
+                        String(
+                            message.text ||
+                            message.message ||
+                            ""
+                        )
+                        .toLowerCase();
+
+
+                    const title =
+                        String(
+                            message.senderName ||
+                            "BGMI ESPORTS ADMIN"
+                        )
+                        .toLowerCase();
+
+
+                    return (
+                        text.includes(search) ||
+                        title.includes(search)
+                    );
+
+                }
+            );
+
+    }
+
+
+    const count =
+        document.getElementById(
+            "messageCount"
+        );
+
+
+    if(count){
+
+        count.textContent =
+            list.length +
+            " MESSAGES";
+
+    }
+
+
+    if(list.length === 0){
+
+        renderEmpty(
+            search
+                ? "No Results"
+                : "No Admin Messages",
+            search
+                ? "Try another search keyword."
+                : "Official admin announcements and messages will appear here."
+        );
+
+        return;
+
+    }
+
+
+    messageList.innerHTML = "";
+
+
+    list.forEach(
+        message => {
+
+            messageList.appendChild(
+                createMessageItem(
+                    message
+                )
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   CREATE ADMIN MESSAGE
+========================================================= */
+
+function createMessageItem(message){
+
+    const item =
+        document.createElement("div");
+
+
+    item.className =
+        "messageItem";
+
+
+    if(
+        isRead(message)
+    ){
+
+        item.classList.add("read");
+
+    }
+    else{
+
+        item.classList.add("unread");
+
+    }
+
+
+    const name =
+        "BGMI ESPORTS ADMIN";
+
+
+    const photo =
+        message.senderPhoto ||
+        message.photoURL ||
+        "https://ui-avatars.com/api/?name=Admin&background=111827&color=fbbf24&bold=true";
+
+
+    const text =
+        message.text ||
+        message.message ||
+        "Admin sent a new message.";
+
+
+    const time =
+        formatMessageTime(
+            message.timestamp
+        );
+
+
+    item.innerHTML = `
+
+        <div class="avatarWrap">
+
+            <img
+                class="avatar"
+                src="${escapeHTML(photo)}"
+                alt="Admin"
+                onerror="
+                    this.onerror=null;
+                    this.src='https://ui-avatars.com/api/?name=Admin&background=111827&color=fbbf24&bold=true';
+                "
+            >
+
+            <span class="adminCrown">
+                👑
+            </span>
+
+        </div>
+
+
+        <div class="messageMain">
+
+            <div class="messageTop">
+
+                <div class="messageName">
+
+                    📢 BGMI ESPORTS ADMIN
+
+                    <span class="adminLabel">
+                        ADMIN
+                    </span>
+
+                </div>
+
+                <div class="messageTime">
+                    ${escapeHTML(time)}
+                </div>
+
+            </div>
+
+
+            <div class="messagePreview">
+
+                ${escapeHTML(text)}
+
+            </div>
+
+
+            <div class="messageType">
+                Official Message
+            </div>
+
+        </div>
+
+
+        ${
+            !isRead(message)
+                ? `<span class="unreadDot"></span>`
+                : ""
+        }
+
+    `;
+
+
+    item.addEventListener(
+        "click",
+        () => {
+
+            openAdminMessage(
+                message
+            );
+
+        }
+    );
+
+
+    return item;
+
+}
+
+
+/* =========================================================
+   OPEN ADMIN MESSAGE
+========================================================= */
+
+async function openAdminMessage(message){
+
+    /*
+       Extra protection:
+       Never open non-admin messages.
+    */
+
+    if(
+        String(
+            message.senderId || ""
+        ) !== ADMIN_UID
+    ){
+
+        return;
+
+    }
+
+
+    /*
+       Mark as read
+    */
+
+    if(
+        !isRead(message) &&
+        message.id
+    ){
+
+        try{
+
+            await update(
+
+                ref(
+                    db,
+                    "messages/" +
+                    currentUID +
+                    "/" +
+                    message.id
+                ),
+
+                {
+                    read:true,
+                    readAt:Date.now()
+                }
+
+            );
+
+        }
+        catch(error){
+
+            console.error(
+                "Read update failed:",
+                error
+            );
+
+        }
+
+    }
+
+
+    const text =
+        message.text ||
+        message.message ||
+        "Admin sent a message.";
+
+
+    const modal =
+        document.getElementById(
+            "messageModal"
+        );
+
+
+    const fullMessage =
+        document.getElementById(
+            "fullMessage"
+        );
+
+
+    const fullMessageTime =
+        document.getElementById(
+            "fullMessageTime"
+        );
+
+
+    if(fullMessage){
+
+        fullMessage.textContent =
+            text;
+
+    }
+
+
+    if(fullMessageTime){
+
+        fullMessageTime.textContent =
+            formatFullDate(
+                message.timestamp
+            );
+
+    }
+
+
+    if(modal){
+
+        modal.classList.add(
+            "show"
+        );
+
+    }
+
+
+    updateUnread();
+
+}
+
+
+/* =========================================================
+   CLOSE MESSAGE MODAL
+========================================================= */
+
+window.closeMessageModal =
+function(){
+
+    const modal =
+        document.getElementById(
+            "messageModal"
+        );
+
+    if(modal){
+
+        modal.classList.remove(
+            "show"
+        );
+
+    }
+
+};
+
+
+window.closeMessageOutside =
+function(event){
+
+    if(
+        event.target.id ===
+        "messageModal"
+    ){
+
+        closeMessageModal();
+
+    }
+
+};
+
+
+/* =========================================================
+   ADMIN BROADCAST
+========================================================= */
+
+function loadBroadcast(){
+
+    if(
+        !db ||
+        broadcastListenerStarted
+    ){
+
+        return;
+
+    }
+
+
+    broadcastListenerStarted = true;
+
+
+    const broadcastRef =
+        ref(
+            db,
+            "adminBroadcast"
+        );
+
+
+    onValue(
+
+        broadcastRef,
+
+        snapshot => {
+
+            if(
+                !snapshot.exists()
+            ){
+
+                return;
+
+            }
+
+
+            const data =
+                snapshot.val() || {};
+
+
+            const text =
+                data.text ||
+                data.message ||
+                "";
+
+
+            if(!text){
+
+                return;
+
+            }
+
+
+            document.getElementById(
+                "broadcastText"
+            ).textContent =
+                text;
+
+
+            document.getElementById(
+                "broadcastDate"
+            ).textContent =
+                formatMessageTime(
+                    data.timestamp
+                );
+
+
+            document.getElementById(
+                "broadcastCard"
+            ).classList.add(
+                "show"
+            );
+
+        },
+
+        error => {
+
+            console.error(
+                "Broadcast error:",
+                error
+            );
+
+        }
+
+    );
+
+}
+
+
+/* =========================================================
+   ANNOUNCEMENT
+========================================================= */
+
+function loadAnnouncement(){
+
+    if(
+        !db ||
+        announcementListenerStarted
+    ){
+
+        return;
+
+    }
+
+
+    announcementListenerStarted = true;
+
+
+    const announcementRef =
+        ref(
+            db,
+            "announcement"
+        );
+
+
+    onValue(
+
+        announcementRef,
+
+        snapshot => {
+
+            if(
+                !snapshot.exists()
+            ){
+
+                return;
+
+            }
+
+
+            const value =
+                snapshot.val();
+
+
+            let text = "";
+
+
+            if(
+                typeof value ===
+                "string"
+            ){
+
+                text =
+                    value;
+
+            }
+            else if(value){
+
+                text =
+                    value.text ||
+                    value.message ||
+                    value.title ||
+                    "";
+
+            }
+
+
+            if(text){
+
+                document.getElementById(
+                    "announcementText"
+                ).textContent =
+                    text;
+
+            }
+
+        },
+
+        error => {
+
+            console.error(
+                "Announcement error:",
+                error
+            );
+
+        }
+
+    );
+
+}
+
+
+/* =========================================================
+   UNREAD
+========================================================= */
+
+function updateUnread(){
+
+    const unread =
+        messages.filter(
+            message =>
+
+                String(
+                    message.senderId || ""
+                ) === ADMIN_UID &&
+
+                !isRead(message)
+
+        ).length;
+
+
+    const header =
+        document.getElementById(
+            "headerUnread"
+        );
+
+
+    const bottom =
+        document.getElementById(
+            "bottomBadge"
+        );
+
+
+    if(unread > 0){
+
+        const display =
+            unread > 99
+                ? "99+"
+                : unread;
+
+
+        if(header){
+
+            header.textContent =
+                display;
+
+            header.style.display =
+                "flex";
+
+        }
+
+
+        if(bottom){
+
+            bottom.textContent =
+                display;
+
+            bottom.style.display =
+                "flex";
+
+        }
+
+    }
+    else{
+
+        if(header){
+
+            header.style.display =
+                "none";
+
+        }
+
+
+        if(bottom){
+
+            bottom.style.display =
+                "none";
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   MARK ALL ADMIN MESSAGES READ
+========================================================= */
+
+window.markAllRead =
+async function(){
+
+    if(
+        !db ||
+        !currentUID
+    ){
+
+        return;
+
+    }
+
+
+    const updates = {};
+
+    const now =
+        Date.now();
+
+
+    messages.forEach(
+        message => {
+
+            /*
+               ONLY ADMIN messages.
+            */
+
+            if(
+                String(
+                    message.senderId || ""
+                ) !== ADMIN_UID
+            ){
+
+                return;
+
+            }
+
+
+            if(
+                message.id &&
+                !isRead(message)
+            ){
+
+                updates[
+                    "messages/" +
+                    currentUID +
+                    "/" +
+                    message.id +
+                    "/read"
+                ] =
+                    true;
+
+
+                updates[
+                    "messages/" +
+                    currentUID +
+                    "/" +
+                    message.id +
+                    "/readAt"
+                ] =
+                    now;
+
+            }
+
+        }
+    );
+
+
+    if(
+        Object.keys(updates).length === 0
+    ){
+
+        showToast(
+            "All admin messages are already read"
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        await update(
+            ref(db),
+            updates
+        );
+
+
+        showToast(
+            "All admin messages marked as read"
+        );
+
+    }
+    catch(error){
+
+        console.error(
+            "Mark read error:",
+            error
+        );
+
+        showToast(
+            "Unable to mark messages as read"
+        );
+
+    }
+
+};
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+searchInput?.addEventListener(
+    "input",
+    () => {
+
+        clearSearchButton.style.display =
+            searchInput.value
+                ? "flex"
+                : "none";
+
+        renderMessages();
+
+    }
+);
+
+
+window.clearSearch =
+function(){
+
+    searchInput.value = "";
+
+    clearSearchButton.style.display =
+        "none";
+
+    renderMessages();
+
+    searchInput.focus();
+
+};
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+function renderEmpty(
+    title,
+    text
+){
+
+    messageList.innerHTML = `
+
+        <div class="empty">
+
+            <div class="emptyIcon">
+                📭
+            </div>
+
+            <div class="emptyTitle">
+                ${escapeHTML(title)}
+            </div>
+
+            <div class="emptyText">
+                ${escapeHTML(text)}
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   READ
+========================================================= */
+
+function isRead(message){
+
+    return (
+        message.read === true ||
+        message.isRead === true
+    );
+
+}
+
+
+/* =========================================================
+   TIME
+========================================================= */
+
+function formatMessageTime(timestamp){
+
+    if(!timestamp){
+
+        return "Now";
+
+    }
+
+
+    const date =
+        new Date(
+            Number(timestamp)
+        );
+
+
+    if(
+        isNaN(
+            date.getTime()
+        )
+    ){
+
+        return "Now";
+
+    }
+
+
+    const now =
+        new Date();
+
+
+    const diff =
+        now.getTime() -
+        date.getTime();
+
+
+    if(diff < 60000){
+
+        return "Just now";
+
+    }
+
+
+    if(diff < 3600000){
+
+        return (
+            Math.floor(
+                diff / 60000
+            ) +
+            "m ago"
+        );
+
+    }
+
+
+    if(
+        date.toDateString() ===
+        now.toDateString()
+    ){
+
+        return date.toLocaleTimeString(
+            "en-IN",
+            {
+                hour:"numeric",
+                minute:"2-digit"
+            }
+        );
+
+    }
+
+
+    return date.toLocaleDateString(
+        "en-IN",
+        {
+            day:"numeric",
+            month:"short"
+        }
+    );
+
+}
+
+
+function formatFullDate(timestamp){
+
+    if(!timestamp){
+
+        return "Just now";
+
+    }
+
+
+    const date =
+        new Date(
+            Number(timestamp)
+        );
+
+
+    if(
+        isNaN(
+            date.getTime()
+        )
+    ){
+
+        return "Just now";
+
+    }
+
+
+    return date.toLocaleString(
+        "en-IN",
+        {
+            day:"numeric",
+            month:"short",
+            year:"numeric",
+            hour:"numeric",
+            minute:"2-digit"
+        }
+    );
+
+}
+
+
+/* =========================================================
+   BACK
+========================================================= */
+
+window.goBack =
+function(){
+
+    if(
+        document.referrer &&
+        document.referrer.includes(
+            location.origin
+        )
+    ){
+
+        history.back();
+
+    }
+    else{
+
+        location.href =
+            "dashboard.html";
+
+    }
+
+};
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer = null;
+
+
+function showToast(message){
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    if(!toast){
+
+        return;
+
+    }
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(
+            () => {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            2200
+        );
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(value){
+
+    return String(
+        value ?? ""
+    )
+    .replaceAll(
+        "&",
+        "&amp;"
+    )
+    .replaceAll(
+        "<",
+        "&lt;"
+    )
+    .replaceAll(
+        ">",
+        "&gt;"
+    )
+    .replaceAll(
+        '"',
+        "&quot;"
+    )
+    .replaceAll(
+        "'",
+        "&#039;"
+    );
+
+}
+
+
+/* =========================================================
+   GLOBAL ERROR
+========================================================= */
+
+window.addEventListener(
+    "error",
+    event => {
+
+        console.error(
+            "Page error:",
+            event.error ||
+            event.message
+        );
+
+    }
+);
+
+
+window.addEventListener(
+    "unhandledrejection",
+    event => {
+
+        console.error(
+            "Unhandled promise:",
+            event.reason
+        );
+
+    }
+);
+
+</script>
+
+</body>
+</html>
