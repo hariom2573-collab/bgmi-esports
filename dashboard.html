@@ -2,7 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+
+<meta name="viewport"
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no,
+      viewport-fit=cover">
+
 <meta name="theme-color" content="#050B18">
 <meta name="color-scheme" content="dark">
 
@@ -10,9 +17,12 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet">
 
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -30,11 +40,7 @@ body{
     background:#050B18;
     color:#fff;
     overflow-x:hidden;
-    padding-bottom:92px;
-}
-
-button{
-    font-family:inherit;
+    padding-bottom:96px;
 }
 
 button,
@@ -42,32 +48,75 @@ div{
     user-select:none;
 }
 
+button{
+    font-family:inherit;
+    cursor:pointer;
+}
+
 .bg{
     position:fixed;
     inset:0;
-    z-index:-5;
+    z-index:-10;
     background:
-        radial-gradient(circle at 0% 0%,rgba(34,197,94,.16),transparent 30%),
-        radial-gradient(circle at 100% 15%,rgba(59,130,246,.12),transparent 28%),
-        linear-gradient(180deg,#050B18,#020711);
+        radial-gradient(
+            circle at 0% 0%,
+            rgba(34,197,94,.18),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 100% 10%,
+            rgba(59,130,246,.14),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(16,185,129,.08),
+            transparent 35%
+        ),
+        linear-gradient(
+            180deg,
+            #050B18 0%,
+            #030914 50%,
+            #020611 100%
+        );
+}
+
+.bg::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    opacity:.08;
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.04) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.04) 1px,
+            transparent 1px
+        );
+    background-size:35px 35px;
 }
 
 .bg::after{
     content:"";
     position:absolute;
     inset:0;
-    opacity:.14;
-    background-image:url("https://images.pexels.com/photos/17681813/pexels-photo-17681813.jpeg");
-    background-size:cover;
-    background-position:center;
+    opacity:.10;
+    background:
+        url("https://images.pexels.com/photos/17681813/pexels-photo-17681813.jpeg")
+        center/cover;
     mix-blend-mode:screen;
 }
+
+/* APP */
 
 .app{
     width:100%;
     max-width:520px;
     margin:auto;
-    padding:0 14px 25px;
+    padding:0 14px 28px;
 }
 
 /* CONNECTION */
@@ -76,21 +125,26 @@ div{
     position:fixed;
     top:0;
     left:50%;
-    transform:translate(-50%,-110%);
+    transform:translate(-50%,-120%);
     width:100%;
     max-width:520px;
     min-height:34px;
     z-index:99999;
+
     display:flex;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
     gap:7px;
+
     padding:7px 12px;
+
     font-size:8px;
     font-weight:800;
-    background:#172033;
+
+    background:#111c2d;
     border-bottom:1px solid rgba(255,255,255,.08);
-    transition:.3s;
+
+    transition:.35s ease;
 }
 
 .connection.show{
@@ -98,7 +152,7 @@ div{
 }
 
 .connection.online{
-    background:rgba(22,101,52,.96);
+    background:rgba(21,93,51,.96);
 }
 
 .connection.offline{
@@ -114,12 +168,12 @@ div{
 
 .online .connectionDot{
     background:#4ade80;
-    box-shadow:0 0 10px #4ade80;
+    box-shadow:0 0 12px #4ade80;
 }
 
 .offline .connectionDot{
     background:#f87171;
-    box-shadow:0 0 10px #f87171;
+    box-shadow:0 0 12px #f87171;
 }
 
 /* HEADER */
@@ -128,6 +182,7 @@ div{
     display:flex;
     align-items:center;
     justify-content:space-between;
+    gap:10px;
     padding:17px 2px 13px;
 }
 
@@ -141,11 +196,17 @@ div{
 .avatar{
     width:48px;
     height:48px;
+    flex-shrink:0;
     border-radius:15px;
     object-fit:cover;
+
     background:#111c2e;
-    border:2px solid rgba(34,197,94,.45);
-    box-shadow:0 0 20px rgba(34,197,94,.14);
+
+    border:2px solid rgba(34,197,94,.48);
+
+    box-shadow:
+        0 0 0 4px rgba(34,197,94,.05),
+        0 0 25px rgba(34,197,94,.16);
 }
 
 .userText{
@@ -157,13 +218,15 @@ div{
     overflow:hidden;
     white-space:nowrap;
     text-overflow:ellipsis;
+
     font-size:17px;
     font-weight:900;
 }
 
 .userText p{
     margin-top:2px;
-    color:#728198;
+
+    color:#6f7e95;
     font-size:8px;
     font-weight:700;
     letter-spacing:.7px;
@@ -176,93 +239,155 @@ div{
 }
 
 .headerBtn{
+    position:relative;
+
     width:38px;
     height:38px;
+
     border:1px solid rgba(255,255,255,.07);
     border-radius:12px;
-    background:#101a2b;
+
+    background:
+        linear-gradient(
+            145deg,
+            #152239,
+            #0b1424
+        );
+
     color:#fff;
-    cursor:pointer;
+
+    box-shadow:
+        inset 0 1px rgba(255,255,255,.04),
+        0 8px 18px rgba(0,0,0,.18);
+
+    transition:.18s ease;
 }
 
 .headerBtn:active{
-    transform:scale(.94);
+    transform:scale(.91);
 }
 
-.messageBtn{
-    position:relative;
+.wallet{
+    min-width:64px;
+
+    padding:9px 11px;
+
+    border-radius:13px;
+
+    color:#4ade80;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(34,197,94,.18),
+            #101a2b
+        );
+
+    border:1px solid rgba(34,197,94,.24);
+
+    font-size:11px;
+    font-weight:900;
+
+    text-align:center;
+
+    box-shadow:
+        inset 0 1px rgba(255,255,255,.04),
+        0 8px 20px rgba(0,0,0,.15);
 }
 
 .badge{
     position:absolute;
-    top:-4px;
-    right:-3px;
+    top:-5px;
+    right:-4px;
+
     min-width:16px;
     height:16px;
+
     padding:0 4px;
+
     display:none;
     align-items:center;
     justify-content:center;
+
     border-radius:20px;
+
     background:#ef4444;
     color:#fff;
+
     font-size:7px;
     font-weight:900;
-    border:2px solid #050B18;
-}
 
-.wallet{
-    padding:9px 11px;
-    border-radius:13px;
-    color:#4ade80;
-    background:linear-gradient(135deg,rgba(34,197,94,.16),#101a2b);
-    border:1px solid rgba(34,197,94,.22);
-    font-size:11px;
-    font-weight:900;
-    white-space:nowrap;
+    border:2px solid #050B18;
 }
 
 /* ANNOUNCEMENT */
 
 .announcement{
     height:38px;
+
     display:flex;
     align-items:center;
+
     overflow:hidden;
-    margin-bottom:13px;
+
+    margin-bottom:14px;
+
     border-radius:13px;
-    background:linear-gradient(90deg,rgba(34,197,94,.12),#0d1728);
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(34,197,94,.13),
+            #0d1728
+        );
+
     border:1px solid rgba(255,255,255,.06);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.12);
 }
 
 .announceIcon{
     width:42px;
     height:100%;
     flex-shrink:0;
+
     display:flex;
     align-items:center;
     justify-content:center;
-    background:rgba(34,197,94,.13);
+
+    background:rgba(34,197,94,.12);
 }
 
 .ticker{
+    width:100%;
     overflow:hidden;
     white-space:nowrap;
-    width:100%;
 }
 
 .tickerText{
     display:inline-block;
+
     padding-left:100%;
-    animation:ticker 16s linear infinite;
+
+    animation:ticker 18s linear infinite;
+
     color:#cbd5e1;
+
     font-size:9px;
     font-weight:600;
 }
 
 @keyframes ticker{
-    from{transform:translateX(0)}
-    to{transform:translateX(-100%)}
+
+    from{
+        transform:translateX(0);
+    }
+
+    to{
+        transform:translateX(-100%);
+    }
+
 }
 
 /* HERO */
@@ -270,38 +395,59 @@ div{
 .hero{
     position:relative;
     overflow:hidden;
-    min-height:205px;
+
+    min-height:210px;
+
     padding:20px;
-    border-radius:23px;
-    margin-bottom:15px;
+
+    border-radius:24px;
+
+    margin-bottom:17px;
+
     background:
-        linear-gradient(135deg,
-        rgba(22,163,74,.96),
-        rgba(21,128,61,.88),
-        rgba(4,12,22,.98));
-    border:1px solid rgba(255,255,255,.09);
-    box-shadow:0 22px 50px rgba(0,0,0,.3);
+        linear-gradient(
+            135deg,
+            rgba(22,163,74,.96),
+            rgba(21,128,61,.88),
+            rgba(4,12,22,.99)
+        );
+
+    border:1px solid rgba(255,255,255,.10);
+
+    box-shadow:
+        0 25px 55px rgba(0,0,0,.32),
+        inset 0 1px rgba(255,255,255,.08);
 }
 
 .hero::before{
     content:"";
+
     position:absolute;
-    width:210px;
-    height:210px;
-    right:-85px;
-    top:-105px;
+
+    width:230px;
+    height:230px;
+
+    right:-100px;
+    top:-120px;
+
     border-radius:50%;
+
     background:rgba(255,255,255,.09);
 }
 
 .hero::after{
     content:"";
+
     position:absolute;
-    width:110px;
-    height:110px;
+
+    width:130px;
+    height:130px;
+
     right:30px;
-    bottom:-65px;
+    bottom:-75px;
+
     border-radius:50%;
+
     background:rgba(255,255,255,.06);
 }
 
@@ -312,79 +458,106 @@ div{
 
 .heroSmall{
     color:rgba(255,255,255,.72);
+
     font-size:8px;
     font-weight:800;
+
     letter-spacing:1px;
 }
 
 .heroTitle{
     margin-top:5px;
+
     font-size:23px;
     line-height:1.25;
+
     font-weight:900;
 }
 
 .heroText{
     max-width:285px;
+
     margin-top:6px;
+
     color:rgba(255,255,255,.74);
+
     font-size:9px;
     line-height:1.7;
 }
 
 .heroStats{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:6px;
+    grid-template-columns:repeat(2,1fr);
+
+    gap:7px;
+
     margin-top:15px;
 }
 
 .heroStat{
-    padding:8px 5px;
-    border-radius:11px;
-    background:rgba(0,0,0,.16);
+    padding:9px 6px;
+
+    border-radius:12px;
+
+    background:rgba(0,0,0,.18);
+
     border:1px solid rgba(255,255,255,.08);
+
     text-align:center;
 }
 
 .heroStat strong{
     display:block;
-    font-size:12px;
+
+    font-size:13px;
+    font-weight:900;
 }
 
 .heroStat span{
     color:rgba(255,255,255,.58);
+
     font-size:7px;
+    font-weight:700;
 }
 
 .heroActions{
     display:grid;
     grid-template-columns:1.35fr 1fr;
+
     gap:8px;
+
     margin-top:13px;
 }
 
 .heroBtn{
     height:43px;
+
     border:0;
     border-radius:12px;
+
     font-size:9px;
     font-weight:900;
-    cursor:pointer;
+
+    transition:.18s ease;
 }
 
 .heroBtn:active{
-    transform:scale(.97);
+    transform:scale(.96);
 }
 
 .primary{
     background:#fff;
     color:#06110a;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.18);
 }
 
 .secondary{
     color:#fff;
+
     background:rgba(0,0,0,.18);
+
     border:1px solid rgba(255,255,255,.15);
 }
 
@@ -392,9 +565,10 @@ div{
 
 .sectionTitle{
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    margin:19px 2px 10px;
+    justify-content:space-between;
+
+    margin:20px 2px 10px;
 }
 
 .sectionTitle h3{
@@ -404,11 +578,12 @@ div{
 
 .sectionTitle span{
     color:#64748b;
+
     font-size:8px;
     font-weight:700;
 }
 
-/* QUICK */
+/* QUICK ACTION */
 
 .quickGrid{
     display:grid;
@@ -418,33 +593,58 @@ div{
 
 .quick{
     position:relative;
+
     padding:12px 4px;
+
     text-align:center;
-    border-radius:15px;
-    background:#0d1728;
+
+    border-radius:16px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #101d31,
+            #0a1322
+        );
+
     border:1px solid rgba(255,255,255,.06);
-    cursor:pointer;
+
+    box-shadow:
+        inset 0 1px rgba(255,255,255,.035),
+        0 10px 22px rgba(0,0,0,.14);
+
+    transition:.18s ease;
 }
 
 .quick:active{
-    transform:scale(.96);
+    transform:translateY(2px) scale(.96);
 }
 
 .quickIcon{
-    width:34px;
-    height:34px;
+    width:35px;
+    height:35px;
+
     margin:auto;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     border-radius:11px;
-    background:#16243a;
+
+    background:#17263d;
+
     font-size:16px;
+
+    box-shadow:
+        inset 0 1px rgba(255,255,255,.04);
 }
 
 .quickText{
     margin-top:6px;
+
     color:#aab6c8;
+
     font-size:7px;
     font-weight:800;
 }
@@ -453,10 +653,26 @@ div{
 
 .mission{
     padding:15px;
+
     border-radius:18px;
-    background:linear-gradient(135deg,rgba(245,158,11,.10),#111827);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(245,158,11,.10),
+            #111827
+        );
+
     border:1px solid rgba(245,158,11,.15);
-    cursor:pointer;
+
+    box-shadow:
+        0 12px 28px rgba(0,0,0,.14);
+
+    transition:.18s ease;
+}
+
+.mission:active{
+    transform:scale(.985);
 }
 
 .missionTop,
@@ -473,35 +689,52 @@ div{
 
 .missionReward{
     color:#fbbf24;
+
     font-size:10px;
     font-weight:900;
 }
 
 .missionText{
     margin-top:4px;
+
     color:#7f8da3;
+
     font-size:7px;
 }
 
 .missionBar{
     height:7px;
+
     margin-top:11px;
+
     border-radius:20px;
+
     background:#1d293b;
+
     overflow:hidden;
 }
 
 .missionFill{
     width:0%;
     height:100%;
+
     border-radius:20px;
-    background:linear-gradient(90deg,#f59e0b,#facc15);
-    transition:.5s;
+
+    background:
+        linear-gradient(
+            90deg,
+            #f59e0b,
+            #facc15
+        );
+
+    transition:.6s ease;
 }
 
 .missionBottom{
     margin-top:6px;
+
     color:#78869a;
+
     font-size:7px;
 }
 
@@ -509,8 +742,11 @@ div{
 
 .category{
     display:flex;
+
     gap:7px;
+
     overflow-x:auto;
+
     padding:2px 0 4px;
 }
 
@@ -520,31 +756,64 @@ div{
 
 .category button{
     flex-shrink:0;
+
     padding:8px 16px;
+
     border-radius:25px;
+
     border:1px solid rgba(255,255,255,.06);
+
     background:#111c2e;
+
     color:#aab6c8;
+
     font-size:8px;
     font-weight:900;
+
+    transition:.18s ease;
+}
+
+.category button:active{
+    transform:scale(.94);
 }
 
 .category button.active{
     background:#22c55e;
     border-color:#22c55e;
     color:#031008;
+
+    box-shadow:
+        0 5px 15px rgba(34,197,94,.18);
 }
 
 /* MATCH */
 
 .match{
     margin:12px 0;
+
     overflow:hidden;
+
     border-radius:21px;
-    background:#0d1728;
+
+    background:
+        linear-gradient(
+            145deg,
+            #101c2f,
+            #0a1321
+        );
+
     border:1px solid rgba(255,255,255,.07);
-    box-shadow:0 12px 30px rgba(0,0,0,.18);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.20);
+
     cursor:pointer;
+
+    transition:.2s ease;
+}
+
+.match:active{
+    transform:scale(.985);
 }
 
 .matchImage{
@@ -555,43 +824,64 @@ div{
 .matchImage img{
     width:100%;
     height:100%;
+
     display:block;
+
     object-fit:cover;
 }
 
 .shade{
     position:absolute;
     inset:0;
-    background:linear-gradient(180deg,transparent 30%,rgba(0,0,0,.92));
+
+    background:
+        linear-gradient(
+            180deg,
+            transparent 25%,
+            rgba(0,0,0,.92)
+        );
 }
 
 .mode{
     position:absolute;
+
     top:10px;
     left:10px;
+
     padding:5px 9px;
+
     border-radius:8px;
+
     background:#22c55e;
     color:#031008;
+
     font-size:7px;
     font-weight:900;
 }
 
 .status{
     position:absolute;
+
     top:10px;
     right:10px;
+
     padding:5px 8px;
+
     border-radius:8px;
-    background:rgba(0,0,0,.65);
+
+    background:rgba(0,0,0,.68);
+
     border:1px solid rgba(255,255,255,.08);
+
     color:#fff;
+
     font-size:7px;
     font-weight:800;
 }
 
 .matchOverlay{
     position:absolute;
+
     left:12px;
     right:12px;
     bottom:11px;
@@ -599,27 +889,34 @@ div{
 
 .matchTitle{
     max-width:85%;
-    white-space:nowrap;
+
     overflow:hidden;
+    white-space:nowrap;
     text-overflow:ellipsis;
+
     font-size:17px;
     font-weight:900;
 }
 
 .matchMap{
     margin-top:2px;
+
     color:#cbd5e1;
+
     font-size:7px;
 }
 
 .matchInfo{
     display:grid;
+
     grid-template-columns:repeat(3,1fr);
+
     padding:13px 9px 9px;
 }
 
 .info{
     text-align:center;
+
     border-right:1px solid rgba(255,255,255,.06);
 }
 
@@ -629,14 +926,19 @@ div{
 
 .info span{
     display:block;
+
     color:#6f7e92;
+
     font-size:6px;
 }
 
 .info strong{
     display:block;
+
     margin-top:3px;
+
     color:#e5e7eb;
+
     font-size:12px;
 }
 
@@ -646,51 +948,88 @@ div{
 
 .progress{
     height:5px;
+
     margin:0 12px 12px;
+
     overflow:hidden;
+
     border-radius:20px;
+
     background:#1b283b;
 }
 
 .progressFill{
     height:100%;
+
     border-radius:20px;
-    background:linear-gradient(90deg,#16a34a,#4ade80);
+
+    background:
+        linear-gradient(
+            90deg,
+            #16a34a,
+            #4ade80
+        );
+
+    transition:.5s;
 }
 
-/* LOADING */
+/* LOADER */
 
 .loader{
     display:flex;
+
     justify-content:center;
     align-items:center;
+
     gap:6px;
+
     padding:35px;
 }
 
 .dot{
     width:7px;
     height:7px;
+
     border-radius:50%;
+
     background:#22c55e;
+
     animation:bounce .8s infinite alternate;
 }
 
-.dot:nth-child(2){animation-delay:.15s}
-.dot:nth-child(3){animation-delay:.3s}
+.dot:nth-child(2){
+    animation-delay:.15s;
+}
+
+.dot:nth-child(3){
+    animation-delay:.3s;
+}
 
 @keyframes bounce{
-    from{transform:translateY(0);opacity:.4}
-    to{transform:translateY(-7px);opacity:1}
+
+    from{
+        transform:translateY(0);
+        opacity:.4;
+    }
+
+    to{
+        transform:translateY(-7px);
+        opacity:1;
+    }
+
 }
 
 /* EMPTY */
 
 .empty{
     padding:40px 15px;
+
     text-align:center;
+
     border-radius:18px;
+
     background:#0d1728;
+
     border:1px solid rgba(255,255,255,.05);
 }
 
@@ -700,14 +1039,18 @@ div{
 
 .emptyTitle{
     margin-top:7px;
+
     color:#aab6c8;
+
     font-size:11px;
     font-weight:800;
 }
 
 .emptyText{
     margin-top:3px;
+
     color:#617086;
+
     font-size:7px;
 }
 
@@ -716,24 +1059,42 @@ div{
 #welcome{
     position:fixed;
     inset:0;
+
     z-index:99998;
+
     display:none;
+
     align-items:center;
     justify-content:center;
+
     padding:20px;
+
     background:rgba(0,0,0,.78);
-    backdrop-filter:blur(8px);
+
+    backdrop-filter:blur(9px);
 }
 
 .welcomeBox{
     width:100%;
     max-width:350px;
+
     padding:25px;
+
     border-radius:23px;
+
     text-align:center;
-    background:linear-gradient(145deg,#111d31,#07101f);
+
+    background:
+        linear-gradient(
+            145deg,
+            #111d31,
+            #07101f
+        );
+
     border:1px solid rgba(34,197,94,.35);
-    box-shadow:0 25px 70px rgba(0,0,0,.55);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.55);
 }
 
 .welcomeIcon{
@@ -742,13 +1103,17 @@ div{
 
 .welcomeBox h2{
     margin-top:6px;
+
     color:#22c55e;
+
     font-size:21px;
 }
 
 .welcomeBox p{
     margin-top:7px;
+
     color:#aab6c8;
+
     font-size:9px;
     line-height:1.8;
 }
@@ -756,57 +1121,100 @@ div{
 .welcomeBtn{
     width:100%;
     height:46px;
+
     margin-top:16px;
+
     border:0;
     border-radius:12px;
+
     background:#22c55e;
     color:#031008;
+
     font-size:10px;
     font-weight:900;
+
+    transition:.18s;
 }
 
-/* BOTTOM */
+.welcomeBtn:active{
+    transform:scale(.96);
+}
+
+/* =========================================
+   BOTTOM NAV — ONLY 4 BUTTONS
+========================================= */
 
 .bottomNav{
     position:fixed;
+
     left:50%;
     bottom:0;
+
     transform:translateX(-50%);
+
     width:100%;
     max-width:520px;
-    height:75px;
+
+    height:78px;
+
     z-index:9999;
-    display:flex;
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
     align-items:center;
-    justify-content:space-around;
-    padding:5px 5px;
-    background:rgba(7,15,28,.97);
+
+    padding:
+        5px 8px
+        calc(5px + env(safe-area-inset-bottom));
+
+    background:
+        rgba(5,12,24,.97);
+
     border-top:1px solid rgba(255,255,255,.07);
-    box-shadow:0 -12px 35px rgba(0,0,0,.25);
-    backdrop-filter:blur(15px);
+
+    box-shadow:
+        0 -15px 40px rgba(0,0,0,.30);
+
+    backdrop-filter:blur(18px);
 }
 
 .nav{
     position:relative;
-    flex:1;
-    height:64px;
+
+    height:66px;
+
     border:0;
-    background:none;
-    color:#68778d;
+
+    background:transparent;
+
+    color:#66758b;
+
     font-size:7px;
     font-weight:800;
+
+    transition:.18s ease;
 }
 
 .navIcon{
     position:relative;
-    width:34px;
-    height:32px;
-    margin:auto;
+
+    width:38px;
+    height:36px;
+
+    margin:2px auto 3px;
+
     display:flex;
+
     align-items:center;
     justify-content:center;
-    border-radius:11px;
+
+    border-radius:12px;
+
     font-size:18px;
+
+    transition:.2s ease;
 }
 
 .nav.active{
@@ -814,36 +1222,55 @@ div{
 }
 
 .nav.active .navIcon{
-    background:rgba(34,197,94,.12);
+    background:
+        rgba(34,197,94,.13);
+
+    box-shadow:
+        0 0 18px rgba(34,197,94,.08);
+}
+
+.nav:active{
+    transform:scale(.91);
 }
 
 .navBadge{
     position:absolute;
-    top:2px;
-    right:calc(50% - 21px);
+
+    top:-3px;
+    right:-5px;
+
     min-width:15px;
     height:15px;
+
     display:none;
+
     align-items:center;
     justify-content:center;
+
     padding:0 3px;
+
     border-radius:20px;
+
     background:#ef4444;
     color:#fff;
+
     font-size:6px;
+
     border:2px solid #07101f;
 }
 
-/* RESPONSIVE */
+/* MOBILE */
 
 @media(max-width:360px){
+
     .app{
         padding-left:11px;
         padding-right:11px;
     }
 
     .wallet{
-        padding:8px 9px;
+        min-width:58px;
+        padding:8px 8px;
     }
 
     .heroTitle{
@@ -853,7 +1280,27 @@ div{
     .matchImage{
         height:155px;
     }
+
+    .headerBtn{
+        width:35px;
+        height:35px;
+    }
+
 }
+
+/* REDUCED MOTION */
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms !important;
+        transition-duration:.01ms !important;
+    }
+
+}
+
 </style>
 </head>
 
@@ -866,265 +1313,431 @@ div{
     <span id="connectionText">Connecting...</span>
 </div>
 
+<!-- WELCOME -->
+
 <div id="welcome">
+
     <div class="welcomeBox">
+
         <div class="welcomeIcon">🎉</div>
+
         <h2>Welcome!</h2>
+
         <p>
             Welcome to <b>BGMI ESPORTS</b>.<br>
             Join tournaments, play matches and win exciting rewards.
         </p>
-        <button class="welcomeBtn" onclick="closeWelcome()">
+
+        <button
+            class="welcomeBtn"
+            onclick="closeWelcome()">
+
             LET'S GO 🚀
+
         </button>
+
     </div>
+
 </div>
+
 
 <div class="app">
 
-    <!-- HEADER -->
-    <header class="header">
+<!-- HEADER -->
 
-        <div class="user">
-            <img
-                id="profilePhoto"
-                class="avatar"
-                src="https://ui-avatars.com/api/?name=Player&background=111827&color=22c55e&bold=true"
-                alt="Profile">
+<header class="header">
 
-            <div class="userText">
-                <h2 id="playerName">Player</h2>
-                <p>BGMI ESPORTS PLAYER</p>
-            </div>
-        </div>
+    <div class="user">
 
-        <div class="headerActions">
+        <img
+            id="profilePhoto"
+            class="avatar"
+            src="https://ui-avatars.com/api/?name=Player&background=111827&color=22c55e&bold=true"
+            alt="Profile">
 
-            <button
-                class="headerBtn messageBtn"
-                onclick="location.href='message.html'">
+        <div class="userText">
 
-                💬
-                <span id="headerBadge" class="badge">0</span>
+            <h2 id="playerName">
+                Player
+            </h2>
 
-            </button>
+            <p>
+                BGMI ESPORTS PLAYER
+            </p>
 
-            <button
-                class="headerBtn"
-                onclick="location.href='help.html'">
-
-                ?
-
-            </button>
-
-            <div
-                class="wallet"
-                onclick="location.href='wallet.html'">
-
-                ₹<span id="walletAmount">0</span>
-
-            </div>
-
-        </div>
-
-    </header>
-
-    <!-- ANNOUNCEMENT -->
-    <div class="announcement">
-
-        <div class="announceIcon">📢</div>
-
-        <div class="ticker">
-            <div id="announcementText" class="tickerText">
-                Welcome to BGMI ESPORTS • Join matches and win rewards
-            </div>
         </div>
 
     </div>
 
-    <!-- HERO -->
-    <section class="hero">
 
-        <div class="heroContent">
+    <div class="headerActions">
 
-            <div class="heroSmall">
-                PREMIUM GAMING EXPERIENCE
-            </div>
+        <button
+            class="headerBtn messageBtn"
+            onclick="location.href='message.html'">
 
-            <div class="heroTitle">
-                Ready for the next match?
-            </div>
+            💬
 
-            <div class="heroText">
-                Join upcoming BGMI tournaments and compete for exciting prizes.
-            </div>
-
-            <div class="heroStats">
-
-                <div class="heroStat">
-                    <strong id="heroMatches">0</strong>
-                    <span>MATCHES</span>
-                </div>
-
-                <div class="heroStat">
-                    <strong id="heroWins">0</strong>
-                    <span>WINS</span>
-                </div>
-
-                <div class="heroStat">
-                    <strong id="heroWinnings">₹0</strong>
-                    <span>WINNINGS</span>
-                </div>
-
-            </div>
-
-            <div class="heroActions">
-
-                <button
-                    class="heroBtn primary"
-                    onclick="scrollToMatches()">
-
-                    🎮 JOIN MATCH
-
-                </button>
-
-                <button
-                    class="heroBtn secondary"
-                    onclick="location.href='matches.html'">
-
-                    MY MATCHES
-
-                </button>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- QUICK -->
-    <div class="sectionTitle">
-        <h3>Quick Actions</h3>
-        <span>EXPLORE</span>
-    </div>
-
-    <div class="quickGrid">
-
-        <div class="quick" onclick="location.href='matches.html'">
-            <div class="quickIcon">🎮</div>
-            <div class="quickText">My Matches</div>
-        </div>
-
-        <div class="quick" onclick="location.href='mission.html'">
-            <div class="quickIcon">🎯</div>
-            <div class="quickText">Missions</div>
-        </div>
-
-        <div class="quick" onclick="location.href='wallet.html'">
-            <div class="quickIcon">💰</div>
-            <div class="quickText">Wallet</div>
-        </div>
-
-        <div class="quick" onclick="location.href='results.html'">
-            <div class="quickIcon">🏆</div>
-            <div class="quickText">Results</div>
-        </div>
-
-    </div>
-
-    <!-- MISSION -->
-    <div class="sectionTitle">
-        <h3>🎯 Mission</h3>
-        <span>CASHBACK</span>
-    </div>
-
-    <div class="mission" onclick="location.href='mission.html'">
-
-        <div class="missionTop">
-
-            <div class="missionTitle">
-                Join 100 Matches
-            </div>
-
-            <div class="missionReward">
-                +₹50
-            </div>
-
-        </div>
-
-        <div class="missionText">
-            Complete 100 match joins and receive ₹50 cashback.
-        </div>
-
-        <div class="missionBar">
-            <div id="missionFill" class="missionFill"></div>
-        </div>
-
-        <div class="missionBottom">
-
-            <span id="missionProgress">
-                0 / 100 Matches
+            <span
+                id="headerBadge"
+                class="badge">
+                0
             </span>
 
-            <span>₹50 Cashback</span>
+        </button>
+
+
+        <button
+            class="headerBtn"
+            onclick="location.href='help.html'">
+
+            ?
+
+        </button>
+
+
+        <div
+            class="wallet"
+            onclick="location.href='wallet.html'">
+
+            ₹<span id="walletAmount">0</span>
 
         </div>
 
     </div>
 
-    <!-- MATCHES -->
-    <div id="matchesSection" class="sectionTitle">
+</header>
 
-        <h3>🔥 Upcoming Matches</h3>
 
-        <span id="matchCount">
-            0 MATCHES
+<!-- ANNOUNCEMENT -->
+
+<div class="announcement">
+
+    <div class="announceIcon">
+        📢
+    </div>
+
+    <div class="ticker">
+
+        <div
+            id="announcementText"
+            class="tickerText">
+
+            Welcome to BGMI ESPORTS • Join matches and win rewards
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="heroContent">
+
+        <div class="heroSmall">
+            PREMIUM GAMING EXPERIENCE
+        </div>
+
+        <div class="heroTitle">
+            Ready for the next match?
+        </div>
+
+        <div class="heroText">
+            Join upcoming BGMI tournaments and compete for exciting prizes.
+        </div>
+
+
+        <div class="heroStats">
+
+            <div class="heroStat">
+
+                <strong id="heroMatches">
+                    0
+                </strong>
+
+                <span>
+                    MATCHES
+                </span>
+
+            </div>
+
+
+            <div class="heroStat">
+
+                <strong id="heroWinnings">
+                    ₹0
+                </strong>
+
+                <span>
+                    WINNINGS
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="heroActions">
+
+            <button
+                class="heroBtn primary"
+                onclick="scrollToMatches()">
+
+                🎮 JOIN MATCH
+
+            </button>
+
+
+            <button
+                class="heroBtn secondary"
+                onclick="location.href='matches.html'">
+
+                MY MATCHES
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- QUICK ACTIONS -->
+
+<div class="sectionTitle">
+
+    <h3>
+        Quick Actions
+    </h3>
+
+    <span>
+        EXPLORE
+    </span>
+
+</div>
+
+
+<div class="quickGrid">
+
+    <div
+        class="quick"
+        onclick="location.href='matches.html'">
+
+        <div class="quickIcon">
+            🎮
+        </div>
+
+        <div class="quickText">
+            My Matches
+        </div>
+
+    </div>
+
+
+    <div
+        class="quick"
+        onclick="location.href='mission.html'">
+
+        <div class="quickIcon">
+            🎯
+        </div>
+
+        <div class="quickText">
+            Missions
+        </div>
+
+    </div>
+
+
+    <div
+        class="quick"
+        onclick="location.href='wallet.html'">
+
+        <div class="quickIcon">
+            💰
+        </div>
+
+        <div class="quickText">
+            Wallet
+        </div>
+
+    </div>
+
+
+    <div
+        class="quick"
+        onclick="location.href='results.html'">
+
+        <div class="quickIcon">
+            🏆
+        </div>
+
+        <div class="quickText">
+            Results
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- MISSION -->
+
+<div class="sectionTitle">
+
+    <h3>
+        🎯 Mission
+    </h3>
+
+    <span>
+        CASHBACK
+    </span>
+
+</div>
+
+
+<div
+    class="mission"
+    onclick="location.href='mission.html'">
+
+    <div class="missionTop">
+
+        <div class="missionTitle">
+            Join 100 Matches
+        </div>
+
+        <div class="missionReward">
+            +₹50
+        </div>
+
+    </div>
+
+
+    <div class="missionText">
+
+        Complete 100 match joins and receive ₹50 cashback.
+
+    </div>
+
+
+    <div class="missionBar">
+
+        <div
+            id="missionFill"
+            class="missionFill">
+        </div>
+
+    </div>
+
+
+    <div class="missionBottom">
+
+        <span id="missionProgress">
+            0 / 100 Matches
+        </span>
+
+        <span>
+            ₹50 Cashback
         </span>
 
     </div>
 
-    <!-- CATEGORY -->
-    <div class="category">
+</div>
 
-        <button class="active" onclick="filterMatches('all',this)">
-            ALL
-        </button>
 
-        <button onclick="filterMatches('solo',this)">
-            SOLO
-        </button>
+<!-- MATCHES -->
 
-        <button onclick="filterMatches('duo',this)">
-            DUO
-        </button>
+<div
+    id="matchesSection"
+    class="sectionTitle">
 
-        <button onclick="filterMatches('squad',this)">
-            SQUAD
-        </button>
+    <h3>
+        🔥 Upcoming Matches
+    </h3>
 
-        <button onclick="filterMatches('tdm',this)">
-            TDM
-        </button>
+    <span id="matchCount">
+        0 MATCHES
+    </span>
 
-    </div>
+</div>
 
-    <!-- MATCH CONTAINER -->
-    <div id="matchesContainer">
 
-        <div class="loader">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-        </div>
+<!-- CATEGORY -->
+
+<div class="category">
+
+    <button
+        class="active"
+        onclick="filterMatches('all',this)">
+
+        ALL
+
+    </button>
+
+    <button
+        onclick="filterMatches('solo',this)">
+
+        SOLO
+
+    </button>
+
+    <button
+        onclick="filterMatches('duo',this)">
+
+        DUO
+
+    </button>
+
+    <button
+        onclick="filterMatches('squad',this)">
+
+        SQUAD
+
+    </button>
+
+    <button
+        onclick="filterMatches('tdm',this)">
+
+        TDM
+
+    </button>
+
+</div>
+
+
+<!-- MATCH CONTAINER -->
+
+<div id="matchesContainer">
+
+    <div class="loader">
+
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
 
     </div>
 
 </div>
 
-<!-- BOTTOM NAV -->
+</div>
+
+
+<!-- =========================================
+     BOTTOM NAV — ONLY 4 BUTTONS
+========================================= -->
+
 <nav class="bottomNav">
 
-    <button class="nav active" onclick="location.href='dashboard.html'">
+    <!-- HOME -->
+
+    <button
+        class="nav active"
+        onclick="location.href='dashboard.html'">
 
         <div class="navIcon">
             🏠
@@ -1134,31 +1747,12 @@ div{
 
     </button>
 
-    <button class="nav" onclick="location.href='matches.html'">
 
-        <div class="navIcon">
-            🎮
-        </div>
+    <!-- WALLET -->
 
-        Matches
-
-    </button>
-
-    <button class="nav" onclick="location.href='message.html'">
-
-        <div class="navIcon">
-
-            💬
-
-            <span id="navBadge" class="navBadge">0</span>
-
-        </div>
-
-        Messages
-
-    </button>
-
-    <button class="nav" onclick="location.href='wallet.html'">
+    <button
+        class="nav"
+        onclick="location.href='wallet.html'">
 
         <div class="navIcon">
             💰
@@ -1168,7 +1762,35 @@ div{
 
     </button>
 
-    <button class="nav" onclick="location.href='profile.html'">
+
+    <!-- MESSAGE -->
+
+    <button
+        class="nav"
+        onclick="location.href='message.html'">
+
+        <div class="navIcon">
+
+            💬
+
+            <span
+                id="navBadge"
+                class="navBadge">
+                0
+            </span>
+
+        </div>
+
+        Messages
+
+    </button>
+
+
+    <!-- PROFILE -->
+
+    <button
+        class="nav"
+        onclick="location.href='profile.html'">
 
         <div class="navIcon">
             👤
@@ -1179,6 +1801,7 @@ div{
     </button>
 
 </nav>
+
 
 <script type="module">
 
@@ -1198,9 +1821,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 
-/* ================================
-   FIREBASE CONFIG
-================================ */
+/* FIREBASE CONFIG */
 
 const firebaseConfig = {
 
@@ -1240,24 +1861,26 @@ try{
 
     db = getDatabase(app);
 
-}catch(error){
+}
+catch(error){
 
-    console.error("Firebase initialization error:",error);
+    console.error(
+        "Firebase initialization error:",
+        error
+    );
 
 }
 
-
-/* ================================
-   GLOBAL STATE
-================================ */
 
 let currentUser = null;
 let currentUID = "";
 
 let allMatches = [];
+
 let currentFilter = "all";
 
 let firebaseConnected = false;
+
 let browserOnline = navigator.onLine;
 
 let userStarted = false;
@@ -1266,9 +1889,7 @@ let announcementStarted = false;
 let messageStarted = false;
 
 
-/* ================================
-   ELEMENTS
-================================ */
+/* ELEMENTS */
 
 const connection =
     document.getElementById("connection");
@@ -1277,13 +1898,15 @@ const connectionText =
     document.getElementById("connectionText");
 
 
-/* ================================
-   CONNECTION
-================================ */
+/* CONNECTION */
 
-function setConnection(state,text){
+function setConnection(
+    state,
+    text
+){
 
-    if(!connection) return;
+    if(!connection)
+        return;
 
     connection.classList.remove(
         "online",
@@ -1291,9 +1914,12 @@ function setConnection(state,text){
         "show"
     );
 
+
     if(state === "online"){
 
-        connection.classList.add("online");
+        connection.classList.add(
+            "online"
+        );
 
         connectionText.textContent =
             text || "LIVE • Connected";
@@ -1301,6 +1927,7 @@ function setConnection(state,text){
         return;
 
     }
+
 
     if(state === "offline"){
 
@@ -1316,7 +1943,10 @@ function setConnection(state,text){
 
     }
 
-    connection.classList.add("show");
+
+    connection.classList.add(
+        "show"
+    );
 
     connectionText.textContent =
         text || "Connecting...";
@@ -1324,9 +1954,7 @@ function setConnection(state,text){
 }
 
 
-/* ================================
-   BROWSER CONNECTION
-================================ */
+/* BROWSER ONLINE */
 
 window.addEventListener(
     "online",
@@ -1342,6 +1970,8 @@ window.addEventListener(
     }
 );
 
+
+/* BROWSER OFFLINE */
 
 window.addEventListener(
     "offline",
@@ -1360,13 +1990,13 @@ window.addEventListener(
 );
 
 
-/* ================================
-   FIREBASE CONNECTION
-================================ */
+/* FIREBASE CONNECTION */
 
 function monitorConnection(){
 
-    if(!db) return;
+    if(!db)
+        return;
+
 
     onValue(
         ref(db,".info/connected"),
@@ -1375,6 +2005,7 @@ function monitorConnection(){
 
             firebaseConnected =
                 snapshot.val() === true;
+
 
             if(
                 firebaseConnected &&
@@ -1407,8 +2038,6 @@ function monitorConnection(){
                 error
             );
 
-            firebaseConnected = false;
-
             setConnection(
                 "offline",
                 "OFFLINE • Firebase error"
@@ -1420,9 +2049,7 @@ function monitorConnection(){
 }
 
 
-/* ================================
-   AUTH
-================================ */
+/* AUTH */
 
 if(auth){
 
@@ -1441,15 +2068,18 @@ if(auth){
 
             }
 
+
             currentUser = user;
 
             currentUID =
                 user.uid;
 
+
             setConnection(
                 "connecting",
                 "Loading your account..."
             );
+
 
             loadUser();
 
@@ -1475,9 +2105,7 @@ else{
 }
 
 
-/* ================================
-   USER
-================================ */
+/* USER */
 
 function loadUser(){
 
@@ -1491,7 +2119,9 @@ function loadUser(){
 
     }
 
+
     userStarted = true;
+
 
     onValue(
 
@@ -1505,6 +2135,7 @@ function loadUser(){
             const data =
                 snapshot.val() || {};
 
+
             const name =
                 data.name ||
                 data.displayName ||
@@ -1516,14 +2147,17 @@ function loadUser(){
                         : "Player"
                 );
 
+
             const wallet =
                 getWallet(data);
+
 
             const photo =
                 data.photo ||
                 data.photoURL ||
                 currentUser.photoURL ||
                 "";
+
 
             const matches =
                 Number(
@@ -1534,13 +2168,6 @@ function loadUser(){
                     0
                 ) || 0;
 
-            const wins =
-                Number(
-                    data.wins ??
-                    data.totalWins ??
-                    data.wonMatches ??
-                    0
-                ) || 0;
 
             const winnings =
                 Number(
@@ -1550,12 +2177,12 @@ function loadUser(){
                     0
                 ) || 0;
 
+
             showUser(
                 name,
                 wallet,
                 photo,
                 matches,
-                wins,
                 winnings
             );
 
@@ -1574,9 +2201,7 @@ function loadUser(){
 }
 
 
-/* ================================
-   WALLET
-================================ */
+/* WALLET */
 
 function getWallet(data){
 
@@ -1594,6 +2219,7 @@ function getWallet(data){
 
     }
 
+
     return Number(
         data.wallet ??
         data.balance ??
@@ -1605,16 +2231,13 @@ function getWallet(data){
 }
 
 
-/* ================================
-   SHOW USER
-================================ */
+/* SHOW USER */
 
 function showUser(
     name,
     wallet,
     photo,
     matches,
-    wins,
     winnings
 ){
 
@@ -1639,12 +2262,6 @@ function showUser(
         "heroMatches"
     ).textContent =
         matches;
-
-
-    document.getElementById(
-        "heroWins"
-    ).textContent =
-        wins;
 
 
     document.getElementById(
@@ -1674,7 +2291,9 @@ function showUser(
 
         image.src =
             "https://ui-avatars.com/api/?name=" +
-            encodeURIComponent(name || "Player") +
+            encodeURIComponent(
+                name || "Player"
+            ) +
             "&background=111827&color=22c55e&bold=true";
 
     }
@@ -1685,9 +2304,7 @@ function showUser(
 }
 
 
-/* ================================
-   MISSION
-================================ */
+/* MISSION */
 
 function updateMission(count){
 
@@ -1700,10 +2317,12 @@ function updateMission(count){
             )
         );
 
+
     document.getElementById(
         "missionFill"
     ).style.width =
         count + "%";
+
 
     document.getElementById(
         "missionProgress"
@@ -1714,9 +2333,7 @@ function updateMission(count){
 }
 
 
-/* ================================
-   ANNOUNCEMENT
-================================ */
+/* ANNOUNCEMENT */
 
 function loadAnnouncement(){
 
@@ -1729,7 +2346,9 @@ function loadAnnouncement(){
 
     }
 
+
     announcementStarted = true;
+
 
     onValue(
 
@@ -1740,12 +2359,16 @@ function loadAnnouncement(){
 
         snapshot => {
 
-            if(!snapshot.exists()) return;
+            if(!snapshot.exists())
+                return;
+
 
             const value =
                 snapshot.val();
 
+
             let text = "";
+
 
             if(typeof value === "string"){
 
@@ -1762,6 +2385,7 @@ function loadAnnouncement(){
 
             }
 
+
             if(text){
 
                 document.getElementById(
@@ -1777,9 +2401,7 @@ function loadAnnouncement(){
 }
 
 
-/* ================================
-   MESSAGE UNREAD COUNT
-================================ */
+/* MESSAGES */
 
 function loadMessages(){
 
@@ -1793,27 +2415,9 @@ function loadMessages(){
 
     }
 
+
     messageStarted = true;
 
-    /*
-       Expected structure:
-
-       messages/
-          UID/
-             messageID/
-                text
-                read
-                createdAt
-
-       Also supports:
-
-       messages/
-          messageID/
-             uid
-             text
-             read
-             createdAt
-    */
 
     onValue(
 
@@ -1826,6 +2430,7 @@ function loadMessages(){
 
             let unread = 0;
 
+
             if(snapshot.exists()){
 
                 snapshot.forEach(
@@ -1833,6 +2438,7 @@ function loadMessages(){
 
                         const data =
                             child.val() || {};
+
 
                         if(
                             data.read === false ||
@@ -1848,7 +2454,10 @@ function loadMessages(){
 
             }
 
-            updateMessageBadge(unread);
+
+            updateMessageBadge(
+                unread
+            );
 
         },
 
@@ -1865,9 +2474,7 @@ function loadMessages(){
 }
 
 
-/* ================================
-   MESSAGE BADGE
-================================ */
+/* MESSAGE BADGE */
 
 function updateMessageBadge(count){
 
@@ -1877,10 +2484,12 @@ function updateMessageBadge(count){
             Number(count) || 0
         );
 
+
     const headerBadge =
         document.getElementById(
             "headerBadge"
         );
+
 
     const navBadge =
         document.getElementById(
@@ -1901,6 +2510,7 @@ function updateMessageBadge(count){
                     : count;
 
         }
+
 
         if(navBadge){
 
@@ -1924,6 +2534,7 @@ function updateMessageBadge(count){
 
         }
 
+
         if(navBadge){
 
             navBadge.style.display =
@@ -1936,9 +2547,7 @@ function updateMessageBadge(count){
 }
 
 
-/* ================================
-   MATCHES
-================================ */
+/* MATCHES */
 
 function loadMatches(){
 
@@ -1951,7 +2560,9 @@ function loadMatches(){
 
     }
 
+
     matchStarted = true;
+
 
     onValue(
 
@@ -1963,6 +2574,7 @@ function loadMatches(){
         snapshot => {
 
             const list = [];
+
 
             if(snapshot.exists()){
 
@@ -1983,8 +2595,10 @@ function loadMatches(){
 
             }
 
+
             allMatches =
                 list.reverse();
+
 
             renderMatches();
 
@@ -1997,6 +2611,7 @@ function loadMatches(){
                 error
             );
 
+
             showEmpty(
                 "Live matches unavailable"
             );
@@ -2007,12 +2622,13 @@ function loadMatches(){
 }
 
 
-/* ================================
-   FILTER
-================================ */
+/* FILTER */
 
 window.filterMatches =
-function(type,button){
+function(
+    type,
+    button
+){
 
     currentFilter =
         String(
@@ -2049,9 +2665,7 @@ function(type,button){
 };
 
 
-/* ================================
-   RENDER MATCHES
-================================ */
+/* RENDER */
 
 function renderMatches(){
 
@@ -2060,7 +2674,10 @@ function renderMatches(){
             "matchesContainer"
         );
 
-    if(!box) return;
+
+    if(!box)
+        return;
+
 
     let list =
         [...allMatches];
@@ -2071,7 +2688,9 @@ function renderMatches(){
         list =
             list.filter(
                 item =>
-                    normalizeType(item.data) ===
+                    normalizeType(
+                        item.data
+                    ) ===
                     currentFilter
             );
 
@@ -2088,6 +2707,7 @@ function renderMatches(){
                     )
                     .trim()
                     .toLowerCase();
+
 
                 return ![
                     "completed",
@@ -2121,6 +2741,7 @@ function renderMatches(){
 
     box.innerHTML = "";
 
+
     list.forEach(
         item => {
 
@@ -2136,9 +2757,7 @@ function renderMatches(){
 }
 
 
-/* ================================
-   TYPE
-================================ */
+/* TYPE */
 
 function normalizeType(match){
 
@@ -2157,8 +2776,10 @@ function normalizeType(match){
     if(raw.includes("solo"))
         return "solo";
 
+
     if(raw.includes("duo"))
         return "duo";
+
 
     if(
         raw.includes("tdm") ||
@@ -2166,17 +2787,17 @@ function normalizeType(match){
     )
         return "tdm";
 
+
     if(raw.includes("squad"))
         return "squad";
+
 
     return raw;
 
 }
 
 
-/* ================================
-   MATCH CARD
-================================ */
+/* MATCH CARD */
 
 function renderMatch(
     box,
@@ -2184,7 +2805,9 @@ function renderMatch(
     match
 ){
 
-    match = match || {};
+    match =
+        match || {};
+
 
     const type =
         normalizeType(match)
@@ -2280,9 +2903,13 @@ function renderMatch(
 
 
     const card =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
-    card.className = "match";
+
+    card.className =
+        "match";
 
 
     card.onclick =
@@ -2297,7 +2924,10 @@ function renderMatch(
                 src="${escapeHTML(image)}"
                 alt="${escapeHTML(title)}"
                 loading="lazy"
-                onerror="this.onerror=null;this.src='https://images.pexels.com/photos/7915357/pexels-photo-7915357.jpeg';">
+                onerror="
+                    this.onerror=null;
+                    this.src='https://images.pexels.com/photos/7915357/pexels-photo-7915357.jpeg';
+                ">
 
             <div class="shade"></div>
 
@@ -2323,11 +2953,14 @@ function renderMatch(
 
         </div>
 
+
         <div class="matchInfo">
 
             <div class="info">
 
-                <span>PRIZE</span>
+                <span>
+                    PRIZE
+                </span>
 
                 <strong class="green">
                     ₹${formatNumber(prize)}
@@ -2335,9 +2968,12 @@ function renderMatch(
 
             </div>
 
+
             <div class="info">
 
-                <span>ENTRY</span>
+                <span>
+                    ENTRY
+                </span>
 
                 <strong>
                     ₹${formatNumber(entry)}
@@ -2345,9 +2981,12 @@ function renderMatch(
 
             </div>
 
+
             <div class="info">
 
-                <span>SLOTS</span>
+                <span>
+                    SLOTS
+                </span>
 
                 <strong>
                     ${safeBooked}/${total}
@@ -2356,6 +2995,7 @@ function renderMatch(
             </div>
 
         </div>
+
 
         <div class="progress">
 
@@ -2374,9 +3014,7 @@ function renderMatch(
 }
 
 
-/* ================================
-   TIMER
-================================ */
+/* TIMER */
 
 function getTimer(match){
 
@@ -2390,6 +3028,7 @@ function getTimer(match){
 
     if(status === "live")
         return "🟢 LIVE";
+
 
     if(
         status === "started" ||
@@ -2435,7 +3074,10 @@ function getTimer(match){
 
 
     const start =
-        parseDate(date,time);
+        parseDate(
+            date,
+            time
+        );
 
 
     if(!start)
@@ -2447,11 +3089,12 @@ function getTimer(match){
 }
 
 
-/* ================================
-   DATE
-================================ */
+/* DATE */
 
-function parseDate(date,time){
+function parseDate(
+    date,
+    time
+){
 
     try{
 
@@ -2461,6 +3104,7 @@ function parseDate(date,time){
                 "T" +
                 String(time).trim()
             );
+
 
         if(!isNaN(normal.getTime()))
             return normal;
@@ -2478,8 +3122,10 @@ function parseDate(date,time){
         const day =
             Number(parts[0]);
 
+
         const month =
             Number(parts[1]);
+
 
         const year =
             Number(parts[2]);
@@ -2512,13 +3158,21 @@ function parseDate(date,time){
 
 
         hour =
-            Number(partsTime[0] || 0);
+            Number(
+                partsTime[0] || 0
+            );
+
 
         minute =
-            Number(partsTime[1] || 0);
+            Number(
+                partsTime[1] || 0
+            );
+
 
         second =
-            Number(partsTime[2] || 0);
+            Number(
+                partsTime[2] || 0
+            );
 
 
         if(
@@ -2554,7 +3208,9 @@ function parseDate(date,time){
             );
 
 
-        return isNaN(result.getTime())
+        return isNaN(
+            result.getTime()
+        )
             ? null
             : result;
 
@@ -2568,9 +3224,7 @@ function parseDate(date,time){
 }
 
 
-/* ================================
-   COUNTDOWN
-================================ */
+/* COUNTDOWN */
 
 function countdown(date){
 
@@ -2602,10 +3256,14 @@ function countdown(date){
     if(hours >= 24){
 
         const days =
-            Math.floor(hours / 24);
+            Math.floor(
+                hours / 24
+            );
+
 
         const remaining =
             hours % 24;
+
 
         return (
             "⏰ " +
@@ -2629,14 +3287,14 @@ function countdown(date){
 }
 
 
-/* ================================
-   OPEN MATCH
-================================ */
+/* OPEN MATCH */
 
 window.openMatch =
 function(id){
 
-    if(!id) return;
+    if(!id)
+        return;
+
 
     location.href =
         "match.html?id=" +
@@ -2645,9 +3303,7 @@ function(id){
 };
 
 
-/* ================================
-   SCROLL
-================================ */
+/* SCROLL */
 
 window.scrollToMatches =
 function(){
@@ -2656,6 +3312,7 @@ function(){
         document.getElementById(
             "matchesSection"
         );
+
 
     if(section){
 
@@ -2669,13 +3326,13 @@ function(){
 };
 
 
-/* ================================
-   WELCOME
-================================ */
+/* WELCOME */
 
 function showWelcome(){
 
-    if(!currentUser) return;
+    if(!currentUser)
+        return;
+
 
     const key =
         "welcome_" +
@@ -2691,8 +3348,10 @@ function showWelcome(){
                 "welcome"
             );
 
+
         popup.style.display =
             "flex";
+
 
         localStorage.setItem(
             key,
@@ -2715,9 +3374,7 @@ function(){
 };
 
 
-/* ================================
-   EMPTY
-================================ */
+/* EMPTY */
 
 function showEmpty(text){
 
@@ -2746,9 +3403,7 @@ function showEmpty(text){
 }
 
 
-/* ================================
-   NUMBER
-================================ */
+/* NUMBER */
 
 function number(value){
 
@@ -2782,9 +3437,7 @@ function number(value){
 }
 
 
-/* ================================
-   FORMAT
-================================ */
+/* FORMAT */
 
 function formatNumber(value){
 
@@ -2799,27 +3452,38 @@ function formatNumber(value){
 }
 
 
-/* ================================
-   ESCAPE
-================================ */
+/* ESCAPE */
 
 function escapeHTML(value){
 
     return String(
         value ?? ""
     )
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+    .replaceAll(
+        "&",
+        "&amp;"
+    )
+    .replaceAll(
+        "<",
+        "&lt;"
+    )
+    .replaceAll(
+        ">",
+        "&gt;"
+    )
+    .replaceAll(
+        '"',
+        "&quot;"
+    )
+    .replaceAll(
+        "'",
+        "&#039;"
+    );
 
 }
 
 
-/* ================================
-   REFRESH COUNTDOWN
-================================ */
+/* REFRESH COUNTDOWN */
 
 setInterval(
     () => {
@@ -2835,15 +3499,14 @@ setInterval(
 );
 
 
-/* ================================
-   START
-================================ */
+/* START */
 
 if(db){
 
     monitorConnection();
 
 }
+
 
 if(!navigator.onLine){
 
@@ -2863,9 +3526,7 @@ else{
 }
 
 
-/* ================================
-   GLOBAL ERROR
-================================ */
+/* ERROR */
 
 window.addEventListener(
     "error",
@@ -2873,11 +3534,13 @@ window.addEventListener(
 
         console.error(
             "Dashboard error:",
-            event.error || event.message
+            event.error ||
+            event.message
         );
 
     }
 );
+
 
 window.addEventListener(
     "unhandledrejection",
