@@ -1,491 +1,2379 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>BGMI Register</title>
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+
+<meta name="theme-color" content="#020617">
+
+<title>Create Account - BGMI ESPORTS</title>
 
 <style>
 
+/* =====================================================
+   RESET
+===================================================== */
+
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Inter,Arial,sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Inter,Arial,sans-serif;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
 }
 
 body{
-background:#07111d;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-overflow:hidden;
+    background:
+        radial-gradient(
+            circle at 0% 0%,
+            rgba(34,197,94,.16),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 100% 100%,
+            rgba(37,99,235,.15),
+            transparent 35%
+        ),
+        #020617;
+
+    color:#fff;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    min-height:100vh;
+
+    padding:16px 12px;
+
+    overflow-x:hidden;
 }
 
-body::before{
-content:"";
-position:fixed;
-width:450px;
-height:450px;
-background:#16a34a33;
-border-radius:50%;
-top:-180px;
-right:-150px;
-filter:blur(80px);
+
+/* =====================================================
+   BACKGROUND EFFECTS
+===================================================== */
+
+.bgGlow{
+    position:fixed;
+
+    width:260px;
+    height:260px;
+
+    border-radius:50%;
+
+    filter:blur(90px);
+
+    opacity:.20;
+
+    pointer-events:none;
+
+    z-index:0;
 }
 
-body::after{
-content:"";
-position:fixed;
-width:350px;
-height:350px;
-background:#2563eb22;
-border-radius:50%;
-bottom:-150px;
-left:-120px;
-filter:blur(80px);
+.glow1{
+    background:#22c55e;
+
+    top:-120px;
+    left:-120px;
 }
 
-.card{
+.glow2{
+    background:#2563eb;
 
-width:92%;
-max-width:390px;
-background:#111827;
-border-radius:25px;
-padding:28px;
-position:relative;
-z-index:2;
-box-shadow:0 15px 40px rgba(0,0,0,.45);
-
+    right:-120px;
+    bottom:-120px;
 }
 
-.logo{
 
-width:90px;
-height:90px;
-margin:auto;
-border-radius:50%;
-background:linear-gradient(135deg,#16a34a,#22c55e);
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:42px;
-box-shadow:0 0 25px rgba(34,197,94,.5);
+/* =====================================================
+   MAIN CARD
+===================================================== */
 
+.registerCard{
+
+    position:relative;
+
+    z-index:2;
+
+    width:100%;
+    max-width:430px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(15,23,42,.98),
+            rgba(2,6,23,.98)
+        );
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:28px;
+
+    padding:25px 20px 22px;
+
+    box-shadow:
+        0 30px 90px rgba(0,0,0,.60),
+        inset 0 1px 0 rgba(255,255,255,.04);
 }
 
-h2{
 
-text-align:center;
-color:#fff;
-margin-top:20px;
-font-size:28px;
+/* =====================================================
+   TOP LINE
+===================================================== */
 
+.topLine{
+
+    width:55px;
+    height:4px;
+
+    margin:0 auto 20px;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #16a34a,
+            #22c55e
+        );
+
+    box-shadow:
+        0 0 18px rgba(34,197,94,.45);
 }
 
-.sub{
 
-text-align:center;
-color:#94a3b8;
-margin-top:6px;
-margin-bottom:25px;
-font-size:14px;
+/* =====================================================
+   LOGO AREA
+===================================================== */
 
+.logoArea{
+    text-align:center;
+
+    margin-bottom:23px;
 }
 
-.input-box{
+.logoIcon{
 
-margin-top:16px;
-position:relative;
+    width:76px;
+    height:76px;
 
+    margin:0 auto 13px;
+
+    border-radius:24px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:36px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #22c55e,
+            #15803d
+        );
+
+    border:1px solid rgba(255,255,255,.12);
+
+    box-shadow:
+        0 14px 40px rgba(34,197,94,.25),
+        inset 0 1px 0 rgba(255,255,255,.25);
+
+    animation:
+        logoFloat 3s ease-in-out infinite;
 }
 
-.input-box input{
+@keyframes logoFloat{
 
-width:100%;
-height:52px;
-background:#1f2937;
-border:none;
-outline:none;
-border-radius:14px;
-padding:0 18px;
-color:#fff;
-font-size:15px;
+    0%,100%{
+        transform:translateY(0);
+    }
 
+    50%{
+        transform:translateY(-4px);
+    }
 }
 
-.input-box input::placeholder{
+.logoTitle{
 
-color:#94a3b8;
+    font-size:24px;
 
+    font-weight:900;
+
+    letter-spacing:.5px;
 }
 
-#togglePassword{
-
-position:absolute;
-right:16px;
-top:15px;
-cursor:pointer;
-font-size:20px;
-
+.logoTitle span{
+    color:#22c55e;
 }
 
-button{
+.logoSubtitle{
 
-width:100%;
-height:52px;
-margin-top:22px;
-border:none;
-border-radius:14px;
-background:#22c55e;
-color:#fff;
-font-size:17px;
-font-weight:bold;
-cursor:pointer;
-transition:.3s;
+    margin-top:6px;
 
+    color:#94a3b8;
+
+    font-size:10px;
+
+    font-weight:700;
+
+    letter-spacing:1.3px;
 }
 
-button:hover{
+.secureBadge{
 
-background:#16a34a;
+    display:inline-flex;
 
+    align-items:center;
+
+    gap:5px;
+
+    margin-top:11px;
+
+    padding:6px 10px;
+
+    border-radius:30px;
+
+    background:rgba(34,197,94,.08);
+
+    border:1px solid rgba(34,197,94,.18);
+
+    color:#86efac;
+
+    font-size:9px;
+
+    font-weight:800;
+
+    letter-spacing:.4px;
 }
 
-#msg{
 
-margin-top:18px;
-text-align:center;
-font-size:14px;
-font-weight:bold;
+/* =====================================================
+   FORM GROUP
+===================================================== */
 
+.formGroup{
+    margin-bottom:15px;
 }
 
-.bottom{
+.label{
 
-margin-top:25px;
-text-align:center;
-font-size:14px;
-color:#94a3b8;
+    display:block;
 
+    margin-bottom:7px;
+
+    color:#cbd5e1;
+
+    font-size:11px;
+
+    font-weight:800;
+
+    letter-spacing:.3px;
 }
 
-.bottom a{
 
-color:#22c55e;
-text-decoration:none;
-font-weight:bold;
+/* =====================================================
+   INPUT WRAPPER
+===================================================== */
 
+.inputWrap{
+    position:relative;
 }
 
-.loader{
+.inputIcon{
 
-display:none;
-margin:auto;
-margin-top:15px;
-width:30px;
-height:30px;
-border:4px solid #1f2937;
-border-top:4px solid #22c55e;
-border-radius:50%;
-animation:spin .8s linear infinite;
+    position:absolute;
 
+    left:14px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:20px;
+
+    text-align:center;
+
+    font-size:15px;
+
+    opacity:.85;
+
+    pointer-events:none;
+}
+
+input:not([type="checkbox"]){
+
+    width:100%;
+
+    height:52px;
+
+    border-radius:15px;
+
+    border:1px solid rgba(148,163,184,.14);
+
+    background:
+        rgba(11,18,32,.92);
+
+    color:#fff;
+
+    outline:none;
+
+    padding:0 44px 0 43px;
+
+    font-size:14px;
+
+    transition:.2s;
+}
+
+input:not([type="checkbox"]):focus{
+
+    border-color:#22c55e;
+
+    background:#0b1424;
+
+    box-shadow:
+        0 0 0 3px rgba(34,197,94,.09),
+        0 8px 25px rgba(0,0,0,.18);
+}
+
+input:not([type="checkbox"]).valid{
+    border-color:rgba(34,197,94,.45);
+}
+
+input:not([type="checkbox"]).invalid{
+    border-color:rgba(239,68,68,.55);
+}
+
+input::placeholder{
+    color:#64748b;
+}
+
+
+/* =====================================================
+   INPUT STATUS ICON
+===================================================== */
+
+.inputStatus{
+
+    position:absolute;
+
+    right:13px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    font-size:14px;
+
+    display:none;
+}
+
+.inputStatus.valid{
+    display:block;
+    color:#22c55e;
+}
+
+.inputStatus.invalid{
+    display:block;
+    color:#ef4444;
+}
+
+
+/* =====================================================
+   PASSWORD TOGGLE
+===================================================== */
+
+.togglePassword{
+
+    position:absolute;
+
+    right:8px;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:35px;
+    height:35px;
+
+    border:0;
+
+    border-radius:10px;
+
+    background:transparent;
+
+    color:#94a3b8;
+
+    font-size:16px;
+
+    cursor:pointer;
+}
+
+
+/* =====================================================
+   PASSWORD STRENGTH
+===================================================== */
+
+.passwordStrength{
+
+    display:none;
+
+    margin-top:9px;
+
+    padding:10px;
+
+    border-radius:12px;
+
+    background:rgba(15,23,42,.65);
+
+    border:1px solid rgba(255,255,255,.05);
+}
+
+.strengthTop{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:7px;
+}
+
+.strengthLabel{
+
+    color:#64748b;
+
+    font-size:9px;
+
+    font-weight:800;
+}
+
+.strengthText{
+
+    font-size:9px;
+
+    font-weight:800;
+}
+
+.strengthBar{
+
+    width:100%;
+
+    height:5px;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    background:#1e293b;
+}
+
+.strengthFill{
+
+    width:0;
+
+    height:100%;
+
+    border-radius:20px;
+
+    transition:.25s;
+}
+
+.passwordRules{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:5px;
+
+    margin-top:8px;
+
+    color:#64748b;
+
+    font-size:9px;
+
+    font-weight:600;
+}
+
+.rule.valid{
+    color:#22c55e;
+}
+
+
+/* =====================================================
+   CONFIRM PASSWORD MESSAGE
+===================================================== */
+
+.confirmMessage{
+
+    min-height:14px;
+
+    margin-top:6px;
+
+    font-size:10px;
+
+    font-weight:700;
+}
+
+.confirmMessage.success{
+    color:#22c55e;
+}
+
+.confirmMessage.error{
+    color:#ef4444;
+}
+
+
+/* =====================================================
+   TERMS
+===================================================== */
+
+.terms{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:9px;
+
+    margin:4px 2px 17px;
+
+    padding:11px;
+
+    border-radius:13px;
+
+    background:rgba(15,23,42,.65);
+
+    border:1px solid rgba(255,255,255,.05);
+
+    color:#94a3b8;
+
+    font-size:10px;
+
+    line-height:1.5;
+
+    cursor:pointer;
+}
+
+.terms input[type="checkbox"]{
+
+    appearance:none;
+
+    -webkit-appearance:none;
+
+    width:18px;
+    height:18px;
+
+    flex-shrink:0;
+
+    margin-top:1px;
+
+    border-radius:5px;
+
+    border:1px solid #475569;
+
+    background:#0b1220;
+
+    position:relative;
+
+    cursor:pointer;
+}
+
+.terms input[type="checkbox"]:checked{
+
+    background:#22c55e;
+
+    border-color:#22c55e;
+}
+
+.terms input[type="checkbox"]:checked::after{
+
+    content:"✓";
+
+    position:absolute;
+
+    left:3px;
+    top:-1px;
+
+    color:#020617;
+
+    font-size:14px;
+
+    font-weight:900;
+}
+
+.terms a{
+
+    color:#22c55e;
+
+    text-decoration:none;
+
+    font-weight:800;
+}
+
+
+/* =====================================================
+   REGISTER BUTTON
+===================================================== */
+
+.registerBtn{
+
+    width:100%;
+
+    height:54px;
+
+    border:0;
+
+    border-radius:16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #22c55e,
+            #16a34a
+        );
+
+    color:#020617;
+
+    font-size:14px;
+
+    font-weight:900;
+
+    letter-spacing:.4px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 13px 30px rgba(34,197,94,.22);
+
+    transition:.2s;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.registerBtn::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-100%;
+
+    width:60%;
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.28),
+            transparent
+        );
+
+    transform:skewX(-20deg);
+
+    animation:buttonShine 3s infinite;
+}
+
+@keyframes buttonShine{
+
+    0%{
+        left:-100%;
+    }
+
+    40%,100%{
+        left:150%;
+    }
+}
+
+.registerBtn:active{
+    transform:scale(.98);
+}
+
+.registerBtn:disabled{
+
+    opacity:.65;
+
+    cursor:not-allowed;
+
+    transform:none;
+}
+
+
+/* =====================================================
+   LOADER
+===================================================== */
+
+.loaderBox{
+
+    display:none;
+
+    text-align:center;
+
+    margin-top:13px;
+
+    color:#94a3b8;
+
+    font-size:10px;
+
+    font-weight:700;
+}
+
+.spinner{
+
+    width:23px;
+    height:23px;
+
+    margin:0 auto 8px;
+
+    border:3px solid #1e293b;
+
+    border-top-color:#22c55e;
+
+    border-radius:50%;
+
+    animation:
+        spin .8s linear infinite;
 }
 
 @keyframes spin{
 
-100%{
-transform:rotate(360deg);
+    to{
+        transform:rotate(360deg);
+    }
 }
 
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.message{
+
+    min-height:18px;
+
+    text-align:center;
+
+    margin-top:11px;
+
+    font-size:11px;
+
+    font-weight:800;
+
+    line-height:1.4;
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+.loginText{
+
+    text-align:center;
+
+    margin-top:18px;
+
+    color:#64748b;
+
+    font-size:11px;
+}
+
+.loginText a{
+
+    color:#22c55e;
+
+    text-decoration:none;
+
+    font-weight:900;
+
+    margin-left:4px;
+}
+
+
+/* =====================================================
+   SUCCESS POPUP
+===================================================== */
+
+.successOverlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.78);
+
+    backdrop-filter:blur(10px);
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    z-index:100;
+}
+
+.successBox{
+
+    width:100%;
+
+    max-width:350px;
+
+    padding:30px 22px;
+
+    text-align:center;
+
+    border-radius:25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #0f172a,
+            #020617
+        );
+
+    border:1px solid rgba(34,197,94,.25);
+
+    box-shadow:
+        0 30px 90px rgba(0,0,0,.7);
+
+    animation:
+        popup .3s ease;
+}
+
+@keyframes popup{
+
+    from{
+        opacity:0;
+        transform:scale(.82);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+.successIcon{
+
+    width:72px;
+    height:72px;
+
+    margin:auto;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    color:#22c55e;
+
+    font-size:34px;
+
+    font-weight:900;
+
+    background:rgba(34,197,94,.10);
+
+    border:1px solid rgba(34,197,94,.25);
+
+    box-shadow:
+        0 0 35px rgba(34,197,94,.15);
+}
+
+.successBox h2{
+
+    margin-top:17px;
+
+    font-size:21px;
+
+    font-weight:900;
+}
+
+.successBox p{
+
+    margin-top:7px;
+
+    color:#94a3b8;
+
+    font-size:11px;
+
+    line-height:1.6;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:380px){
+
+    body{
+        padding:10px;
+    }
+
+    .registerCard{
+
+        padding:21px 15px 18px;
+
+        border-radius:23px;
+    }
+
+    .logoIcon{
+
+        width:65px;
+        height:65px;
+
+        font-size:31px;
+    }
+
+    .logoTitle{
+        font-size:21px;
+    }
+
+    input:not([type="checkbox"]){
+        height:49px;
+    }
+
+    .registerBtn{
+        height:51px;
+    }
 }
 
 </style>
 
 </head>
 
+
 <body>
 
-<div class="card">
 
-<div class="logo">
-🎮
+<div class="bgGlow glow1"></div>
+<div class="bgGlow glow2"></div>
+
+
+<div class="registerCard">
+
+
+    <div class="topLine"></div>
+
+
+    <!-- =================================================
+         LOGO
+    ================================================== -->
+
+    <div class="logoArea">
+
+        <div class="logoIcon">
+            🎮
+        </div>
+
+        <div class="logoTitle">
+            BGMI <span>ESPORTS</span>
+        </div>
+
+        <div class="logoSubtitle">
+            CREATE YOUR GAMING ACCOUNT
+        </div>
+
+        <div class="secureBadge">
+            🛡️ SECURE REGISTRATION
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         NAME
+    ================================================== -->
+
+    <div class="formGroup">
+
+        <label class="label">
+            FULL NAME
+        </label>
+
+        <div class="inputWrap">
+
+            <div class="inputIcon">
+                👤
+            </div>
+
+            <input
+                id="name"
+                type="text"
+                maxlength="30"
+                autocomplete="name"
+                placeholder="Enter your full name">
+
+            <div
+                id="nameStatus"
+                class="inputStatus">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         BGMI ID
+    ================================================== -->
+
+    <div class="formGroup">
+
+        <label class="label">
+            BGMI ID
+        </label>
+
+        <div class="inputWrap">
+
+            <div class="inputIcon">
+                🎮
+            </div>
+
+            <input
+                id="bgmiId"
+                type="text"
+                inputmode="numeric"
+                maxlength="15"
+                autocomplete="off"
+                placeholder="Enter your BGMI ID">
+
+            <div
+                id="bgmiStatus"
+                class="inputStatus">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         EMAIL
+    ================================================== -->
+
+    <div class="formGroup">
+
+        <label class="label">
+            EMAIL ADDRESS
+        </label>
+
+        <div class="inputWrap">
+
+            <div class="inputIcon">
+                ✉️
+            </div>
+
+            <input
+                id="email"
+                type="email"
+                maxlength="100"
+                autocomplete="email"
+                placeholder="Enter your email">
+
+            <div
+                id="emailStatus"
+                class="inputStatus">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         PASSWORD
+    ================================================== -->
+
+    <div class="formGroup">
+
+        <label class="label">
+            PASSWORD
+        </label>
+
+        <div class="inputWrap">
+
+            <div class="inputIcon">
+                🔒
+            </div>
+
+            <input
+                id="password"
+                type="password"
+                maxlength="64"
+                autocomplete="new-password"
+                placeholder="Create a strong password">
+
+            <button
+                type="button"
+                id="togglePassword"
+                class="togglePassword">
+
+                👁️
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="passwordStrength"
+            class="passwordStrength">
+
+            <div class="strengthTop">
+
+                <span class="strengthLabel">
+                    PASSWORD STRENGTH
+                </span>
+
+                <span
+                    id="strengthText"
+                    class="strengthText">
+
+                    Password strength
+
+                </span>
+
+            </div>
+
+
+            <div class="strengthBar">
+
+                <div
+                    id="strengthFill"
+                    class="strengthFill">
+                </div>
+
+            </div>
+
+
+            <div class="passwordRules">
+
+                <div id="ruleLength">
+                    ○ 8+ characters
+                </div>
+
+                <div id="ruleUpper">
+                    ○ Uppercase letter
+                </div>
+
+                <div id="ruleNumber">
+                    ○ Number
+                </div>
+
+                <div id="ruleSpecial">
+                    ○ Special character
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         CONFIRM PASSWORD
+    ================================================== -->
+
+    <div class="formGroup">
+
+        <label class="label">
+            CONFIRM PASSWORD
+        </label>
+
+        <div class="inputWrap">
+
+            <div class="inputIcon">
+                🔐
+            </div>
+
+            <input
+                id="confirmPassword"
+                type="password"
+                maxlength="64"
+                autocomplete="new-password"
+                placeholder="Confirm your password">
+
+            <button
+                type="button"
+                id="toggleConfirm"
+                class="togglePassword">
+
+                👁️
+
+            </button>
+
+        </div>
+
+        <div
+            id="confirmMessage"
+            class="confirmMessage">
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         TERMS
+    ================================================== -->
+
+    <label class="terms">
+
+        <input
+            id="terms"
+            type="checkbox">
+
+        <span>
+
+            I agree to the
+            <a
+                href="terms.html"
+                onclick="event.stopPropagation()">
+
+                Terms & Conditions
+
+            </a>
+
+            and confirm that the information
+            provided by me is correct.
+
+        </span>
+
+    </label>
+
+
+    <!-- =================================================
+         REGISTER BUTTON
+    ================================================== -->
+
+    <button
+        id="registerBtn"
+        class="registerBtn"
+        type="button">
+
+        CREATE ACCOUNT 🚀
+
+    </button>
+
+
+    <!-- =================================================
+         LOADER
+    ================================================== -->
+
+    <div
+        id="loader"
+        class="loaderBox">
+
+        <div class="spinner"></div>
+
+        Creating your BGMI account...
+
+    </div>
+
+
+    <!-- =================================================
+         MESSAGE
+    ================================================== -->
+
+    <div
+        id="msg"
+        class="message">
+    </div>
+
+
+    <!-- =================================================
+         LOGIN
+    ================================================== -->
+
+    <div class="loginText">
+
+        Already have an account?
+
+        <a href="index.html">
+            Login
+        </a>
+
+    </div>
+
 </div>
 
-<h2>Create Account</h2>
 
-<div class="sub">
-Register & Start Playing BGMI
-</div>
+<!-- =====================================================
+     SUCCESS POPUP
+===================================================== -->
 
-<div class="input-box">
+<div
+    id="successOverlay"
+    class="successOverlay">
 
-<input
-type="text"
-id="name"
-placeholder="Full Name">
+    <div class="successBox">
 
-</div>
+        <div class="successIcon">
+            ✓
+        </div>
 
-<div class="input-box">
+        <h2>
+            Account Created!
+        </h2>
 
-<input
-type="email"
-id="email"
-placeholder="Email Address">
+        <p>
+            Welcome to BGMI ESPORTS.<br>
+            Your gaming account is ready.
+        </p>
 
-</div>
-
-<div class="input-box">
-
-<input
-type="password"
-id="password"
-placeholder="Password">
-
-<span id="togglePassword">
-👁️
-</span>
+    </div>
 
 </div>
 
-<button id="registerBtn">
 
-REGISTER
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
 
-</button>
-
-<div class="loader" id="loader"></div>
-
-<div id="msg"></div>
-
-<div class="bottom">
-
-Already have an account?
-
-<a href="index.html">
-
-Login
-
-</a>
-
-</div>
-
-</div>
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 
 import {
-getAuth,
-createUserWithEmailAndPassword,
-updateProfile
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
 
 import {
-getDatabase,
-ref,
-set
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    getAuth,
+    createUserWithEmailAndPassword,
+    updateProfile
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 
-const firebaseConfig={
+import {
+    getDatabase,
+    ref,
+    set
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-apiKey:"AIzaSyDsJUtZdIXcsB0w_2MQhMBXxIgbI3ijOvg",
 
-authDomain:"incoinpaysliveearning.firebaseapp.com",
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
 
-databaseURL:"https://incoinpaysliveearning-default-rtdb.firebaseio.com",
+const firebaseConfig = {
 
-projectId:"incoinpaysliveearning",
+    apiKey:
+    "AIzaSyDsJUtZdIXcsB0w_2MQhMBXxIgbI3ijOvg",
 
-storageBucket:"incoinpaysliveearning.firebasestorage.app",
+    authDomain:
+    "incoinpaysliveearning.firebaseapp.com",
 
-messagingSenderId:"971873814750",
+    databaseURL:
+    "https://incoinpaysliveearning-default-rtdb.firebaseio.com",
 
-appId:"1:971873814750:web:7418c7da119e4725ed9a4f"
+    projectId:
+    "incoinpaysliveearning",
+
+    storageBucket:
+    "incoinpaysliveearning.firebasestorage.app",
+
+    messagingSenderId:
+    "971873814750",
+
+    appId:
+    "1:971873814750:web:7418c7da119e4725ed9a4f"
 
 };
 
 
-const app=initializeApp(firebaseConfig);
+/* =====================================================
+   INITIALIZE FIREBASE
+===================================================== */
 
-const auth=getAuth(app);
+const app =
+    initializeApp(firebaseConfig);
 
-const db=getDatabase(app);
+const auth =
+    getAuth(app);
+
+const db =
+    getDatabase(app);
 
 
-const btn=document.getElementById("registerBtn");
-const loader=document.getElementById("loader");
-const msg=document.getElementById("msg");
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const nameInput =
+    document.getElementById("name");
+
+const bgmiInput =
+    document.getElementById("bgmiId");
+
+const emailInput =
+    document.getElementById("email");
+
+const passwordInput =
+    document.getElementById("password");
+
+const confirmInput =
+    document.getElementById("confirmPassword");
+
+const termsInput =
+    document.getElementById("terms");
+
+const registerBtn =
+    document.getElementById("registerBtn");
+
+const loader =
+    document.getElementById("loader");
+
+const msg =
+    document.getElementById("msg");
+
+const strengthBox =
+    document.getElementById("passwordStrength");
+
+const strengthFill =
+    document.getElementById("strengthFill");
+
+const strengthText =
+    document.getElementById("strengthText");
+
+const confirmMessage =
+    document.getElementById("confirmMessage");
 
 
+/* =====================================================
+   MESSAGE
+===================================================== */
 
-/* Show Hide Password */
+function showMessage(
+    text,
+    color = "#ef4444"
+){
 
-document.getElementById("togglePassword").onclick=function(){
+    msg.textContent =
+        text;
 
-const pass=document.getElementById("password");
-
-if(pass.type=="password"){
-
-pass.type="text";
-this.innerHTML="🙈";
-
-}else{
-
-pass.type="password";
-this.innerHTML="👁️";
-
+    msg.style.color =
+        color;
 }
 
-};
 
+/* =====================================================
+   INPUT STATUS
+===================================================== */
 
+function setStatus(
+    input,
+    statusElement,
+    valid
+){
 
-btn.onclick=async function(){
+    input.classList.remove(
+        "valid",
+        "invalid"
+    );
 
+    statusElement.classList.remove(
+        "valid",
+        "invalid"
+    );
 
-const name=document.getElementById("name").value.trim();
+    if(valid === true){
 
-const email=document.getElementById("email").value.trim();
+        input.classList.add("valid");
 
-const password=document.getElementById("password").value.trim();
+        statusElement.classList.add("valid");
 
+        statusElement.textContent =
+            "✓";
 
-msg.innerHTML="";
+    }
 
+    if(valid === false){
 
-if(name==""||email==""||password==""){
+        input.classList.add("invalid");
 
-msg.style.color="#ef4444";
+        statusElement.classList.add("invalid");
 
-msg.innerHTML="⚠ Please fill all fields";
+        statusElement.textContent =
+            "✕";
 
-return;
-
+    }
 }
 
 
-btn.style.display="none";
+/* =====================================================
+   PASSWORD SHOW / HIDE
+===================================================== */
 
-loader.style.display="block";
+document
+.getElementById("togglePassword")
+.addEventListener(
+    "click",
+    function(){
 
+        if(
+            passwordInput.type ===
+            "password"
+        ){
 
-try{
+            passwordInput.type =
+                "text";
 
+            this.textContent =
+                "🙈";
 
-const result=await createUserWithEmailAndPassword(
+        }else{
 
-auth,
+            passwordInput.type =
+                "password";
 
-email,
+            this.textContent =
+                "👁️";
+        }
 
-password
-
+    }
 );
 
 
-/* Save Display Name */
+document
+.getElementById("toggleConfirm")
+.addEventListener(
+    "click",
+    function(){
 
-await updateProfile(result.user,{
+        if(
+            confirmInput.type ===
+            "password"
+        ){
 
-displayName:name
+            confirmInput.type =
+                "text";
 
-});
+            this.textContent =
+                "🙈";
 
+        }else{
 
-/* Save Database */
+            confirmInput.type =
+                "password";
 
-await set(ref(db,"users/"+result.user.uid),{
+            this.textContent =
+                "👁️";
+        }
 
-uid:result.user.uid,
-
-name:name,
-
-email:email,
-
-wallet:0,
-
-createdAt:Date.now()
-
-});
-
-
-loader.style.display="none";
-
-msg.style.color="#22c55e";
-
-msg.innerHTML="✅ Registration Successful";
+    }
+);
 
 
-/* Auto Login + Redirect */
+/* =====================================================
+   NAME VALIDATION
+===================================================== */
 
-setTimeout(()=>{
+nameInput.addEventListener(
+    "input",
+    function(){
 
-location.href="dashboard.html";
+        this.value =
+            this.value
+            .replace(/[<>]/g,"")
+            .replace(/\s+/g," ");
 
-},1000);
+        const name =
+            this.value.trim();
 
+        const valid =
+            name.length >= 3 &&
+            /^[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ .'-]*$/
+            .test(name);
 
-}catch(error){
+        setStatus(
+            this,
+            document.getElementById("nameStatus"),
+            name.length === 0
+                ? null
+                : valid
+        );
 
-
-loader.style.display="none";
-
-btn.style.display="block";
-
-
-switch(error.code){
-
-
-case "auth/email-already-in-use":
-
-msg.style.color="#ef4444";
-
-msg.innerHTML="❌ Email already registered";
-
-break;
-
-
-case "auth/invalid-email":
-
-msg.style.color="#ef4444";
-
-msg.innerHTML="❌ Invalid Email Address";
-
-break;
+    }
+);
 
 
-case "auth/weak-password":
+/* =====================================================
+   BGMI ID VALIDATION
+===================================================== */
 
-msg.style.color="#ef4444";
+bgmiInput.addEventListener(
+    "input",
+    function(){
 
-msg.innerHTML="❌ Password must be at least 6 characters";
+        this.value =
+            this.value.replace(
+                /\D/g,
+                ""
+            );
 
-break;
+        const id =
+            this.value.trim();
+
+        const valid =
+            /^\d{6,15}$/.test(id);
+
+        setStatus(
+            this,
+            document.getElementById("bgmiStatus"),
+            id.length === 0
+                ? null
+                : valid
+        );
+
+    }
+);
 
 
-default:
+/* =====================================================
+   EMAIL VALIDATION
+===================================================== */
 
-msg.style.color="#ef4444";
+emailInput.addEventListener(
+    "input",
+    function(){
 
-msg.innerHTML="❌ "+error.message;
+        this.value =
+            this.value
+            .replace(/\s/g,"")
+            .toLowerCase();
 
-break;
+        const email =
+            this.value.trim();
+
+        const valid =
+            /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+            .test(email);
+
+        setStatus(
+            this,
+            document.getElementById("emailStatus"),
+            email.length === 0
+                ? null
+                : valid
+        );
+
+    }
+);
+
+
+/* =====================================================
+   PASSWORD STRENGTH
+===================================================== */
+
+passwordInput.addEventListener(
+    "input",
+    checkPasswordStrength
+);
+
+
+function checkPasswordStrength(){
+
+    const password =
+        passwordInput.value;
+
+    if(!password){
+
+        strengthBox.style.display =
+            "none";
+
+        strengthFill.style.width =
+            "0";
+
+        return;
+
+    }
+
+    strengthBox.style.display =
+        "block";
+
+
+    const lengthOK =
+        password.length >= 8;
+
+    const upperOK =
+        /[A-Z]/.test(password);
+
+    const numberOK =
+        /[0-9]/.test(password);
+
+    const specialOK =
+        /[^A-Za-z0-9]/.test(password);
+
+
+    updateRule(
+        "ruleLength",
+        lengthOK,
+        "8+ characters"
+    );
+
+    updateRule(
+        "ruleUpper",
+        upperOK,
+        "Uppercase letter"
+    );
+
+    updateRule(
+        "ruleNumber",
+        numberOK,
+        "Number"
+    );
+
+    updateRule(
+        "ruleSpecial",
+        specialOK,
+        "Special character"
+    );
+
+
+    let score = 0;
+
+    if(lengthOK) score++;
+    if(upperOK) score++;
+    if(numberOK) score++;
+    if(specialOK) score++;
+
+
+    if(score <= 1){
+
+        strengthFill.style.width =
+            "25%";
+
+        strengthFill.style.background =
+            "#ef4444";
+
+        strengthText.textContent =
+            "Weak";
+
+        strengthText.style.color =
+            "#ef4444";
+
+    }
+
+    else if(score === 2){
+
+        strengthFill.style.width =
+            "50%";
+
+        strengthFill.style.background =
+            "#f59e0b";
+
+        strengthText.textContent =
+            "Medium";
+
+        strengthText.style.color =
+            "#f59e0b";
+
+    }
+
+    else if(score === 3){
+
+        strengthFill.style.width =
+            "75%";
+
+        strengthFill.style.background =
+            "#eab308";
+
+        strengthText.textContent =
+            "Good";
+
+        strengthText.style.color =
+            "#eab308";
+
+    }
+
+    else{
+
+        strengthFill.style.width =
+            "100%";
+
+        strengthFill.style.background =
+            "#22c55e";
+
+        strengthText.textContent =
+            "Strong";
+
+        strengthText.style.color =
+            "#22c55e";
+    }
+
+
+    checkConfirmPassword();
 
 }
 
 
+function updateRule(
+    id,
+    valid,
+    text
+){
+
+    const element =
+        document.getElementById(id);
+
+    element.classList.toggle(
+        "valid",
+        valid
+    );
+
+    element.textContent =
+        (valid ? "✓ " : "○ ") +
+        text;
 }
 
 
-};
+/* =====================================================
+   CONFIRM PASSWORD
+===================================================== */
+
+confirmInput.addEventListener(
+    "input",
+    checkConfirmPassword
+);
+
+
+function checkConfirmPassword(){
+
+    const password =
+        passwordInput.value;
+
+    const confirm =
+        confirmInput.value;
+
+
+    if(!confirm){
+
+        confirmMessage.textContent =
+            "";
+
+        confirmMessage.className =
+            "confirmMessage";
+
+        return false;
+    }
+
+
+    if(password === confirm){
+
+        confirmMessage.textContent =
+            "✓ Passwords match";
+
+        confirmMessage.className =
+            "confirmMessage success";
+
+        return true;
+
+    }
+
+
+    confirmMessage.textContent =
+        "✕ Passwords do not match";
+
+    confirmMessage.className =
+        "confirmMessage error";
+
+    return false;
+}
+
+
+/* =====================================================
+   TERMS
+===================================================== */
+
+termsInput.addEventListener(
+    "change",
+    function(){
+
+        if(this.checked){
+
+            this.closest(".terms")
+            .style.borderColor =
+                "rgba(34,197,94,.25)";
+
+        }else{
+
+            this.closest(".terms")
+            .style.borderColor =
+                "rgba(255,255,255,.05)";
+        }
+
+    }
+);
+
+
+/* =====================================================
+   VALIDATE FORM
+===================================================== */
+
+function validateForm(){
+
+    const name =
+        nameInput.value.trim();
+
+    const bgmiId =
+        bgmiInput.value.trim();
+
+    const email =
+        emailInput.value.trim()
+        .toLowerCase();
+
+    const password =
+        passwordInput.value;
+
+    const confirmPassword =
+        confirmInput.value;
+
+
+    if(name.length < 3){
+
+        showMessage(
+            "⚠ Please enter your full name"
+        );
+
+        nameInput.focus();
+
+        return false;
+    }
+
+
+    if(
+        !/^[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ .'-]*$/
+        .test(name)
+    ){
+
+        showMessage(
+            "⚠ Please enter a valid name"
+        );
+
+        nameInput.focus();
+
+        return false;
+    }
+
+
+    if(
+        !/^\d{6,15}$/.test(bgmiId)
+    ){
+
+        showMessage(
+            "⚠ Enter a valid BGMI ID"
+        );
+
+        bgmiInput.focus();
+
+        return false;
+    }
+
+
+    if(
+        !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+        .test(email)
+    ){
+
+        showMessage(
+            "⚠ Enter a valid email address"
+        );
+
+        emailInput.focus();
+
+        return false;
+    }
+
+
+    if(password.length < 8){
+
+        showMessage(
+            "⚠ Password must contain at least 8 characters"
+        );
+
+        passwordInput.focus();
+
+        return false;
+    }
+
+
+    if(!/[A-Z]/.test(password)){
+
+        showMessage(
+            "⚠ Password needs an uppercase letter"
+        );
+
+        passwordInput.focus();
+
+        return false;
+    }
+
+
+    if(!/[0-9]/.test(password)){
+
+        showMessage(
+            "⚠ Password needs a number"
+        );
+
+        passwordInput.focus();
+
+        return false;
+    }
+
+
+    if(!/[^A-Za-z0-9]/.test(password)){
+
+        showMessage(
+            "⚠ Password needs a special character"
+        );
+
+        passwordInput.focus();
+
+        return false;
+    }
+
+
+    if(password !== confirmPassword){
+
+        showMessage(
+            "❌ Passwords do not match"
+        );
+
+        confirmInput.focus();
+
+        return false;
+    }
+
+
+    if(!termsInput.checked){
+
+        showMessage(
+            "⚠ Please accept Terms & Conditions"
+        );
+
+        return false;
+    }
+
+
+    return true;
+}
+
+
+/* =====================================================
+   LOADING STATE
+===================================================== */
+
+function setLoading(loading){
+
+    registerBtn.disabled =
+        loading;
+
+    if(loading){
+
+        registerBtn.style.display =
+            "none";
+
+        loader.style.display =
+            "block";
+
+    }else{
+
+        registerBtn.style.display =
+            "block";
+
+        loader.style.display =
+            "none";
+
+        registerBtn.disabled =
+            false;
+    }
+}
+
+
+/* =====================================================
+   FIREBASE ERROR MESSAGE
+===================================================== */
+
+function firebaseErrorMessage(error){
+
+    switch(error.code){
+
+        case "auth/email-already-in-use":
+
+            return "❌ This email is already registered.";
+
+        case "auth/invalid-email":
+
+            return "❌ Please enter a valid email address.";
+
+        case "auth/weak-password":
+
+            return "❌ Password is too weak.";
+
+        case "auth/network-request-failed":
+
+            return "❌ Network error. Check your internet connection.";
+
+        case "auth/operation-not-allowed":
+
+            return "❌ Email/password registration is disabled in Firebase.";
+
+        case "auth/too-many-requests":
+
+            return "❌ Too many attempts. Please try again later.";
+
+        case "PERMISSION_DENIED":
+
+            return "❌ Database permission denied. Check Firebase Rules.";
+
+        case "permission-denied":
+
+            return "❌ Database permission denied. Check Firebase Rules.";
+
+        default:
+
+            return (
+                "❌ " +
+                (
+                    error.message ||
+                    "Registration failed. Please try again."
+                )
+            );
+    }
+}
+
+
+/* =====================================================
+   REGISTER ACCOUNT
+===================================================== */
+
+registerBtn.addEventListener(
+    "click",
+    async function(){
+
+        if(registerBtn.disabled){
+            return;
+        }
+
+
+        showMessage("");
+
+
+        if(!validateForm()){
+            return;
+        }
+
+
+        const name =
+            nameInput.value.trim();
+
+        const bgmiId =
+            bgmiInput.value.trim();
+
+        const email =
+            emailInput.value.trim()
+            .toLowerCase();
+
+        const password =
+            passwordInput.value;
+
+
+        setLoading(true);
+
+
+        try{
+
+
+            /* =========================================
+               CREATE AUTH USER
+            ========================================= */
+
+            const result =
+                await createUserWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+
+
+            const user =
+                result.user;
+
+
+            /* =========================================
+               SAVE AUTH PROFILE
+            ========================================= */
+
+            await updateProfile(
+                user,
+                {
+                    displayName:name
+                }
+            );
+
+
+            /* =========================================
+               SAVE DATABASE PROFILE
+            ========================================= */
+
+            await set(
+                ref(
+                    db,
+                    "users/" + user.uid
+                ),
+                {
+
+                    uid:user.uid,
+
+                    name:name,
+
+                    bgmiId:bgmiId,
+
+                    email:email,
+
+                    wallet:0,
+
+                    matchesJoined:0,
+
+                    missionMatches:0,
+
+                    totalWins:0,
+
+                    totalKills:0,
+
+                    status:"active",
+
+                    photoURL:"",
+
+                    createdAt:Date.now()
+
+                }
+            );
+
+
+            /* =========================================
+               SUCCESS
+            ========================================= */
+
+            setLoading(false);
+
+
+            document
+            .getElementById(
+                "successOverlay"
+            )
+            .style.display =
+                "flex";
+
+
+            /* =========================================
+               DASHBOARD REDIRECT
+            ========================================= */
+
+            setTimeout(
+                function(){
+
+                    location.replace(
+                        "dashboard.html"
+                    );
+
+                },
+                1800
+            );
+
+
+        }
+        catch(error){
+
+            console.error(
+                "Registration Error:",
+                error
+            );
+
+
+            setLoading(false);
+
+
+            showMessage(
+                firebaseErrorMessage(error)
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   ENTER KEY
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Enter" &&
+            !registerBtn.disabled
+        ){
+
+            registerBtn.click();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   PREVENT ACCIDENTAL SUBMISSION
+===================================================== */
+
+window.addEventListener(
+    "beforeunload",
+    function(event){
+
+        if(registerBtn.disabled){
+
+            event.preventDefault();
+
+        }
+
+    }
+);
 
 </script>
 
 </body>
+
 </html>
