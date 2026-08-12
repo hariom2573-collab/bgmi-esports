@@ -972,9 +972,9 @@ button{
 
         Don't have an account?
 
-        <span onclick="showRegister()">
-            Register
-        </span>
+        <span onclick="location.href='register.html'">
+    Register
+</span>
 
     </div>
 
@@ -1029,64 +1029,6 @@ setTimeout(() => {
     }
 
 },1500);
-
-
-/* =========================
-   SHOW REGISTER
-========================= */
-
-window.showRegister = function(){
-
-    document.getElementById(
-        "formTitle"
-    ).innerText =
-        "Create Account";
-
-    document.getElementById(
-        "formSubTitle"
-    ).innerText =
-        "Register your player account";
-
-    document.getElementById(
-        "nameGroup"
-    ).style.display =
-        "block";
-
-    document.getElementById(
-        "confirmGroup"
-    ).style.display =
-        "block";
-
-    document.getElementById(
-        "loginBtn"
-    ).style.display =
-        "none";
-
-    document.getElementById(
-        "registerBtn"
-    ).style.display =
-        "block";
-
-    document.getElementById(
-        "forgotBox"
-    ).style.display =
-        "none";
-
-    document.getElementById(
-        "password"
-    ).autocomplete =
-        "new-password";
-
-    document.getElementById(
-        "switchBox"
-    ).innerHTML =
-        "Already have an account? " +
-        '<span onclick="showLogin()">Login</span>';
-
-    clearMessage();
-
-};
-
 
 /* =========================
    SHOW LOGIN
