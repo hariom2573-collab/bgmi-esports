@@ -1,23 +1,21 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 
 <meta name="viewport"
-content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+      content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
 
 <meta name="theme-color" content="#050B18">
+<meta name="color-scheme" content="dark">
 
 <title>Premium Wallet</title>
 
-<link
-href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-
 *{
     margin:0;
     padding:0;
@@ -26,8 +24,7 @@ rel="stylesheet">
     -webkit-tap-highlight-color:transparent;
 }
 
-html,
-body{
+html,body{
     width:100%;
     min-height:100%;
 }
@@ -42,24 +39,21 @@ body::before{
     content:"";
     position:fixed;
     inset:0;
-    background:
-    radial-gradient(
-        circle at 0% 0%,
-        rgba(34,197,94,.18),
-        transparent 32%
-    ),
-    radial-gradient(
-        circle at 100% 0%,
-        rgba(37,99,235,.18),
-        transparent 32%
-    ),
-    radial-gradient(
-        circle at 50% 100%,
-        rgba(168,85,247,.08),
-        transparent 35%
-    ),
-    #050B18;
     z-index:-1;
+    background:
+    radial-gradient(circle at 0% 0%,rgba(34,197,94,.18),transparent 32%),
+    radial-gradient(circle at 100% 0%,rgba(37,99,235,.18),transparent 32%),
+    radial-gradient(circle at 50% 100%,rgba(168,85,247,.08),transparent 35%),
+    #050B18;
+}
+
+button,
+input{
+    font-family:inherit;
+}
+
+button{
+    -webkit-tap-highlight-color:transparent;
 }
 
 .app{
@@ -109,15 +103,7 @@ body::before{
     padding:23px;
     border-radius:27px;
     margin-bottom:16px;
-
-    background:
-    linear-gradient(
-        135deg,
-        #16a34a 0%,
-        #22c55e 45%,
-        #15803d 100%
-    );
-
+    background:linear-gradient(135deg,#16a34a 0%,#22c55e 45%,#15803d 100%);
     box-shadow:
     0 22px 45px rgba(0,0,0,.38),
     inset 0 1px 0 rgba(255,255,255,.22);
@@ -243,14 +229,7 @@ body::before{
 .summary-card{
     padding:14px;
     border-radius:16px;
-
-    background:
-    linear-gradient(
-        145deg,
-        rgba(17,29,49,.96),
-        rgba(7,14,26,.98)
-    );
-
+    background:linear-gradient(145deg,rgba(17,29,49,.96),rgba(7,14,26,.98));
     border:1px solid rgba(255,255,255,.07);
 }
 
@@ -512,32 +491,21 @@ body::before{
     overflow-y:auto;
     padding:21px;
     border-radius:23px 23px 18px 18px;
-
-    background:
-    linear-gradient(
-        145deg,
-        #111d31,
-        #070e1b
-    );
-
+    background:linear-gradient(145deg,#111d31,#070e1b);
     border:1px solid rgba(255,255,255,.08);
     box-shadow:0 -10px 50px rgba(0,0,0,.55);
-
     animation:slideUp .2s ease;
 }
 
 @keyframes slideUp{
-
     from{
         transform:translateY(30px);
         opacity:0;
     }
-
     to{
         transform:translateY(0);
         opacity:1;
     }
-
 }
 
 .modal-head{
@@ -576,11 +544,15 @@ body::before{
     font-size:13px;
 }
 
+.input:focus{
+    border-color:rgba(34,197,94,.45);
+}
+
 .input::placeholder{
     color:#64748b;
 }
 
-/* PAYMENT AMOUNT */
+/* PAYMENT */
 
 .payment-amount-box{
     padding:15px;
@@ -602,8 +574,6 @@ body::before{
     font-weight:800;
     color:#4ade80;
 }
-
-/* PAYMENT APPS */
 
 .payment-section{
     margin-top:16px;
@@ -629,14 +599,11 @@ body::before{
     background:#111d30;
     color:#fff;
     cursor:pointer;
-
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
     gap:6px;
-
-    transition:.15s ease;
 }
 
 .payment-app:active{
@@ -779,42 +746,27 @@ body::before{
     position:fixed;
     left:50%;
     bottom:25px;
-
-    transform:
-        translate(-50%,20px);
-
+    transform:translate(-50%,20px);
     z-index:10000;
-
     width:max-content;
     max-width:90%;
-
     padding:11px 15px;
-
     border-radius:11px;
-
     background:#172338;
     border:1px solid rgba(255,255,255,.08);
-
     color:#e5ebf5;
     font-size:10px;
-
     opacity:0;
     pointer-events:none;
-
     transition:.2s ease;
 }
 
 .toast.show{
     opacity:1;
-
-    transform:
-        translate(-50%,0);
+    transform:translate(-50%,0);
 }
 
-/* RESPONSIVE */
-
 @media(max-width:360px){
-
     .app{
         padding:13px;
     }
@@ -831,588 +783,401 @@ body::before{
     .payment-apps{
         gap:6px;
     }
-
 }
-
 </style>
-
 </head>
 
 <body>
 
 <div class="app">
 
-<!-- HEADER -->
-
-<div class="header">
-
-
-<div>
-
-    <div class="header-title">
-        Wallet
-    </div>
-
-    <div class="header-subtitle">
-        Manage your money securely
-    </div>
-
-</div>
-
-<div class="security-badge">
-    🔒 SECURE
-</div>
-
-
-</div>
-
-<!-- WALLET CARD -->
-
-<div class="wallet-card">
-
-
-<div class="wallet-top">
-
-    <div class="wallet-label">
-        AVAILABLE BALANCE
-    </div>
-
-    <div class="wallet-brand">
-        BGMI PAY
-    </div>
-
-</div>
-
-
-<div class="balance-row">
-
-    <div
-        id="walletBalance"
-        class="balance">
-
-        ₹0
-
-    </div>
-
-    <button
-        id="eyeBtn"
-        class="eye-btn"
-        onclick="toggleBalance()">
-
-        👁
-
-    </button>
-
-</div>
-
-
-<div
-    id="walletNumber"
-    class="wallet-number">
-
-    •••• •••• ••••
-
-</div>
-
-
-<div class="wallet-bottom">
-
-    <div>
-
-        <div class="wallet-mini-label">
-            Wallet Status
+    <div class="header">
+        <div>
+            <div class="header-title">Wallet</div>
+            <div class="header-subtitle">Manage your money securely</div>
         </div>
 
-        <div class="wallet-mini-value">
-            ACTIVE
+        <div class="security-badge">
+            🔒 SECURE
         </div>
-
     </div>
 
-    <div class="premium-badge">
-        👑 PREMIUM
-    </div>
-
-</div>
-
-
-</div>
-
-<!-- SUMMARY -->
-
-<div class="summary">
-
-
-<div class="summary-card">
-
-    <div class="summary-label">
-        Bonus Balance
-    </div>
-
-    <div
-        id="bonusBalance"
-        class="summary-value">
-
-        ₹0
-
-    </div>
-
-</div>
-
-
-<div class="summary-card">
-
-    <div class="summary-label">
-        Withdrawable
-    </div>
-
-    <div
-        id="withdrawableBalance"
-        class="summary-value">
-
-        ₹0
-
-    </div>
-
-</div>
-
-
-</div>
-
-<!-- ACTIONS -->
-
-<div class="action-card">
-
-
-<div class="section-title">
-    Wallet Action
-</div>
-
-<div class="actions">
-
-    <button
-        class="btn btn-green"
-        onclick="openAddMoney()">
-
-        + Add Money
-
-    </button>
-
-
-    <button
-        class="btn btn-blue"
-        onclick="openWithdraw()">
-
-        ↑ Withdraw
-
-    </button>
-
-</div>
-
-
-</div>
-
-<!-- PENDING -->
-
-<div class="pending-grid">
-
-
-<div class="pending">
-
-    <div class="pending-label">
-        PENDING DEPOSITS
-    </div>
-
-    <div
-        id="pendingDeposits"
-        class="pending-value">
-
-        0
-
-    </div>
-
-</div>
-
-
-<div class="pending">
-
-    <div class="pending-label">
-        PENDING WITHDRAWS
-    </div>
-
-    <div
-        id="pendingWithdraws"
-        class="pending-value">
-
-        0
-
-    </div>
-
-</div>
-
-</div>
-
-<!-- HISTORY -->
-
-<div class="history-card">
-
-
-<div class="history-header">
-
-    <div class="history-title">
-        Transaction History
-    </div>
-
-</div>
-
-
-<div class="filters">
-
-    <button
-        class="filter active"
-        data-filter="all"
-        onclick="setFilter('all',this)">
-
-        ALL
-
-    </button>
-
-    <button
-        class="filter"
-        data-filter="credit"
-        onclick="setFilter('credit',this)">
-
-        CREDIT
-
-    </button>
-
-    <button
-        class="filter"
-        data-filter="debit"
-        onclick="setFilter('debit',this)">
-
-        DEBIT
-
-    </button>
-
-    <button
-        class="filter"
-        data-filter="deposit"
-        onclick="setFilter('deposit',this)">
-
-        DEPOSITS
-
-    </button>
-
-    <button
-        class="filter"
-        data-filter="withdraw"
-        onclick="setFilter('withdraw',this)">
-
-        WITHDRAW
-
-    </button>
-
-    <button
-        class="filter"
-        data-filter="match"
-        onclick="setFilter('match',this)">
-
-        MATCH
-
-    </button>
-
-    <button
-        class="filter"
-        data-filter="reward"
-        onclick="setFilter('reward',this)">
-
-        REWARDS
-
-    </button>
-
-</div>
-
-
-<div id="historyList">
-
-    <div class="empty">
-
-        <div class="empty-icon">
-            💳
-        </div>
-
-        <div class="empty-title">
-            No Transactions
-        </div>
-
-        <div class="empty-text">
-            Your wallet activity will appear here.
-        </div>
-
-    </div>
-
-</div>
-
-
-</div>
-
-</div>
-
-<!-- =========================
-     ADD MONEY MODAL
-========================= -->
-
-<div
-    id="addModal"
-    class="modal"
-    onclick="closeOutside(event,'addModal')">
-
-
-<div
-    class="modal-box"
-    onclick="event.stopPropagation()">
-
-
-    <div class="modal-head">
-
-        <div class="modal-title">
-            Add Money
-        </div>
-
-        <button
-            class="close"
-            onclick="closeAddMoney()">
-
-            ×
-
-        </button>
-
-    </div>
-
-
-    <!-- STEP 1 -->
-
-    <div
-        id="paymentStep1">
-
-        <div class="payment-amount-box">
-
-            <div class="payment-amount-label">
-                Enter Amount
+    <div class="wallet-card">
+
+        <div class="wallet-top">
+            <div class="wallet-label">
+                AVAILABLE BALANCE
             </div>
 
-            <input
-                id="depositAmount"
-                class="input"
-                type="number"
-                min="10"
-                inputmode="decimal"
-                placeholder="Enter Amount">
-
-        </div>
-
-
-        <button
-            id="payNowBtn"
-            class="btn btn-green"
-            style="width:100%;margin-top:14px"
-            onclick="showPaymentOptions()">
-
-            Pay Now
-
-        </button>
-
-
-        <div class="modal-note">
-
-            Minimum deposit ₹10
-
-        </div>
-
-    </div>
-
-
-    <!-- STEP 2 -->
-
-    <div
-        id="paymentStep2"
-        style="display:none">
-
-
-        <div class="payment-amount-box">
-
-            <div class="payment-amount-label">
-                PAYMENT AMOUNT
+            <div class="wallet-brand">
+                BGMI PAY
             </div>
+        </div>
 
-            <div
-                id="selectedAmount"
-                class="payment-amount">
-
+        <div class="balance-row">
+            <div id="walletBalance" class="balance">
                 ₹0
+            </div>
 
+            <button id="eyeBtn"
+                    class="eye-btn"
+                    onclick="toggleBalance()">
+                👁
+            </button>
+        </div>
+
+        <div id="walletNumber" class="wallet-number">
+            •••• •••• ••••
+        </div>
+
+        <div class="wallet-bottom">
+
+            <div>
+                <div class="wallet-mini-label">
+                    Wallet Status
+                </div>
+
+                <div class="wallet-mini-value">
+                    ACTIVE
+                </div>
+            </div>
+
+            <div class="premium-badge">
+                👑 PREMIUM
             </div>
 
         </div>
 
+    </div>
 
-        <div class="payment-section">
+    <div class="summary">
 
-            <div class="payment-section-title">
-
-                Pay using UPI App
-
+        <div class="summary-card">
+            <div class="summary-label">
+                Bonus Balance
             </div>
 
+            <div id="bonusBalance" class="summary-value">
+                ₹0
+            </div>
+        </div>
 
-            <div class="payment-apps">
-
-
-                <button
-                    class="payment-app"
-                    onclick="payWithUPI('gpay')">
-
-                    <div class="payment-app-icon gpay">
-                        G
-                    </div>
-
-                    <div class="payment-app-name">
-                        Google Pay
-                    </div>
-
-                </button>
-
-
-                <button
-                    class="payment-app"
-                    onclick="payWithUPI('phonepe')">
-
-                    <div class="payment-app-icon phonepe">
-                        P
-                    </div>
-
-                    <div class="payment-app-name">
-                        PhonePe
-                    </div>
-
-                </button>
-
-
-                <button
-                    class="payment-app"
-                    onclick="payWithUPI('paytm')">
-
-                    <div class="payment-app-icon paytm">
-                        ₹
-                    </div>
-
-                    <div class="payment-app-name">
-                        Paytm
-                    </div>
-
-                </button>
-
-
-                <button
-                    class="payment-app"
-                    onclick="payWithUPI('fampay')">
-
-                    <div class="payment-app-icon fampay">
-                        F
-                    </div>
-
-                    <div class="payment-app-name">
-                        FamPay
-                    </div>
-
-                </button>
-
-
+        <div class="summary-card">
+            <div class="summary-label">
+                Withdrawable
             </div>
 
-
-            <div class="upi-box">
-
-                <div class="upi-label">
-                    PAY TO UPI ID
-                </div>
-
-                <div
-                    id="adminUPI"
-                    class="upi-value">
-
-                    Loading UPI...
-
-                </div>
-
+            <div id="withdrawableBalance" class="summary-value">
+                ₹0
             </div>
+        </div>
 
+    </div>
 
-            <div class="payment-divider">
-                OR SCAN QR
-            </div>
+    <div class="action-card">
 
+        <div class="section-title">
+            Wallet Action
+        </div>
 
-            <img
-                id="adminQR"
-                class="qr"
-                src=""
-                alt="UPI QR">
+        <div class="actions">
 
-
-            <div class="qr-note">
-
-                UPI app se payment complete karne ke
-                baad neeche Transaction ID / UTR enter karein.
-
-            </div>
-
-
-            <div class="tx-label">
-                Transaction ID / UTR
-            </div>
-
-
-            <input
-                id="utr"
-                class="input"
-                type="text"
-                maxlength="50"
-                autocomplete="off"
-                placeholder="Enter Transaction ID / UTR">
-
-
-            <button
-                id="depositBtn"
-                class="btn btn-green"
-                style="width:100%;margin-top:14px"
-                onclick="submitDeposit()">
-
-                Submit Payment
-
+            <button class="btn btn-green"
+                    onclick="openAddMoney()">
+                + Add Money
             </button>
 
-
-            <button
-                class="btn"
-                style="
-                    width:100%;
-                    margin-top:9px;
-                    background:#182338;
-                    color:#fff;
-                "
-                onclick="backToAmount()">
-
-                ← Change Amount
-
+            <button class="btn btn-blue"
+                    onclick="openWithdraw()">
+                ↑ Withdraw
             </button>
 
+        </div>
+
+    </div>
+
+    <div class="pending-grid">
+
+        <div class="pending">
+            <div class="pending-label">
+                PENDING DEPOSITS
+            </div>
+
+            <div id="pendingDeposits"
+                 class="pending-value">
+                0
+            </div>
+        </div>
+
+        <div class="pending">
+            <div class="pending-label">
+                PENDING WITHDRAWS
+            </div>
+
+            <div id="pendingWithdraws"
+                 class="pending-value">
+                0
+            </div>
+        </div>
+
+    </div>
+
+    <div class="history-card">
+
+        <div class="history-header">
+            <div class="history-title">
+                Transaction History
+            </div>
+        </div>
+
+        <div class="filters">
+
+            <button class="filter active"
+                    onclick="setFilter('all',this)">
+                ALL
+            </button>
+
+            <button class="filter"
+                    onclick="setFilter('credit',this)">
+                CREDIT
+            </button>
+
+            <button class="filter"
+                    onclick="setFilter('debit',this)">
+                DEBIT
+            </button>
+
+            <button class="filter"
+                    onclick="setFilter('deposit',this)">
+                DEPOSITS
+            </button>
+
+            <button class="filter"
+                    onclick="setFilter('withdraw',this)">
+                WITHDRAW
+            </button>
+
+            <button class="filter"
+                    onclick="setFilter('match',this)">
+                MATCH
+            </button>
+
+            <button class="filter"
+                    onclick="setFilter('reward',this)">
+                REWARDS
+            </button>
+
+        </div>
+
+        <div id="historyList">
+
+            <div class="empty">
+                <div class="empty-icon">💳</div>
+
+                <div class="empty-title">
+                    No Transactions
+                </div>
+
+                <div class="empty-text">
+                    Your wallet activity will appear here.
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ADD MONEY -->
+
+<div id="addModal"
+     class="modal"
+     onclick="closeOutside(event,'addModal')">
+
+    <div class="modal-box"
+         onclick="event.stopPropagation()">
+
+        <div class="modal-head">
+
+            <div class="modal-title">
+                Add Money
+            </div>
+
+            <button class="close"
+                    onclick="closeAddMoney()">
+                ×
+            </button>
+
+        </div>
+
+        <div id="paymentStep1">
+
+            <div class="payment-amount-box">
+
+                <div class="payment-amount-label">
+                    Enter Amount
+                </div>
+
+                <input id="depositAmount"
+                       class="input"
+                       type="number"
+                       min="10"
+                       step="1"
+                       inputmode="decimal"
+                       placeholder="Enter Amount">
+
+            </div>
+
+            <button id="payNowBtn"
+                    class="btn btn-green"
+                    style="width:100%;margin-top:14px"
+                    onclick="showPaymentOptions()">
+                Pay Now
+            </button>
 
             <div class="modal-note">
+                Minimum deposit ₹10
+            </div>
 
-                Payment complete hone ke baad UTR submit karein.
-                Admin approval ke baad wallet me amount add hoga.
+        </div>
+
+
+        <div id="paymentStep2"
+             style="display:none">
+
+            <div class="payment-amount-box">
+
+                <div class="payment-amount-label">
+                    PAYMENT AMOUNT
+                </div>
+
+                <div id="selectedAmount"
+                     class="payment-amount">
+                    ₹0
+                </div>
+
+            </div>
+
+            <div class="payment-section">
+
+                <div class="payment-section-title">
+                    Pay using UPI App
+                </div>
+
+                <div class="payment-apps">
+
+                    <button class="payment-app"
+                            onclick="payWithUPI('gpay')">
+
+                        <div class="payment-app-icon gpay">
+                            G
+                        </div>
+
+                        <div class="payment-app-name">
+                            Google Pay
+                        </div>
+
+                    </button>
+
+                    <button class="payment-app"
+                            onclick="payWithUPI('phonepe')">
+
+                        <div class="payment-app-icon phonepe">
+                            P
+                        </div>
+
+                        <div class="payment-app-name">
+                            PhonePe
+                        </div>
+
+                    </button>
+
+                    <button class="payment-app"
+                            onclick="payWithUPI('paytm')">
+
+                        <div class="payment-app-icon paytm">
+                            ₹
+                        </div>
+
+                        <div class="payment-app-name">
+                            Paytm
+                        </div>
+
+                    </button>
+
+                    <button class="payment-app"
+                            onclick="payWithUPI('fampay')">
+
+                        <div class="payment-app-icon fampay">
+                            F
+                        </div>
+
+                        <div class="payment-app-name">
+                            FamPay
+                        </div>
+
+                    </button>
+
+                </div>
+
+                <div class="upi-box">
+
+                    <div class="upi-label">
+                        PAY TO UPI ID
+                    </div>
+
+                    <div id="adminUPI"
+                         class="upi-value">
+                        Loading UPI...
+                    </div>
+
+                </div>
+
+                <div class="payment-divider">
+                    OR SCAN QR
+                </div>
+
+                <img id="adminQR"
+                     class="qr"
+                     src=""
+                     alt="UPI QR">
+
+                <div class="qr-note">
+                    UPI app se payment complete karne ke baad
+                    neeche Transaction ID / UTR enter karein.
+                </div>
+
+                <div class="tx-label">
+                    Transaction ID / UTR
+                </div>
+
+                <input id="utr"
+                       class="input"
+                       type="text"
+                       maxlength="50"
+                       autocomplete="off"
+                       spellcheck="false"
+                       placeholder="Enter Transaction ID / UTR">
+
+                <button id="depositBtn"
+                        class="btn btn-green"
+                        style="width:100%;margin-top:14px"
+                        onclick="submitDeposit()">
+                    Submit Payment
+                </button>
+
+                <button class="btn"
+                        style="width:100%;margin-top:9px;background:#182338;color:#fff"
+                        onclick="backToAmount()">
+                    ← Change Amount
+                </button>
+
+                <div class="modal-note">
+                    Payment complete hone ke baad UTR submit karein.
+                    Admin approval ke baad wallet me amount add hoga.
+                </div>
 
             </div>
 
@@ -1423,123 +1188,86 @@ body::before{
 </div>
 
 
-</div>
+<!-- WITHDRAW -->
 
-<!-- =========================
-     WITHDRAW MODAL
-========================= -->
+<div id="withdrawModal"
+     class="modal"
+     onclick="closeOutside(event,'withdrawModal')">
 
-<div
-    id="withdrawModal"
-    class="modal"
-    onclick="closeOutside(event,'withdrawModal')">
+    <div class="modal-box"
+         onclick="event.stopPropagation()">
 
+        <div class="modal-head">
 
-<div
-    class="modal-box"
-    onclick="event.stopPropagation()">
+            <div class="modal-title">
+                Withdraw Money
+            </div>
 
+            <button class="close"
+                    onclick="closeWithdraw()">
+                ×
+            </button>
 
-    <div class="modal-head">
-
-        <div class="modal-title">
-            Withdraw Money
         </div>
 
-        <button
-            class="close"
-            onclick="closeWithdraw()">
+        <div class="withdraw-info">
 
-            ×
+            <div class="withdraw-info-text">
+                Available Withdrawable Balance
+            </div>
 
+            <div id="withdrawAvailable"
+                 class="withdraw-info-value">
+                ₹0
+            </div>
+
+        </div>
+
+        <input id="withdrawAmount"
+               class="input"
+               type="number"
+               min="10"
+               step="1"
+               inputmode="decimal"
+               placeholder="Enter Amount">
+
+        <input id="withdrawUPI"
+               class="input"
+               type="text"
+               maxlength="100"
+               autocomplete="off"
+               spellcheck="false"
+               placeholder="Enter UPI ID">
+
+        <button id="withdrawBtn"
+                class="btn btn-blue"
+                style="width:100%;margin-top:14px"
+                onclick="submitWithdraw()">
+            Submit Withdraw
         </button>
 
-    </div>
-
-
-    <div class="withdraw-info">
-
-        <div class="withdraw-info-text">
-            Available Withdrawable Balance
-        </div>
-
-        <div
-            id="withdrawAvailable"
-            class="withdraw-info-value">
-
-            ₹0
-
+        <div class="modal-note">
+            Withdrawal request Admin verification ke baad process hogi.
         </div>
 
     </div>
 
-
-    <input
-        id="withdrawAmount"
-        class="input"
-        type="number"
-        min="10"
-        inputmode="decimal"
-        placeholder="Enter Amount">
-
-
-    <input
-        id="withdrawUPI"
-        class="input"
-        type="text"
-        maxlength="100"
-        autocomplete="off"
-        placeholder="Enter UPI ID">
-
-
-    <button
-        id="withdrawBtn"
-        class="btn btn-blue"
-        style="width:100%;margin-top:14px"
-        onclick="submitWithdraw()">
-
-        Submit Withdraw
-
-    </button>
-
-
-    <div class="modal-note">
-
-        Withdrawal request Admin verification ke baad
-        process hogi.
-
-    </div>
-
 </div>
 
 
-</div>
+<div id="toast" class="toast"></div>
 
-<!-- TOAST -->
-
-<div
-    id="toast"
-    class="toast">
-</div>
-
-<!-- FIREBASE -->
 
 <script type="module">
 
-import {
-    initializeApp
-}
-from
-"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 
 import {
     getAuth,
     onAuthStateChanged
 }
-from
-"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 import {
     getDatabase,
@@ -1549,47 +1277,47 @@ import {
     get,
     onValue
 }
-from
-"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 
-/* FIREBASE CONFIG */
+/* =========================
+   FIREBASE CONFIG
+========================= */
 
 const firebaseConfig = {
 
     apiKey:
-    "AIzaSyDsJUtZdIXcsB0w_2MQhMBXxIgbI3ijOvg",
+        "AIzaSyDsJUtZdIXcsB0w_2MQhMBXxIgbI3ijOvg",
 
     authDomain:
-    "incoinpaysliveearning.firebaseapp.com",
+        "incoinpaysliveearning.firebaseapp.com",
 
     databaseURL:
-    "https://incoinpaysliveearning-default-rtdb.firebaseio.com",
+        "https://incoinpaysliveearning-default-rtdb.firebaseio.com",
 
     projectId:
-    "incoinpaysliveearning",
+        "incoinpaysliveearning",
 
     storageBucket:
-    "incoinpaysliveearning.firebasestorage.app",
+        "incoinpaysliveearning.firebasestorage.app",
 
     messagingSenderId:
-    "971873814750",
+        "971873814750",
 
     appId:
-    "1:971873814750:web:7418c7da119e4725ed9a4f"
+        "1:971873814750:web:7418c7da119e4725ed9a4f"
 
 };
 
 
-const app =
-    initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getDatabase(app);
 
-const auth =
-    getAuth(app);
 
-const db =
-    getDatabase(app);
-
+/* =========================
+   GLOBALS
+========================= */
 
 let UID = "";
 
@@ -1597,9 +1325,9 @@ let transactions = [];
 
 let walletBalance = 0;
 
-let withdrawSubmitting = false;
+let bonusBalance = 0;
 
-let depositSubmitting = false;
+let withdrawableBalance = 0;
 
 let balanceHidden = false;
 
@@ -1607,182 +1335,121 @@ let realBalance = "₹0";
 
 let selectedDepositAmount = 0;
 
+let depositSubmitting = false;
 
-/* AUTH */
+let withdrawSubmitting = false;
 
-onAuthStateChanged(
-    auth,
-    (user) => {
+let currentFilter = "all";
 
-        if(!user){
+let adminUPIValue = "";
 
-            location.replace(
-                "index.html"
-            );
 
-            return;
+/* =========================
+   AUTH
+========================= */
 
-        }
+onAuthStateChanged(auth,(user)=>{
 
-        UID =
-            user.uid;
+    if(!user){
 
-        loadWallet();
+        location.replace("index.html");
 
-        loadHistory();
-
-        loadAdminPayment();
-
-        loadPendingRequests();
-
+        return;
     }
-);
+
+    UID = user.uid;
+
+    loadWallet();
+
+    loadHistory();
+
+    loadAdminPayment();
+
+    loadPendingRequests();
+
+});
 
 
-/* WALLET */
+/* =========================
+   WALLET
+========================= */
 
 function loadWallet(){
 
     onValue(
-        ref(db, "users/" + UID + "/wallet"),
+        ref(db,"users/" + UID),
         (snapshot)=>{
 
-            let walletBalance = 0;
-
-            if(snapshot.exists()){
-
-                const walletData = snapshot.val();
-
-                /*
-                 NEW FORMAT:
-                 wallet: {
-                    balance: 500
-                 }
-
-                 OLD FORMAT:
-                 wallet: 500
-                */
-
-                if(
-                    walletData &&
-                    typeof walletData === "object"
-                ){
-
-                    walletBalance =
-                        Number(
-                            walletData.balance || 0
-                        );
-
-                }else{
-
-                    walletBalance =
-                        Number(
-                            walletData || 0
-                        );
-
-                }
-
-            }
-
-            if(
-                !Number.isFinite(walletBalance)
-            ){
+            if(!snapshot.exists()){
 
                 walletBalance = 0;
+                bonusBalance = 0;
+                withdrawableBalance = 0;
+
+                updateWalletUI();
+
+                return;
+            }
+
+            const user = snapshot.val() || {};
+
+            /* WALLET SUPPORTS BOTH FORMATS */
+
+            if(
+                user.wallet &&
+                typeof user.wallet === "object"
+            ){
+
+                walletBalance =
+                    Number(user.wallet.balance || 0);
+
+            }
+            else{
+
+                walletBalance =
+                    Number(user.wallet || 0);
+
+            }
+
+            /* BONUS */
+
+            bonusBalance =
+                Number(user.bonus || 0);
+
+
+            /* WITHDRAWABLE */
+
+            if(
+                user.withdrawable !== undefined &&
+                user.withdrawable !== null
+            ){
+
+                withdrawableBalance =
+                    Number(user.withdrawable);
+
+            }
+            else{
+
+                withdrawableBalance =
+                    walletBalance;
 
             }
 
 
-            /*
-             BONUS
-            */
+            if(!Number.isFinite(walletBalance)){
+                walletBalance = 0;
+            }
 
-            const userSnap =
-                document.getElementById(
-                    "bonusBalance"
-                );
+            if(!Number.isFinite(bonusBalance)){
+                bonusBalance = 0;
+            }
 
-            const withdrawSnap =
-                document.getElementById(
-                    "withdrawableBalance"
-                );
-
-            const walletSnap =
-                document.getElementById(
-                    "walletBalance"
-                );
-
-
-            /*
-             WALLET BALANCE
-            */
-
-            if(walletSnap){
-
-                walletSnap.innerHTML =
-                    "₹" +
-                    Math.floor(walletBalance);
-
+            if(!Number.isFinite(withdrawableBalance)){
+                withdrawableBalance = walletBalance;
             }
 
 
-            /*
-             WITHDRAWABLE BALANCE
-            */
-
-            if(withdrawSnap){
-
-                withdrawSnap.innerHTML =
-                    "₹" +
-                    Math.floor(walletBalance);
-
-            }
-
-
-            /*
-             BONUS
-            */
-
-            if(userSnap){
-
-                /*
-                 Bonus alag path se read hoga.
-                 Isliye yahan existing value ko
-                 disturb nahi kar rahe.
-                */
-
-                const bonusRef =
-                    ref(
-                        db,
-                        "users/" +
-                        UID +
-                        "/bonus"
-                    );
-
-                onValue(
-                    bonusRef,
-                    (bonusSnapshot)=>{
-
-                        const bonus =
-                            Number(
-                                bonusSnapshot.val() || 0
-                            );
-
-                        userSnap.innerHTML =
-                            "₹" +
-                            Math.floor(
-                                Number.isFinite(bonus)
-                                ? bonus
-                                : 0
-                            );
-
-                    },
-                    {
-                        onlyOnce:false
-                    }
-                );
-
-            }
+            updateWalletUI();
 
         },
         (error)=>{
@@ -1792,29 +1459,15 @@ function loadWallet(){
                 error
             );
 
-            const walletSnap =
-                document.getElementById(
-                    "walletBalance"
-                );
+            walletBalance = 0;
+            bonusBalance = 0;
+            withdrawableBalance = 0;
 
-            const withdrawSnap =
-                document.getElementById(
-                    "withdrawableBalance"
-                );
+            updateWalletUI();
 
-            if(walletSnap){
-
-                walletSnap.innerHTML =
-                    "₹0";
-
-            }
-
-            if(withdrawSnap){
-
-                withdrawSnap.innerHTML =
-                    "₹0";
-
-            }
+            showToast(
+                "Wallet load failed"
+            );
 
         }
     );
@@ -1822,30 +1475,91 @@ function loadWallet(){
 }
 
 
-/* BALANCE VISIBILITY */
+/* =========================
+   UPDATE WALLET UI
+========================= */
 
-window.toggleBalance =
-function(){
+function updateWalletUI(){
+
+    realBalance =
+        "₹" +
+        Math.floor(walletBalance).toLocaleString("en-IN");
+
+
+    const walletElement =
+        document.getElementById("walletBalance");
+
+    const withdrawElement =
+        document.getElementById("withdrawableBalance");
+
+    const bonusElement =
+        document.getElementById("bonusBalance");
+
+
+    if(walletElement){
+
+        walletElement.innerText =
+            balanceHidden
+            ? "₹••••"
+            : realBalance;
+
+    }
+
+
+    if(withdrawElement){
+
+        withdrawElement.innerText =
+            "₹" +
+            Math.floor(
+                withdrawableBalance
+            ).toLocaleString("en-IN");
+
+    }
+
+
+    if(bonusElement){
+
+        bonusElement.innerText =
+            "₹" +
+            Math.floor(
+                bonusBalance
+            ).toLocaleString("en-IN");
+
+    }
+
+
+    const available =
+        document.getElementById(
+            "withdrawAvailable"
+        );
+
+    if(available){
+
+        available.innerText =
+            "₹" +
+            Math.floor(
+                withdrawableBalance
+            ).toLocaleString("en-IN");
+
+    }
+
+}
+
+
+/* =========================
+   BALANCE TOGGLE
+========================= */
+
+window.toggleBalance = function(){
 
     balanceHidden =
         !balanceHidden;
 
+    updateWalletUI();
 
-    document
-        .getElementById(
-            "walletBalance"
-        )
-        .innerText =
-        balanceHidden
-        ? "₹••••"
-        : realBalance;
-
-
-    document
-        .getElementById(
-            "eyeBtn"
-        )
-        .innerText =
+    document.getElementById(
+        "eyeBtn"
+    ).innerText =
         balanceHidden
         ? "🙈"
         : "👁";
@@ -1853,73 +1567,55 @@ function(){
 };
 
 
-/* ADD MONEY */
+/* =========================
+   ADD MONEY
+========================= */
 
-window.openAddMoney =
-function(){
+window.openAddMoney = function(){
 
     document
-        .getElementById(
-            "addModal"
-        )
+        .getElementById("addModal")
         .classList.add("show");
 
+    document
+        .getElementById("paymentStep1")
+        .style.display = "block";
 
     document
-        .getElementById(
-            "paymentStep1"
-        )
-        .style.display =
-        "block";
-
+        .getElementById("paymentStep2")
+        .style.display = "none";
 
     document
-        .getElementById(
-            "paymentStep2"
-        )
-        .style.display =
-        "none";
-
-
-    document
-        .getElementById(
-            "depositAmount"
-        )
+        .getElementById("depositAmount")
         .focus();
 
 };
 
 
-/* CLOSE ADD MONEY */
-
-window.closeAddMoney =
-function(){
+window.closeAddMoney = function(){
 
     document
-        .getElementById(
-            "addModal"
-        )
+        .getElementById("addModal")
         .classList.remove("show");
 
 };
 
 
-/* SHOW PAYMENT OPTIONS */
+window.showPaymentOptions = function(){
 
-window.showPaymentOptions =
-function(){
-
-    const amount =
-        Number(
-            document
-                .getElementById(
-                    "depositAmount"
-                )
-                .value
+    const input =
+        document.getElementById(
+            "depositAmount"
         );
 
+    const amount =
+        Number(input.value);
 
-    if(!amount || amount < 10){
+
+    if(
+        !Number.isFinite(amount) ||
+        amount < 10
+    ){
 
         showToast(
             "Minimum deposit is ₹10"
@@ -1931,79 +1627,68 @@ function(){
 
 
     selectedDepositAmount =
-        amount;
+        Math.floor(amount);
 
 
     document
-        .getElementById(
-            "selectedAmount"
-        )
+        .getElementById("selectedAmount")
         .innerText =
         "₹" +
-        Math.floor(
-            amount
-        ).toLocaleString(
+        selectedDepositAmount.toLocaleString(
             "en-IN"
         );
 
 
     document
-        .getElementById(
-            "paymentStep1"
-        )
-        .style.display =
-        "none";
-
+        .getElementById("paymentStep1")
+        .style.display = "none";
 
     document
-        .getElementById(
-            "paymentStep2"
-        )
-        .style.display =
-        "block";
+        .getElementById("paymentStep2")
+        .style.display = "block";
+
+
+    /* REFRESH QR WITH SELECTED AMOUNT */
+
+    if(adminUPIValue){
+
+        createQR(
+            adminUPIValue,
+            selectedDepositAmount
+        );
+
+    }
 
 };
 
 
-/* BACK */
-
-window.backToAmount =
-function(){
+window.backToAmount = function(){
 
     document
-        .getElementById(
-            "paymentStep2"
-        )
-        .style.display =
-        "none";
-
+        .getElementById("paymentStep2")
+        .style.display = "none";
 
     document
-        .getElementById(
-            "paymentStep1"
-        )
-        .style.display =
-        "block";
+        .getElementById("paymentStep1")
+        .style.display = "block";
 
 };
 
 
-/* ADMIN PAYMENT */
+/* =========================
+   ADMIN UPI
+========================= */
 
 function loadAdminPayment(){
 
     onValue(
-        ref(
-            db,
-            "settings/payment"
-        ),
-        (snapshot) => {
+        ref(db,"settings/payment"),
+        (snapshot)=>{
 
             const upiBox =
                 document.getElementById(
                     "adminUPI"
                 );
-
 
             const qr =
                 document.getElementById(
@@ -2012,6 +1697,8 @@ function loadAdminPayment(){
 
 
             if(!snapshot.exists()){
+
+                adminUPIValue = "";
 
                 upiBox.innerText =
                     "UPI Not Found";
@@ -2025,7 +1712,7 @@ function loadAdminPayment(){
 
 
             const data =
-                snapshot.val();
+                snapshot.val() || {};
 
 
             const upi =
@@ -2035,6 +1722,8 @@ function loadAdminPayment(){
 
 
             if(!upi){
+
+                adminUPIValue = "";
 
                 upiBox.innerText =
                     "UPI Not Found";
@@ -2047,14 +1736,30 @@ function loadAdminPayment(){
             }
 
 
+            adminUPIValue = upi;
+
+
             upiBox.innerText =
                 "UPI : " + upi;
 
 
             createQR(
                 upi,
-                selectedDepositAmount || 0
+                selectedDepositAmount
             );
+
+        },
+        (error)=>{
+
+            console.error(
+                "UPI load error:",
+                error
+            );
+
+            document.getElementById(
+                "adminUPI"
+            ).innerText =
+                "UPI unavailable";
 
         }
     );
@@ -2062,12 +1767,11 @@ function loadAdminPayment(){
 }
 
 
-/* CREATE QR */
+/* =========================
+   CREATE QR
+========================= */
 
-function createQR(
-    upi,
-    amount
-){
+function createQR(upi,amount){
 
     const qr =
         document.getElementById(
@@ -2075,17 +1779,28 @@ function createQR(
         );
 
 
+    if(!upi){
+
+        qr.style.display =
+            "none";
+
+        return;
+
+    }
+
+
     let upiURL =
-        "upi://pay?pa=" +
-        encodeURIComponent(
-            upi
-        ) +
+        "upi://pay" +
+        "?pa=" +
+        encodeURIComponent(upi) +
+        "&pn=" +
+        encodeURIComponent("BGMI PAY") +
         "&cu=INR";
 
 
     if(
         amount &&
-        amount > 0
+        Number(amount) >= 10
     ){
 
         upiURL +=
@@ -2099,9 +1814,7 @@ function createQR(
 
     qr.src =
         "https://quickchart.io/qr?size=300&text=" +
-        encodeURIComponent(
-            upiURL
-        );
+        encodeURIComponent(upiURL);
 
 
     qr.style.display =
@@ -2110,10 +1823,11 @@ function createQR(
 }
 
 
-/* PAYMENT APP */
+/* =========================
+   UPI PAYMENT
+========================= */
 
-window.payWithUPI =
-function(appName){
+window.payWithUPI = function(appName){
 
     if(
         !selectedDepositAmount ||
@@ -2129,24 +1843,11 @@ function(appName){
     }
 
 
-    const upiText =
-        document
-            .getElementById(
-                "adminUPI"
-            )
-            .innerText
-            .replace(
-                "UPI : ",
-                ""
-            )
-            .trim();
+    const upi =
+        adminUPIValue;
 
 
-    if(
-        !upiText ||
-        upiText === "Loading UPI..." ||
-        upiText === "UPI Not Found"
-    ){
+    if(!upi){
 
         showToast(
             "Admin UPI not available"
@@ -2163,36 +1864,19 @@ function(appName){
         ).toFixed(2);
 
 
-    /*
-     * Standard UPI deep link.
-     * Android may show the available
-     * installed UPI apps.
-     */
-
-    const upiURL =
+    const standardUPI =
         "upi://pay" +
         "?pa=" +
-        encodeURIComponent(
-            upiText
-        ) +
+        encodeURIComponent(upi) +
         "&pn=" +
-        encodeURIComponent(
-            "BGMI PAY"
-        ) +
+        encodeURIComponent("BGMI PAY") +
         "&am=" +
-        encodeURIComponent(
-            amount
-        ) +
+        encodeURIComponent(amount) +
         "&cu=INR";
 
 
-    /*
-     * Try requested app-specific scheme first.
-     * If unavailable, fall back to standard UPI.
-     */
-
     let appURL =
-        upiURL;
+        standardUPI;
 
 
     if(appName === "gpay"){
@@ -2200,15 +1884,11 @@ function(appName){
         appURL =
             "tez://upi/pay" +
             "?pa=" +
-            encodeURIComponent(
-                upiText
-            ) +
+            encodeURIComponent(upi) +
             "&pn=" +
-            encodeURIComponent(
-                "BGMI PAY"
-            ) +
+            encodeURIComponent("BGMI PAY") +
             "&am=" +
-            amount +
+            encodeURIComponent(amount) +
             "&cu=INR";
 
     }
@@ -2219,15 +1899,11 @@ function(appName){
         appURL =
             "phonepe://pay" +
             "?pa=" +
-            encodeURIComponent(
-                upiText
-            ) +
+            encodeURIComponent(upi) +
             "&pn=" +
-            encodeURIComponent(
-                "BGMI PAY"
-            ) +
+            encodeURIComponent("BGMI PAY") +
             "&am=" +
-            amount +
+            encodeURIComponent(amount) +
             "&cu=INR";
 
     }
@@ -2238,29 +1914,12 @@ function(appName){
         appURL =
             "paytmmp://pay" +
             "?pa=" +
-            encodeURIComponent(
-                upiText
-            ) +
+            encodeURIComponent(upi) +
             "&pn=" +
-            encodeURIComponent(
-                "BGMI PAY"
-            ) +
+            encodeURIComponent("BGMI PAY") +
             "&am=" +
-            amount +
+            encodeURIComponent(amount) +
             "&cu=INR";
-
-    }
-
-
-    if(appName === "fampay"){
-
-        /*
-         * FamPay support can vary by device/version.
-         * Standard UPI is safer fallback.
-         */
-
-        appURL =
-            upiURL;
 
     }
 
@@ -2270,30 +1929,54 @@ function(appName){
         window.location.href =
             appURL;
 
+        showToast(
+            "Payment app open ho raha hai..."
+        );
+
     }
     catch(error){
 
         window.location.href =
-            upiURL;
+            standardUPI;
 
     }
-
-
-    /*
-     * Keep the standard UPI QR ready.
-     */
-
-    showToast(
-        "Payment app open ho raha hai..."
-    );
 
 };
 
 
-/* DEPOSIT */
+/* =========================
+   NORMALIZE UTR
+========================= */
 
-window.submitDeposit =
-async function(){
+function normalizeUTR(utr){
+
+    return String(utr || "")
+        .trim()
+        .toUpperCase()
+        .replace(/\s+/g,"");
+
+}
+
+
+/* =========================
+   SAFE FIREBASE KEY
+========================= */
+
+function makeSafeKey(value){
+
+    return encodeURIComponent(
+        normalizeUTR(value)
+    )
+    .replace(/\./g,"%2E");
+
+}
+
+
+/* =========================
+   SUBMIT DEPOSIT
+========================= */
+
+window.submitDeposit = async function(){
 
     if(depositSubmitting){
         return;
@@ -2310,30 +1993,18 @@ async function(){
         );
 
 
-    const utr =
+    const utrInput =
         document
-            .getElementById(
-                "utr"
-            )
-            .value
-            .trim();
+            .getElementById("utr")
+            .value;
+
+
+    const utr =
+        normalizeUTR(utrInput);
 
 
     if(
-        !amount ||
-        amount <= 0
-    ){
-
-        showToast(
-            "Enter valid amount"
-        );
-
-        return;
-
-    }
-
-
-    if(
+        !Number.isFinite(amount) ||
         amount < 10
     ){
 
@@ -2346,12 +2017,21 @@ async function(){
     }
 
 
-    if(
-        utr === ""
-    ){
+    if(!utr){
 
         showToast(
             "Enter Transaction ID / UTR"
+        );
+
+        return;
+
+    }
+
+
+    if(utr.length < 6){
+
+        showToast(
+            "Enter valid Transaction ID / UTR"
         );
 
         return;
@@ -2374,6 +2054,17 @@ async function(){
     }
 
 
+    if(!UID){
+
+        showToast(
+            "User authentication required"
+        );
+
+        return;
+
+    }
+
+
     depositSubmitting =
         true;
 
@@ -2387,7 +2078,6 @@ async function(){
     button.disabled =
         true;
 
-
     button.innerText =
         "Submitting...";
 
@@ -2395,56 +2085,33 @@ async function(){
     try{
 
         /*
-         * CHECK DUPLICATE UTR
+         * UTR ko unique Firebase key banaya gaya hai.
+         *
+         * Isse poora depositRequests read karke
+         * duplicate check karne ki zarurat nahi.
          */
 
-        const utrSnap =
-            await get(
-                ref(
-                    db,
-                    "depositRequests"
-                )
+        const utrKey =
+            makeSafeKey(utr);
+
+
+        const requestRef =
+            ref(
+                db,
+                "depositRequests/" +
+                utrKey
             );
 
 
-        let duplicate =
-            false;
+        /*
+         * Existing request check.
+         */
+
+        const existing =
+            await get(requestRef);
 
 
-        if(
-            utrSnap.exists()
-        ){
-
-            utrSnap.forEach(
-                (item) => {
-
-                    const data =
-                        item.val() || {};
-
-
-                    if(
-                        String(
-                            data.utr || ""
-                        )
-                        .trim()
-                        .toLowerCase()
-                        ===
-                        utr
-                            .toLowerCase()
-                    ){
-
-                        duplicate =
-                            true;
-
-                    }
-
-                }
-            );
-
-        }
-
-
-        if(duplicate){
+        if(existing.exists()){
 
             throw new Error(
                 "Transaction ID already used"
@@ -2454,17 +2121,8 @@ async function(){
 
 
         /*
-         * CREATE REQUEST
+         * Deposit request create.
          */
-
-        const requestRef =
-            push(
-                ref(
-                    db,
-                    "depositRequests"
-                )
-            );
-
 
         await set(
             requestRef,
@@ -2474,7 +2132,7 @@ async function(){
                     UID,
 
                 amount:
-                    amount,
+                    Math.floor(amount),
 
                 utr:
                     utr,
@@ -2497,30 +2155,43 @@ async function(){
         );
 
 
-        closeAddMoney();
-
-
         document
             .getElementById(
                 "depositAmount"
             )
-            .value =
-            "";
+            .value = "";
 
 
         document
             .getElementById(
                 "utr"
             )
-            .value =
-            "";
+            .value = "";
 
 
         selectedDepositAmount =
             0;
 
-    }
 
+        closeAddMoney();
+
+
+        document
+            .getElementById(
+                "paymentStep1"
+            )
+            .style.display =
+            "block";
+
+
+        document
+            .getElementById(
+                "paymentStep2"
+            )
+            .style.display =
+            "none";
+
+    }
     catch(error){
 
         console.error(
@@ -2529,22 +2200,38 @@ async function(){
         );
 
 
-        showToast(
-            error.message ||
-            "Deposit failed"
-        );
+        let message =
+            "Payment submission failed";
+
+
+        if(
+            error &&
+            error.code ===
+            "PERMISSION_DENIED"
+        ){
+
+            message =
+                "Firebase permission denied";
+
+        }
+        else if(error.message){
+
+            message =
+                error.message;
+
+        }
+
+
+        showToast(message);
 
     }
-
     finally{
 
         depositSubmitting =
             false;
 
-
         button.disabled =
             false;
-
 
         button.innerText =
             "Submit Payment";
@@ -2554,10 +2241,11 @@ async function(){
 };
 
 
-/* WITHDRAW */
+/* =========================
+   WITHDRAW
+========================= */
 
-window.openWithdraw =
-function(){
+window.openWithdraw = function(){
 
     document
         .getElementById(
@@ -2571,17 +2259,17 @@ function(){
             "withdrawAvailable"
         )
         .innerText =
-        document
-            .getElementById(
-                "withdrawableBalance"
-            )
-            .innerText;
+        "₹" +
+        Math.floor(
+            withdrawableBalance
+        ).toLocaleString(
+            "en-IN"
+        );
 
 };
 
 
-window.closeWithdraw =
-function(){
+window.closeWithdraw = function(){
 
     document
         .getElementById(
@@ -2592,13 +2280,212 @@ function(){
 };
 
 
-/* OUTSIDE CLOSE */
+/* =========================
+   SUBMIT WITHDRAW
+========================= */
 
-window.closeOutside =
-function(
-    event,
-    id
-){
+window.submitWithdraw = async function(){
+
+    if(withdrawSubmitting){
+        return;
+    }
+
+
+    const amount =
+        Number(
+            document
+                .getElementById(
+                    "withdrawAmount"
+                )
+                .value
+        );
+
+
+    const upi =
+        document
+            .getElementById(
+                "withdrawUPI"
+            )
+            .value
+            .trim();
+
+
+    if(
+        !Number.isFinite(amount) ||
+        amount < 10
+    ){
+
+        showToast(
+            "Minimum withdrawal is ₹10"
+        );
+
+        return;
+
+    }
+
+
+    if(!upi){
+
+        showToast(
+            "Enter UPI ID"
+        );
+
+        return;
+
+    }
+
+
+    const upiPattern =
+        /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+$/;
+
+
+    if(!upiPattern.test(upi)){
+
+        showToast(
+            "Enter valid UPI ID"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        amount >
+        withdrawableBalance
+    ){
+
+        showToast(
+            "Insufficient withdrawable balance"
+        );
+
+        return;
+
+    }
+
+
+    withdrawSubmitting =
+        true;
+
+
+    const button =
+        document.getElementById(
+            "withdrawBtn"
+        );
+
+
+    button.disabled =
+        true;
+
+    button.innerText =
+        "Submitting...";
+
+
+    try{
+
+        const withdrawRef =
+            push(
+                ref(
+                    db,
+                    "withdrawRequests"
+                )
+            );
+
+
+        await set(
+            withdrawRef,
+            {
+
+                uid:
+                    UID,
+
+                amount:
+                    Math.floor(amount),
+
+                upi:
+                    upi,
+
+                status:
+                    "pending",
+
+                time:
+                    Date.now()
+
+            }
+        );
+
+
+        showToast(
+            "Withdraw request submitted"
+        );
+
+
+        closeWithdraw();
+
+
+        document
+            .getElementById(
+                "withdrawAmount"
+            )
+            .value = "";
+
+
+        document
+            .getElementById(
+                "withdrawUPI"
+            )
+            .value = "";
+
+    }
+    catch(error){
+
+        console.error(
+            "Withdraw Error:",
+            error
+        );
+
+
+        if(
+            error.code ===
+            "PERMISSION_DENIED"
+        ){
+
+            showToast(
+                "Firebase permission denied"
+            );
+
+        }
+        else{
+
+            showToast(
+                error.message ||
+                "Withdraw failed"
+            );
+
+        }
+
+    }
+    finally{
+
+        withdrawSubmitting =
+            false;
+
+        button.disabled =
+            false;
+
+        button.innerText =
+            "Submit Withdraw";
+
+    }
+
+};
+
+
+/* =========================
+   CLOSE OUTSIDE
+========================= */
+
+window.closeOutside = function(event,id){
 
     if(
         event.target.id === id
@@ -2615,19 +2502,16 @@ function(
 };
 
 
-/* FILTER */
+/* =========================
+   FILTER
+========================= */
 
-window.currentFilter =
-"all";
-
-
-window.setFilter =
-function(
+window.setFilter = function(
     filter,
     button
 ){
 
-    window.currentFilter =
+    currentFilter =
         filter;
 
 
@@ -2648,19 +2532,14 @@ function(
     );
 
 
-    if(
-        typeof window.renderTransactions ===
-        "function"
-    ){
-
-        window.renderTransactions();
-
-    }
+    renderTransactions();
 
 };
 
 
-/* HISTORY */
+/* =========================
+   HISTORY
+========================= */
 
 function loadHistory(){
 
@@ -2671,24 +2550,26 @@ function loadHistory(){
             UID +
             "/transactions"
         ),
-        (snapshot) => {
+        (snapshot)=>{
 
             transactions = [];
 
 
-            if(
-                snapshot.exists()
-            ){
+            if(snapshot.exists()){
 
                 snapshot.forEach(
-                    (item) => {
+                    item => {
+
+                        const data =
+                            item.val() || {};
+
 
                         transactions.push({
 
                             id:
                                 item.key,
 
-                            ...item.val()
+                            ...data
 
                         });
 
@@ -2699,21 +2580,21 @@ function loadHistory(){
 
 
             transactions.sort(
-                (a,b) => {
-
-                    return Number(
-                        b.time || 0
-                    )
-                    -
-                    Number(
-                        a.time || 0
-                    );
-
-                }
+                (a,b)=>
+                    Number(b.time || 0) -
+                    Number(a.time || 0)
             );
 
 
-            window.renderTransactions();
+            renderTransactions();
+
+        },
+        (error)=>{
+
+            console.error(
+                "History error:",
+                error
+            );
 
         }
     );
@@ -2721,10 +2602,11 @@ function loadHistory(){
 }
 
 
-/* RENDER TRANSACTIONS */
+/* =========================
+   RENDER HISTORY
+========================= */
 
-window.renderTransactions =
-function(){
+function renderTransactions(){
 
     const box =
         document.getElementById(
@@ -2736,134 +2618,121 @@ function(){
         [...transactions];
 
 
-    const filter =
-        window.currentFilter ||
-        "all";
-
-
-    if(
-        filter !== "all"
-    ){
+    if(currentFilter !== "all"){
 
         list =
-            list.filter(
-                (tx) => {
+            list.filter(tx=>{
 
-                    const type =
-                        String(
-                            tx.type || ""
-                        ).toLowerCase();
-
-
-                    const category =
-                        String(
-                            tx.category ||
-                            tx.source ||
-                            ""
-                        ).toLowerCase();
+                const type =
+                    String(
+                        tx.type || ""
+                    ).toLowerCase();
 
 
-                    const title =
-                        String(
-                            tx.title || ""
-                        ).toLowerCase();
+                const category =
+                    String(
+                        tx.category ||
+                        tx.source ||
+                        ""
+                    ).toLowerCase();
 
 
-                    if(
-                        filter === "credit"
-                    ){
-
-                        return (
-                            type === "credit"
-                        );
-
-                    }
+                const title =
+                    String(
+                        tx.title || ""
+                    ).toLowerCase();
 
 
-                    if(
-                        filter === "debit"
-                    ){
+                if(
+                    currentFilter ===
+                    "credit"
+                ){
 
-                        return (
-                            type === "debit"
-                        );
-
-                    }
-
-
-                    if(
-                        filter === "deposit"
-                    ){
-
-                        return (
-                            category.includes("deposit") ||
-                            category.includes("add") ||
-                            title.includes("deposit") ||
-                            title.includes("add money")
-                        );
-
-                    }
-
-
-                    if(
-                        filter === "withdraw"
-                    ){
-
-                        return (
-                            category.includes("withdraw") ||
-                            title.includes("withdraw")
-                        );
-
-                    }
-
-
-                    if(
-                        filter === "match"
-                    ){
-
-                        return (
-                            category.includes("match") ||
-                            title.includes("match")
-                        );
-
-                    }
-
-
-                    if(
-                        filter === "reward"
-                    ){
-
-                        return (
-                            category.includes("reward") ||
-                            category.includes("cashback") ||
-                            title.includes("reward") ||
-                            title.includes("cashback") ||
-                            title.includes("winning") ||
-                            title.includes("win")
-                        );
-
-                    }
-
-
-                    return true;
+                    return type === "credit";
 
                 }
-            );
+
+
+                if(
+                    currentFilter ===
+                    "debit"
+                ){
+
+                    return type === "debit";
+
+                }
+
+
+                if(
+                    currentFilter ===
+                    "deposit"
+                ){
+
+                    return (
+                        category.includes("deposit") ||
+                        category.includes("add") ||
+                        title.includes("deposit") ||
+                        title.includes("add money")
+                    );
+
+                }
+
+
+                if(
+                    currentFilter ===
+                    "withdraw"
+                ){
+
+                    return (
+                        category.includes("withdraw") ||
+                        title.includes("withdraw")
+                    );
+
+                }
+
+
+                if(
+                    currentFilter ===
+                    "match"
+                ){
+
+                    return (
+                        category.includes("match") ||
+                        title.includes("match")
+                    );
+
+                }
+
+
+                if(
+                    currentFilter ===
+                    "reward"
+                ){
+
+                    return (
+                        category.includes("reward") ||
+                        category.includes("cashback") ||
+                        title.includes("reward") ||
+                        title.includes("cashback") ||
+                        title.includes("winning") ||
+                        title.includes("win")
+                    );
+
+                }
+
+
+                return true;
+
+            });
 
     }
 
 
-    if(
-        list.length === 0
-    ){
+    if(!list.length){
 
         box.innerHTML = `
-
             <div class="empty">
-
-                <div class="empty-icon">
-                    💳
-                </div>
+                <div class="empty-icon">💳</div>
 
                 <div class="empty-title">
                     No Transactions
@@ -2872,9 +2741,7 @@ function(){
                 <div class="empty-text">
                     No transaction found in this category.
                 </div>
-
             </div>
-
         `;
 
         return;
@@ -2882,229 +2749,211 @@ function(){
     }
 
 
-    box.innerHTML =
-        "";
+    box.innerHTML = "";
 
 
-    list.forEach(
-        (tx) => {
+    list.forEach(tx=>{
 
-            const amount =
-                Number(
-                    tx.amount || 0
-                );
+        const amount =
+            Number(tx.amount || 0);
 
 
-            const type =
-                String(
-                    tx.type ||
-                    "credit"
-                ).toLowerCase();
+        const type =
+            String(
+                tx.type ||
+                "credit"
+            ).toLowerCase();
 
 
-            const status =
-                String(
-                    tx.status ||
-                    "completed"
-                ).toLowerCase();
+        const status =
+            String(
+                tx.status ||
+                "completed"
+            ).toLowerCase();
 
 
-            const title =
-                String(
-                    tx.title ||
-                    "Transaction"
-                );
-
-
-            const lowerTitle =
-                title.toLowerCase();
-
-
-            let icon =
-                "💳";
-
-
-            if(
-                lowerTitle.includes("deposit") ||
-                lowerTitle.includes("add money")
-            ){
-
-                icon = "🟢";
-
-            }
-
-            else if(
-                lowerTitle.includes("withdraw")
-            ){
-
-                icon = "💸";
-
-            }
-
-            else if(
-                lowerTitle.includes("match")
-            ){
-
-                icon = "🎮";
-
-            }
-
-            else if(
-                lowerTitle.includes("winning") ||
-                lowerTitle.includes("win")
-            ){
-
-                icon = "🏆";
-
-            }
-
-            else if(
-                lowerTitle.includes("cashback") ||
-                lowerTitle.includes("reward")
-            ){
-
-                icon = "🎁";
-
-            }
-
-            else if(
-                lowerTitle.includes("refund")
-            ){
-
-                icon = "↩️";
-
-            }
-
-
-            let statusClass =
-                "";
-
-
-            if(
-                status === "pending"
-            ){
-
-                statusClass =
-                    "pending-text";
-
-            }
-
-            else if(
-                status === "rejected"
-            ){
-
-                statusClass =
-                    "rejected-text";
-
-            }
-
-
-            const statusText =
-                status
-                    .charAt(0)
-                    .toUpperCase() +
-                status.slice(1);
-
-
-            const time =
-                tx.time
-                ? new Date(
-                    Number(tx.time)
-                ).toLocaleString(
-                    "en-IN",
-                    {
-                        day:"2-digit",
-                        month:"short",
-                        year:"numeric",
-                        hour:"2-digit",
-                        minute:"2-digit"
-                    }
-                )
-                : "--";
-
-
-            const amountText =
-                type === "debit"
-                ? "-₹"
-                : "+₹";
-
-
-            const amountClass =
-                type === "debit"
-                ? "debit"
-                : "credit";
-
-
-            const row =
-                document.createElement(
-                    "div"
-                );
-
-
-            row.className =
-                "history";
-
-
-            row.innerHTML = `
-
-                <div class="tx-icon">
-                    ${icon}
-                </div>
-
-                <div class="tx-info">
-
-                    <div class="tx-title">
-                        ${escapeHTML(title)}
-                    </div>
-
-                    <div class="tx-time">
-                        ${time}
-                    </div>
-
-                    <div class="tx-status ${statusClass}">
-                        ${escapeHTML(statusText)}
-                    </div>
-
-                </div>
-
-                <div class="tx-amount ${amountClass}">
-                    ${amountText}${Math.floor(amount)}
-                </div>
-
-            `;
-
-
-            box.appendChild(
-                row
+        const title =
+            String(
+                tx.title ||
+                "Transaction"
             );
 
+
+        const lowerTitle =
+            title.toLowerCase();
+
+
+        let icon = "💳";
+
+
+        if(
+            lowerTitle.includes("deposit") ||
+            lowerTitle.includes("add money")
+        ){
+
+            icon = "🟢";
+
         }
-    );
+        else if(
+            lowerTitle.includes("withdraw")
+        ){
 
-};
+            icon = "💸";
+
+        }
+        else if(
+            lowerTitle.includes("match")
+        ){
+
+            icon = "🎮";
+
+        }
+        else if(
+            lowerTitle.includes("winning") ||
+            lowerTitle.includes("win")
+        ){
+
+            icon = "🏆";
+
+        }
+        else if(
+            lowerTitle.includes("cashback") ||
+            lowerTitle.includes("reward")
+        ){
+
+            icon = "🎁";
+
+        }
+        else if(
+            lowerTitle.includes("refund")
+        ){
+
+            icon = "↩️";
+
+        }
 
 
-/* PENDING REQUESTS */
+        let statusClass = "";
+
+
+        if(status === "pending"){
+
+            statusClass =
+                "pending-text";
+
+        }
+        else if(status === "rejected"){
+
+            statusClass =
+                "rejected-text";
+
+        }
+
+
+        const statusText =
+            status.charAt(0).toUpperCase() +
+            status.slice(1);
+
+
+        const time =
+            tx.time
+            ? new Date(
+                Number(tx.time)
+              ).toLocaleString(
+                "en-IN",
+                {
+                    day:"2-digit",
+                    month:"short",
+                    year:"numeric",
+                    hour:"2-digit",
+                    minute:"2-digit"
+                }
+              )
+            : "--";
+
+
+        const amountText =
+            type === "debit"
+            ? "-₹"
+            : "+₹";
+
+
+        const amountClass =
+            type === "debit"
+            ? "debit"
+            : "credit";
+
+
+        const row =
+            document.createElement(
+                "div"
+            );
+
+
+        row.className =
+            "history";
+
+
+        row.innerHTML = `
+
+            <div class="tx-icon">
+                ${icon}
+            </div>
+
+            <div class="tx-info">
+
+                <div class="tx-title">
+                    ${escapeHTML(title)}
+                </div>
+
+                <div class="tx-time">
+                    ${time}
+                </div>
+
+                <div class="tx-status ${statusClass}">
+                    ${escapeHTML(statusText)}
+                </div>
+
+            </div>
+
+            <div class="tx-amount ${amountClass}">
+                ${amountText}${Math.floor(amount).toLocaleString("en-IN")}
+            </div>
+
+        `;
+
+
+        box.appendChild(row);
+
+    });
+
+}
+
+
+/* =========================
+   PENDING REQUESTS
+========================= */
 
 function loadPendingRequests(){
+
+    /*
+     * DEPOSITS
+     */
 
     onValue(
         ref(
             db,
             "depositRequests"
         ),
-        (snapshot) => {
+        snapshot=>{
 
-            let count =
-                0;
+            let count = 0;
 
 
-            if(
-                snapshot.exists()
-            ){
+            if(snapshot.exists()){
 
                 snapshot.forEach(
-                    (item) => {
+                    item=>{
 
                         const data =
                             item.val() || {};
@@ -3137,27 +2986,36 @@ function loadPendingRequests(){
                 .innerText =
                 count;
 
+        },
+        error=>{
+
+            console.error(
+                "Pending deposit error:",
+                error
+            );
+
         }
     );
 
+
+    /*
+     * WITHDRAW
+     */
 
     onValue(
         ref(
             db,
             "withdrawRequests"
         ),
-        (snapshot) => {
+        snapshot=>{
 
-            let count =
-                0;
+            let count = 0;
 
 
-            if(
-                snapshot.exists()
-            ){
+            if(snapshot.exists()){
 
                 snapshot.forEach(
-                    (item) => {
+                    item=>{
 
                         const data =
                             item.val() || {};
@@ -3190,263 +3048,25 @@ function loadPendingRequests(){
                 .innerText =
                 count;
 
+        },
+        error=>{
+
+            console.error(
+                "Pending withdraw error:",
+                error
+            );
+
         }
     );
 
 }
 
 
-/* WITHDRAW */
-
-window.submitWithdraw =
-async function(){
-
-    if(withdrawSubmitting){
-        return;
-    }
-
-
-    const amount =
-        Number(
-            document
-                .getElementById(
-                    "withdrawAmount"
-                )
-                .value
-        );
-
-
-    const upi =
-        document
-            .getElementById(
-                "withdrawUPI"
-            )
-            .value
-            .trim();
-
-
-    if(
-        !amount ||
-        amount <= 0
-    ){
-
-        showToast(
-            "Enter valid amount"
-        );
-
-        return;
-
-    }
-
-
-    if(
-        amount < 10
-    ){
-
-        showToast(
-            "Minimum withdrawal is ₹10"
-        );
-
-        return;
-
-    }
-
-
-    if(
-        upi === ""
-    ){
-
-        showToast(
-            "Enter UPI ID"
-        );
-
-        return;
-
-    }
-
-
-    const upiPattern =
-        /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+$/;
-
-
-    if(
-        !upiPattern.test(
-            upi
-        )
-    ){
-
-        showToast(
-            "Enter valid UPI ID"
-        );
-
-        return;
-
-    }
-
-
-    withdrawSubmitting =
-        true;
-
-
-    const button =
-        document.getElementById(
-            "withdrawBtn"
-        );
-
-
-    button.disabled =
-        true;
-
-
-    button.innerText =
-        "Submitting...";
-
-
-    try{
-
-        const userSnap =
-            await get(
-                ref(
-                    db,
-                    "users/" +
-                    UID
-                )
-            );
-
-
-        if(
-            !userSnap.exists()
-        ){
-
-            throw new Error(
-                "User not found"
-            );
-
-        }
-
-
-        const user =
-            userSnap.val();
-
-
-        const wallet =
-            Number(
-                user.wallet || 0
-            );
-
-
-        const withdrawable =
-            Number(
-                user.withdrawable ??
-                wallet
-            );
-
-
-        if(
-            withdrawable < amount
-        ){
-
-            throw new Error(
-                "Insufficient withdrawable balance"
-            );
-
-        }
-
-
-        const withdrawRef =
-            push(
-                ref(
-                    db,
-                    "withdrawRequests"
-                )
-            );
-
-
-        await set(
-            withdrawRef,
-            {
-
-                uid:
-                    UID,
-
-                amount:
-                    amount,
-
-                upi:
-                    upi,
-
-                status:
-                    "pending",
-
-                time:
-                    Date.now()
-
-            }
-        );
-
-
-        showToast(
-            "Withdraw request submitted"
-        );
-
-
-        closeWithdraw();
-
-
-        document
-            .getElementById(
-                "withdrawAmount"
-            )
-            .value =
-            "";
-
-
-        document
-            .getElementById(
-                "withdrawUPI"
-            )
-            .value =
-            "";
-
-    }
-
-    catch(error){
-
-        console.error(
-            "Withdraw Error:",
-            error
-        );
-
-
-        showToast(
-            error.message ||
-            "Withdraw failed"
-        );
-
-    }
-
-    finally{
-
-        withdrawSubmitting =
-            false;
-
-
-        button.disabled =
-            false;
-
-
-        button.innerText =
-            "Submit Withdraw";
-
-    }
-
-};
-
-
-/* TOAST */
-
-window.showToast =
-function(message){
+/* =========================
+   TOAST
+========================= */
+
+window.showToast = function(message){
 
     const toast =
         document.getElementById(
@@ -3463,49 +3083,36 @@ function(message){
     );
 
 
-    setTimeout(
-        () => {
-
-            toast.classList.remove(
-                "show"
-            );
-
-        },
-        2200
+    clearTimeout(
+        window.toastTimer
     );
+
+
+    window.toastTimer =
+        setTimeout(
+            ()=>{
+                toast.classList.remove(
+                    "show"
+                );
+            },
+            2600
+        );
 
 };
 
 
-/* ESCAPE HTML */
+/* =========================
+   ESCAPE HTML
+========================= */
 
-function escapeHTML(
-    value
-){
+function escapeHTML(value){
 
-    return String(
-        value
-    )
-    .replaceAll(
-        "&",
-        "&amp;"
-    )
-    .replaceAll(
-        "<",
-        "&lt;"
-    )
-    .replaceAll(
-        ">",
-        "&gt;"
-    )
-    .replaceAll(
-        '"',
-        "&quot;"
-    )
-    .replaceAll(
-        "'",
-        "&#039;"
-    );
+    return String(value)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
 
 }
 
