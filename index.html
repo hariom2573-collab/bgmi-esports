@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -6,391 +7,737 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 
 <meta name="theme-color" content="#050B18">
 
 <title>BGMI ESPORTS</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
 
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet">
 
 <style>
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
--webkit-tap-highlight-color:transparent;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Poppins,sans-serif;
+    -webkit-tap-highlight-color:transparent;
 }
 
-html{
-scroll-behavior:smooth;
+html,
+body{
+    width:100%;
+    min-height:100%;
 }
 
 body{
 
-background:#050B18;
-color:#fff;
-overflow:hidden;
+    background:#050B18;
+    color:#fff;
+
+    overflow-x:hidden;
 
 }
 
-/* Background */
+/* =========================
+   BACKGROUND
+========================= */
 
 body::before{
 
-content:"";
+    content:"";
 
-position:fixed;
+    position:fixed;
 
-inset:0;
+    inset:0;
 
-background:
+    background:
+        radial-gradient(
+            circle at 15% 10%,
+            rgba(34,197,94,.20),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 90% 20%,
+            rgba(37,99,235,.20),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(168,85,247,.12),
+            transparent 35%
+        );
 
-radial-gradient(circle at top left,
-rgba(34,197,94,.20),
-transparent 35%),
+    pointer-events:none;
 
-radial-gradient(circle at top right,
-rgba(37,99,235,.20),
-transparent 35%),
-
-radial-gradient(circle at bottom,
-rgba(168,85,247,.18),
-transparent 40%),
-
-#050B18;
-
-z-index:-5;
-
-}
-
-/* Glow */
-
-.glow{
-
-position:fixed;
-
-border-radius:50%;
-
-filter:blur(90px);
-
-opacity:.45;
-
-animation:floatGlow 12s linear infinite alternate;
-
-z-index:-4;
+    z-index:-2;
 
 }
 
-.glow1{
+/* GRID EFFECT */
 
-width:240px;
-height:240px;
+body::after{
 
-background:#22c55e;
+    content:"";
 
-top:-80px;
-left:-80px;
+    position:fixed;
 
-}
+    inset:0;
 
-.glow2{
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px
+        );
 
-width:240px;
-height:240px;
+    background-size:40px 40px;
 
-background:#2563eb;
+    mask-image:linear-gradient(
+        to bottom,
+        black,
+        transparent
+    );
 
-top:150px;
-right:-90px;
+    pointer-events:none;
 
-animation-delay:2s;
-
-}
-
-.glow3{
-
-width:220px;
-height:220px;
-
-background:#9333ea;
-
-bottom:-70px;
-left:35%;
-
-animation-delay:4s;
+    z-index:-1;
 
 }
 
-@keyframes floatGlow{
-
-100%{
-
-transform:translate(40px,40px);
-
-}
-
-}
-
-/* Splash */
+/* =========================
+   SPLASH
+========================= */
 
 #splash{
 
-position:fixed;
+    position:fixed;
 
-inset:0;
+    inset:0;
 
-display:flex;
+    background:#050B18;
 
-justify-content:center;
+    display:flex;
 
-align-items:center;
+    justify-content:center;
 
-flex-direction:column;
+    align-items:center;
 
-background:#050B18;
+    flex-direction:column;
 
-z-index:999999;
-
-}
-
-.logo{
-
-width:120px;
-
-height:120px;
-
-border-radius:50%;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-font-size:55px;
-
-background:linear-gradient(135deg,#16a34a,#22c55e);
-
-box-shadow:
-
-0 0 40px rgba(34,197,94,.55),
-
-0 0 80px rgba(34,197,94,.20);
-
-animation:pulse 1.5s infinite;
+    z-index:9999;
 
 }
 
-@keyframes pulse{
+.splashLogo{
 
-50%{
+    width:90px;
+    height:90px;
 
-transform:scale(1.08);
+    border-radius:26px;
 
-}
+    display:flex;
 
-}
+    justify-content:center;
+    align-items:center;
 
-.logoTitle{
+    font-size:42px;
 
-margin-top:25px;
+    background:
+        linear-gradient(
+            135deg,
+            #16a34a,
+            #22c55e
+        );
 
-font-size:28px;
+    box-shadow:
+        0 0 25px rgba(34,197,94,.35),
+        0 20px 50px rgba(0,0,0,.5);
 
-font-weight:800;
-
-letter-spacing:1px;
-
-}
-
-.logoSub{
-
-margin-top:8px;
-
-font-size:13px;
-
-color:#94a3b8;
+    animation:
+        splashPulse 1.2s infinite alternate;
 
 }
 
-/* Main */
+.splashTitle{
 
-.container{
+    margin-top:20px;
 
-display:none;
+    font-size:24px;
 
-width:100%;
+    font-weight:800;
 
-max-width:450px;
-
-margin:auto;
-
-padding:25px;
-
-min-height:100vh;
-
-justify-content:center;
-
-align-items:center;
-
-flex-direction:column;
+    letter-spacing:1px;
 
 }
+
+.splashSub{
+
+    margin-top:5px;
+
+    color:#94a3b8;
+
+    font-size:12px;
+
+    letter-spacing:2px;
+
+}
+
+.loaderDots{
+
+    display:flex;
+
+    gap:6px;
+
+    margin-top:25px;
+
+}
+
+.loaderDots span{
+
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#22c55e;
+
+    animation:dot 1s infinite;
+
+}
+
+.loaderDots span:nth-child(2){
+    animation-delay:.15s;
+}
+
+.loaderDots span:nth-child(3){
+    animation-delay:.3s;
+}
+
+@keyframes splashPulse{
+
+    from{
+        transform:scale(1);
+    }
+
+    to{
+        transform:scale(1.06);
+    }
+
+}
+
+@keyframes dot{
+
+    0%,100%{
+        opacity:.25;
+        transform:translateY(0);
+    }
+
+    50%{
+        opacity:1;
+        transform:translateY(-5px);
+    }
+
+}
+
+/* =========================
+   MAIN
+========================= */
+
+#mainContainer{
+
+    width:100%;
+
+    min-height:100vh;
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:25px 16px;
+
+}
+
+.app{
+
+    width:100%;
+
+    max-width:430px;
+
+}
+
+/* =========================
+   BRAND
+========================= */
+
+.brand{
+
+    text-align:center;
+
+    margin-bottom:25px;
+
+}
+
+.brandLogo{
+
+    width:68px;
+    height:68px;
+
+    margin:auto;
+
+    border-radius:20px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #16a34a,
+            #22c55e
+        );
+
+    box-shadow:
+        0 10px 30px rgba(34,197,94,.25);
+
+}
+
+.brand h1{
+
+    margin-top:14px;
+
+    font-size:24px;
+
+    font-weight:800;
+
+    letter-spacing:.5px;
+
+}
+
+.brand p{
+
+    margin-top:4px;
+
+    color:#94a3b8;
+
+    font-size:12px;
+
+}
+
+/* =========================
+   CARD
+========================= */
 
 .card{
 
-width:100%;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(17,24,39,.96),
+            rgba(10,15,28,.98)
+        );
 
-background:rgba(17,24,39,.92);
+    border:1px solid rgba(255,255,255,.08);
 
-border:1px solid rgba(255,255,255,.08);
+    border-radius:25px;
 
-border-radius:28px;
+    padding:24px;
 
-padding:28px;
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.45),
+        inset 0 1px rgba(255,255,255,.04);
 
-backdrop-filter:blur(20px);
-
-box-shadow:
-
-0 20px 50px rgba(0,0,0,.35);
+    backdrop-filter:blur(15px);
 
 }
 
+/* TOP BADGE */
+
+.topBadge{
+
+    width:max-content;
+
+    margin:0 auto 18px;
+
+    padding:7px 13px;
+
+    border-radius:999px;
+
+    background:rgba(34,197,94,.10);
+
+    border:1px solid rgba(34,197,94,.20);
+
+    color:#4ade80;
+
+    font-size:10px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+}
+
+/* TITLE */
+
 .title{
 
-font-size:28px;
+    text-align:center;
 
-font-weight:800;
+    font-size:23px;
 
-text-align:center;
-
-margin-bottom:8px;
+    font-weight:800;
 
 }
 
 .subtitle{
 
-text-align:center;
+    text-align:center;
 
-font-size:13px;
+    margin-top:5px;
 
-color:#94a3b8;
+    margin-bottom:22px;
 
-margin-bottom:25px;
+    color:#94a3b8;
+
+    font-size:13px;
+
+}
+
+/* =========================
+   INPUT
+========================= */
+
+.inputGroup{
+
+    position:relative;
+
+    margin-top:13px;
+
+}
+
+.inputIcon{
+
+    position:absolute;
+
+    left:15px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    font-size:17px;
+
+    opacity:.75;
 
 }
 
 input{
 
-width:100%;
+    width:100%;
 
-height:55px;
+    height:53px;
 
-margin-bottom:15px;
+    padding:
+        0 48px;
 
-padding:0 16px;
+    border-radius:14px;
 
-border:none;
+    border:1px solid rgba(255,255,255,.08);
 
-outline:none;
+    outline:none;
 
-border-radius:14px;
+    background:#0b1220;
 
-background:#1f2937;
+    color:#fff;
 
-color:#fff;
+    font-size:14px;
 
-font-size:15px;
+    transition:.2s;
 
 }
 
 input::placeholder{
 
-color:#94a3b8;
+    color:#64748b;
 
 }
+
+input:focus{
+
+    border-color:#22c55e;
+
+    box-shadow:
+        0 0 0 3px rgba(34,197,94,.08);
+
+}
+
+/* PASSWORD EYE */
+
+.passwordToggle{
+
+    position:absolute;
+
+    right:12px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:36px;
+    height:36px;
+
+    border:0;
+
+    background:transparent;
+
+    color:#94a3b8;
+
+    cursor:pointer;
+
+    font-size:17px;
+
+}
+
+/* =========================
+   BUTTON
+========================= */
 
 button{
 
-width:100%;
-
-height:55px;
-
-border:none;
-
-border-radius:14px;
-
-background:#22c55e;
-
-color:#000;
-
-font-size:16px;
-
-font-weight:700;
-
-cursor:pointer;
-
-transition:.3s;
+    font-family:inherit;
 
 }
 
-button:hover{
+#loginBtn,
+#registerBtn{
 
-transform:scale(1.02);
+    width:100%;
+
+    height:54px;
+
+    border:0;
+
+    border-radius:14px;
+
+    margin-top:18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #16a34a,
+            #22c55e
+        );
+
+    color:#031207;
+
+    font-size:15px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 12px 25px rgba(34,197,94,.18);
+
+    transition:.2s;
 
 }
+
+#loginBtn:active,
+#registerBtn:active{
+
+    transform:scale(.98);
+
+}
+
+#loginBtn:disabled,
+#registerBtn:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+
+}
+
+/* =========================
+   FORGOT
+========================= */
 
 .link{
 
-margin-top:18px;
+    text-align:center;
 
-text-align:center;
+    margin-top:16px;
 
-font-size:14px;
+    color:#94a3b8;
 
-color:#94a3b8;
-
-cursor:pointer;
+    font-size:12px;
 
 }
 
 .link span{
 
-color:#22c55e;
+    color:#4ade80;
 
-font-weight:700;
+    font-weight:700;
+
+    cursor:pointer;
+
+}
+
+#forgotBox{
+
+    cursor:pointer;
+
+    color:#60a5fa;
+
+}
+
+/* =========================
+   MESSAGE
+========================= */
+
+#message{
+
+    min-height:20px;
+
+    margin-top:14px;
+
+    text-align:center;
+
+    font-size:12px;
+
+    line-height:1.5;
 
 }
 
 .error{
 
-margin-top:10px;
-
-text-align:center;
-
-color:#ef4444;
-
-font-size:13px;
+    color:#f87171;
 
 }
 
 .success{
 
-margin-top:10px;
+    color:#4ade80;
 
-text-align:center;
+}
 
-color:#22c55e;
+/* =========================
+   DIVIDER
+========================= */
 
-font-size:13px;
+.divider{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin:20px 0;
+
+    color:#475569;
+
+    font-size:10px;
+
+}
+
+.divider::before,
+.divider::after{
+
+    content:"";
+
+    height:1px;
+
+    flex:1;
+
+    background:#ffffff10;
+
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+
+    text-align:center;
+
+    margin-top:18px;
+
+    color:#64748b;
+
+    font-size:10px;
+
+}
+
+.footer b{
+
+    color:#22c55e;
+
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:360px){
+
+    #mainContainer{
+
+        padding:18px 12px;
+
+    }
+
+    .card{
+
+        padding:20px;
+
+    }
+
+    .brand h1{
+
+        font-size:21px;
+
+    }
+
+}
+
+/* =========================
+   HIDE DESKTOP FEEL
+========================= */
+
+@media(min-width:700px){
+
+    body{
+
+        background:#030712;
+
+    }
+
+    #mainContainer{
+
+        max-width:100%;
+
+    }
 
 }
 
@@ -400,424 +747,1039 @@ font-size:13px;
 
 <body>
 
-<div class="glow glow1"></div>
-<div class="glow glow2"></div>
-<div class="glow glow3"></div>
+<!-- =========================
+     SPLASH
+========================= -->
 
 <div id="splash">
 
-<div class="logo">
-🎮
+<div class="splashLogo">
+    🎮
 </div>
 
-<div class="logoTitle">
-BGMI ESPORTS
+<div class="splashTitle">
+    BGMI ESPORTS
 </div>
 
-<div class="logoSub">
-Loading...
+<div class="splashSub">
+    PREMIUM GAMING EXPERIENCE
+</div>
+
+<div class="loaderDots">
+
+    <span></span>
+    <span></span>
+    <span></span>
+
 </div>
 
 </div>
-<div class="container" id="mainContainer">
 
-    <div class="card">
+<!-- =========================
+     MAIN
+========================= -->
 
-        <div class="title" id="formTitle">
-            Welcome Back
-        </div>
+<div id="mainContainer">
 
-        <div class="subtitle" id="formSubTitle">
-            Login to continue
-        </div>
+<div class="app">
 
-        <!-- Name (Register Only) -->
-        <input
-        type="text"
-        id="name"
-        placeholder="Full Name"
+<!-- BRAND -->
+
+<div class="brand">
+
+    <div class="brandLogo">
+        🎮
+    </div>
+
+    <h1>
+        BGMI ESPORTS
+    </h1>
+
+    <p>
+        Play • Compete • Win
+    </p>
+
+</div>
+
+
+<!-- CARD -->
+
+<div class="card">
+
+
+    <div class="topBadge">
+        🔥 PREMIUM TOURNAMENT PLATFORM
+    </div>
+
+
+    <div
+        class="title"
+        id="formTitle">
+
+        Welcome Back
+
+    </div>
+
+
+    <div
+        class="subtitle"
+        id="formSubTitle">
+
+        Login to continue
+
+    </div>
+
+
+    <!-- NAME -->
+
+    <div
+        class="inputGroup"
+        id="nameGroup"
         style="display:none;">
 
-        <!-- Email -->
-        <input
-        type="email"
-        id="email"
-        placeholder="Email Address">
+        <span class="inputIcon">
+            👤
+        </span>
 
-        <!-- Password -->
         <input
-        type="password"
-        id="password"
-        placeholder="Password">
+            type="text"
+            id="name"
+            placeholder="Full Name"
+            autocomplete="name">
 
-        <!-- Confirm Password -->
+    </div>
+
+
+    <!-- EMAIL -->
+
+    <div class="inputGroup">
+
+        <span class="inputIcon">
+            ✉️
+        </span>
+
         <input
-        type="password"
-        id="confirmPassword"
-        placeholder="Confirm Password"
-        style="display:none;">
+            type="email"
+            id="email"
+            placeholder="Email Address"
+            autocomplete="email">
 
-        <!-- Login Button -->
-        <button id="loginBtn" onclick="loginUser()">
-            LOGIN
+    </div>
+
+
+    <!-- PASSWORD -->
+
+    <div class="inputGroup">
+
+        <span class="inputIcon">
+            🔐
+        </span>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            autocomplete="current-password">
+
+        <button
+            type="button"
+            class="passwordToggle"
+            id="passwordToggle"
+            onclick="togglePassword('password','passwordToggle')">
+
+            👁️
+
         </button>
 
-        <!-- Register Button -->
+    </div>
+
+
+    <!-- CONFIRM -->
+
+    <div
+        class="inputGroup"
+        id="confirmGroup"
+        style="display:none;">
+
+        <span class="inputIcon">
+            🔒
+        </span>
+
+        <input
+            type="password"
+            id="confirmPassword"
+            placeholder="Confirm Password"
+            autocomplete="new-password">
+
         <button
+            type="button"
+            class="passwordToggle"
+            id="confirmToggle"
+            onclick="togglePassword('confirmPassword','confirmToggle')">
+
+            👁️
+
+        </button>
+
+    </div>
+
+
+    <!-- LOGIN -->
+
+    <button
+        id="loginBtn"
+        onclick="loginUser()">
+
+        LOGIN 🚀
+
+    </button>
+
+
+    <!-- REGISTER -->
+
+    <button
         id="registerBtn"
         onclick="registerUser()"
-        style="display:none;margin-top:12px;">
-            CREATE ACCOUNT
-        </button>
+        style="display:none;">
 
-        <!-- Forgot Password -->
-        <div
+        CREATE ACCOUNT 🎮
+
+    </button>
+
+
+    <!-- FORGOT -->
+
+    <div
         id="forgotBox"
         class="link"
         onclick="forgotPassword()">
-            Forgot Password?
-        </div>
 
-        <!-- Switch -->
-        <div
+        Forgot Password?
+
+    </div>
+
+
+    <div class="divider">
+        ACCOUNT
+    </div>
+
+
+    <!-- SWITCH -->
+
+    <div
         id="switchBox"
         class="link">
 
-            Don't have an account?
+        Don't have an account?
 
-            <span onclick="showRegister()">
-                Register
-            </span>
-
-        </div>
-
-        <!-- Message -->
-        <div id="message" class="error"></div>
+        <span onclick="showRegister()">
+            Register
+        </span>
 
     </div>
+
+
+    <!-- MESSAGE -->
+
+    <div
+        id="message"
+        class="error">
+
+    </div>
+
+
+</div>
+
+
+<div class="footer">
+
+    Secure login powered by
+    <b>Firebase</b>
+
+</div>
+
+</div>
 
 </div>
 
 <script>
 
-/* Splash */
+/* =========================
+   SPLASH
+========================= */
 
-setTimeout(()=>{
+setTimeout(() => {
 
-document.getElementById("splash").style.display="none";
+    const splash =
+        document.getElementById("splash");
 
-document.getElementById("mainContainer").style.display="flex";
+    const main =
+        document.getElementById("mainContainer");
 
-},2000);
+    if(splash){
 
-/* Register Screen */
+        splash.style.display = "none";
 
-function showRegister(){
+    }
 
-document.getElementById("formTitle").innerHTML="Create Account";
+    if(main){
 
-document.getElementById("formSubTitle").innerHTML="Register your account";
+        main.style.display = "flex";
 
-document.getElementById("name").style.display="block";
+    }
 
-document.getElementById("confirmPassword").style.display="block";
+},1500);
 
-document.getElementById("loginBtn").style.display="none";
 
-document.getElementById("registerBtn").style.display="block";
+/* =========================
+   SHOW REGISTER
+========================= */
 
-document.getElementById("forgotBox").style.display="none";
+window.showRegister = function(){
 
-document.getElementById("switchBox").innerHTML=
+    document.getElementById(
+        "formTitle"
+    ).innerText =
+        "Create Account";
 
-'Already have an account? <span onclick="showLogin()">Login</span>';
+    document.getElementById(
+        "formSubTitle"
+    ).innerText =
+        "Register your player account";
+
+    document.getElementById(
+        "nameGroup"
+    ).style.display =
+        "block";
+
+    document.getElementById(
+        "confirmGroup"
+    ).style.display =
+        "block";
+
+    document.getElementById(
+        "loginBtn"
+    ).style.display =
+        "none";
+
+    document.getElementById(
+        "registerBtn"
+    ).style.display =
+        "block";
+
+    document.getElementById(
+        "forgotBox"
+    ).style.display =
+        "none";
+
+    document.getElementById(
+        "password"
+    ).autocomplete =
+        "new-password";
+
+    document.getElementById(
+        "switchBox"
+    ).innerHTML =
+        "Already have an account? " +
+        '<span onclick="showLogin()">Login</span>';
+
+    clearMessage();
+
+};
+
+
+/* =========================
+   SHOW LOGIN
+========================= */
+
+window.showLogin = function(){
+
+    document.getElementById(
+        "formTitle"
+    ).innerText =
+        "Welcome Back";
+
+    document.getElementById(
+        "formSubTitle"
+    ).innerText =
+        "Login to continue";
+
+    document.getElementById(
+        "nameGroup"
+    ).style.display =
+        "none";
+
+    document.getElementById(
+        "confirmGroup"
+    ).style.display =
+        "none";
+
+    document.getElementById(
+        "loginBtn"
+    ).style.display =
+        "block";
+
+    document.getElementById(
+        "registerBtn"
+    ).style.display =
+        "none";
+
+    document.getElementById(
+        "forgotBox"
+    ).style.display =
+        "block";
+
+    document.getElementById(
+        "password"
+    ).autocomplete =
+        "current-password";
+
+    document.getElementById(
+        "switchBox"
+    ).innerHTML =
+        "Don't have an account? " +
+        '<span onclick="showRegister()">Register</span>';
+
+    clearMessage();
+
+};
+
+
+/* =========================
+   PASSWORD TOGGLE
+========================= */
+
+window.togglePassword = function(
+    inputId,
+    buttonId
+){
+
+    const input =
+        document.getElementById(
+            inputId
+        );
+
+    const button =
+        document.getElementById(
+            buttonId
+        );
+
+    if(input.type === "password"){
+
+        input.type = "text";
+
+        button.innerText = "🙈";
+
+    }else{
+
+        input.type = "password";
+
+        button.innerText = "👁️";
+
+    }
+
+};
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+function clearMessage(){
+
+    const msg =
+        document.getElementById(
+            "message"
+        );
+
+    msg.innerText = "";
+
+    msg.className = "error";
 
 }
 
-/* Login Screen */
+function showError(text){
 
-function showLogin(){
+    const msg =
+        document.getElementById(
+            "message"
+        );
 
-document.getElementById("formTitle").innerHTML="Welcome Back";
+    msg.className = "error";
 
-document.getElementById("formSubTitle").innerHTML="Login to continue";
+    msg.innerText = text;
 
-document.getElementById("name").style.display="none";
+}
 
-document.getElementById("confirmPassword").style.display="none";
+function showSuccess(text){
 
-document.getElementById("loginBtn").style.display="block";
+    const msg =
+        document.getElementById(
+            "message"
+        );
 
-document.getElementById("registerBtn").style.display="none";
+    msg.className = "success";
 
-document.getElementById("forgotBox").style.display="block";
+    msg.innerText = text;
 
-document.getElementById("switchBox").innerHTML=
+}
 
-'Don\'t have an account? <span onclick="showRegister()">Register</span>';
+
+/* =========================
+   FIREBASE ERROR
+========================= */
+
+function friendlyError(error){
+
+    const code =
+        error?.code || "";
+
+    switch(code){
+
+        case "auth/invalid-credential":
+            return "Invalid email or password.";
+
+        case "auth/invalid-email":
+            return "Please enter a valid email address.";
+
+        case "auth/user-not-found":
+            return "Account not found.";
+
+        case "auth/wrong-password":
+            return "Incorrect password.";
+
+        case "auth/email-already-in-use":
+            return "This email is already registered.";
+
+        case "auth/weak-password":
+            return "Password should be at least 6 characters.";
+
+        case "auth/too-many-requests":
+            return "Too many attempts. Please try again later.";
+
+        case "auth/network-request-failed":
+            return "Network error. Check your internet connection.";
+
+        default:
+            return error?.message ||
+                   "Something went wrong.";
+
+    }
 
 }
 
 </script>
+
 <!-- ==========================
-PART 2A
-FIREBASE IMPORT + CONFIG + AUTH
+     FIREBASE
 ========================== -->
 
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {
+    initializeApp
+} from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 
 import {
-getAuth,
-onAuthStateChanged,
-signInWithEmailAndPassword,
-createUserWithEmailAndPassword,
-sendPasswordResetEmail,
-updateProfile
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    getAuth,
+
+    onAuthStateChanged,
+
+    signInWithEmailAndPassword,
+
+    createUserWithEmailAndPassword,
+
+    sendPasswordResetEmail,
+
+    updateProfile
+
+} from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 import {
-getDatabase,
-ref,
-set,
-get
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-/* Firebase Config */
+    getDatabase,
+
+    ref,
+
+    set
+
+} from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+
+/* ==========================
+   FIREBASE CONFIG
+========================== */
 
 const firebaseConfig = {
 
-apiKey:"AIzaSyDsJUtZdIXcsB0w_2MQhMBXxIgbI3ijOvg",
+    apiKey:
+        "AIzaSyDsJUtZdIXcsB0w_2MQhMBXxIgbI3ijOvg",
 
-authDomain:"incoinpaysliveearning.firebaseapp.com",
+    authDomain:
+        "incoinpaysliveearning.firebaseapp.com",
 
-databaseURL:"https://incoinpaysliveearning-default-rtdb.firebaseio.com",
+    databaseURL:
+        "https://incoinpaysliveearning-default-rtdb.firebaseio.com",
 
-projectId:"incoinpaysliveearning",
+    projectId:
+        "incoinpaysliveearning",
 
-storageBucket:"incoinpaysliveearning.firebasestorage.app",
+    storageBucket:
+        "incoinpaysliveearning.firebasestorage.app",
 
-messagingSenderId:"971873814750",
+    messagingSenderId:
+        "971873814750",
 
-appId:"1:971873814750:web:7418c7da119e4725ed9a4f"
+    appId:
+        "1:971873814750:web:7418c7da119e4725ed9a4f"
 
 };
 
-/* Initialize */
 
-const app = initializeApp(firebaseConfig);
-
-const auth = getAuth(app);
-
-const db = getDatabase(app);
-
-/* Auto Login */
-
-onAuthStateChanged(auth,(user)=>{
-
-if(user){
-
-location.href="dashboard.html";
-
-}
-
-});
-
-window.auth=auth;
-window.db=db;
-window.ref=ref;
-window.set=set;
-window.get=get;
-window.createUserWithEmailAndPassword=createUserWithEmailAndPassword;
-window.signInWithEmailAndPassword=signInWithEmailAndPassword;
-window.sendPasswordResetEmail=sendPasswordResetEmail;
-window.updateProfile=updateProfile;
 /* ==========================
-PART 2B
-LOGIN + REGISTER + RESET PASSWORD
+   INITIALIZE
 ========================== */
 
-window.loginUser = async function(){
+const app =
+    initializeApp(
+        firebaseConfig
+    );
 
-const email = document.getElementById("email").value.trim();
+const auth =
+    getAuth(app);
 
-const password = document.getElementById("password").value.trim();
+const db =
+    getDatabase(app);
 
-const msg = document.getElementById("message");
 
-msg.className="error";
-msg.innerHTML="";
-
-if(email=="" || password==""){
-
-msg.innerHTML="Please fill all fields.";
-
-return;
-
-}
-
-try{
-
-await signInWithEmailAndPassword(auth,email,password);
-
-msg.className="success";
-msg.innerHTML="Login Successful...";
-
-setTimeout(()=>{
-
-location.href="dashboard.html";
-
-},800);
-
-}catch(e){
-
-msg.className="error";
-msg.innerHTML=e.message;
-
-}
-
-};
-
-
-
-window.registerUser = async function(){
-
-const name=document.getElementById("name").value.trim();
-
-const email=document.getElementById("email").value.trim();
-
-const password=document.getElementById("password").value.trim();
-
-const confirm=document.getElementById("confirmPassword").value.trim();
-
-const msg=document.getElementById("message");
-
-msg.className="error";
-msg.innerHTML="";
-
-if(name=="" || email=="" || password=="" || confirm==""){
-
-msg.innerHTML="Please fill all fields.";
-
-return;
-
-}
-
-if(password!==confirm){
-
-msg.innerHTML="Passwords do not match.";
-
-return;
-
-}
-
-try{
-
-const userCredential=
-
-await createUserWithEmailAndPassword(auth,email,password);
-
-const user=userCredential.user;
-
-await updateProfile(user,{
-
-displayName:name
-
-});
-
-await set(ref(db,"users/"+user.uid),{
-
-uid:user.uid,
-
-name:name,
-
-email:email,
-
-wallet:0,
-
-winning:0,
-
-deposit:0,
-
-photo:"https://i.imgur.com/6VBx3io.png",
-
-createdAt:Date.now()
-
-});
-
-msg.className="success";
-msg.innerHTML="Account Created Successfully.";
-
-setTimeout(()=>{
-
-location.href="dashboard.html";
-
-},1000);
-
-}catch(e){
-
-msg.className="error";
-msg.innerHTML=e.message;
-
-}
-
-};
-
-
-
-window.forgotPassword = async function(){
-
-const email=document.getElementById("email").value.trim();
-
-const msg=document.getElementById("message");
-
-msg.className="error";
-msg.innerHTML="";
-
-if(email==""){
-
-msg.innerHTML="Enter your email first.";
-
-return;
-
-}
-
-try{
-
-await sendPasswordResetEmail(auth,email);
-
-msg.className="success";
-
-msg.innerHTML="Password reset email sent.";
-
-}catch(e){
-
-msg.className="error";
-
-msg.innerHTML=e.message;
-
-}
-
-};
 /* ==========================
-PART 2C
-AUTO LOGIN + CLOSE MODULE
+   AUTO LOGIN
 ========================== */
 
-onAuthStateChanged(auth,(user)=>{
+let redirecting = false;
 
-if(user){
+onAuthStateChanged(
+    auth,
+    (user) => {
 
-location.replace("dashboard.html");
+        if(
+            user &&
+            !redirecting
+        ){
 
-}
+            redirecting = true;
 
-});
+            location.replace(
+                "dashboard.html"
+            );
 
-/* End Firebase Module */
+        }
+
+    }
+);
+
+
+/* ==========================
+   LOGIN
+========================== */
+
+window.loginUser =
+async function(){
+
+    if(redirecting){
+        return;
+    }
+
+    const email =
+        document.getElementById(
+            "email"
+        ).value.trim();
+
+    const password =
+        document.getElementById(
+            "password"
+        ).value;
+
+    const button =
+        document.getElementById(
+            "loginBtn"
+        );
+
+
+    clearMessage();
+
+
+    if(
+        email === "" ||
+        password === ""
+    ){
+
+        showError(
+            "Please enter email and password."
+        );
+
+        return;
+
+    }
+
+
+    button.disabled = true;
+
+    button.innerText =
+        "LOGGING IN...";
+
+
+    try{
+
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+        showSuccess(
+            "Login successful. Opening dashboard..."
+        );
+
+        redirecting = true;
+
+        setTimeout(
+            () => {
+
+                location.replace(
+                    "dashboard.html"
+                );
+
+            },
+            500
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "Login Error:",
+            error
+        );
+
+        showError(
+            friendlyError(error)
+        );
+
+        button.disabled = false;
+
+        button.innerText =
+            "LOGIN 🚀";
+
+    }
+
+};
+
+
+/* ==========================
+   REGISTER
+========================== */
+
+window.registerUser =
+async function(){
+
+    if(redirecting){
+        return;
+    }
+
+
+    const name =
+        document.getElementById(
+            "name"
+        ).value.trim();
+
+    const email =
+        document.getElementById(
+            "email"
+        ).value.trim();
+
+    const password =
+        document.getElementById(
+            "password"
+        ).value;
+
+    const confirm =
+        document.getElementById(
+            "confirmPassword"
+        ).value;
+
+    const button =
+        document.getElementById(
+            "registerBtn"
+        );
+
+
+    clearMessage();
+
+
+    if(
+        name === "" ||
+        email === "" ||
+        password === "" ||
+        confirm === ""
+    ){
+
+        showError(
+            "Please fill all fields."
+        );
+
+        return;
+
+    }
+
+
+    if(name.length < 2){
+
+        showError(
+            "Please enter a valid name."
+        );
+
+        return;
+
+    }
+
+
+    if(password.length < 6){
+
+        showError(
+            "Password must be at least 6 characters."
+        );
+
+        return;
+
+    }
+
+
+    if(password !== confirm){
+
+        showError(
+            "Passwords do not match."
+        );
+
+        return;
+
+    }
+
+
+    button.disabled = true;
+
+    button.innerText =
+        "CREATING ACCOUNT...";
+
+
+    try{
+
+
+        const userCredential =
+            await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+
+        const user =
+            userCredential.user;
+
+
+        /* AUTH PROFILE */
+
+        await updateProfile(
+            user,
+            {
+                displayName:name
+            }
+        );
+
+
+        /* DATABASE PROFILE */
+
+        await set(
+            ref(
+                db,
+                "users/" + user.uid
+            ),
+            {
+
+                uid:
+                    user.uid,
+
+                name:
+                    name,
+
+                email:
+                    email,
+
+                wallet:
+                    0,
+
+                winning:
+                    0,
+
+                deposit:
+                    0,
+
+                bonus:
+                    0,
+
+                matchCount:
+                    0,
+
+                matchesJoined:
+                    0,
+
+                photo:
+                    "https://i.imgur.com/6VBx3io.png",
+
+                premium:
+                    false,
+
+                createdAt:
+                    Date.now()
+
+            }
+        );
+
+
+        showSuccess(
+            "Account created successfully!"
+        );
+
+
+        redirecting = true;
+
+
+        setTimeout(
+            () => {
+
+                location.replace(
+                    "dashboard.html"
+                );
+
+            },
+            700
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "Register Error:",
+            error
+        );
+
+        showError(
+            friendlyError(error)
+        );
+
+        button.disabled = false;
+
+        button.innerText =
+            "CREATE ACCOUNT 🎮";
+
+    }
+
+};
+
+
+/* ==========================
+   FORGOT PASSWORD
+========================== */
+
+window.forgotPassword =
+async function(){
+
+    const email =
+        document.getElementById(
+            "email"
+        ).value.trim();
+
+
+    clearMessage();
+
+
+    if(email === ""){
+
+        showError(
+            "Enter your email first."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        await sendPasswordResetEmail(
+            auth,
+            email
+        );
+
+        showSuccess(
+            "Password reset email sent. Check your inbox."
+        );
+
+    }catch(error){
+
+        console.error(
+            "Reset Error:",
+            error
+        );
+
+        showError(
+            friendlyError(error)
+        );
+
+    }
+
+};
+
+
+/* ==========================
+   ENTER KEY
+========================== */
+
+document.addEventListener(
+    "keydown",
+    (event) => {
+
+        if(
+            event.key === "Enter"
+        ){
+
+            const registerVisible =
+                document.getElementById(
+                    "registerBtn"
+                ).style.display !== "none";
+
+
+            if(registerVisible){
+
+                registerUser();
+
+            }else{
+
+                loginUser();
+
+            }
+
+        }
+
+    }
+);
 
 </script>
 
 </body>
+
 </html>
