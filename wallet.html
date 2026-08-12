@@ -1644,98 +1644,177 @@ onAuthStateChanged(
 function loadWallet(){
 
     onValue(
-        ref(
-            db,
-            "users/" + UID
-        ),
-        (snapshot) => {
+        ref(db, "users/" + UID + "/wallet"),
+        (snapshot)=>{
 
-            if(!snapshot.exists()){
-                return;
+            let walletBalance = 0;
+
+            if(snapshot.exists()){
+
+                const walletData = snapshot.val();
+
+                /*
+                 NEW FORMAT:
+                 wallet: {
+                    balance: 500
+                 }
+
+                 OLD FORMAT:
+                 wallet: 500
+                */
+
+                if(
+                    walletData &&
+                    typeof walletData === "object"
+                ){
+
+                    walletBalance =
+                        Number(
+                            walletData.balance || 0
+                        );
+
+                }else{
+
+                    walletBalance =
+                        Number(
+                            walletData || 0
+                        );
+
+                }
+
             }
 
-            const data =
-                snapshot.val();
+            if(
+                !Number.isFinite(walletBalance)
+            ){
 
-
-            walletBalance =
-                Number(
-                    data.wallet || 0
-                );
-
-
-            const bonus =
-                Number(
-                    data.bonus || 0
-                );
-
-
-            const withdrawable =
-                Number(
-                    data.withdrawable ??
-                    data.wallet ??
-                    0
-                );
-
-
-            realBalance =
-                "₹" +
-                Math.floor(
-                    walletBalance
-                ).toLocaleString(
-                    "en-IN"
-                );
-
-
-            if(!balanceHidden){
-
-                document
-                    .getElementById(
-                        "walletBalance"
-                    )
-                    .innerText =
-                    realBalance;
+                walletBalance = 0;
 
             }
 
 
-            document
-                .getElementById(
+            /*
+             BONUS
+            */
+
+            const userSnap =
+                document.getElementById(
                     "bonusBalance"
-                )
-                .innerText =
-                "₹" +
-                Math.floor(
-                    bonus
-                ).toLocaleString(
-                    "en-IN"
                 );
 
-
-            document
-                .getElementById(
+            const withdrawSnap =
+                document.getElementById(
                     "withdrawableBalance"
-                )
-                .innerText =
-                "₹" +
-                Math.floor(
-                    withdrawable
-                ).toLocaleString(
-                    "en-IN"
+                );
+
+            const walletSnap =
+                document.getElementById(
+                    "walletBalance"
                 );
 
 
-            document
-                .getElementById(
-                    "withdrawAvailable"
-                )
-                .innerText =
-                "₹" +
-                Math.floor(
-                    withdrawable
-                ).toLocaleString(
-                    "en-IN"
+            /*
+             WALLET BALANCE
+            */
+
+            if(walletSnap){
+
+                walletSnap.innerHTML =
+                    "₹" +
+                    Math.floor(walletBalance);
+
+            }
+
+
+            /*
+             WITHDRAWABLE BALANCE
+            */
+
+            if(withdrawSnap){
+
+                withdrawSnap.innerHTML =
+                    "₹" +
+                    Math.floor(walletBalance);
+
+            }
+
+
+            /*
+             BONUS
+            */
+
+            if(userSnap){
+
+                /*
+                 Bonus alag path se read hoga.
+                 Isliye yahan existing value ko
+                 disturb nahi kar rahe.
+                */
+
+                const bonusRef =
+                    ref(
+                        db,
+                        "users/" +
+                        UID +
+                        "/bonus"
+                    );
+
+                onValue(
+                    bonusRef,
+                    (bonusSnapshot)=>{
+
+                        const bonus =
+                            Number(
+                                bonusSnapshot.val() || 0
+                            );
+
+                        userSnap.innerHTML =
+                            "₹" +
+                            Math.floor(
+                                Number.isFinite(bonus)
+                                ? bonus
+                                : 0
+                            );
+
+                    },
+                    {
+                        onlyOnce:false
+                    }
                 );
+
+            }
+
+        },
+        (error)=>{
+
+            console.error(
+                "Wallet load error:",
+                error
+            );
+
+            const walletSnap =
+                document.getElementById(
+                    "walletBalance"
+                );
+
+            const withdrawSnap =
+                document.getElementById(
+                    "withdrawableBalance"
+                );
+
+            if(walletSnap){
+
+                walletSnap.innerHTML =
+                    "₹0";
+
+            }
+
+            if(withdrawSnap){
+
+                withdrawSnap.innerHTML =
+                    "₹0";
+
+            }
 
         }
     );
