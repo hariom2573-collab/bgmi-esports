@@ -44,7 +44,7 @@ body{
     background:#050B18;
     color:#fff;
     overflow-x:hidden;
-    padding-bottom:88px;
+    padding-bottom:90px;
 }
 
 button,
@@ -65,7 +65,6 @@ button:active{
     width:0;
     height:0;
 }
-
 
 /* =========================================================
    BACKGROUND
@@ -125,10 +124,8 @@ body::before{
         );
 
     pointer-events:none;
-
     z-index:-1;
 }
-
 
 /* =========================================================
    APP
@@ -147,7 +144,6 @@ body::before{
         105px;
 }
 
-
 /* =========================================================
    HEADER
 ========================================================= */
@@ -159,7 +155,7 @@ body::before{
 
     display:flex;
     align-items:center;
-    justify-content:space-between;
+    justify-content:center;
 
     padding:
         calc(12px + env(safe-area-inset-top))
@@ -174,54 +170,15 @@ body::before{
     border-bottom:1px solid rgba(255,255,255,.055);
 }
 
-.headerLeft{
-    display:flex;
-    align-items:center;
-    gap:11px;
-
-    min-width:0;
-}
-
-.backBtn{
-    width:40px;
-    height:40px;
-
-    flex-shrink:0;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:13px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #142239,
-            #0d182a
-        );
-
-    color:#fff;
-
-    border:1px solid rgba(255,255,255,.07);
-
-    font-size:23px;
-    line-height:1;
-
-    box-shadow:
-        0 7px 20px rgba(0,0,0,.18);
-}
-
 .headerTitleBox{
     min-width:0;
+    text-align:center;
 }
 
 .headerTitle{
     font-size:18px;
     font-weight:800;
     line-height:1.2;
-
-    letter-spacing:-.2px;
 }
 
 .headerSubtitle{
@@ -236,78 +193,12 @@ body::before{
     letter-spacing:1px;
 }
 
-.headerRight{
-    display:flex;
-    align-items:center;
-}
-
-.headerIcon{
-    position:relative;
-
-    width:40px;
-    height:40px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:13px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #142239,
-            #0d182a
-        );
-
-    color:#dbe4ef;
-
-    border:1px solid rgba(255,255,255,.06);
-
-    font-size:16px;
-}
-
-.headerIcon:active{
-    transform:scale(.94);
-}
-
-.unreadBadge{
-    position:absolute;
-
-    top:-4px;
-    right:-4px;
-
-    min-width:18px;
-    height:18px;
-
-    padding:0 4px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:20px;
-
-    background:#ef4444;
-    color:#fff;
-
-    border:2px solid #050B18;
-
-    font-size:7px;
-    font-weight:900;
-
-    box-shadow:
-        0 0 12px rgba(239,68,68,.35);
-}
-
-
 /* =========================================================
    SEARCH
 ========================================================= */
 
 .searchBox{
     position:relative;
-
     margin:14px 0 11px;
 }
 
@@ -338,12 +229,6 @@ body::before{
 
     font-size:10px;
     font-weight:600;
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.025),
-        0 8px 22px rgba(0,0,0,.10);
-
-    transition:.2s;
 }
 
 .searchBox input:focus{
@@ -360,14 +245,12 @@ body::before{
 
 .searchIcon{
     position:absolute;
-
     left:15px;
     top:50%;
 
     transform:translateY(-50%);
 
     color:#64748b;
-
     font-size:15px;
 
     pointer-events:none;
@@ -396,13 +279,8 @@ body::before{
     font-size:16px;
 }
 
-.clearSearch:active{
-    transform:translateY(-50%) scale(.94);
-}
-
-
 /* =========================================================
-   FILTER CHIPS
+   FILTER
 ========================================================= */
 
 .filterRow{
@@ -412,7 +290,6 @@ body::before{
     margin-bottom:13px;
 
     overflow-x:auto;
-
     scrollbar-width:none;
 }
 
@@ -430,7 +307,6 @@ body::before{
     border-radius:10px;
 
     background:#0d192b;
-
     color:#718096;
 
     border:1px solid rgba(255,255,255,.055);
@@ -439,9 +315,6 @@ body::before{
     font-weight:800;
 
     text-transform:uppercase;
-    letter-spacing:.3px;
-
-    transition:.18s;
 }
 
 .filterBtn.active{
@@ -455,14 +328,10 @@ body::before{
     color:#22c55e;
 
     border-color:rgba(34,197,94,.24);
-
-    box-shadow:
-        0 5px 16px rgba(34,197,94,.07);
 }
 
-
 /* =========================================================
-   SECURITY / ADMIN BADGE
+   ADMIN BADGE
 ========================================================= */
 
 .adminOnlyBadge{
@@ -471,7 +340,6 @@ body::before{
     gap:10px;
 
     margin-bottom:13px;
-
     padding:11px 13px;
 
     border-radius:16px;
@@ -484,9 +352,6 @@ body::before{
         );
 
     border:1px solid rgba(34,197,94,.14);
-
-    box-shadow:
-        0 8px 24px rgba(0,0,0,.10);
 }
 
 .adminOnlyIcon{
@@ -503,8 +368,6 @@ body::before{
 
     background:rgba(34,197,94,.11);
 
-    border:1px solid rgba(34,197,94,.10);
-
     font-size:16px;
 }
 
@@ -515,7 +378,6 @@ body::before{
     font-weight:900;
 
     text-transform:uppercase;
-    letter-spacing:.3px;
 }
 
 .adminOnlyText{
@@ -529,7 +391,6 @@ body::before{
     line-height:1.45;
 }
 
-
 /* =========================================================
    ANNOUNCEMENT
 ========================================================= */
@@ -541,7 +402,6 @@ body::before{
     min-height:53px;
 
     margin-bottom:13px;
-
     padding:8px 11px;
 
     border-radius:17px;
@@ -554,9 +414,6 @@ body::before{
         );
 
     border:1px solid rgba(34,197,94,.13);
-
-    box-shadow:
-        0 8px 25px rgba(0,0,0,.10);
 }
 
 .announcementIcon{
@@ -578,7 +435,6 @@ body::before{
 
 .announcementContent{
     min-width:0;
-
     margin-left:9px;
 }
 
@@ -596,7 +452,6 @@ body::before{
     margin-top:2px;
 
     overflow:hidden;
-
     white-space:nowrap;
     text-overflow:ellipsis;
 
@@ -606,9 +461,8 @@ body::before{
     font-weight:600;
 }
 
-
 /* =========================================================
-   ADMIN BROADCAST
+   BROADCAST
 ========================================================= */
 
 .broadcastCard{
@@ -617,7 +471,6 @@ body::before{
     position:relative;
 
     margin-bottom:13px;
-
     padding:14px;
 
     overflow:hidden;
@@ -632,16 +485,11 @@ body::before{
         );
 
     border:1px solid rgba(245,158,11,.17);
-
-    box-shadow:
-        0 10px 28px rgba(0,0,0,.12);
 }
 
 .broadcastCard.show{
     display:block;
-
-    animation:
-        broadcastIn .25s ease;
+    animation:broadcastIn .25s ease;
 }
 
 @keyframes broadcastIn{
@@ -670,8 +518,6 @@ body::before{
     border-radius:50%;
 
     background:rgba(245,158,11,.08);
-
-    pointer-events:none;
 }
 
 .broadcastTop{
@@ -679,7 +525,6 @@ body::before{
 
     display:flex;
     align-items:center;
-
     gap:9px;
 }
 
@@ -703,8 +548,6 @@ body::before{
 
     font-size:10px;
     font-weight:900;
-
-    letter-spacing:.3px;
 }
 
 .broadcastDate{
@@ -713,7 +556,6 @@ body::before{
     color:#64748b;
 
     font-size:7px;
-    font-weight:600;
 }
 
 .broadcastText{
@@ -727,13 +569,11 @@ body::before{
     line-height:1.7;
 
     white-space:pre-wrap;
-
     word-break:break-word;
 }
 
-
 /* =========================================================
-   SECTION HEADER
+   SECTION
 ========================================================= */
 
 .sectionHeader{
@@ -753,8 +593,6 @@ body::before{
 .sectionTitle h3{
     font-size:13px;
     font-weight:800;
-
-    letter-spacing:-.15px;
 }
 
 .sectionLiveDot{
@@ -778,7 +616,6 @@ body::before{
     text-transform:uppercase;
 }
 
-
 /* =========================================================
    MESSAGE LIST
 ========================================================= */
@@ -786,14 +623,8 @@ body::before{
 .messageList{
     display:flex;
     flex-direction:column;
-
     gap:9px;
 }
-
-
-/* =========================================================
-   MESSAGE ITEM
-========================================================= */
 
 .messageItem{
     position:relative;
@@ -818,11 +649,7 @@ body::before{
 
     overflow:hidden;
 
-    transition:
-        transform .15s ease,
-        border-color .18s ease,
-        background .18s ease,
-        box-shadow .18s ease;
+    transition:.18s;
 }
 
 .messageItem::before{
@@ -837,8 +664,6 @@ body::before{
     width:3px;
 
     background:transparent;
-
-    border-radius:0 5px 5px 0;
 }
 
 .messageItem.unread{
@@ -850,9 +675,6 @@ body::before{
         );
 
     border-color:rgba(34,197,94,.18);
-
-    box-shadow:
-        0 8px 26px rgba(0,0,0,.14);
 }
 
 .messageItem.unread::before{
@@ -870,18 +692,12 @@ body::before{
     transform:scale(.985);
 }
 
-.messageItem:hover{
-    border-color:rgba(34,197,94,.15);
-}
-
-
 /* =========================================================
    AVATAR
 ========================================================= */
 
 .avatarWrap{
     position:relative;
-
     flex-shrink:0;
 }
 
@@ -898,9 +714,6 @@ body::before{
     background:#172338;
 
     border:1px solid rgba(34,197,94,.16);
-
-    box-shadow:
-        0 5px 16px rgba(0,0,0,.16);
 }
 
 .adminCrown{
@@ -923,11 +736,7 @@ body::before{
     border:2px solid #0b1627;
 
     font-size:9px;
-
-    box-shadow:
-        0 3px 10px rgba(245,158,11,.2);
 }
-
 
 /* =========================================================
    MESSAGE CONTENT
@@ -935,9 +744,7 @@ body::before{
 
 .messageMain{
     min-width:0;
-
     flex:1;
-
     margin-left:11px;
 }
 
@@ -966,7 +773,6 @@ body::before{
     align-items:center;
 
     margin-left:5px;
-
     padding:2px 5px;
 
     border-radius:5px;
@@ -977,10 +783,6 @@ body::before{
 
     font-size:5px;
     font-weight:900;
-
-    vertical-align:middle;
-
-    letter-spacing:.3px;
 }
 
 .messageTime{
@@ -1033,8 +835,6 @@ body::before{
     font-weight:900;
 
     text-transform:uppercase;
-
-    letter-spacing:.2px;
 }
 
 .readLabel{
@@ -1061,14 +861,12 @@ body::before{
     box-shadow:
         0 0 10px rgba(34,197,94,.55);
 
-    animation:
-        unreadPulse 1.7s infinite;
+    animation:unreadPulse 1.7s infinite;
 }
 
 @keyframes unreadPulse{
 
-    0%,
-    100%{
+    0%,100%{
         box-shadow:
             0 0 5px rgba(34,197,94,.35);
     }
@@ -1080,9 +878,8 @@ body::before{
 
 }
 
-
 /* =========================================================
-   EMPTY STATE
+   EMPTY
 ========================================================= */
 
 .empty{
@@ -1116,12 +913,7 @@ body::before{
 
     background:#101e32;
 
-    border:1px solid rgba(255,255,255,.04);
-
     font-size:27px;
-
-    box-shadow:
-        0 8px 25px rgba(0,0,0,.14);
 }
 
 .emptyTitle{
@@ -1143,7 +935,6 @@ body::before{
     font-size:8px;
     line-height:1.7;
 }
-
 
 /* =========================================================
    LOADER
@@ -1167,8 +958,7 @@ body::before{
 
     background:#22c55e;
 
-    animation:
-        loaderBounce .8s infinite alternate;
+    animation:loaderBounce .8s infinite alternate;
 }
 
 .dot:nth-child(2){
@@ -1193,9 +983,8 @@ body::before{
 
 }
 
-
 /* =========================================================
-   MESSAGE MODAL / BOTTOM SHEET
+   CENTER MODAL
 ========================================================= */
 
 .messageModal{
@@ -1205,15 +994,16 @@ body::before{
     z-index:99999;
 
     display:none;
-    align-items:flex-end;
+
+    align-items:center;
     justify-content:center;
 
-    background:rgba(0,0,0,.76);
+    padding:20px;
 
-    backdrop-filter:blur(10px);
-    -webkit-backdrop-filter:blur(10px);
+    background:rgba(0,0,0,.78);
 
-    padding:0;
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
 }
 
 .messageModal.show{
@@ -1221,62 +1011,54 @@ body::before{
 }
 
 .messageModalBox{
-    width:100%;
-    max-width:520px;
+    position:relative;
 
-    max-height:
-        calc(
-            88vh +
-            env(safe-area-inset-bottom)
-        );
+    width:100%;
+    max-width:440px;
+
+    max-height:min(620px,82vh);
 
     overflow-y:auto;
 
-    padding:
-        13px
-        15px
-        calc(
-            20px +
-            env(safe-area-inset-bottom)
-        );
+    padding:18px;
 
-    border-radius:27px 27px 0 0;
+    border-radius:24px;
 
     background:
         linear-gradient(
             160deg,
             #111d31,
-            #07101f 75%
+            #07101f 78%
         );
 
-    border-top:1px solid rgba(34,197,94,.20);
+    border:1px solid rgba(34,197,94,.20);
 
     box-shadow:
-        0 -20px 60px rgba(0,0,0,.42);
+        0 25px 80px rgba(0,0,0,.60),
+        0 0 45px rgba(34,197,94,.06);
 
-    animation:
-        modalUp .22s ease;
+    animation:modalCenter .22s cubic-bezier(.2,.8,.2,1);
 }
 
-@keyframes modalUp{
+@keyframes modalCenter{
 
     from{
-        transform:translateY(55px);
         opacity:0;
+        transform:scale(.88);
     }
 
     to{
-        transform:translateY(0);
         opacity:1;
+        transform:scale(1);
     }
 
 }
 
 .modalHandle{
-    width:43px;
+    width:40px;
     height:4px;
 
-    margin:0 auto 17px;
+    margin:0 auto 16px;
 
     border-radius:20px;
 
@@ -1293,23 +1075,22 @@ body::before{
 }
 
 .modalAvatar{
-    width:45px;
-    height:45px;
+    width:48px;
+    height:48px;
 
     flex-shrink:0;
 
     object-fit:cover;
 
-    border-radius:14px;
+    border-radius:15px;
 
     background:#172338;
 
-    border:1px solid rgba(245,158,11,.18);
+    border:1px solid rgba(245,158,11,.20);
 }
 
 .modalUser{
     min-width:0;
-
     flex:1;
 }
 
@@ -1332,13 +1113,11 @@ body::before{
     font-weight:800;
 
     text-transform:uppercase;
-
-    letter-spacing:.5px;
 }
 
 .modalClose{
-    width:35px;
-    height:35px;
+    width:36px;
+    height:36px;
 
     flex-shrink:0;
 
@@ -1351,19 +1130,17 @@ body::before{
     background:#18263a;
     color:#94a3b8;
 
-    border:1px solid rgba(255,255,255,.05);
-
-    font-size:18px;
+    font-size:19px;
 }
 
 .modalClose:active{
-    transform:scale(.92);
+    background:#24344d;
 }
 
 .fullMessage{
-    padding:14px;
+    padding:15px;
 
-    border-radius:15px;
+    border-radius:16px;
 
     background:
         linear-gradient(
@@ -1380,7 +1157,6 @@ body::before{
     line-height:1.8;
 
     white-space:pre-wrap;
-
     word-break:break-word;
 }
 
@@ -1398,6 +1174,7 @@ body::before{
 .modalMessageMeta{
     display:flex;
     align-items:center;
+
     gap:6px;
 
     margin-top:10px;
@@ -1417,7 +1194,6 @@ body::before{
 
     text-transform:uppercase;
 }
-
 
 /* =========================================================
    BOTTOM NAV
@@ -1442,10 +1218,7 @@ body::before{
 
     padding:
         5px 8px
-        calc(
-            5px +
-            env(safe-area-inset-bottom)
-        );
+        calc(5px + env(safe-area-inset-bottom));
 
     background:rgba(8,17,31,.98);
 
@@ -1488,8 +1261,6 @@ body::before{
     border-radius:11px;
 
     font-size:18px;
-
-    transition:.16s;
 }
 
 .navBtn.active{
@@ -1498,9 +1269,6 @@ body::before{
 
 .navBtn.active .navIcon{
     background:rgba(34,197,94,.12);
-
-    box-shadow:
-        0 0 14px rgba(34,197,94,.05);
 }
 
 .navBadge{
@@ -1528,7 +1296,6 @@ body::before{
     font-size:6px;
     font-weight:900;
 }
-
 
 /* =========================================================
    TOAST
@@ -1571,40 +1338,12 @@ body::before{
     transition:.25s;
 
     z-index:100000;
-
-    box-shadow:
-        0 12px 35px rgba(0,0,0,.30);
 }
 
 .toast.show{
     transform:translate(-50%,0);
     opacity:1;
 }
-
-
-/* =========================================================
-   NEW MESSAGE TOAST SPECIAL
-========================================================= */
-
-.newMessageToast{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:7px;
-}
-
-.newMessageToastDot{
-    width:6px;
-    height:6px;
-
-    border-radius:50%;
-
-    background:#22c55e;
-
-    box-shadow:
-        0 0 9px rgba(34,197,94,.7);
-}
-
 
 /* =========================================================
    RESPONSIVE
@@ -1626,29 +1365,21 @@ body::before{
         height:48px;
     }
 
-    .messageName{
-        font-size:9px;
+    .messageModal{
+        padding:15px;
     }
 
-    .messagePreview{
-        font-size:7px;
+    .messageModalBox{
+        padding:15px;
+        border-radius:21px;
     }
 
 }
-
-
-/* =========================================================
-   VERY SMALL SCREEN
-========================================================= */
 
 @media(max-width:320px){
 
     .headerTitle{
         font-size:16px;
-    }
-
-    .adminOnlyText{
-        font-size:6.5px;
     }
 
     .messageItem{
@@ -1665,12 +1396,15 @@ body::before{
         border-radius:14px;
     }
 
+    .messageName{
+        font-size:9px;
+    }
+
+    .messagePreview{
+        font-size:7px;
+    }
+
 }
-
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
 
 @media(prefers-reduced-motion:reduce){
 
@@ -1685,301 +1419,132 @@ body::before{
 }
 
 </style>
-
 </head>
-<body>
 
-<!-- =========================================================
-     BACKGROUND
-========================================================= -->
+<body>
 
 <div class="bgImage"></div>
 <div class="bgOverlay"></div>
 
-
-<!-- =========================================================
-     MAIN APP
-========================================================= -->
-
 <div class="app">
 
-    <!-- HEADER -->
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-    <header class="header">
+<header class="header">
 
-        <div class="headerLeft">
+    <div class="headerTitleBox">
 
-            <button
-                class="backBtn"
-                type="button"
-                onclick="goBack()"
-                aria-label="Go back">
-                ‹
-            </button>
-
-            <div class="headerTitleBox">
-
-                <div class="headerTitle">
-                    Messages
-                </div>
-
-                <div class="headerSubtitle">
-                    ADMIN UPDATES & NOTIFICATIONS
-                </div>
-
-            </div>
-
+        <div class="headerTitle">
+            Messages
         </div>
 
-
-        <div class="headerRight">
-
-            <button
-                class="headerIcon"
-                type="button"
-                onclick="markAllRead()"
-                aria-label="Mark all messages as read">
-
-                ✓
-
-                <span
-                    id="headerUnread"
-                    class="unreadBadge"
-                    style="display:none">
-                    0
-                </span>
-
-            </button>
-
-        </div>
-
-    </header>
-
-
-    <!-- =====================================================
-         SEARCH
-    ====================================================== -->
-
-    <div class="searchBox">
-
-        <span class="searchIcon">
-            🔍
-        </span>
-
-        <input
-            id="searchInput"
-            type="search"
-            placeholder="Search admin messages..."
-            autocomplete="off"
-            spellcheck="false">
-
-        <button
-            id="clearSearch"
-            class="clearSearch"
-            type="button"
-            onclick="clearSearch()"
-            aria-label="Clear search">
-
-            ×
-
-        </button>
-
-    </div>
-
-
-    <!-- =====================================================
-         FILTERS
-    ====================================================== -->
-
-    <div class="filterRow">
-
-        <button
-            class="filterBtn active"
-            type="button"
-            data-filter="all"
-            onclick="setFilter('all', this)">
-            All
-        </button>
-
-        <button
-            class="filterBtn"
-            type="button"
-            data-filter="announcement"
-            onclick="setFilter('announcement', this)">
-            Announcement
-        </button>
-
-        <button
-            class="filterBtn"
-            type="button"
-            data-filter="match"
-            onclick="setFilter('match', this)">
-            Match
-        </button>
-
-        <button
-            class="filterBtn"
-            type="button"
-            data-filter="payment"
-            onclick="setFilter('payment', this)">
-            Payment
-        </button>
-
-        <button
-            class="filterBtn"
-            type="button"
-            data-filter="result"
-            onclick="setFilter('result', this)">
-            Result
-        </button>
-
-        <button
-            class="filterBtn"
-            type="button"
-            data-filter="important"
-            onclick="setFilter('important', this)">
-            Important
-        </button>
-
-    </div>
-
-
-    <!-- =====================================================
-         ADMIN ONLY
-    ====================================================== -->
-
-    <div class="adminOnlyBadge">
-
-        <div class="adminOnlyIcon">
-            🛡️
-        </div>
-
-        <div>
-
-            <div class="adminOnlyTitle">
-                Official Admin Messages
-            </div>
-
-            <div class="adminOnlyText">
-                Only verified BGMI ESPORTS administrator messages
-                are displayed here.
-            </div>
-
+        <div class="headerSubtitle">
+            ADMIN UPDATES & NOTIFICATIONS
         </div>
 
     </div>
 
+</header>
 
-    <!-- =====================================================
-         ANNOUNCEMENT
-    ====================================================== -->
 
-    <div
-        id="announcementCard"
-        class="announcement">
+<!-- =====================================================
+     SEARCH
+===================================================== -->
 
-        <div class="announcementIcon">
-            📢
-        </div>
+<div class="searchBox">
 
-        <div class="announcementContent">
+    <span class="searchIcon">🔍</span>
 
-            <div class="announcementLabel">
-                Latest Update
-            </div>
+    <input
+        id="searchInput"
+        type="search"
+        placeholder="Search admin messages..."
+        autocomplete="off"
+        spellcheck="false">
 
-            <div
-                id="announcementText"
-                class="announcementText">
+    <button
+        id="clearSearch"
+        class="clearSearch"
+        type="button"
+        onclick="clearSearch()">
+        ×
+    </button>
 
-                Welcome to BGMI ESPORTS
+</div>
 
-            </div>
 
-        </div>
+<!-- =====================================================
+     FILTER
+===================================================== -->
 
+<div class="filterRow">
+
+    <button
+        class="filterBtn active"
+        data-filter="all"
+        onclick="setFilter('all',this)">
+        All
+    </button>
+
+    <button
+        class="filterBtn"
+        data-filter="announcement"
+        onclick="setFilter('announcement',this)">
+        Announcement
+    </button>
+
+    <button
+        class="filterBtn"
+        data-filter="match"
+        onclick="setFilter('match',this)">
+        Match
+    </button>
+
+    <button
+        class="filterBtn"
+        data-filter="payment"
+        onclick="setFilter('payment',this)">
+        Payment
+    </button>
+
+    <button
+        class="filterBtn"
+        data-filter="result"
+        onclick="setFilter('result',this)">
+        Result
+    </button>
+
+    <button
+        class="filterBtn"
+        data-filter="important"
+        onclick="setFilter('important',this)">
+        Important
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     ADMIN INFO
+===================================================== -->
+
+<div class="adminOnlyBadge">
+
+    <div class="adminOnlyIcon">
+        🛡️
     </div>
 
+    <div>
 
-    <!-- =====================================================
-         ADMIN BROADCAST
-    ====================================================== -->
-
-    <div
-        id="broadcastCard"
-        class="broadcastCard">
-
-        <div class="broadcastGlow"></div>
-
-        <div class="broadcastTop">
-
-            <div class="broadcastIcon">
-                📣
-            </div>
-
-            <div>
-
-                <div class="broadcastTitle">
-                    ADMIN BROADCAST
-                </div>
-
-                <div
-                    id="broadcastDate"
-                    class="broadcastDate">
-                    Official Announcement
-                </div>
-
-            </div>
-
+        <div class="adminOnlyTitle">
+            Official Admin Messages
         </div>
 
-        <div
-            id="broadcastText"
-            class="broadcastText">
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         SECTION HEADER
-    ====================================================== -->
-
-    <div class="sectionHeader">
-
-        <div class="sectionTitle">
-
-            <span class="sectionLiveDot"></span>
-
-            <h3>
-                Messages
-            </h3>
-
-        </div>
-
-        <span
-            id="messageCount"
-            class="sectionCount">
-            0 MESSAGES
-        </span>
-
-    </div>
-
-
-    <!-- =====================================================
-         MESSAGE LIST
-    ====================================================== -->
-
-    <div
-        id="messageList"
-        class="messageList">
-
-        <div class="loader">
-
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-
+        <div class="adminOnlyText">
+            Only verified BGMI ESPORTS administrator
+            messages are displayed here.
         </div>
 
     </div>
@@ -1987,9 +1552,120 @@ body::before{
 </div>
 
 
-<!-- =========================================================
-     MESSAGE DETAIL MODAL
-========================================================= -->
+<!-- =====================================================
+     ANNOUNCEMENT
+===================================================== -->
+
+<div class="announcement">
+
+    <div class="announcementIcon">
+        📢
+    </div>
+
+    <div class="announcementContent">
+
+        <div class="announcementLabel">
+            Latest Update
+        </div>
+
+        <div
+            id="announcementText"
+            class="announcementText">
+            Welcome to BGMI ESPORTS
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     BROADCAST
+===================================================== -->
+
+<div
+    id="broadcastCard"
+    class="broadcastCard">
+
+    <div class="broadcastGlow"></div>
+
+    <div class="broadcastTop">
+
+        <div class="broadcastIcon">
+            📣
+        </div>
+
+        <div>
+
+            <div class="broadcastTitle">
+                ADMIN BROADCAST
+            </div>
+
+            <div
+                id="broadcastDate"
+                class="broadcastDate">
+                Official Announcement
+            </div>
+
+        </div>
+
+    </div>
+
+    <div
+        id="broadcastText"
+        class="broadcastText">
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     SECTION
+===================================================== -->
+
+<div class="sectionHeader">
+
+    <div class="sectionTitle">
+
+        <span class="sectionLiveDot"></span>
+
+        <h3>Messages</h3>
+
+    </div>
+
+    <span
+        id="messageCount"
+        class="sectionCount">
+        0 MESSAGES
+    </span>
+
+</div>
+
+
+<!-- =====================================================
+     MESSAGE LIST
+===================================================== -->
+
+<div
+    id="messageList"
+    class="messageList">
+
+    <div class="loader">
+
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     CENTER MESSAGE MODAL
+===================================================== -->
 
 <div
     id="messageModal"
@@ -2002,9 +1678,6 @@ body::before{
 
         <div class="modalHandle"></div>
 
-
-        <!-- MODAL HEADER -->
-
         <div class="messageModalHeader">
 
             <img
@@ -2013,69 +1686,49 @@ body::before{
                 src="https://ui-avatars.com/api/?name=BGMI+Admin&background=111827&color=fbbf24&bold=true"
                 alt="Admin">
 
-
             <div class="modalUser">
 
                 <div
                     id="modalUserName"
                     class="modalUserName">
-
                     BGMI ESPORTS ADMIN
-
                 </div>
 
                 <div class="modalUserRole">
-
                     Official Administrator
-
                 </div>
 
             </div>
 
-
             <button
                 class="modalClose"
                 type="button"
-                onclick="closeMessageModal()"
-                aria-label="Close">
-
+                onclick="closeMessageModal()">
                 ×
-
             </button>
 
         </div>
-
-
-        <!-- FULL MESSAGE -->
 
         <div
             id="fullMessage"
             class="fullMessage">
         </div>
 
-
-        <!-- MESSAGE META -->
-
         <div class="modalMessageMeta">
 
             <span
                 id="modalMessageType"
                 class="modalBadge">
-
-                Official Message
-
+                Announcement
             </span>
 
             <span
                 id="modalMessageStatus"
                 class="modalBadge">
-
                 READ
-
             </span>
 
         </div>
-
 
         <div
             id="fullMessageTime"
@@ -2087,15 +1740,14 @@ body::before{
 </div>
 
 
-<!-- =========================================================
-     BOTTOM NAVIGATION
-========================================================= -->
+<!-- =====================================================
+     BOTTOM NAV
+===================================================== -->
 
 <nav class="bottomNav">
 
     <button
         class="navBtn"
-        type="button"
         onclick="location.href='dashboard.html'">
 
         <div class="navIcon">
@@ -2106,10 +1758,8 @@ body::before{
 
     </button>
 
-
     <button
         class="navBtn"
-        type="button"
         onclick="location.href='wallet.html'">
 
         <div class="navIcon">
@@ -2120,10 +1770,8 @@ body::before{
 
     </button>
 
-
     <button
         class="navBtn active"
-        type="button"
         onclick="location.href='message.html'">
 
         <div class="navIcon">
@@ -2141,10 +1789,8 @@ body::before{
 
     </button>
 
-
     <button
         class="navBtn"
-        type="button"
         onclick="location.href='profile.html'">
 
         <div class="navIcon">
@@ -2158,9 +1804,9 @@ body::before{
 </nav>
 
 
-<!-- =========================================================
+<!-- =====================================================
      TOAST
-========================================================= -->
+===================================================== -->
 
 <div
     id="toast"
@@ -2168,11 +1814,11 @@ body::before{
 </div>
 
 
-<!-- =========================================================
-     FIREBASE
-========================================================= -->
-
 <script type="module">
+
+/* =========================================================
+   FIREBASE IMPORTS
+========================================================= */
 
 import {
     initializeApp
@@ -2222,7 +1868,7 @@ const firebaseConfig = {
 
 
 /* =========================================================
-   INITIALIZE FIREBASE
+   FIREBASE INIT
 ========================================================= */
 
 const app =
@@ -2248,7 +1894,6 @@ const ADMIN_UID =
 ========================================================= */
 
 let currentUser = null;
-
 let currentUID = "";
 
 let messages = [];
@@ -2256,16 +1901,21 @@ let messages = [];
 let currentFilter = "all";
 
 let messagesListenerStarted = false;
-
 let announcementListenerStarted = false;
-
 let broadcastListenerStarted = false;
 
 let firstMessageLoad = true;
-
 let previousMessageIds = new Set();
 
 let toastTimer = null;
+
+
+/* =========================================================
+   DEFAULT ADMIN PHOTO
+========================================================= */
+
+const DEFAULT_ADMIN_PHOTO =
+    "https://ui-avatars.com/api/?name=BGMI+Admin&background=111827&color=fbbf24&bold=true";
 
 
 /* =========================================================
@@ -2283,12 +1933,12 @@ const clearSearchButton =
 
 
 /* =========================================================
-   AUTH STATE
+   AUTH
 ========================================================= */
 
 onAuthStateChanged(
     auth,
-    (user) => {
+    user => {
 
         if(!user){
 
@@ -2298,16 +1948,11 @@ onAuthStateChanged(
 
         }
 
-
         currentUser = user;
-
         currentUID = user.uid;
 
-
         loadAdminMessages();
-
         loadAnnouncement();
-
         loadBroadcast();
 
     }
@@ -2320,152 +1965,95 @@ onAuthStateChanged(
 
 function loadAdminMessages(){
 
-    if(!db || !currentUID || messagesListenerStarted){
+    if(
+        !db ||
+        !currentUID ||
+        messagesListenerStarted
+    ){
+
         return;
+
     }
 
     messagesListenerStarted = true;
 
-    const messagesRef = ref(db, "messages");
+    const messagesRef =
+        ref(db,"messages");
+
 
     onValue(
+
         messagesRef,
-        (snapshot) => {
+
+        snapshot => {
 
             const list = [];
 
-            if(!snapshot.exists()){
-                messages = [];
-                renderMessages();
-                updateUnread();
+            const root =
+                snapshot.exists()
+                    ? snapshot.val()
+                    : null;
 
-                console.log("MESSAGES: No data found");
 
-                return;
+            if(root){
+
+                scanMessageTree(
+                    root,
+                    [],
+                    list
+                );
+
             }
 
-            snapshot.forEach((child) => {
 
-                const key = child.key;
-                const value = child.val();
+            const unique =
+                new Map();
 
-                if(!value || typeof value !== "object"){
-                    return;
-                }
+            list.forEach(
+                message => {
 
-                /*
-                 * ==========================================
-                 * STRUCTURE 1
-                 *
-                 * messages/
-                 *   USER_UID/
-                 *      MESSAGE_ID/
-                 * ==========================================
-                 */
+                    if(!unique.has(message.id)){
 
-                const looksLikeMessage =
-                    value.text !== undefined ||
-                    value.message !== undefined ||
-                    value.senderId !== undefined ||
-                    value.senderUid !== undefined ||
-                    value.senderUID !== undefined ||
-                    value.receiverId !== undefined ||
-                    value.receiverUid !== undefined;
+                        unique.set(
+                            message.id,
+                            message
+                        );
 
-                if(looksLikeMessage){
-
-                    processFirebaseMessage(
-                        key,
-                        value,
-                        list
-                    );
-
-                    return;
-                }
-
-
-                /*
-                 * ==========================================
-                 * STRUCTURE 2
-                 *
-                 * messages/
-                 *   USER_UID/
-                 *      MESSAGE_ID/
-                 * ==========================================
-                 */
-
-                const possibleUserUid = key;
-
-                if(
-                    possibleUserUid === currentUID &&
-                    value &&
-                    typeof value === "object"
-                ){
-
-                    Object.entries(value).forEach(
-                        ([messageId, messageData]) => {
-
-                            if(
-                                !messageData ||
-                                typeof messageData !== "object"
-                            ){
-                                return;
-                            }
-
-                            processFirebaseMessage(
-                                messageId,
-                                messageData,
-                                list
-                            );
-
-                        }
-                    );
+                    }
 
                 }
+            );
 
-            });
+
+            messages =
+                Array.from(
+                    unique.values()
+                );
 
 
-            /*
-             * ==========================================
-             * SORT
-             * ==========================================
-             */
-
-            messages = list.sort(
+            messages.sort(
                 (a,b) => {
 
                     return (
-                        Number(b.timestamp || 0) -
-                        Number(a.timestamp || 0)
+                        getTimestamp(b) -
+                        getTimestamp(a)
                     );
 
                 }
             );
 
 
-            console.log(
-                "ADMIN MESSAGES LOADED:",
-                messages
-            );
-
-
-            /*
-             * ==========================================
-             * NEW MESSAGE DETECTION
-             * ==========================================
-             */
-
-            const newIds = new Set(
-                messages.map(
-                    message => message.id
-                )
-            );
+            const newIds =
+                new Set(
+                    messages.map(
+                        message => message.id
+                    )
+                );
 
 
             if(!firstMessageLoad){
 
-                const hasNewMessage =
+                const hasNew =
                     messages.some(
                         message =>
                             !previousMessageIds.has(
@@ -2474,7 +2062,7 @@ function loadAdminMessages(){
                     );
 
 
-                if(hasNewMessage){
+                if(hasNew){
 
                     showNewMessageToast();
 
@@ -2483,9 +2071,11 @@ function loadAdminMessages(){
             }
 
 
-            previousMessageIds = newIds;
+            previousMessageIds =
+                newIds;
 
-            firstMessageLoad = false;
+            firstMessageLoad =
+                false;
 
 
             renderMessages();
@@ -2494,7 +2084,7 @@ function loadAdminMessages(){
 
         },
 
-        (error) => {
+        error => {
 
             console.error(
                 "Firebase messages error:",
@@ -2503,89 +2093,34 @@ function loadAdminMessages(){
 
             renderEmpty(
                 "Unable to Load Messages",
-                "Firebase database permission denied or messages structure is incorrect."
+                "Firebase permission denied. Check your Realtime Database rules."
             );
 
             showToast(
-                "Firebase messages permission error"
+                "Firebase permission denied"
             );
 
         }
+
     );
 
 }
-function processFirebaseMessage(
-    messageId,
-    data,
+
+
+/* =========================================================
+   SCAN FIREBASE TREE
+========================================================= */
+
+function scanMessageTree(
+    node,
+    path,
     list
 ){
 
-    if(!data || typeof data !== "object"){
-        return;
-    }
-
-
-    /*
-     * ==========================================
-     * FIND SENDER UID
-     * ==========================================
-     */
-
-    const senderId = String(
-        data.senderId ||
-        data.senderUid ||
-        data.senderUID ||
-        data.adminUid ||
-        data.adminUID ||
-        data.fromUid ||
-        data.fromUID ||
-        data.from ||
-        ""
-    );
-
-
-    /*
-     * ==========================================
-     * FIND RECEIVER UID
-     * ==========================================
-     */
-
-    const receiverId = String(
-        data.receiverId ||
-        data.receiverUid ||
-        data.receiverUID ||
-        data.toUid ||
-        data.toUID ||
-        data.uid ||
-        ""
-    );
-
-
-    /*
-     * ==========================================
-     * ADMIN FILTER
-     * ==========================================
-     */
-
-    if(senderId !== ADMIN_UID){
-
-        return;
-
-    }
-
-
-    /*
-     * ==========================================
-     * RECEIVER FILTER
-     *
-     * If receiverId exists, it must belong
-     * to current logged-in user.
-     * ==========================================
-     */
-
     if(
-        receiverId &&
-        receiverId !== currentUID
+        !node ||
+        typeof node !== "object" ||
+        Array.isArray(node)
     ){
 
         return;
@@ -2593,18 +2128,188 @@ function processFirebaseMessage(
     }
 
 
-    /*
-     * ==========================================
-     * MESSAGE TEXT
-     * ==========================================
-     */
+    Object.entries(node).forEach(
+        ([key,value]) => {
+
+            if(
+                !value ||
+                typeof value !== "object"
+            ){
+
+                return;
+
+            }
+
+
+            if(isMessageObject(value)){
+
+                processFirebaseMessage(
+                    key,
+                    value,
+                    path,
+                    list
+                );
+
+                return;
+
+            }
+
+
+            scanMessageTree(
+                value,
+                [...path,key],
+                list
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   MESSAGE DETECTION
+========================================================= */
+
+function isMessageObject(data){
+
+    if(
+        !data ||
+        typeof data !== "object"
+    ){
+
+        return false;
+
+    }
+
 
     const text =
-        data.text ||
-        data.message ||
-        data.body ||
-        data.content ||
+        data.text ??
+        data.message ??
+        data.body ??
+        data.content ??
+        data.description ??
         "";
+
+
+    return String(text).trim() !== "";
+
+}
+
+
+/* =========================================================
+   PROCESS MESSAGE
+========================================================= */
+
+function processFirebaseMessage(
+    messageId,
+    data,
+    path,
+    list
+){
+
+    if(
+        !data ||
+        typeof data !== "object"
+    ){
+
+        return;
+
+    }
+
+
+    const senderId =
+        String(
+            data.senderId ??
+            data.senderUid ??
+            data.senderUID ??
+            data.adminUid ??
+            data.adminUID ??
+            data.fromUid ??
+            data.fromUID ??
+            data.from ??
+            data.createdBy ??
+            data.createdByUid ??
+            ""
+        );
+
+
+    const adminField =
+        String(
+            data.adminId ??
+            data.adminUID ??
+            data.adminUid ??
+            data.admin ??
+            data.createdBy ??
+            data.createdByUid ??
+            ""
+        );
+
+
+    const isAdmin =
+        senderId === ADMIN_UID ||
+        adminField === ADMIN_UID;
+
+
+    if(
+        senderId &&
+        !isAdmin
+    ){
+
+        return;
+
+    }
+
+
+    const insideUserNode =
+        path.includes(currentUID);
+
+
+    if(
+        !isAdmin &&
+        !insideUserNode
+    ){
+
+        return;
+
+    }
+
+
+    const receiverId =
+        String(
+            data.receiverId ??
+            data.receiverUid ??
+            data.receiverUID ??
+            data.toUid ??
+            data.toUID ??
+            data.userId ??
+            data.uid ??
+            data.to ??
+            ""
+        );
+
+
+    if(
+        receiverId &&
+        receiverId !== currentUID &&
+        receiverId.toLowerCase() !== "all" &&
+        receiverId.toLowerCase() !== "broadcast"
+    ){
+
+        return;
+
+    }
+
+
+    const text =
+        String(
+            data.text ??
+            data.message ??
+            data.body ??
+            data.content ??
+            data.description ??
+            ""
+        ).trim();
 
 
     if(!text){
@@ -2614,28 +2319,106 @@ function processFirebaseMessage(
     }
 
 
-    /*
-     * ==========================================
-     * PUSH MESSAGE
-     * ==========================================
-     */
+    const customId =
+        String(
+            data.id ??
+            data.messageId ??
+            messageId
+        );
+
+
+    const finalId =
+        customId ||
+        path.join("_") ||
+        messageId;
+
 
     list.push({
 
-        id: messageId,
-
         ...data,
 
-        senderId: ADMIN_UID,
+        id:finalId,
 
-        text: text
+        senderId:
+            isAdmin
+                ? ADMIN_UID
+                : senderId,
+
+        text:text,
+
+        _firebasePath:[
+            ...path,
+            messageId
+        ]
 
     });
 
 }
 
+
 /* =========================================================
-   RENDER MESSAGES
+   TIMESTAMP
+========================================================= */
+
+function getTimestamp(message){
+
+    const value =
+        message?.timestamp ??
+        message?.createdAt ??
+        message?.time ??
+        message?.date ??
+        0;
+
+
+    if(
+        typeof value === "object" &&
+        value !== null
+    ){
+
+        if(
+            typeof value.seconds === "number"
+        ){
+
+            return value.seconds * 1000;
+
+        }
+
+    }
+
+
+    const number =
+        Number(value);
+
+
+    if(
+        !Number.isNaN(number) &&
+        number > 0
+    ){
+
+        if(number < 10000000000){
+
+            return number * 1000;
+
+        }
+
+        return number;
+
+    }
+
+
+    const parsed =
+        Date.parse(String(value));
+
+
+    return Number.isNaN(parsed)
+        ? 0
+        : parsed;
+
+}
+
+
+/* =========================================================
+   RENDER
 ========================================================= */
 
 function renderMessages(){
@@ -2656,50 +2439,25 @@ function renderMessages(){
 
 
     let list =
-        [...messages];
-
-
-    /*
-        SECOND SECURITY FILTER
-    */
-
-    list =
-        list.filter(
-            message => {
-
-                return (
-                    String(
-                        message.senderId || ""
-                    ) === ADMIN_UID
-                );
-
-            }
+        messages.filter(
+            message =>
+                String(
+                    message.senderId || ""
+                ) === ADMIN_UID
         );
 
-
-    /*
-        CATEGORY FILTER
-    */
 
     if(currentFilter !== "all"){
 
         list =
             list.filter(
-                message => {
-
-                    return getMessageType(
-                        message
-                    ) === currentFilter;
-
-                }
+                message =>
+                    getMessageType(message) ===
+                    currentFilter
             );
 
     }
 
-
-    /*
-        SEARCH FILTER
-    */
 
     if(search){
 
@@ -2709,32 +2467,24 @@ function renderMessages(){
 
                     const text =
                         String(
-                            message.text ||
-                            message.message ||
-                            ""
-                        )
-                        .toLowerCase();
-
-
-                    const title =
-                        String(
-                            message.senderName ||
-                            "BGMI ESPORTS ADMIN"
-                        )
-                        .toLowerCase();
-
+                            message.text || ""
+                        ).toLowerCase();
 
                     const type =
                         getMessageType(
                             message
-                        )
-                        .toLowerCase();
+                        ).toLowerCase();
+
+                    const typeLabel =
+                        getMessageTypeLabel(
+                            type
+                        ).toLowerCase();
 
 
                     return (
                         text.includes(search) ||
-                        title.includes(search) ||
-                        type.includes(search)
+                        type.includes(search) ||
+                        typeLabel.includes(search)
                     );
 
                 }
@@ -2766,11 +2516,13 @@ function renderMessages(){
 
         renderEmpty(
 
-            search || currentFilter !== "all"
+            search ||
+            currentFilter !== "all"
                 ? "No Results"
                 : "No Admin Messages",
 
-            search || currentFilter !== "all"
+            search ||
+            currentFilter !== "all"
                 ? "Try another search or message category."
                 : "Official admin announcements and messages will appear here."
 
@@ -2800,7 +2552,7 @@ function renderMessages(){
 
 
 /* =========================================================
-   CREATE MESSAGE ITEM
+   CREATE MESSAGE
 ========================================================= */
 
 function createMessageItem(message){
@@ -2822,50 +2574,30 @@ function createMessageItem(message){
         );
 
 
-    const name =
-        "BGMI ESPORTS ADMIN";
-
-
     const photo =
         message.senderPhoto ||
         message.photoURL ||
-        "https://ui-avatars.com/api/?name=BGMI+Admin&background=111827&color=fbbf24&bold=true";
+        message.avatar ||
+        DEFAULT_ADMIN_PHOTO;
 
 
     const text =
         message.text ||
-        message.message ||
         "Admin sent a new message.";
 
 
     const time =
         formatMessageTime(
-            message.timestamp
+            getTimestamp(message)
         );
 
 
     const type =
-        getMessageType(
-            message
-        );
+        getMessageType(message);
 
 
     const typeLabel =
-        getMessageTypeLabel(
-            type
-        );
-
-
-    const safePhoto =
-        escapeAttribute(
-            photo
-        );
-
-
-    const safeText =
-        escapeHTML(
-            text
-        );
+        getMessageTypeLabel(type);
 
 
     item.innerHTML = `
@@ -2874,13 +2606,8 @@ function createMessageItem(message){
 
             <img
                 class="avatar"
-                src="${safePhoto}"
-                alt="Admin"
-                onerror="
-                    this.onerror=null;
-                    this.src='https://ui-avatars.com/api/?name=BGMI+Admin&background=111827&color=fbbf24&bold=true';
-                "
-            >
+                src="${escapeAttribute(photo)}"
+                alt="Admin">
 
             <span class="adminCrown">
                 👑
@@ -2895,7 +2622,7 @@ function createMessageItem(message){
 
                 <div class="messageName">
 
-                    📢 ${name}
+                    📢 BGMI ESPORTS ADMIN
 
                     <span class="adminLabel">
                         ADMIN
@@ -2911,9 +2638,7 @@ function createMessageItem(message){
 
 
             <div class="messagePreview">
-
-                ${safeText}
-
+                ${escapeHTML(text)}
             </div>
 
 
@@ -2927,7 +2652,7 @@ function createMessageItem(message){
                     read
                         ? `
                             <span class="readLabel">
-                                Read
+                                READ
                             </span>
                           `
                         : ""
@@ -2941,9 +2666,7 @@ function createMessageItem(message){
         ${
             !read
                 ? `
-                    <span
-                        class="unreadDot">
-                    </span>
+                    <span class="unreadDot"></span>
                   `
                 : ""
         }
@@ -2951,10 +2674,27 @@ function createMessageItem(message){
     `;
 
 
-    /*
-        CLICK MESSAGE
-        -> OPEN POPUP
-    */
+    const image =
+        item.querySelector("img");
+
+
+    if(image){
+
+        image.addEventListener(
+            "error",
+            () => {
+
+                image.src =
+                    DEFAULT_ADMIN_PHOTO;
+
+            },
+            {
+                once:true
+            }
+        );
+
+    }
+
 
     item.addEventListener(
         "click",
@@ -2974,14 +2714,10 @@ function createMessageItem(message){
 
 
 /* =========================================================
-   OPEN MESSAGE POPUP
+   OPEN CENTER POPUP
 ========================================================= */
 
 async function openAdminMessage(message){
-
-    /*
-        EXTRA SECURITY
-    */
 
     if(
         String(
@@ -2994,70 +2730,28 @@ async function openAdminMessage(message){
     }
 
 
-    /*
-        MARK AS READ
-    */
+    if(!isRead(message)){
 
-    if(
-        !isRead(message) &&
-        message.id &&
-        currentUID
-    ){
-
-        try{
-
-            await update(
-
-                ref(
-                    db,
-                    "messages/" +
-                    currentUID +
-                    "/" +
-                    message.id
-                ),
-
-                {
-                    read:true,
-                    readAt:Date.now()
-                }
-
-            );
-
-        }
-        catch(error){
-
-            console.error(
-                "Read update failed:",
-                error
-            );
-
-        }
+        await markMessageRead(
+            message
+        );
 
     }
 
 
     const text =
         message.text ||
-        message.message ||
         "Admin sent a new message.";
 
 
     const photo =
         message.senderPhoto ||
         message.photoURL ||
-        "https://ui-avatars.com/api/?name=BGMI+Admin&background=111827&color=fbbf24&bold=true";
+        DEFAULT_ADMIN_PHOTO;
 
 
     const type =
-        getMessageType(
-            message
-        );
-
-
-    const typeLabel =
-        getMessageTypeLabel(
-            type
-        );
+        getMessageType(message);
 
 
     const modal =
@@ -3107,6 +2801,14 @@ async function openAdminMessage(message){
         modalAvatar.src =
             photo;
 
+        modalAvatar.onerror =
+            () => {
+
+                modalAvatar.src =
+                    DEFAULT_ADMIN_PHOTO;
+
+            };
+
     }
 
 
@@ -3130,7 +2832,7 @@ async function openAdminMessage(message){
 
         fullMessageTime.textContent =
             formatFullDate(
-                message.timestamp
+                getTimestamp(message)
             );
 
     }
@@ -3139,7 +2841,7 @@ async function openAdminMessage(message){
     if(modalType){
 
         modalType.textContent =
-            typeLabel;
+            getMessageTypeLabel(type);
 
     }
 
@@ -3154,9 +2856,7 @@ async function openAdminMessage(message){
 
     if(modal){
 
-        modal.classList.add(
-            "show"
-        );
+        modal.classList.add("show");
 
         document.body.style.overflow =
             "hidden";
@@ -3172,7 +2872,101 @@ async function openAdminMessage(message){
 
 
 /* =========================================================
-   CLOSE MESSAGE MODAL
+   MARK SINGLE READ
+========================================================= */
+
+async function markMessageRead(message){
+
+    if(
+        !db ||
+        !currentUID ||
+        !message
+    ){
+
+        return;
+
+    }
+
+
+    const updates = {};
+
+    const now =
+        Date.now();
+
+
+    if(
+        Array.isArray(
+            message._firebasePath
+        ) &&
+        message._firebasePath.length > 0
+    ){
+
+        const path =
+            message._firebasePath.join("/");
+
+
+        updates[
+            "messages/" +
+            path +
+            "/read"
+        ] = true;
+
+
+        updates[
+            "messages/" +
+            path +
+            "/readAt"
+        ] = now;
+
+    }
+    else{
+
+        updates[
+            "messages/" +
+            currentUID +
+            "/" +
+            message.id +
+            "/read"
+        ] = true;
+
+
+        updates[
+            "messages/" +
+            currentUID +
+            "/" +
+            message.id +
+            "/readAt"
+        ] = now;
+
+    }
+
+
+    try{
+
+        await update(
+            ref(db),
+            updates
+        );
+
+
+        message.read = true;
+        message.readAt = now;
+
+    }
+    catch(error){
+
+        console.error(
+            "Mark read failed:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   CLOSE MODAL
 ========================================================= */
 
 window.closeMessageModal =
@@ -3186,18 +2980,19 @@ function(){
 
     if(modal){
 
-        modal.classList.remove(
-            "show"
-        );
+        modal.classList.remove("show");
 
     }
 
 
-    document.body.style.overflow =
-        "";
+    document.body.style.overflow = "";
 
 };
 
+
+/* =========================================================
+   OUTSIDE CLICK
+========================================================= */
 
 window.closeMessageOutside =
 function(event){
@@ -3221,7 +3016,7 @@ function(event){
 
 document.addEventListener(
     "keydown",
-    (event) => {
+    event => {
 
         if(
             event.key === "Escape"
@@ -3246,7 +3041,7 @@ function getMessageType(message){
             message.type ||
             message.category ||
             message.messageType ||
-            "announcement"
+            ""
         )
         .trim()
         .toLowerCase();
@@ -3302,7 +3097,7 @@ function getMessageType(message){
 
 
 /* =========================================================
-   MESSAGE TYPE LABEL
+   TYPE LABEL
 ========================================================= */
 
 function getMessageTypeLabel(type){
@@ -3379,7 +3174,106 @@ function(
 
 
 /* =========================================================
-   ADMIN BROADCAST
+   ANNOUNCEMENT
+========================================================= */
+
+function loadAnnouncement(){
+
+    if(
+        !db ||
+        announcementListenerStarted
+    ){
+
+        return;
+
+    }
+
+
+    announcementListenerStarted = true;
+
+
+    onValue(
+
+        ref(
+            db,
+            "announcement"
+        ),
+
+        snapshot => {
+
+            const box =
+                document.getElementById(
+                    "announcementText"
+                );
+
+
+            if(!snapshot.exists()){
+
+                if(box){
+
+                    box.textContent =
+                        "Welcome to BGMI ESPORTS";
+
+                }
+
+                return;
+
+            }
+
+
+            const value =
+                snapshot.val();
+
+
+            let text = "";
+
+
+            if(
+                typeof value === "string"
+            ){
+
+                text = value;
+
+            }
+            else if(value){
+
+                text =
+                    value.text ||
+                    value.message ||
+                    value.title ||
+                    "";
+
+            }
+
+
+            if(
+                box &&
+                text
+            ){
+
+                box.textContent =
+                    text;
+
+            }
+
+        },
+
+        error => {
+
+            console.error(
+                "Announcement error:",
+                error
+            );
+
+        }
+
+    );
+
+}
+
+
+/* =========================================================
+   BROADCAST
 ========================================================= */
 
 function loadBroadcast(){
@@ -3397,18 +3291,14 @@ function loadBroadcast(){
     broadcastListenerStarted = true;
 
 
-    const broadcastRef =
+    onValue(
+
         ref(
             db,
             "adminBroadcast"
-        );
+        ),
 
-
-    onValue(
-
-        broadcastRef,
-
-        (snapshot) => {
+        snapshot => {
 
             const card =
                 document.getElementById(
@@ -3416,17 +3306,11 @@ function loadBroadcast(){
                 );
 
 
-            if(
-                !snapshot.exists()
-            ){
+            if(!snapshot.exists()){
 
-                if(card){
-
-                    card.classList.remove(
-                        "show"
-                    );
-
-                }
+                card?.classList.remove(
+                    "show"
+                );
 
                 return;
 
@@ -3440,18 +3324,15 @@ function loadBroadcast(){
             const text =
                 data.text ||
                 data.message ||
+                data.body ||
                 "";
 
 
             if(!text){
 
-                if(card){
-
-                    card.classList.remove(
-                        "show"
-                    );
-
-                }
+                card?.classList.remove(
+                    "show"
+                );
 
                 return;
 
@@ -3482,24 +3363,19 @@ function loadBroadcast(){
 
                 dateBox.textContent =
                     formatMessageTime(
-                        data.timestamp ||
-                        data.time
+                        getTimestamp(data)
                     );
 
             }
 
 
-            if(card){
-
-                card.classList.add(
-                    "show"
-                );
-
-            }
+            card?.classList.add(
+                "show"
+            );
 
         },
 
-        (error) => {
+        error => {
 
             console.error(
                 "Broadcast error:",
@@ -3514,114 +3390,7 @@ function loadBroadcast(){
 
 
 /* =========================================================
-   ANNOUNCEMENT
-========================================================= */
-
-function loadAnnouncement(){
-
-    if(
-        !db ||
-        announcementListenerStarted
-    ){
-
-        return;
-
-    }
-
-
-    announcementListenerStarted = true;
-
-
-    const announcementRef =
-        ref(
-            db,
-            "announcement"
-        );
-
-
-    onValue(
-
-        announcementRef,
-
-        (snapshot) => {
-
-            const textBox =
-                document.getElementById(
-                    "announcementText"
-                );
-
-
-            if(
-                !snapshot.exists()
-            ){
-
-                if(textBox){
-
-                    textBox.textContent =
-                        "Welcome to BGMI ESPORTS";
-
-                }
-
-                return;
-
-            }
-
-
-            const value =
-                snapshot.val();
-
-
-            let text = "";
-
-
-            if(
-                typeof value ===
-                "string"
-            ){
-
-                text =
-                    value;
-
-            }
-            else if(value){
-
-                text =
-                    value.text ||
-                    value.message ||
-                    value.title ||
-                    "";
-
-            }
-
-
-            if(
-                text &&
-                textBox
-            ){
-
-                textBox.textContent =
-                    text;
-
-            }
-
-        },
-
-        (error) => {
-
-            console.error(
-                "Announcement error:",
-                error
-            );
-
-        }
-
-    );
-
-}
-
-
-/* =========================================================
-   UNREAD COUNTER
+   UNREAD
 ========================================================= */
 
 function updateUnread(){
@@ -3641,12 +3410,6 @@ function updateUnread(){
         ).length;
 
 
-    const header =
-        document.getElementById(
-            "headerUnread"
-        );
-
-
     const bottom =
         document.getElementById(
             "bottomBadge"
@@ -3659,17 +3422,6 @@ function updateUnread(){
             unread > 99
                 ? "99+"
                 : unread;
-
-
-        if(header){
-
-            header.textContent =
-                display;
-
-            header.style.display =
-                "flex";
-
-        }
 
 
         if(bottom){
@@ -3685,14 +3437,6 @@ function updateUnread(){
     }
     else{
 
-        if(header){
-
-            header.style.display =
-                "none";
-
-        }
-
-
         if(bottom){
 
             bottom.style.display =
@@ -3703,122 +3447,6 @@ function updateUnread(){
     }
 
 }
-
-
-/* =========================================================
-   MARK ALL READ
-========================================================= */
-
-window.markAllRead =
-async function(){
-
-    if(
-        !db ||
-        !currentUID
-    ){
-
-        return;
-
-    }
-
-
-    const updates = {};
-
-    const now =
-        Date.now();
-
-
-    messages.forEach(
-        message => {
-
-            /*
-                ONLY ADMIN MESSAGES
-            */
-
-            if(
-                String(
-                    message.senderId || ""
-                ) !== ADMIN_UID
-            ){
-
-                return;
-
-            }
-
-
-            if(
-                message.id &&
-                !isRead(message)
-            ){
-
-                updates[
-                    "messages/" +
-                    currentUID +
-                    "/" +
-                    message.id +
-                    "/read"
-                ] =
-                    true;
-
-
-                updates[
-                    "messages/" +
-                    currentUID +
-                    "/" +
-                    message.id +
-                    "/readAt"
-                ] =
-                    now;
-
-            }
-
-        }
-    );
-
-
-    if(
-        Object.keys(
-            updates
-        ).length === 0
-    ){
-
-        showToast(
-            "All admin messages are already read"
-        );
-
-        return;
-
-    }
-
-
-    try{
-
-        await update(
-            ref(db),
-            updates
-        );
-
-
-        showToast(
-            "All messages marked as read"
-        );
-
-    }
-    catch(error){
-
-        console.error(
-            "Mark all read error:",
-            error
-        );
-
-
-        showToast(
-            "Unable to mark messages as read"
-        );
-
-    }
-
-};
 
 
 /* =========================================================
@@ -3878,7 +3506,7 @@ function(){
 
 
 /* =========================================================
-   EMPTY STATE
+   EMPTY
 ========================================================= */
 
 function renderEmpty(
@@ -3931,7 +3559,7 @@ function isRead(message){
 
 
 /* =========================================================
-   MESSAGE TIME
+   TIME
 ========================================================= */
 
 function formatMessageTime(timestamp){
@@ -3950,7 +3578,7 @@ function formatMessageTime(timestamp){
 
 
     if(
-        isNaN(
+        Number.isNaN(
             date.getTime()
         )
     ){
@@ -4042,7 +3670,7 @@ function formatFullDate(timestamp){
 
 
     if(
-        isNaN(
+        Number.isNaN(
             date.getTime()
         )
     ){
@@ -4064,33 +3692,6 @@ function formatFullDate(timestamp){
     );
 
 }
-
-
-/* =========================================================
-   BACK
-========================================================= */
-
-window.goBack =
-function(){
-
-    if(
-        document.referrer &&
-        document.referrer.includes(
-            location.origin
-        )
-    ){
-
-        history.back();
-
-    }
-    else{
-
-        location.href =
-            "dashboard.html";
-
-    }
-
-};
 
 
 /* =========================================================
@@ -4201,12 +3802,12 @@ function escapeAttribute(value){
 
 
 /* =========================================================
-   GLOBAL ERROR HANDLER
+   GLOBAL ERROR
 ========================================================= */
 
 window.addEventListener(
     "error",
-    (event) => {
+    event => {
 
         console.error(
             "Page error:",
@@ -4220,7 +3821,7 @@ window.addEventListener(
 
 window.addEventListener(
     "unhandledrejection",
-    (event) => {
+    event => {
 
         console.error(
             "Unhandled promise:",
