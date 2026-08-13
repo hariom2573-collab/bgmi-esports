@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,11 +6,11 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
 
 <meta name="theme-color" content="#050B18">
 
-<title>Mission</title>
+<title>Missions</title>
 
 <style>
 
@@ -20,15 +19,31 @@ content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no
     padding:0;
     box-sizing:border-box;
     font-family:Arial,sans-serif;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
 }
 
 body{
     min-height:100vh;
     background:
-        radial-gradient(circle at top,#13213d 0%,#050B18 45%,#02050b 100%);
+        radial-gradient(
+            circle at top,
+            #13213d 0%,
+            #050B18 45%,
+            #02050b 100%
+        );
     color:#fff;
-    padding:20px;
-    padding-bottom:40px;
+    padding:16px;
+    padding-bottom:35px;
+}
+
+button{
+    font-family:inherit;
 }
 
 .container{
@@ -37,27 +52,358 @@ body{
     margin:auto;
 }
 
-/* HEADER */
+/* =====================================================
+   HEADER
+===================================================== */
 
 .header{
-    margin-bottom:20px;
+    margin-bottom:16px;
+}
+
+.header-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
 }
 
 .header h1{
     font-size:24px;
-    font-weight:800;
+    font-weight:900;
+    letter-spacing:-.4px;
 }
 
 .header p{
-    margin-top:6px;
+    margin-top:5px;
     color:#8d9bb0;
-    font-size:12px;
+    font-size:11px;
 }
 
-/* WALLET RECHARGE MISSION */
+/* =====================================================
+   LEVEL CARD
+===================================================== */
+
+.level-card{
+    position:relative;
+    overflow:hidden;
+
+    padding:18px;
+
+    border-radius:22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,215,0,.13),
+            rgba(20,31,54,.96) 45%,
+            rgba(5,11,24,.99)
+        );
+
+    border:1px solid rgba(255,215,0,.25);
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.42),
+        inset 0 1px 0 rgba(255,255,255,.05);
+
+    margin-bottom:15px;
+}
+
+.level-card::before{
+    content:"";
+    position:absolute;
+
+    width:150px;
+    height:150px;
+
+    right:-70px;
+    top:-80px;
+
+    background:#FFD700;
+    opacity:.08;
+
+    filter:blur(20px);
+
+    border-radius:50%;
+}
+
+.level-top{
+    position:relative;
+
+    display:flex;
+    align-items:center;
+    gap:13px;
+}
+
+.level-icon{
+    width:58px;
+    height:58px;
+
+    border-radius:17px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #FFD700,
+            #ff9d00
+        );
+
+    color:#111;
+
+    font-size:28px;
+
+    box-shadow:
+        0 10px 30px rgba(255,215,0,.2);
+
+    flex-shrink:0;
+}
+
+.level-info{
+    flex:1;
+    min-width:0;
+}
+
+.level-title{
+    font-size:17px;
+    font-weight:900;
+}
+
+.level-sub{
+    margin-top:4px;
+    color:#94a3b8;
+    font-size:10px;
+}
+
+.level-number{
+    color:#FFD700;
+    font-size:26px;
+    font-weight:900;
+}
+
+.xp-row{
+    position:relative;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-top:15px;
+    margin-bottom:7px;
+
+    font-size:10px;
+    color:#94a3b8;
+}
+
+.xp-value{
+    color:#fff;
+    font-weight:800;
+}
+
+.xp-progress{
+    width:100%;
+    height:9px;
+
+    background:#111827;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    border:1px solid rgba(255,255,255,.06);
+}
+
+.xp-bar{
+    width:0%;
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #FFD700,
+            #22c55e
+        );
+
+    border-radius:20px;
+
+    transition:width .5s ease;
+}
+
+/* =====================================================
+   STATS GRID
+===================================================== */
+
+.stats-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:10px;
+
+    margin-bottom:15px;
+}
+
+.stat-card{
+    padding:14px;
+
+    border-radius:17px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(25,40,70,.92),
+            rgba(5,11,24,.98)
+        );
+
+    border:1px solid rgba(255,255,255,.07);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.25);
+}
+
+.stat-icon{
+    font-size:20px;
+}
+
+.stat-label{
+    margin-top:8px;
+
+    color:#7f8da3;
+
+    font-size:9px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.6px;
+}
+
+.stat-value{
+    margin-top:3px;
+
+    font-size:19px;
+
+    font-weight:900;
+
+    color:#fff;
+}
+
+.stat-value.gold{
+    color:#FFD700;
+}
+
+.stat-value.green{
+    color:#4ade80;
+}
+
+.stat-value.orange{
+    color:#fb923c;
+}
+
+/* =====================================================
+   ACHIEVEMENTS
+===================================================== */
+
+.section-title{
+    margin:20px 2px 10px;
+
+    font-size:12px;
+
+    color:#94a3b8;
+
+    font-weight:800;
+
+    text-transform:uppercase;
+
+    letter-spacing:.7px;
+}
+
+.badges-scroll{
+    display:flex;
+
+    gap:9px;
+
+    overflow-x:auto;
+
+    padding:2px 1px 5px;
+
+    scrollbar-width:none;
+
+    margin-bottom:5px;
+}
+
+.badges-scroll::-webkit-scrollbar{
+    display:none;
+}
+
+.badge-card{
+    min-width:86px;
+
+    padding:11px 8px;
+
+    border-radius:15px;
+
+    text-align:center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(25,40,70,.95),
+            rgba(5,11,24,.98)
+        );
+
+    border:1px solid rgba(255,215,0,.16);
+
+    opacity:.55;
+
+    transition:.2s;
+}
+
+.badge-card.unlocked{
+    opacity:1;
+
+    border-color:
+        rgba(255,215,0,.38);
+
+    box-shadow:
+        0 8px 25px rgba(255,215,0,.08);
+}
+
+.badge-icon{
+    font-size:25px;
+}
+
+.badge-name{
+    margin-top:6px;
+
+    color:#d5dbea;
+
+    font-size:9px;
+
+    font-weight:800;
+}
+
+.badge-status{
+    margin-top:4px;
+
+    font-size:8px;
+
+    color:#64748b;
+}
+
+.badge-card.unlocked .badge-status{
+    color:#4ade80;
+}
+
+/* =====================================================
+   RECHARGE MISSION
+===================================================== */
 
 .recharge-card{
     position:relative;
+
     overflow:hidden;
 
     background:
@@ -71,9 +417,9 @@ body{
 
     border-radius:22px;
 
-    padding:20px;
+    padding:18px;
 
-    margin-bottom:18px;
+    margin-bottom:15px;
 
     box-shadow:
         0 15px 40px rgba(0,0,0,.4),
@@ -82,24 +428,31 @@ body{
 
 .recharge-top{
     display:flex;
+
     align-items:center;
-    gap:13px;
+
+    gap:12px;
 }
 
 .recharge-icon{
-    width:55px;
-    height:55px;
+    width:52px;
+    height:52px;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
     border-radius:16px;
 
     background:
-        linear-gradient(135deg,#22c55e,#16a34a);
+        linear-gradient(
+            135deg,
+            #22c55e,
+            #16a34a
+        );
 
-    font-size:28px;
+    font-size:26px;
 
     box-shadow:
         0 8px 25px rgba(34,197,94,.25);
@@ -108,87 +461,121 @@ body{
 }
 
 .recharge-title{
-    font-size:18px;
-    font-weight:800;
+    font-size:17px;
+    font-weight:900;
 }
 
 .recharge-sub{
     color:#94a3b8;
-    font-size:11px;
+    font-size:10px;
     margin-top:4px;
 }
 
 .recharge-info{
-    margin-top:17px;
+    margin-top:15px;
 
     display:flex;
+
     justify-content:space-between;
     align-items:center;
 
-    padding:14px;
+    padding:13px;
 
-    border-radius:15px;
+    border-radius:14px;
 
-    background:rgba(34,197,94,.08);
+    background:
+        rgba(34,197,94,.08);
 
-    border:1px solid rgba(34,197,94,.15);
+    border:1px solid
+        rgba(34,197,94,.15);
 }
 
 .recharge-label{
     color:#94a3b8;
-    font-size:11px;
+    font-size:9px;
 }
 
 .recharge-value{
     margin-top:3px;
+
     color:#fff;
-    font-size:20px;
-    font-weight:800;
+
+    font-size:19px;
+
+    font-weight:900;
 }
 
 .bonus-value{
     color:#4ade80;
-    font-size:20px;
-    font-weight:800;
+
+    font-size:19px;
+
+    font-weight:900;
 }
 
 .recharge-status{
-    margin-top:13px;
+    margin-top:11px;
 
-    padding:12px;
+    padding:11px;
 
     text-align:center;
 
-    border-radius:13px;
+    border-radius:12px;
 
     background:#111827;
 
     color:#94a3b8;
 
-    font-size:12px;
+    font-size:10px;
+}
+
+.recharge-status.success{
+    color:#4ade80;
+
+    background:
+        rgba(34,197,94,.08);
+
+    border:1px solid
+        rgba(34,197,94,.15);
+}
+
+.recharge-status.warning{
+    color:#fbbf24;
+
+    background:
+        rgba(251,191,36,.07);
+
+    border:1px solid
+        rgba(251,191,36,.14);
 }
 
 .claim-btn{
     width:100%;
 
-    margin-top:13px;
+    margin-top:11px;
 
-    height:46px;
+    height:44px;
 
     border:0;
 
-    border-radius:13px;
+    border-radius:12px;
 
     background:
-        linear-gradient(135deg,#22c55e,#16a34a);
+        linear-gradient(
+            135deg,
+            #22c55e,
+            #16a34a
+        );
 
     color:#001b09;
 
-    font-size:13px;
+    font-size:12px;
 
-    font-weight:800;
+    font-weight:900;
 
     cursor:pointer;
+
+    transition:.15s;
 }
 
 .claim-btn:active{
@@ -197,30 +584,13 @@ body{
 
 .claim-btn:disabled{
     opacity:.45;
+
     cursor:not-allowed;
 }
 
-.claimed{
-    color:#4ade80 !important;
-}
-
-/* SECTION */
-
-.section-title{
-    margin:22px 2px 12px;
-
-    font-size:13px;
-
-    color:#94a3b8;
-
-    font-weight:700;
-
-    text-transform:uppercase;
-
-    letter-spacing:.7px;
-}
-
-/* MISSION CARD */
+/* =====================================================
+   MISSION CARD
+===================================================== */
 
 .mission-card{
     position:relative;
@@ -234,13 +604,14 @@ body{
             rgba(5,11,24,.98)
         );
 
-    border:1px solid rgba(255,215,0,.25);
+    border:1px solid
+        rgba(255,215,0,.22);
 
     border-radius:22px;
 
-    padding:20px;
+    padding:18px;
 
-    margin-bottom:15px;
+    margin-bottom:13px;
 
     box-shadow:
         0 15px 40px rgba(0,0,0,.4),
@@ -249,69 +620,106 @@ body{
 
 .mission-card.locked{
     opacity:.55;
-    border-color:rgba(148,163,184,.15);
+
+    border-color:
+        rgba(148,163,184,.15);
 }
 
 .mission-card.completed{
-    border-color:rgba(34,197,94,.4);
+    border-color:
+        rgba(34,197,94,.4);
+}
+
+.mission-card.expired{
+    opacity:.55;
+
+    border-color:
+        rgba(239,68,68,.25);
 }
 
 .mission-head{
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
-    gap:10px;
+
+    gap:9px;
 }
 
 .mission-left{
     display:flex;
+
     align-items:center;
-    gap:12px;
+
+    gap:11px;
+
+    min-width:0;
 }
 
 .mission-icon{
-    width:52px;
-    height:52px;
+    width:50px;
+    height:50px;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
     border-radius:15px;
 
     background:
-        linear-gradient(135deg,#FFD700,#ff9d00);
+        linear-gradient(
+            135deg,
+            #FFD700,
+            #ff9d00
+        );
 
-    font-size:26px;
+    font-size:25px;
 
     flex-shrink:0;
 }
 
-.mission-card.locked .mission-icon{
+.mission-card.locked .mission-icon,
+.mission-card.expired .mission-icon{
     background:#1f2937;
 }
 
+.mission-card.completed .mission-icon{
+    background:
+        linear-gradient(
+            135deg,
+            #22c55e,
+            #15803d
+        );
+}
+
 .mission-name{
-    font-size:17px;
-    font-weight:800;
+    font-size:16px;
+
+    font-weight:900;
 }
 
 .mission-subtitle{
     color:#8d9bb0;
-    font-size:11px;
-    margin-top:4px;
+
+    font-size:10px;
+
+    margin-top:3px;
 }
 
 .lock-badge,
 .completed-badge,
-.available-badge{
-    padding:5px 9px;
+.available-badge,
+.expired-badge,
+.claim-badge{
+    padding:5px 8px;
 
     border-radius:20px;
 
-    font-size:9px;
+    font-size:8px;
 
-    font-weight:800;
+    font-weight:900;
 
     flex-shrink:0;
 }
@@ -327,6 +735,16 @@ body{
 }
 
 .completed-badge{
+    background:#22c55e18;
+    color:#4ade80;
+}
+
+.expired-badge{
+    background:#ef444418;
+    color:#f87171;
+}
+
+.claim-badge{
     background:#FFD70018;
     color:#FFD700;
 }
@@ -334,17 +752,19 @@ body{
 .mission-description{
     color:#aeb9cc;
 
-    font-size:13px;
+    font-size:11px;
 
     line-height:1.5;
 
-    margin-top:15px;
+    margin-top:13px;
 }
 
-/* REWARD */
+/* =====================================================
+   REWARD
+===================================================== */
 
 .reward{
-    margin-top:16px;
+    margin-top:13px;
 
     display:flex;
 
@@ -352,35 +772,49 @@ body{
 
     align-items:center;
 
-    padding:13px;
+    padding:12px;
 
-    background:rgba(255,215,0,.07);
+    background:
+        rgba(255,215,0,.07);
 
-    border:1px solid rgba(255,215,0,.18);
+    border:1px solid
+        rgba(255,215,0,.18);
 
-    border-radius:14px;
+    border-radius:13px;
 }
 
 .reward-label{
     color:#9da9bb;
 
-    font-size:10px;
+    font-size:9px;
 }
 
 .reward-value{
     color:#FFD700;
 
-    font-size:21px;
+    font-size:20px;
+
+    font-weight:900;
+
+    margin-top:2px;
+}
+
+.reward-xp{
+    color:#4ade80;
+
+    font-size:9px;
 
     font-weight:800;
 
     margin-top:2px;
 }
 
-/* COUNT */
+/* =====================================================
+   COUNT
+===================================================== */
 
 .count-box{
-    margin-top:16px;
+    margin-top:13px;
 }
 
 .count-row{
@@ -390,25 +824,25 @@ body{
 
     align-items:center;
 
-    margin-bottom:8px;
+    margin-bottom:7px;
 }
 
 .count-title{
-    font-size:12px;
+    font-size:10px;
 
     color:#c9d2e2;
 }
 
 .count{
-    font-size:14px;
+    font-size:12px;
 
-    font-weight:800;
+    font-weight:900;
 }
 
 .progress{
     width:100%;
 
-    height:10px;
+    height:9px;
 
     background:#111a2a;
 
@@ -416,7 +850,8 @@ body{
 
     overflow:hidden;
 
-    border:1px solid rgba(255,255,255,.06);
+    border:1px solid
+        rgba(255,255,255,.06);
 }
 
 .progress-bar{
@@ -425,51 +860,228 @@ body{
     height:100%;
 
     background:
-        linear-gradient(90deg,#22c55e,#FFD700);
+        linear-gradient(
+            90deg,
+            #22c55e,
+            #FFD700
+        );
 
     border-radius:20px;
 
-    transition:width .5s ease;
+    transition:
+        width .5s ease;
 }
 
-/* STATUS */
+/* =====================================================
+   STATUS
+===================================================== */
 
 .status{
-    margin-top:14px;
+    margin-top:11px;
 
-    padding:11px;
+    padding:10px;
 
-    border-radius:12px;
+    border-radius:11px;
 
     text-align:center;
 
-    background:rgba(34,197,94,.08);
+    background:
+        rgba(34,197,94,.08);
 
-    border:1px solid rgba(34,197,94,.15);
+    border:1px solid
+        rgba(34,197,94,.15);
 
     color:#86efac;
 
-    font-size:11px;
+    font-size:9px;
 }
 
 .status.completed{
-    background:rgba(255,215,0,.08);
+    background:
+        rgba(34,197,94,.08);
 
-    border-color:rgba(255,215,0,.25);
+    border-color:
+        rgba(34,197,94,.25);
 
-    color:#FFD700;
+    color:#4ade80;
 }
 
-/* LOADING */
+.status.locked{
+    background:
+        rgba(148,163,184,.06);
+
+    border-color:
+        rgba(148,163,184,.12);
+
+    color:#94a3b8;
+}
+
+.status.expired{
+    background:
+        rgba(239,68,68,.07);
+
+    border-color:
+        rgba(239,68,68,.15);
+
+    color:#f87171;
+}
+
+/* =====================================================
+   CLAIM BUTTON
+===================================================== */
+
+.mission-claim-btn{
+    width:100%;
+
+    height:42px;
+
+    margin-top:10px;
+
+    border:0;
+
+    border-radius:12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #FFD700,
+            #ff9d00
+        );
+
+    color:#171100;
+
+    font-size:11px;
+
+    font-weight:900;
+
+    cursor:pointer;
+}
+
+.mission-claim-btn:disabled{
+    opacity:.45;
+
+    cursor:not-allowed;
+}
+
+/* =====================================================
+   HISTORY
+===================================================== */
+
+.history-card{
+    padding:15px;
+
+    border-radius:18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(25,40,70,.9),
+            rgba(5,11,24,.98)
+        );
+
+    border:1px solid
+        rgba(255,255,255,.06);
+}
+
+.history-row{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    padding:10px 0;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.05);
+}
+
+.history-row:last-child{
+    border-bottom:0;
+}
+
+.history-left{
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    min-width:0;
+}
+
+.history-icon{
+    width:35px;
+    height:35px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:10px;
+
+    background:#111827;
+
+    font-size:17px;
+}
+
+.history-name{
+    font-size:10px;
+
+    font-weight:800;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+.history-date{
+    margin-top:3px;
+
+    color:#64748b;
+
+    font-size:8px;
+}
+
+.history-reward{
+    text-align:right;
+
+    color:#4ade80;
+
+    font-size:11px;
+
+    font-weight:900;
+
+    flex-shrink:0;
+}
+
+.history-empty{
+    text-align:center;
+
+    padding:20px 5px;
+
+    color:#64748b;
+
+    font-size:10px;
+}
+
+/* =====================================================
+   LOADING
+===================================================== */
 
 .loading{
     text-align:center;
 
-    padding:50px 20px;
+    padding:45px 20px;
 
     color:#64748b;
 
-    font-size:13px;
+    font-size:12px;
 }
 
 .spinner{
@@ -484,7 +1096,8 @@ body{
 
     border-radius:50%;
 
-    animation:spin .8s linear infinite;
+    animation:
+        spin .8s linear infinite;
 }
 
 @keyframes spin{
@@ -495,68 +1108,118 @@ body{
 
 }
 
-/* TOAST */
+/* =====================================================
+   ERROR
+===================================================== */
+
+.error-box{
+    padding:16px;
+
+    border-radius:15px;
+
+    background:
+        rgba(239,68,68,.07);
+
+    border:1px solid
+        rgba(239,68,68,.16);
+
+    color:#fca5a5;
+
+    text-align:center;
+
+    font-size:10px;
+}
+
+/* =====================================================
+   TOAST
+===================================================== */
 
 .toast{
     position:fixed;
 
     left:50%;
 
-    bottom:25px;
+    bottom:20px;
 
-    transform:translateX(-50%) translateY(100px);
+    transform:
+        translateX(-50%)
+        translateY(100px);
 
-    width:calc(100% - 40px);
+    width:
+        calc(100% - 32px);
 
     max-width:460px;
 
-    padding:13px 15px;
+    padding:12px 14px;
 
     border-radius:13px;
 
     background:#111827;
 
-    border:1px solid #ffffff15;
+    border:
+        1px solid #ffffff15;
 
-    box-shadow:0 10px 30px #0008;
+    box-shadow:
+        0 10px 30px #0008;
 
     text-align:center;
 
-    font-size:12px;
+    font-size:11px;
 
-    z-index:9999;
+    z-index:99999;
 
     transition:.3s;
 }
 
 .toast.show{
-    transform:translateX(-50%) translateY(0);
+    transform:
+        translateX(-50%)
+        translateY(0);
 }
 
 .toast.success{
     color:#4ade80;
 
-    border-color:#22c55e40;
+    border-color:
+        #22c55e40;
 }
 
 .toast.error{
     color:#f87171;
 
-    border-color:#ef444440;
+    border-color:
+        #ef444440;
 }
+
+.toast.warning{
+    color:#fbbf24;
+
+    border-color:
+        #f59e0b40;
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
 
 @media(max-width:380px){
 
     body{
-        padding:14px;
+        padding:13px;
     }
 
     .header h1{
         font-size:21px;
     }
 
-    .mission-card{
-        padding:17px;
+    .level-card,
+    .mission-card,
+    .recharge-card{
+        padding:16px;
+    }
+
+    .mission-name{
+        font-size:15px;
     }
 
 }
@@ -569,18 +1232,197 @@ body{
 
 <div class="container">
 
-    <!-- HEADER -->
+    <!-- =================================================
+         HEADER
+    ================================================= -->
 
     <div class="header">
 
-        <h1>🎯 Missions</h1>
+        <div class="header-top">
 
-        <p>Complete missions aur wallet rewards earn karo</p>
+            <div>
+
+                <h1>🎯 Missions</h1>
+
+                <p>
+                    Complete missions, earn XP & unlock rewards
+                </p>
+
+            </div>
+
+        </div>
 
     </div>
 
 
-    <!-- RECHARGE MISSION -->
+    <!-- =================================================
+         LEVEL / XP CARD
+    ================================================= -->
+
+    <div class="level-card">
+
+        <div class="level-top">
+
+            <div class="level-icon">
+                🏆
+            </div>
+
+            <div class="level-info">
+
+                <div class="level-title">
+                    Player Level
+                </div>
+
+                <div
+                    id="levelSubtitle"
+                    class="level-sub">
+                    Keep completing missions
+                </div>
+
+            </div>
+
+            <div
+                id="levelNumber"
+                class="level-number">
+                1
+            </div>
+
+        </div>
+
+
+        <div class="xp-row">
+
+            <span>
+                XP PROGRESS
+            </span>
+
+            <span
+                id="xpText"
+                class="xp-value">
+                0 / 100 XP
+            </span>
+
+        </div>
+
+
+        <div class="xp-progress">
+
+            <div
+                id="xpBar"
+                class="xp-bar">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         STATISTICS
+    ================================================= -->
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🎯
+            </div>
+
+            <div class="stat-label">
+                Completion
+            </div>
+
+            <div
+                id="completionPercent"
+                class="stat-value green">
+                0%
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                💰
+            </div>
+
+            <div class="stat-label">
+                Rewards Earned
+            </div>
+
+            <div
+                id="totalRewards"
+                class="stat-value gold">
+                ₹0
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🔥
+            </div>
+
+            <div class="stat-label">
+                Current Streak
+            </div>
+
+            <div
+                id="currentStreak"
+                class="stat-value orange">
+                0 days
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ⭐
+            </div>
+
+            <div class="stat-label">
+                Total XP
+            </div>
+
+            <div
+                id="totalXP"
+                class="stat-value">
+                0 XP
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         BADGES
+    ================================================= -->
+
+    <div class="section-title">
+        Achievements
+    </div>
+
+    <div
+        id="badgesContainer"
+        class="badges-scroll">
+    </div>
+
+
+    <!-- =================================================
+         FIRST RECHARGE
+    ================================================= -->
+
+    <div class="section-title">
+        Special Mission
+    </div>
+
 
     <div class="recharge-card">
 
@@ -597,7 +1439,7 @@ body{
                 </div>
 
                 <div class="recharge-sub">
-                    First ₹100 wallet recharge complete karo
+                    First ₹100 successful recharge complete karo
                 </div>
 
             </div>
@@ -627,7 +1469,7 @@ body{
                 </div>
 
                 <div class="bonus-value">
-                    10%
+                    ₹10
                 </div>
 
             </div>
@@ -656,12 +1498,14 @@ body{
     </div>
 
 
+    <!-- =================================================
+         MATCH MISSIONS
+    ================================================= -->
+
     <div class="section-title">
         Match Missions
     </div>
 
-
-    <!-- MISSION LIST -->
 
     <div id="missionList">
 
@@ -675,8 +1519,34 @@ body{
 
     </div>
 
+
+    <!-- =================================================
+         REWARD HISTORY
+    ================================================= -->
+
+    <div class="section-title">
+        Mission Reward History
+    </div>
+
+
+    <div class="history-card">
+
+        <div id="historyList">
+
+            <div class="history-empty">
+                Loading reward history...
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
 
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
 
 <div
     id="toast"
@@ -686,9 +1556,16 @@ body{
 
 <script type="module">
 
-import { initializeApp }
+/* =====================================================
+   FIREBASE IMPORTS
+===================================================== */
+
+import {
+    initializeApp
+}
 from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
 
 import {
     getAuth,
@@ -697,11 +1574,14 @@ import {
 from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
+
 import {
     getDatabase,
     ref,
     onValue,
-    update
+    get,
+    push,
+    set
 }
 from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
@@ -756,46 +1636,177 @@ const db =
 ===================================================== */
 
 const missionList =
-    document.getElementById("missionList");
+    document.getElementById(
+        "missionList"
+    );
+
+const historyList =
+    document.getElementById(
+        "historyList"
+    );
+
+const badgesContainer =
+    document.getElementById(
+        "badgesContainer"
+    );
 
 const rechargeStatus =
-    document.getElementById("rechargeStatus");
+    document.getElementById(
+        "rechargeStatus"
+    );
 
 const rechargeClaimBtn =
-    document.getElementById("rechargeClaimBtn");
+    document.getElementById(
+        "rechargeClaimBtn"
+    );
+
+const levelNumber =
+    document.getElementById(
+        "levelNumber"
+    );
+
+const levelSubtitle =
+    document.getElementById(
+        "levelSubtitle"
+    );
+
+const xpText =
+    document.getElementById(
+        "xpText"
+    );
+
+const xpBar =
+    document.getElementById(
+        "xpBar"
+    );
+
+const completionPercent =
+    document.getElementById(
+        "completionPercent"
+    );
+
+const totalRewards =
+    document.getElementById(
+        "totalRewards"
+    );
+
+const currentStreak =
+    document.getElementById(
+        "currentStreak"
+    );
+
+const totalXP =
+    document.getElementById(
+        "totalXP"
+    );
 
 const toast =
-    document.getElementById("toast");
+    document.getElementById(
+        "toast"
+    );
 
 
 /* =====================================================
-   MISSION CONFIG
+   DEFAULT MISSIONS
+   Admin Firebase config can override these.
 ===================================================== */
 
-const missions = [
+const defaultMissions = [
 
     {
         id:"mission1",
         number:1,
+        title:"First Warrior",
+        subtitle:"100 Matches",
         target:100,
         reward:50,
-        icon:"🎯"
+        xp:100,
+        icon:"🎯",
+        type:"matches",
+        enabled:true
     },
 
     {
         id:"mission2",
         number:2,
+        title:"Battle Grinder",
+        subtitle:"200 Matches",
         target:200,
         reward:150,
-        icon:"🔥"
+        xp:250,
+        icon:"🔥",
+        type:"matches",
+        enabled:true
     },
 
     {
         id:"mission3",
         number:3,
+        title:"Tournament King",
+        subtitle:"500 Matches",
         target:500,
         reward:500,
-        icon:"👑"
+        xp:700,
+        icon:"👑",
+        type:"matches",
+        enabled:true
+    }
+
+];
+
+
+/* =====================================================
+   BADGES
+===================================================== */
+
+const defaultBadges = [
+
+    {
+        id:"starter",
+        name:"Starter",
+        icon:"🎮",
+        requirement:1,
+        type:"completed"
+    },
+
+    {
+        id:"warrior",
+        name:"Warrior",
+        icon:"⚔️",
+        requirement:100,
+        type:"matches"
+    },
+
+    {
+        id:"grinder",
+        name:"Grinder",
+        icon:"🔥",
+        requirement:200,
+        type:"matches"
+    },
+
+    {
+        id:"champion",
+        name:"Champion",
+        icon:"🏆",
+        requirement:500,
+        type:"matches"
+    },
+
+    {
+        id:"rich",
+        name:"Reward Hunter",
+        icon:"💰",
+        requirement:500,
+        type:"rewards"
+    },
+
+    {
+        id:"legend",
+        name:"Legend",
+        icon:"👑",
+        requirement:10,
+        type:"level"
     }
 
 ];
@@ -809,28 +1820,60 @@ let currentUser = null;
 
 let userData = {};
 
+let missions = [];
+
+let badges = [];
+
+let matchCount = 0;
+
 let walletBalance = 0;
+
+let totalRewardEarned = 0;
+
+let userXP = 0;
+
+let currentLevel = 1;
+
+let currentStreakValue = 0;
+
+let rewardHistory = {};
+
+let pendingClaims = {};
+
+let userListenerStarted = false;
+
+let configListenerStarted = false;
 
 
 /* =====================================================
    AUTH
 ===================================================== */
 
-onAuthStateChanged(auth,(user)=>{
+onAuthStateChanged(
+    auth,
+    async(user)=>{
 
-    if(!user){
+        if(!user){
 
-        location.replace("index.html");
+            location.replace(
+                "index.html"
+            );
 
-        return;
+            return;
+
+        }
+
+
+        currentUser = user;
+
+        loadMissionConfig();
+
+        loadUser(user.uid);
+
+        loadRewardHistory(user.uid);
 
     }
-
-    currentUser = user;
-
-    loadUser(user.uid);
-
-});
+);
 
 
 /* =====================================================
@@ -838,6 +1881,12 @@ onAuthStateChanged(auth,(user)=>{
 ===================================================== */
 
 function loadUser(uid){
+
+    if(userListenerStarted)
+        return;
+
+    userListenerStarted = true;
+
 
     const userRef =
         ref(
@@ -856,11 +1905,19 @@ function loadUser(uid){
 
                 userData = {};
 
+                matchCount = 0;
+
                 walletBalance = 0;
 
-                renderMissions(0);
+                totalRewardEarned = 0;
 
-                updateRechargeMission(0);
+                userXP = 0;
+
+                currentStreakValue = 0;
+
+                pendingClaims = {};
+
+                renderAll();
 
                 return;
 
@@ -871,27 +1928,49 @@ function loadUser(uid){
                 snapshot.val() || {};
 
 
-            walletBalance =
-                getWalletBalance(userData);
-
-
-            let matchCount =
-                Number(
-                    userData.missionMatches || 0
+            matchCount =
+                safeNumber(
+                    userData.missionMatches ??
+                    userData.matchesJoined ??
+                    0
                 );
 
 
-            if(!Number.isFinite(matchCount))
-                matchCount = 0;
+            walletBalance =
+                getWalletBalance(
+                    userData
+                );
 
 
-            if(matchCount < 0)
-                matchCount = 0;
+            totalRewardEarned =
+                safeNumber(
+                    userData.totalMissionRewards ??
+                    userData.missionRewardsEarned ??
+                    0
+                );
 
 
-            renderMissions(matchCount);
+            userXP =
+                safeNumber(
+                    userData.missionXP ??
+                    userData.xp ??
+                    0
+                );
 
-            updateRechargeMission(walletBalance);
+
+            currentStreakValue =
+                safeNumber(
+                    userData.missionStreak ??
+                    userData.currentStreak ??
+                    0
+                );
+
+
+            pendingClaims =
+                userData.missionClaims || {};
+
+
+            renderAll();
 
         },
 
@@ -903,12 +1982,335 @@ function loadUser(uid){
             );
 
             showToast(
-                "Unable to load mission data.",
+                "Mission data load nahi ho paaya.",
                 "error"
             );
 
         }
 
+    );
+
+}
+
+
+/* =====================================================
+   LOAD ADMIN MISSION CONFIG
+===================================================== */
+
+function loadMissionConfig(){
+
+    if(configListenerStarted)
+        return;
+
+    configListenerStarted = true;
+
+
+    const configRef =
+        ref(
+            db,
+            "missionConfig"
+        );
+
+
+    onValue(
+
+        configRef,
+
+        (snapshot)=>{
+
+            if(
+                snapshot.exists()
+            ){
+
+                const data =
+                    snapshot.val() || {};
+
+
+                if(
+                    data.enabled === false
+                ){
+
+                    missions = [];
+
+                }
+                else{
+
+                    missions =
+                        normalizeMissions(
+                            data.missions
+                        );
+
+                }
+
+
+                badges =
+                    normalizeBadges(
+                        data.badges
+                    );
+
+            }
+            else{
+
+                missions =
+                    defaultMissions.map(
+                        item=>({...item})
+                    );
+
+                badges =
+                    defaultBadges.map(
+                        item=>({...item})
+                    );
+
+            }
+
+
+            renderAll();
+
+        },
+
+        (error)=>{
+
+            console.warn(
+                "Mission config read failed:",
+                error
+            );
+
+
+            missions =
+                defaultMissions.map(
+                    item=>({...item})
+                );
+
+
+            badges =
+                defaultBadges.map(
+                    item=>({...item})
+                );
+
+
+            renderAll();
+
+        }
+
+    );
+
+}
+
+
+/* =====================================================
+   NORMALIZE MISSIONS
+===================================================== */
+
+function normalizeMissions(data){
+
+    if(!data)
+        return defaultMissions.map(
+            item=>({...item})
+        );
+
+
+    let output = [];
+
+
+    if(Array.isArray(data)){
+
+        output = data;
+
+    }
+    else{
+
+        output =
+            Object.entries(data)
+            .map(
+                ([id,value])=>({
+
+                    id:id,
+
+                    ...(value || {})
+
+                })
+            );
+
+    }
+
+
+    output =
+        output
+        .filter(
+            mission =>
+                mission &&
+                mission.enabled !== false
+        )
+        .map(
+            (mission,index)=>({
+
+                id:
+                    mission.id ||
+                    "mission" + (index + 1),
+
+                number:
+                    safeNumber(
+                        mission.number ||
+                        index + 1
+                    ),
+
+                title:
+                    mission.title ||
+                    "Mission " + (index + 1),
+
+                subtitle:
+                    mission.subtitle ||
+                    (
+                        safeNumber(
+                            mission.target
+                        ) +
+                        " Matches"
+                    ),
+
+                target:
+                    safeNumber(
+                        mission.target
+                    ),
+
+                reward:
+                    safeNumber(
+                        mission.reward
+                    ),
+
+                xp:
+                    safeNumber(
+                        mission.xp
+                    ),
+
+                icon:
+                    mission.icon ||
+                    "🎯",
+
+                type:
+                    mission.type ||
+                    "matches",
+
+                enabled:
+                    mission.enabled !== false,
+
+                expiresAt:
+                    mission.expiresAt ||
+                    0,
+
+                startAt:
+                    mission.startAt ||
+                    0,
+
+                period:
+                    mission.period ||
+                    "lifetime"
+
+            })
+        )
+        .filter(
+            mission =>
+                mission.target > 0
+        );
+
+
+    if(!output.length){
+
+        return defaultMissions.map(
+            item=>({...item})
+        );
+
+    }
+
+
+    return output;
+
+}
+
+
+/* =====================================================
+   NORMALIZE BADGES
+===================================================== */
+
+function normalizeBadges(data){
+
+    if(!data)
+        return defaultBadges.map(
+            item=>({...item})
+        );
+
+
+    let output = [];
+
+
+    if(Array.isArray(data)){
+
+        output = data;
+
+    }
+    else{
+
+        output =
+            Object.entries(data)
+            .map(
+                ([id,value])=>({
+
+                    id:id,
+
+                    ...(value || {})
+
+                })
+            );
+
+    }
+
+
+    return output.map(
+        (badge,index)=>({
+
+            id:
+                badge.id ||
+                "badge" + index,
+
+            name:
+                badge.name ||
+                "Achievement",
+
+            icon:
+                badge.icon ||
+                "🏆",
+
+            requirement:
+                safeNumber(
+                    badge.requirement
+                ),
+
+            type:
+                badge.type ||
+                "completed"
+
+        })
+    );
+
+}
+
+
+/* =====================================================
+   SAFE NUMBER
+===================================================== */
+
+function safeNumber(value){
+
+    const n =
+        Number(value);
+
+
+    if(!Number.isFinite(n))
+        return 0;
+
+
+    return Math.max(
+        0,
+        n
     );
 
 }
@@ -929,23 +2331,19 @@ function getWalletBalance(data){
     ){
 
         balance =
-            Number(
-                data.wallet.balance ?? 0
+            safeNumber(
+                data.wallet.balance
             );
 
     }
     else{
 
         balance =
-            Number(
-                data.wallet ?? 0
+            safeNumber(
+                data.wallet
             );
 
     }
-
-
-    if(!Number.isFinite(balance))
-        balance = 0;
 
 
     return balance;
@@ -954,266 +2352,1635 @@ function getWalletBalance(data){
 
 
 /* =====================================================
-   RENDER MISSIONS
+   RENDER ALL
 ===================================================== */
 
-function renderMissions(matchCount){
+function renderAll(){
 
-    missionList.innerHTML = "";
+    renderLevel();
 
+    renderStats();
 
-    missions.forEach((mission,index)=>{
+    renderBadges();
 
-        const previous =
-            index === 0
-            ? true
-            : matchCount >=
-              missions[index - 1].target;
+    renderRechargeMission();
 
+    renderMissions();
 
-        const completed =
-            matchCount >= mission.target;
-
-
-        const locked =
-            !previous;
-
-
-        const card =
-            document.createElement("div");
-
-
-        card.className =
-            "mission-card" +
-            (locked ? " locked" : "") +
-            (completed ? " completed" : "");
-
-
-        let badgeHTML = "";
-
-
-        if(completed){
-
-            badgeHTML =
-                `<div class="completed-badge">
-                    ✓ COMPLETED
-                 </div>`;
-
-        }
-        else if(locked){
-
-            badgeHTML =
-                `<div class="lock-badge">
-                    🔒 LOCKED
-                 </div>`;
-
-        }
-        else{
-
-            badgeHTML =
-                `<div class="available-badge">
-                    ● ACTIVE
-                 </div>`;
-
-        }
-
-
-        let progress =
-            (matchCount / mission.target) * 100;
-
-
-        if(progress > 100)
-            progress = 100;
-
-
-        if(progress < 0)
-            progress = 0;
-
-
-        let visibleCount =
-            Math.min(
-                matchCount,
-                mission.target
-            );
-
-
-        card.innerHTML = `
-
-            <div class="mission-head">
-
-                <div class="mission-left">
-
-                    <div class="mission-icon">
-                        ${locked ? "🔒" : mission.icon}
-                    </div>
-
-                    <div>
-
-                        <div class="mission-name">
-                            Mission ${mission.number}
-                        </div>
-
-                        <div class="mission-subtitle">
-                            ${mission.target} Matches
-                        </div>
-
-                    </div>
-
-                </div>
-
-                ${badgeHTML}
-
-            </div>
-
-
-            <div class="mission-description">
-
-                ${
-                    locked
-                    ? "Previous mission complete hone ke baad ye mission unlock hoga."
-                    : completed
-                    ? "Mission successfully completed. Reward claim ho chuka hai ya claim ke liye ready hai."
-                    : `${mission.target} matches join karo aur ₹${mission.reward} wallet reward pao.`
-                }
-
-            </div>
-
-
-            <div class="reward">
-
-                <div>
-
-                    <div class="reward-label">
-                        WALLET REWARD
-                    </div>
-
-                    <div class="reward-value">
-                        ₹${mission.reward}
-                    </div>
-
-                </div>
-
-                <div style="font-size:26px;">
-                    🎁
-                </div>
-
-            </div>
-
-
-            <div class="count-box">
-
-                <div class="count-row">
-
-                    <div class="count-title">
-                        Matches Joined
-                    </div>
-
-                    <div class="count">
-                        ${visibleCount}/${mission.target}
-                    </div>
-
-                </div>
-
-
-                <div class="progress">
-
-                    <div
-                        class="progress-bar"
-                        style="width:${progress}%">
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="status ${
-                completed ? "completed" : ""
-            }">
-
-                ${
-                    completed
-                    ? "🎉 Mission Completed — Reward Ready"
-                    : locked
-                    ? "🔒 Complete previous mission to unlock"
-                    : `🔥 ${mission.target - matchCount} more match join karo`
-                }
-
-            </div>
-
-        `;
-
-
-        missionList.appendChild(card);
-
-    });
+    renderRewardHistory();
 
 }
 
 
 /* =====================================================
-   RECHARGE MISSION
+   LEVEL SYSTEM
 ===================================================== */
 
-function updateRechargeMission(balance){
+function calculateLevel(xp){
+
+    /*
+       Level formula:
+
+       Level 1 = 0 XP
+       Level 2 = 100 XP
+       Level 3 = 250 XP
+       etc.
+
+       Maximum Level = 10
+    */
+
+
+    let level = 1;
+
+    let remainingXP = xp;
+
+    let required = 100;
+
+
+    while(
+        level < 10 &&
+        remainingXP >= required
+    ){
+
+        remainingXP -= required;
+
+        level++;
+
+        required =
+            100 + (
+                (level - 1) * 50
+            );
+
+    }
+
+
+    return {
+
+        level:level,
+
+        progressXP:
+            remainingXP,
+
+        requiredXP:
+            required
+
+    };
+
+}
+
+
+/* =====================================================
+   RENDER LEVEL
+===================================================== */
+
+function renderLevel(){
+
+    const levelData =
+        calculateLevel(
+            userXP
+        );
+
+
+    currentLevel =
+        levelData.level;
+
+
+    levelNumber.innerText =
+        currentLevel;
+
+
+    if(currentLevel >= 10){
+
+        levelSubtitle.innerText =
+            "👑 Maximum Level Reached";
+
+        xpText.innerText =
+            userXP + " XP — MAX";
+
+        xpBar.style.width =
+            "100%";
+
+        return;
+
+    }
+
+
+    levelSubtitle.innerText =
+        "Level " +
+        currentLevel +
+        " • Keep completing missions";
+
+
+    xpText.innerText =
+        levelData.progressXP +
+        " / " +
+        levelData.requiredXP +
+        " XP";
+
+
+    const percentage =
+        (
+            levelData.progressXP /
+            levelData.requiredXP
+        ) * 100;
+
+
+    xpBar.style.width =
+        Math.min(
+            100,
+            percentage
+        ) + "%";
+
+}
+
+
+/* =====================================================
+   RENDER STATISTICS
+===================================================== */
+
+function renderStats(){
+
+    const totalMissions =
+        missions.length;
+
+
+    let completed =
+        0;
+
+
+    missions.forEach(
+        mission=>{
+
+            if(
+                getMissionProgress(
+                    mission
+                ) >=
+                mission.target
+            ){
+
+                completed++;
+
+            }
+
+        }
+    );
+
+
+    const percentage =
+        totalMissions === 0
+        ? 0
+        : (
+            completed /
+            totalMissions
+        ) * 100;
+
+
+    completionPercent.innerText =
+        Math.round(
+            percentage
+        ) + "%";
+
+
+    totalRewards.innerText =
+        "₹" +
+        formatNumber(
+            totalRewardEarned
+        );
+
+
+    currentStreak.innerText =
+        currentStreakValue +
+        (
+            currentStreakValue === 1
+            ? " day"
+            : " days"
+        );
+
+
+    totalXP.innerText =
+        formatNumber(
+            userXP
+        ) +
+        " XP";
+
+}
+
+
+/* =====================================================
+   BADGE SYSTEM
+===================================================== */
+
+function isBadgeUnlocked(badge){
+
+    const requirement =
+        safeNumber(
+            badge.requirement
+        );
+
+
+    if(
+        badge.type ===
+        "completed"
+    ){
+
+        return getCompletedMissionCount()
+            >= requirement;
+
+    }
+
+
+    if(
+        badge.type ===
+        "matches"
+    ){
+
+        return matchCount >=
+            requirement;
+
+    }
+
+
+    if(
+        badge.type ===
+        "rewards"
+    ){
+
+        return totalRewardEarned >=
+            requirement;
+
+    }
+
+
+    if(
+        badge.type ===
+        "level"
+    ){
+
+        return currentLevel >=
+            requirement;
+
+    }
+
+
+    if(
+        badge.type ===
+        "xp"
+    ){
+
+        return userXP >=
+            requirement;
+
+    }
+
+
+    if(
+        badge.type ===
+        "streak"
+    ){
+
+        return currentStreakValue >=
+            requirement;
+
+    }
+
+
+    return false;
+
+}
+
+
+/* =====================================================
+   RENDER BADGES
+===================================================== */
+
+function renderBadges(){
+
+    badgesContainer.innerHTML = "";
+
+
+    if(!badges.length){
+
+        badgesContainer.innerHTML =
+            `<div class="badge-card">
+                🏆
+                <div class="badge-name">
+                    No Badges
+                </div>
+             </div>`;
+
+        return;
+
+    }
+
+
+    badges.forEach(
+        badge=>{
+
+            const unlocked =
+                isBadgeUnlocked(
+                    badge
+                );
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "badge-card" +
+                (
+                    unlocked
+                    ? " unlocked"
+                    : ""
+                );
+
+
+            card.innerHTML = `
+
+                <div class="badge-icon">
+                    ${
+                        unlocked
+                        ? badge.icon
+                        : "🔒"
+                    }
+                </div>
+
+                <div class="badge-name">
+                    ${escapeHTML(
+                        badge.name
+                    )}
+                </div>
+
+                <div class="badge-status">
+
+                    ${
+                        unlocked
+                        ? "✓ UNLOCKED"
+                        : "LOCKED"
+                    }
+
+                </div>
+
+            `;
+
+
+            badgesContainer.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   COMPLETED MISSION COUNT
+===================================================== */
+
+function getCompletedMissionCount(){
+
+    let count = 0;
+
+
+    missions.forEach(
+        mission=>{
+
+            if(
+                getMissionProgress(
+                    mission
+                ) >=
+                mission.target
+            ){
+
+                count++;
+
+            }
+
+        }
+    );
+
+
+    return count;
+
+}
+
+
+/* =====================================================
+   MISSION PROGRESS
+===================================================== */
+
+function getMissionProgress(
+    mission
+){
+
+    if(
+        mission.type ===
+        "matches"
+    ){
+
+        return matchCount;
+
+    }
+
+
+    if(
+        mission.type ===
+        "recharge"
+    ){
+
+        return safeNumber(
+            userData.totalRecharge ??
+            userData.totalRecharged ??
+            userData.rechargeAmount ??
+            0
+        );
+
+    }
+
+
+    if(
+        mission.type ===
+        "xp"
+    ){
+
+        return userXP;
+
+    }
+
+
+    if(
+        mission.type ===
+        "rewards"
+    ){
+
+        return totalRewardEarned;
+
+    }
+
+
+    if(
+        mission.type ===
+        "streak"
+    ){
+
+        return currentStreakValue;
+
+    }
+
+
+    return 0;
+
+}
+
+
+/* =====================================================
+   MISSION COMPLETED CHECK
+===================================================== */
+
+function isMissionCompleted(
+    mission
+){
+
+    return (
+        getMissionProgress(
+            mission
+        ) >=
+        mission.target
+    );
+
+}
+
+
+/* =====================================================
+   MISSION LOCK CHECK
+===================================================== */
+
+function isMissionLocked(
+    mission,
+    index
+){
+
+    if(index === 0)
+        return false;
+
+
+    const previous =
+        missions[index - 1];
+
+
+    return !isMissionCompleted(
+        previous
+    );
+
+}
+
+
+/* =====================================================
+   MISSION EXPIRED
+===================================================== */
+
+function isMissionExpired(
+    mission
+){
+
+    if(!mission.expiresAt)
+        return false;
+
+
+    return (
+        Date.now() >
+        Number(
+            mission.expiresAt
+        )
+    );
+
+}
+
+
+/* =====================================================
+   MISSION STARTED
+===================================================== */
+
+function isMissionNotStarted(
+    mission
+){
+
+    if(!mission.startAt)
+        return false;
+
+
+    return (
+        Date.now() <
+        Number(
+            mission.startAt
+        )
+    );
+
+}
+
+
+/* =====================================================
+   RENDER MISSIONS
+===================================================== */
+
+function renderMissions(){
+
+    missionList.innerHTML = "";
+
+
+    if(!missions.length){
+
+        missionList.innerHTML = `
+
+            <div class="error-box">
+
+                🚫 Missions currently unavailable.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    missions.forEach(
+        (mission,index)=>{
+
+            const completed =
+                isMissionCompleted(
+                    mission
+                );
+
+
+            const locked =
+                isMissionLocked(
+                    mission,
+                    index
+                );
+
+
+            const expired =
+                isMissionExpired(
+                    mission
+                );
+
+
+            const notStarted =
+                isMissionNotStarted(
+                    mission
+                );
+
+
+            const progress =
+                getMissionProgress(
+                    mission
+                );
+
+
+            const visibleCount =
+                Math.min(
+                    progress,
+                    mission.target
+                );
+
+
+            let percentage =
+                (
+                    progress /
+                    mission.target
+                ) * 100;
+
+
+            percentage =
+                Math.max(
+                    0,
+                    Math.min(
+                        100,
+                        percentage
+                    )
+                );
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            let classes =
+                "mission-card";
+
+
+            if(locked)
+                classes += " locked";
+
+
+            if(completed)
+                classes += " completed";
+
+
+            if(expired)
+                classes += " expired";
+
+
+            card.className =
+                classes;
+
+
+            let badgeHTML = "";
+
+
+            if(expired){
+
+                badgeHTML =
+                    `<div class="expired-badge">
+                        EXPIRED
+                     </div>`;
+
+            }
+            else if(completed){
+
+                if(
+                    isClaimPending(
+                        mission.id
+                    )
+                ){
+
+                    badgeHTML =
+                        `<div class="claim-badge">
+                            CLAIMING
+                         </div>`;
+
+                }
+                else if(
+                    isMissionClaimed(
+                        mission.id
+                    )
+                ){
+
+                    badgeHTML =
+                        `<div class="completed-badge">
+                            ✓ CLAIMED
+                         </div>`;
+
+                }
+                else{
+
+                    badgeHTML =
+                        `<div class="claim-badge">
+                            🎁 CLAIM
+                         </div>`;
+
+                }
+
+            }
+            else if(locked){
+
+                badgeHTML =
+                    `<div class="lock-badge">
+                        🔒 LOCKED
+                     </div>`;
+
+            }
+            else{
+
+                badgeHTML =
+                    `<div class="available-badge">
+                        ● ACTIVE
+                     </div>`;
+
+            }
+
+
+            let description = "";
+
+
+            if(expired){
+
+                description =
+                    "This mission has expired.";
+
+            }
+            else if(notStarted){
+
+                description =
+                    "This mission will become available soon.";
+
+            }
+            else if(locked){
+
+                description =
+                    "Previous mission complete hone ke baad ye mission unlock hoga.";
+
+            }
+            else if(completed){
+
+                description =
+                    "Mission successfully completed. Reward claim status neeche check karein.";
+
+            }
+            else{
+
+                description =
+                    getMissionDescription(
+                        mission,
+                        progress
+                    );
+
+            }
+
+
+            card.innerHTML = `
+
+                <div class="mission-head">
+
+                    <div class="mission-left">
+
+                        <div class="mission-icon">
+
+                            ${
+                                locked
+                                ? "🔒"
+                                : expired
+                                ? "⌛"
+                                : completed
+                                ? "✓"
+                                : mission.icon
+                            }
+
+                        </div>
+
+                        <div>
+
+                            <div class="mission-name">
+
+                                ${escapeHTML(
+                                    mission.title
+                                )}
+
+                            </div>
+
+                            <div class="mission-subtitle">
+
+                                ${escapeHTML(
+                                    mission.subtitle
+                                )}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    ${badgeHTML}
+
+                </div>
+
+
+                <div class="mission-description">
+
+                    ${escapeHTML(
+                        description
+                    )}
+
+                </div>
+
+
+                <div class="reward">
+
+                    <div>
+
+                        <div class="reward-label">
+                            WALLET REWARD
+                        </div>
+
+                        <div class="reward-value">
+
+                            ₹${formatNumber(
+                                mission.reward
+                            )}
+
+                        </div>
+
+                        <div class="reward-xp">
+
+                            +${formatNumber(
+                                mission.xp
+                            )} XP
+
+                        </div>
+
+                    </div>
+
+                    <div style="font-size:25px;">
+                        🎁
+                    </div>
+
+                </div>
+
+
+                <div class="count-box">
+
+                    <div class="count-row">
+
+                        <div class="count-title">
+
+                            Progress
+
+                        </div>
+
+                        <div class="count">
+
+                            ${formatNumber(
+                                visibleCount
+                            )}
+                            /
+                            ${formatNumber(
+                                mission.target
+                            )}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="progress">
+
+                        <div
+                            class="progress-bar"
+                            style="
+                                width:${percentage}%
+                            ">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="
+                    status
+                    ${
+                        completed
+                        ? "completed"
+                        : locked
+                        ? "locked"
+                        : expired
+                        ? "expired"
+                        : ""
+                    }
+                ">
+
+                    ${
+                        expired
+                        ? "⌛ Mission Expired"
+                        : notStarted
+                        ? "⏳ Mission Not Started"
+                        : completed
+                        ? "🎉 Mission Completed — Reward Ready"
+                        : locked
+                        ? "🔒 Complete previous mission to unlock"
+                        : getMissionStatus(
+                            mission,
+                            progress
+                        )
+                    }
+
+                </div>
+
+
+                ${
+                    completed &&
+                    !expired &&
+                    !isMissionClaimed(
+                        mission.id
+                    )
+                    ? `
+
+                        <button
+                            class="mission-claim-btn"
+                            data-mission-id="
+                                ${escapeHTML(
+                                    mission.id
+                                )}
+                            "
+                            ${
+                                isClaimPending(
+                                    mission.id
+                                )
+                                ? "disabled"
+                                : ""
+                            }
+                        >
+
+                            ${
+                                isClaimPending(
+                                    mission.id
+                                )
+                                ? "⏳ Claim Request Pending..."
+                                : "🎁 Claim ₹" +
+                                  formatNumber(
+                                      mission.reward
+                                  ) +
+                                  " Reward"
+                            }
+
+                        </button>
+
+                    `
+                    : ""
+                }
+
+            `;
+
+
+            missionList.appendChild(
+                card
+            );
+
+        }
+    );
+
+
+    bindMissionClaimButtons();
+
+}
+
+
+/* =====================================================
+   MISSION DESCRIPTION
+===================================================== */
+
+function getMissionDescription(
+    mission,
+    progress
+){
+
+    const remaining =
+        Math.max(
+            0,
+            mission.target -
+            progress
+        );
+
+
+    if(
+        mission.type ===
+        "matches"
+    ){
+
+        return (
+            mission.target +
+            " matches join karo aur ₹" +
+            mission.reward +
+            " wallet reward + " +
+            mission.xp +
+            " XP pao."
+        );
+
+    }
+
+
+    if(
+        mission.type ===
+        "recharge"
+    ){
+
+        return (
+            "₹" +
+            mission.target +
+            " successful recharge complete karo."
+        );
+
+    }
+
+
+    if(
+        mission.type ===
+        "streak"
+    ){
+
+        return (
+            mission.target +
+            " days streak maintain karo."
+        );
+
+    }
+
+
+    return (
+        mission.target +
+        " target complete karo."
+    );
+
+}
+
+
+/* =====================================================
+   MISSION STATUS
+===================================================== */
+
+function getMissionStatus(
+    mission,
+    progress
+){
+
+    const remaining =
+        Math.max(
+            0,
+            mission.target -
+            progress
+        );
+
+
+    if(
+        mission.type ===
+        "matches"
+    ){
+
+        return (
+            "🔥 " +
+            formatNumber(
+                remaining
+            ) +
+            " more match join karo"
+        );
+
+    }
+
+
+    if(
+        mission.type ===
+        "recharge"
+    ){
+
+        return (
+            "💳 ₹" +
+            formatNumber(
+                remaining
+            ) +
+            " recharge remaining"
+        );
+
+    }
+
+
+    return (
+        "🔥 " +
+        formatNumber(
+            remaining
+        ) +
+        " remaining"
+    );
+
+}
+
+
+/* =====================================================
+   CLAIM BUTTON EVENTS
+===================================================== */
+
+function bindMissionClaimButtons(){
+
+    const buttons =
+        document.querySelectorAll(
+            ".mission-claim-btn"
+        );
+
+
+    buttons.forEach(
+        button=>{
+
+            button.addEventListener(
+                "click",
+                ()=>{
+
+                    const missionId =
+                        button.dataset.missionId;
+
+
+                    claimMission(
+                        missionId,
+                        button
+                    );
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   CLAIM STATUS
+===================================================== */
+
+function isMissionClaimed(
+    missionId
+){
+
+    const claim =
+        pendingClaims &&
+        pendingClaims[missionId];
+
+
+    if(!claim)
+        return false;
+
+
+    return (
+        claim.status ===
+        "approved"
+        ||
+        claim.status ===
+        "completed"
+        ||
+        claim.claimed === true
+    );
+
+}
+
+
+/* =====================================================
+   CLAIM PENDING
+===================================================== */
+
+function isClaimPending(
+    missionId
+){
+
+    const claim =
+        pendingClaims &&
+        pendingClaims[missionId];
+
+
+    if(!claim)
+        return false;
+
+
+    return (
+        claim.status ===
+        "pending"
+        ||
+        claim.status ===
+        "processing"
+    );
+
+}
+
+
+/* =====================================================
+   SECURE MISSION CLAIM
+===================================================== */
+
+async function claimMission(
+    missionId,
+    button
+){
+
+    if(!currentUser){
+
+        showToast(
+            "Login required.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const mission =
+        missions.find(
+            item =>
+                item.id ===
+                missionId
+        );
+
+
+    if(!mission){
+
+        showToast(
+            "Mission not found.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !isMissionCompleted(
+            mission
+        )
+    ){
+
+        showToast(
+            "Mission abhi complete nahi hua.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        isMissionClaimed(
+            mission.id
+        )
+    ){
+
+        showToast(
+            "Reward already claimed.",
+            "warning"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        isClaimPending(
+            mission.id
+        )
+    ){
+
+        showToast(
+            "Claim already pending hai.",
+            "warning"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        isMissionExpired(
+            mission
+        )
+    ){
+
+        showToast(
+            "Mission expire ho chuka hai.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    button.disabled =
+        true;
+
+    button.innerText =
+        "⏳ Sending Claim Request...";
+
+
+    try{
+
+        /*
+         IMPORTANT SECURITY:
+
+         Browser wallet ko directly update
+         nahi karta.
+
+         Browser sirf claim request create
+         karta hai.
+
+         Firebase Rules / Cloud Function /
+         trusted admin process ko:
+
+         1. User eligibility verify
+         2. Mission target verify
+         3. Duplicate claim verify
+         4. Reward verify
+         5. XP verify
+         6. Wallet credit
+         7. Ledger entry
+
+         karna chahiye.
+        */
+
+
+        const claimRef =
+            ref(
+                db,
+                "missionClaims/" +
+                currentUser.uid +
+                "/" +
+                mission.id
+            );
+
+
+        /*
+         Existing claim check
+        */
+
+        const existing =
+            await get(
+                claimRef
+            );
+
+
+        if(existing.exists()){
+
+            const existingData =
+                existing.val() || {};
+
+
+            if(
+                existingData.status ===
+                "approved"
+                ||
+                existingData.status ===
+                "completed"
+                ||
+                existingData.claimed ===
+                true
+            ){
+
+                showToast(
+                    "Reward already claimed.",
+                    "warning"
+                );
+
+                return;
+
+            }
+
+
+            if(
+                existingData.status ===
+                "pending"
+                ||
+                existingData.status ===
+                "processing"
+            ){
+
+                showToast(
+                    "Claim already pending hai.",
+                    "warning"
+                );
+
+                return;
+
+            }
+
+        }
+
+
+        const claimData = {
+
+            uid:
+                currentUser.uid,
+
+            missionId:
+                mission.id,
+
+            missionNumber:
+                mission.number,
+
+            target:
+                mission.target,
+
+            rewardRequested:
+                mission.reward,
+
+            xpRequested:
+                mission.xp,
+
+            progressAtClaim:
+                getMissionProgress(
+                    mission
+                ),
+
+            status:
+                "pending",
+
+            requestedAt:
+                Date.now(),
+
+            userEmail:
+                currentUser.email ||
+                null
+
+        };
+
+
+        /*
+         Fixed claim path prevents
+         multiple claim records for same
+         user + mission.
+        */
+
+        await set(
+            claimRef,
+            claimData
+        );
+
+
+        showToast(
+            "🎁 Claim request submit ho gayi. Verification pending.",
+            "success"
+        );
+
+
+        button.innerText =
+            "⏳ Claim Verification Pending...";
+
+
+    }
+    catch(error){
+
+        console.error(
+            "Mission claim error:",
+            error
+        );
+
+
+        button.disabled =
+            false;
+
+
+        button.innerText =
+            "🎁 Claim Reward";
+
+
+        showToast(
+            "Claim request failed. Firebase Rules check karein.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   FIRST RECHARGE MISSION
+===================================================== */
+
+function renderRechargeMission(){
+
+    if(!currentUser)
+        return;
+
 
     const claimed =
-        userData.firstRechargeBonusClaimed === true ||
-        userData.firstRechargeBonusClaimed === "true";
+        isTrue(
+            userData.firstRechargeBonusClaimed
+        );
 
 
-    const rechargeCompleted =
-        userData.firstRechargeCompleted === true ||
-        userData.firstRechargeCompleted === "true" ||
-        Number(
-            userData.totalRecharge ||
-            userData.totalRecharged ||
-            userData.rechargeAmount ||
+    const completed =
+        isTrue(
+            userData.firstRechargeCompleted
+        )
+        ||
+        safeNumber(
+            userData.totalRecharge ??
+            userData.totalRecharged ??
+            userData.rechargeAmount ??
             0
         ) >= 100;
 
 
+    const pending =
+        userData.firstRechargeBonusStatus ===
+        "pending";
+
+
     if(claimed){
 
-        rechargeStatus.innerText =
-            "🎉 10% First Recharge Bonus Claimed";
+        rechargeStatus.className =
+            "recharge-status success";
 
-        rechargeStatus.classList.add(
-            "claimed"
-        );
+
+        rechargeStatus.innerText =
+            "🎉 ₹10 First Recharge Bonus Claimed";
+
 
         rechargeClaimBtn.innerText =
             "✓ Bonus Already Claimed";
 
+
         rechargeClaimBtn.disabled =
             true;
+
 
         return;
 
     }
 
 
-    if(rechargeCompleted){
+    if(pending){
+
+        rechargeStatus.className =
+            "recharge-status warning";
+
 
         rechargeStatus.innerText =
-            "🎉 ₹100 recharge completed — 10% bonus ready to claim";
+            "⏳ Bonus claim verification pending";
+
 
         rechargeClaimBtn.innerText =
-            "🎁 Claim 10% Bonus";
+            "⏳ Verification Pending";
+
+
+        rechargeClaimBtn.disabled =
+            true;
+
+
+        return;
+
+    }
+
+
+    if(completed){
+
+        rechargeStatus.className =
+            "recharge-status success";
+
+
+        rechargeStatus.innerText =
+            "🎉 ₹100 recharge completed — ₹10 bonus ready";
+
+
+        rechargeClaimBtn.innerText =
+            "🎁 Claim ₹10 Bonus";
+
 
         rechargeClaimBtn.disabled =
             false;
 
+
         rechargeClaimBtn.onclick =
             claimRechargeBonus;
+
 
         return;
 
     }
 
 
+    rechargeStatus.className =
+        "recharge-status";
+
+
     rechargeStatus.innerText =
-        "💳 First ₹100 recharge complete karo";
+        "💳 First successful ₹100 recharge complete karo";
 
 
     rechargeClaimBtn.innerText =
@@ -1227,7 +3994,7 @@ function updateRechargeMission(balance){
 
 
 /* =====================================================
-   CLAIM RECHARGE BONUS
+   FIRST RECHARGE CLAIM
 ===================================================== */
 
 async function claimRechargeBonus(){
@@ -1237,12 +4004,14 @@ async function claimRechargeBonus(){
 
 
     if(
-        userData.firstRechargeBonusClaimed === true
+        isTrue(
+            userData.firstRechargeBonusClaimed
+        )
     ){
 
         showToast(
             "Bonus already claimed.",
-            "error"
+            "warning"
         );
 
         return;
@@ -1251,26 +4020,27 @@ async function claimRechargeBonus(){
 
 
     const rechargeAmount =
-        Number(
-            userData.totalRecharge ||
-            userData.totalRecharged ||
-            userData.rechargeAmount ||
+        safeNumber(
+            userData.totalRecharge ??
+            userData.totalRecharged ??
+            userData.rechargeAmount ??
             0
         );
 
 
-    const firstRechargeCompleted =
-        userData.firstRechargeCompleted === true ||
-        userData.firstRechargeCompleted === "true";
+    const rechargeCompleted =
+        isTrue(
+            userData.firstRechargeCompleted
+        );
 
 
     if(
         rechargeAmount < 100 &&
-        !firstRechargeCompleted
+        !rechargeCompleted
     ){
 
         showToast(
-            "First ₹100 recharge complete karein.",
+            "First ₹100 successful recharge complete karein.",
             "error"
         );
 
@@ -1279,56 +4049,103 @@ async function claimRechargeBonus(){
     }
 
 
-    /*
-       10% of ₹100 = ₹10
-
-       Important:
-       Bonus ko automatically arbitrary wallet balance
-       ke basis par calculate nahi kiya gaya.
-    */
-
-    const bonus =
-        10;
-
-
     rechargeClaimBtn.disabled =
         true;
 
+
     rechargeClaimBtn.innerText =
-        "Claiming...";
+        "⏳ Sending Claim Request...";
 
 
     try{
 
-        const userRef =
+        const claimRef =
             ref(
                 db,
-                "users/" +
-                currentUser.uid
+                "missionClaims/" +
+                currentUser.uid +
+                "/firstRecharge"
             );
 
 
-        const newWallet =
-            walletBalance +
-            bonus;
+        const existing =
+            await get(
+                claimRef
+            );
 
 
-        await update(
+        if(existing.exists()){
 
-            userRef,
+            const existingData =
+                existing.val() || {};
+
+
+            if(
+                existingData.status ===
+                "approved"
+                ||
+                existingData.status ===
+                "completed"
+                ||
+                existingData.claimed === true
+            ){
+
+                showToast(
+                    "Bonus already claimed.",
+                    "warning"
+                );
+
+                return;
+
+            }
+
+
+            if(
+                existingData.status ===
+                "pending"
+                ||
+                existingData.status ===
+                "processing"
+            ){
+
+                showToast(
+                    "Bonus verification already pending.",
+                    "warning"
+                );
+
+                return;
+
+            }
+
+        }
+
+
+        await set(
+
+            claimRef,
 
             {
 
-                "wallet":
-                    newWallet,
+                uid:
+                    currentUser.uid,
 
-                "firstRechargeBonus":
-                    bonus,
+                missionId:
+                    "firstRecharge",
 
-                "firstRechargeBonusClaimed":
-                    true,
+                requiredRecharge:
+                    100,
 
-                "firstRechargeBonusClaimedAt":
+                rewardRequested:
+                    10,
+
+                rechargeVerifiedByClient:
+                    rechargeCompleted ||
+                    rechargeAmount >= 100,
+
+                status:
+                    "pending",
+
+                requestedAt:
                     Date.now()
 
             }
@@ -1336,17 +4153,38 @@ async function claimRechargeBonus(){
         );
 
 
+        /*
+         IMPORTANT:
+
+         Wallet is NOT changed here.
+         Backend / trusted admin process
+         must verify the recharge and then
+         credit the reward.
+        */
+
+
+        rechargeStatus.className =
+            "recharge-status warning";
+
+
+        rechargeStatus.innerText =
+            "⏳ ₹10 bonus verification pending";
+
+
+        rechargeClaimBtn.innerText =
+            "⏳ Verification Pending";
+
+
         showToast(
-            "🎉 ₹10 bonus wallet me add ho gaya!",
+            "🎁 Bonus claim request submit ho gayi.",
             "success"
         );
-
 
     }
     catch(error){
 
         console.error(
-            "Bonus claim error:",
+            "Recharge claim error:",
             error
         );
 
@@ -1354,12 +4192,13 @@ async function claimRechargeBonus(){
         rechargeClaimBtn.disabled =
             false;
 
+
         rechargeClaimBtn.innerText =
-            "🎁 Claim 10% Bonus";
+            "🎁 Claim ₹10 Bonus";
 
 
         showToast(
-            "Bonus claim failed. Firebase Rules check karein.",
+            "Bonus claim request failed.",
             "error"
         );
 
@@ -1369,31 +4208,354 @@ async function claimRechargeBonus(){
 
 
 /* =====================================================
+   REWARD HISTORY
+===================================================== */
+
+function loadRewardHistory(uid){
+
+    const historyRef =
+        ref(
+            db,
+            "missionRewardLedger/" +
+            uid
+        );
+
+
+    onValue(
+
+        historyRef,
+
+        snapshot=>{
+
+            rewardHistory =
+                snapshot.exists()
+                ? snapshot.val() || {}
+                : {};
+
+
+            renderRewardHistory();
+
+        },
+
+        error=>{
+
+            console.warn(
+                "Reward history error:",
+                error
+            );
+
+
+            historyList.innerHTML =
+                `<div class="history-empty">
+                    Reward history unavailable
+                 </div>`;
+
+        }
+
+    );
+
+}
+
+
+/* =====================================================
+   RENDER REWARD HISTORY
+===================================================== */
+
+function renderRewardHistory(){
+
+    historyList.innerHTML = "";
+
+
+    const entries =
+        Object.entries(
+            rewardHistory || {}
+        );
+
+
+    if(!entries.length){
+
+        historyList.innerHTML =
+            `<div class="history-empty">
+                Abhi tak koi mission reward nahi mila.
+             </div>`;
+
+        return;
+
+    }
+
+
+    entries.sort(
+        (a,b)=>{
+
+            const ta =
+                safeNumber(
+                    a[1]?.createdAt
+                );
+
+            const tb =
+                safeNumber(
+                    b[1]?.createdAt
+                );
+
+            return tb - ta;
+
+        }
+    );
+
+
+    entries
+    .slice(0,20)
+    .forEach(
+        ([id,item])=>{
+
+            const reward =
+                safeNumber(
+                    item.reward ??
+                    item.amount ??
+                    0
+                );
+
+
+            const name =
+                item.missionName ||
+                item.title ||
+                item.missionId ||
+                "Mission Reward";
+
+
+            const date =
+                item.createdAt
+                ? formatDate(
+                    item.createdAt
+                )
+                : "Recent";
+
+
+            const row =
+                document.createElement(
+                    "div"
+                );
+
+
+            row.className =
+                "history-row";
+
+
+            row.innerHTML = `
+
+                <div class="history-left">
+
+                    <div class="history-icon">
+                        🎁
+                    </div>
+
+                    <div>
+
+                        <div class="history-name">
+
+                            ${escapeHTML(
+                                name
+                            )}
+
+                        </div>
+
+                        <div class="history-date">
+
+                            ${escapeHTML(
+                                date
+                            )}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="history-reward">
+
+                    +₹${formatNumber(
+                        reward
+                    )}
+
+                </div>
+
+            `;
+
+
+            historyList.appendChild(
+                row
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   FORMAT NUMBER
+===================================================== */
+
+function formatNumber(value){
+
+    const number =
+        safeNumber(
+            value
+        );
+
+
+    return number.toLocaleString(
+        "en-IN"
+    );
+
+}
+
+
+/* =====================================================
+   FORMAT DATE
+===================================================== */
+
+function formatDate(timestamp){
+
+    const date =
+        new Date(
+            Number(
+                timestamp
+            )
+        );
+
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+
+        return "Unknown date";
+
+    }
+
+
+    return date.toLocaleDateString(
+        "en-IN",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
+        }
+    );
+
+}
+
+
+/* =====================================================
+   TRUE CHECK
+===================================================== */
+
+function isTrue(value){
+
+    return (
+        value === true ||
+        value === "true" ||
+        value === 1 ||
+        value === "1"
+    );
+
+}
+
+
+/* =====================================================
+   HTML ESCAPE
+===================================================== */
+
+function escapeHTML(value){
+
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* =====================================================
    TOAST
 ===================================================== */
 
-function showToast(message,type){
+let toastTimer = null;
+
+
+function showToast(
+    message,
+    type="success"
+){
 
     toast.innerText =
         message;
+
 
     toast.className =
         "toast show " +
         type;
 
 
-    setTimeout(()=>{
+    clearTimeout(
+        toastTimer
+    );
 
-        toast.className =
-            "toast";
 
-    },3500);
+    toastTimer =
+        setTimeout(
+            ()=>{
+
+                toast.className =
+                    "toast";
+
+            },
+            3500
+        );
 
 }
+
+
+/* =====================================================
+   INITIAL SAFETY
+===================================================== */
+
+window.addEventListener(
+    "error",
+    event=>{
+
+        console.error(
+            "Mission page error:",
+            event.error
+        );
+
+    }
+);
 
 </script>
 
 </body>
 
 </html>
-
