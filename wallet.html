@@ -2195,1961 +2195,6 @@ body::after{
      FIREBASE
 ===================================================== -->
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
-
-<meta name="theme-color" content="#050B18">
-
-<meta name="color-scheme" content="dark">
-
-<title>BGMI PAY Wallet</title>
-
-
-<style>
-
-/* =========================================================
-   RESET
-========================================================= */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Inter,Arial,sans-serif;
-    -webkit-tap-highlight-color:transparent;
-}
-
-html,
-body{
-    width:100%;
-    min-height:100%;
-}
-
-html{
-    background:#050B18;
-}
-
-body{
-    background:#050B18;
-    color:#fff;
-    overflow-x:hidden;
-    padding-bottom:90px;
-}
-
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-
-    background:
-        radial-gradient(
-            circle at 0% 0%,
-            #22c55e28,
-            transparent 32%
-        ),
-        radial-gradient(
-            circle at 100% 0%,
-            #2563eb24,
-            transparent 32%
-        ),
-        radial-gradient(
-            circle at 50% 100%,
-            #a855f716,
-            transparent 35%
-        ),
-        #050B18;
-
-    z-index:-2;
-}
-
-body::after{
-    content:"";
-    position:fixed;
-    inset:0;
-
-    pointer-events:none;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(255,255,255,.015),
-            transparent 30%,
-            rgba(255,255,255,.01)
-        );
-
-    z-index:-1;
-}
-
-
-/* =========================================================
-   APP
-========================================================= */
-
-.app{
-    width:100%;
-    max-width:520px;
-    margin:0 auto;
-    min-height:100vh;
-    padding:
-        calc(14px + env(safe-area-inset-top))
-        14px
-        20px;
-}
-
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-.header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:18px;
-}
-
-.header-left{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.header-icon{
-    width:44px;
-    height:44px;
-    border-radius:14px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:
-        linear-gradient(
-            145deg,
-            #22c55e,
-            #15803d
-        );
-
-    box-shadow:
-        0 8px 25px #22c55e25,
-        inset 0 1px 0 #ffffff35;
-
-    font-size:22px;
-}
-
-.header-title{
-    font-size:20px;
-    font-weight:900;
-    letter-spacing:-.5px;
-}
-
-.header-subtitle{
-    color:#8d99ad;
-    font-size:11px;
-    margin-top:2px;
-}
-
-.header-badge{
-    padding:7px 10px;
-    border-radius:20px;
-
-    border:1px solid #ffffff10;
-
-    background:#ffffff08;
-
-    color:#dce5f2;
-
-    font-size:10px;
-    font-weight:800;
-}
-
-
-/* =========================================================
-   WALLET CARD
-========================================================= */
-
-.wallet-card{
-    position:relative;
-    overflow:hidden;
-
-    min-height:205px;
-
-    border-radius:26px;
-
-    padding:22px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #111c30,
-            #08111f 55%,
-            #0b1728
-        );
-
-    border:1px solid #ffffff12;
-
-    box-shadow:
-        0 20px 55px #00000045,
-        inset 0 1px 0 #ffffff10;
-
-    margin-bottom:16px;
-}
-
-.wallet-card::before{
-    content:"";
-    position:absolute;
-
-    width:210px;
-    height:210px;
-
-    right:-85px;
-    top:-90px;
-
-    border-radius:50%;
-
-    background:#22c55e18;
-
-    filter:blur(4px);
-}
-
-.wallet-card::after{
-    content:"";
-    position:absolute;
-
-    width:150px;
-    height:150px;
-
-    left:-80px;
-    bottom:-80px;
-
-    border-radius:50%;
-
-    background:#2563eb18;
-
-    filter:blur(5px);
-}
-
-.wallet-top{
-    position:relative;
-    z-index:2;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.wallet-label{
-    color:#8d99ad;
-    font-size:12px;
-    font-weight:700;
-}
-
-.wallet-chip{
-    display:flex;
-    align-items:center;
-    gap:5px;
-
-    padding:6px 9px;
-
-    border-radius:20px;
-
-    background:#22c55e12;
-    border:1px solid #22c55e30;
-
-    color:#6ee7a1;
-
-    font-size:10px;
-    font-weight:800;
-}
-
-.wallet-main{
-    position:relative;
-    z-index:2;
-
-    display:flex;
-    align-items:center;
-    gap:12px;
-
-    margin-top:14px;
-}
-
-.wallet-amount{
-    font-size:36px;
-    line-height:1;
-
-    font-weight:950;
-
-    letter-spacing:-1.5px;
-
-    color:#ffffff;
-}
-
-.eye-btn{
-    width:34px;
-    height:34px;
-
-    border-radius:11px;
-
-    border:1px solid #ffffff12;
-
-    background:#ffffff08;
-
-    color:#dce5f2;
-
-    font-size:16px;
-
-    cursor:pointer;
-}
-
-.wallet-bottom{
-    position:relative;
-    z-index:2;
-
-    display:grid;
-    grid-template-columns:1fr 1fr;
-
-    gap:10px;
-
-    margin-top:25px;
-}
-
-.wallet-mini{
-    padding:11px;
-
-    border-radius:15px;
-
-    background:#ffffff06;
-
-    border:1px solid #ffffff0d;
-}
-
-.wallet-mini-label{
-    color:#77859b;
-    font-size:10px;
-    font-weight:700;
-}
-
-.wallet-mini-value{
-    margin-top:5px;
-
-    color:#fff;
-
-    font-size:15px;
-    font-weight:900;
-}
-
-
-/* =========================================================
-   ACTIONS
-========================================================= */
-
-.actions{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-
-    margin-bottom:16px;
-}
-
-.action-btn{
-    height:54px;
-
-    border:none;
-    border-radius:17px;
-
-    font-size:13px;
-    font-weight:900;
-
-    cursor:pointer;
-
-    transition:
-        transform .15s ease,
-        opacity .15s ease;
-}
-
-.action-btn:active{
-    transform:scale(.97);
-}
-
-.add-btn{
-    color:#04120a;
-
-    background:
-        linear-gradient(
-            135deg,
-            #4ade80,
-            #22c55e
-        );
-
-    box-shadow:
-        0 10px 25px #22c55e20;
-}
-
-.withdraw-btn{
-    color:#fff;
-
-    background:
-        linear-gradient(
-            135deg,
-            #1d4ed8,
-            #2563eb
-        );
-
-    box-shadow:
-        0 10px 25px #2563eb20;
-}
-
-
-/* =========================================================
-   STATUS CARD
-========================================================= */
-
-.status-card{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-
-    gap:10px;
-
-    margin-bottom:18px;
-}
-
-.status-item{
-    padding:13px;
-
-    border-radius:17px;
-
-    background:#ffffff06;
-
-    border:1px solid #ffffff0d;
-}
-
-.status-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    color:#7e8ba0;
-
-    font-size:10px;
-    font-weight:800;
-}
-
-.status-number{
-    margin-top:6px;
-
-    font-size:18px;
-    font-weight:950;
-
-    color:#fff;
-}
-
-
-/* =========================================================
-   HISTORY HEADER
-========================================================= */
-
-.history-header{
-    display:flex;
-    align-items:end;
-    justify-content:space-between;
-
-    margin-bottom:12px;
-}
-
-.history-title{
-    font-size:18px;
-    font-weight:950;
-}
-
-.history-count{
-    color:#728097;
-    font-size:10px;
-    font-weight:700;
-}
-
-
-/* =========================================================
-   FILTERS
-========================================================= */
-
-.filters{
-    display:flex;
-
-    gap:7px;
-
-    overflow-x:auto;
-
-    padding-bottom:5px;
-
-    margin-bottom:12px;
-
-    scrollbar-width:none;
-}
-
-.filters::-webkit-scrollbar{
-    display:none;
-}
-
-.filter{
-    flex:0 0 auto;
-
-    padding:8px 11px;
-
-    border-radius:20px;
-
-    background:#ffffff06;
-
-    border:1px solid #ffffff0d;
-
-    color:#8995a8;
-
-    font-size:10px;
-    font-weight:800;
-
-    cursor:pointer;
-}
-
-.filter.active{
-    background:#22c55e15;
-
-    border-color:#22c55e45;
-
-    color:#5ee995;
-}
-
-
-/* =========================================================
-   HISTORY
-========================================================= */
-
-.history-list{
-    display:flex;
-    flex-direction:column;
-    gap:9px;
-}
-
-.history{
-    display:flex;
-    align-items:center;
-
-    min-height:72px;
-
-    padding:11px;
-
-    border-radius:18px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff08,
-            #ffffff03
-        );
-
-    border:1px solid #ffffff0b;
-}
-
-.tx-icon{
-    width:42px;
-    height:42px;
-
-    flex:0 0 42px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:14px;
-
-    background:#ffffff08;
-
-    font-size:18px;
-}
-
-.tx-info{
-    min-width:0;
-    flex:1;
-
-    margin-left:10px;
-}
-
-.tx-title{
-    color:#fff;
-
-    font-size:12px;
-    font-weight:850;
-
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
-
-.tx-time{
-    margin-top:4px;
-
-    color:#657287;
-
-    font-size:9px;
-}
-
-.tx-status{
-    display:inline-block;
-
-    margin-top:4px;
-
-    font-size:9px;
-    font-weight:850;
-}
-
-.completed-text{
-    color:#4ade80;
-}
-
-.pending-text{
-    color:#fbbf24;
-}
-
-.rejected-text{
-    color:#f87171;
-}
-
-.tx-amount{
-    margin-left:8px;
-
-    font-size:13px;
-    font-weight:950;
-
-    white-space:nowrap;
-}
-
-.tx-amount.credit{
-    color:#4ade80;
-}
-
-.tx-amount.debit{
-    color:#fb7185;
-}
-
-
-/* =========================================================
-   EMPTY
-========================================================= */
-
-.empty{
-    text-align:center;
-
-    padding:42px 18px;
-
-    border-radius:20px;
-
-    background:#ffffff05;
-
-    border:1px solid #ffffff09;
-}
-
-.empty-icon{
-    font-size:30px;
-    margin-bottom:10px;
-}
-
-.empty-title{
-    color:#fff;
-
-    font-size:14px;
-    font-weight:900;
-}
-
-.empty-text{
-    margin-top:6px;
-
-    color:#68758a;
-
-    font-size:10px;
-}
-
-
-/* =========================================================
-   MODAL BACKDROP
-========================================================= */
-
-.modal{
-    position:fixed;
-    inset:0;
-
-    z-index:1000;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    padding:18px;
-
-    background:#000000a8;
-
-    backdrop-filter:blur(10px);
-    -webkit-backdrop-filter:blur(10px);
-
-    opacity:0;
-    visibility:hidden;
-
-    transition:
-        opacity .2s ease,
-        visibility .2s ease;
-}
-
-.modal.show{
-    opacity:1;
-    visibility:visible;
-}
-
-
-/* =========================================================
-   MODAL BOX
-========================================================= */
-
-.modal-box{
-    width:100%;
-    max-width:430px;
-
-    max-height:
-        calc(
-            100vh -
-            36px -
-            env(safe-area-inset-top) -
-            env(safe-area-inset-bottom)
-        );
-
-    overflow-y:auto;
-
-    border-radius:25px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #101b2d,
-            #07101d
-        );
-
-    border:1px solid #ffffff12;
-
-    box-shadow:
-        0 30px 90px #00000070;
-
-    padding:18px;
-
-    transform:scale(.94);
-
-    transition:
-        transform .22s ease;
-}
-
-.modal.show .modal-box{
-    transform:scale(1);
-}
-
-.modal-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    margin-bottom:16px;
-}
-
-.modal-title{
-    font-size:18px;
-    font-weight:950;
-}
-
-.close-btn{
-    width:34px;
-    height:34px;
-
-    border-radius:11px;
-
-    border:1px solid #ffffff10;
-
-    background:#ffffff07;
-
-    color:#aeb8c8;
-
-    font-size:17px;
-
-    cursor:pointer;
-}
-
-
-/* =========================================================
-   MODAL STEP
-========================================================= */
-
-.payment-step{
-    width:100%;
-}
-
-.step-title{
-    font-size:13px;
-    font-weight:900;
-
-    margin-bottom:10px;
-}
-
-.input-label{
-    display:block;
-
-    margin-bottom:6px;
-
-    color:#7f8ca0;
-
-    font-size:10px;
-    font-weight:800;
-}
-
-.input{
-    width:100%;
-    height:48px;
-
-    border-radius:14px;
-
-    outline:none;
-
-    border:1px solid #ffffff10;
-
-    background:#ffffff07;
-
-    color:#fff;
-
-    padding:0 14px;
-
-    font-size:14px;
-    font-weight:700;
-}
-
-.input::placeholder{
-    color:#566378;
-}
-
-.input:focus{
-    border-color:#22c55e45;
-
-    background:#ffffff09;
-}
-
-.quick-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-
-    gap:7px;
-
-    margin:10px 0 14px;
-}
-
-.quick-btn{
-    height:38px;
-
-    border-radius:11px;
-
-    border:1px solid #ffffff0d;
-
-    background:#ffffff06;
-
-    color:#c6cfdb;
-
-    font-size:10px;
-    font-weight:850;
-
-    cursor:pointer;
-}
-
-.quick-btn:active{
-    transform:scale(.96);
-}
-
-.primary-btn{
-    width:100%;
-    height:49px;
-
-    border:none;
-
-    border-radius:14px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #22c55e,
-            #16a34a
-        );
-
-    color:#031009;
-
-    font-size:12px;
-    font-weight:950;
-
-    cursor:pointer;
-
-    margin-top:10px;
-}
-
-.secondary-btn{
-    width:100%;
-    height:45px;
-
-    border:1px solid #ffffff10;
-
-    border-radius:14px;
-
-    background:#ffffff06;
-
-    color:#c8d1dd;
-
-    font-size:11px;
-    font-weight:850;
-
-    cursor:pointer;
-
-    margin-top:8px;
-}
-
-
-/* =========================================================
-   PAYMENT
-========================================================= */
-
-.amount-display{
-    padding:12px;
-
-    border-radius:14px;
-
-    background:#22c55e0b;
-
-    border:1px solid #22c55e22;
-
-    margin-bottom:13px;
-}
-
-.amount-label{
-    color:#718097;
-
-    font-size:9px;
-    font-weight:800;
-}
-
-.amount-value{
-    color:#5ee995;
-
-    font-size:20px;
-    font-weight:950;
-
-    margin-top:3px;
-}
-
-.upi-box{
-    text-align:center;
-
-    padding:10px;
-
-    border-radius:13px;
-
-    background:#ffffff05;
-
-    border:1px solid #ffffff09;
-
-    color:#aeb8c7;
-
-    font-size:10px;
-    font-weight:800;
-
-    word-break:break-all;
-
-    margin-bottom:12px;
-}
-
-.qr-wrap{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    min-height:220px;
-
-    margin-bottom:12px;
-}
-
-#adminQR{
-    width:210px;
-    height:210px;
-
-    object-fit:contain;
-
-    background:#fff;
-
-    border-radius:13px;
-
-    padding:7px;
-
-    display:none;
-}
-
-.payment-apps{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-
-    gap:8px;
-
-    margin-top:8px;
-}
-
-.app-btn{
-    height:45px;
-
-    border-radius:13px;
-
-    border:1px solid #ffffff0d;
-
-    background:#ffffff07;
-
-    color:#fff;
-
-    font-size:10px;
-    font-weight:900;
-
-    cursor:pointer;
-}
-
-.app-btn:active{
-    transform:scale(.97);
-}
-
-.app-gpay{
-    border-color:#4285f420;
-}
-
-.app-phonepe{
-    border-color:#6f42c120;
-}
-
-.app-paytm{
-    border-color:#00baf220;
-}
-
-.info-box{
-    margin-top:12px;
-
-    padding:10px;
-
-    border-radius:12px;
-
-    background:#ffffff04;
-
-    border:1px solid #ffffff08;
-
-    color:#68758a;
-
-    font-size:9px;
-
-    line-height:1.5;
-
-    text-align:center;
-}
-
-
-/* =========================================================
-   WITHDRAW
-========================================================= */
-
-.available-card{
-    padding:13px;
-
-    border-radius:15px;
-
-    background:#2563eb0c;
-
-    border:1px solid #2563eb22;
-
-    margin-bottom:14px;
-}
-
-.available-label{
-    color:#75839a;
-
-    font-size:9px;
-    font-weight:800;
-}
-
-.available-value{
-    margin-top:4px;
-
-    color:#60a5fa;
-
-    font-size:21px;
-    font-weight:950;
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-.toast{
-    position:fixed;
-
-    left:50%;
-    bottom:
-        calc(
-            22px +
-            env(safe-area-inset-bottom)
-        );
-
-    transform:
-        translate(-50%,20px);
-
-    z-index:3000;
-
-    width:max-content;
-    max-width:calc(100vw - 36px);
-
-    padding:11px 16px;
-
-    border-radius:14px;
-
-    background:#101a2aee;
-
-    border:1px solid #ffffff15;
-
-    box-shadow:
-        0 12px 35px #00000055;
-
-    color:#fff;
-
-    font-size:11px;
-    font-weight:800;
-
-    opacity:0;
-    visibility:hidden;
-
-    transition:
-        .22s ease;
-}
-
-.toast.show{
-    opacity:1;
-    visibility:visible;
-
-    transform:
-        translate(-50%,0);
-}
-
-
-/* =========================================================
-   BOTTOM NAV
-========================================================= */
-
-.bottom-nav{
-    position:fixed;
-
-    left:50%;
-    bottom:
-        calc(
-            10px +
-            env(safe-area-inset-bottom)
-        );
-
-    transform:translateX(-50%);
-
-    width:
-        min(
-            calc(100% - 24px),
-            500px
-        );
-
-    height:62px;
-
-    z-index:900;
-
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-
-    padding:6px;
-
-    border-radius:21px;
-
-    background:#091322e8;
-
-    border:1px solid #ffffff12;
-
-    box-shadow:
-        0 15px 50px #00000055;
-
-    backdrop-filter:blur(15px);
-    -webkit-backdrop-filter:blur(15px);
-}
-
-.nav-item{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-
-    gap:3px;
-
-    border-radius:16px;
-
-    color:#69768a;
-
-    text-decoration:none;
-
-    font-size:9px;
-    font-weight:800;
-}
-
-.nav-icon{
-    font-size:18px;
-}
-
-.nav-item.active{
-    background:#22c55e10;
-
-    color:#4ade80;
-}
-
-
-/* =========================================================
-   DESKTOP LIMIT
-========================================================= */
-
-@media(min-width:700px){
-
-    body{
-        display:flex;
-        justify-content:center;
-    }
-
-    .app{
-        width:520px;
-    }
-
-}
-
-
-/* =========================================================
-   SMALL PHONES
-========================================================= */
-
-@media(max-width:360px){
-
-    .app{
-        padding-left:11px;
-        padding-right:11px;
-    }
-
-    .wallet-card{
-        padding:18px;
-    }
-
-    .wallet-amount{
-        font-size:31px;
-    }
-
-    .action-btn{
-        font-size:11px;
-    }
-
-    .filter{
-        padding-left:9px;
-        padding-right:9px;
-    }
-
-}
-
-</style>
-
-</head>
-
-
-<body>
-
-
-<!-- =======================================================
-     APP
-======================================================= -->
-
-<div class="app">
-
-
-    <!-- HEADER -->
-
-    <header class="header">
-
-        <div class="header-left">
-
-            <div class="header-icon">
-                💰
-            </div>
-
-            <div>
-
-                <div class="header-title">
-                    BGMI PAY
-                </div>
-
-                <div class="header-subtitle">
-                    Your Gaming Wallet
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="header-badge">
-            SECURE
-        </div>
-
-    </header>
-
-
-    <!-- ===================================================
-         WALLET CARD
-    ==================================================== -->
-
-    <section class="wallet-card">
-
-        <div class="wallet-top">
-
-            <div class="wallet-label">
-                Available Balance
-            </div>
-
-            <div class="wallet-chip">
-                ● LIVE
-            </div>
-
-        </div>
-
-
-        <div class="wallet-main">
-
-            <div
-                id="walletBalance"
-                class="wallet-amount">
-                ₹0
-            </div>
-
-            <button
-                id="eyeBtn"
-                class="eye-btn"
-                onclick="toggleBalance()">
-                👁
-            </button>
-
-        </div>
-
-
-        <div class="wallet-bottom">
-
-            <div class="wallet-mini">
-
-                <div class="wallet-mini-label">
-                    Withdrawable
-                </div>
-
-                <div
-                    id="withdrawableBalance"
-                    class="wallet-mini-value">
-                    ₹0
-                </div>
-
-            </div>
-
-
-            <div class="wallet-mini">
-
-                <div class="wallet-mini-label">
-                    Bonus
-                </div>
-
-                <div
-                    id="bonusBalance"
-                    class="wallet-mini-value">
-                    ₹0
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ===================================================
-         ACTIONS
-    ==================================================== -->
-
-    <div class="actions">
-
-        <button
-            class="action-btn add-btn"
-            onclick="openAddMoney()">
-
-            ＋ Add Money
-
-        </button>
-
-
-        <button
-            class="action-btn withdraw-btn"
-            onclick="openWithdraw()">
-
-            ↗ Withdraw
-
-        </button>
-
-    </div>
-
-
-    <!-- ===================================================
-         PENDING STATUS
-    ==================================================== -->
-
-    <div class="status-card">
-
-        <div class="status-item">
-
-            <div class="status-head">
-
-                <span>
-                    Pending Deposits
-                </span>
-
-                <span>
-                    💳
-                </span>
-
-            </div>
-
-            <div
-                id="pendingDeposits"
-                class="status-number">
-                0
-            </div>
-
-        </div>
-
-
-        <div class="status-item">
-
-            <div class="status-head">
-
-                <span>
-                    Pending Withdraws
-                </span>
-
-                <span>
-                    💸
-                </span>
-
-            </div>
-
-            <div
-                id="pendingWithdraws"
-                class="status-number">
-                0
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- ===================================================
-         HISTORY HEADER
-    ==================================================== -->
-
-    <div class="history-header">
-
-        <div class="history-title">
-            Transaction History
-        </div>
-
-        <div
-            id="historyCount"
-            class="history-count">
-            0 transactions
-        </div>
-
-    </div>
-
-
-    <!-- ===================================================
-         FILTERS
-    ==================================================== -->
-
-    <div class="filters">
-
-        <button
-            class="filter active"
-            onclick="setFilter('all',this)">
-            ALL
-        </button>
-
-        <button
-            class="filter"
-            onclick="setFilter('credit',this)">
-            CREDIT
-        </button>
-
-        <button
-            class="filter"
-            onclick="setFilter('debit',this)">
-            DEBIT
-        </button>
-
-        <button
-            class="filter"
-            onclick="setFilter('deposit',this)">
-            DEPOSIT
-        </button>
-
-        <button
-            class="filter"
-            onclick="setFilter('withdraw',this)">
-            WITHDRAW
-        </button>
-
-        <button
-            class="filter"
-            onclick="setFilter('match',this)">
-            MATCH
-        </button>
-
-        <button
-            class="filter"
-            onclick="setFilter('reward',this)">
-            REWARD
-        </button>
-
-    </div>
-
-
-    <!-- ===================================================
-         HISTORY LIST
-    ==================================================== -->
-
-    <div
-        id="historyList"
-        class="history-list">
-
-        <div class="empty">
-
-            <div class="empty-icon">
-                💳
-            </div>
-
-            <div class="empty-title">
-                Loading Transactions
-            </div>
-
-            <div class="empty-text">
-                Please wait...
-            </div>
-
-        </div>
-
-    </div>
-
-
-</div>
-
-
-<!-- =======================================================
-     ADD MONEY MODAL
-======================================================= -->
-
-<div
-    id="addModal"
-    class="modal"
-    onclick="closeOutside(event,'addModal')">
-
-    <div class="modal-box">
-
-
-        <div class="modal-head">
-
-            <div class="modal-title">
-                Add Money
-            </div>
-
-            <button
-                class="close-btn"
-                onclick="closeAddMoney()">
-                ×
-            </button>
-
-        </div>
-
-
-        <!-- STEP 1 -->
-
-        <div
-            id="paymentStep1"
-            class="payment-step">
-
-            <div class="step-title">
-                Enter Deposit Amount
-            </div>
-
-
-            <label class="input-label">
-                Amount
-            </label>
-
-            <input
-                id="depositAmount"
-                class="input"
-                type="number"
-                inputmode="numeric"
-                min="10"
-                max="100000"
-                placeholder="Enter amount">
-
-
-            <div class="quick-grid">
-
-                <button
-                    class="quick-btn"
-                    onclick="setDepositAmount(50)">
-                    ₹50
-                </button>
-
-                <button
-                    class="quick-btn"
-                    onclick="setDepositAmount(100)">
-                    ₹100
-                </button>
-
-                <button
-                    class="quick-btn"
-                    onclick="setDepositAmount(500)">
-                    ₹500
-                </button>
-
-                <button
-                    class="quick-btn"
-                    onclick="setDepositAmount(1000)">
-                    ₹1000
-                </button>
-
-            </div>
-
-
-            <button
-                class="primary-btn"
-                onclick="showPaymentOptions()">
-
-                Continue to Payment
-
-            </button>
-
-
-            <div class="info-box">
-
-                Minimum deposit ₹10<br>
-                Maximum deposit ₹1,00,000
-
-            </div>
-
-        </div>
-
-
-        <!-- STEP 2 -->
-
-        <div
-            id="paymentStep2"
-            class="payment-step"
-            style="display:none;">
-
-
-            <div class="amount-display">
-
-                <div class="amount-label">
-                    PAYMENT AMOUNT
-                </div>
-
-                <div
-                    id="selectedAmount"
-                    class="amount-value">
-                    ₹0
-                </div>
-
-            </div>
-
-
-            <div
-                id="adminUPI"
-                class="upi-box">
-                Loading UPI...
-            </div>
-
-
-            <div class="qr-wrap">
-
-                <img
-                    id="adminQR"
-                    alt="UPI QR">
-
-            </div>
-
-
-            <div class="payment-apps">
-
-                <button
-                    class="app-btn app-gpay"
-                    onclick="payWithUPI('gpay')">
-                    GPay
-                </button>
-
-                <button
-                    class="app-btn app-phonepe"
-                    onclick="payWithUPI('phonepe')">
-                    PhonePe
-                </button>
-
-                <button
-                    class="app-btn app-paytm"
-                    onclick="payWithUPI('paytm')">
-                    Paytm
-                </button>
-
-            </div>
-
-
-            <label
-                class="input-label"
-                style="margin-top:14px;">
-                Transaction ID / UTR
-            </label>
-
-            <input
-                id="utr"
-                class="input"
-                type="text"
-                autocomplete="off"
-                placeholder="Enter UTR / Transaction ID">
-
-
-            <button
-                id="depositBtn"
-                class="primary-btn"
-                onclick="submitDeposit()">
-
-                Submit Payment
-
-            </button>
-
-
-            <button
-                class="secondary-btn"
-                onclick="backToAmount()">
-
-                ← Change Amount
-
-            </button>
-
-
-            <div class="info-box">
-
-                Payment करने के बाद सही Transaction ID / UTR
-                submit करें. Duplicate UTR automatically blocked होगा.
-
-            </div>
-
-        </div>
-
-
-    </div>
-
-</div>
-
-
-<!-- =======================================================
-     WITHDRAW MODAL
-======================================================= -->
-
-<div
-    id="withdrawModal"
-    class="modal"
-    onclick="closeOutside(event,'withdrawModal')">
-
-    <div class="modal-box">
-
-
-        <div class="modal-head">
-
-            <div class="modal-title">
-                Withdraw Money
-            </div>
-
-            <button
-                class="close-btn"
-                onclick="closeWithdraw()">
-                ×
-            </button>
-
-        </div>
-
-
-        <div class="available-card">
-
-            <div class="available-label">
-                AVAILABLE WITHDRAWABLE BALANCE
-            </div>
-
-            <div
-                id="withdrawAvailable"
-                class="available-value">
-                ₹0
-            </div>
-
-        </div>
-
-
-        <label class="input-label">
-            Withdrawal Amount
-        </label>
-
-        <input
-            id="withdrawAmount"
-            class="input"
-            type="number"
-            inputmode="numeric"
-            min="100"
-            max="100000"
-            placeholder="Minimum ₹100">
-
-
-        <label
-            class="input-label"
-            style="margin-top:13px;">
-            UPI ID
-        </label>
-
-        <input
-            id="withdrawUPI"
-            class="input"
-            type="text"
-            autocomplete="off"
-            placeholder="example@upi">
-
-
-        <button
-            id="withdrawBtn"
-            class="primary-btn"
-            onclick="submitWithdraw()">
-
-            Submit Withdraw
-
-        </button>
-
-
-        <div class="info-box">
-
-            Minimum withdrawal ₹100<br>
-            Maximum withdrawal ₹1,00,000
-
-        </div>
-
-
-    </div>
-
-</div>
-
-
-<!-- =======================================================
-     TOAST
-======================================================= -->
-
-<div
-    id="toast"
-    class="toast">
-</div>
-
-
-<!-- =======================================================
-     BOTTOM NAV
-======================================================= -->
-
-<nav class="bottom-nav">
-
-    <a
-        class="nav-item"
-        href="index.html">
-
-        <div class="nav-icon">
-            🏠
-        </div>
-
-        <div>
-            Home
-        </div>
-
-    </a>
-
-
-    <a
-        class="nav-item active"
-        href="wallet.html">
-
-        <div class="nav-icon">
-            💰
-        </div>
-
-        <div>
-            Wallet
-        </div>
-
-    </a>
-
-
-    <a
-        class="nav-item"
-        href="matches.html">
-
-        <div class="nav-icon">
-            🎮
-        </div>
-
-        <div>
-            Games
-        </div>
-
-    </a>
-
-
-    <a
-        class="nav-item"
-        href="profile.html">
-
-        <div class="nav-icon">
-            👤
-        </div>
-
-        <div>
-            Profile
-        </div>
-
-    </a>
-
-</nav>
-
-
-<!-- =======================================================
-     FIREBASE
-======================================================= -->
-
 <script type="module">
 
 
@@ -4325,8 +2370,8 @@ function parseWalletValue(value){
     ){
 
         return Number(
-            value.balance ??
-            value.amount ??
+            value.balance ||
+            value.amount ||
             0
         );
 
@@ -4386,11 +2431,6 @@ function loadWallet(){
             currentWalletBalance =
                 balance;
 
-
-            /*
-             * If withdrawable path does not
-             * exist yet, wallet becomes fallback.
-             */
 
             updateWalletUI();
 
@@ -4462,15 +2502,6 @@ function loadBonus(){
 
             updateWalletUI();
 
-        },
-
-        (error)=>{
-
-            console.error(
-                "Bonus load error:",
-                error
-            );
-
         }
     );
 
@@ -4513,6 +2544,14 @@ function loadWithdrawable(){
             }
             else{
 
+                /*
+                 * Existing projects may not have
+                 * separate withdrawable field.
+                 *
+                 * In that case wallet balance
+                 * will be used as fallback.
+                 */
+
                 value =
                     currentWalletBalance;
 
@@ -4532,20 +2571,6 @@ function loadWithdrawable(){
             currentWithdrawable =
                 value;
 
-
-            updateWalletUI();
-
-        },
-
-        (error)=>{
-
-            console.error(
-                "Withdrawable load error:",
-                error
-            );
-
-            currentWithdrawable =
-                currentWalletBalance;
 
             updateWalletUI();
 
@@ -4586,7 +2611,7 @@ function updateWalletUI(){
 
 
     /*
-     * If separate withdrawable field
+     * If separate withdrawable path
      * doesn't exist yet, use wallet balance.
      */
 
@@ -4683,17 +2708,11 @@ function(){
 window.openAddMoney =
 function(){
 
-    const modal =
-        document.getElementById(
+    document
+        .getElementById(
             "addModal"
-        );
-
-    if(!modal){
-        return;
-    }
-
-
-    modal.classList.add("show");
+        )
+        .classList.add("show");
 
 
     document
@@ -4718,14 +2737,6 @@ function(){
 
     document
         .getElementById(
-            "depositAmount"
-        )
-        .value =
-        "";
-
-
-    document
-        .getElementById(
             "utr"
         )
         .value =
@@ -4734,13 +2745,11 @@ function(){
 
     setTimeout(
         ()=>{
-
             document
                 .getElementById(
                     "depositAmount"
                 )
                 .focus();
-
         },
         180
     );
@@ -4755,18 +2764,11 @@ function(){
 window.closeAddMoney =
 function(){
 
-    const modal =
-        document.getElementById(
+    document
+        .getElementById(
             "addModal"
-        );
-
-    if(modal){
-
-        modal.classList.remove(
-            "show"
-        );
-
-    }
+        )
+        .classList.remove("show");
 
 };
 
@@ -4782,11 +2784,6 @@ function(amount){
         document.getElementById(
             "depositAmount"
         );
-
-
-    if(!input){
-        return;
-    }
 
 
     input.value =
@@ -4931,11 +2928,6 @@ function loadAdminPayment(){
                 );
 
 
-            if(!upiBox || !qr){
-                return;
-            }
-
-
             if(
                 !snapshot.exists()
             ){
@@ -4959,8 +2951,8 @@ function loadAdminPayment(){
 
             const upi =
                 String(
-                    data.upi ??
-                    data.upiId ??
+                    data.upi ||
+                    data.upiId ||
                     ""
                 ).trim();
 
@@ -4991,15 +2983,6 @@ function loadAdminPayment(){
                 selectedDepositAmount
             );
 
-        },
-
-        (error)=>{
-
-            console.error(
-                "Payment settings error:",
-                error
-            );
-
         }
     );
 
@@ -5019,11 +3002,6 @@ function createQR(
         document.getElementById(
             "adminQR"
         );
-
-
-    if(!qr){
-        return;
-    }
 
 
     if(!upi){
@@ -5184,7 +3162,6 @@ function(appName){
             appURL;
 
     }
-
     catch(error){
 
         window.location.href =
@@ -5245,19 +3222,6 @@ async function(){
     }
 
 
-    if(
-        amount > 100000
-    ){
-
-        showToast(
-            "Maximum deposit is ₹1,00,000"
-        );
-
-        return;
-
-    }
-
-
     if(!utr){
 
         showToast(
@@ -5309,15 +3273,12 @@ async function(){
         );
 
 
-    if(button){
+    button.disabled =
+        true;
 
-        button.disabled =
-            true;
 
-        button.innerText =
-            "Submitting...";
-
-    }
+    button.innerText =
+        "Submitting...";
 
 
     try{
@@ -5452,7 +3413,6 @@ async function(){
 
     }
 
-
     catch(error){
 
         console.error(
@@ -5468,22 +3428,18 @@ async function(){
 
     }
 
-
     finally{
 
         depositSubmitting =
             false;
 
 
-        if(button){
+        button.disabled =
+            false;
 
-            button.disabled =
-                false;
 
-            button.innerText =
-                "Submit Payment";
-
-        }
+        button.innerText =
+            "Submit Payment";
 
     }
 
@@ -5519,13 +3475,11 @@ function(){
 
     setTimeout(
         ()=>{
-
             document
                 .getElementById(
                     "withdrawAmount"
                 )
                 .focus();
-
         },
         180
     );
@@ -5602,13 +3556,9 @@ function(
         );
 
 
-    if(button){
-
-        button.classList.add(
-            "active"
-        );
-
-    }
+    button.classList.add(
+        "active"
+    );
 
 
     renderTransactions();
@@ -5690,15 +3640,11 @@ function loadHistory(){
             );
 
 
-            const historyList =
-                document.getElementById(
+            document
+                .getElementById(
                     "historyList"
-                );
-
-
-            if(historyList){
-
-                historyList.innerHTML = `
+                )
+                .innerHTML = `
 
                     <div class="empty">
 
@@ -5717,8 +3663,6 @@ function loadHistory(){
                     </div>
 
                 `;
-
-            }
 
         }
     );
@@ -5742,11 +3686,6 @@ function renderTransactions(){
         document.getElementById(
             "historyCount"
         );
-
-
-    if(!box){
-        return;
-    }
 
 
     let list =
@@ -6007,7 +3946,6 @@ function renderTransactions(){
 
             }
 
-
             else if(
                 lowerTitle.includes(
                     "withdraw"
@@ -6019,7 +3957,6 @@ function renderTransactions(){
 
             }
 
-
             else if(
                 lowerTitle.includes(
                     "match"
@@ -6030,7 +3967,6 @@ function renderTransactions(){
                     "🎮";
 
             }
-
 
             else if(
                 lowerTitle.includes(
@@ -6046,7 +3982,6 @@ function renderTransactions(){
 
             }
 
-
             else if(
                 lowerTitle.includes(
                     "cashback"
@@ -6060,7 +3995,6 @@ function renderTransactions(){
                     "🎁";
 
             }
-
 
             else if(
                 lowerTitle.includes(
@@ -6087,7 +4021,6 @@ function renderTransactions(){
 
             }
 
-
             else if(
                 status === "rejected"
             ){
@@ -6096,7 +4029,6 @@ function renderTransactions(){
                     "rejected-text";
 
             }
-
 
             else if(
                 status === "completed" ||
@@ -6251,18 +4183,12 @@ function loadPendingRequests(){
             }
 
 
-            const element =
-                document.getElementById(
+            document
+                .getElementById(
                     "pendingDeposits"
-                );
-
-
-            if(element){
-
-                element.innerText =
-                    count;
-
-            }
+                )
+                .innerText =
+                count;
 
         }
     );
@@ -6310,18 +4236,12 @@ function loadPendingRequests(){
             }
 
 
-            const element =
-                document.getElementById(
+            document
+                .getElementById(
                     "pendingWithdraws"
-                );
-
-
-            if(element){
-
-                element.innerText =
-                    count;
-
-            }
+                )
+                .innerText =
+                count;
 
         }
     );
@@ -6449,15 +4369,12 @@ async function(){
         );
 
 
-    if(button){
+    button.disabled =
+        true;
 
-        button.disabled =
-            true;
 
-        button.innerText =
-            "Submitting...";
-
-    }
+    button.innerText =
+        "Submitting...";
 
 
     try{
@@ -6574,6 +4491,9 @@ async function(){
 
         /*
          * CHECK EXISTING PENDING
+         *
+         * Prevent accidental duplicate
+         * requests for same amount.
          */
 
         const existingSnap =
@@ -6721,7 +4641,6 @@ async function(){
 
     }
 
-
     catch(error){
 
         console.error(
@@ -6737,22 +4656,18 @@ async function(){
 
     }
 
-
     finally{
 
         withdrawSubmitting =
             false;
 
 
-        if(button){
+        button.disabled =
+            false;
 
-            button.disabled =
-                false;
 
-            button.innerText =
-                "Submit Withdraw";
-
-        }
+        button.innerText =
+            "Submit Withdraw";
 
     }
 
@@ -6796,11 +4711,6 @@ function(message){
         document.getElementById(
             "toast"
         );
-
-
-    if(!toast){
-        return;
-    }
 
 
     toast.innerText =
@@ -6906,15 +4816,11 @@ document.addEventListener(
    AUTO QR REFRESH WHEN AMOUNT CHANGES
 ========================================================= */
 
-const depositAmountInput =
-    document.getElementById(
+document
+    .getElementById(
         "depositAmount"
-    );
-
-
-if(depositAmountInput){
-
-    depositAmountInput.addEventListener(
+    )
+    .addEventListener(
         "input",
         ()=>{
 
@@ -6924,7 +4830,11 @@ if(depositAmountInput){
 
                 const value =
                     Number(
-                        depositAmountInput.value
+                        document
+                            .getElementById(
+                                "depositAmount"
+                            )
+                            .value
                     );
 
 
@@ -6959,100 +4869,8 @@ if(depositAmountInput){
         }
     );
 
-}
-
-
-/* =========================================================
-   MODAL BACKDROP SCROLL LOCK
-========================================================= */
-
-function updateBodyModalLock(){
-
-    const add =
-        document
-            .getElementById(
-                "addModal"
-            )
-            ?.classList.contains(
-                "show"
-            );
-
-    const withdraw =
-        document
-            .getElementById(
-                "withdrawModal"
-            )
-            ?.classList.contains(
-                "show"
-            );
-
-
-    document.body.style.overflow =
-        add || withdraw
-        ? "hidden"
-        : "";
-
-}
-
-
-const originalCloseAddMoney =
-    window.closeAddMoney;
-
-
-const originalCloseWithdraw =
-    window.closeWithdraw;
-
-
-window.closeAddMoney =
-function(){
-
-    originalCloseAddMoney();
-
-    updateBodyModalLock();
-
-};
-
-
-window.closeWithdraw =
-function(){
-
-    originalCloseWithdraw();
-
-    updateBodyModalLock();
-
-};
-
-
-const originalOpenAddMoney =
-    window.openAddMoney;
-
-
-window.openAddMoney =
-function(){
-
-    originalOpenAddMoney();
-
-    updateBodyModalLock();
-
-};
-
-
-const originalOpenWithdraw =
-    window.openWithdraw;
-
-
-window.openWithdraw =
-function(){
-
-    originalOpenWithdraw();
-
-    updateBodyModalLock();
-
-};
-
 
 </script>
-
 
 </body>
 
