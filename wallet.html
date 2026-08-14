@@ -2120,23 +2120,22 @@ function formatMoney(value){
    GET NUMERIC WALLET
 ========================================================= */
 
-function parseWalletValue(value){
+function parseWalletValue(walletData) {
+    if (!walletData) return 0;
 
-    if(
-        value &&
-        typeof value === "object"
-    ){
-
-        return Number(
-            value.balance ??
-            value.amount ??
-            0
-        );
-
+    if (typeof walletData === "number") {
+        return walletData;
     }
 
-    return Number(value || 0);
+    if (typeof walletData === "object") {
+        return Number(
+            walletData.balance ??
+            walletData.amount ??
+            0
+        );
+    }
 
+    return Number(walletData) || 0;
 }
 
 
