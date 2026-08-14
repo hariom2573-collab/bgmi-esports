@@ -18,6 +18,40 @@ content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no
 <style>
 
 /* =========================================================
+   BGMI PAY — PREMIUM WALLET UI
+   Existing HTML / JS compatible CSS
+========================================================= */
+
+:root{
+    --bg:#040914;
+    --bg2:#07101d;
+    --card:#0b1627;
+    --card2:#0e1b2e;
+
+    --green:#22c55e;
+    --green2:#4ade80;
+    --green3:#16a34a;
+
+    --blue:#2563eb;
+    --blue2:#60a5fa;
+
+    --purple:#8b5cf6;
+    --gold:#fbbf24;
+
+    --text:#ffffff;
+    --muted:#8794a8;
+    --muted2:#647188;
+
+    --border:rgba(255,255,255,.09);
+
+    --shadow:
+        0 25px 70px rgba(0,0,0,.45);
+
+    --radius:22px;
+}
+
+
+/* =========================================================
    RESET
 ========================================================= */
 
@@ -25,8 +59,18 @@ content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Inter,Arial,sans-serif;
+
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
     -webkit-tap-highlight-color:transparent;
+    -webkit-font-smoothing:antialiased;
 }
 
 html,
@@ -36,55 +80,92 @@ body{
 }
 
 html{
-    background:#050B18;
+    background:var(--bg);
 }
 
 body{
-    background:#050B18;
-    color:#fff;
-    overflow-x:hidden;
-    padding-bottom:90px;
-}
-
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-
     background:
         radial-gradient(
-            circle at 0% 0%,
-            #22c55e28,
-            transparent 32%
+            circle at 15% -5%,
+            rgba(34,197,94,.12),
+            transparent 30%
         ),
         radial-gradient(
-            circle at 100% 0%,
-            #2563eb24,
-            transparent 32%
+            circle at 100% 5%,
+            rgba(37,99,235,.12),
+            transparent 30%
         ),
         radial-gradient(
             circle at 50% 100%,
-            #a855f716,
+            rgba(139,92,246,.08),
             transparent 35%
         ),
-        #050B18;
+        var(--bg);
 
-    z-index:-2;
+    color:var(--text);
+
+    overflow-x:hidden;
+
+    padding-bottom:
+        calc(92px + env(safe-area-inset-bottom));
 }
 
-body::after{
+
+/* =========================================================
+   BACKGROUND EFFECT
+========================================================= */
+
+body::before{
     content:"";
+
     position:fixed;
     inset:0;
 
     pointer-events:none;
 
     background:
+        radial-gradient(
+            circle at 0% 0%,
+            rgba(34,197,94,.10),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 100% 20%,
+            rgba(37,99,235,.08),
+            transparent 28%
+        );
+
+    z-index:-2;
+}
+
+body::after{
+    content:"";
+
+    position:fixed;
+    inset:0;
+
+    pointer-events:none;
+
+    opacity:.35;
+
+    background:
         linear-gradient(
-            180deg,
-            rgba(255,255,255,.015),
-            transparent 30%,
-            rgba(255,255,255,.01)
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        );
+
+    background-size:35px 35px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent 75%
         );
 
     z-index:-1;
@@ -98,12 +179,15 @@ body::after{
 .app{
     width:100%;
     max-width:520px;
+
     margin:0 auto;
+
     min-height:100vh;
+
     padding:
         calc(14px + env(safe-area-inset-top))
         14px
-        20px;
+        22px;
 }
 
 
@@ -115,6 +199,7 @@ body::after{
     display:flex;
     align-items:center;
     justify-content:space-between;
+
     margin-bottom:18px;
 }
 
@@ -125,52 +210,100 @@ body::after{
 }
 
 .header-icon{
-    width:44px;
-    height:44px;
-    border-radius:14px;
+    position:relative;
+
+    width:45px;
+    height:45px;
+
+    flex:0 0 45px;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
+    border-radius:15px;
+
     background:
         linear-gradient(
             145deg,
-            #22c55e,
-            #15803d
+            #4ade80,
+            #16a34a
         );
 
     box-shadow:
-        0 8px 25px #22c55e25,
-        inset 0 1px 0 #ffffff35;
+        0 10px 28px rgba(34,197,94,.20),
+        inset 0 1px 0 rgba(255,255,255,.35);
 
-    font-size:22px;
+    font-size:21px;
+}
+
+.header-icon::after{
+    content:"";
+
+    position:absolute;
+    inset:-4px;
+
+    border-radius:18px;
+
+    border:1px solid rgba(74,222,128,.12);
+
+    pointer-events:none;
 }
 
 .header-title{
     font-size:20px;
-    font-weight:900;
-    letter-spacing:-.5px;
+    font-weight:950;
+
+    letter-spacing:-.6px;
 }
 
 .header-subtitle{
-    color:#8d99ad;
-    font-size:11px;
-    margin-top:2px;
+    margin-top:3px;
+
+    color:var(--muted);
+
+    font-size:10px;
+    font-weight:600;
 }
 
 .header-badge{
+    display:flex;
+    align-items:center;
+    gap:5px;
+
     padding:7px 10px;
-    border-radius:20px;
 
-    border:1px solid #ffffff10;
+    border-radius:999px;
 
-    background:#ffffff08;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(34,197,94,.10),
+            rgba(34,197,94,.035)
+        );
 
-    color:#dce5f2;
+    border:1px solid rgba(34,197,94,.18);
 
-    font-size:10px;
-    font-weight:800;
+    color:#6ee7a1;
+
+    font-size:9px;
+    font-weight:900;
+
+    letter-spacing:.5px;
+}
+
+.header-badge::before{
+    content:"";
+
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:#4ade80;
+
+    box-shadow:
+        0 0 10px #4ade80;
 }
 
 
@@ -180,63 +313,81 @@ body::after{
 
 .wallet-card{
     position:relative;
+
     overflow:hidden;
 
-    min-height:205px;
-
-    border-radius:26px;
+    min-height:210px;
 
     padding:22px;
 
+    margin-bottom:15px;
+
+    border-radius:27px;
+
     background:
         linear-gradient(
-            135deg,
-            #111c30,
-            #08111f 55%,
-            #0b1728
+            145deg,
+            rgba(18,32,53,.98),
+            rgba(7,16,29,.98) 58%,
+            rgba(10,24,40,.98)
         );
 
-    border:1px solid #ffffff12;
+    border:1px solid rgba(255,255,255,.10);
 
     box-shadow:
-        0 20px 55px #00000045,
-        inset 0 1px 0 #ffffff10;
+        0 25px 65px rgba(0,0,0,.42),
+        inset 0 1px 0 rgba(255,255,255,.08);
 
-    margin-bottom:16px;
+    isolation:isolate;
 }
 
 .wallet-card::before{
     content:"";
+
     position:absolute;
 
-    width:210px;
-    height:210px;
+    width:250px;
+    height:250px;
 
-    right:-85px;
-    top:-90px;
+    right:-105px;
+    top:-125px;
 
     border-radius:50%;
 
-    background:#22c55e18;
+    background:
+        radial-gradient(
+            circle,
+            rgba(34,197,94,.24),
+            rgba(34,197,94,.04) 48%,
+            transparent 70%
+        );
 
-    filter:blur(4px);
+    filter:blur(3px);
+
+    z-index:-1;
 }
 
 .wallet-card::after{
     content:"";
+
     position:absolute;
 
-    width:150px;
-    height:150px;
+    width:180px;
+    height:180px;
 
-    left:-80px;
-    bottom:-80px;
+    left:-100px;
+    bottom:-110px;
 
     border-radius:50%;
 
-    background:#2563eb18;
+    background:
+        radial-gradient(
+            circle,
+            rgba(37,99,235,.20),
+            transparent 68%
+        );
 
-    filter:blur(5px);
+    z-index:-1;
 }
 
 .wallet-top{
@@ -249,9 +400,12 @@ body::after{
 }
 
 .wallet-label{
-    color:#8d99ad;
-    font-size:12px;
-    font-weight:700;
+    color:#93a0b4;
+
+    font-size:11px;
+    font-weight:750;
+
+    letter-spacing:.15px;
 }
 
 .wallet-chip{
@@ -259,17 +413,23 @@ body::after{
     align-items:center;
     gap:5px;
 
-    padding:6px 9px;
+    padding:6px 10px;
 
-    border-radius:20px;
+    border-radius:999px;
 
-    background:#22c55e12;
-    border:1px solid #22c55e30;
+    background:
+        rgba(34,197,94,.08);
 
-    color:#6ee7a1;
+    border:1px solid
+        rgba(34,197,94,.22);
 
-    font-size:10px;
-    font-weight:800;
+    color:#70eda3;
+
+    font-size:9px;
+    font-weight:900;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.05);
 }
 
 .wallet-main{
@@ -278,37 +438,54 @@ body::after{
 
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:11px;
 
-    margin-top:14px;
+    margin-top:15px;
 }
 
 .wallet-amount{
-    font-size:36px;
+    font-size:37px;
+
     line-height:1;
 
     font-weight:950;
 
-    letter-spacing:-1.5px;
+    letter-spacing:-1.7px;
 
-    color:#ffffff;
+    color:#fff;
+
+    text-shadow:
+        0 3px 20px rgba(255,255,255,.06);
 }
 
 .eye-btn{
-    width:34px;
-    height:34px;
+    width:35px;
+    height:35px;
 
-    border-radius:11px;
+    display:grid;
+    place-items:center;
 
-    border:1px solid #ffffff12;
+    border-radius:12px;
 
-    background:#ffffff08;
+    border:1px solid rgba(255,255,255,.09);
 
-    color:#dce5f2;
+    background:
+        rgba(255,255,255,.055);
 
-    font-size:16px;
+    color:#cdd6e3;
+
+    font-size:15px;
 
     cursor:pointer;
+
+    transition:
+        transform .16s ease,
+        background .16s ease;
+}
+
+.eye-btn:active{
+    transform:scale(.92);
+    background:rgba(255,255,255,.10);
 }
 
 .wallet-bottom{
@@ -316,27 +493,64 @@ body::after{
     z-index:2;
 
     display:grid;
+
     grid-template-columns:1fr 1fr;
 
     gap:10px;
 
-    margin-top:25px;
+    margin-top:27px;
 }
 
 .wallet-mini{
-    padding:11px;
+    position:relative;
 
-    border-radius:15px;
+    padding:12px;
 
-    background:#ffffff06;
+    min-height:59px;
 
-    border:1px solid #ffffff0d;
+    border-radius:16px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.065),
+            rgba(255,255,255,.025)
+        );
+
+    border:1px solid
+        rgba(255,255,255,.075);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.035);
+}
+
+.wallet-mini::before{
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    top:12px;
+    bottom:12px;
+
+    width:2px;
+
+    border-radius:3px;
+
+    background:
+        linear-gradient(
+            #4ade80,
+            transparent
+        );
+
+    opacity:.65;
 }
 
 .wallet-mini-label{
-    color:#77859b;
-    font-size:10px;
-    font-weight:700;
+    color:#77869b;
+
+    font-size:9px;
+    font-weight:750;
 }
 
 .wallet-mini-value{
@@ -345,54 +559,92 @@ body::after{
     color:#fff;
 
     font-size:15px;
-    font-weight:900;
+    font-weight:950;
 }
 
 
 /* =========================================================
-   ACTIONS
+   ACTION BUTTONS
 ========================================================= */
 
 .actions{
     display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
 
-    margin-bottom:16px;
+    grid-template-columns:1fr 1fr;
+
+    gap:11px;
+
+    margin-bottom:15px;
 }
 
 .action-btn{
-    height:54px;
+    position:relative;
+
+    height:55px;
 
     border:none;
+
     border-radius:17px;
 
-    font-size:13px;
-    font-weight:900;
+    font-size:12px;
+    font-weight:950;
 
     cursor:pointer;
 
+    overflow:hidden;
+
     transition:
-        transform .15s ease,
-        opacity .15s ease;
+        transform .16s ease,
+        filter .16s ease;
+}
+
+.action-btn::after{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-100%;
+
+    width:60%;
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.18),
+            transparent
+        );
+
+    transform:skewX(-20deg);
+
+    transition:left .5s ease;
+}
+
+.action-btn:hover::after{
+    left:140%;
 }
 
 .action-btn:active{
-    transform:scale(.97);
+    transform:scale(.965);
+    filter:brightness(.94);
 }
 
 .add-btn{
-    color:#04120a;
+    color:#031109;
 
     background:
         linear-gradient(
             135deg,
             #4ade80,
-            #22c55e
+            #22c55e 55%,
+            #16a34a
         );
 
     box-shadow:
-        0 10px 25px #22c55e20;
+        0 12px 30px rgba(34,197,94,.18),
+        inset 0 1px 0 rgba(255,255,255,.35);
 }
 
 .withdraw-btn{
@@ -401,36 +653,52 @@ body::after{
     background:
         linear-gradient(
             135deg,
-            #1d4ed8,
-            #2563eb
+            #3b82f6,
+            #2563eb 55%,
+            #1d4ed8
         );
 
     box-shadow:
-        0 10px 25px #2563eb20;
+        0 12px 30px rgba(37,99,235,.18),
+        inset 0 1px 0 rgba(255,255,255,.20);
 }
 
 
 /* =========================================================
-   STATUS CARD
+   STATUS
 ========================================================= */
 
 .status-card{
     display:grid;
+
     grid-template-columns:1fr 1fr;
 
     gap:10px;
 
-    margin-bottom:18px;
+    margin-bottom:19px;
 }
 
 .status-item{
+    position:relative;
+
     padding:13px;
+
+    min-height:73px;
 
     border-radius:17px;
 
-    background:#ffffff06;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.055),
+            rgba(255,255,255,.018)
+        );
 
-    border:1px solid #ffffff0d;
+    border:1px solid
+        rgba(255,255,255,.075);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.025);
 }
 
 .status-head{
@@ -438,14 +706,14 @@ body::after{
     align-items:center;
     justify-content:space-between;
 
-    color:#7e8ba0;
+    color:#7e8ca0;
 
-    font-size:10px;
+    font-size:9px;
     font-weight:800;
 }
 
 .status-number{
-    margin-top:6px;
+    margin-top:7px;
 
     font-size:18px;
     font-weight:950;
@@ -460,7 +728,7 @@ body::after{
 
 .history-header{
     display:flex;
-    align-items:end;
+    align-items:flex-end;
     justify-content:space-between;
 
     margin-bottom:12px;
@@ -469,12 +737,15 @@ body::after{
 .history-title{
     font-size:18px;
     font-weight:950;
+
+    letter-spacing:-.35px;
 }
 
 .history-count{
-    color:#728097;
-    font-size:10px;
-    font-weight:700;
+    color:#68768b;
+
+    font-size:9px;
+    font-weight:750;
 }
 
 
@@ -489,9 +760,9 @@ body::after{
 
     overflow-x:auto;
 
-    padding-bottom:5px;
+    padding:2px 1px 6px;
 
-    margin-bottom:12px;
+    margin-bottom:11px;
 
     scrollbar-width:none;
 }
@@ -503,28 +774,46 @@ body::after{
 .filter{
     flex:0 0 auto;
 
-    padding:8px 11px;
+    padding:8px 12px;
 
-    border-radius:20px;
+    border-radius:999px;
 
-    background:#ffffff06;
+    background:
+        rgba(255,255,255,.035);
 
-    border:1px solid #ffffff0d;
+    border:1px solid
+        rgba(255,255,255,.075);
 
-    color:#8995a8;
+    color:#7f8da2;
 
-    font-size:10px;
-    font-weight:800;
+    font-size:9px;
+    font-weight:900;
 
     cursor:pointer;
+
+    transition:
+        .16s ease;
+}
+
+.filter:active{
+    transform:scale(.94);
 }
 
 .filter.active{
-    background:#22c55e15;
+    color:#63ee99;
 
-    border-color:#22c55e45;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(34,197,94,.14),
+            rgba(34,197,94,.055)
+        );
 
-    color:#5ee995;
+    border-color:
+        rgba(34,197,94,.35);
+
+    box-shadow:
+        0 5px 18px rgba(34,197,94,.07);
 }
 
 
@@ -535,44 +824,67 @@ body::after{
 .history-list{
     display:flex;
     flex-direction:column;
-    gap:9px;
+
+    gap:8px;
 }
 
 .history{
+    position:relative;
+
     display:flex;
     align-items:center;
 
-    min-height:72px;
+    min-height:73px;
 
-    padding:11px;
+    padding:10px;
 
     border-radius:18px;
 
     background:
         linear-gradient(
             145deg,
-            #ffffff08,
-            #ffffff03
+            rgba(255,255,255,.055),
+            rgba(255,255,255,.018)
         );
 
-    border:1px solid #ffffff0b;
+    border:1px solid
+        rgba(255,255,255,.075);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.025);
+
+    transition:
+        transform .15s ease,
+        background .15s ease;
+}
+
+.history:active{
+    transform:scale(.985);
+    background:rgba(255,255,255,.065);
 }
 
 .tx-icon{
-    width:42px;
-    height:42px;
+    width:43px;
+    height:43px;
 
-    flex:0 0 42px;
+    flex:0 0 43px;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    display:grid;
+    place-items:center;
 
     border-radius:14px;
 
-    background:#ffffff08;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.08),
+            rgba(255,255,255,.025)
+        );
 
-    font-size:18px;
+    border:1px solid
+        rgba(255,255,255,.07);
+
+    font-size:17px;
 }
 
 .tx-info{
@@ -585,8 +897,8 @@ body::after{
 .tx-title{
     color:#fff;
 
-    font-size:12px;
-    font-weight:850;
+    font-size:11px;
+    font-weight:900;
 
     white-space:nowrap;
     overflow:hidden;
@@ -596,9 +908,10 @@ body::after{
 .tx-time{
     margin-top:4px;
 
-    color:#657287;
+    color:#637087;
 
-    font-size:9px;
+    font-size:8px;
+    font-weight:650;
 }
 
 .tx-status{
@@ -606,8 +919,8 @@ body::after{
 
     margin-top:4px;
 
-    font-size:9px;
-    font-weight:850;
+    font-size:8px;
+    font-weight:900;
 }
 
 .completed-text{
@@ -625,7 +938,7 @@ body::after{
 .tx-amount{
     margin-left:8px;
 
-    font-size:13px;
+    font-size:12px;
     font-weight:950;
 
     white-space:nowrap;
@@ -647,33 +960,54 @@ body::after{
 .empty{
     text-align:center;
 
-    padding:42px 18px;
+    padding:43px 18px;
 
     border-radius:20px;
 
-    background:#ffffff05;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.045),
+            rgba(255,255,255,.015)
+        );
 
-    border:1px solid #ffffff09;
+    border:1px solid
+        rgba(255,255,255,.07);
 }
 
 .empty-icon{
-    font-size:30px;
-    margin-bottom:10px;
+    width:55px;
+    height:55px;
+
+    display:grid;
+    place-items:center;
+
+    margin:0 auto 11px;
+
+    border-radius:17px;
+
+    background:
+        rgba(34,197,94,.07);
+
+    border:1px solid
+        rgba(34,197,94,.12);
+
+    font-size:24px;
 }
 
 .empty-title{
     color:#fff;
 
-    font-size:14px;
+    font-size:13px;
     font-weight:900;
 }
 
 .empty-text{
     margin-top:6px;
 
-    color:#68758a;
+    color:#65738a;
 
-    font-size:10px;
+    font-size:9px;
 }
 
 
@@ -683,6 +1017,7 @@ body::after{
 
 .modal{
     position:fixed;
+
     inset:0;
 
     z-index:1000;
@@ -691,19 +1026,28 @@ body::after{
     align-items:center;
     justify-content:center;
 
-    padding:18px;
+    padding:
+        calc(14px + env(safe-area-inset-top))
+        14px
+        calc(14px + env(safe-area-inset-bottom));
 
-    background:#000000a8;
+    background:
+        rgba(0,0,0,.72);
 
-    backdrop-filter:blur(10px);
-    -webkit-backdrop-filter:blur(10px);
+    backdrop-filter:
+        blur(16px)
+        saturate(125%);
+
+    -webkit-backdrop-filter:
+        blur(16px)
+        saturate(125%);
 
     opacity:0;
     visibility:hidden;
 
     transition:
-        opacity .2s ease,
-        visibility .2s ease;
+        opacity .22s ease,
+        visibility .22s ease;
 }
 
 .modal.show{
@@ -717,78 +1061,145 @@ body::after{
 ========================================================= */
 
 .modal-box{
+    position:relative;
+
     width:100%;
     max-width:430px;
 
     max-height:
         calc(
-            100vh -
-            36px -
-            env(safe-area-inset-top) -
-            env(safe-area-inset-bottom)
+            100vh
+            - 28px
+            - env(safe-area-inset-top)
+            - env(safe-area-inset-bottom)
         );
 
     overflow-y:auto;
 
-    border-radius:25px;
+    padding:19px;
+
+    border-radius:26px;
 
     background:
         linear-gradient(
             145deg,
-            #101b2d,
-            #07101d
+            #111e32,
+            #07111f 58%,
+            #081422
         );
 
-    border:1px solid #ffffff12;
+    border:1px solid
+        rgba(255,255,255,.105);
 
     box-shadow:
-        0 30px 90px #00000070;
+        0 35px 100px rgba(0,0,0,.72),
+        inset 0 1px 0 rgba(255,255,255,.08);
 
-    padding:18px;
-
-    transform:scale(.94);
+    transform:
+        scale(.90)
+        translateY(10px);
 
     transition:
-        transform .22s ease;
+        transform .24s cubic-bezier(.2,.8,.2,1);
 }
 
 .modal.show .modal-box{
-    transform:scale(1);
+    transform:
+        scale(1)
+        translateY(0);
 }
 
+.modal-box::-webkit-scrollbar{
+    width:3px;
+}
+
+.modal-box::-webkit-scrollbar-thumb{
+    background:#26364e;
+    border-radius:10px;
+}
+
+
+/* =========================================================
+   MODAL TOP GLOW
+========================================================= */
+
+.modal-box::before{
+    content:"";
+
+    position:absolute;
+
+    top:-80px;
+    left:50%;
+
+    width:180px;
+    height:120px;
+
+    transform:translateX(-50%);
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(34,197,94,.14),
+            transparent 70%
+        );
+
+    pointer-events:none;
+}
+
+
+/* =========================================================
+   MODAL HEADER
+========================================================= */
+
 .modal-head{
+    position:relative;
+
     display:flex;
     align-items:center;
     justify-content:space-between;
 
-    margin-bottom:16px;
+    margin-bottom:17px;
 }
 
 .modal-title{
     font-size:18px;
     font-weight:950;
+
+    letter-spacing:-.4px;
 }
 
 .close-btn{
-    width:34px;
-    height:34px;
+    width:35px;
+    height:35px;
 
-    border-radius:11px;
+    display:grid;
+    place-items:center;
 
-    border:1px solid #ffffff10;
+    border-radius:12px;
 
-    background:#ffffff07;
+    border:1px solid
+        rgba(255,255,255,.08);
 
-    color:#aeb8c8;
+    background:
+        rgba(255,255,255,.045);
 
-    font-size:17px;
+    color:#aeb9c9;
+
+    font-size:18px;
 
     cursor:pointer;
+
+    transition:.16s ease;
+}
+
+.close-btn:active{
+    transform:scale(.90);
+    background:rgba(255,255,255,.09);
 }
 
 
 /* =========================================================
-   MODAL STEP
+   PAYMENT STEP
 ========================================================= */
 
 .payment-step{
@@ -796,10 +1207,12 @@ body::after{
 }
 
 .step-title{
+    margin-bottom:11px;
+
+    color:#eaf0f7;
+
     font-size:13px;
     font-weight:900;
-
-    margin-bottom:10px;
 }
 
 .input-label{
@@ -807,45 +1220,74 @@ body::after{
 
     margin-bottom:6px;
 
-    color:#7f8ca0;
+    color:#7e8ca0;
 
-    font-size:10px;
-    font-weight:800;
+    font-size:9px;
+    font-weight:850;
+
+    letter-spacing:.15px;
 }
 
 .input{
     width:100%;
-    height:48px;
-
-    border-radius:14px;
-
-    outline:none;
-
-    border:1px solid #ffffff10;
-
-    background:#ffffff07;
-
-    color:#fff;
+    height:49px;
 
     padding:0 14px;
 
-    font-size:14px;
-    font-weight:700;
+    outline:none;
+
+    border-radius:14px;
+
+    border:1px solid
+        rgba(255,255,255,.085);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.055),
+            rgba(255,255,255,.025)
+        );
+
+    color:#fff;
+
+    font-size:13px;
+    font-weight:750;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.025);
+
+    transition:
+        border-color .18s ease,
+        background .18s ease,
+        box-shadow .18s ease;
 }
 
 .input::placeholder{
-    color:#566378;
+    color:#56657a;
 }
 
 .input:focus{
-    border-color:#22c55e45;
+    border-color:
+        rgba(34,197,94,.40);
 
-    background:#ffffff09;
+    background:
+        rgba(34,197,94,.045);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(34,197,94,.055);
 }
+
+
+/* =========================================================
+   QUICK AMOUNT
+========================================================= */
 
 .quick-grid{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+
+    grid-template-columns:
+        repeat(4,1fr);
 
     gap:7px;
 
@@ -853,250 +1295,573 @@ body::after{
 }
 
 .quick-btn{
-    height:38px;
+    height:39px;
 
-    border-radius:11px;
+    border-radius:12px;
 
-    border:1px solid #ffffff0d;
+    border:1px solid
+        rgba(255,255,255,.075);
 
-    background:#ffffff06;
+    background:
+        rgba(255,255,255,.04);
 
-    color:#c6cfdb;
+    color:#cbd4df;
 
     font-size:10px;
-    font-weight:850;
+    font-weight:900;
 
     cursor:pointer;
+
+    transition:
+        transform .14s ease,
+        background .14s ease,
+        border-color .14s ease;
+}
+
+.quick-btn:hover{
+    border-color:
+        rgba(34,197,94,.25);
+
+    background:
+        rgba(34,197,94,.07);
+
+    color:#65e997;
 }
 
 .quick-btn:active{
-    transform:scale(.96);
+    transform:scale(.93);
 }
 
+
+/* =========================================================
+   PRIMARY BUTTON
+========================================================= */
+
 .primary-btn{
+    position:relative;
+
     width:100%;
-    height:49px;
+    height:50px;
+
+    margin-top:10px;
 
     border:none;
 
-    border-radius:14px;
+    border-radius:15px;
 
     background:
         linear-gradient(
             135deg,
-            #22c55e,
+            #4ade80,
+            #22c55e 55%,
             #16a34a
         );
 
-    color:#031009;
+    color:#031109;
 
-    font-size:12px;
+    font-size:11px;
     font-weight:950;
 
     cursor:pointer;
 
-    margin-top:10px;
+    overflow:hidden;
+
+    box-shadow:
+        0 12px 28px
+        rgba(34,197,94,.16),
+        inset 0 1px 0
+        rgba(255,255,255,.35);
+
+    transition:
+        transform .15s ease,
+        filter .15s ease;
+}
+
+.primary-btn::after{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-110%;
+
+    width:65%;
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.28),
+            transparent
+        );
+
+    transform:skewX(-20deg);
+
+    transition:left .5s ease;
+}
+
+.primary-btn:hover::after{
+    left:140%;
+}
+
+.primary-btn:active{
+    transform:scale(.97);
+    filter:brightness(.92);
 }
 
 .secondary-btn{
     width:100%;
     height:45px;
 
-    border:1px solid #ffffff10;
+    margin-top:8px;
+
+    border:1px solid
+        rgba(255,255,255,.09);
 
     border-radius:14px;
 
-    background:#ffffff06;
+    background:
+        rgba(255,255,255,.045);
 
-    color:#c8d1dd;
+    color:#c7d0dc;
 
-    font-size:11px;
+    font-size:10px;
     font-weight:850;
 
     cursor:pointer;
 
-    margin-top:8px;
+    transition:.16s ease;
+}
+
+.secondary-btn:active{
+    transform:scale(.975);
+    background:rgba(255,255,255,.07);
 }
 
 
 /* =========================================================
-   PAYMENT
+   PAYMENT AMOUNT DISPLAY
 ========================================================= */
 
 .amount-display{
-    padding:12px;
+    position:relative;
 
-    border-radius:14px;
+    padding:13px;
 
-    background:#22c55e0b;
+    margin-bottom:12px;
 
-    border:1px solid #22c55e22;
+    border-radius:16px;
 
-    margin-bottom:13px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(34,197,94,.11),
+            rgba(34,197,94,.035)
+        );
+
+    border:1px solid
+        rgba(34,197,94,.20);
+
+    overflow:hidden;
+}
+
+.amount-display::after{
+    content:"";
+
+    position:absolute;
+
+    width:100px;
+    height:100px;
+
+    right:-50px;
+    top:-55px;
+
+    border-radius:50%;
+
+    background:
+        rgba(34,197,94,.10);
+
+    filter:blur(3px);
 }
 
 .amount-label{
-    color:#718097;
+    position:relative;
+    z-index:1;
 
-    font-size:9px;
-    font-weight:800;
-}
+    color:#718098;
 
-.payment-method-label{
-    display:inline-flex;
-    margin-top:7px;
-    padding:4px 8px;
-    border-radius:999px;
-    background:#22c55e12;
-    border:1px solid #22c55e22;
-    color:#74eaa0;
-    font-size:7px;
-    font-weight:950;
+    font-size:8px;
+    font-weight:850;
+
     letter-spacing:.7px;
 }
 
 .amount-value{
-    color:#5ee995;
-
-    font-size:20px;
-    font-weight:950;
+    position:relative;
+    z-index:1;
 
     margin-top:3px;
+
+    color:#61ed99;
+
+    font-size:22px;
+    font-weight:950;
+
+    letter-spacing:-.5px;
 }
 
+.payment-method-label{
+    position:relative;
+    z-index:1;
+
+    display:inline-flex;
+
+    margin-top:7px;
+
+    padding:4px 8px;
+
+    border-radius:999px;
+
+    background:
+        rgba(34,197,94,.09);
+
+    border:1px solid
+        rgba(34,197,94,.18);
+
+    color:#6ee7a0;
+
+    font-size:7px;
+    font-weight:950;
+
+    letter-spacing:.7px;
+}
+
+
+/* =========================================================
+   UPI BOX
+========================================================= */
+
 .upi-box{
+    position:relative;
+
     text-align:center;
 
-    padding:10px;
+    padding:10px 12px;
+
+    margin-bottom:10px;
 
     border-radius:13px;
 
-    background:#ffffff05;
+    background:
+        rgba(255,255,255,.035);
 
-    border:1px solid #ffffff09;
+    border:1px solid
+        rgba(255,255,255,.07);
 
-    color:#aeb8c7;
+    color:#abb7c7;
 
-    font-size:10px;
+    font-size:9px;
     font-weight:800;
 
     word-break:break-all;
-
-    margin-bottom:12px;
 }
 
+.upi-box::before{
+    content:"UPI";
+
+    display:inline-block;
+
+    margin-right:6px;
+
+    color:#5ee995;
+
+    font-size:8px;
+    font-weight:950;
+}
+
+
+/* =========================================================
+   QR
+========================================================= */
+
 .qr-wrap{
+    position:relative;
+
     display:flex;
+
     justify-content:center;
     align-items:center;
 
-    min-height:220px;
+    min-height:225px;
 
-    margin-bottom:12px;
+    margin-bottom:8px;
+
+    border-radius:18px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.035),
+            transparent 70%
+        );
 }
 
 #adminQR{
-    width:210px;
-    height:210px;
+    width:205px;
+    height:205px;
 
     object-fit:contain;
 
+    display:none;
+
+    padding:8px;
+
+    border-radius:16px;
+
     background:#fff;
 
-    border-radius:13px;
+    border:4px solid rgba(255,255,255,.96);
 
-    padding:7px;
-
-    display:none;
+    box-shadow:
+        0 16px 40px rgba(0,0,0,.35),
+        0 0 0 1px rgba(255,255,255,.12);
 }
+
+
+/* =========================================================
+   PAYMENT APP BUTTONS
+========================================================= */
 
 .payment-apps{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
+
+    grid-template-columns:
+        repeat(2,1fr);
+
     gap:9px;
-    margin-top:10px;
+
+    margin-top:8px;
 }
 
 .app-btn{
-    min-height:58px;
+    position:relative;
+
+    min-height:65px;
+
     padding:9px 10px;
-    border-radius:15px;
-    border:1px solid #ffffff10;
-    background:linear-gradient(145deg,#ffffff0b,#ffffff04);
-    color:#fff;
-    font-size:10px;
-    font-weight:900;
-    cursor:pointer;
+
     display:flex;
     align-items:center;
-    gap:10px;
+
+    gap:9px;
+
+    border-radius:16px;
+
+    border:1px solid
+        rgba(255,255,255,.08);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.065),
+            rgba(255,255,255,.025)
+        );
+
+    color:#fff;
+
+    cursor:pointer;
+
     text-align:left;
-    transition:.18s ease;
-    box-shadow:0 8px 24px #00000018;
+
+    overflow:hidden;
+
+    box-shadow:
+        inset 0 1px 0
+        rgba(255,255,255,.035);
+
+    transition:
+        transform .16s ease,
+        border-color .16s ease,
+        background .16s ease;
+}
+
+.app-btn::after{
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent 35%,
+            rgba(255,255,255,.055),
+            transparent 65%
+        );
+
+    transform:translateX(-100%);
+
+    transition:transform .45s ease;
+}
+
+.app-btn:hover::after{
+    transform:translateX(100%);
 }
 
 .app-btn:active{
-    transform:scale(.97);
+    transform:scale(.955);
 }
 
 .app-icon{
-    width:34px;
-    height:34px;
-    flex:0 0 34px;
+    position:relative;
+    z-index:1;
+
+    width:37px;
+    height:37px;
+
+    flex:0 0 37px;
+
     display:grid;
     place-items:center;
-    border-radius:11px;
-    background:#ffffff0b;
+
+    border-radius:12px;
+
+    background:
+        rgba(255,255,255,.065);
+
+    border:1px solid
+        rgba(255,255,255,.07);
+
     font-size:14px;
     font-weight:950;
 }
 
 .app-name{
+    position:relative;
+    z-index:1;
+
     display:block;
-    font-size:11px;
+
+    font-size:10px;
     line-height:1.1;
+
+    font-weight:950;
 }
 
 .app-sub{
+    position:relative;
+    z-index:1;
+
     display:block;
-    margin-top:3px;
-    color:#718097;
-    font-size:8px;
-    font-weight:750;
+
+    margin-top:4px;
+
+    color:#6f7d91;
+
+    font-size:7px;
+    font-weight:700;
 }
 
-.app-gpay{border-color:#4285f430;}
-.app-phonepe{border-color:#673ab730;}
-.app-paytm{border-color:#00baf230;}
-.app-fampay{border-color:#ff5c8a30;}
+.app-gpay{
+    border-color:
+        rgba(66,133,244,.22);
+}
+
+.app-gpay .app-icon{
+    background:
+        linear-gradient(
+            135deg,
+            rgba(66,133,244,.18),
+            rgba(52,168,83,.08)
+        );
+
+    color:#fff;
+}
+
+.app-phonepe{
+    border-color:
+        rgba(103,58,183,.25);
+}
+
+.app-phonepe .app-icon{
+    background:
+        rgba(103,58,183,.15);
+
+    color:#c4a5ff;
+}
+
+.app-paytm{
+    border-color:
+        rgba(0,186,242,.22);
+}
+
+.app-paytm .app-icon{
+    background:
+        rgba(0,186,242,.12);
+
+    color:#63dfff;
+}
+
+.app-fampay{
+    border-color:
+        rgba(255,92,138,.22);
+}
+
+.app-fampay .app-icon{
+    background:
+        rgba(255,92,138,.12);
+
+    color:#ff8faf;
+}
+
+
+/* =========================================================
+   PAYMENT SECURITY
+========================================================= */
 
 .payment-security{
     display:flex;
+
     align-items:center;
     justify-content:center;
-    gap:7px;
-    margin:10px 0 2px;
-    color:#7f8da3;
-    font-size:8px;
+
+    gap:5px;
+
+    margin:11px 0 2px;
+
+    color:#718097;
+
+    font-size:7px;
     font-weight:800;
+
+    text-align:center;
 }
+
+
+/* =========================================================
+   INFO BOX
+========================================================= */
 
 .info-box{
     margin-top:12px;
 
-    padding:10px;
+    padding:10px 11px;
 
-    border-radius:12px;
+    border-radius:13px;
 
-    background:#ffffff04;
+    background:
+        rgba(255,255,255,.028);
 
-    border:1px solid #ffffff08;
+    border:1px solid
+        rgba(255,255,255,.06);
 
-    color:#68758a;
+    color:#68768b;
 
-    font-size:9px;
+    font-size:8px;
 
-    line-height:1.5;
+    line-height:1.55;
 
     text-align:center;
 }
@@ -1107,30 +1872,67 @@ body::after{
 ========================================================= */
 
 .available-card{
-    padding:13px;
+    position:relative;
 
-    border-radius:15px;
-
-    background:#2563eb0c;
-
-    border:1px solid #2563eb22;
+    padding:14px;
 
     margin-bottom:14px;
+
+    border-radius:16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(37,99,235,.12),
+            rgba(37,99,235,.035)
+        );
+
+    border:1px solid
+        rgba(37,99,235,.20);
+
+    overflow:hidden;
+}
+
+.available-card::after{
+    content:"";
+
+    position:absolute;
+
+    width:90px;
+    height:90px;
+
+    right:-40px;
+    top:-45px;
+
+    border-radius:50%;
+
+    background:
+        rgba(37,99,235,.12);
+
+    filter:blur(4px);
 }
 
 .available-label{
+    position:relative;
+    z-index:1;
+
     color:#75839a;
 
-    font-size:9px;
-    font-weight:800;
+    font-size:8px;
+    font-weight:850;
+
+    letter-spacing:.5px;
 }
 
 .available-value{
+    position:relative;
+    z-index:1;
+
     margin-top:4px;
 
     color:#60a5fa;
 
-    font-size:21px;
+    font-size:22px;
     font-weight:950;
 }
 
@@ -1143,41 +1945,48 @@ body::after{
     position:fixed;
 
     left:50%;
+
     bottom:
         calc(
-            22px +
+            20px +
             env(safe-area-inset-bottom)
         );
-
-    transform:
-        translate(-50%,20px);
 
     z-index:3000;
 
     width:max-content;
-    max-width:calc(100vw - 36px);
+
+    max-width:
+        calc(100vw - 34px);
 
     padding:11px 16px;
 
     border-radius:14px;
 
-    background:#101a2aee;
+    background:
+        rgba(12,22,37,.96);
 
-    border:1px solid #ffffff15;
+    border:1px solid
+        rgba(255,255,255,.11);
 
     box-shadow:
-        0 12px 35px #00000055;
+        0 15px 45px rgba(0,0,0,.55);
 
     color:#fff;
 
-    font-size:11px;
-    font-weight:800;
+    font-size:10px;
+    font-weight:850;
 
     opacity:0;
     visibility:hidden;
 
+    transform:
+        translate(-50%,20px);
+
     transition:
-        .22s ease;
+        opacity .22s ease,
+        transform .22s ease,
+        visibility .22s ease;
 }
 
 .toast.show{
@@ -1197,9 +2006,10 @@ body::after{
     position:fixed;
 
     left:50%;
+
     bottom:
         calc(
-            10px +
+            9px +
             env(safe-area-inset-bottom)
         );
 
@@ -1211,31 +2021,46 @@ body::after{
             500px
         );
 
-    height:62px;
+    height:63px;
 
     z-index:900;
 
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+
+    grid-template-columns:
+        repeat(4,1fr);
 
     padding:6px;
 
-    border-radius:21px;
+    border-radius:22px;
 
-    background:#091322e8;
+    background:
+        rgba(8,18,32,.90);
 
-    border:1px solid #ffffff12;
+    border:1px solid
+        rgba(255,255,255,.10);
 
     box-shadow:
-        0 15px 50px #00000055;
+        0 18px 55px rgba(0,0,0,.60),
+        inset 0 1px 0
+        rgba(255,255,255,.06);
 
-    backdrop-filter:blur(15px);
-    -webkit-backdrop-filter:blur(15px);
+    backdrop-filter:
+        blur(18px)
+        saturate(130%);
+
+    -webkit-backdrop-filter:
+        blur(18px)
+        saturate(130%);
 }
 
 .nav-item{
+    position:relative;
+
     display:flex;
+
     flex-direction:column;
+
     align-items:center;
     justify-content:center;
 
@@ -1243,27 +2068,70 @@ body::after{
 
     border-radius:16px;
 
-    color:#69768a;
+    color:#68758a;
 
     text-decoration:none;
 
-    font-size:9px;
-    font-weight:800;
+    font-size:8px;
+    font-weight:850;
+
+    transition:
+        color .18s ease,
+        background .18s ease,
+        transform .18s ease;
 }
 
 .nav-icon{
-    font-size:18px;
+    font-size:17px;
+
+    line-height:1;
+
+    transition:
+        transform .18s ease;
 }
 
 .nav-item.active{
-    background:#22c55e10;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(34,197,94,.13),
+            rgba(34,197,94,.045)
+        );
 
     color:#4ade80;
+
+    box-shadow:
+        inset 0 1px 0
+        rgba(74,222,128,.07);
+}
+
+.nav-item.active .nav-icon{
+    transform:
+        translateY(-1px)
+        scale(1.04);
+}
+
+.nav-item.active::after{
+    content:"";
+
+    position:absolute;
+
+    bottom:3px;
+
+    width:4px;
+    height:4px;
+
+    border-radius:50%;
+
+    background:#4ade80;
+
+    box-shadow:
+        0 0 9px #4ade80;
 }
 
 
 /* =========================================================
-   DESKTOP LIMIT
+   DESKTOP
 ========================================================= */
 
 @media(min-width:700px){
@@ -1277,6 +2145,9 @@ body::after{
         width:520px;
     }
 
+    .modal-box{
+        max-width:430px;
+    }
 }
 
 
@@ -1293,25 +2164,117 @@ body::after{
 
     .wallet-card{
         padding:18px;
+
+        min-height:200px;
     }
 
     .wallet-amount{
         font-size:31px;
     }
 
+    .wallet-bottom{
+        margin-top:23px;
+    }
+
     .action-btn{
+        height:52px;
         font-size:11px;
     }
 
     .filter{
-        padding-left:9px;
-        padding-right:9px;
+        padding-left:10px;
+        padding-right:10px;
     }
 
+    .modal{
+        padding-left:10px;
+        padding-right:10px;
+    }
+
+    .modal-box{
+        padding:16px;
+
+        border-radius:23px;
+    }
+
+    .payment-apps{
+        gap:7px;
+    }
+
+    .app-btn{
+        min-height:61px;
+        padding:8px;
+    }
+
+    .app-icon{
+        width:34px;
+        height:34px;
+        flex-basis:34px;
+    }
+
+    .app-name{
+        font-size:9px;
+    }
+
+    .app-sub{
+        font-size:6.5px;
+    }
+
+    #adminQR{
+        width:190px;
+        height:190px;
+    }
+
+    .qr-wrap{
+        min-height:205px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL DEVICES
+========================================================= */
+
+@media(max-width:330px){
+
+    .wallet-amount{
+        font-size:29px;
+    }
+
+    .wallet-mini{
+        padding:10px;
+    }
+
+    .payment-apps{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .quick-grid{
+        gap:5px;
+    }
+
+    .quick-btn{
+        font-size:9px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+        animation:none !important;
+        transition:none !important;
+        scroll-behavior:auto !important;
+    }
 }
 
 </style>
-
 </head>
 
 
@@ -1730,8 +2693,6 @@ body::after{
                     ₹0
                 </div>
 
-                <div id="selectedPaymentLabel" class="payment-method-label">UPI PAYMENT</div>
-
             </div>
 
 
@@ -1756,47 +2717,21 @@ body::after{
                 <button
                     class="app-btn app-gpay"
                     onclick="payWithUPI('gpay')">
-                    <span class="app-icon">G</span>
-                    <span>
-                        <span class="app-name">Google Pay</span>
-                        <span class="app-sub">Pay securely with UPI</span>
-                    </span>
+                    GPay
                 </button>
 
                 <button
                     class="app-btn app-phonepe"
                     onclick="payWithUPI('phonepe')">
-                    <span class="app-icon">P</span>
-                    <span>
-                        <span class="app-name">PhonePe</span>
-                        <span class="app-sub">Fast UPI payment</span>
-                    </span>
+                    PhonePe
                 </button>
 
                 <button
                     class="app-btn app-paytm"
                     onclick="payWithUPI('paytm')">
-                    <span class="app-icon">P</span>
-                    <span>
-                        <span class="app-name">Paytm</span>
-                        <span class="app-sub">Pay using UPI</span>
-                    </span>
+                    Paytm
                 </button>
 
-                <button
-                    class="app-btn app-fampay"
-                    onclick="payWithUPI('fampay')">
-                    <span class="app-icon">F</span>
-                    <span>
-                        <span class="app-name">FamPay</span>
-                        <span class="app-sub">FamApp / UPI</span>
-                    </span>
-                </button>
-
-            </div>
-
-            <div class="payment-security">
-                🔒 Secure UPI flow &nbsp;•&nbsp; Never share your UPI PIN
             </div>
 
 
@@ -2112,7 +3047,6 @@ let currentBonus = 0;
 let balanceHidden = false;
 
 let selectedDepositAmount = 0;
-let selectedPaymentMethod = "UPI";
 
 let depositSubmitting = false;
 
@@ -2191,23 +3125,22 @@ function formatMoney(value){
    GET NUMERIC WALLET
 ========================================================= */
 
-function parseWalletValue(value){
+function parseWalletValue(walletData) {
+    if (!walletData) return 0;
 
-    if(
-        value &&
-        typeof value === "object"
-    ){
-
-        return Number(
-            value.balance ??
-            value.amount ??
-            0
-        );
-
+    if (typeof walletData === "number") {
+        return walletData;
     }
 
-    return Number(value || 0);
+    if (typeof walletData === "object") {
+        return Number(
+            walletData.balance ??
+            walletData.amount ??
+            0
+        );
+    }
 
+    return Number(walletData) || 0;
 }
 
 
@@ -2229,7 +3162,7 @@ function loadWallet(){
             db,
             "users/" +
             UID +
-            "/wallet/balance"
+            "/wallet"
         ),
 
         (snapshot)=>{
@@ -2589,9 +3522,6 @@ function(){
     selectedDepositAmount =
         0;
 
-    selectedPaymentMethod =
-        "UPI";
-
 
     document
         .getElementById(
@@ -2721,12 +3651,6 @@ function(){
 
     selectedDepositAmount =
         Math.floor(amount);
-
-    selectedPaymentMethod = "UPI";
-    const methodLabel = document.getElementById("selectedPaymentLabel");
-    if(methodLabel){
-        methodLabel.innerText = "UPI PAYMENT";
-    }
 
 
     document
@@ -2961,77 +3885,125 @@ function createQR(
 window.payWithUPI =
 function(appName){
 
-    if(!selectedDepositAmount || selectedDepositAmount < 10){
-        showToast("Please enter amount first");
+    if(
+        !selectedDepositAmount ||
+        selectedDepositAmount < 10
+    ){
+
+        showToast(
+            "Please enter amount first"
+        );
+
         return;
+
     }
+
 
     if(!adminUPIValue){
-        showToast("Admin UPI not available");
+
+        showToast(
+            "Admin UPI not available"
+        );
+
         return;
+
     }
 
-    selectedPaymentMethod =
-        appName === "gpay" ? "Google Pay" :
-        appName === "phonepe" ? "PhonePe" :
-        appName === "paytm" ? "Paytm" :
-        appName === "fampay" ? "FamPay" : "UPI";
 
-    const methodLabel = document.getElementById("selectedPaymentLabel");
-    if(methodLabel){
-        methodLabel.innerText =
-            selectedPaymentMethod.toUpperCase() + " PAYMENT";
-    }
+    const amount =
+        Number(
+            selectedDepositAmount
+        ).toFixed(2);
 
-    const amount = Number(selectedDepositAmount).toFixed(2);
 
     const standardUPI =
         "upi://pay" +
-        "?pa=" + encodeURIComponent(adminUPIValue) +
-        "&pn=" + encodeURIComponent("BGMI PAY") +
-        "&am=" + encodeURIComponent(amount) +
+        "?pa=" +
+        encodeURIComponent(
+            adminUPIValue
+        ) +
+        "&pn=" +
+        encodeURIComponent(
+            "BGMI PAY"
+        ) +
+        "&am=" +
+        encodeURIComponent(
+            amount
+        ) +
         "&cu=INR";
 
-    let appURL = standardUPI;
+
+    let appURL =
+        standardUPI;
+
 
     if(appName === "gpay"){
+
         appURL =
             "tez://upi/pay" +
-            "?pa=" + encodeURIComponent(adminUPIValue) +
+            "?pa=" +
+            encodeURIComponent(
+                adminUPIValue
+            ) +
             "&pn=BGMI%20PAY" +
-            "&am=" + amount +
+            "&am=" +
+            amount +
             "&cu=INR";
-    }else if(appName === "phonepe"){
+
+    }
+
+
+    else if(appName === "phonepe"){
+
         appURL =
             "phonepe://pay" +
-            "?pa=" + encodeURIComponent(adminUPIValue) +
+            "?pa=" +
+            encodeURIComponent(
+                adminUPIValue
+            ) +
             "&pn=BGMI%20PAY" +
-            "&am=" + amount +
+            "&am=" +
+            amount +
             "&cu=INR";
-    }else if(appName === "paytm"){
+
+    }
+
+
+    else if(appName === "paytm"){
+
         appURL =
             "paytmmp://pay" +
-            "?pa=" + encodeURIComponent(adminUPIValue) +
+            "?pa=" +
+            encodeURIComponent(
+                adminUPIValue
+            ) +
             "&pn=BGMI%20PAY" +
-            "&am=" + amount +
+            "&am=" +
+            amount +
             "&cu=INR";
+
     }
 
-    /*
-     * FamPay is now FamApp. It supports UPI/QR payments.
-     * We intentionally use the standard UPI URI here rather
-     * than inventing an undocumented FamApp deep-link.
-     */
 
     try{
-        window.location.href = appURL;
-    }catch(error){
-        window.location.href = standardUPI;
+
+        window.location.href =
+            appURL;
+
     }
 
+    catch(error){
+
+        window.location.href =
+            standardUPI;
+
+    }
+
+
     showToast(
-        selectedPaymentMethod + " payment flow opening..."
+        "Payment app open ho raha hai..."
     );
+
 };
 
 
@@ -3246,7 +4218,7 @@ async function(){
                     utr,
 
                 paymentMethod:
-                    selectedPaymentMethod || "UPI",
+                    "UPI",
 
                 status:
                     "pending",
@@ -3284,9 +4256,6 @@ async function(){
 
         selectedDepositAmount =
             0;
-
-        selectedPaymentMethod =
-            "UPI";
 
     }
 
