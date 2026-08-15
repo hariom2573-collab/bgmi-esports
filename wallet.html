@@ -2960,21 +2960,18 @@ body::after{
 
 <script type="module">
 
+/* =========================================================
+   FIREBASE IMPORTS
+========================================================= */
 
 import {
     initializeApp
-}
-from
-"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 
 import {
     getAuth,
     onAuthStateChanged
-}
-from
-"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 import {
     getDatabase,
@@ -2983,9 +2980,7 @@ import {
     push,
     get,
     onValue
-}
-from
-"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 
 /* =========================================================
@@ -2995,36 +2990,33 @@ from
 const firebaseConfig = {
 
     apiKey:
-    "AIzaSyDsJUtZdIXcsB0w_2MQhMBXxIgbI3ijOvg",
+        "AIzaSyDsJUtZdIXcsB0w_2MQhMBXxIgbI3ijOvg",
 
     authDomain:
-    "incoinpaysliveearning.firebaseapp.com",
+        "incoinpaysliveearning.firebaseapp.com",
 
     databaseURL:
-    "https://incoinpaysliveearning-default-rtdb.firebaseio.com",
+        "https://incoinpaysliveearning-default-rtdb.firebaseio.com",
 
     projectId:
-    "incoinpaysliveearning",
+        "incoinpaysliveearning",
 
     storageBucket:
-    "incoinpaysliveearning.firebasestorage.app",
+        "incoinpaysliveearning.firebasestorage.app",
 
     messagingSenderId:
-    "971873814750",
+        "971873814750",
 
     appId:
-    "1:971873814750:web:7418c7da119e4725ed9a4f"
-
+        "1:971873814750:web:7418c7da119e4725ed9a4f"
 };
 
 
 const app =
     initializeApp(firebaseConfig);
 
-
 const auth =
     getAuth(app);
-
 
 const db =
     getDatabase(app);
@@ -3039,9 +3031,7 @@ let UID = "";
 let transactions = [];
 
 let currentWalletBalance = 0;
-
 let currentWithdrawable = 0;
-
 let currentBonus = 0;
 
 let balanceHidden = false;
@@ -3049,7 +3039,6 @@ let balanceHidden = false;
 let selectedDepositAmount = 0;
 
 let depositSubmitting = false;
-
 let withdrawSubmitting = false;
 
 let currentFilter = "all";
@@ -3057,10 +3046,16 @@ let currentFilter = "all";
 let adminUPIValue = "";
 
 let walletListenerStarted = false;
-
 let bonusListenerStarted = false;
-
 let withdrawableListenerStarted = false;
+let historyListenerStarted = false;
+let pendingListenerStarted = false;
+
+let refundInitialized = false;
+
+let previousTransactionIds = new Set();
+
+let refundMessageShown = new Set();
 
 
 /* =========================================================
@@ -3071,12 +3066,11 @@ onAuthStateChanged(
     auth,
     (user) => {
 
-        if(!user){
+        if (!user) {
 
             location.replace("index.html");
 
             return;
-
         }
 
 
@@ -3104,7 +3098,7 @@ onAuthStateChanged(
    FORMAT MONEY
 ========================================================= */
 
-function formatMoney(value){
+function formatMoney(value) {
 
     const number =
         Number(value || 0);
@@ -3113,8 +3107,8 @@ function formatMoney(value){
         "₹" +
         Math.floor(
             Number.isFinite(number)
-            ? number
-            : 0
+                ? number
+                : 0
         ).toLocaleString("en-IN")
     );
 
@@ -3122,25 +3116,44 @@ function formatMoney(value){
 
 
 /* =========================================================
-   GET NUMERIC WALLET
+   PARSE WALLET
 ========================================================= */
 
 function parseWalletValue(walletData) {
-    if (!walletData) return 0;
 
-    if (typeof walletData === "number") {
-        return walletData;
+    if (!walletData) {
+
+        return 0;
+
     }
 
-    if (typeof walletData === "object") {
+
+    if (
+        typeof walletData ===
+        "number"
+    ) {
+
+        return walletData;
+
+    }
+
+
+    if (
+        typeof walletData ===
+        "object"
+    ) {
+
         return Number(
             walletData.balance ??
             walletData.amount ??
             0
         );
+
     }
 
+
     return Number(walletData) || 0;
+
 }
 
 
@@ -3148,11 +3161,14 @@ function parseWalletValue(walletData) {
    WALLET
 ========================================================= */
 
-function loadWallet(){
+function loadWallet() {
 
-    if(walletListenerStarted){
+    if (walletListenerStarted) {
+
         return;
+
     }
+
 
     walletListenerStarted = true;
 
@@ -3165,12 +3181,12 @@ function loadWallet(){
             "/wallet"
         ),
 
-        (snapshot)=>{
+        (snapshot) => {
 
             let balance = 0;
 
 
-            if(snapshot.exists()){
+            if (snapshot.exists()) {
 
                 balance =
                     parseWalletValue(
@@ -3180,10 +3196,10 @@ function loadWallet(){
             }
 
 
-            if(
+            if (
                 !Number.isFinite(balance) ||
                 balance < 0
-            ){
+            ) {
 
                 balance = 0;
 
@@ -3194,25 +3210,24 @@ function loadWallet(){
                 balance;
 
 
-            /*
-             * If withdrawable path does not
-             * exist yet, wallet becomes fallback.
-             */
-
             updateWalletUI();
 
         },
 
-        (error)=>{
+        (error) => {
 
             console.error(
                 "Wallet load error:",
                 error
             );
 
-            currentWalletBalance = 0;
+
+            currentWalletBalance =
+                0;
+
 
             updateWalletUI();
+
 
             showToast(
                 "Wallet load failed"
@@ -3228,11 +3243,14 @@ function loadWallet(){
    BONUS
 ========================================================= */
 
-function loadBonus(){
+function loadBonus() {
 
-    if(bonusListenerStarted){
+    if (bonusListenerStarted) {
+
         return;
+
     }
+
 
     bonusListenerStarted = true;
 
@@ -3245,7 +3263,7 @@ function loadBonus(){
             "/bonus"
         ),
 
-        (snapshot)=>{
+        (snapshot) => {
 
             let bonus =
                 Number(
@@ -3253,10 +3271,10 @@ function loadBonus(){
                 );
 
 
-            if(
+            if (
                 !Number.isFinite(bonus) ||
                 bonus < 0
-            ){
+            ) {
 
                 bonus = 0;
 
@@ -3271,7 +3289,7 @@ function loadBonus(){
 
         },
 
-        (error)=>{
+        (error) => {
 
             console.error(
                 "Bonus load error:",
@@ -3288,11 +3306,14 @@ function loadBonus(){
    WITHDRAWABLE
 ========================================================= */
 
-function loadWithdrawable(){
+function loadWithdrawable() {
 
-    if(withdrawableListenerStarted){
+    if (withdrawableListenerStarted) {
+
         return;
+
     }
+
 
     withdrawableListenerStarted = true;
 
@@ -3305,20 +3326,19 @@ function loadWithdrawable(){
             "/withdrawable"
         ),
 
-        (snapshot)=>{
+        (snapshot) => {
 
             let value;
 
 
-            if(snapshot.exists()){
+            if (snapshot.exists()) {
 
                 value =
                     parseWalletValue(
                         snapshot.val()
                     );
 
-            }
-            else{
+            } else {
 
                 value =
                     currentWalletBalance;
@@ -3326,10 +3346,10 @@ function loadWithdrawable(){
             }
 
 
-            if(
+            if (
                 !Number.isFinite(value) ||
                 value < 0
-            ){
+            ) {
 
                 value = 0;
 
@@ -3344,15 +3364,17 @@ function loadWithdrawable(){
 
         },
 
-        (error)=>{
+        (error) => {
 
             console.error(
                 "Withdrawable load error:",
                 error
             );
 
+
             currentWithdrawable =
                 currentWalletBalance;
+
 
             updateWalletUI();
 
@@ -3366,7 +3388,7 @@ function loadWithdrawable(){
    UPDATE WALLET UI
 ========================================================= */
 
-function updateWalletUI(){
+function updateWalletUI() {
 
     const walletElement =
         document.getElementById(
@@ -3392,14 +3414,9 @@ function updateWalletUI(){
         );
 
 
-    /*
-     * If separate withdrawable field
-     * doesn't exist yet, use wallet balance.
-     */
-
-    if(
+    if (
         !withdrawableListenerStarted
-    ){
+    ) {
 
         currentWithdrawable =
             currentWalletBalance;
@@ -3407,19 +3424,19 @@ function updateWalletUI(){
     }
 
 
-    if(walletElement){
+    if (walletElement) {
 
         walletElement.innerText =
             balanceHidden
-            ? "₹••••"
-            : formatMoney(
-                currentWalletBalance
-            );
+                ? "₹••••"
+                : formatMoney(
+                    currentWalletBalance
+                );
 
     }
 
 
-    if(withdrawElement){
+    if (withdrawElement) {
 
         withdrawElement.innerText =
             formatMoney(
@@ -3429,7 +3446,7 @@ function updateWalletUI(){
     }
 
 
-    if(bonusElement){
+    if (bonusElement) {
 
         bonusElement.innerText =
             formatMoney(
@@ -3439,7 +3456,7 @@ function updateWalletUI(){
     }
 
 
-    if(withdrawAvailable){
+    if (withdrawAvailable) {
 
         withdrawAvailable.innerText =
             formatMoney(
@@ -3456,7 +3473,7 @@ function updateWalletUI(){
 ========================================================= */
 
 window.toggleBalance =
-function(){
+function () {
 
     balanceHidden =
         !balanceHidden;
@@ -3471,12 +3488,12 @@ function(){
         );
 
 
-    if(eye){
+    if (eye) {
 
         eye.innerText =
             balanceHidden
-            ? "🙈"
-            : "👁";
+                ? "🙈"
+                : "👁";
 
     }
 
@@ -3484,69 +3501,98 @@ function(){
 
 
 /* =========================================================
-   ADD MONEY OPEN
+   ADD MONEY
 ========================================================= */
 
 window.openAddMoney =
-function(){
+function () {
 
     const modal =
         document.getElementById(
             "addModal"
         );
 
-    if(!modal){
+
+    if (!modal) {
+
         return;
+
     }
 
 
-    modal.classList.add("show");
+    modal.classList.add(
+        "show"
+    );
 
 
-    document
-        .getElementById(
+    const step1 =
+        document.getElementById(
             "paymentStep1"
-        )
-        .style.display =
-        "block";
+        );
 
 
-    document
-        .getElementById(
+    const step2 =
+        document.getElementById(
             "paymentStep2"
-        )
-        .style.display =
-        "none";
+        );
+
+
+    if (step1) {
+
+        step1.style.display =
+            "block";
+
+    }
+
+
+    if (step2) {
+
+        step2.style.display =
+            "none";
+
+    }
 
 
     selectedDepositAmount =
         0;
 
 
-    document
-        .getElementById(
+    const amountInput =
+        document.getElementById(
             "depositAmount"
-        )
-        .value =
-        "";
+        );
 
 
-    document
-        .getElementById(
+    const utrInput =
+        document.getElementById(
             "utr"
-        )
-        .value =
-        "";
+        );
+
+
+    if (amountInput) {
+
+        amountInput.value =
+            "";
+
+    }
+
+
+    if (utrInput) {
+
+        utrInput.value =
+            "";
+
+    }
 
 
     setTimeout(
-        ()=>{
+        () => {
 
-            document
-                .getElementById(
-                    "depositAmount"
-                )
-                .focus();
+            if (amountInput) {
+
+                amountInput.focus();
+
+            }
 
         },
         180
@@ -3560,14 +3606,15 @@ function(){
 ========================================================= */
 
 window.closeAddMoney =
-function(){
+function () {
 
     const modal =
         document.getElementById(
             "addModal"
         );
 
-    if(modal){
+
+    if (modal) {
 
         modal.classList.remove(
             "show"
@@ -3583,7 +3630,7 @@ function(){
 ========================================================= */
 
 window.setDepositAmount =
-function(amount){
+function (amount) {
 
     const input =
         document.getElementById(
@@ -3591,8 +3638,10 @@ function(amount){
         );
 
 
-    if(!input){
+    if (!input) {
+
         return;
+
     }
 
 
@@ -3606,26 +3655,35 @@ function(amount){
 
 
 /* =========================================================
-   SHOW PAYMENT
+   SHOW PAYMENT OPTIONS
 ========================================================= */
 
 window.showPaymentOptions =
-function(){
+function () {
 
-    const amount =
-        Number(
-            document
-                .getElementById(
-                    "depositAmount"
-                )
-                .value
+    const input =
+        document.getElementById(
+            "depositAmount"
         );
 
 
-    if(
+    if (!input) {
+
+        return;
+
+    }
+
+
+    const amount =
+        Number(
+            input.value
+        );
+
+
+    if (
         !Number.isFinite(amount) ||
         amount < 10
-    ){
+    ) {
 
         showToast(
             "Minimum deposit is ₹10"
@@ -3636,9 +3694,9 @@ function(){
     }
 
 
-    if(
+    if (
         amount > 100000
-    ){
+    ) {
 
         showToast(
             "Maximum deposit is ₹1,00,000"
@@ -3653,30 +3711,48 @@ function(){
         Math.floor(amount);
 
 
-    document
-        .getElementById(
+    const selected =
+        document.getElementById(
             "selectedAmount"
-        )
-        .innerText =
-        formatMoney(
-            selectedDepositAmount
         );
 
 
-    document
-        .getElementById(
+    if (selected) {
+
+        selected.innerText =
+            formatMoney(
+                selectedDepositAmount
+            );
+
+    }
+
+
+    const step1 =
+        document.getElementById(
             "paymentStep1"
-        )
-        .style.display =
-        "none";
+        );
 
 
-    document
-        .getElementById(
+    const step2 =
+        document.getElementById(
             "paymentStep2"
-        )
-        .style.display =
-        "block";
+        );
+
+
+    if (step1) {
+
+        step1.style.display =
+            "none";
+
+    }
+
+
+    if (step2) {
+
+        step2.style.display =
+            "block";
+
+    }
 
 
     createQR(
@@ -3692,22 +3768,34 @@ function(){
 ========================================================= */
 
 window.backToAmount =
-function(){
+function () {
 
-    document
-        .getElementById(
+    const step2 =
+        document.getElementById(
             "paymentStep2"
-        )
-        .style.display =
-        "none";
+        );
 
 
-    document
-        .getElementById(
+    const step1 =
+        document.getElementById(
             "paymentStep1"
-        )
-        .style.display =
-        "block";
+        );
+
+
+    if (step2) {
+
+        step2.style.display =
+            "none";
+
+    }
+
+
+    if (step1) {
+
+        step1.style.display =
+            "block";
+
+    }
 
 };
 
@@ -3716,7 +3804,7 @@ function(){
    ADMIN PAYMENT
 ========================================================= */
 
-function loadAdminPayment(){
+function loadAdminPayment() {
 
     onValue(
         ref(
@@ -3724,7 +3812,7 @@ function loadAdminPayment(){
             "settings/payment"
         ),
 
-        (snapshot)=>{
+        (snapshot) => {
 
             const upiBox =
                 document.getElementById(
@@ -3738,16 +3826,17 @@ function loadAdminPayment(){
                 );
 
 
-            if(!upiBox || !qr){
+            if (!upiBox || !qr) {
+
                 return;
+
             }
 
 
-            if(
-                !snapshot.exists()
-            ){
+            if (!snapshot.exists()) {
 
-                adminUPIValue = "";
+                adminUPIValue =
+                    "";
 
                 upiBox.innerText =
                     "UPI Not Found";
@@ -3776,7 +3865,7 @@ function loadAdminPayment(){
                 upi;
 
 
-            if(!upi){
+            if (!upi) {
 
                 upiBox.innerText =
                     "UPI Not Found";
@@ -3790,7 +3879,8 @@ function loadAdminPayment(){
 
 
             upiBox.innerText =
-                "UPI : " + upi;
+                "UPI : " +
+                upi;
 
 
             createQR(
@@ -3800,7 +3890,7 @@ function loadAdminPayment(){
 
         },
 
-        (error)=>{
+        (error) => {
 
             console.error(
                 "Payment settings error:",
@@ -3820,7 +3910,7 @@ function loadAdminPayment(){
 function createQR(
     upi,
     amount
-){
+) {
 
     const qr =
         document.getElementById(
@@ -3828,12 +3918,14 @@ function createQR(
         );
 
 
-    if(!qr){
+    if (!qr) {
+
         return;
+
     }
 
 
-    if(!upi){
+    if (!upi) {
 
         qr.style.display =
             "none";
@@ -3847,14 +3939,16 @@ function createQR(
         "upi://pay?pa=" +
         encodeURIComponent(upi) +
         "&pn=" +
-        encodeURIComponent("BGMI PAY") +
+        encodeURIComponent(
+            "BGMI PAY"
+        ) +
         "&cu=INR";
 
 
-    if(
+    if (
         amount &&
         amount > 0
-    ){
+    ) {
 
         upiURL +=
             "&am=" +
@@ -3879,16 +3973,147 @@ function createQR(
 
 
 /* =========================================================
+   GENERATE STANDARD UPI URL
+========================================================= */
+
+function getStandardUPIURL() {
+
+    if (!adminUPIValue) {
+
+        return "";
+
+    }
+
+
+    const amount =
+        Number(
+            selectedDepositAmount || 0
+        );
+
+
+    let url =
+        "upi://pay" +
+        "?pa=" +
+        encodeURIComponent(
+            adminUPIValue
+        ) +
+        "&pn=" +
+        encodeURIComponent(
+            "BGMI PAY"
+        );
+
+
+    if (
+        amount > 0
+    ) {
+
+        url +=
+            "&am=" +
+            encodeURIComponent(
+                amount.toFixed(2)
+            );
+
+    }
+
+
+    url +=
+        "&cu=INR";
+
+
+    return url;
+
+}
+
+
+/* =========================================================
+   PAYMENT APP LOGO URL
+========================================================= */
+
+function paymentLogo(appName) {
+
+    const logos = {
+
+        gpay:
+            "https://cdn.simpleicons.org/googlepay/4285F4",
+
+        phonepe:
+            "https://cdn.simpleicons.org/phonepe/5F259F",
+
+        paytm:
+            "https://cdn.simpleicons.org/paytm/00BAF2",
+
+        fampay:
+            "https://cdn.simpleicons.org/fampay/7C3AED"
+
+    };
+
+
+    return (
+        logos[
+            String(appName)
+                .toLowerCase()
+        ] ||
+        ""
+    );
+
+}
+
+
+/* =========================================================
+   UPDATE PAYMENT LOGOS
+   HTML EXAMPLE:
+
+   <img data-payment-logo="gpay">
+   <img data-payment-logo="phonepe">
+   <img data-payment-logo="paytm">
+   <img data-payment-logo="fampay">
+========================================================= */
+
+function updatePaymentLogos() {
+
+    document
+        .querySelectorAll(
+            "[data-payment-logo]"
+        )
+        .forEach(
+            (img) => {
+
+                const name =
+                    img.getAttribute(
+                        "data-payment-logo"
+                    );
+
+
+                const src =
+                    paymentLogo(
+                        name
+                    );
+
+
+                if (src) {
+
+                    img.src =
+                        src;
+
+                }
+
+            }
+        );
+
+}
+
+
+/* =========================================================
    PAY USING UPI
 ========================================================= */
 
 window.payWithUPI =
-function(appName){
+function (appName) {
 
-    if(
+    if (
         !selectedDepositAmount ||
         selectedDepositAmount < 10
-    ){
+    ) {
 
         showToast(
             "Please enter amount first"
@@ -3899,7 +4124,7 @@ function(appName){
     }
 
 
-    if(!adminUPIValue){
+    if (!adminUPIValue) {
 
         showToast(
             "Admin UPI not available"
@@ -3916,20 +4141,22 @@ function(appName){
         ).toFixed(2);
 
 
+    const pa =
+        encodeURIComponent(
+            adminUPIValue
+        );
+
+
     const standardUPI =
         "upi://pay" +
         "?pa=" +
-        encodeURIComponent(
-            adminUPIValue
-        ) +
+        pa +
         "&pn=" +
         encodeURIComponent(
             "BGMI PAY"
         ) +
         "&am=" +
-        encodeURIComponent(
-            amount
-        ) +
+        amount +
         "&cu=INR";
 
 
@@ -3937,14 +4164,22 @@ function(appName){
         standardUPI;
 
 
-    if(appName === "gpay"){
+    const name =
+        String(
+            appName || ""
+        ).toLowerCase();
+
+
+    /* -------------------------
+       GOOGLE PAY
+    ------------------------- */
+
+    if (name === "gpay") {
 
         appURL =
             "tez://upi/pay" +
             "?pa=" +
-            encodeURIComponent(
-                adminUPIValue
-            ) +
+            pa +
             "&pn=BGMI%20PAY" +
             "&am=" +
             amount +
@@ -3953,14 +4188,18 @@ function(appName){
     }
 
 
-    else if(appName === "phonepe"){
+    /* -------------------------
+       PHONEPE
+    ------------------------- */
+
+    else if (
+        name === "phonepe"
+    ) {
 
         appURL =
             "phonepe://pay" +
             "?pa=" +
-            encodeURIComponent(
-                adminUPIValue
-            ) +
+            pa +
             "&pn=BGMI%20PAY" +
             "&am=" +
             amount +
@@ -3969,14 +4208,18 @@ function(appName){
     }
 
 
-    else if(appName === "paytm"){
+    /* -------------------------
+       PAYTM
+    ------------------------- */
+
+    else if (
+        name === "paytm"
+    ) {
 
         appURL =
             "paytmmp://pay" +
             "?pa=" +
-            encodeURIComponent(
-                adminUPIValue
-            ) +
+            pa +
             "&pn=BGMI%20PAY" +
             "&am=" +
             amount +
@@ -3985,14 +4228,71 @@ function(appName){
     }
 
 
-    try{
+    /* -------------------------
+       FAMPAY
+       Try app deep-link first.
+       Normal UPI remains fallback.
+    ------------------------- */
+
+    else if (
+        name === "fampay"
+    ) {
+
+        appURL =
+            "fampay://upi/pay" +
+            "?pa=" +
+            pa +
+            "&pn=BGMI%20PAY" +
+            "&am=" +
+            amount +
+            "&cu=INR";
+
+    }
+
+
+    try {
 
         window.location.href =
             appURL;
 
+
+        /*
+         * Fallback to standard UPI
+         * if app deep link doesn't open.
+         */
+
+        if (
+            name !== "upi"
+        ) {
+
+            setTimeout(
+                () => {
+
+                    if (
+                        document.visibilityState ===
+                        "visible"
+                    ) {
+
+                        window.location.href =
+                            standardUPI;
+
+                    }
+
+                },
+                1300
+            );
+
+        }
+
     }
 
-    catch(error){
+    catch (error) {
+
+        console.error(
+            "Payment app error:",
+            error
+        );
+
 
         window.location.href =
             standardUPI;
@@ -4008,40 +4308,96 @@ function(appName){
 
 
 /* =========================================================
+   DIRECT PAYMENT BUTTON HELPERS
+========================================================= */
+
+window.payGPay =
+function () {
+
+    window.payWithUPI(
+        "gpay"
+    );
+
+};
+
+
+window.payPhonePe =
+function () {
+
+    window.payWithUPI(
+        "phonepe"
+    );
+
+};
+
+
+window.payPaytm =
+function () {
+
+    window.payWithUPI(
+        "paytm"
+    );
+
+};
+
+
+window.payFamPay =
+function () {
+
+    window.payWithUPI(
+        "fampay"
+    );
+
+};
+
+
+/* =========================================================
    SUBMIT DEPOSIT
 ========================================================= */
 
 window.submitDeposit =
-async function(){
+async function () {
 
-    if(depositSubmitting){
+    if (depositSubmitting) {
+
         return;
+
+    }
+
+
+    const amountInput =
+        document.getElementById(
+            "depositAmount"
+        );
+
+
+    const utrInput =
+        document.getElementById(
+            "utr"
+        );
+
+
+    if (!amountInput || !utrInput) {
+
+        return;
+
     }
 
 
     const amount =
         Number(
-            document
-                .getElementById(
-                    "depositAmount"
-                )
-                .value
+            amountInput.value
         );
 
 
     const utr =
-        document
-            .getElementById(
-                "utr"
-            )
-            .value
-            .trim();
+        utrInput.value.trim();
 
 
-    if(
+    if (
         !Number.isFinite(amount) ||
         amount < 10
-    ){
+    ) {
 
         showToast(
             "Minimum deposit is ₹10"
@@ -4052,9 +4408,9 @@ async function(){
     }
 
 
-    if(
+    if (
         amount > 100000
-    ){
+    ) {
 
         showToast(
             "Maximum deposit is ₹1,00,000"
@@ -4065,7 +4421,7 @@ async function(){
     }
 
 
-    if(!utr){
+    if (!utr) {
 
         showToast(
             "Enter Transaction ID / UTR"
@@ -4076,13 +4432,13 @@ async function(){
     }
 
 
-    if(
+    if (
         selectedDepositAmount &&
         Math.floor(amount) !==
         Math.floor(
             selectedDepositAmount
         )
-    ){
+    ) {
 
         showToast(
             "Amount mismatch"
@@ -4093,9 +4449,9 @@ async function(){
     }
 
 
-    if(
+    if (
         utr.length < 6
-    ){
+    ) {
 
         showToast(
             "Enter a valid UTR"
@@ -4116,7 +4472,7 @@ async function(){
         );
 
 
-    if(button){
+    if (button) {
 
         button.disabled =
             true;
@@ -4127,11 +4483,7 @@ async function(){
     }
 
 
-    try{
-
-        /*
-         * DUPLICATE UTR CHECK
-         */
+    try {
 
         const utrSnap =
             await get(
@@ -4146,12 +4498,12 @@ async function(){
             false;
 
 
-        if(
+        if (
             utrSnap.exists()
-        ){
+        ) {
 
             utrSnap.forEach(
-                (item)=>{
+                (item) => {
 
                     const data =
                         item.val() || {};
@@ -4165,11 +4517,11 @@ async function(){
                         .toLowerCase();
 
 
-                    if(
+                    if (
                         existingUTR &&
                         existingUTR ===
                         utr.toLowerCase()
-                    ){
+                    ) {
 
                         duplicate =
                             true;
@@ -4182,7 +4534,7 @@ async function(){
         }
 
 
-        if(duplicate){
+        if (duplicate) {
 
             throw new Error(
                 "Transaction ID already used"
@@ -4190,10 +4542,6 @@ async function(){
 
         }
 
-
-        /*
-         * CREATE REQUEST
-         */
 
         const requestRef =
             push(
@@ -4238,19 +4586,11 @@ async function(){
         closeAddMoney();
 
 
-        document
-            .getElementById(
-                "depositAmount"
-            )
-            .value =
+        amountInput.value =
             "";
 
 
-        document
-            .getElementById(
-                "utr"
-            )
-            .value =
+        utrInput.value =
             "";
 
 
@@ -4259,8 +4599,7 @@ async function(){
 
     }
 
-
-    catch(error){
+    catch (error) {
 
         console.error(
             "Deposit Error:",
@@ -4275,14 +4614,13 @@ async function(){
 
     }
 
-
-    finally{
+    finally {
 
         depositSubmitting =
             false;
 
 
-        if(button){
+        if (button) {
 
             button.disabled =
                 false;
@@ -4298,40 +4636,63 @@ async function(){
 
 
 /* =========================================================
-   OPEN WITHDRAW
+   WITHDRAW OPEN
 ========================================================= */
 
 window.openWithdraw =
-function(){
+function () {
 
     updateWalletUI();
 
 
-    document
-        .getElementById(
+    const modal =
+        document.getElementById(
             "withdrawModal"
-        )
-        .classList.add("show");
-
-
-    document
-        .getElementById(
-            "withdrawAvailable"
-        )
-        .innerText =
-        formatMoney(
-            currentWithdrawable
         );
 
 
-    setTimeout(
-        ()=>{
+    if (!modal) {
 
-            document
-                .getElementById(
+        return;
+
+    }
+
+
+    modal.classList.add(
+        "show"
+    );
+
+
+    const available =
+        document.getElementById(
+            "withdrawAvailable"
+        );
+
+
+    if (available) {
+
+        available.innerText =
+            formatMoney(
+                currentWithdrawable
+            );
+
+    }
+
+
+    setTimeout(
+        () => {
+
+            const input =
+                document.getElementById(
                     "withdrawAmount"
-                )
-                .focus();
+                );
+
+
+            if (input) {
+
+                input.focus();
+
+            }
 
         },
         180
@@ -4345,38 +4706,52 @@ function(){
 ========================================================= */
 
 window.closeWithdraw =
-function(){
+function () {
 
-    document
-        .getElementById(
+    const modal =
+        document.getElementById(
             "withdrawModal"
-        )
-        .classList.remove("show");
+        );
+
+
+    if (modal) {
+
+        modal.classList.remove(
+            "show"
+        );
+
+    }
 
 };
 
 
 /* =========================================================
-   OUTSIDE MODAL CLOSE
+   OUTSIDE MODAL
 ========================================================= */
 
 window.closeOutside =
-function(
+function (
     event,
     id
-){
+) {
 
-    if(
+    if (
         event.target.id === id
-    ){
+    ) {
 
-        document
-            .getElementById(
+        const modal =
+            document.getElementById(
                 id
-            )
-            .classList.remove(
+            );
+
+
+        if (modal) {
+
+            modal.classList.remove(
                 "show"
             );
+
+        }
 
     }
 
@@ -4388,10 +4763,10 @@ function(
 ========================================================= */
 
 window.setFilter =
-function(
+function (
     filter,
     button
-){
+) {
 
     currentFilter =
         filter;
@@ -4402,14 +4777,17 @@ function(
             ".filter"
         )
         .forEach(
-            btn =>
-            btn.classList.remove(
-                "active"
-            )
+            btn => {
+
+                btn.classList.remove(
+                    "active"
+                );
+
+            }
         );
 
 
-    if(button){
+    if (button) {
 
         button.classList.add(
             "active"
@@ -4427,7 +4805,18 @@ function(
    LOAD HISTORY
 ========================================================= */
 
-function loadHistory(){
+function loadHistory() {
+
+    if (historyListenerStarted) {
+
+        return;
+
+    }
+
+
+    historyListenerStarted =
+        true;
+
 
     onValue(
         ref(
@@ -4437,18 +4826,26 @@ function loadHistory(){
             "/transactions"
         ),
 
-        (snapshot)=>{
+        (snapshot) => {
+
+            const oldIds =
+                new Set(
+                    transactions.map(
+                        tx => tx.id
+                    )
+                );
+
 
             transactions =
                 [];
 
 
-            if(
+            if (
                 snapshot.exists()
-            ){
+            ) {
 
                 snapshot.forEach(
-                    (item)=>{
+                    (item) => {
 
                         const data =
                             item.val() || {};
@@ -4470,7 +4867,7 @@ function loadHistory(){
 
 
             transactions.sort(
-                (a,b)=>{
+                (a, b) => {
 
                     return (
                         Number(
@@ -4485,11 +4882,74 @@ function loadHistory(){
             );
 
 
+            /*
+             * FIRST LOAD
+             */
+
+            if (!refundInitialized) {
+
+                transactions.forEach(
+                    tx => {
+
+                        previousTransactionIds.add(
+                            tx.id
+                        );
+
+                    }
+                );
+
+
+                refundInitialized =
+                    true;
+
+            }
+
+            else {
+
+                /*
+                 * DETECT NEW TRANSACTIONS
+                 */
+
+                transactions.forEach(
+                    tx => {
+
+                        if (
+                            !oldIds.has(
+                                tx.id
+                            ) &&
+                            !previousTransactionIds.has(
+                                tx.id
+                            )
+                        ) {
+
+                            handleNewTransaction(
+                                tx
+                            );
+
+                        }
+
+                    }
+                );
+
+
+                transactions.forEach(
+                    tx => {
+
+                        previousTransactionIds.add(
+                            tx.id
+                        );
+
+                    }
+                );
+
+            }
+
+
             renderTransactions();
 
         },
 
-        (error)=>{
+        (error) => {
 
             console.error(
                 "History Error:",
@@ -4503,7 +4963,7 @@ function loadHistory(){
                 );
 
 
-            if(historyList){
+            if (historyList) {
 
                 historyList.innerHTML = `
 
@@ -4534,10 +4994,255 @@ function loadHistory(){
 
 
 /* =========================================================
+   DETECT NEW TRANSACTION
+========================================================= */
+
+function handleNewTransaction(tx) {
+
+    if (!tx) {
+
+        return;
+
+    }
+
+
+    const type =
+        String(
+            tx.type || ""
+        ).toLowerCase();
+
+
+    const category =
+        String(
+            tx.category ||
+            tx.source ||
+            ""
+        ).toLowerCase();
+
+
+    const title =
+        String(
+            tx.title ||
+            ""
+        ).toLowerCase();
+
+
+    const status =
+        String(
+            tx.status ||
+            "completed"
+        ).toLowerCase();
+
+
+    const isRefund =
+        type === "credit" &&
+        (
+            category.includes(
+                "refund"
+            ) ||
+
+            category.includes(
+                "match_cancel"
+            ) ||
+
+            category.includes(
+                "match-cancel"
+            ) ||
+
+            category.includes(
+                "match cancelled"
+            ) ||
+
+            category.includes(
+                "cancelled"
+            ) ||
+
+            category.includes(
+                "canceled"
+            ) ||
+
+            title.includes(
+                "refund"
+            ) ||
+
+            title.includes(
+                "match cancelled"
+            ) ||
+
+            title.includes(
+                "match canceled"
+            ) ||
+
+            title.includes(
+                "match cancel"
+            )
+        );
+
+
+    if (
+        !isRefund
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        status === "rejected"
+    ) {
+
+        return;
+
+    }
+
+
+    const transactionId =
+        String(
+            tx.id || ""
+        );
+
+
+    if (
+        refundMessageShown.has(
+            transactionId
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    refundMessageShown.add(
+        transactionId
+    );
+
+
+    const amount =
+        Number(
+            tx.amount || 0
+        );
+
+
+    /*
+     * WALLET UI REFRESH
+     */
+
+    updateWalletUI();
+
+
+    /*
+     * REFUND MESSAGE
+     */
+
+    const message =
+        amount > 0
+
+            ? "Match cancelled. " +
+              formatMoney(amount) +
+              " refund wallet mein add ho gaya."
+
+            : "Match cancelled. Refund wallet mein add ho gaya.";
+
+
+    showRefundMessage(
+        message
+    );
+
+
+    /*
+     * VIBRATION
+     */
+
+    try {
+
+        if (
+            navigator.vibrate
+        ) {
+
+            navigator.vibrate(
+                [100, 60, 100]
+            );
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.warn(
+            "Vibration unavailable"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   REFUND MESSAGE
+========================================================= */
+
+function showRefundMessage(
+    message
+) {
+
+    /*
+     * If page already has
+     * refundMessage element,
+     * update it.
+     */
+
+    const existing =
+        document.getElementById(
+            "refundMessage"
+        );
+
+
+    if (existing) {
+
+        existing.innerText =
+            String(message);
+
+
+        existing.classList.add(
+            "show"
+        );
+
+
+        setTimeout(
+            () => {
+
+                existing.classList.remove(
+                    "show"
+                );
+
+            },
+            5000
+        );
+
+    }
+
+
+    /*
+     * Toast always works if
+     * toast element exists.
+     */
+
+    showToast(
+        "↩️ " +
+        String(message)
+    );
+
+}
+
+
+/* =========================================================
    RENDER HISTORY
 ========================================================= */
 
-function renderTransactions(){
+function renderTransactions() {
 
     const box =
         document.getElementById(
@@ -4551,8 +5256,10 @@ function renderTransactions(){
         );
 
 
-    if(!box){
+    if (!box) {
+
         return;
+
     }
 
 
@@ -4560,13 +5267,13 @@ function renderTransactions(){
         [...transactions];
 
 
-    if(
+    if (
         currentFilter !== "all"
-    ){
+    ) {
 
         list =
             list.filter(
-                (tx)=>{
+                (tx) => {
 
                     const type =
                         String(
@@ -4588,34 +5295,36 @@ function renderTransactions(){
                         ).toLowerCase();
 
 
-                    if(
+                    if (
                         currentFilter ===
                         "credit"
-                    ){
+                    ) {
 
                         return (
-                            type === "credit"
+                            type ===
+                            "credit"
                         );
 
                     }
 
 
-                    if(
+                    if (
                         currentFilter ===
                         "debit"
-                    ){
+                    ) {
 
                         return (
-                            type === "debit"
+                            type ===
+                            "debit"
                         );
 
                     }
 
 
-                    if(
+                    if (
                         currentFilter ===
                         "deposit"
-                    ){
+                    ) {
 
                         return (
                             category.includes(
@@ -4638,10 +5347,10 @@ function renderTransactions(){
                     }
 
 
-                    if(
+                    if (
                         currentFilter ===
                         "withdraw"
-                    ){
+                    ) {
 
                         return (
                             category.includes(
@@ -4656,10 +5365,10 @@ function renderTransactions(){
                     }
 
 
-                    if(
+                    if (
                         currentFilter ===
                         "match"
-                    ){
+                    ) {
 
                         return (
                             category.includes(
@@ -4674,10 +5383,10 @@ function renderTransactions(){
                     }
 
 
-                    if(
+                    if (
                         currentFilter ===
                         "reward"
-                    ){
+                    ) {
 
                         return (
                             category.includes(
@@ -4688,12 +5397,20 @@ function renderTransactions(){
                                 "cashback"
                             ) ||
 
+                            category.includes(
+                                "refund"
+                            ) ||
+
                             title.includes(
                                 "reward"
                             ) ||
 
                             title.includes(
                                 "cashback"
+                            ) ||
+
+                            title.includes(
+                                "refund"
                             ) ||
 
                             title.includes(
@@ -4716,22 +5433,22 @@ function renderTransactions(){
     }
 
 
-    if(count){
+    if (count) {
 
         count.innerText =
             list.length +
             (
                 list.length === 1
-                ? " transaction"
-                : " transactions"
+                    ? " transaction"
+                    : " transactions"
             );
 
     }
 
 
-    if(
+    if (
         list.length === 0
-    ){
+    ) {
 
         box.innerHTML = `
 
@@ -4763,7 +5480,7 @@ function renderTransactions(){
 
 
     list.forEach(
-        (tx)=>{
+        (tx) => {
 
             const amount =
                 Number(
@@ -4796,18 +5513,51 @@ function renderTransactions(){
                 title.toLowerCase();
 
 
+            const category =
+                String(
+                    tx.category ||
+                    tx.source ||
+                    ""
+                ).toLowerCase();
+
+
             let icon =
                 "💳";
 
 
-            if(
+            /*
+             * REFUND
+             */
+
+            if (
+                lowerTitle.includes(
+                    "refund"
+                ) ||
+
+                category.includes(
+                    "refund"
+                ) ||
+
+                category.includes(
+                    "cancel"
+                )
+            ) {
+
+                icon =
+                    "↩️";
+
+            }
+
+
+            else if (
                 lowerTitle.includes(
                     "deposit"
                 ) ||
+
                 lowerTitle.includes(
                     "add money"
                 )
-            ){
+            ) {
 
                 icon =
                     "🟢";
@@ -4815,11 +5565,11 @@ function renderTransactions(){
             }
 
 
-            else if(
+            else if (
                 lowerTitle.includes(
                     "withdraw"
                 )
-            ){
+            ) {
 
                 icon =
                     "💸";
@@ -4827,11 +5577,11 @@ function renderTransactions(){
             }
 
 
-            else if(
+            else if (
                 lowerTitle.includes(
                     "match"
                 )
-            ){
+            ) {
 
                 icon =
                     "🎮";
@@ -4839,14 +5589,15 @@ function renderTransactions(){
             }
 
 
-            else if(
+            else if (
                 lowerTitle.includes(
                     "winning"
                 ) ||
+
                 lowerTitle.includes(
                     "win"
                 )
-            ){
+            ) {
 
                 icon =
                     "🏆";
@@ -4854,14 +5605,15 @@ function renderTransactions(){
             }
 
 
-            else if(
+            else if (
                 lowerTitle.includes(
                     "cashback"
                 ) ||
+
                 lowerTitle.includes(
                     "reward"
                 )
-            ){
+            ) {
 
                 icon =
                     "🎁";
@@ -4869,11 +5621,11 @@ function renderTransactions(){
             }
 
 
-            else if(
+            else if (
                 lowerTitle.includes(
                     "refund"
                 )
-            ){
+            ) {
 
                 icon =
                     "↩️";
@@ -4885,30 +5637,28 @@ function renderTransactions(){
                 "";
 
 
-            if(
+            if (
                 status === "pending"
-            ){
+            ) {
 
                 statusClass =
                     "pending-text";
 
             }
 
-
-            else if(
+            else if (
                 status === "rejected"
-            ){
+            ) {
 
                 statusClass =
                     "rejected-text";
 
             }
 
-
-            else if(
+            else if (
                 status === "completed" ||
                 status === "approved"
-            ){
+            ) {
 
                 statusClass =
                     "completed-text";
@@ -4925,33 +5675,44 @@ function renderTransactions(){
 
             const time =
                 tx.time
-                ? new Date(
-                    Number(
-                        tx.time
+
+                    ? new Date(
+                        Number(
+                            tx.time
+                        )
+                    ).toLocaleString(
+                        "en-IN",
+                        {
+                            day:
+                                "2-digit",
+
+                            month:
+                                "short",
+
+                            year:
+                                "numeric",
+
+                            hour:
+                                "2-digit",
+
+                            minute:
+                                "2-digit"
+                        }
                     )
-                ).toLocaleString(
-                    "en-IN",
-                    {
-                        day:"2-digit",
-                        month:"short",
-                        year:"numeric",
-                        hour:"2-digit",
-                        minute:"2-digit"
-                    }
-                )
-                : "--";
+
+                    : "--";
 
 
             const amountText =
                 type === "debit"
-                ? "-₹"
-                : "+₹";
+                    ? "-₹"
+                    : "+₹";
 
 
             const amountClass =
                 type === "debit"
-                ? "debit"
-                : "credit";
+                    ? "debit"
+                    : "credit";
 
 
             const row =
@@ -4970,7 +5731,6 @@ function renderTransactions(){
                     ${icon}
                 </div>
 
-
                 <div class="tx-info">
 
                     <div class="tx-title">
@@ -4987,13 +5747,16 @@ function renderTransactions(){
 
                 </div>
 
-
                 <div class="tx-amount ${amountClass}">
                     ${amountText}${Math.floor(
-                        Number.isFinite(amount)
-                        ? amount
-                        : 0
-                    ).toLocaleString("en-IN")}
+                        Number.isFinite(
+                            amount
+                        )
+                            ? amount
+                            : 0
+                    ).toLocaleString(
+                        "en-IN"
+                    )}
                 </div>
 
             `;
@@ -5013,7 +5776,17 @@ function renderTransactions(){
    PENDING REQUESTS
 ========================================================= */
 
-function loadPendingRequests(){
+function loadPendingRequests() {
+
+    if (pendingListenerStarted) {
+
+        return;
+
+    }
+
+
+    pendingListenerStarted =
+        true;
 
 
     onValue(
@@ -5022,31 +5795,32 @@ function loadPendingRequests(){
             "depositRequests"
         ),
 
-        (snapshot)=>{
+        (snapshot) => {
 
             let count =
                 0;
 
 
-            if(
+            if (
                 snapshot.exists()
-            ){
+            ) {
 
                 snapshot.forEach(
-                    (item)=>{
+                    (item) => {
 
                         const data =
                             item.val() || {};
 
 
-                        if(
+                        if (
                             data.uid === UID &&
+
                             String(
                                 data.status ||
                                 "pending"
                             ).toLowerCase() ===
                             "pending"
-                        ){
+                        ) {
 
                             count++;
 
@@ -5064,7 +5838,7 @@ function loadPendingRequests(){
                 );
 
 
-            if(element){
+            if (element) {
 
                 element.innerText =
                     count;
@@ -5081,31 +5855,32 @@ function loadPendingRequests(){
             "withdrawRequests"
         ),
 
-        (snapshot)=>{
+        (snapshot) => {
 
             let count =
                 0;
 
 
-            if(
+            if (
                 snapshot.exists()
-            ){
+            ) {
 
                 snapshot.forEach(
-                    (item)=>{
+                    (item) => {
 
                         const data =
                             item.val() || {};
 
 
-                        if(
+                        if (
                             data.uid === UID &&
+
                             String(
                                 data.status ||
                                 "pending"
                             ).toLowerCase() ===
                             "pending"
-                        ){
+                        ) {
 
                             count++;
 
@@ -5123,7 +5898,7 @@ function loadPendingRequests(){
                 );
 
 
-            if(element){
+            if (element) {
 
                 element.innerText =
                     count;
@@ -5142,40 +5917,48 @@ function loadPendingRequests(){
 ========================================================= */
 
 window.submitWithdraw =
-async function(){
+async function () {
 
-    if(withdrawSubmitting){
+    if (withdrawSubmitting) {
+
         return;
+
+    }
+
+
+    const amountInput =
+        document.getElementById(
+            "withdrawAmount"
+        );
+
+
+    const upiInput =
+        document.getElementById(
+            "withdrawUPI"
+        );
+
+
+    if (!amountInput || !upiInput) {
+
+        return;
+
     }
 
 
     const amount =
         Number(
-            document
-                .getElementById(
-                    "withdrawAmount"
-                )
-                .value
+            amountInput.value
         );
 
 
     const upi =
-        document
-            .getElementById(
-                "withdrawUPI"
-            )
-            .value
-            .trim();
+        upiInput.value.trim();
 
 
-    /*
-     * MINIMUM ₹100
-     */
-
-    if(
+    if (
         !Number.isFinite(amount) ||
         amount < 100
-    ){
+    ) {
 
         showToast(
             "Minimum withdrawal is ₹100"
@@ -5186,9 +5969,9 @@ async function(){
     }
 
 
-    if(
+    if (
         amount > 100000
-    ){
+    ) {
 
         showToast(
             "Maximum withdrawal is ₹1,00,000"
@@ -5199,7 +5982,7 @@ async function(){
     }
 
 
-    if(!upi){
+    if (!upi) {
 
         showToast(
             "Enter UPI ID"
@@ -5214,11 +5997,11 @@ async function(){
         /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+$/;
 
 
-    if(
+    if (
         !upiPattern.test(
             upi
         )
-    ){
+    ) {
 
         showToast(
             "Enter valid UPI ID"
@@ -5229,13 +6012,10 @@ async function(){
     }
 
 
-    /*
-     * CHECK BALANCE BEFORE REQUEST
-     */
-
-    if(
-        currentWithdrawable < amount
-    ){
+    if (
+        currentWithdrawable <
+        amount
+    ) {
 
         showToast(
             "Insufficient withdrawable balance"
@@ -5256,7 +6036,7 @@ async function(){
         );
 
 
-    if(button){
+    if (button) {
 
         button.disabled =
             true;
@@ -5267,11 +6047,7 @@ async function(){
     }
 
 
-    try{
-
-        /*
-         * READ USER
-         */
+    try {
 
         const userSnap =
             await get(
@@ -5283,9 +6059,9 @@ async function(){
             );
 
 
-        if(
+        if (
             !userSnap.exists()
-        ){
+        ) {
 
             throw new Error(
                 "User not found"
@@ -5298,37 +6074,28 @@ async function(){
             userSnap.val() || {};
 
 
-        /*
-         * READ WALLET AGAIN
-         */
-
-        let wallet =
+        const wallet =
             parseWalletValue(
                 user.wallet
             );
 
 
-        /*
-         * READ WITHDRAWABLE
-         */
-
         let withdrawable;
 
 
-        if(
+        if (
             user.withdrawable !==
             undefined &&
             user.withdrawable !==
             null
-        ){
+        ) {
 
             withdrawable =
                 parseWalletValue(
                     user.withdrawable
                 );
 
-        }
-        else{
+        } else {
 
             withdrawable =
                 wallet;
@@ -5336,12 +6103,12 @@ async function(){
         }
 
 
-        if(
+        if (
             !Number.isFinite(
                 withdrawable
             ) ||
             withdrawable < 0
-        ){
+        ) {
 
             withdrawable =
                 0;
@@ -5349,28 +6116,10 @@ async function(){
         }
 
 
-        /*
-         * MINIMUM ₹100 AGAIN
-         */
-
-        if(
-            amount < 100
-        ){
-
-            throw new Error(
-                "Minimum withdrawal is ₹100"
-            );
-
-        }
-
-
-        /*
-         * BALANCE CHECK AGAIN
-         */
-
-        if(
-            withdrawable < amount
-        ){
+        if (
+            withdrawable <
+            amount
+        ) {
 
             throw new Error(
                 "Insufficient withdrawable balance"
@@ -5378,10 +6127,6 @@ async function(){
 
         }
 
-
-        /*
-         * CHECK EXISTING PENDING
-         */
 
         const existingSnap =
             await get(
@@ -5396,25 +6141,26 @@ async function(){
             false;
 
 
-        if(
+        if (
             existingSnap.exists()
-        ){
+        ) {
 
             existingSnap.forEach(
-                (item)=>{
+                (item) => {
 
                     const data =
                         item.val() || {};
 
 
-                    if(
+                    if (
                         data.uid === UID &&
+
                         String(
                             data.status ||
                             "pending"
                         ).toLowerCase() ===
                         "pending"
-                    ){
+                    ) {
 
                         const existingAmount =
                             Number(
@@ -5432,16 +6178,17 @@ async function(){
                             .toLowerCase();
 
 
-                        if(
+                        if (
                             Math.floor(
                                 existingAmount
                             ) ===
                             Math.floor(
                                 amount
                             ) &&
+
                             existingUPI ===
                             upi.toLowerCase()
-                        ){
+                        ) {
 
                             duplicatePending =
                                 true;
@@ -5456,9 +6203,9 @@ async function(){
         }
 
 
-        if(
+        if (
             duplicatePending
-        ){
+        ) {
 
             throw new Error(
                 "Same withdrawal request already pending"
@@ -5466,10 +6213,6 @@ async function(){
 
         }
 
-
-        /*
-         * CREATE WITHDRAW REQUEST
-         */
 
         const withdrawRef =
             push(
@@ -5488,7 +6231,9 @@ async function(){
                     UID,
 
                 amount:
-                    Math.floor(amount),
+                    Math.floor(
+                        amount
+                    ),
 
                 upi:
                     upi,
@@ -5511,25 +6256,16 @@ async function(){
         closeWithdraw();
 
 
-        document
-            .getElementById(
-                "withdrawAmount"
-            )
-            .value =
+        amountInput.value =
             "";
 
 
-        document
-            .getElementById(
-                "withdrawUPI"
-            )
-            .value =
+        upiInput.value =
             "";
 
     }
 
-
-    catch(error){
+    catch (error) {
 
         console.error(
             "Withdraw Error:",
@@ -5544,14 +6280,13 @@ async function(){
 
     }
 
-
-    finally{
+    finally {
 
         withdrawSubmitting =
             false;
 
 
-        if(button){
+        if (button) {
 
             button.disabled =
                 false;
@@ -5567,17 +6302,17 @@ async function(){
 
 
 /* =========================================================
-   ESC KEY / BACK SUPPORT
+   ESC KEY
 ========================================================= */
 
 document.addEventListener(
     "keydown",
-    (event)=>{
+    (event) => {
 
-        if(
+        if (
             event.key ===
             "Escape"
-        ){
+        ) {
 
             closeAddMoney();
 
@@ -5593,11 +6328,12 @@ document.addEventListener(
    TOAST
 ========================================================= */
 
-let toastTimer = null;
+let toastTimer =
+    null;
 
 
 window.showToast =
-function(message){
+function (message) {
 
     const toast =
         document.getElementById(
@@ -5605,8 +6341,10 @@ function(message){
         );
 
 
-    if(!toast){
+    if (!toast) {
+
         return;
+
     }
 
 
@@ -5626,7 +6364,7 @@ function(message){
 
     toastTimer =
         setTimeout(
-            ()=>{
+            () => {
 
                 toast.classList.remove(
                     "show"
@@ -5643,7 +6381,7 @@ function(message){
    ESCAPE HTML
 ========================================================= */
 
-function escapeHTML(value){
+function escapeHTML(value) {
 
     return String(value)
 
@@ -5679,20 +6417,23 @@ function escapeHTML(value){
    PREVENT DOUBLE TAP / ZOOM
 ========================================================= */
 
-let lastTouchEnd = 0;
+let lastTouchEnd =
+    0;
 
 
 document.addEventListener(
     "touchend",
-    function(event){
+    function (event) {
 
         const now =
             Date.now();
 
 
-        if(
-            now - lastTouchEnd <= 300
-        ){
+        if (
+            now -
+            lastTouchEnd <=
+            300
+        ) {
 
             event.preventDefault();
 
@@ -5704,13 +6445,14 @@ document.addEventListener(
 
     },
     {
-        passive:false
+        passive:
+            false
     }
 );
 
 
 /* =========================================================
-   AUTO QR REFRESH WHEN AMOUNT CHANGES
+   AUTO QR REFRESH
 ========================================================= */
 
 const depositAmountInput =
@@ -5719,15 +6461,16 @@ const depositAmountInput =
     );
 
 
-if(depositAmountInput){
+if (depositAmountInput) {
 
     depositAmountInput.addEventListener(
         "input",
-        ()=>{
+        () => {
 
-            if(
-                selectedDepositAmount > 0
-            ){
+            if (
+                selectedDepositAmount >
+                0
+            ) {
 
                 const value =
                     Number(
@@ -5735,23 +6478,33 @@ if(depositAmountInput){
                     );
 
 
-                if(
-                    Number.isFinite(value) &&
+                if (
+                    Number.isFinite(
+                        value
+                    ) &&
                     value >= 10
-                ){
+                ) {
 
                     selectedDepositAmount =
-                        Math.floor(value);
-
-
-                    document
-                        .getElementById(
-                            "selectedAmount"
-                        )
-                        .innerText =
-                        formatMoney(
-                            selectedDepositAmount
+                        Math.floor(
+                            value
                         );
+
+
+                    const selected =
+                        document.getElementById(
+                            "selectedAmount"
+                        );
+
+
+                    if (selected) {
+
+                        selected.innerText =
+                            formatMoney(
+                                selectedDepositAmount
+                            );
+
+                    }
 
 
                     createQR(
@@ -5770,10 +6523,10 @@ if(depositAmountInput){
 
 
 /* =========================================================
-   MODAL BACKDROP SCROLL LOCK
+   MODAL BODY LOCK
 ========================================================= */
 
-function updateBodyModalLock(){
+function updateBodyModalLock() {
 
     const add =
         document
@@ -5783,6 +6536,7 @@ function updateBodyModalLock(){
             ?.classList.contains(
                 "show"
             );
+
 
     const withdraw =
         document
@@ -5796,11 +6550,15 @@ function updateBodyModalLock(){
 
     document.body.style.overflow =
         add || withdraw
-        ? "hidden"
-        : "";
+            ? "hidden"
+            : "";
 
 }
 
+
+/* =========================================================
+   WRAP MODAL FUNCTIONS
+========================================================= */
 
 const originalCloseAddMoney =
     window.closeAddMoney;
@@ -5811,7 +6569,7 @@ const originalCloseWithdraw =
 
 
 window.closeAddMoney =
-function(){
+function () {
 
     originalCloseAddMoney();
 
@@ -5821,7 +6579,7 @@ function(){
 
 
 window.closeWithdraw =
-function(){
+function () {
 
     originalCloseWithdraw();
 
@@ -5835,7 +6593,7 @@ const originalOpenAddMoney =
 
 
 window.openAddMoney =
-function(){
+function () {
 
     originalOpenAddMoney();
 
@@ -5849,7 +6607,7 @@ const originalOpenWithdraw =
 
 
 window.openWithdraw =
-function(){
+function () {
 
     originalOpenWithdraw();
 
@@ -5858,8 +6616,58 @@ function(){
 };
 
 
-</script>
+/* =========================================================
+   PAYMENT LOGOS AFTER DOM READY
+========================================================= */
 
+if (
+    document.readyState ===
+    "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        updatePaymentLogos
+    );
+
+} else {
+
+    updatePaymentLogos();
+
+}
+
+
+/* =========================================================
+   OPTIONAL PAYMENT LOGO FALLBACK
+========================================================= */
+
+window.getPaymentLogo =
+function (appName) {
+
+    return paymentLogo(
+        appName
+    );
+
+};
+
+
+/* =========================================================
+   CONSOLE
+========================================================= */
+
+console.log(
+    "Wallet system loaded successfully."
+);
+
+console.log(
+    "Refund real-time listener enabled."
+);
+
+console.log(
+    "Payment methods: GPay, PhonePe, Paytm, FamPay."
+);
+
+</script>
 
 </body>
 
