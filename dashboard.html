@@ -272,25 +272,16 @@ button{
     right:-5px;
 }
 
-/* =========================================================
-   ANNOUNCEMENT
-========================================================= */
+/* ANNOUNCEMENT */
 
 .announcement{
     position:relative;
-
     height:40px;
-
     display:flex;
-
     align-items:center;
-
     overflow:hidden;
-
     margin-bottom:16px;
-
     border-radius:15px;
-
     background:
         linear-gradient(
             90deg,
@@ -298,10 +289,7 @@ button{
             rgba(11,23,39,.94),
             rgba(8,16,28,.98)
         );
-
-    border:
-        1px solid rgba(255,255,255,.07);
-
+    border:1px solid rgba(255,255,255,.07);
     box-shadow:
         0 12px 32px rgba(0,0,0,.22),
         inset 0 1px rgba(255,255,255,.045);
@@ -309,15 +297,11 @@ button{
 
 .announcement::before{
     content:"";
-
     position:absolute;
-
     left:0;
     top:0;
     bottom:0;
-
     width:2px;
-
     background:
         linear-gradient(
             180deg,
@@ -325,22 +309,17 @@ button{
             #4ade80,
             transparent
         );
-
     box-shadow:
         0 0 12px rgba(34,197,94,.6);
 }
 
 .announcement::after{
     content:"";
-
     position:absolute;
-
     top:0;
     left:-100px;
-
     width:75px;
     height:100%;
-
     background:
         linear-gradient(
             90deg,
@@ -348,11 +327,8 @@ button{
             rgba(255,255,255,.1),
             transparent
         );
-
     transform:skewX(-20deg);
-
-    animation:
-        announceShine 4s infinite;
+    animation:announceShine 4s infinite;
 }
 
 @keyframes announceShine{
@@ -368,47 +344,34 @@ button{
 .announceIcon{
     width:44px;
     height:100%;
-
     flex-shrink:0;
-
     display:flex;
-
     align-items:center;
     justify-content:center;
-
     background:
         linear-gradient(
             135deg,
             rgba(34,197,94,.17),
             rgba(34,197,94,.035)
         );
-
     border-right:
         1px solid rgba(34,197,94,.11);
-
     font-size:14px;
 }
 
 .ticker{
     width:100%;
-
     overflow:hidden;
-
     white-space:nowrap;
 }
 
 .tickerText{
     display:inline-block;
-
     padding-left:100%;
-
     color:#cbd5e1;
-
     font-size:9px;
     font-weight:600;
-
-    animation:
-        ticker 18s linear infinite;
+    animation:ticker 18s linear infinite;
 }
 
 @keyframes ticker{
@@ -420,6 +383,7 @@ button{
         transform:translateX(-100%);
     }
 }
+
 /* HERO */
 
 .hero{
@@ -822,6 +786,7 @@ button{
         transform:translateY(0);
         opacity:.3;
     }
+
     to{
         transform:translateY(-7px);
         opacity:1;
@@ -958,8 +923,6 @@ button{
 </div>
 
 
-<!-- WELCOME -->
-
 <div id="welcome">
 
     <div class="welcomeBox">
@@ -992,7 +955,6 @@ button{
 
 <div class="app">
 
-<!-- HEADER -->
 
 <header class="header">
 
@@ -1058,8 +1020,6 @@ button{
 </header>
 
 
-<!-- ANNOUNCEMENT -->
-
 <div class="announcement">
 
     <div class="announceIcon">
@@ -1080,8 +1040,6 @@ button{
 
 </div>
 
-
-<!-- HERO -->
 
 <section class="hero">
 
@@ -1155,8 +1113,6 @@ button{
 
 </section>
 
-
-<!-- QUICK ACTIONS -->
 
 <div class="sectionTitle">
 
@@ -1235,8 +1191,6 @@ button{
 </div>
 
 
-<!-- MISSION -->
-
 <div class="sectionTitle">
 
     <h3>
@@ -1297,8 +1251,6 @@ button{
 </div>
 
 
-<!-- MATCHES -->
-
 <div
     id="matchesSection"
     class="sectionTitle">
@@ -1313,8 +1265,6 @@ button{
 
 </div>
 
-
-<!-- CATEGORY -->
 
 <div class="category">
 
@@ -1357,8 +1307,6 @@ button{
 </div>
 
 
-<!-- MATCH CONTAINER -->
-
 <div id="matchesContainer">
 
     <div class="loader">
@@ -1373,8 +1321,6 @@ button{
 
 </div>
 
-
-<!-- BOTTOM NAV -->
 
 <nav class="bottomNav">
 
@@ -1492,6 +1438,11 @@ let app = null;
 let auth = null;
 let db = null;
 
+
+/* =========================================================
+   FIREBASE INIT
+========================================================= */
+
 try{
 
     app =
@@ -1533,21 +1484,23 @@ let matchStarted = false;
 let matchPlayersStarted = false;
 let announcementStarted = false;
 let messageStarted = false;
+let missionStarted = false;
 
 
 /*
-   IMPORTANT
-
-   matchPlayersData:
-
-   {
-       matchId: number
-   }
-
-   Isme har match ka LIVE player count rahega.
+    LIVE SLOT COUNTS
 */
 
 const matchPlayersData = {};
+
+
+/*
+    ACTUAL CURRENT USER MISSION COUNT
+
+    This is the important fix.
+*/
+
+let actualMissionMatches = null;
 
 
 /* =========================================================
@@ -1755,12 +1708,9 @@ if(auth){
 
             loadUser();
 
-            loadMatches();
+            loadMissionMatches();
 
-            /*
-                NEW:
-                matchPlayers se live slot count
-            */
+            loadMatches();
 
             loadMatchPlayers();
 
@@ -1836,7 +1786,14 @@ function loadUser(){
                 currentUser.photoURL ||
                 "";
 
-            const matches =
+            /*
+                FALLBACK ONLY
+
+                Actual matchPlayers count
+                has priority.
+            */
+
+            const storedMatches =
                 Number(
                     data.matchesJoined ??
                     data.matchCount ??
@@ -1857,7 +1814,7 @@ function loadUser(){
                 name,
                 wallet,
                 photo,
-                matches,
+                storedMatches,
                 winnings
             );
 
@@ -1873,6 +1830,430 @@ function loadUser(){
         }
 
     );
+
+}
+
+
+/* =========================================================
+   MISSION MATCH COUNT
+=========================================================
+
+   This is the main fix.
+
+   Supported structures:
+
+   1.
+
+   matchPlayers/
+       MATCH_ID/
+           USER_UID/
+
+   2.
+
+   matchPlayers/
+       MATCH_ID/
+           players/
+               USER_UID/
+
+   3.
+
+   matchPlayers/
+       MATCH_ID/
+           users/
+               USER_UID/
+
+   4.
+
+   matchPlayers/
+       MATCH_ID/
+           participants/
+               USER_UID/
+
+   5.
+
+   matchPlayers/
+       USER_UID/
+           MATCH_ID/
+
+========================================================= */
+
+function loadMissionMatches(){
+
+    if(
+        !db ||
+        !currentUID ||
+        missionStarted
+    ){
+
+        return;
+
+    }
+
+    missionStarted = true;
+
+    onValue(
+
+        ref(
+            db,
+            "matchPlayers"
+        ),
+
+        snapshot => {
+
+            const count =
+                calculateUserMissionCount(
+                    snapshot,
+                    currentUID
+                );
+
+            /*
+                null means we could not
+                confidently detect a user
+                record.
+
+                In that case keep the
+                users/<uid> fallback.
+            */
+
+            if(count !== null){
+
+                actualMissionMatches =
+                    count;
+
+                updateMission(
+                    count
+                );
+
+                /*
+                    Hero matches should also
+                    use the actual count.
+                */
+
+                const heroMatches =
+                    document.getElementById(
+                        "heroMatches"
+                    );
+
+                if(heroMatches){
+
+                    heroMatches.textContent =
+                        count;
+
+                }
+
+            }
+
+        },
+
+        error => {
+
+            console.warn(
+                "Mission match count error:",
+                error
+            );
+
+        }
+
+    );
+
+}
+
+
+/* =========================================================
+   CALCULATE USER MISSION COUNT
+========================================================= */
+
+function calculateUserMissionCount(
+    snapshot,
+    uid
+){
+
+    if(
+        !snapshot ||
+        !snapshot.exists() ||
+        !uid
+    ){
+
+        return null;
+
+    }
+
+
+    const root =
+        snapshot.val();
+
+    if(
+        !root ||
+        typeof root !== "object"
+    ){
+
+        return null;
+
+    }
+
+
+    let foundAnyUserRecord =
+        false;
+
+    const countedMatchIds =
+        new Set();
+
+
+    /*
+        =====================================================
+        STRUCTURE A
+
+        matchPlayers/
+            MATCH_ID/
+                USER_UID: true
+        =====================================================
+    */
+
+    Object.entries(root).forEach(
+        ([matchId, matchValue]) => {
+
+            if(
+                !matchValue ||
+                typeof matchValue !== "object"
+            ){
+
+                return;
+
+            }
+
+
+            /*
+                Direct UID
+            */
+
+            if(
+                Object.prototype.hasOwnProperty.call(
+                    matchValue,
+                    uid
+                )
+            ){
+
+                const player =
+                    matchValue[uid];
+
+                if(
+                    isValidPlayerValue(
+                        player
+                    )
+                ){
+
+                    foundAnyUserRecord =
+                        true;
+
+                    countedMatchIds.add(
+                        String(matchId)
+                    );
+
+                }
+
+            }
+
+
+            /*
+                Nested players
+            */
+
+            const containers = [
+
+                matchValue.players,
+                matchValue.users,
+                matchValue.participants,
+                matchValue.playerList
+
+            ];
+
+
+            containers.forEach(
+                container => {
+
+                    if(
+                        !container ||
+                        typeof container !== "object"
+                    ){
+
+                        return;
+
+                    }
+
+
+                    if(
+                        Object.prototype.hasOwnProperty.call(
+                            container,
+                            uid
+                        )
+                    ){
+
+                        const player =
+                            container[uid];
+
+                        if(
+                            isValidPlayerValue(
+                                player
+                            )
+                        ){
+
+                            foundAnyUserRecord =
+                                true;
+
+                            countedMatchIds.add(
+                                String(matchId)
+                            );
+
+                        }
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+    /*
+        =====================================================
+        STRUCTURE B
+
+        matchPlayers/
+            USER_UID/
+                MATCH_ID: true
+        =====================================================
+    */
+
+    if(
+        Object.prototype.hasOwnProperty.call(
+            root,
+            uid
+        )
+    ){
+
+        const userMatches =
+            root[uid];
+
+
+        if(
+            userMatches &&
+            typeof userMatches === "object"
+        ){
+
+            Object.entries(
+                userMatches
+            ).forEach(
+                ([matchId, value]) => {
+
+                    /*
+                        Ignore metadata fields.
+                    */
+
+                    if(
+                        [
+                            "count",
+                            "total",
+                            "createdAt",
+                            "updatedAt",
+                            "name",
+                            "uid",
+                            "userId"
+                        ].includes(
+                            String(matchId)
+                        )
+                    ){
+
+                        return;
+
+                    }
+
+
+                    if(
+                        isValidPlayerValue(
+                            value
+                        )
+                    ){
+
+                        foundAnyUserRecord =
+                            true;
+
+                        countedMatchIds.add(
+                            String(matchId)
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+
+    }
+
+
+    /*
+        =====================================================
+        Return actual count
+        =====================================================
+    */
+
+    if(foundAnyUserRecord){
+
+        return countedMatchIds.size;
+
+    }
+
+
+    /*
+        No user record detected.
+
+        Return null so users/<uid>
+        stored count remains fallback.
+    */
+
+    return null;
+
+}
+
+
+/* =========================================================
+   PLAYER VALUE CHECK
+========================================================= */
+
+function isValidPlayerValue(
+    value
+){
+
+    if(
+        value === true ||
+        value === 1 ||
+        value === "1"
+    ){
+
+        return true;
+
+    }
+
+
+    if(
+        value &&
+        typeof value === "object"
+    ){
+
+        /*
+            Don't treat empty object as
+            a player record.
+        */
+
+        return Object.keys(
+            value
+        ).length > 0;
+
+    }
+
+
+    return false;
 
 }
 
@@ -1964,8 +2345,15 @@ function showUser(
 
     if(heroMatches){
 
+        /*
+            If actual matchPlayers count
+            already arrived, use it.
+        */
+
         heroMatches.textContent =
-            matches;
+            actualMissionMatches !== null
+                ? actualMissionMatches
+                : matches;
 
     }
 
@@ -2018,9 +2406,21 @@ function showUser(
     }
 
 
-    updateMission(
-        matches
-    );
+    /*
+        Initial fallback mission.
+        Actual matchPlayers count will
+        replace it automatically.
+    */
+
+    if(
+        actualMissionMatches === null
+    ){
+
+        updateMission(
+            matches
+        );
+
+    }
 
 }
 
@@ -2029,16 +2429,29 @@ function showUser(
    MISSION
 ========================================================= */
 
-function updateMission(count){
+function updateMission(
+    count
+){
 
     count =
         Math.max(
             0,
-            Math.min(
-                100,
-                Number(count) || 0
-            )
+            Number(count) || 0
         );
+
+
+    /*
+        Progress bar max is 100,
+        but actual number can continue
+        beyond 100.
+    */
+
+    const progressPercent =
+        Math.min(
+            100,
+            count
+        );
+
 
     const fill =
         document.getElementById(
@@ -2048,7 +2461,7 @@ function updateMission(count){
     if(fill){
 
         fill.style.width =
-            count + "%";
+            progressPercent + "%";
 
     }
 
@@ -2219,13 +2632,16 @@ function loadMessages(){
    MESSAGE BADGE
 ========================================================= */
 
-function updateMessageBadge(count){
+function updateMessageBadge(
+    count
+){
 
     count =
         Math.max(
             0,
             Number(count) || 0
         );
+
 
     const headerBadge =
         document.getElementById(
@@ -2363,33 +2779,7 @@ function loadMatches(){
 
 
 /* =========================================================
-   NEW — MATCH PLAYERS
-=========================================================
-
-   Supported structures:
-
-   1.
-   matchPlayers/
-       MATCH_ID/
-           PLAYER_ID/
-               name: "Player"
-
-   2.
-   matchPlayers/
-       MATCH_ID/
-           PLAYER_ID: true
-
-   3.
-   matchPlayers/
-       PLAYER_ID/
-           matchId: MATCH_ID
-
-   4.
-   matchPlayers/
-       MATCH_ID/
-           players/
-               PLAYER_ID/
-
+   MATCH PLAYERS
 ========================================================= */
 
 function loadMatchPlayers(){
@@ -2405,7 +2795,6 @@ function loadMatchPlayers(){
 
     matchPlayersStarted = true;
 
-
     onValue(
 
         ref(
@@ -2414,10 +2803,6 @@ function loadMatchPlayers(){
         ),
 
         snapshot => {
-
-            /*
-                Reset old counts
-            */
 
             Object.keys(
                 matchPlayersData
@@ -2453,19 +2838,10 @@ function loadMatchPlayers(){
                         matchChild.val();
 
 
-                    /*
-                        CASE 1:
-                        matchPlayers/{matchId}/{players}
-                    */
-
                     if(
                         value &&
                         typeof value === "object"
                     ){
-
-                        /*
-                            Direct player children
-                        */
 
                         let directCount = 0;
 
@@ -2477,7 +2853,8 @@ function loadMatchPlayers(){
                                 if(
                                     key === "players" ||
                                     key === "users" ||
-                                    key === "participants"
+                                    key === "participants" ||
+                                    key === "playerList"
                                 ){
 
                                     return;
@@ -2506,16 +2883,13 @@ function loadMatchPlayers(){
                         );
 
 
-                        /*
-                            matchPlayers/{matchId}/players
-                        */
-
                         let nestedCount = 0;
 
                         const nested =
                             value.players ||
                             value.users ||
-                            value.participants;
+                            value.participants ||
+                            value.playerList;
 
 
                         if(
@@ -2548,14 +2922,6 @@ function loadMatchPlayers(){
                         }
                         else{
 
-                            /*
-                                Sometimes structure itself is:
-
-                                matchPlayers/
-                                  matchId/
-                                    count: 10
-                            */
-
                             const directNumber =
                                 Number(
                                     value.count ??
@@ -2585,10 +2951,6 @@ function loadMatchPlayers(){
                     }
                     else{
 
-                        /*
-                            matchPlayers/{matchId}: true
-                        */
-
                         if(
                             value === true ||
                             value === 1 ||
@@ -2607,11 +2969,6 @@ function loadMatchPlayers(){
             );
 
 
-            /*
-                Render again after live
-                matchPlayers update.
-            */
-
             renderMatches();
 
         },
@@ -2622,12 +2979,6 @@ function loadMatchPlayers(){
                 "matchPlayers load error:",
                 error
             );
-
-            /*
-                Match data still works
-                if matchPlayers permission
-                is unavailable.
-            */
 
             renderMatches();
 
@@ -2667,9 +3018,6 @@ function countObjectChildren(
             const value =
                 object[key];
 
-            /*
-                Ignore metadata fields.
-            */
 
             if(
                 [
@@ -2686,11 +3034,6 @@ function countObjectChildren(
 
             }
 
-
-            /*
-                A player record can be
-                object / true / 1 / string.
-            */
 
             if(
                 value &&
@@ -2720,7 +3063,7 @@ function countObjectChildren(
 
 
 /* =========================================================
-   GET LIVE SLOT COUNT
+   GET BOOKED COUNT
 ========================================================= */
 
 function getBookedCount(
@@ -2733,10 +3076,6 @@ function getBookedCount(
             String(id)
         ];
 
-
-    /*
-        matchPlayers count has priority.
-    */
 
     if(
         playerCount !== undefined &&
@@ -2752,10 +3091,6 @@ function getBookedCount(
 
     }
 
-
-    /*
-        Fallback to matches data.
-    */
 
     return Math.max(
         0,
@@ -2974,13 +3309,7 @@ function normalizeType(
 
 
 /* =========================================================
-   IMAGE URL
-=========================================================
-
-   Admin Create Tournament me image
-   kisi bhi common field me ho to
-   yaha se detect ho jayegi.
-
+   IMAGE
 ========================================================= */
 
 function getMatchImage(
@@ -3057,11 +3386,6 @@ function getMatchImage(
                 value.trim();
 
 
-            /*
-                Ignore normal page links
-                unless they look like an image.
-            */
-
             if(
                 isImageURL(clean)
             ){
@@ -3070,13 +3394,6 @@ function getMatchImage(
 
             }
 
-
-            /*
-                Some admin panels save
-                image link without extension.
-                HTTPS image-host URLs are
-                still accepted.
-            */
 
             if(
                 /^https?:\/\//i.test(
@@ -3092,10 +3409,6 @@ function getMatchImage(
 
     }
 
-
-    /*
-        Nested image object support.
-    */
 
     if(
         match?.image &&
@@ -3121,10 +3434,6 @@ function getMatchImage(
     }
 
 
-    /*
-        Default image.
-    */
-
     return "https://images.pexels.com/photos/7915357/pexels-photo-7915357.jpeg";
 
 }
@@ -3149,10 +3458,6 @@ function isImageURL(
     }
 
 
-    /*
-        Direct image extensions.
-    */
-
     if(
         /\.(jpg|jpeg|png|webp|gif|avif|svg)(\?.*)?$/i.test(
             url
@@ -3163,11 +3468,6 @@ function isImageURL(
 
     }
 
-
-    /*
-        Popular image hosts / query based
-        image URLs.
-    */
 
     if(
         /images\.pexels\.com/i.test(url) ||
@@ -3268,17 +3568,6 @@ function renderMatch(
         );
 
 
-    /*
-        IMPORTANT:
-
-        Slot count ab pehle
-        matchPlayers se aayega.
-
-        Agar waha data nahi mila
-        to matches ka booked value
-        fallback rahega.
-    */
-
     const booked =
         getBookedCount(
             id,
@@ -3304,14 +3593,6 @@ function renderMatch(
             )
         );
 
-
-    /*
-        ADMIN IMAGE
-
-        Create Tournament me jo
-        image URL save hua hai,
-        wahi Upcoming me show hoga.
-    */
 
     const image =
         getMatchImage(
@@ -3359,16 +3640,13 @@ function renderMatch(
 
             <div class="shade"></div>
 
-
             <span class="mode">
                 ${escapeHTML(type)}
             </span>
 
-
             <span class="status">
                 ${escapeHTML(timer)}
             </span>
-
 
             <div class="matchOverlay">
 
@@ -4067,7 +4345,7 @@ function escapeHTML(
 
 
 /* =========================================================
-   REFRESH COUNTDOWN + SLOT COUNT
+   REFRESH
 ========================================================= */
 
 setInterval(
