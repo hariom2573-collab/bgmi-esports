@@ -8,46 +8,52 @@
 <meta name="viewport"
 content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
 
-<meta name="theme-color" content="#050B18">
-
+<meta name="theme-color" content="#07111d">
 <meta name="color-scheme" content="dark">
 
-<title>BGMI PAY Wallet</title>
-
+<title>BGMI PAY - Wallet</title>
 
 <style>
 
 /* =========================================================
-   BGMI PAY — PREMIUM WALLET UI
-   Existing HTML / JS compatible CSS
+   PREMIUM BGMI WALLET UI — V2
 ========================================================= */
 
 :root{
-    --bg:#040914;
-    --bg2:#07101d;
-    --card:#0b1627;
-    --card2:#0e1b2e;
+    --bg:#02070d;
+    --bg-soft:#050c14;
+    --card:#09141f;
+    --card-2:#0d1a27;
+    --card-3:#0b1824;
 
-    --green:#22c55e;
-    --green2:#4ade80;
-    --green3:#16a34a;
-
-    --blue:#2563eb;
-    --blue2:#60a5fa;
-
-    --purple:#8b5cf6;
-    --gold:#fbbf24;
+    --border:#203447;
+    --border-soft:#182b3b;
+    --border-bright:#2b4357;
 
     --text:#ffffff;
-    --muted:#8794a8;
-    --muted2:#647188;
+    --muted:#718496;
+    --muted-2:#8799ab;
 
-    --border:rgba(255,255,255,.09);
+    --green:#4cff91;
+    --green-2:#50ff94;
+    --green-dark:#16c866;
+    --green-bg:#092318;
 
-    --shadow:
-        0 25px 70px rgba(0,0,0,.45);
+    --red:#ff5e6c;
+    --red-bg:#281015;
 
-    --radius:22px;
+    --yellow:#ffc44d;
+    --yellow-bg:#211a09;
+
+    --shadow:0 18px 45px rgba(0,0,0,.30);
+    --shadow-heavy:0 25px 80px rgba(0,0,0,.60);
+
+    --radius-sm:10px;
+    --radius-md:14px;
+    --radius-lg:18px;
+    --radius-xl:23px;
+
+    --transition:.22s ease;
 }
 
 
@@ -59,135 +65,69 @@ content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no
     margin:0;
     padding:0;
     box-sizing:border-box;
-
-    font-family:
-        Inter,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Arial,
-        sans-serif;
-
     -webkit-tap-highlight-color:transparent;
-    -webkit-font-smoothing:antialiased;
 }
 
 html,
 body{
     width:100%;
     min-height:100%;
-}
-
-html{
     background:var(--bg);
+    color:var(--text);
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
 }
 
 body{
-    background:
-        radial-gradient(
-            circle at 15% -5%,
-            rgba(34,197,94,.12),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 100% 5%,
-            rgba(37,99,235,.12),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 50% 100%,
-            rgba(139,92,246,.08),
-            transparent 35%
-        ),
-        var(--bg);
-
-    color:var(--text);
-
     overflow-x:hidden;
+    overscroll-behavior-x:none;
+}
 
-    padding-bottom:
-        calc(92px + env(safe-area-inset-bottom));
+button,
+input{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+    -webkit-user-select:none;
+    user-select:none;
+}
+
+button,
+a{
+    -webkit-touch-callout:none;
+}
+
+input{
+    -webkit-appearance:none;
+    appearance:none;
 }
 
 
 /* =========================================================
-   BACKGROUND EFFECT
-========================================================= */
-
-body::before{
-    content:"";
-
-    position:fixed;
-    inset:0;
-
-    pointer-events:none;
-
-    background:
-        radial-gradient(
-            circle at 0% 0%,
-            rgba(34,197,94,.10),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 100% 20%,
-            rgba(37,99,235,.08),
-            transparent 28%
-        );
-
-    z-index:-2;
-}
-
-body::after{
-    content:"";
-
-    position:fixed;
-    inset:0;
-
-    pointer-events:none;
-
-    opacity:.35;
-
-    background:
-        linear-gradient(
-            rgba(255,255,255,.018) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,.018) 1px,
-            transparent 1px
-        );
-
-    background-size:35px 35px;
-
-    mask-image:
-        linear-gradient(
-            to bottom,
-            black,
-            transparent 75%
-        );
-
-    z-index:-1;
-}
-
-
-/* =========================================================
-   APP
+   APP CONTAINER
 ========================================================= */
 
 .app{
     width:100%;
     max-width:520px;
-
-    margin:0 auto;
-
     min-height:100vh;
+    min-height:100dvh;
+
+    margin:auto;
 
     padding:
-        calc(14px + env(safe-area-inset-top))
+        15px
         14px
-        22px;
+        calc(95px + env(safe-area-inset-bottom));
+
+    position:relative;
 }
 
 
@@ -200,110 +140,94 @@ body::after{
     align-items:center;
     justify-content:space-between;
 
-    margin-bottom:18px;
+    margin-bottom:15px;
 }
 
 .header-left{
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:11px;
+    min-width:0;
 }
 
 .header-icon{
-    position:relative;
-
     width:45px;
     height:45px;
 
-    flex:0 0 45px;
+    flex:none;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    border-radius:15px;
+    border-radius:14px;
 
     background:
+        radial-gradient(
+            circle at 30% 20%,
+            rgba(76,255,145,.12),
+            transparent 55%
+        ),
         linear-gradient(
             145deg,
-            #4ade80,
-            #16a34a
+            #142333,
+            #07111d
         );
 
-    box-shadow:
-        0 10px 28px rgba(34,197,94,.20),
-        inset 0 1px 0 rgba(255,255,255,.35);
+    border:1px solid #26394d;
 
-    font-size:21px;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.05),
+        0 8px 25px rgba(0,0,0,.20);
+
+    font-size:22px;
+
+    transition:
+        transform var(--transition),
+        border-color var(--transition);
 }
 
-.header-icon::after{
-    content:"";
-
-    position:absolute;
-    inset:-4px;
-
-    border-radius:18px;
-
-    border:1px solid rgba(74,222,128,.12);
-
-    pointer-events:none;
+.header-icon:active{
+    transform:scale(.94);
 }
 
 .header-title{
-    font-size:20px;
-    font-weight:950;
-
-    letter-spacing:-.6px;
+    font-size:17px;
+    font-weight:900;
+    letter-spacing:-.2px;
 }
 
 .header-subtitle{
     margin-top:3px;
 
-    color:var(--muted);
-
-    font-size:10px;
-    font-weight:600;
+    font-size:11px;
+    color:#8091a3;
 }
 
 .header-badge{
-    display:flex;
-    align-items:center;
-    gap:5px;
+    flex:none;
 
     padding:7px 10px;
 
-    border-radius:999px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(34,197,94,.10),
-            rgba(34,197,94,.035)
-        );
-
-    border:1px solid rgba(34,197,94,.18);
-
-    color:#6ee7a1;
+    border-radius:9px;
 
     font-size:9px;
     font-weight:900;
 
-    letter-spacing:.5px;
-}
+    color:#62ff9b;
 
-.header-badge::before{
-    content:"";
+    background:
+        linear-gradient(
+            135deg,
+            rgba(76,255,145,.12),
+            rgba(8,33,22,.95)
+        );
 
-    width:6px;
-    height:6px;
-
-    border-radius:50%;
-
-    background:#4ade80;
+    border:1px solid #174c30;
 
     box-shadow:
-        0 0 10px #4ade80;
+        inset 0 1px 0 rgba(255,255,255,.03),
+        0 0 18px rgba(76,255,145,.04);
 }
 
 
@@ -313,30 +237,34 @@ body::after{
 
 .wallet-card{
     position:relative;
-
     overflow:hidden;
 
-    min-height:210px;
+    padding:19px;
 
-    padding:22px;
-
-    margin-bottom:15px;
-
-    border-radius:27px;
+    border-radius:var(--radius-xl);
 
     background:
+        radial-gradient(
+            circle at 100% 0%,
+            rgba(37,211,102,.18),
+            transparent 42%
+        ),
+        radial-gradient(
+            circle at 0% 100%,
+            rgba(45,110,255,.06),
+            transparent 45%
+        ),
         linear-gradient(
             145deg,
-            rgba(18,32,53,.98),
-            rgba(7,16,29,.98) 58%,
-            rgba(10,24,40,.98)
+            #0d1a27,
+            #06101a
         );
 
-    border:1px solid rgba(255,255,255,.10);
+    border:1px solid #203447;
 
     box-shadow:
-        0 25px 65px rgba(0,0,0,.42),
-        inset 0 1px 0 rgba(255,255,255,.08);
+        0 18px 45px rgba(0,0,0,.30),
+        inset 0 1px 0 rgba(255,255,255,.035);
 
     isolation:isolate;
 }
@@ -345,221 +273,180 @@ body::after{
     content:"";
 
     position:absolute;
+    top:-80px;
+    right:-80px;
 
-    width:250px;
-    height:250px;
-
-    right:-105px;
-    top:-125px;
+    width:190px;
+    height:190px;
 
     border-radius:50%;
 
-    background:
-        radial-gradient(
-            circle,
-            rgba(34,197,94,.24),
-            rgba(34,197,94,.04) 48%,
-            transparent 70%
-        );
+    background:rgba(76,255,145,.035);
 
-    filter:blur(3px);
+    filter:blur(20px);
 
-    z-index:-1;
+    pointer-events:none;
 }
 
 .wallet-card::after{
     content:"";
 
     position:absolute;
+    left:15px;
+    right:15px;
+    top:0;
 
-    width:180px;
-    height:180px;
-
-    left:-100px;
-    bottom:-110px;
-
-    border-radius:50%;
+    height:1px;
 
     background:
-        radial-gradient(
-            circle,
-            rgba(37,99,235,.20),
-            transparent 68%
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.08),
+            transparent
         );
 
-    z-index:-1;
+    pointer-events:none;
 }
 
-.wallet-top{
-    position:relative;
-    z-index:2;
-
+.wallet-top,
+.wallet-bottom{
     display:flex;
     align-items:center;
     justify-content:space-between;
 }
 
 .wallet-label{
-    color:#93a0b4;
-
+    color:#8799ab;
     font-size:11px;
-    font-weight:750;
-
-    letter-spacing:.15px;
+    font-weight:700;
 }
 
 .wallet-chip{
-    display:flex;
-    align-items:center;
-    gap:5px;
-
-    padding:6px 10px;
-
-    border-radius:999px;
+    color:#54ff98;
 
     background:
-        rgba(34,197,94,.08);
+        linear-gradient(
+            135deg,
+            #0d2b1d,
+            #092318
+        );
 
-    border:1px solid
-        rgba(34,197,94,.22);
+    border:1px solid #174c30;
 
-    color:#70eda3;
+    padding:5px 8px;
 
-    font-size:9px;
+    border-radius:8px;
+
+    font-size:8px;
     font-weight:900;
 
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.05);
+        0 0 16px rgba(76,255,145,.05);
 }
 
 .wallet-main{
-    position:relative;
-    z-index:2;
-
     display:flex;
     align-items:center;
-    gap:11px;
+    justify-content:space-between;
 
-    margin-top:15px;
+    margin:17px 0 21px;
 }
 
 .wallet-amount{
-    font-size:37px;
+    font-size:35px;
+    font-weight:900;
 
-    line-height:1;
-
-    font-weight:950;
-
-    letter-spacing:-1.7px;
-
-    color:#fff;
+    letter-spacing:-1px;
 
     text-shadow:
-        0 3px 20px rgba(255,255,255,.06);
+        0 0 22px rgba(76,255,145,.06);
+
+    transition:
+        transform .2s ease,
+        opacity .2s ease;
 }
 
 .eye-btn{
-    width:35px;
-    height:35px;
-
-    display:grid;
-    place-items:center;
+    width:38px;
+    height:38px;
 
     border-radius:12px;
 
-    border:1px solid rgba(255,255,255,.09);
-
-    background:
-        rgba(255,255,255,.055);
-
-    color:#cdd6e3;
-
-    font-size:15px;
-
-    cursor:pointer;
-
-    transition:
-        transform .16s ease,
-        background .16s ease;
-}
-
-.eye-btn:active{
-    transform:scale(.92);
-    background:rgba(255,255,255,.10);
-}
-
-.wallet-bottom{
-    position:relative;
-    z-index:2;
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:10px;
-
-    margin-top:27px;
-}
-
-.wallet-mini{
-    position:relative;
-
-    padding:12px;
-
-    min-height:59px;
-
-    border-radius:16px;
+    border:1px solid #294052;
 
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.065),
-            rgba(255,255,255,.025)
+            #10202d,
+            #0b1824
         );
 
-    border:1px solid
-        rgba(255,255,255,.075);
+    color:#fff;
+
+    font-size:17px;
 
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.035);
+        inset 0 1px 0 rgba(255,255,255,.04);
+
+    transition:
+        transform .15s ease,
+        border-color .2s ease,
+        background .2s ease;
 }
 
-.wallet-mini::before{
-    content:"";
+.eye-btn:active{
+    transform:scale(.92);
+}
 
-    position:absolute;
+.eye-btn:hover{
+    border-color:#365268;
+}
 
-    left:0;
-    top:12px;
-    bottom:12px;
+.wallet-bottom{
+    gap:10px;
+}
 
-    width:2px;
+.wallet-mini{
+    flex:1;
 
-    border-radius:3px;
+    min-width:0;
+
+    padding:10px;
+
+    border-radius:12px;
 
     background:
         linear-gradient(
-            #4ade80,
-            transparent
+            145deg,
+            #0b1824,
+            #09141f
         );
 
-    opacity:.65;
+    border:1px solid #1b2b3a;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.025);
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease;
+}
+
+.wallet-mini:active{
+    transform:scale(.98);
 }
 
 .wallet-mini-label{
-    color:#77869b;
-
     font-size:9px;
-    font-weight:750;
+    color:#718496;
 }
 
 .wallet-mini-value{
     margin-top:5px;
 
-    color:#fff;
-
-    font-size:15px;
-    font-weight:950;
+    font-size:14px;
+    font-weight:900;
 }
 
 
@@ -568,83 +455,90 @@ body::after{
 ========================================================= */
 
 .actions{
-    display:grid;
+    display:flex;
+    gap:10px;
 
-    grid-template-columns:1fr 1fr;
-
-    gap:11px;
-
-    margin-bottom:15px;
+    margin:14px 0;
 }
 
 .action-btn{
+    flex:1;
+
+    height:50px;
+
+    border-radius:14px;
+
+    font-size:13px;
+    font-weight:900;
+
     position:relative;
-
-    height:55px;
-
-    border:none;
-
-    border-radius:17px;
-
-    font-size:12px;
-    font-weight:950;
-
-    cursor:pointer;
-
     overflow:hidden;
 
     transition:
-        transform .16s ease,
-        filter .16s ease;
+        transform .15s ease,
+        filter .2s ease,
+        border-color .2s ease;
 }
 
-.action-btn::after{
+.action-btn::after,
+.primary-btn::after,
+.secondary-btn::after{
     content:"";
 
     position:absolute;
 
     top:0;
-    left:-100%;
+    left:-120%;
 
-    width:60%;
+    width:70%;
     height:100%;
 
     background:
         linear-gradient(
             90deg,
             transparent,
-            rgba(255,255,255,.18),
+            rgba(255,255,255,.14),
             transparent
         );
 
     transform:skewX(-20deg);
 
     transition:left .5s ease;
+
+    pointer-events:none;
 }
 
-.action-btn:hover::after{
+.action-btn:active,
+.primary-btn:active,
+.secondary-btn:active{
+    transform:scale(.97);
+}
+
+.action-btn:active::after,
+.primary-btn:active::after,
+.secondary-btn:active::after{
     left:140%;
 }
 
-.action-btn:active{
-    transform:scale(.965);
-    filter:brightness(.94);
-}
-
 .add-btn{
-    color:#031109;
+    color:#03120a;
+
+    border:1px solid rgba(255,255,255,.05);
 
     background:
         linear-gradient(
             135deg,
-            #4ade80,
-            #22c55e 55%,
-            #16a34a
+            #50ff94,
+            #16c866
         );
 
     box-shadow:
-        0 12px 30px rgba(34,197,94,.18),
-        inset 0 1px 0 rgba(255,255,255,.35);
+        0 8px 25px rgba(22,200,102,.12),
+        inset 0 1px 0 rgba(255,255,255,.25);
+}
+
+.add-btn:hover{
+    filter:brightness(1.06);
 }
 
 .withdraw-btn{
@@ -652,15 +546,19 @@ body::after{
 
     background:
         linear-gradient(
-            135deg,
-            #3b82f6,
-            #2563eb 55%,
-            #1d4ed8
+            145deg,
+            #132332,
+            #101e2b
         );
 
+    border:1px solid #294052;
+
     box-shadow:
-        0 12px 30px rgba(37,99,235,.18),
-        inset 0 1px 0 rgba(255,255,255,.20);
+        inset 0 1px 0 rgba(255,255,255,.03);
+}
+
+.withdraw-btn:hover{
+    border-color:#38536a;
 }
 
 
@@ -669,151 +567,55 @@ body::after{
 ========================================================= */
 
 .status-card{
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
+    display:flex;
     gap:10px;
 
-    margin-bottom:19px;
+    margin-bottom:20px;
 }
 
 .status-item{
-    position:relative;
+    flex:1;
+
+    min-width:0;
 
     padding:13px;
 
-    min-height:73px;
-
-    border-radius:17px;
+    border-radius:15px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.055),
-            rgba(255,255,255,.018)
+            #0b1722,
+            #09141f
         );
 
-    border:1px solid
-        rgba(255,255,255,.075);
+    border:1px solid #1d2d3c;
 
     box-shadow:
         inset 0 1px 0 rgba(255,255,255,.025);
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease;
+}
+
+.status-item:active{
+    transform:translateY(1px);
 }
 
 .status-head{
     display:flex;
-    align-items:center;
     justify-content:space-between;
 
-    color:#7e8ca0;
-
+    color:#788b9d;
     font-size:9px;
-    font-weight:800;
 }
 
 .status-number{
-    margin-top:7px;
+    margin-top:8px;
 
-    font-size:18px;
-    font-weight:950;
-
-    color:#fff;
-}
-
-
-/* =========================================================
-   HISTORY HEADER
-========================================================= */
-
-.history-header{
-    display:flex;
-    align-items:flex-end;
-    justify-content:space-between;
-
-    margin-bottom:12px;
-}
-
-.history-title{
-    font-size:18px;
-    font-weight:950;
-
-    letter-spacing:-.35px;
-}
-
-.history-count{
-    color:#68768b;
-
-    font-size:9px;
-    font-weight:750;
-}
-
-
-/* =========================================================
-   FILTERS
-========================================================= */
-
-.filters{
-    display:flex;
-
-    gap:7px;
-
-    overflow-x:auto;
-
-    padding:2px 1px 6px;
-
-    margin-bottom:11px;
-
-    scrollbar-width:none;
-}
-
-.filters::-webkit-scrollbar{
-    display:none;
-}
-
-.filter{
-    flex:0 0 auto;
-
-    padding:8px 12px;
-
-    border-radius:999px;
-
-    background:
-        rgba(255,255,255,.035);
-
-    border:1px solid
-        rgba(255,255,255,.075);
-
-    color:#7f8da2;
-
-    font-size:9px;
+    font-size:22px;
     font-weight:900;
-
-    cursor:pointer;
-
-    transition:
-        .16s ease;
-}
-
-.filter:active{
-    transform:scale(.94);
-}
-
-.filter.active{
-    color:#63ee99;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(34,197,94,.14),
-            rgba(34,197,94,.055)
-        );
-
-    border-color:
-        rgba(34,197,94,.35);
-
-    box-shadow:
-        0 5px 18px rgba(34,197,94,.07);
 }
 
 
@@ -821,84 +623,141 @@ body::after{
    HISTORY
 ========================================================= */
 
-.history-list{
+.history-header{
     display:flex;
-    flex-direction:column;
+    align-items:center;
+    justify-content:space-between;
 
-    gap:8px;
+    margin-bottom:11px;
+}
+
+.history-title{
+    font-size:16px;
+    font-weight:900;
+}
+
+.history-count{
+    color:#718496;
+    font-size:10px;
+}
+
+.filters{
+    display:flex;
+    gap:7px;
+
+    overflow-x:auto;
+
+    padding-bottom:8px;
+
+    scrollbar-width:none;
+
+    overscroll-behavior-x:contain;
+}
+
+.filters::-webkit-scrollbar{
+    display:none;
+}
+
+.filter{
+    flex:none;
+
+    padding:8px 12px;
+
+    border-radius:10px;
+
+    border:1px solid #213342;
+
+    background:
+        linear-gradient(
+            145deg,
+            #0c1925,
+            #09141f
+        );
+
+    color:#7f91a2;
+
+    font-size:9px;
+    font-weight:900;
+
+    transition:
+        .18s ease;
+}
+
+.filter:active{
+    transform:scale(.95);
+}
+
+.filter.active{
+    color:#06130b;
+
+    background:
+        linear-gradient(
+            135deg,
+            #59ff9a,
+            #4cff91
+        );
+
+    border-color:#4cff91;
+
+    box-shadow:
+        0 5px 18px rgba(76,255,145,.08);
+}
+
+.history-list{
+    margin-top:5px;
 }
 
 .history{
-    position:relative;
-
     display:flex;
     align-items:center;
+    gap:11px;
 
-    min-height:73px;
+    padding:13px 2px;
 
-    padding:10px;
-
-    border-radius:18px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.055),
-            rgba(255,255,255,.018)
-        );
-
-    border:1px solid
-        rgba(255,255,255,.075);
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.025);
+    border-bottom:1px solid #142431;
 
     transition:
-        transform .15s ease,
-        background .15s ease;
+        background .2s ease,
+        transform .2s ease;
 }
 
 .history:active{
-    transform:scale(.985);
-    background:rgba(255,255,255,.065);
+    transform:scale(.99);
 }
 
 .tx-icon{
-    width:43px;
-    height:43px;
+    width:40px;
+    height:40px;
 
-    flex:0 0 43px;
+    border-radius:12px;
 
-    display:grid;
-    place-items:center;
-
-    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.08),
-            rgba(255,255,255,.025)
+            #0d1b27,
+            #0b1824
         );
 
-    border:1px solid
-        rgba(255,255,255,.07);
+    border:1px solid #1e3040;
 
-    font-size:17px;
+    flex:none;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.025);
 }
 
 .tx-info{
     min-width:0;
     flex:1;
-
-    margin-left:10px;
 }
 
 .tx-title{
-    color:#fff;
-
-    font-size:11px;
-    font-weight:900;
+    font-size:12px;
+    font-weight:800;
 
     white-space:nowrap;
     overflow:hidden;
@@ -908,935 +767,418 @@ body::after{
 .tx-time{
     margin-top:4px;
 
-    color:#637087;
-
-    font-size:8px;
-    font-weight:650;
+    color:#637587;
+    font-size:9px;
 }
 
 .tx-status{
-    display:inline-block;
-
-    margin-top:4px;
-
-    font-size:8px;
-    font-weight:900;
+    margin-top:3px;
+    font-size:9px;
 }
 
 .completed-text{
-    color:#4ade80;
+    color:#4cff91;
 }
 
 .pending-text{
-    color:#fbbf24;
+    color:#ffc44d;
 }
 
 .rejected-text{
-    color:#f87171;
+    color:#ff5e6c;
 }
 
 .tx-amount{
-    margin-left:8px;
-
-    font-size:12px;
-    font-weight:950;
-
-    white-space:nowrap;
-}
-
-.tx-amount.credit{
-    color:#4ade80;
-}
-
-.tx-amount.debit{
-    color:#fb7185;
-}
-
-
-/* =========================================================
-   EMPTY
-========================================================= */
-
-.empty{
-    text-align:center;
-
-    padding:43px 18px;
-
-    border-radius:20px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.045),
-            rgba(255,255,255,.015)
-        );
-
-    border:1px solid
-        rgba(255,255,255,.07);
-}
-
-.empty-icon{
-    width:55px;
-    height:55px;
-
-    display:grid;
-    place-items:center;
-
-    margin:0 auto 11px;
-
-    border-radius:17px;
-
-    background:
-        rgba(34,197,94,.07);
-
-    border:1px solid
-        rgba(34,197,94,.12);
-
-    font-size:24px;
-}
-
-.empty-title{
-    color:#fff;
+    flex:none;
 
     font-size:13px;
     font-weight:900;
 }
 
-.empty-text{
-    margin-top:6px;
+.tx-amount.credit{
+    color:#4cff91;
 
-    color:#65738a;
+    text-shadow:
+        0 0 12px rgba(76,255,145,.05);
+}
 
-    font-size:9px;
+.tx-amount.debit{
+    color:#ff6573;
 }
 
 
 /* =========================================================
-   MODAL BACKDROP
+   EMPTY STATE
+========================================================= */
+
+.empty{
+    text-align:center;
+    padding:45px 15px;
+}
+
+.empty-icon{
+    font-size:35px;
+
+    filter:
+        drop-shadow(
+            0 8px 20px rgba(255,255,255,.05)
+        );
+}
+
+.empty-title{
+    margin-top:10px;
+
+    font-size:14px;
+    font-weight:900;
+}
+
+.empty-text{
+    margin-top:5px;
+
+    color:#697b8c;
+    font-size:10px;
+}
+
+
+/* =========================================================
+   MODAL
 ========================================================= */
 
 .modal{
     position:fixed;
-
     inset:0;
 
-    z-index:1000;
+    z-index:5000;
 
-    display:flex;
+    display:none;
+
     align-items:center;
     justify-content:center;
 
-    padding:
-        calc(14px + env(safe-area-inset-top))
-        14px
-        calc(14px + env(safe-area-inset-bottom));
-
-    background:
-        rgba(0,0,0,.72);
-
-    backdrop-filter:
-        blur(16px)
-        saturate(125%);
-
-    -webkit-backdrop-filter:
-        blur(16px)
-        saturate(125%);
-
-    opacity:0;
-    visibility:hidden;
-
-    transition:
-        opacity .22s ease,
-        visibility .22s ease;
-}
-
-.modal.show{
-    opacity:1;
-    visibility:visible;
-}
-
-
-/* =========================================================
-   MODAL BOX
-========================================================= */
-
-.modal-box{
-    position:relative;
-
-    width:100%;
-    max-width:430px;
-
-    max-height:
-        calc(
-            100vh
-            - 28px
-            - env(safe-area-inset-top)
-            - env(safe-area-inset-bottom)
-        );
-
-    overflow-y:auto;
-
-    padding:19px;
-
-    border-radius:26px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #111e32,
-            #07111f 58%,
-            #081422
-        );
-
-    border:1px solid
-        rgba(255,255,255,.105);
-
-    box-shadow:
-        0 35px 100px rgba(0,0,0,.72),
-        inset 0 1px 0 rgba(255,255,255,.08);
-
-    transform:
-        scale(.90)
-        translateY(10px);
-
-    transition:
-        transform .24s cubic-bezier(.2,.8,.2,1);
-}
-
-.modal.show .modal-box{
-    transform:
-        scale(1)
-        translateY(0);
-}
-
-.modal-box::-webkit-scrollbar{
-    width:3px;
-}
-
-.modal-box::-webkit-scrollbar-thumb{
-    background:#26364e;
-    border-radius:10px;
-}
-
-
-/* =========================================================
-   MODAL TOP GLOW
-========================================================= */
-
-.modal-box::before{
-    content:"";
-
-    position:absolute;
-
-    top:-80px;
-    left:50%;
-
-    width:180px;
-    height:120px;
-
-    transform:translateX(-50%);
+    padding:15px;
 
     background:
         radial-gradient(
-            ellipse,
-            rgba(34,197,94,.14),
-            transparent 70%
+            circle at center,
+            rgba(18,48,38,.08),
+            rgba(0,0,0,.82)
         );
 
-    pointer-events:none;
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+
+    opacity:0;
 }
 
+.modal.show{
+    display:flex;
 
-/* =========================================================
-   MODAL HEADER
-========================================================= */
+    animation:
+        modalFadeIn .20s ease forwards;
+}
+
+@keyframes modalFadeIn{
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
+}
+
+.modal-box{
+    width:100%;
+    max-width:430px;
+
+    max-height:90vh;
+    max-height:90dvh;
+
+    overflow-y:auto;
+
+    border-radius:22px;
+
+    padding:18px;
+
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(76,255,145,.045),
+            transparent 42%
+        ),
+        linear-gradient(
+            145deg,
+            #091622,
+            #07111d
+        );
+
+    border:1px solid #263a4c;
+
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.60),
+        inset 0 1px 0 rgba(255,255,255,.035);
+
+    animation:
+        modalPop .25s cubic-bezier(.2,.8,.2,1);
+
+    scrollbar-width:thin;
+    scrollbar-color:#24394a transparent;
+}
+
+@keyframes modalPop{
+    from{
+        opacity:0;
+        transform:
+            translateY(8px)
+            scale(.94);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+.modal-box::-webkit-scrollbar{
+    width:4px;
+}
+
+.modal-box::-webkit-scrollbar-track{
+    background:transparent;
+}
+
+.modal-box::-webkit-scrollbar-thumb{
+    background:#24394a;
+    border-radius:20px;
+}
 
 .modal-head{
-    position:relative;
-
     display:flex;
     align-items:center;
     justify-content:space-between;
 
-    margin-bottom:17px;
+    margin-bottom:18px;
 }
 
 .modal-title{
     font-size:18px;
-    font-weight:950;
-
-    letter-spacing:-.4px;
+    font-weight:900;
 }
 
 .close-btn{
     width:35px;
     height:35px;
 
-    display:grid;
-    place-items:center;
+    border-radius:10px;
 
-    border-radius:12px;
-
-    border:1px solid
-        rgba(255,255,255,.08);
+    border:1px solid #26394a;
 
     background:
-        rgba(255,255,255,.045);
+        linear-gradient(
+            145deg,
+            #10202d,
+            #0d1a27
+        );
 
-    color:#aeb9c9;
+    color:#fff;
 
-    font-size:18px;
+    font-size:23px;
 
-    cursor:pointer;
-
-    transition:.16s ease;
+    transition:
+        transform .15s ease,
+        background .2s ease,
+        border-color .2s ease;
 }
 
 .close-btn:active{
-    transform:scale(.90);
-    background:rgba(255,255,255,.09);
+    transform:scale(.9) rotate(5deg);
+}
+
+.close-btn:hover{
+    border-color:#3b5368;
 }
 
 
 /* =========================================================
-   PAYMENT STEP
+   INPUTS
 ========================================================= */
-
-.payment-step{
-    width:100%;
-}
-
-.step-title{
-    margin-bottom:11px;
-
-    color:#eaf0f7;
-
-    font-size:13px;
-    font-weight:900;
-}
 
 .input-label{
     display:block;
 
-    margin-bottom:6px;
+    margin-bottom:7px;
 
-    color:#7e8ca0;
+    color:#8495a6;
 
-    font-size:9px;
-    font-weight:850;
-
-    letter-spacing:.15px;
+    font-size:10px;
+    font-weight:800;
 }
 
 .input{
     width:100%;
-    height:49px;
+    height:48px;
 
-    padding:0 14px;
+    padding:0 13px;
 
     outline:none;
 
-    border-radius:14px;
+    border-radius:12px;
 
-    border:1px solid
-        rgba(255,255,255,.085);
+    border:1px solid #263a4c;
 
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.055),
-            rgba(255,255,255,.025)
+            #0b1925,
+            #091621
         );
 
     color:#fff;
 
     font-size:13px;
-    font-weight:750;
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.025);
 
     transition:
-        border-color .18s ease,
-        background .18s ease,
-        box-shadow .18s ease;
+        border-color .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
 }
 
 .input::placeholder{
-    color:#56657a;
+    color:#526576;
 }
 
 .input:focus{
-    border-color:
-        rgba(34,197,94,.40);
+    border-color:#36ed83;
 
-    background:
-        rgba(34,197,94,.045);
+    background:#0a1824;
 
     box-shadow:
-        0 0 0 3px
-        rgba(34,197,94,.055);
+        0 0 0 3px rgba(54,237,131,.06),
+        0 8px 25px rgba(0,0,0,.15);
 }
 
 
 /* =========================================================
-   QUICK AMOUNT
+   QUICK AMOUNT BUTTONS
 ========================================================= */
 
 .quick-grid{
     display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
+    grid-template-columns:repeat(4,1fr);
 
     gap:7px;
 
-    margin:10px 0 14px;
+    margin:10px 0 15px;
 }
 
 .quick-btn{
-    height:39px;
+    height:40px;
 
-    border-radius:12px;
+    border-radius:10px;
 
-    border:1px solid
-        rgba(255,255,255,.075);
-
-    background:
-        rgba(255,255,255,.04);
-
-    color:#cbd4df;
-
-    font-size:10px;
-    font-weight:900;
-
-    cursor:pointer;
-
-    transition:
-        transform .14s ease,
-        background .14s ease,
-        border-color .14s ease;
-}
-
-.quick-btn:hover{
-    border-color:
-        rgba(34,197,94,.25);
-
-    background:
-        rgba(34,197,94,.07);
-
-    color:#65e997;
-}
-
-.quick-btn:active{
-    transform:scale(.93);
-}
-
-
-/* =========================================================
-   PRIMARY BUTTON
-========================================================= */
-
-.primary-btn{
-    position:relative;
-
-    width:100%;
-    height:50px;
-
-    margin-top:10px;
-
-    border:none;
-
-    border-radius:15px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #4ade80,
-            #22c55e 55%,
-            #16a34a
-        );
-
-    color:#031109;
-
-    font-size:11px;
-    font-weight:950;
-
-    cursor:pointer;
-
-    overflow:hidden;
-
-    box-shadow:
-        0 12px 28px
-        rgba(34,197,94,.16),
-        inset 0 1px 0
-        rgba(255,255,255,.35);
-
-    transition:
-        transform .15s ease,
-        filter .15s ease;
-}
-
-.primary-btn::after{
-    content:"";
-
-    position:absolute;
-
-    top:0;
-    left:-110%;
-
-    width:65%;
-    height:100%;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.28),
-            transparent
-        );
-
-    transform:skewX(-20deg);
-
-    transition:left .5s ease;
-}
-
-.primary-btn:hover::after{
-    left:140%;
-}
-
-.primary-btn:active{
-    transform:scale(.97);
-    filter:brightness(.92);
-}
-
-.secondary-btn{
-    width:100%;
-    height:45px;
-
-    margin-top:8px;
-
-    border:1px solid
-        rgba(255,255,255,.09);
-
-    border-radius:14px;
-
-    background:
-        rgba(255,255,255,.045);
-
-    color:#c7d0dc;
-
-    font-size:10px;
-    font-weight:850;
-
-    cursor:pointer;
-
-    transition:.16s ease;
-}
-
-.secondary-btn:active{
-    transform:scale(.975);
-    background:rgba(255,255,255,.07);
-}
-
-
-/* =========================================================
-   PAYMENT AMOUNT DISPLAY
-========================================================= */
-
-.amount-display{
-    position:relative;
-
-    padding:13px;
-
-    margin-bottom:12px;
-
-    border-radius:16px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(34,197,94,.11),
-            rgba(34,197,94,.035)
-        );
-
-    border:1px solid
-        rgba(34,197,94,.20);
-
-    overflow:hidden;
-}
-
-.amount-display::after{
-    content:"";
-
-    position:absolute;
-
-    width:100px;
-    height:100px;
-
-    right:-50px;
-    top:-55px;
-
-    border-radius:50%;
-
-    background:
-        rgba(34,197,94,.10);
-
-    filter:blur(3px);
-}
-
-.amount-label{
-    position:relative;
-    z-index:1;
-
-    color:#718098;
-
-    font-size:8px;
-    font-weight:850;
-
-    letter-spacing:.7px;
-}
-
-.amount-value{
-    position:relative;
-    z-index:1;
-
-    margin-top:3px;
-
-    color:#61ed99;
-
-    font-size:22px;
-    font-weight:950;
-
-    letter-spacing:-.5px;
-}
-
-.payment-method-label{
-    position:relative;
-    z-index:1;
-
-    display:inline-flex;
-
-    margin-top:7px;
-
-    padding:4px 8px;
-
-    border-radius:999px;
-
-    background:
-        rgba(34,197,94,.09);
-
-    border:1px solid
-        rgba(34,197,94,.18);
-
-    color:#6ee7a0;
-
-    font-size:7px;
-    font-weight:950;
-
-    letter-spacing:.7px;
-}
-
-
-/* =========================================================
-   UPI BOX
-========================================================= */
-
-.upi-box{
-    position:relative;
-
-    text-align:center;
-
-    padding:10px 12px;
-
-    margin-bottom:10px;
-
-    border-radius:13px;
-
-    background:
-        rgba(255,255,255,.035);
-
-    border:1px solid
-        rgba(255,255,255,.07);
-
-    color:#abb7c7;
-
-    font-size:9px;
-    font-weight:800;
-
-    word-break:break-all;
-}
-
-.upi-box::before{
-    content:"UPI";
-
-    display:inline-block;
-
-    margin-right:6px;
-
-    color:#5ee995;
-
-    font-size:8px;
-    font-weight:950;
-}
-
-
-/* =========================================================
-   QR
-========================================================= */
-
-.qr-wrap{
-    position:relative;
-
-    display:flex;
-
-    justify-content:center;
-    align-items:center;
-
-    min-height:225px;
-
-    margin-bottom:8px;
-
-    border-radius:18px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,255,255,.035),
-            transparent 70%
-        );
-}
-
-#adminQR{
-    width:205px;
-    height:205px;
-
-    object-fit:contain;
-
-    display:none;
-
-    padding:8px;
-
-    border-radius:16px;
-
-    background:#fff;
-
-    border:4px solid rgba(255,255,255,.96);
-
-    box-shadow:
-        0 16px 40px rgba(0,0,0,.35),
-        0 0 0 1px rgba(255,255,255,.12);
-}
-
-
-/* =========================================================
-   PAYMENT APP BUTTONS
-========================================================= */
-
-.payment-apps{
-    display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap:9px;
-
-    margin-top:8px;
-}
-
-.app-btn{
-    position:relative;
-
-    min-height:65px;
-
-    padding:9px 10px;
-
-    display:flex;
-    align-items:center;
-
-    gap:9px;
-
-    border-radius:16px;
-
-    border:1px solid
-        rgba(255,255,255,.08);
+    border:1px solid #26394a;
 
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.065),
-            rgba(255,255,255,.025)
+            #0d1b27,
+            #0b1824
         );
 
     color:#fff;
 
-    cursor:pointer;
-
-    text-align:left;
-
-    overflow:hidden;
-
-    box-shadow:
-        inset 0 1px 0
-        rgba(255,255,255,.035);
+    font-size:11px;
+    font-weight:900;
 
     transition:
-        transform .16s ease,
-        border-color .16s ease,
-        background .16s ease;
+        transform .15s ease,
+        border-color .2s ease,
+        color .2s ease,
+        background .2s ease;
 }
 
-.app-btn::after{
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-        linear-gradient(
-            120deg,
-            transparent 35%,
-            rgba(255,255,255,.055),
-            transparent 65%
-        );
-
-    transform:translateX(-100%);
-
-    transition:transform .45s ease;
+.quick-btn:active{
+    transform:scale(.94);
 }
 
-.app-btn:hover::after{
-    transform:translateX(100%);
-}
-
-.app-btn:active{
-    transform:scale(.955);
-}
-
-.app-icon{
-    position:relative;
-    z-index:1;
-
-    width:37px;
-    height:37px;
-
-    flex:0 0 37px;
-
-    display:grid;
-    place-items:center;
-
-    border-radius:12px;
-
-    background:
-        rgba(255,255,255,.065);
-
-    border:1px solid
-        rgba(255,255,255,.07);
-
-    font-size:14px;
-    font-weight:950;
-}
-
-.app-name{
-    position:relative;
-    z-index:1;
-
-    display:block;
-
-    font-size:10px;
-    line-height:1.1;
-
-    font-weight:950;
-}
-
-.app-sub{
-    position:relative;
-    z-index:1;
-
-    display:block;
-
-    margin-top:4px;
-
-    color:#6f7d91;
-
-    font-size:7px;
-    font-weight:700;
-}
-
-.app-gpay{
-    border-color:
-        rgba(66,133,244,.22);
-}
-
-.app-gpay .app-icon{
-    background:
-        linear-gradient(
-            135deg,
-            rgba(66,133,244,.18),
-            rgba(52,168,83,.08)
-        );
-
-    color:#fff;
-}
-
-.app-phonepe{
-    border-color:
-        rgba(103,58,183,.25);
-}
-
-.app-phonepe .app-icon{
-    background:
-        rgba(103,58,183,.15);
-
-    color:#c4a5ff;
-}
-
-.app-paytm{
-    border-color:
-        rgba(0,186,242,.22);
-}
-
-.app-paytm .app-icon{
-    background:
-        rgba(0,186,242,.12);
-
-    color:#63dfff;
-}
-
-.app-fampay{
-    border-color:
-        rgba(255,92,138,.22);
-}
-
-.app-fampay .app-icon{
-    background:
-        rgba(255,92,138,.12);
-
-    color:#ff8faf;
+.quick-btn:hover{
+    color:#4cff91;
+    border-color:#31516a;
 }
 
 
 /* =========================================================
-   PAYMENT SECURITY
+   PRIMARY / SECONDARY BUTTONS
 ========================================================= */
 
-.payment-security{
-    display:flex;
+.primary-btn,
+.secondary-btn{
+    width:100%;
+    height:48px;
 
-    align-items:center;
-    justify-content:center;
+    margin-top:12px;
 
-    gap:5px;
+    position:relative;
+    overflow:hidden;
 
-    margin:11px 0 2px;
+    border-radius:12px;
 
-    color:#718097;
+    font-weight:900;
+    font-size:12px;
 
-    font-size:7px;
-    font-weight:800;
+    transition:
+        transform .15s ease,
+        filter .2s ease,
+        border-color .2s ease;
+}
 
-    text-align:center;
+.primary-btn{
+    border:0;
+
+    color:#03120a;
+
+    background:
+        linear-gradient(
+            135deg,
+            #51ff96,
+            #18c967
+        );
+
+    box-shadow:
+        0 8px 25px rgba(24,201,103,.10),
+        inset 0 1px 0 rgba(255,255,255,.25);
+}
+
+.primary-btn:hover{
+    filter:brightness(1.06);
+}
+
+.secondary-btn{
+    border:1px solid #293e50;
+
+    background:
+        linear-gradient(
+            145deg,
+            #10202d,
+            #0c1925
+        );
+
+    color:#fff;
+}
+
+.secondary-btn:hover{
+    border-color:#3a566d;
+}
+
+.primary-btn:disabled,
+.secondary-btn:disabled,
+.action-btn:disabled{
+    opacity:.45;
+    cursor:not-allowed;
+    transform:none;
+    filter:none;
 }
 
 
@@ -1847,93 +1189,176 @@ body::after{
 .info-box{
     margin-top:12px;
 
-    padding:10px 11px;
+    padding:11px;
 
-    border-radius:13px;
+    border-radius:11px;
+
+    color:#718496;
 
     background:
-        rgba(255,255,255,.028);
+        linear-gradient(
+            145deg,
+            #0b1824,
+            #09141f
+        );
 
-    border:1px solid
-        rgba(255,255,255,.06);
+    border:1px solid #192b3a;
 
-    color:#68768b;
-
-    font-size:8px;
-
-    line-height:1.55;
-
-    text-align:center;
+    font-size:9px;
+    line-height:1.6;
 }
 
 
 /* =========================================================
-   WITHDRAW
+   AMOUNT / AVAILABLE
 ========================================================= */
 
+.amount-display,
 .available-card{
-    position:relative;
+    margin-bottom:15px;
 
     padding:14px;
 
-    margin-bottom:14px;
+    border-radius:13px;
 
-    border-radius:16px;
+    background:
+        linear-gradient(
+            145deg,
+            #0c1925,
+            #091722
+        );
+
+    border:1px solid #1c3140;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.025);
+}
+
+.amount-label,
+.available-label{
+    color:#6e8192;
+
+    font-size:9px;
+    font-weight:900;
+}
+
+.amount-value,
+.available-value{
+    margin-top:5px;
+
+    font-size:24px;
+    font-weight:900;
+}
+
+.available-value{
+    color:#4cff91;
+}
+
+
+/* =========================================================
+   UPI / QR
+========================================================= */
+
+.upi-box{
+    margin-bottom:12px;
+
+    padding:10px;
+
+    border-radius:10px;
 
     background:
         linear-gradient(
             135deg,
-            rgba(37,99,235,.12),
-            rgba(37,99,235,.035)
+            #0d2519,
+            #0b1925
         );
 
-    border:1px solid
-        rgba(37,99,235,.20);
+    border:1px solid #213648;
 
-    overflow:hidden;
+    color:#55ff99;
+
+    font-size:11px;
+
+    text-align:center;
+
+    box-shadow:
+        0 0 20px rgba(76,255,145,.03);
 }
 
-.available-card::after{
-    content:"";
+.qr-wrap{
+    display:flex;
+    justify-content:center;
 
-    position:absolute;
+    margin:10px 0;
+}
 
-    width:90px;
-    height:90px;
+.qr-wrap img{
+    width:210px;
+    height:210px;
 
-    right:-40px;
-    top:-45px;
+    object-fit:contain;
 
-    border-radius:50%;
+    border-radius:12px;
+
+    background:#fff;
+
+    padding:7px;
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.30);
+
+    transition:
+        transform .2s ease;
+}
+
+.qr-wrap img:active{
+    transform:scale(.98);
+}
+
+
+/* =========================================================
+   PAYMENT APPS
+========================================================= */
+
+.payment-apps{
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:8px;
+}
+
+.app-btn{
+    height:43px;
+
+    border-radius:10px;
+
+    border:1px solid #293e50;
+
+    color:#fff;
 
     background:
-        rgba(37,99,235,.12);
+        linear-gradient(
+            145deg,
+            #10202d,
+            #0c1925
+        );
 
-    filter:blur(4px);
+    font-size:11px;
+    font-weight:900;
+
+    transition:
+        transform .15s ease,
+        border-color .2s ease,
+        background .2s ease;
 }
 
-.available-label{
-    position:relative;
-    z-index:1;
-
-    color:#75839a;
-
-    font-size:8px;
-    font-weight:850;
-
-    letter-spacing:.5px;
+.app-btn:active{
+    transform:scale(.94);
 }
 
-.available-value{
-    position:relative;
-    z-index:1;
-
-    margin-top:4px;
-
-    color:#60a5fa;
-
-    font-size:22px;
-    font-weight:950;
+.app-btn:hover{
+    border-color:#3a566d;
 }
 
 
@@ -1945,56 +1370,54 @@ body::after{
     position:fixed;
 
     left:50%;
-
     bottom:
-        calc(
-            20px +
-            env(safe-area-inset-bottom)
-        );
+        calc(78px + env(safe-area-inset-bottom));
 
-    z-index:3000;
+    transform:
+        translate(-50%,20px)
+        scale(.97);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    z-index:10000;
 
     width:max-content;
+    max-width:90%;
 
-    max-width:
-        calc(100vw - 34px);
+    padding:12px 15px;
 
-    padding:11px 16px;
-
-    border-radius:14px;
+    border-radius:12px;
 
     background:
-        rgba(12,22,37,.96);
+        linear-gradient(
+            145deg,
+            #142633,
+            #10202d
+        );
 
-    border:1px solid
-        rgba(255,255,255,.11);
-
-    box-shadow:
-        0 15px 45px rgba(0,0,0,.55);
+    border:1px solid #2c4355;
 
     color:#fff;
 
-    font-size:10px;
-    font-weight:850;
+    font-size:11px;
+    text-align:center;
 
-    opacity:0;
-    visibility:hidden;
-
-    transform:
-        translate(-50%,20px);
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.35);
 
     transition:
-        opacity .22s ease,
-        transform .22s ease,
-        visibility .22s ease;
+        opacity .25s ease,
+        transform .25s cubic-bezier(.2,.8,.2,1);
 }
 
 .toast.show{
     opacity:1;
-    visibility:visible;
 
     transform:
-        translate(-50%,0);
+        translate(-50%,0)
+        scale(1);
 }
 
 
@@ -2005,57 +1428,46 @@ body::after{
 .bottom-nav{
     position:fixed;
 
-    left:50%;
+    z-index:4000;
 
-    bottom:
-        calc(
-            9px +
-            env(safe-area-inset-bottom)
-        );
+    left:50%;
+    bottom:0;
 
     transform:translateX(-50%);
 
-    width:
-        min(
-            calc(100% - 24px),
-            500px
-        );
+    width:min(520px,100%);
 
-    height:63px;
+    height:
+        calc(68px + env(safe-area-inset-bottom));
 
-    z-index:900;
+    padding-bottom:
+        env(safe-area-inset-bottom);
 
-    display:grid;
+    display:flex;
 
-    grid-template-columns:
-        repeat(4,1fr);
-
-    padding:6px;
-
-    border-radius:22px;
+    align-items:center;
+    justify-content:space-around;
 
     background:
-        rgba(8,18,32,.90);
+        linear-gradient(
+            180deg,
+            rgba(7,17,29,.97),
+            rgba(3,10,17,.99)
+        );
 
-    border:1px solid
-        rgba(255,255,255,.10);
+    border-top:1px solid #1b2c3b;
 
     box-shadow:
-        0 18px 55px rgba(0,0,0,.60),
-        inset 0 1px 0
-        rgba(255,255,255,.06);
+        0 -10px 35px rgba(0,0,0,.20);
 
-    backdrop-filter:
-        blur(18px)
-        saturate(130%);
-
-    -webkit-backdrop-filter:
-        blur(18px)
-        saturate(130%);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
 }
 
 .nav-item{
-    position:relative;
+    flex:1;
+
+    height:68px;
 
     display:flex;
 
@@ -2066,49 +1478,45 @@ body::after{
 
     gap:3px;
 
-    border-radius:16px;
+    position:relative;
 
-    color:#68758a;
+    color:#627486;
 
     text-decoration:none;
 
-    font-size:8px;
-    font-weight:850;
+    font-size:9px;
+    font-weight:800;
 
     transition:
-        color .18s ease,
-        background .18s ease,
-        transform .18s ease;
+        color .2s ease,
+        transform .15s ease;
 }
 
 .nav-icon{
-    font-size:17px;
-
-    line-height:1;
+    font-size:18px;
 
     transition:
-        transform .18s ease;
+        transform .2s ease,
+        filter .2s ease;
+}
+
+.nav-item:active{
+    transform:scale(.94);
 }
 
 .nav-item.active{
-    background:
-        linear-gradient(
-            145deg,
-            rgba(34,197,94,.13),
-            rgba(34,197,94,.045)
-        );
-
-    color:#4ade80;
-
-    box-shadow:
-        inset 0 1px 0
-        rgba(74,222,128,.07);
+    color:#4cff91;
 }
 
 .nav-item.active .nav-icon{
     transform:
         translateY(-1px)
-        scale(1.04);
+        scale(1.06);
+
+    filter:
+        drop-shadow(
+            0 0 8px rgba(76,255,145,.25)
+        );
 }
 
 .nav-item.active::after{
@@ -2116,46 +1524,224 @@ body::after{
 
     position:absolute;
 
-    bottom:3px;
+    left:50%;
+    bottom:6px;
 
-    width:4px;
-    height:4px;
+    width:25px;
+    height:3px;
 
-    border-radius:50%;
+    transform:translateX(-50%);
 
-    background:#4ade80;
+    border-radius:10px;
+
+    background:#4cff91;
 
     box-shadow:
-        0 0 9px #4ade80;
+        0 0 12px rgba(76,255,145,.35);
+
+    animation:
+        navIndicator .22s ease;
 }
 
-
-/* =========================================================
-   DESKTOP
-========================================================= */
-
-@media(min-width:700px){
-
-    body{
-        display:flex;
-        justify-content:center;
+@keyframes navIndicator{
+    from{
+        opacity:0;
+        width:10px;
     }
 
-    .app{
-        width:520px;
-    }
-
-    .modal-box{
-        max-width:430px;
+    to{
+        opacity:1;
+        width:25px;
     }
 }
 
 
 /* =========================================================
-   SMALL PHONES
+   ACCOUNT FREEZE
 ========================================================= */
 
-@media(max-width:360px){
+.freeze-overlay{
+    position:fixed;
+    inset:0;
+
+    z-index:999999;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,50,70,.12),
+            rgba(0,0,0,.97) 65%
+        );
+
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+}
+
+.freeze-overlay.show{
+    display:flex;
+
+    animation:
+        freezeFade .25s ease;
+}
+
+@keyframes freezeFade{
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
+}
+
+.freeze-box{
+    width:min(390px,100%);
+
+    padding:28px 22px;
+
+    text-align:center;
+
+    border-radius:24px;
+
+    background:
+        radial-gradient(
+            circle at top center,
+            rgba(255,50,70,.08),
+            transparent 45%
+        ),
+        linear-gradient(
+            145deg,
+            #130b0e,
+            #080b10
+        );
+
+    border:1px solid #6c2833;
+
+    box-shadow:
+        0 25px 90px rgba(0,0,0,.75),
+        0 0 45px rgba(255,50,70,.08);
+
+    animation:
+        freezePop .3s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes freezePop{
+    from{
+        opacity:0;
+        transform:scale(.92);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+.freeze-icon{
+    width:72px;
+    height:72px;
+
+    margin:0 auto 16px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:22px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,95,112,.15),
+            #281015
+        );
+
+    border:1px solid #74313c;
+
+    font-size:35px;
+
+    box-shadow:
+        0 0 30px rgba(255,50,70,.08);
+
+    animation:
+        freezePulse 2s ease-in-out infinite;
+}
+
+@keyframes freezePulse{
+    0%,
+    100%{
+        box-shadow:
+            0 0 25px rgba(255,50,70,.06);
+    }
+
+    50%{
+        box-shadow:
+            0 0 38px rgba(255,50,70,.16);
+    }
+}
+
+.freeze-title{
+    color:#ff5f70;
+
+    font-size:22px;
+    font-weight:900;
+}
+
+.freeze-subtitle{
+    margin-top:8px;
+
+    color:#fff;
+
+    font-size:13px;
+    font-weight:800;
+}
+
+.freeze-text{
+    margin-top:11px;
+
+    color:#9b8990;
+
+    font-size:11px;
+    line-height:1.7;
+}
+
+.freeze-status{
+    margin-top:17px;
+
+    padding:10px;
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1d0d11,
+            #1a0d11
+        );
+
+    border:1px solid #4c222b;
+
+    color:#ff6978;
+
+    font-size:9px;
+    font-weight:900;
+
+    letter-spacing:.5px;
+}
+
+
+/* =========================================================
+   MOBILE RESPONSIVE
+========================================================= */
+
+@media(max-width:380px){
 
     .app{
         padding-left:11px;
@@ -2163,70 +1749,36 @@ body::after{
     }
 
     .wallet-card{
-        padding:18px;
-
-        min-height:200px;
+        padding:16px;
     }
 
     .wallet-amount{
         font-size:31px;
     }
 
-    .wallet-bottom{
-        margin-top:23px;
+    .header-title{
+        font-size:16px;
     }
 
-    .action-btn{
-        height:52px;
-        font-size:11px;
+    .status-item{
+        padding:11px;
     }
 
-    .filter{
-        padding-left:10px;
-        padding-right:10px;
+    .status-number{
+        font-size:20px;
     }
 
-    .modal{
-        padding-left:10px;
-        padding-right:10px;
+    .quick-grid{
+        gap:5px;
     }
 
-    .modal-box{
-        padding:16px;
-
-        border-radius:23px;
+    .quick-btn{
+        font-size:10px;
     }
 
-    .payment-apps{
-        gap:7px;
-    }
-
-    .app-btn{
-        min-height:61px;
-        padding:8px;
-    }
-
-    .app-icon{
-        width:34px;
-        height:34px;
-        flex-basis:34px;
-    }
-
-    .app-name{
-        font-size:9px;
-    }
-
-    .app-sub{
-        font-size:6.5px;
-    }
-
-    #adminQR{
+    .qr-wrap img{
         width:190px;
         height:190px;
-    }
-
-    .qr-wrap{
-        min-height:205px;
     }
 }
 
@@ -2237,24 +1789,34 @@ body::after{
 
 @media(max-width:330px){
 
-    .wallet-amount{
-        font-size:29px;
+    .wallet-bottom{
+        gap:6px;
     }
 
     .wallet-mini{
-        padding:10px;
+        padding:8px;
     }
 
-    .payment-apps{
-        grid-template-columns:1fr 1fr;
+    .wallet-mini-value{
+        font-size:12px;
     }
 
-    .quick-grid{
-        gap:5px;
+    .wallet-amount{
+        font-size:28px;
     }
 
-    .quick-btn{
-        font-size:9px;
+    .action-btn{
+        height:47px;
+        font-size:12px;
+    }
+
+    .bottom-nav{
+        height:
+            calc(64px + env(safe-area-inset-bottom));
+    }
+
+    .nav-item{
+        height:64px;
     }
 }
 
@@ -2268,701 +1830,709 @@ body::after{
     *,
     *::before,
     *::after{
-        animation:none !important;
-        transition:none !important;
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        transition-duration:.01ms !important;
         scroll-behavior:auto !important;
     }
 }
 
-</style>
-</head>
 
+/* =========================================================
+   SELECTION
+========================================================= */
+
+::selection{
+    background:rgba(76,255,145,.22);
+    color:#fff;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar{
+    width:4px;
+    height:4px;
+}
+
+::-webkit-scrollbar-track{
+    background:transparent;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#1c3040;
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:#294355;
+}
+
+
+/* =========================================================
+   SAFE AREA / MOBILE HEIGHT FIX
+========================================================= */
+
+@supports(height:100dvh){
+
+    html,
+    body{
+        min-height:100dvh;
+    }
+
+    .app{
+        min-height:100dvh;
+    }
+}
+
+
+/* =========================================================
+   TOUCH OPTIMIZATION
+========================================================= */
+
+button,
+.nav-item,
+.filter,
+.quick-btn,
+.app-btn{
+    touch-action:manipulation;
+}
+
+
+/* =========================================================
+   DISABLED STATES
+========================================================= */
+
+button:disabled{
+    pointer-events:none;
+}
+
+
+/* =========================================================
+   FOCUS ACCESSIBILITY
+========================================================= */
+
+button:focus-visible,
+input:focus-visible,
+a:focus-visible{
+    outline:2px solid rgba(76,255,145,.55);
+    outline-offset:2px;
+}
+
+
+/* =========================================================
+   PREMIUM LOADING SHIMMER
+   Use class="loading-shimmer" where needed
+========================================================= */
+
+.loading-shimmer{
+    position:relative;
+    overflow:hidden;
+
+    background:#0b1824;
+}
+
+.loading-shimmer::after{
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    transform:translateX(-100%);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.055),
+            transparent
+        );
+
+    animation:
+        shimmer 1.25s infinite;
+}
+
+@keyframes shimmer{
+    100%{
+        transform:translateX(100%);
+    }
+}
+
+
+/* =========================================================
+   PREMIUM PULSE UTILITY
+========================================================= */
+
+.premium-pulse{
+    animation:
+        premiumPulse 2s ease-in-out infinite;
+}
+
+@keyframes premiumPulse{
+
+    0%,
+    100%{
+        filter:brightness(1);
+    }
+
+    50%{
+        filter:brightness(1.08);
+    }
+}
+
+
+/* =========================================================
+   HIDE NUMBER INPUT ARROWS
+========================================================= */
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button{
+    -webkit-appearance:none;
+    margin:0;
+}
+
+input[type="number"]{
+    -moz-appearance:textfield;
+}
+
+
+/* =========================================================
+   END
+========================================================= */
+
+</style>
+
+</head>
 
 <body>
 
-
-<!-- =======================================================
-     APP
-======================================================= -->
-
 <div class="app">
 
+<header class="header">
 
-    <!-- HEADER -->
+<div class="header-left">
 
-    <header class="header">
+<div class="header-icon">💰</div>
 
-        <div class="header-left">
+<div>
+<div class="header-title">BGMI PAY</div>
+<div class="header-subtitle">Your Gaming Wallet</div>
+</div>
 
-            <div class="header-icon">
-                💰
-            </div>
+</div>
 
-            <div>
+<div class="header-badge">
+SECURE
+</div>
 
-                <div class="header-title">
-                    BGMI PAY
-                </div>
+</header>
 
-                <div class="header-subtitle">
-                    Your Gaming Wallet
-                </div>
 
-            </div>
+<section class="wallet-card">
 
-        </div>
+<div class="wallet-top">
 
+<div class="wallet-label">
+Available Balance
+</div>
 
-        <div class="header-badge">
-            SECURE
-        </div>
+<div class="wallet-chip">
+● LIVE
+</div>
 
-    </header>
+</div>
 
+<div class="wallet-main">
 
-    <!-- ===================================================
-         WALLET CARD
-    ==================================================== -->
+<div id="walletBalance"
+class="wallet-amount">
+₹0
+</div>
 
-    <section class="wallet-card">
+<button id="eyeBtn"
+class="eye-btn"
+onclick="toggleBalance()">
+👁
+</button>
 
-        <div class="wallet-top">
+</div>
 
-            <div class="wallet-label">
-                Available Balance
-            </div>
+<div class="wallet-bottom">
 
-            <div class="wallet-chip">
-                ● LIVE
-            </div>
+<div class="wallet-mini">
 
-        </div>
+<div class="wallet-mini-label">
+Withdrawable
+</div>
 
+<div id="withdrawableBalance"
+class="wallet-mini-value">
+₹0
+</div>
 
-        <div class="wallet-main">
+</div>
 
-            <div
-                id="walletBalance"
-                class="wallet-amount">
-                ₹0
-            </div>
+<div class="wallet-mini">
 
-            <button
-                id="eyeBtn"
-                class="eye-btn"
-                onclick="toggleBalance()">
-                👁
-            </button>
+<div class="wallet-mini-label">
+Bonus
+</div>
 
-        </div>
+<div id="bonusBalance"
+class="wallet-mini-value">
+₹0
+</div>
 
+</div>
 
-        <div class="wallet-bottom">
+</div>
 
-            <div class="wallet-mini">
+</section>
 
-                <div class="wallet-mini-label">
-                    Withdrawable
-                </div>
 
-                <div
-                    id="withdrawableBalance"
-                    class="wallet-mini-value">
-                    ₹0
-                </div>
+<div class="actions">
 
-            </div>
+<button
+id="addMoneyAction"
+class="action-btn add-btn"
+onclick="openAddMoney()">
 
+＋ Add Money
 
-            <div class="wallet-mini">
+</button>
 
-                <div class="wallet-mini-label">
-                    Bonus
-                </div>
+<button
+id="withdrawAction"
+class="action-btn withdraw-btn"
+onclick="openWithdraw()">
 
-                <div
-                    id="bonusBalance"
-                    class="wallet-mini-value">
-                    ₹0
-                </div>
+↗ Withdraw
 
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ===================================================
-         ACTIONS
-    ==================================================== -->
-
-    <div class="actions">
-
-        <button
-            class="action-btn add-btn"
-            onclick="openAddMoney()">
-
-            ＋ Add Money
-
-        </button>
-
-
-        <button
-            class="action-btn withdraw-btn"
-            onclick="openWithdraw()">
-
-            ↗ Withdraw
-
-        </button>
-
-    </div>
-
-
-    <!-- ===================================================
-         PENDING STATUS
-    ==================================================== -->
-
-    <div class="status-card">
-
-        <div class="status-item">
-
-            <div class="status-head">
-
-                <span>
-                    Pending Deposits
-                </span>
-
-                <span>
-                    💳
-                </span>
-
-            </div>
-
-            <div
-                id="pendingDeposits"
-                class="status-number">
-                0
-            </div>
-
-        </div>
-
-
-        <div class="status-item">
-
-            <div class="status-head">
-
-                <span>
-                    Pending Withdraws
-                </span>
-
-                <span>
-                    💸
-                </span>
-
-            </div>
-
-            <div
-                id="pendingWithdraws"
-                class="status-number">
-                0
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- ===================================================
-         HISTORY HEADER
-    ==================================================== -->
-
-    <div class="history-header">
-
-        <div class="history-title">
-            Transaction History
-        </div>
-
-        <div
-            id="historyCount"
-            class="history-count">
-            0 transactions
-        </div>
-
-    </div>
-
-
-    <!-- ===================================================
-         FILTERS
-    ==================================================== -->
-
-    <div class="filters">
-
-        <button
-            class="filter active"
-            onclick="setFilter('all',this)">
-            ALL
-        </button>
-
-        <button
-            class="filter"
-            onclick="setFilter('credit',this)">
-            CREDIT
-        </button>
-
-        <button
-            class="filter"
-            onclick="setFilter('debit',this)">
-            DEBIT
-        </button>
-
-        <button
-            class="filter"
-            onclick="setFilter('deposit',this)">
-            DEPOSIT
-        </button>
-
-        <button
-            class="filter"
-            onclick="setFilter('withdraw',this)">
-            WITHDRAW
-        </button>
-
-        <button
-            class="filter"
-            onclick="setFilter('match',this)">
-            MATCH
-        </button>
-
-        <button
-            class="filter"
-            onclick="setFilter('reward',this)">
-            REWARD
-        </button>
-
-    </div>
-
-
-    <!-- ===================================================
-         HISTORY LIST
-    ==================================================== -->
-
-    <div
-        id="historyList"
-        class="history-list">
-
-        <div class="empty">
-
-            <div class="empty-icon">
-                💳
-            </div>
-
-            <div class="empty-title">
-                Loading Transactions
-            </div>
-
-            <div class="empty-text">
-                Please wait...
-            </div>
-
-        </div>
-
-    </div>
-
+</button>
 
 </div>
 
 
-<!-- =======================================================
-     ADD MONEY MODAL
-======================================================= -->
+<div class="status-card">
 
-<div
-    id="addModal"
-    class="modal"
-    onclick="closeOutside(event,'addModal')">
+<div class="status-item">
 
-    <div class="modal-box">
+<div class="status-head">
+<span>Pending Deposits</span>
+<span>💳</span>
+</div>
 
+<div id="pendingDeposits"
+class="status-number">
+0
+</div>
 
-        <div class="modal-head">
+</div>
 
-            <div class="modal-title">
-                Add Money
-            </div>
+<div class="status-item">
 
-            <button
-                class="close-btn"
-                onclick="closeAddMoney()">
-                ×
-            </button>
+<div class="status-head">
+<span>Pending Withdraws</span>
+<span>💸</span>
+</div>
 
-        </div>
+<div id="pendingWithdraws"
+class="status-number">
+0
+</div>
 
-
-        <!-- STEP 1 -->
-
-        <div
-            id="paymentStep1"
-            class="payment-step">
-
-            <div class="step-title">
-                Enter Deposit Amount
-            </div>
-
-
-            <label class="input-label">
-                Amount
-            </label>
-
-            <input
-                id="depositAmount"
-                class="input"
-                type="number"
-                inputmode="numeric"
-                min="10"
-                max="100000"
-                placeholder="Enter amount">
-
-
-            <div class="quick-grid">
-
-                <button
-                    class="quick-btn"
-                    onclick="setDepositAmount(50)">
-                    ₹50
-                </button>
-
-                <button
-                    class="quick-btn"
-                    onclick="setDepositAmount(100)">
-                    ₹100
-                </button>
-
-                <button
-                    class="quick-btn"
-                    onclick="setDepositAmount(500)">
-                    ₹500
-                </button>
-
-                <button
-                    class="quick-btn"
-                    onclick="setDepositAmount(1000)">
-                    ₹1000
-                </button>
-
-            </div>
-
-
-            <button
-                class="primary-btn"
-                onclick="showPaymentOptions()">
-
-                Continue to Payment
-
-            </button>
-
-
-            <div class="info-box">
-
-                Minimum deposit ₹10<br>
-                Maximum deposit ₹1,00,000
-
-            </div>
-
-        </div>
-
-
-        <!-- STEP 2 -->
-
-        <div
-            id="paymentStep2"
-            class="payment-step"
-            style="display:none;">
-
-
-            <div class="amount-display">
-
-                <div class="amount-label">
-                    PAYMENT AMOUNT
-                </div>
-
-                <div
-                    id="selectedAmount"
-                    class="amount-value">
-                    ₹0
-                </div>
-
-            </div>
-
-
-            <div
-                id="adminUPI"
-                class="upi-box">
-                Loading UPI...
-            </div>
-
-
-            <div class="qr-wrap">
-
-                <img
-                    id="adminQR"
-                    alt="UPI QR">
-
-            </div>
-
-
-            <div class="payment-apps">
-
-                <button
-                    class="app-btn app-gpay"
-                    onclick="payWithUPI('gpay')">
-                    GPay
-                </button>
-
-                <button
-                    class="app-btn app-phonepe"
-                    onclick="payWithUPI('phonepe')">
-                    PhonePe
-                </button>
-
-                <button
-                    class="app-btn app-paytm"
-                    onclick="payWithUPI('paytm')">
-                    Paytm
-                </button>
-
-            </div>
-
-
-            <label
-                class="input-label"
-                style="margin-top:14px;">
-                Transaction ID / UTR
-            </label>
-
-            <input
-                id="utr"
-                class="input"
-                type="text"
-                autocomplete="off"
-                placeholder="Enter UTR / Transaction ID">
-
-
-            <button
-                id="depositBtn"
-                class="primary-btn"
-                onclick="submitDeposit()">
-
-                Submit Payment
-
-            </button>
-
-
-            <button
-                class="secondary-btn"
-                onclick="backToAmount()">
-
-                ← Change Amount
-
-            </button>
-
-
-            <div class="info-box">
-
-                Payment करने के बाद सही Transaction ID / UTR
-                submit करें. Duplicate UTR automatically blocked होगा.
-
-            </div>
-
-        </div>
-
-
-    </div>
+</div>
 
 </div>
 
 
-<!-- =======================================================
-     WITHDRAW MODAL
-======================================================= -->
+<div class="history-header">
 
-<div
-    id="withdrawModal"
-    class="modal"
-    onclick="closeOutside(event,'withdrawModal')">
+<div class="history-title">
+Transaction History
+</div>
 
-    <div class="modal-box">
-
-
-        <div class="modal-head">
-
-            <div class="modal-title">
-                Withdraw Money
-            </div>
-
-            <button
-                class="close-btn"
-                onclick="closeWithdraw()">
-                ×
-            </button>
-
-        </div>
-
-
-        <div class="available-card">
-
-            <div class="available-label">
-                AVAILABLE WITHDRAWABLE BALANCE
-            </div>
-
-            <div
-                id="withdrawAvailable"
-                class="available-value">
-                ₹0
-            </div>
-
-        </div>
-
-
-        <label class="input-label">
-            Withdrawal Amount
-        </label>
-
-        <input
-            id="withdrawAmount"
-            class="input"
-            type="number"
-            inputmode="numeric"
-            min="100"
-            max="100000"
-            placeholder="Minimum ₹100">
-
-
-        <label
-            class="input-label"
-            style="margin-top:13px;">
-            UPI ID
-        </label>
-
-        <input
-            id="withdrawUPI"
-            class="input"
-            type="text"
-            autocomplete="off"
-            placeholder="example@upi">
-
-
-        <button
-            id="withdrawBtn"
-            class="primary-btn"
-            onclick="submitWithdraw()">
-
-            Submit Withdraw
-
-        </button>
-
-
-        <div class="info-box">
-
-            Minimum withdrawal ₹100<br>
-            Maximum withdrawal ₹1,00,000
-
-        </div>
-
-
-    </div>
+<div id="historyCount"
+class="history-count">
+0 transactions
+</div>
 
 </div>
 
 
-<!-- =======================================================
-     TOAST
-======================================================= -->
+<div class="filters">
 
-<div
-    id="toast"
-    class="toast">
+<button class="filter active"
+onclick="setFilter('all',this)">
+ALL
+</button>
+
+<button class="filter"
+onclick="setFilter('credit',this)">
+CREDIT
+</button>
+
+<button class="filter"
+onclick="setFilter('debit',this)">
+DEBIT
+</button>
+
+<button class="filter"
+onclick="setFilter('deposit',this)">
+DEPOSIT
+</button>
+
+<button class="filter"
+onclick="setFilter('withdraw',this)">
+WITHDRAW
+</button>
+
+<button class="filter"
+onclick="setFilter('match',this)">
+MATCH
+</button>
+
+<button class="filter"
+onclick="setFilter('reward',this)">
+REWARD
+</button>
+
 </div>
 
 
-<!-- =======================================================
-     BOTTOM NAV
-======================================================= -->
+<div id="historyList"
+class="history-list">
+
+<div class="empty">
+
+<div class="empty-icon">
+💳
+</div>
+
+<div class="empty-title">
+Loading Transactions
+</div>
+
+<div class="empty-text">
+Please wait...
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ADD MONEY -->
+
+<div id="addModal"
+class="modal"
+onclick="closeOutside(event,'addModal')">
+
+<div class="modal-box">
+
+<div class="modal-head">
+
+<div class="modal-title">
+Add Money
+</div>
+
+<button class="close-btn"
+onclick="closeAddMoney()">
+×
+</button>
+
+</div>
+
+
+<div id="paymentStep1">
+
+<div class="input-label">
+Enter Deposit Amount
+</div>
+
+<input
+id="depositAmount"
+class="input"
+type="number"
+inputmode="numeric"
+min="10"
+max="100000"
+placeholder="Enter amount">
+
+<div class="quick-grid">
+
+<button class="quick-btn"
+onclick="setDepositAmount(50)">
+₹50
+</button>
+
+<button class="quick-btn"
+onclick="setDepositAmount(100)">
+₹100
+</button>
+
+<button class="quick-btn"
+onclick="setDepositAmount(500)">
+₹500
+</button>
+
+<button class="quick-btn"
+onclick="setDepositAmount(1000)">
+₹1000
+</button>
+
+</div>
+
+<button class="primary-btn"
+onclick="showPaymentOptions()">
+Continue to Payment
+</button>
+
+<div class="info-box">
+Minimum deposit ₹10<br>
+Maximum deposit ₹1,00,000
+</div>
+
+</div>
+
+
+<div id="paymentStep2"
+style="display:none;">
+
+<div class="amount-display">
+
+<div class="amount-label">
+PAYMENT AMOUNT
+</div>
+
+<div id="selectedAmount"
+class="amount-value">
+₹0
+</div>
+
+</div>
+
+<div id="adminUPI"
+class="upi-box">
+Loading UPI...
+</div>
+
+<div class="qr-wrap">
+
+<img id="adminQR"
+alt="UPI QR">
+
+</div>
+
+<div class="payment-apps">
+
+<button class="app-btn"
+onclick="payWithUPI('gpay')">
+GPay
+</button>
+
+<button class="app-btn"
+onclick="payWithUPI('phonepe')">
+PhonePe
+</button>
+
+<button class="app-btn"
+onclick="payWithUPI('paytm')">
+Paytm
+</button>
+
+</div>
+
+<div class="input-label"
+style="margin-top:14px;">
+Transaction ID / UTR
+</div>
+
+<input
+id="utr"
+class="input"
+type="text"
+autocomplete="off"
+placeholder="Enter UTR / Transaction ID">
+
+<button
+id="depositBtn"
+class="primary-btn"
+onclick="submitDeposit()">
+Submit Payment
+</button>
+
+<button
+class="secondary-btn"
+onclick="backToAmount()">
+← Change Amount
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- WITHDRAW -->
+
+<div id="withdrawModal"
+class="modal"
+onclick="closeOutside(event,'withdrawModal')">
+
+<div class="modal-box">
+
+<div class="modal-head">
+
+<div class="modal-title">
+Withdraw Money
+</div>
+
+<button class="close-btn"
+onclick="closeWithdraw()">
+×
+</button>
+
+</div>
+
+<div class="available-card">
+
+<div class="available-label">
+AVAILABLE WITHDRAWABLE BALANCE
+</div>
+
+<div id="withdrawAvailable"
+class="available-value">
+₹0
+</div>
+
+</div>
+
+<div class="input-label">
+Withdrawal Amount
+</div>
+
+<input
+id="withdrawAmount"
+class="input"
+type="number"
+inputmode="numeric"
+min="100"
+max="100000"
+placeholder="Minimum ₹100">
+
+<div class="input-label"
+style="margin-top:13px;">
+UPI ID
+</div>
+
+<input
+id="withdrawUPI"
+class="input"
+type="text"
+autocomplete="off"
+placeholder="example@upi">
+
+<button
+id="withdrawBtn"
+class="primary-btn"
+onclick="submitWithdraw()">
+Submit Withdraw
+</button>
+
+<div class="info-box">
+Minimum withdrawal ₹100<br>
+Maximum withdrawal ₹1,00,000
+</div>
+
+</div>
+
+</div>
+
+
+<!-- FREEZE OVERLAY -->
+
+<div id="freezeOverlay"
+class="freeze-overlay">
+
+<div class="freeze-box">
+
+<div class="freeze-icon">
+🔒
+</div>
+
+<div class="freeze-title">
+ACCOUNT FROZEN
+</div>
+
+<div class="freeze-subtitle">
+Your account has been blocked.
+</div>
+
+<div class="freeze-text">
+Aapke account ko temporarily freeze kiya gaya hai.
+Wallet, deposit, withdrawal aur gaming activities
+ab available nahi hain.
+</div>
+
+<div class="freeze-status">
+ACCOUNT STATUS : BLOCKED
+</div>
+
+</div>
+
+</div>
+
+
+<div id="toast"
+class="toast">
+</div>
+
 
 <nav class="bottom-nav">
 
-    <a
-        class="nav-item"
-        href="index.html">
+<a class="nav-item"
+href="index.html">
 
-        <div class="nav-icon">
-            🏠
-        </div>
+<div class="nav-icon">🏠</div>
+<div>Home</div>
 
-        <div>
-            Home
-        </div>
+</a>
 
-    </a>
+<a class="nav-item active"
+href="wallet.html">
 
+<div class="nav-icon">💰</div>
+<div>Wallet</div>
 
-    <a
-        class="nav-item active"
-        href="wallet.html">
+</a>
 
-        <div class="nav-icon">
-            💰
-        </div>
+<a class="nav-item"
+href="matches.html">
 
-        <div>
-            Wallet
-        </div>
+<div class="nav-icon">🎮</div>
+<div>Games</div>
 
-    </a>
+</a>
 
+<a class="nav-item"
+href="profile.html">
 
-    <a
-        class="nav-item"
-        href="matches.html">
+<div class="nav-icon">👤</div>
+<div>Profile</div>
 
-        <div class="nav-icon">
-            🎮
-        </div>
-
-        <div>
-            Games
-        </div>
-
-    </a>
-
-
-    <a
-        class="nav-item"
-        href="profile.html">
-
-        <div class="nav-icon">
-            👤
-        </div>
-
-        <div>
-            Profile
-        </div>
-
-    </a>
+</a>
 
 </nav>
 
 
-<!-- =======================================================
-     FIREBASE
-======================================================= -->
-
 <script type="module">
-
-/* =========================================================
-   FIREBASE IMPORTS
-========================================================= */
 
 import {
     initializeApp
@@ -2970,7 +2540,8 @@ import {
 
 import {
     getAuth,
-    onAuthStateChanged
+    onAuthStateChanged,
+    signOut
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 import {
@@ -2983,9 +2554,9 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 
-/* =========================================================
-   FIREBASE CONFIG
-========================================================= */
+/* =====================================================
+   FIREBASE
+===================================================== */
 
 const firebaseConfig = {
 
@@ -3022,11 +2593,13 @@ const db =
     getDatabase(app);
 
 
-/* =========================================================
-   GLOBAL STATE
-========================================================= */
+/* =====================================================
+   GLOBAL
+===================================================== */
 
 let UID = "";
+
+let accountFrozen = false;
 
 let transactions = [];
 
@@ -3045,22 +2618,19 @@ let currentFilter = "all";
 
 let adminUPIValue = "";
 
-let walletListenerStarted = false;
-let bonusListenerStarted = false;
-let withdrawableListenerStarted = false;
-let historyListenerStarted = false;
-let pendingListenerStarted = false;
+let previousTransactionIds =
+    new Set();
 
-let refundInitialized = false;
+let refundMessageShown =
+    new Set();
 
-let previousTransactionIds = new Set();
-
-let refundMessageShown = new Set();
+let refundInitialized =
+    false;
 
 
-/* =========================================================
+/* =====================================================
    AUTH
-========================================================= */
+===================================================== */
 
 onAuthStateChanged(
     auth,
@@ -3068,15 +2638,21 @@ onAuthStateChanged(
 
         if (!user) {
 
-            location.replace("index.html");
+            location.replace(
+                "index.html"
+            );
 
             return;
         }
 
+        UID = user.uid;
 
-        UID =
-            user.uid;
+        /*
+         * FREEZE LISTENER
+         * Sabse pehle start hoga.
+         */
 
+        listenAccountStatus();
 
         loadWallet();
 
@@ -3094,54 +2670,273 @@ onAuthStateChanged(
 );
 
 
-/* =========================================================
-   FORMAT MONEY
-========================================================= */
+/* =====================================================
+   ACCOUNT BLOCK / FREEZE
+===================================================== */
 
-function formatMoney(value) {
+function listenAccountStatus(){
 
-    const number =
-        Number(value || 0);
+    if(!UID){
+        return;
+    }
 
-    return (
-        "₹" +
-        Math.floor(
-            Number.isFinite(number)
-                ? number
-                : 0
-        ).toLocaleString("en-IN")
+    onValue(
+
+        ref(
+            db,
+            "users/" + UID
+        ),
+
+        (snapshot)=>{
+
+            if(!snapshot.exists()){
+                return;
+            }
+
+            const user =
+                snapshot.val() || {};
+
+            /*
+             * Supported:
+             *
+             * blocked: true
+             * isBlocked: true
+             * accountStatus: blocked
+             * status: blocked
+             */
+
+            const blocked =
+                user.blocked === true ||
+                user.isBlocked === true ||
+                String(
+                    user.accountStatus || ""
+                ).toLowerCase() === "blocked" ||
+                String(
+                    user.status || ""
+                ).toLowerCase() === "blocked";
+
+            if(blocked){
+
+                freezeAccount();
+
+            }else{
+
+                unfreezeAccount();
+
+            }
+
+        },
+
+        (error)=>{
+
+            console.error(
+                "Account status error:",
+                error
+            );
+
+        }
+
     );
 
 }
 
 
-/* =========================================================
-   PARSE WALLET
-========================================================= */
+/* =====================================================
+   FREEZE ACCOUNT
+===================================================== */
 
-function parseWalletValue(walletData) {
+function freezeAccount(){
 
-    if (!walletData) {
+    if(accountFrozen){
+        return;
+    }
 
-        return 0;
+    accountFrozen = true;
+
+    const overlay =
+        document.getElementById(
+            "freezeOverlay"
+        );
+
+    if(overlay){
+
+        overlay.classList.add(
+            "show"
+        );
+
+    }
+
+    /*
+     * Disable actions
+     */
+
+    const ids = [
+
+        "addMoneyAction",
+        "withdrawAction"
+
+    ];
+
+    ids.forEach(
+        id=>{
+
+            const element =
+                document.getElementById(
+                    id
+                );
+
+            if(element){
+
+                element.disabled =
+                    true;
+
+            }
+
+        }
+    );
+
+
+    /*
+     * Close active modals
+     */
+
+    document
+        .querySelectorAll(
+            ".modal"
+        )
+        .forEach(
+            modal=>{
+
+                modal.classList.remove(
+                    "show"
+                );
+
+            }
+        );
+
+
+    document.body.style.overflow =
+        "hidden";
+
+
+    showToast(
+        "🔒 Account frozen"
+    );
+
+}
+
+
+/* =====================================================
+   UNFREEZE
+===================================================== */
+
+function unfreezeAccount(){
+
+    if(!accountFrozen){
+        return;
+    }
+
+    accountFrozen = false;
+
+    const overlay =
+        document.getElementById(
+            "freezeOverlay"
+        );
+
+    if(overlay){
+
+        overlay.classList.remove(
+            "show"
+        );
 
     }
 
 
-    if (
+    document
+        .querySelectorAll(
+            ".action-btn"
+        )
+        .forEach(
+            button=>{
+
+                button.disabled =
+                    false;
+
+            }
+        );
+
+
+    document.body.style.overflow =
+        "";
+
+}
+
+
+/* =====================================================
+   FREEZE GUARD
+===================================================== */
+
+function isAccountFrozen(){
+
+    if(accountFrozen){
+
+        showToast(
+            "🔒 Account is frozen"
+        );
+
+        return true;
+
+    }
+
+    return false;
+
+}
+
+
+/* =====================================================
+   MONEY
+===================================================== */
+
+function formatMoney(value){
+
+    const number =
+        Number(value || 0);
+
+    return "₹" +
+        Math.floor(
+            Number.isFinite(number)
+                ? number
+                : 0
+        ).toLocaleString(
+            "en-IN"
+        );
+
+}
+
+
+/* =====================================================
+   PARSE WALLET
+===================================================== */
+
+function parseWalletValue(
+    walletData
+){
+
+    if(!walletData){
+        return 0;
+    }
+
+    if(
         typeof walletData ===
         "number"
-    ) {
-
+    ){
         return walletData;
-
     }
 
-
-    if (
+    if(
         typeof walletData ===
         "object"
-    ) {
+    ){
 
         return Number(
             walletData.balance ??
@@ -3151,29 +2946,21 @@ function parseWalletValue(walletData) {
 
     }
 
-
-    return Number(walletData) || 0;
+    return Number(
+        walletData
+    ) || 0;
 
 }
 
 
-/* =========================================================
+/* =====================================================
    WALLET
-========================================================= */
+===================================================== */
 
-function loadWallet() {
-
-    if (walletListenerStarted) {
-
-        return;
-
-    }
-
-
-    walletListenerStarted = true;
-
+function loadWallet(){
 
     onValue(
+
         ref(
             db,
             "users/" +
@@ -3181,12 +2968,11 @@ function loadWallet() {
             "/wallet"
         ),
 
-        (snapshot) => {
+        snapshot=>{
 
             let balance = 0;
 
-
-            if (snapshot.exists()) {
+            if(snapshot.exists()){
 
                 balance =
                     parseWalletValue(
@@ -3195,67 +2981,33 @@ function loadWallet() {
 
             }
 
-
-            if (
+            if(
                 !Number.isFinite(balance) ||
                 balance < 0
-            ) {
-
+            ){
                 balance = 0;
-
             }
-
 
             currentWalletBalance =
                 balance;
 
-
             updateWalletUI();
-
-        },
-
-        (error) => {
-
-            console.error(
-                "Wallet load error:",
-                error
-            );
-
-
-            currentWalletBalance =
-                0;
-
-
-            updateWalletUI();
-
-
-            showToast(
-                "Wallet load failed"
-            );
 
         }
+
     );
 
 }
 
 
-/* =========================================================
+/* =====================================================
    BONUS
-========================================================= */
+===================================================== */
 
-function loadBonus() {
-
-    if (bonusListenerStarted) {
-
-        return;
-
-    }
-
-
-    bonusListenerStarted = true;
-
+function loadBonus(){
 
     onValue(
+
         ref(
             db,
             "users/" +
@@ -3263,62 +3015,40 @@ function loadBonus() {
             "/bonus"
         ),
 
-        (snapshot) => {
+        snapshot=>{
 
             let bonus =
                 Number(
                     snapshot.val() || 0
                 );
 
-
-            if (
+            if(
                 !Number.isFinite(bonus) ||
                 bonus < 0
-            ) {
-
+            ){
                 bonus = 0;
-
             }
-
 
             currentBonus =
                 bonus;
 
-
             updateWalletUI();
 
-        },
-
-        (error) => {
-
-            console.error(
-                "Bonus load error:",
-                error
-            );
-
         }
+
     );
 
 }
 
 
-/* =========================================================
+/* =====================================================
    WITHDRAWABLE
-========================================================= */
+===================================================== */
 
-function loadWithdrawable() {
-
-    if (withdrawableListenerStarted) {
-
-        return;
-
-    }
-
-
-    withdrawableListenerStarted = true;
-
+function loadWithdrawable(){
 
     onValue(
+
         ref(
             db,
             "users/" +
@@ -3326,107 +3056,73 @@ function loadWithdrawable() {
             "/withdrawable"
         ),
 
-        (snapshot) => {
+        snapshot=>{
 
             let value;
 
-
-            if (snapshot.exists()) {
+            if(snapshot.exists()){
 
                 value =
                     parseWalletValue(
                         snapshot.val()
                     );
 
-            } else {
+            }else{
 
                 value =
                     currentWalletBalance;
 
             }
 
-
-            if (
+            if(
                 !Number.isFinite(value) ||
                 value < 0
-            ) {
-
+            ){
                 value = 0;
-
             }
-
 
             currentWithdrawable =
                 value;
 
-
-            updateWalletUI();
-
-        },
-
-        (error) => {
-
-            console.error(
-                "Withdrawable load error:",
-                error
-            );
-
-
-            currentWithdrawable =
-                currentWalletBalance;
-
-
             updateWalletUI();
 
         }
+
     );
 
 }
 
 
-/* =========================================================
-   UPDATE WALLET UI
-========================================================= */
+/* =====================================================
+   UI
+===================================================== */
 
-function updateWalletUI() {
+function updateWalletUI(){
 
-    const walletElement =
+    const wallet =
         document.getElementById(
             "walletBalance"
         );
 
-
-    const withdrawElement =
+    const withdraw =
         document.getElementById(
             "withdrawableBalance"
         );
 
-
-    const bonusElement =
+    const bonus =
         document.getElementById(
             "bonusBalance"
         );
 
-
-    const withdrawAvailable =
+    const available =
         document.getElementById(
             "withdrawAvailable"
         );
 
 
-    if (
-        !withdrawableListenerStarted
-    ) {
+    if(wallet){
 
-        currentWithdrawable =
-            currentWalletBalance;
-
-    }
-
-
-    if (walletElement) {
-
-        walletElement.innerText =
+        wallet.innerText =
             balanceHidden
                 ? "₹••••"
                 : formatMoney(
@@ -3436,9 +3132,9 @@ function updateWalletUI() {
     }
 
 
-    if (withdrawElement) {
+    if(withdraw){
 
-        withdrawElement.innerText =
+        withdraw.innerText =
             formatMoney(
                 currentWithdrawable
             );
@@ -3446,9 +3142,9 @@ function updateWalletUI() {
     }
 
 
-    if (bonusElement) {
+    if(bonus){
 
-        bonusElement.innerText =
+        bonus.innerText =
             formatMoney(
                 currentBonus
             );
@@ -3456,9 +3152,9 @@ function updateWalletUI() {
     }
 
 
-    if (withdrawAvailable) {
+    if(available){
 
-        withdrawAvailable.innerText =
+        available.innerText =
             formatMoney(
                 currentWithdrawable
             );
@@ -3468,27 +3164,28 @@ function updateWalletUI() {
 }
 
 
-/* =========================================================
-   BALANCE VISIBILITY
-========================================================= */
+/* =====================================================
+   BALANCE
+===================================================== */
 
 window.toggleBalance =
-function () {
+function(){
+
+    if(isAccountFrozen()){
+        return;
+    }
 
     balanceHidden =
         !balanceHidden;
 
-
     updateWalletUI();
-
 
     const eye =
         document.getElementById(
             "eyeBtn"
         );
 
-
-    if (eye) {
+    if(eye){
 
         eye.innerText =
             balanceHidden
@@ -3500,121 +3197,49 @@ function () {
 };
 
 
-/* =========================================================
+/* =====================================================
    ADD MONEY
-========================================================= */
+===================================================== */
 
 window.openAddMoney =
-function () {
+function(){
+
+    if(isAccountFrozen()){
+        return;
+    }
 
     const modal =
         document.getElementById(
             "addModal"
         );
 
-
-    if (!modal) {
-
+    if(!modal){
         return;
-
     }
-
 
     modal.classList.add(
         "show"
     );
 
-
-    const step1 =
-        document.getElementById(
-            "paymentStep1"
-        );
-
-
-    const step2 =
-        document.getElementById(
-            "paymentStep2"
-        );
-
-
-    if (step1) {
-
-        step1.style.display =
-            "block";
-
-    }
-
-
-    if (step2) {
-
-        step2.style.display =
-            "none";
-
-    }
-
-
-    selectedDepositAmount =
-        0;
-
-
-    const amountInput =
-        document.getElementById(
-            "depositAmount"
-        );
-
-
-    const utrInput =
-        document.getElementById(
-            "utr"
-        );
-
-
-    if (amountInput) {
-
-        amountInput.value =
-            "";
-
-    }
-
-
-    if (utrInput) {
-
-        utrInput.value =
-            "";
-
-    }
-
-
-    setTimeout(
-        () => {
-
-            if (amountInput) {
-
-                amountInput.focus();
-
-            }
-
-        },
-        180
-    );
+    document.body.style.overflow =
+        "hidden";
 
 };
 
 
-/* =========================================================
-   CLOSE ADD MONEY
-========================================================= */
+/* =====================================================
+   CLOSE
+===================================================== */
 
 window.closeAddMoney =
-function () {
+function(){
 
     const modal =
         document.getElementById(
             "addModal"
         );
 
-
-    if (modal) {
+    if(modal){
 
         modal.classList.remove(
             "show"
@@ -3622,68 +3247,97 @@ function () {
 
     }
 
+    if(!accountFrozen){
+
+        document.body.style.overflow =
+            "";
+
+    }
+
 };
 
 
-/* =========================================================
-   QUICK AMOUNT
-========================================================= */
+window.closeWithdraw =
+function(){
+
+    const modal =
+        document.getElementById(
+            "withdrawModal"
+        );
+
+    if(modal){
+
+        modal.classList.remove(
+            "show"
+        );
+
+    }
+
+    if(!accountFrozen){
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+};
+
+
+/* =====================================================
+   DEPOSIT AMOUNT
+===================================================== */
 
 window.setDepositAmount =
-function (amount) {
+function(amount){
+
+    if(isAccountFrozen()){
+        return;
+    }
 
     const input =
         document.getElementById(
             "depositAmount"
         );
 
+    if(input){
 
-    if (!input) {
-
-        return;
+        input.value =
+            amount;
 
     }
-
-
-    input.value =
-        amount;
-
-
-    input.focus();
 
 };
 
 
-/* =========================================================
-   SHOW PAYMENT OPTIONS
-========================================================= */
+/* =====================================================
+   PAYMENT OPTIONS
+===================================================== */
 
 window.showPaymentOptions =
-function () {
+function(){
+
+    if(isAccountFrozen()){
+        return;
+    }
 
     const input =
         document.getElementById(
             "depositAmount"
         );
 
-
-    if (!input) {
-
+    if(!input){
         return;
-
     }
-
 
     const amount =
         Number(
             input.value
         );
 
-
-    if (
+    if(
         !Number.isFinite(amount) ||
         amount < 10
-    ) {
+    ){
 
         showToast(
             "Minimum deposit is ₹10"
@@ -3693,10 +3347,7 @@ function () {
 
     }
 
-
-    if (
-        amount > 100000
-    ) {
+    if(amount > 100000){
 
         showToast(
             "Maximum deposit is ₹1,00,000"
@@ -3706,18 +3357,15 @@ function () {
 
     }
 
-
     selectedDepositAmount =
         Math.floor(amount);
-
 
     const selected =
         document.getElementById(
             "selectedAmount"
         );
 
-
-    if (selected) {
+    if(selected){
 
         selected.innerText =
             formatMoney(
@@ -3726,34 +3374,15 @@ function () {
 
     }
 
+    document.getElementById(
+        "paymentStep1"
+    ).style.display =
+        "none";
 
-    const step1 =
-        document.getElementById(
-            "paymentStep1"
-        );
-
-
-    const step2 =
-        document.getElementById(
-            "paymentStep2"
-        );
-
-
-    if (step1) {
-
-        step1.style.display =
-            "none";
-
-    }
-
-
-    if (step2) {
-
-        step2.style.display =
-            "block";
-
-    }
-
+    document.getElementById(
+        "paymentStep2"
+    ).style.display =
+        "block";
 
     createQR(
         adminUPIValue,
@@ -3763,109 +3392,79 @@ function () {
 };
 
 
-/* =========================================================
-   BACK TO AMOUNT
-========================================================= */
+/* =====================================================
+   BACK
+===================================================== */
 
 window.backToAmount =
-function () {
+function(){
 
-    const step2 =
-        document.getElementById(
-            "paymentStep2"
-        );
-
-
-    const step1 =
-        document.getElementById(
-            "paymentStep1"
-        );
-
-
-    if (step2) {
-
-        step2.style.display =
-            "none";
-
+    if(isAccountFrozen()){
+        return;
     }
 
+    document.getElementById(
+        "paymentStep2"
+    ).style.display =
+        "none";
 
-    if (step1) {
-
-        step1.style.display =
-            "block";
-
-    }
+    document.getElementById(
+        "paymentStep1"
+    ).style.display =
+        "block";
 
 };
 
 
-/* =========================================================
+/* =====================================================
    ADMIN PAYMENT
-========================================================= */
+===================================================== */
 
-function loadAdminPayment() {
+function loadAdminPayment(){
 
     onValue(
+
         ref(
             db,
             "settings/payment"
         ),
 
-        (snapshot) => {
+        snapshot=>{
 
             const upiBox =
                 document.getElementById(
                     "adminUPI"
                 );
 
-
             const qr =
                 document.getElementById(
                     "adminQR"
                 );
 
-
-            if (!upiBox || !qr) {
-
+            if(!upiBox || !qr){
                 return;
-
             }
 
-
-            if (!snapshot.exists()) {
-
-                adminUPIValue =
-                    "";
+            if(!snapshot.exists()){
 
                 upiBox.innerText =
                     "UPI Not Found";
 
-                qr.style.display =
-                    "none";
-
                 return;
 
             }
 
-
             const data =
                 snapshot.val() || {};
 
-
-            const upi =
+            adminUPIValue =
                 String(
                     data.upi ??
                     data.upiId ??
                     ""
                 ).trim();
 
-
-            adminUPIValue =
-                upi;
-
-
-            if (!upi) {
+            if(!adminUPIValue){
 
                 upiBox.innerText =
                     "UPI Not Found";
@@ -3877,55 +3476,41 @@ function loadAdminPayment() {
 
             }
 
-
             upiBox.innerText =
                 "UPI : " +
-                upi;
-
+                adminUPIValue;
 
             createQR(
-                upi,
+                adminUPIValue,
                 selectedDepositAmount
             );
 
-        },
-
-        (error) => {
-
-            console.error(
-                "Payment settings error:",
-                error
-            );
-
         }
+
     );
 
 }
 
 
-/* =========================================================
-   CREATE QR
-========================================================= */
+/* =====================================================
+   QR
+===================================================== */
 
 function createQR(
     upi,
     amount
-) {
+){
 
     const qr =
         document.getElementById(
             "adminQR"
         );
 
-
-    if (!qr) {
-
+    if(!qr){
         return;
-
     }
 
-
-    if (!upi) {
+    if(!upi){
 
         qr.style.display =
             "none";
@@ -3934,23 +3519,16 @@ function createQR(
 
     }
 
-
-    let upiURL =
+    let url =
         "upi://pay?pa=" +
         encodeURIComponent(upi) +
         "&pn=" +
-        encodeURIComponent(
-            "BGMI PAY"
-        ) +
+        encodeURIComponent("BGMI PAY") +
         "&cu=INR";
 
+    if(amount > 0){
 
-    if (
-        amount &&
-        amount > 0
-    ) {
-
-        upiURL +=
+        url +=
             "&am=" +
             encodeURIComponent(
                 Number(amount).toFixed(2)
@@ -3958,13 +3536,9 @@ function createQR(
 
     }
 
-
     qr.src =
         "https://quickchart.io/qr?size=300&text=" +
-        encodeURIComponent(
-            upiURL
-        );
-
+        encodeURIComponent(url);
 
     qr.style.display =
         "block";
@@ -3972,148 +3546,18 @@ function createQR(
 }
 
 
-/* =========================================================
-   GENERATE STANDARD UPI URL
-========================================================= */
-
-function getStandardUPIURL() {
-
-    if (!adminUPIValue) {
-
-        return "";
-
-    }
-
-
-    const amount =
-        Number(
-            selectedDepositAmount || 0
-        );
-
-
-    let url =
-        "upi://pay" +
-        "?pa=" +
-        encodeURIComponent(
-            adminUPIValue
-        ) +
-        "&pn=" +
-        encodeURIComponent(
-            "BGMI PAY"
-        );
-
-
-    if (
-        amount > 0
-    ) {
-
-        url +=
-            "&am=" +
-            encodeURIComponent(
-                amount.toFixed(2)
-            );
-
-    }
-
-
-    url +=
-        "&cu=INR";
-
-
-    return url;
-
-}
-
-
-/* =========================================================
-   PAYMENT APP LOGO URL
-========================================================= */
-
-function paymentLogo(appName) {
-
-    const logos = {
-
-        gpay:
-            "https://cdn.simpleicons.org/googlepay/4285F4",
-
-        phonepe:
-            "https://cdn.simpleicons.org/phonepe/5F259F",
-
-        paytm:
-            "https://cdn.simpleicons.org/paytm/00BAF2",
-
-        fampay:
-            "https://cdn.simpleicons.org/fampay/7C3AED"
-
-    };
-
-
-    return (
-        logos[
-            String(appName)
-                .toLowerCase()
-        ] ||
-        ""
-    );
-
-}
-
-
-/* =========================================================
-   UPDATE PAYMENT LOGOS
-   HTML EXAMPLE:
-
-   <img data-payment-logo="gpay">
-   <img data-payment-logo="phonepe">
-   <img data-payment-logo="paytm">
-   <img data-payment-logo="fampay">
-========================================================= */
-
-function updatePaymentLogos() {
-
-    document
-        .querySelectorAll(
-            "[data-payment-logo]"
-        )
-        .forEach(
-            (img) => {
-
-                const name =
-                    img.getAttribute(
-                        "data-payment-logo"
-                    );
-
-
-                const src =
-                    paymentLogo(
-                        name
-                    );
-
-
-                if (src) {
-
-                    img.src =
-                        src;
-
-                }
-
-            }
-        );
-
-}
-
-
-/* =========================================================
-   PAY USING UPI
-========================================================= */
+/* =====================================================
+   UPI
+===================================================== */
 
 window.payWithUPI =
-function (appName) {
+function(appName){
 
-    if (
-        !selectedDepositAmount ||
-        selectedDepositAmount < 10
-    ) {
+    if(isAccountFrozen()){
+        return;
+    }
+
+    if(!selectedDepositAmount){
 
         showToast(
             "Please enter amount first"
@@ -4123,8 +3567,7 @@ function (appName) {
 
     }
 
-
-    if (!adminUPIValue) {
+    if(!adminUPIValue){
 
         showToast(
             "Admin UPI not available"
@@ -4134,270 +3577,129 @@ function (appName) {
 
     }
 
-
     const amount =
         Number(
             selectedDepositAmount
         ).toFixed(2);
-
 
     const pa =
         encodeURIComponent(
             adminUPIValue
         );
 
-
-    const standardUPI =
+    const standard =
         "upi://pay" +
-        "?pa=" +
-        pa +
-        "&pn=" +
-        encodeURIComponent(
-            "BGMI PAY"
-        ) +
-        "&am=" +
-        amount +
+        "?pa=" + pa +
+        "&pn=BGMI%20PAY" +
+        "&am=" + amount +
         "&cu=INR";
 
-
-    let appURL =
-        standardUPI;
-
+    let url =
+        standard;
 
     const name =
         String(
             appName || ""
         ).toLowerCase();
 
+    if(name === "gpay"){
 
-    /* -------------------------
-       GOOGLE PAY
-    ------------------------- */
-
-    if (name === "gpay") {
-
-        appURL =
+        url =
             "tez://upi/pay" +
-            "?pa=" +
-            pa +
+            "?pa=" + pa +
             "&pn=BGMI%20PAY" +
-            "&am=" +
-            amount +
+            "&am=" + amount +
             "&cu=INR";
 
     }
 
+    else if(name === "phonepe"){
 
-    /* -------------------------
-       PHONEPE
-    ------------------------- */
-
-    else if (
-        name === "phonepe"
-    ) {
-
-        appURL =
+        url =
             "phonepe://pay" +
-            "?pa=" +
-            pa +
+            "?pa=" + pa +
             "&pn=BGMI%20PAY" +
-            "&am=" +
-            amount +
+            "&am=" + amount +
             "&cu=INR";
 
     }
 
+    else if(name === "paytm"){
 
-    /* -------------------------
-       PAYTM
-    ------------------------- */
-
-    else if (
-        name === "paytm"
-    ) {
-
-        appURL =
+        url =
             "paytmmp://pay" +
-            "?pa=" +
-            pa +
+            "?pa=" + pa +
             "&pn=BGMI%20PAY" +
-            "&am=" +
-            amount +
+            "&am=" + amount +
             "&cu=INR";
 
     }
 
+    try{
 
-    /* -------------------------
-       FAMPAY
-       Try app deep-link first.
-       Normal UPI remains fallback.
-    ------------------------- */
+        location.href =
+            url;
 
-    else if (
-        name === "fampay"
-    ) {
-
-        appURL =
-            "fampay://upi/pay" +
-            "?pa=" +
-            pa +
-            "&pn=BGMI%20PAY" +
-            "&am=" +
-            amount +
-            "&cu=INR";
-
-    }
-
-
-    try {
-
-        window.location.href =
-            appURL;
-
-
-        /*
-         * Fallback to standard UPI
-         * if app deep link doesn't open.
-         */
-
-        if (
-            name !== "upi"
-        ) {
-
-            setTimeout(
-                () => {
-
-                    if (
-                        document.visibilityState ===
-                        "visible"
-                    ) {
-
-                        window.location.href =
-                            standardUPI;
-
-                    }
-
-                },
-                1300
-            );
-
-        }
-
-    }
-
-    catch (error) {
-
-        console.error(
-            "Payment app error:",
-            error
+        setTimeout(
+            ()=>{
+                if(
+                    document.visibilityState ===
+                    "visible"
+                ){
+                    location.href =
+                        standard;
+                }
+            },
+            1300
         );
 
+    }catch(error){
 
-        window.location.href =
-            standardUPI;
+        location.href =
+            standard;
 
     }
 
-
-    showToast(
-        "Payment app open ho raha hai..."
-    );
-
 };
 
 
-/* =========================================================
-   DIRECT PAYMENT BUTTON HELPERS
-========================================================= */
-
-window.payGPay =
-function () {
-
-    window.payWithUPI(
-        "gpay"
-    );
-
-};
-
-
-window.payPhonePe =
-function () {
-
-    window.payWithUPI(
-        "phonepe"
-    );
-
-};
-
-
-window.payPaytm =
-function () {
-
-    window.payWithUPI(
-        "paytm"
-    );
-
-};
-
-
-window.payFamPay =
-function () {
-
-    window.payWithUPI(
-        "fampay"
-    );
-
-};
-
-
-/* =========================================================
-   SUBMIT DEPOSIT
-========================================================= */
+/* =====================================================
+   DEPOSIT
+===================================================== */
 
 window.submitDeposit =
-async function () {
+async function(){
 
-    if (depositSubmitting) {
-
+    if(isAccountFrozen()){
         return;
-
     }
 
+    if(depositSubmitting){
+        return;
+    }
 
     const amountInput =
         document.getElementById(
             "depositAmount"
         );
 
-
     const utrInput =
         document.getElementById(
             "utr"
         );
-
-
-    if (!amountInput || !utrInput) {
-
-        return;
-
-    }
-
 
     const amount =
         Number(
             amountInput.value
         );
 
-
     const utr =
         utrInput.value.trim();
 
-
-    if (
+    if(
         !Number.isFinite(amount) ||
         amount < 10
-    ) {
+    ){
 
         showToast(
             "Minimum deposit is ₹10"
@@ -4407,10 +3709,7 @@ async function () {
 
     }
 
-
-    if (
-        amount > 100000
-    ) {
+    if(amount > 100000){
 
         showToast(
             "Maximum deposit is ₹1,00,000"
@@ -4420,8 +3719,7 @@ async function () {
 
     }
 
-
-    if (!utr) {
+    if(!utr){
 
         showToast(
             "Enter Transaction ID / UTR"
@@ -4431,48 +3729,25 @@ async function () {
 
     }
 
-
-    if (
-        selectedDepositAmount &&
-        Math.floor(amount) !==
-        Math.floor(
-            selectedDepositAmount
-        )
-    ) {
+    if(utr.length < 6){
 
         showToast(
-            "Amount mismatch"
+            "Enter valid UTR"
         );
 
         return;
 
     }
-
-
-    if (
-        utr.length < 6
-    ) {
-
-        showToast(
-            "Enter a valid UTR"
-        );
-
-        return;
-
-    }
-
 
     depositSubmitting =
         true;
-
 
     const button =
         document.getElementById(
             "depositBtn"
         );
 
-
-    if (button) {
+    if(button){
 
         button.disabled =
             true;
@@ -4482,10 +3757,49 @@ async function () {
 
     }
 
+    try{
 
-    try {
+        /*
+         * Re-check block status
+         * before write.
+         */
 
-        const utrSnap =
+        const userSnap =
+            await get(
+                ref(
+                    db,
+                    "users/" + UID
+                )
+            );
+
+        if(userSnap.exists()){
+
+            const user =
+                userSnap.val() || {};
+
+            if(
+                user.blocked === true ||
+                user.isBlocked === true ||
+                String(
+                    user.accountStatus || ""
+                ).toLowerCase() === "blocked" ||
+                String(
+                    user.status || ""
+                ).toLowerCase() === "blocked"
+            ){
+
+                freezeAccount();
+
+                throw new Error(
+                    "Account is frozen"
+                );
+
+            }
+
+        }
+
+
+        const existing =
             await get(
                 ref(
                     db,
@@ -4493,35 +3807,25 @@ async function () {
                 )
             );
 
-
         let duplicate =
             false;
 
+        if(existing.exists()){
 
-        if (
-            utrSnap.exists()
-        ) {
-
-            utrSnap.forEach(
-                (item) => {
+            existing.forEach(
+                item=>{
 
                     const data =
                         item.val() || {};
 
-
-                    const existingUTR =
+                    if(
                         String(
                             data.utr || ""
                         )
                         .trim()
-                        .toLowerCase();
-
-
-                    if (
-                        existingUTR &&
-                        existingUTR ===
+                        .toLowerCase() ===
                         utr.toLowerCase()
-                    ) {
+                    ){
 
                         duplicate =
                             true;
@@ -4533,8 +3837,7 @@ async function () {
 
         }
 
-
-        if (duplicate) {
+        if(duplicate){
 
             throw new Error(
                 "Transaction ID already used"
@@ -4543,7 +3846,7 @@ async function () {
         }
 
 
-        const requestRef =
+        const request =
             push(
                 ref(
                     db,
@@ -4551,19 +3854,16 @@ async function () {
                 )
             );
 
-
         await set(
-            requestRef,
+            request,
             {
 
-                uid:
-                    UID,
+                uid:UID,
 
                 amount:
                     Math.floor(amount),
 
-                utr:
-                    utr,
+                utr:utr,
 
                 paymentMethod:
                     "UPI",
@@ -4582,30 +3882,24 @@ async function () {
             "Payment submitted successfully"
         );
 
-
         closeAddMoney();
-
 
         amountInput.value =
             "";
 
-
         utrInput.value =
             "";
-
 
         selectedDepositAmount =
             0;
 
     }
 
-    catch (error) {
+    catch(error){
 
         console.error(
-            "Deposit Error:",
             error
         );
-
 
         showToast(
             error.message ||
@@ -4614,16 +3908,15 @@ async function () {
 
     }
 
-    finally {
+    finally{
 
         depositSubmitting =
             false;
 
-
-        if (button) {
+        if(button){
 
             button.disabled =
-                false;
+                accountFrozen;
 
             button.innerText =
                 "Submit Payment";
@@ -4635,1330 +3928,75 @@ async function () {
 };
 
 
-/* =========================================================
-   WITHDRAW OPEN
-========================================================= */
+/* =====================================================
+   WITHDRAW
+===================================================== */
 
 window.openWithdraw =
-function () {
+function(){
+
+    if(isAccountFrozen()){
+        return;
+    }
 
     updateWalletUI();
-
 
     const modal =
         document.getElementById(
             "withdrawModal"
         );
 
+    if(modal){
 
-    if (!modal) {
-
-        return;
-
-    }
-
-
-    modal.classList.add(
-        "show"
-    );
-
-
-    const available =
-        document.getElementById(
-            "withdrawAvailable"
-        );
-
-
-    if (available) {
-
-        available.innerText =
-            formatMoney(
-                currentWithdrawable
-            );
-
-    }
-
-
-    setTimeout(
-        () => {
-
-            const input =
-                document.getElementById(
-                    "withdrawAmount"
-                );
-
-
-            if (input) {
-
-                input.focus();
-
-            }
-
-        },
-        180
-    );
-
-};
-
-
-/* =========================================================
-   CLOSE WITHDRAW
-========================================================= */
-
-window.closeWithdraw =
-function () {
-
-    const modal =
-        document.getElementById(
-            "withdrawModal"
-        );
-
-
-    if (modal) {
-
-        modal.classList.remove(
+        modal.classList.add(
             "show"
         );
 
-    }
-
-};
-
-
-/* =========================================================
-   OUTSIDE MODAL
-========================================================= */
-
-window.closeOutside =
-function (
-    event,
-    id
-) {
-
-    if (
-        event.target.id === id
-    ) {
-
-        const modal =
-            document.getElementById(
-                id
-            );
-
-
-        if (modal) {
-
-            modal.classList.remove(
-                "show"
-            );
-
-        }
+        document.body.style.overflow =
+            "hidden";
 
     }
 
 };
 
 
-/* =========================================================
-   FILTER
-========================================================= */
-
-window.setFilter =
-function (
-    filter,
-    button
-) {
-
-    currentFilter =
-        filter;
-
-
-    document
-        .querySelectorAll(
-            ".filter"
-        )
-        .forEach(
-            btn => {
-
-                btn.classList.remove(
-                    "active"
-                );
-
-            }
-        );
-
-
-    if (button) {
-
-        button.classList.add(
-            "active"
-        );
-
-    }
-
-
-    renderTransactions();
-
-};
-
-
-/* =========================================================
-   LOAD HISTORY
-========================================================= */
-
-function loadHistory() {
-
-    if (historyListenerStarted) {
-
-        return;
-
-    }
-
-
-    historyListenerStarted =
-        true;
-
-
-    onValue(
-        ref(
-            db,
-            "users/" +
-            UID +
-            "/transactions"
-        ),
-
-        (snapshot) => {
-
-            const oldIds =
-                new Set(
-                    transactions.map(
-                        tx => tx.id
-                    )
-                );
-
-
-            transactions =
-                [];
-
-
-            if (
-                snapshot.exists()
-            ) {
-
-                snapshot.forEach(
-                    (item) => {
-
-                        const data =
-                            item.val() || {};
-
-
-                        transactions.push({
-
-                            id:
-                                item.key,
-
-                            ...data
-
-                        });
-
-                    }
-                );
-
-            }
-
-
-            transactions.sort(
-                (a, b) => {
-
-                    return (
-                        Number(
-                            b.time || 0
-                        ) -
-                        Number(
-                            a.time || 0
-                        )
-                    );
-
-                }
-            );
-
-
-            /*
-             * FIRST LOAD
-             */
-
-            if (!refundInitialized) {
-
-                transactions.forEach(
-                    tx => {
-
-                        previousTransactionIds.add(
-                            tx.id
-                        );
-
-                    }
-                );
-
-
-                refundInitialized =
-                    true;
-
-            }
-
-            else {
-
-                /*
-                 * DETECT NEW TRANSACTIONS
-                 */
-
-                transactions.forEach(
-                    tx => {
-
-                        if (
-                            !oldIds.has(
-                                tx.id
-                            ) &&
-                            !previousTransactionIds.has(
-                                tx.id
-                            )
-                        ) {
-
-                            handleNewTransaction(
-                                tx
-                            );
-
-                        }
-
-                    }
-                );
-
-
-                transactions.forEach(
-                    tx => {
-
-                        previousTransactionIds.add(
-                            tx.id
-                        );
-
-                    }
-                );
-
-            }
-
-
-            renderTransactions();
-
-        },
-
-        (error) => {
-
-            console.error(
-                "History Error:",
-                error
-            );
-
-
-            const historyList =
-                document.getElementById(
-                    "historyList"
-                );
-
-
-            if (historyList) {
-
-                historyList.innerHTML = `
-
-                    <div class="empty">
-
-                        <div class="empty-icon">
-                            ⚠️
-                        </div>
-
-                        <div class="empty-title">
-                            Unable to load history
-                        </div>
-
-                        <div class="empty-text">
-                            Please try again later.
-                        </div>
-
-                    </div>
-
-                `;
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   DETECT NEW TRANSACTION
-========================================================= */
-
-function handleNewTransaction(tx) {
-
-    if (!tx) {
-
-        return;
-
-    }
-
-
-    const type =
-        String(
-            tx.type || ""
-        ).toLowerCase();
-
-
-    const category =
-        String(
-            tx.category ||
-            tx.source ||
-            ""
-        ).toLowerCase();
-
-
-    const title =
-        String(
-            tx.title ||
-            ""
-        ).toLowerCase();
-
-
-    const status =
-        String(
-            tx.status ||
-            "completed"
-        ).toLowerCase();
-
-
-    const isRefund =
-        type === "credit" &&
-        (
-            category.includes(
-                "refund"
-            ) ||
-
-            category.includes(
-                "match_cancel"
-            ) ||
-
-            category.includes(
-                "match-cancel"
-            ) ||
-
-            category.includes(
-                "match cancelled"
-            ) ||
-
-            category.includes(
-                "cancelled"
-            ) ||
-
-            category.includes(
-                "canceled"
-            ) ||
-
-            title.includes(
-                "refund"
-            ) ||
-
-            title.includes(
-                "match cancelled"
-            ) ||
-
-            title.includes(
-                "match canceled"
-            ) ||
-
-            title.includes(
-                "match cancel"
-            )
-        );
-
-
-    if (
-        !isRefund
-    ) {
-
-        return;
-
-    }
-
-
-    if (
-        status === "rejected"
-    ) {
-
-        return;
-
-    }
-
-
-    const transactionId =
-        String(
-            tx.id || ""
-        );
-
-
-    if (
-        refundMessageShown.has(
-            transactionId
-        )
-    ) {
-
-        return;
-
-    }
-
-
-    refundMessageShown.add(
-        transactionId
-    );
-
-
-    const amount =
-        Number(
-            tx.amount || 0
-        );
-
-
-    /*
-     * WALLET UI REFRESH
-     */
-
-    updateWalletUI();
-
-
-    /*
-     * REFUND MESSAGE
-     */
-
-    const message =
-        amount > 0
-
-            ? "Match cancelled. " +
-              formatMoney(amount) +
-              " refund wallet mein add ho gaya."
-
-            : "Match cancelled. Refund wallet mein add ho gaya.";
-
-
-    showRefundMessage(
-        message
-    );
-
-
-    /*
-     * VIBRATION
-     */
-
-    try {
-
-        if (
-            navigator.vibrate
-        ) {
-
-            navigator.vibrate(
-                [100, 60, 100]
-            );
-
-        }
-
-    }
-
-    catch (error) {
-
-        console.warn(
-            "Vibration unavailable"
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   REFUND MESSAGE
-========================================================= */
-
-function showRefundMessage(
-    message
-) {
-
-    /*
-     * If page already has
-     * refundMessage element,
-     * update it.
-     */
-
-    const existing =
-        document.getElementById(
-            "refundMessage"
-        );
-
-
-    if (existing) {
-
-        existing.innerText =
-            String(message);
-
-
-        existing.classList.add(
-            "show"
-        );
-
-
-        setTimeout(
-            () => {
-
-                existing.classList.remove(
-                    "show"
-                );
-
-            },
-            5000
-        );
-
-    }
-
-
-    /*
-     * Toast always works if
-     * toast element exists.
-     */
-
-    showToast(
-        "↩️ " +
-        String(message)
-    );
-
-}
-
-
-/* =========================================================
-   RENDER HISTORY
-========================================================= */
-
-function renderTransactions() {
-
-    const box =
-        document.getElementById(
-            "historyList"
-        );
-
-
-    const count =
-        document.getElementById(
-            "historyCount"
-        );
-
-
-    if (!box) {
-
-        return;
-
-    }
-
-
-    let list =
-        [...transactions];
-
-
-    if (
-        currentFilter !== "all"
-    ) {
-
-        list =
-            list.filter(
-                (tx) => {
-
-                    const type =
-                        String(
-                            tx.type || ""
-                        ).toLowerCase();
-
-
-                    const category =
-                        String(
-                            tx.category ||
-                            tx.source ||
-                            ""
-                        ).toLowerCase();
-
-
-                    const title =
-                        String(
-                            tx.title || ""
-                        ).toLowerCase();
-
-
-                    if (
-                        currentFilter ===
-                        "credit"
-                    ) {
-
-                        return (
-                            type ===
-                            "credit"
-                        );
-
-                    }
-
-
-                    if (
-                        currentFilter ===
-                        "debit"
-                    ) {
-
-                        return (
-                            type ===
-                            "debit"
-                        );
-
-                    }
-
-
-                    if (
-                        currentFilter ===
-                        "deposit"
-                    ) {
-
-                        return (
-                            category.includes(
-                                "deposit"
-                            ) ||
-
-                            category.includes(
-                                "add"
-                            ) ||
-
-                            title.includes(
-                                "deposit"
-                            ) ||
-
-                            title.includes(
-                                "add money"
-                            )
-                        );
-
-                    }
-
-
-                    if (
-                        currentFilter ===
-                        "withdraw"
-                    ) {
-
-                        return (
-                            category.includes(
-                                "withdraw"
-                            ) ||
-
-                            title.includes(
-                                "withdraw"
-                            )
-                        );
-
-                    }
-
-
-                    if (
-                        currentFilter ===
-                        "match"
-                    ) {
-
-                        return (
-                            category.includes(
-                                "match"
-                            ) ||
-
-                            title.includes(
-                                "match"
-                            )
-                        );
-
-                    }
-
-
-                    if (
-                        currentFilter ===
-                        "reward"
-                    ) {
-
-                        return (
-                            category.includes(
-                                "reward"
-                            ) ||
-
-                            category.includes(
-                                "cashback"
-                            ) ||
-
-                            category.includes(
-                                "refund"
-                            ) ||
-
-                            title.includes(
-                                "reward"
-                            ) ||
-
-                            title.includes(
-                                "cashback"
-                            ) ||
-
-                            title.includes(
-                                "refund"
-                            ) ||
-
-                            title.includes(
-                                "winning"
-                            ) ||
-
-                            title.includes(
-                                "win"
-                            )
-                        );
-
-                    }
-
-
-                    return true;
-
-                }
-            );
-
-    }
-
-
-    if (count) {
-
-        count.innerText =
-            list.length +
-            (
-                list.length === 1
-                    ? " transaction"
-                    : " transactions"
-            );
-
-    }
-
-
-    if (
-        list.length === 0
-    ) {
-
-        box.innerHTML = `
-
-            <div class="empty">
-
-                <div class="empty-icon">
-                    💳
-                </div>
-
-                <div class="empty-title">
-                    No Transactions
-                </div>
-
-                <div class="empty-text">
-                    No transaction found in this category.
-                </div>
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    box.innerHTML =
-        "";
-
-
-    list.forEach(
-        (tx) => {
-
-            const amount =
-                Number(
-                    tx.amount || 0
-                );
-
-
-            const type =
-                String(
-                    tx.type ||
-                    "credit"
-                ).toLowerCase();
-
-
-            const status =
-                String(
-                    tx.status ||
-                    "completed"
-                ).toLowerCase();
-
-
-            const title =
-                String(
-                    tx.title ||
-                    "Transaction"
-                );
-
-
-            const lowerTitle =
-                title.toLowerCase();
-
-
-            const category =
-                String(
-                    tx.category ||
-                    tx.source ||
-                    ""
-                ).toLowerCase();
-
-
-            let icon =
-                "💳";
-
-
-            /*
-             * REFUND
-             */
-
-            if (
-                lowerTitle.includes(
-                    "refund"
-                ) ||
-
-                category.includes(
-                    "refund"
-                ) ||
-
-                category.includes(
-                    "cancel"
-                )
-            ) {
-
-                icon =
-                    "↩️";
-
-            }
-
-
-            else if (
-                lowerTitle.includes(
-                    "deposit"
-                ) ||
-
-                lowerTitle.includes(
-                    "add money"
-                )
-            ) {
-
-                icon =
-                    "🟢";
-
-            }
-
-
-            else if (
-                lowerTitle.includes(
-                    "withdraw"
-                )
-            ) {
-
-                icon =
-                    "💸";
-
-            }
-
-
-            else if (
-                lowerTitle.includes(
-                    "match"
-                )
-            ) {
-
-                icon =
-                    "🎮";
-
-            }
-
-
-            else if (
-                lowerTitle.includes(
-                    "winning"
-                ) ||
-
-                lowerTitle.includes(
-                    "win"
-                )
-            ) {
-
-                icon =
-                    "🏆";
-
-            }
-
-
-            else if (
-                lowerTitle.includes(
-                    "cashback"
-                ) ||
-
-                lowerTitle.includes(
-                    "reward"
-                )
-            ) {
-
-                icon =
-                    "🎁";
-
-            }
-
-
-            else if (
-                lowerTitle.includes(
-                    "refund"
-                )
-            ) {
-
-                icon =
-                    "↩️";
-
-            }
-
-
-            let statusClass =
-                "";
-
-
-            if (
-                status === "pending"
-            ) {
-
-                statusClass =
-                    "pending-text";
-
-            }
-
-            else if (
-                status === "rejected"
-            ) {
-
-                statusClass =
-                    "rejected-text";
-
-            }
-
-            else if (
-                status === "completed" ||
-                status === "approved"
-            ) {
-
-                statusClass =
-                    "completed-text";
-
-            }
-
-
-            const statusText =
-                status
-                    .charAt(0)
-                    .toUpperCase() +
-                status.slice(1);
-
-
-            const time =
-                tx.time
-
-                    ? new Date(
-                        Number(
-                            tx.time
-                        )
-                    ).toLocaleString(
-                        "en-IN",
-                        {
-                            day:
-                                "2-digit",
-
-                            month:
-                                "short",
-
-                            year:
-                                "numeric",
-
-                            hour:
-                                "2-digit",
-
-                            minute:
-                                "2-digit"
-                        }
-                    )
-
-                    : "--";
-
-
-            const amountText =
-                type === "debit"
-                    ? "-₹"
-                    : "+₹";
-
-
-            const amountClass =
-                type === "debit"
-                    ? "debit"
-                    : "credit";
-
-
-            const row =
-                document.createElement(
-                    "div"
-                );
-
-
-            row.className =
-                "history";
-
-
-            row.innerHTML = `
-
-                <div class="tx-icon">
-                    ${icon}
-                </div>
-
-                <div class="tx-info">
-
-                    <div class="tx-title">
-                        ${escapeHTML(title)}
-                    </div>
-
-                    <div class="tx-time">
-                        ${escapeHTML(time)}
-                    </div>
-
-                    <div class="tx-status ${statusClass}">
-                        ${escapeHTML(statusText)}
-                    </div>
-
-                </div>
-
-                <div class="tx-amount ${amountClass}">
-                    ${amountText}${Math.floor(
-                        Number.isFinite(
-                            amount
-                        )
-                            ? amount
-                            : 0
-                    ).toLocaleString(
-                        "en-IN"
-                    )}
-                </div>
-
-            `;
-
-
-            box.appendChild(
-                row
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   PENDING REQUESTS
-========================================================= */
-
-function loadPendingRequests() {
-
-    if (pendingListenerStarted) {
-
-        return;
-
-    }
-
-
-    pendingListenerStarted =
-        true;
-
-
-    onValue(
-        ref(
-            db,
-            "depositRequests"
-        ),
-
-        (snapshot) => {
-
-            let count =
-                0;
-
-
-            if (
-                snapshot.exists()
-            ) {
-
-                snapshot.forEach(
-                    (item) => {
-
-                        const data =
-                            item.val() || {};
-
-
-                        if (
-                            data.uid === UID &&
-
-                            String(
-                                data.status ||
-                                "pending"
-                            ).toLowerCase() ===
-                            "pending"
-                        ) {
-
-                            count++;
-
-                        }
-
-                    }
-                );
-
-            }
-
-
-            const element =
-                document.getElementById(
-                    "pendingDeposits"
-                );
-
-
-            if (element) {
-
-                element.innerText =
-                    count;
-
-            }
-
-        }
-    );
-
-
-    onValue(
-        ref(
-            db,
-            "withdrawRequests"
-        ),
-
-        (snapshot) => {
-
-            let count =
-                0;
-
-
-            if (
-                snapshot.exists()
-            ) {
-
-                snapshot.forEach(
-                    (item) => {
-
-                        const data =
-                            item.val() || {};
-
-
-                        if (
-                            data.uid === UID &&
-
-                            String(
-                                data.status ||
-                                "pending"
-                            ).toLowerCase() ===
-                            "pending"
-                        ) {
-
-                            count++;
-
-                        }
-
-                    }
-                );
-
-            }
-
-
-            const element =
-                document.getElementById(
-                    "pendingWithdraws"
-                );
-
-
-            if (element) {
-
-                element.innerText =
-                    count;
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   SUBMIT WITHDRAW
-   MINIMUM ₹100
-========================================================= */
+/* =====================================================
+   WITHDRAW SUBMIT
+===================================================== */
 
 window.submitWithdraw =
-async function () {
+async function(){
 
-    if (withdrawSubmitting) {
-
+    if(isAccountFrozen()){
         return;
-
     }
 
+    if(withdrawSubmitting){
+        return;
+    }
 
     const amountInput =
         document.getElementById(
             "withdrawAmount"
         );
 
-
     const upiInput =
         document.getElementById(
             "withdrawUPI"
         );
-
-
-    if (!amountInput || !upiInput) {
-
-        return;
-
-    }
-
 
     const amount =
         Number(
             amountInput.value
         );
 
-
     const upi =
         upiInput.value.trim();
 
-
-    if (
+    if(
         !Number.isFinite(amount) ||
         amount < 100
-    ) {
+    ){
 
         showToast(
             "Minimum withdrawal is ₹100"
@@ -5968,10 +4006,7 @@ async function () {
 
     }
 
-
-    if (
-        amount > 100000
-    ) {
+    if(amount > 100000){
 
         showToast(
             "Maximum withdrawal is ₹1,00,000"
@@ -5981,8 +4016,7 @@ async function () {
 
     }
 
-
-    if (!upi) {
+    if(!upi){
 
         showToast(
             "Enter UPI ID"
@@ -5992,16 +4026,10 @@ async function () {
 
     }
 
-
-    const upiPattern =
+    const pattern =
         /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+$/;
 
-
-    if (
-        !upiPattern.test(
-            upi
-        )
-    ) {
+    if(!pattern.test(upi)){
 
         showToast(
             "Enter valid UPI ID"
@@ -6011,32 +4039,28 @@ async function () {
 
     }
 
-
-    if (
+    if(
         currentWithdrawable <
         amount
-    ) {
+    ){
 
         showToast(
-            "Insufficient withdrawable balance"
+            "Insufficient balance"
         );
 
         return;
 
     }
 
-
     withdrawSubmitting =
         true;
-
 
     const button =
         document.getElementById(
             "withdrawBtn"
         );
 
-
-    if (button) {
+    if(button){
 
         button.disabled =
             true;
@@ -6046,22 +4070,21 @@ async function () {
 
     }
 
+    try{
 
-    try {
+        /*
+         * BLOCK CHECK
+         */
 
         const userSnap =
             await get(
                 ref(
                     db,
-                    "users/" +
-                    UID
+                    "users/" + UID
                 )
             );
 
-
-        if (
-            !userSnap.exists()
-        ) {
+        if(!userSnap.exists()){
 
             throw new Error(
                 "User not found"
@@ -6069,57 +4092,33 @@ async function () {
 
         }
 
-
         const user =
             userSnap.val() || {};
 
+        if(
+            user.blocked === true ||
+            user.isBlocked === true ||
+            String(
+                user.accountStatus || ""
+            ).toLowerCase() === "blocked" ||
+            String(
+                user.status || ""
+            ).toLowerCase() === "blocked"
+        ){
 
-        const wallet =
-            parseWalletValue(
-                user.wallet
+            freezeAccount();
+
+            throw new Error(
+                "Account is frozen"
             );
 
-
-        let withdrawable;
-
-
-        if (
-            user.withdrawable !==
-            undefined &&
-            user.withdrawable !==
-            null
-        ) {
-
-            withdrawable =
-                parseWalletValue(
-                    user.withdrawable
-                );
-
-        } else {
-
-            withdrawable =
-                wallet;
-
         }
 
 
-        if (
-            !Number.isFinite(
-                withdrawable
-            ) ||
-            withdrawable < 0
-        ) {
-
-            withdrawable =
-                0;
-
-        }
-
-
-        if (
-            withdrawable <
+        if(
+            currentWithdrawable <
             amount
-        ) {
+        ){
 
             throw new Error(
                 "Insufficient withdrawable balance"
@@ -6128,7 +4127,7 @@ async function () {
         }
 
 
-        const existingSnap =
+        const requests =
             await get(
                 ref(
                     db,
@@ -6136,64 +4135,38 @@ async function () {
                 )
             );
 
-
-        let duplicatePending =
+        let duplicate =
             false;
 
+        if(requests.exists()){
 
-        if (
-            existingSnap.exists()
-        ) {
-
-            existingSnap.forEach(
-                (item) => {
+            requests.forEach(
+                item=>{
 
                     const data =
                         item.val() || {};
 
-
-                    if (
+                    if(
                         data.uid === UID &&
-
                         String(
                             data.status ||
                             "pending"
                         ).toLowerCase() ===
-                        "pending"
-                    ) {
+                        "pending" &&
+                        Number(
+                            data.amount || 0
+                        ) ===
+                        Math.floor(amount) &&
+                        String(
+                            data.upi || ""
+                        )
+                        .trim()
+                        .toLowerCase() ===
+                        upi.toLowerCase()
+                    ){
 
-                        const existingAmount =
-                            Number(
-                                data.amount ||
-                                0
-                            );
-
-
-                        const existingUPI =
-                            String(
-                                data.upi ||
-                                ""
-                            )
-                            .trim()
-                            .toLowerCase();
-
-
-                        if (
-                            Math.floor(
-                                existingAmount
-                            ) ===
-                            Math.floor(
-                                amount
-                            ) &&
-
-                            existingUPI ===
-                            upi.toLowerCase()
-                        ) {
-
-                            duplicatePending =
-                                true;
-
-                        }
+                        duplicate =
+                            true;
 
                     }
 
@@ -6202,10 +4175,7 @@ async function () {
 
         }
 
-
-        if (
-            duplicatePending
-        ) {
+        if(duplicate){
 
             throw new Error(
                 "Same withdrawal request already pending"
@@ -6214,7 +4184,7 @@ async function () {
         }
 
 
-        const withdrawRef =
+        const request =
             push(
                 ref(
                     db,
@@ -6222,21 +4192,16 @@ async function () {
                 )
             );
 
-
         await set(
-            withdrawRef,
+            request,
             {
 
-                uid:
-                    UID,
+                uid:UID,
 
                 amount:
-                    Math.floor(
-                        amount
-                    ),
+                    Math.floor(amount),
 
-                upi:
-                    upi,
+                upi:upi,
 
                 status:
                     "pending",
@@ -6252,26 +4217,21 @@ async function () {
             "Withdraw request submitted"
         );
 
-
         closeWithdraw();
-
 
         amountInput.value =
             "";
-
 
         upiInput.value =
             "";
 
     }
 
-    catch (error) {
+    catch(error){
 
         console.error(
-            "Withdraw Error:",
             error
         );
-
 
         showToast(
             error.message ||
@@ -6280,16 +4240,15 @@ async function () {
 
     }
 
-    finally {
+    finally{
 
         withdrawSubmitting =
             false;
 
-
-        if (button) {
+        if(button){
 
             button.disabled =
-                false;
+                accountFrozen;
 
             button.innerText =
                 "Submit Withdraw";
@@ -6301,87 +4260,768 @@ async function () {
 };
 
 
-/* =========================================================
-   ESC KEY
-========================================================= */
+/* =====================================================
+   MODAL
+===================================================== */
 
-document.addEventListener(
-    "keydown",
-    (event) => {
+window.closeOutside =
+function(event,id){
 
-        if (
-            event.key ===
-            "Escape"
-        ) {
+    if(
+        event.target.id === id
+    ){
+
+        if(id === "addModal"){
 
             closeAddMoney();
+
+        }
+
+        if(id === "withdrawModal"){
 
             closeWithdraw();
 
         }
 
     }
-);
+
+};
 
 
-/* =========================================================
-   TOAST
-========================================================= */
+/* =====================================================
+   FILTER
+===================================================== */
 
-let toastTimer =
-    null;
+window.setFilter =
+function(
+    filter,
+    button
+){
 
+    if(isAccountFrozen()){
+        return;
+    }
 
-window.showToast =
-function (message) {
+    currentFilter =
+        filter;
 
-    const toast =
-        document.getElementById(
-            "toast"
+    document
+        .querySelectorAll(
+            ".filter"
+        )
+        .forEach(
+            item=>{
+                item.classList.remove(
+                    "active"
+                );
+            }
         );
 
+    if(button){
 
-    if (!toast) {
+        button.classList.add(
+            "active"
+        );
+
+    }
+
+    renderTransactions();
+
+};
+
+
+/* =====================================================
+   HISTORY
+===================================================== */
+
+function loadHistory(){
+
+    onValue(
+
+        ref(
+            db,
+            "users/" +
+            UID +
+            "/transactions"
+        ),
+
+        snapshot=>{
+
+            const oldIds =
+                new Set(
+                    transactions.map(
+                        tx=>tx.id
+                    )
+                );
+
+            transactions =
+                [];
+
+            if(snapshot.exists()){
+
+                snapshot.forEach(
+                    item=>{
+
+                        transactions.push({
+
+                            id:item.key,
+
+                            ...(
+                                item.val() || {}
+                            )
+
+                        });
+
+                    }
+                );
+
+            }
+
+            transactions.sort(
+                (a,b)=>
+                    Number(
+                        b.time || 0
+                    ) -
+                    Number(
+                        a.time || 0
+                    )
+            );
+
+
+            if(!refundInitialized){
+
+                transactions.forEach(
+                    tx=>{
+                        previousTransactionIds.add(
+                            tx.id
+                        );
+                    }
+                );
+
+                refundInitialized =
+                    true;
+
+            }else{
+
+                transactions.forEach(
+                    tx=>{
+
+                        if(
+                            !oldIds.has(tx.id) &&
+                            !previousTransactionIds.has(
+                                tx.id
+                            )
+                        ){
+
+                            handleNewTransaction(
+                                tx
+                            );
+
+                        }
+
+                    }
+                );
+
+                transactions.forEach(
+                    tx=>{
+                        previousTransactionIds.add(
+                            tx.id
+                        );
+                    }
+                );
+
+            }
+
+            renderTransactions();
+
+        }
+
+    );
+
+}
+
+
+/* =====================================================
+   TRANSACTION
+===================================================== */
+
+function handleNewTransaction(tx){
+
+    const type =
+        String(
+            tx.type || ""
+        ).toLowerCase();
+
+    const category =
+        String(
+            tx.category ||
+            tx.source ||
+            ""
+        ).toLowerCase();
+
+    const title =
+        String(
+            tx.title || ""
+        ).toLowerCase();
+
+    const isRefund =
+        type === "credit" &&
+        (
+            category.includes("refund") ||
+            category.includes("cancel") ||
+            title.includes("refund") ||
+            title.includes("cancel")
+        );
+
+    if(!isRefund){
+        return;
+    }
+
+    if(
+        refundMessageShown.has(
+            tx.id
+        )
+    ){
+        return;
+    }
+
+    refundMessageShown.add(
+        tx.id
+    );
+
+    const amount =
+        Number(
+            tx.amount || 0
+        );
+
+    showToast(
+        amount > 0
+            ? "↩️ " +
+              formatMoney(amount) +
+              " refund wallet mein add ho gaya."
+            : "↩️ Refund wallet mein add ho gaya."
+    );
+
+}
+
+
+/* =====================================================
+   RENDER
+===================================================== */
+
+function renderTransactions(){
+
+    const box =
+        document.getElementById(
+            "historyList"
+        );
+
+    const count =
+        document.getElementById(
+            "historyCount"
+        );
+
+    if(!box){
+        return;
+    }
+
+    let list =
+        [...transactions];
+
+    if(
+        currentFilter !== "all"
+    ){
+
+        list =
+            list.filter(
+                tx=>{
+
+                    const type =
+                        String(
+                            tx.type || ""
+                        ).toLowerCase();
+
+                    const category =
+                        String(
+                            tx.category ||
+                            tx.source ||
+                            ""
+                        ).toLowerCase();
+
+                    const title =
+                        String(
+                            tx.title || ""
+                        ).toLowerCase();
+
+                    if(
+                        currentFilter ===
+                        "credit"
+                    ){
+                        return type ===
+                            "credit";
+                    }
+
+                    if(
+                        currentFilter ===
+                        "debit"
+                    ){
+                        return type ===
+                            "debit";
+                    }
+
+                    if(
+                        currentFilter ===
+                        "deposit"
+                    ){
+                        return (
+                            category.includes(
+                                "deposit"
+                            ) ||
+                            title.includes(
+                                "deposit"
+                            )
+                        );
+                    }
+
+                    if(
+                        currentFilter ===
+                        "withdraw"
+                    ){
+                        return (
+                            category.includes(
+                                "withdraw"
+                            ) ||
+                            title.includes(
+                                "withdraw"
+                            )
+                        );
+                    }
+
+                    if(
+                        currentFilter ===
+                        "match"
+                    ){
+                        return (
+                            category.includes(
+                                "match"
+                            ) ||
+                            title.includes(
+                                "match"
+                            )
+                        );
+                    }
+
+                    if(
+                        currentFilter ===
+                        "reward"
+                    ){
+                        return (
+                            category.includes(
+                                "reward"
+                            ) ||
+                            category.includes(
+                                "refund"
+                            ) ||
+                            category.includes(
+                                "cashback"
+                            ) ||
+                            title.includes(
+                                "reward"
+                            ) ||
+                            title.includes(
+                                "refund"
+                            ) ||
+                            title.includes(
+                                "cashback"
+                            )
+                        );
+                    }
+
+                    return true;
+
+                }
+            );
+
+    }
+
+
+    if(count){
+
+        count.innerText =
+            list.length +
+            (
+                list.length === 1
+                    ? " transaction"
+                    : " transactions"
+            );
+
+    }
+
+
+    if(!list.length){
+
+        box.innerHTML = `
+
+        <div class="empty">
+
+            <div class="empty-icon">
+                💳
+            </div>
+
+            <div class="empty-title">
+                No Transactions
+            </div>
+
+            <div class="empty-text">
+                No transaction found.
+            </div>
+
+        </div>
+
+        `;
 
         return;
 
     }
 
 
+    box.innerHTML =
+        "";
+
+
+    list.forEach(
+        tx=>{
+
+            const amount =
+                Number(
+                    tx.amount || 0
+                );
+
+            const type =
+                String(
+                    tx.type ||
+                    "credit"
+                ).toLowerCase();
+
+            const status =
+                String(
+                    tx.status ||
+                    "completed"
+                ).toLowerCase();
+
+            const title =
+                String(
+                    tx.title ||
+                    "Transaction"
+                );
+
+            let icon =
+                "💳";
+
+            const lower =
+                title.toLowerCase();
+
+            if(
+                lower.includes(
+                    "refund"
+                )
+            ){
+                icon = "↩️";
+            }
+            else if(
+                lower.includes(
+                    "deposit"
+                )
+            ){
+                icon = "🟢";
+            }
+            else if(
+                lower.includes(
+                    "withdraw"
+                )
+            ){
+                icon = "💸";
+            }
+            else if(
+                lower.includes(
+                    "match"
+                )
+            ){
+                icon = "🎮";
+            }
+            else if(
+                lower.includes(
+                    "win"
+                )
+            ){
+                icon = "🏆";
+            }
+            else if(
+                lower.includes(
+                    "reward"
+                )
+            ){
+                icon = "🎁";
+            }
+
+
+            const time =
+                tx.time
+                    ? new Date(
+                        Number(
+                            tx.time
+                        )
+                    ).toLocaleString(
+                        "en-IN",
+                        {
+                            day:"2-digit",
+                            month:"short",
+                            year:"numeric",
+                            hour:"2-digit",
+                            minute:"2-digit"
+                        }
+                    )
+                    : "--";
+
+
+            const statusClass =
+                status === "pending"
+                    ? "pending-text"
+                    : status === "rejected"
+                        ? "rejected-text"
+                        : "completed-text";
+
+
+            const row =
+                document.createElement(
+                    "div"
+                );
+
+            row.className =
+                "history";
+
+            row.innerHTML = `
+
+            <div class="tx-icon">
+                ${icon}
+            </div>
+
+            <div class="tx-info">
+
+                <div class="tx-title">
+                    ${escapeHTML(title)}
+                </div>
+
+                <div class="tx-time">
+                    ${escapeHTML(time)}
+                </div>
+
+                <div class="tx-status ${statusClass}">
+                    ${escapeHTML(
+                        status
+                            .charAt(0)
+                            .toUpperCase() +
+                        status.slice(1)
+                    )}
+                </div>
+
+            </div>
+
+            <div class="tx-amount ${
+                type === "debit"
+                    ? "debit"
+                    : "credit"
+            }">
+
+                ${
+                    type === "debit"
+                        ? "-"
+                        : "+"
+                }₹${
+                    Math.floor(
+                        Number.isFinite(
+                            amount
+                        )
+                            ? amount
+                            : 0
+                    ).toLocaleString(
+                        "en-IN"
+                    )
+                }
+
+            </div>
+
+            `;
+
+            box.appendChild(
+                row
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   PENDING
+===================================================== */
+
+function loadPendingRequests(){
+
+    onValue(
+
+        ref(
+            db,
+            "depositRequests"
+        ),
+
+        snapshot=>{
+
+            let count = 0;
+
+            if(snapshot.exists()){
+
+                snapshot.forEach(
+                    item=>{
+
+                        const data =
+                            item.val() || {};
+
+                        if(
+                            data.uid === UID &&
+                            String(
+                                data.status ||
+                                "pending"
+                            ).toLowerCase() ===
+                            "pending"
+                        ){
+                            count++;
+                        }
+
+                    }
+                );
+
+            }
+
+            const element =
+                document.getElementById(
+                    "pendingDeposits"
+                );
+
+            if(element){
+
+                element.innerText =
+                    count;
+
+            }
+
+        }
+
+    );
+
+
+    onValue(
+
+        ref(
+            db,
+            "withdrawRequests"
+        ),
+
+        snapshot=>{
+
+            let count = 0;
+
+            if(snapshot.exists()){
+
+                snapshot.forEach(
+                    item=>{
+
+                        const data =
+                            item.val() || {};
+
+                        if(
+                            data.uid === UID &&
+                            String(
+                                data.status ||
+                                "pending"
+                            ).toLowerCase() ===
+                            "pending"
+                        ){
+                            count++;
+                        }
+
+                    }
+                );
+
+            }
+
+            const element =
+                document.getElementById(
+                    "pendingWithdraws"
+                );
+
+            if(element){
+
+                element.innerText =
+                    count;
+
+            }
+
+        }
+
+    );
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+let toastTimer = null;
+
+window.showToast =
+function(message){
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+    if(!toast){
+        return;
+    }
+
     toast.innerText =
         String(message);
-
 
     toast.classList.add(
         "show"
     );
 
-
     clearTimeout(
         toastTimer
     );
 
-
     toastTimer =
         setTimeout(
-            () => {
-
+            ()=>{
                 toast.classList.remove(
                     "show"
                 );
-
             },
-            2400
+            2500
         );
 
 };
 
 
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
+/* =====================================================
+   ESCAPE
+===================================================== */
 
-function escapeHTML(value) {
+function escapeHTML(value){
 
     return String(value)
 
@@ -6413,262 +5053,83 @@ function escapeHTML(value) {
 }
 
 
-/* =========================================================
-   PREVENT DOUBLE TAP / ZOOM
-========================================================= */
-
-let lastTouchEnd =
-    0;
-
+/* =====================================================
+   ESC KEY
+===================================================== */
 
 document.addEventListener(
-    "touchend",
-    function (event) {
+    "keydown",
+    event=>{
 
-        const now =
-            Date.now();
+        if(
+            event.key === "Escape"
+        ){
+
+            if(!accountFrozen){
+
+                closeAddMoney();
+
+                closeWithdraw();
+
+            }
+
+        }
+
+    }
+);
 
 
-        if (
-            now -
-            lastTouchEnd <=
-            300
-        ) {
+/* =====================================================
+   MODAL CLICK GUARD
+===================================================== */
+
+document.addEventListener(
+    "click",
+    event=>{
+
+        if(!accountFrozen){
+            return;
+        }
+
+        const target =
+            event.target;
+
+        /*
+         * Freeze hone ke baad
+         * kisi bhi action ko prevent.
+         */
+
+        if(
+            target.closest(
+                "button"
+            ) ||
+            target.closest(
+                "a"
+            )
+        ){
 
             event.preventDefault();
 
         }
 
-
-        lastTouchEnd =
-            now;
-
     },
-    {
-        passive:
-            false
-    }
+    true
 );
 
 
-/* =========================================================
-   AUTO QR REFRESH
-========================================================= */
-
-const depositAmountInput =
-    document.getElementById(
-        "depositAmount"
-    );
-
-
-if (depositAmountInput) {
-
-    depositAmountInput.addEventListener(
-        "input",
-        () => {
-
-            if (
-                selectedDepositAmount >
-                0
-            ) {
-
-                const value =
-                    Number(
-                        depositAmountInput.value
-                    );
-
-
-                if (
-                    Number.isFinite(
-                        value
-                    ) &&
-                    value >= 10
-                ) {
-
-                    selectedDepositAmount =
-                        Math.floor(
-                            value
-                        );
-
-
-                    const selected =
-                        document.getElementById(
-                            "selectedAmount"
-                        );
-
-
-                    if (selected) {
-
-                        selected.innerText =
-                            formatMoney(
-                                selectedDepositAmount
-                            );
-
-                    }
-
-
-                    createQR(
-                        adminUPIValue,
-                        selectedDepositAmount
-                    );
-
-                }
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   MODAL BODY LOCK
-========================================================= */
-
-function updateBodyModalLock() {
-
-    const add =
-        document
-            .getElementById(
-                "addModal"
-            )
-            ?.classList.contains(
-                "show"
-            );
-
-
-    const withdraw =
-        document
-            .getElementById(
-                "withdrawModal"
-            )
-            ?.classList.contains(
-                "show"
-            );
-
-
-    document.body.style.overflow =
-        add || withdraw
-            ? "hidden"
-            : "";
-
-}
-
-
-/* =========================================================
-   WRAP MODAL FUNCTIONS
-========================================================= */
-
-const originalCloseAddMoney =
-    window.closeAddMoney;
-
-
-const originalCloseWithdraw =
-    window.closeWithdraw;
-
-
-window.closeAddMoney =
-function () {
-
-    originalCloseAddMoney();
-
-    updateBodyModalLock();
-
-};
-
-
-window.closeWithdraw =
-function () {
-
-    originalCloseWithdraw();
-
-    updateBodyModalLock();
-
-};
-
-
-const originalOpenAddMoney =
-    window.openAddMoney;
-
-
-window.openAddMoney =
-function () {
-
-    originalOpenAddMoney();
-
-    updateBodyModalLock();
-
-};
-
-
-const originalOpenWithdraw =
-    window.openWithdraw;
-
-
-window.openWithdraw =
-function () {
-
-    originalOpenWithdraw();
-
-    updateBodyModalLock();
-
-};
-
-
-/* =========================================================
-   PAYMENT LOGOS AFTER DOM READY
-========================================================= */
-
-if (
-    document.readyState ===
-    "loading"
-) {
-
-    document.addEventListener(
-        "DOMContentLoaded",
-        updatePaymentLogos
-    );
-
-} else {
-
-    updatePaymentLogos();
-
-}
-
-
-/* =========================================================
-   OPTIONAL PAYMENT LOGO FALLBACK
-========================================================= */
-
-window.getPaymentLogo =
-function (appName) {
-
-    return paymentLogo(
-        appName
-    );
-
-};
-
-
-/* =========================================================
-   CONSOLE
-========================================================= */
+/* =====================================================
+   INITIAL
+===================================================== */
 
 console.log(
-    "Wallet system loaded successfully."
+    "BGMI PAY Wallet loaded."
 );
 
 console.log(
-    "Refund real-time listener enabled."
-);
-
-console.log(
-    "Payment methods: GPay, PhonePe, Paytm, FamPay."
+    "Realtime account freeze protection enabled."
 );
 
 </script>
 
 </body>
-
 </html>
