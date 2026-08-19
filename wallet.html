@@ -16,44 +16,56 @@ content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no
 <style>
 
 /* =========================================================
-   PREMIUM BGMI WALLET UI — V2
+   BGMI PAY — PREMIUM WALLET UI V4
+   IMAGE 2 INSPIRED / MOBILE GAMING / NEON GLASS
 ========================================================= */
 
 :root{
-    --bg:#02070d;
+    --bg:#02060b;
     --bg-soft:#050c14;
+
     --card:#09141f;
     --card-2:#0d1a27;
     --card-3:#0b1824;
 
     --border:#203447;
-    --border-soft:#182b3b;
-    --border-bright:#2b4357;
+    --border-soft:#172b3a;
+    --border-bright:#315068;
 
     --text:#ffffff;
     --muted:#718496;
-    --muted-2:#8799ab;
+    --muted-2:#8ea0b2;
 
     --green:#4cff91;
-    --green-2:#50ff94;
-    --green-dark:#16c866;
-    --green-bg:#092318;
+    --green-2:#6dffa8;
+    --green-dark:#12c864;
+    --green-deep:#082719;
 
     --red:#ff5e6c;
-    --red-bg:#281015;
+    --red-dark:#321017;
 
     --yellow:#ffc44d;
-    --yellow-bg:#211a09;
+    --yellow-dark:#2c220b;
 
-    --shadow:0 18px 45px rgba(0,0,0,.30);
-    --shadow-heavy:0 25px 80px rgba(0,0,0,.60);
+    --blue:#4da3ff;
+    --purple:#8b5cff;
+    --cyan:#00d9ff;
+
+    --shadow:
+        0 18px 50px rgba(0,0,0,.38);
+
+    --shadow-heavy:
+        0 30px 100px rgba(0,0,0,.72);
+
+    --glow-green:
+        0 0 30px rgba(76,255,145,.10);
 
     --radius-sm:10px;
     --radius-md:14px;
     --radius-lg:18px;
     --radius-xl:23px;
 
-    --transition:.22s ease;
+    --transition:.22s cubic-bezier(.2,.8,.2,1);
 }
 
 
@@ -72,8 +84,22 @@ html,
 body{
     width:100%;
     min-height:100%;
-    background:var(--bg);
+
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(31,87,61,.12),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 100% 40%,
+            rgba(29,88,133,.055),
+            transparent 35%
+        ),
+        var(--bg);
+
     color:var(--text);
+
     font-family:
         Arial,
         Helvetica,
@@ -86,37 +112,95 @@ body{
 body{
     overflow-x:hidden;
     overscroll-behavior-x:none;
-}
-
-button,
-input{
-    font-family:inherit;
-}
-
-button{
-    cursor:pointer;
-    -webkit-user-select:none;
-    user-select:none;
-}
-
-button,
-a{
-    -webkit-touch-callout:none;
-}
-
-input{
-    -webkit-appearance:none;
-    appearance:none;
+    position:relative;
 }
 
 
 /* =========================================================
-   APP CONTAINER
+   PREMIUM BACKGROUND
+========================================================= */
+
+body::before{
+    content:"";
+
+    position:fixed;
+    inset:-25%;
+
+    pointer-events:none;
+    z-index:-2;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(76,255,145,.035),
+            transparent 22%
+        ),
+        radial-gradient(
+            circle at 85% 70%,
+            rgba(53,133,255,.025),
+            transparent 25%
+        );
+
+    animation:
+        ambientMove 12s ease-in-out infinite alternate;
+}
+
+body::after{
+    content:"";
+
+    position:fixed;
+    inset:0;
+
+    pointer-events:none;
+    z-index:-1;
+
+    opacity:.25;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.012) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.012) 1px,
+            transparent 1px
+        );
+
+    background-size:40px 40px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent 85%
+        );
+}
+
+@keyframes ambientMove{
+
+    0%{
+        transform:
+            translate3d(-2%,0,0)
+            scale(1);
+    }
+
+    100%{
+        transform:
+            translate3d(2%,2%,0)
+            scale(1.05);
+    }
+}
+
+
+/* =========================================================
+   APP
 ========================================================= */
 
 .app{
     width:100%;
     max-width:520px;
+
     min-height:100vh;
     min-height:100dvh;
 
@@ -125,9 +209,25 @@ input{
     padding:
         15px
         14px
-        calc(95px + env(safe-area-inset-bottom));
+        calc(105px + env(safe-area-inset-bottom));
 
     position:relative;
+
+    animation:
+        pageEnter .45s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes pageEnter{
+
+    from{
+        opacity:0;
+        transform:translateY(8px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
 
@@ -139,7 +239,6 @@ input{
     display:flex;
     align-items:center;
     justify-content:space-between;
-
     margin-bottom:15px;
 }
 
@@ -165,47 +264,50 @@ input{
     background:
         radial-gradient(
             circle at 30% 20%,
-            rgba(76,255,145,.12),
+            rgba(76,255,145,.14),
             transparent 55%
         ),
         linear-gradient(
             145deg,
-            #142333,
+            #162939,
             #07111d
         );
 
-    border:1px solid #26394d;
+    border:1px solid #2b4357;
 
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.05),
-        0 8px 25px rgba(0,0,0,.20);
+        inset 0 1px 0 rgba(255,255,255,.06),
+        0 10px 28px rgba(0,0,0,.28),
+        0 0 25px rgba(76,255,145,.025);
 
     font-size:22px;
 
     transition:
         transform var(--transition),
-        border-color var(--transition);
+        border-color var(--transition),
+        box-shadow var(--transition);
 }
 
 .header-icon:active{
-    transform:scale(.94);
+    transform:scale(.92);
 }
 
 .header-title{
     font-size:17px;
     font-weight:900;
-    letter-spacing:-.2px;
+    letter-spacing:-.25px;
 }
 
 .header-subtitle{
     margin-top:3px;
-
-    font-size:11px;
     color:#8091a3;
+    font-size:11px;
 }
 
 .header-badge{
     flex:none;
+
+    position:relative;
 
     padding:7px 10px;
 
@@ -219,15 +321,34 @@ input{
     background:
         linear-gradient(
             135deg,
-            rgba(76,255,145,.12),
+            rgba(76,255,145,.13),
             rgba(8,33,22,.95)
         );
 
     border:1px solid #174c30;
 
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.03),
-        0 0 18px rgba(76,255,145,.04);
+        inset 0 1px 0 rgba(255,255,255,.04),
+        0 0 18px rgba(76,255,145,.05);
+
+    animation:
+        securePulse 2.4s ease-in-out infinite;
+}
+
+@keyframes securePulse{
+
+    0%,
+    100%{
+        box-shadow:
+            inset 0 1px 0 rgba(255,255,255,.04),
+            0 0 14px rgba(76,255,145,.025);
+    }
+
+    50%{
+        box-shadow:
+            inset 0 1px 0 rgba(255,255,255,.05),
+            0 0 22px rgba(76,255,145,.10);
+    }
 }
 
 
@@ -246,54 +367,94 @@ input{
     background:
         radial-gradient(
             circle at 100% 0%,
-            rgba(37,211,102,.18),
+            rgba(37,211,102,.19),
             transparent 42%
         ),
         radial-gradient(
             circle at 0% 100%,
-            rgba(45,110,255,.06),
+            rgba(45,110,255,.07),
             transparent 45%
         ),
         linear-gradient(
             145deg,
-            #0d1a27,
+            #0e1c2a,
             #06101a
         );
 
-    border:1px solid #203447;
+    border:1px solid #263d50;
 
     box-shadow:
-        0 18px 45px rgba(0,0,0,.30),
-        inset 0 1px 0 rgba(255,255,255,.035);
+        0 20px 55px rgba(0,0,0,.38),
+        inset 0 1px 0 rgba(255,255,255,.055),
+        inset 0 -1px 0 rgba(0,0,0,.35);
 
     isolation:isolate;
+    transform:translateZ(0);
+
+    transition:
+        border-color .25s ease,
+        box-shadow .25s ease,
+        transform .25s ease;
+}
+
+.wallet-card:hover{
+    border-color:#315168;
+
+    box-shadow:
+        0 22px 60px rgba(0,0,0,.42),
+        inset 0 1px 0 rgba(255,255,255,.055),
+        0 0 30px rgba(76,255,145,.025);
 }
 
 .wallet-card::before{
     content:"";
 
     position:absolute;
-    top:-80px;
-    right:-80px;
 
-    width:190px;
-    height:190px;
+    width:210px;
+    height:210px;
+
+    top:-100px;
+    right:-100px;
 
     border-radius:50%;
 
-    background:rgba(76,255,145,.035);
+    background:
+        radial-gradient(
+            circle,
+            rgba(76,255,145,.13),
+            transparent 68%
+        );
 
-    filter:blur(20px);
+    filter:blur(10px);
 
     pointer-events:none;
+
+    animation:
+        walletGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes walletGlow{
+
+    from{
+        transform:scale(.9);
+        opacity:.55;
+    }
+
+    to{
+        transform:scale(1.08);
+        opacity:1;
+    }
 }
 
 .wallet-card::after{
     content:"";
 
     position:absolute;
+
     left:15px;
     right:15px;
+
     top:0;
 
     height:1px;
@@ -302,7 +463,7 @@ input{
         linear-gradient(
             90deg,
             transparent,
-            rgba(255,255,255,.08),
+            rgba(255,255,255,.12),
             transparent
         );
 
@@ -317,12 +478,14 @@ input{
 }
 
 .wallet-label{
-    color:#8799ab;
+    color:#8a9cad;
     font-size:11px;
     font-weight:700;
 }
 
 .wallet-chip{
+    position:relative;
+
     color:#54ff98;
 
     background:
@@ -341,8 +504,22 @@ input{
     font-size:8px;
     font-weight:900;
 
-    box-shadow:
-        0 0 16px rgba(76,255,145,.05);
+    animation:
+        livePulse 1.8s ease-in-out infinite;
+}
+
+@keyframes livePulse{
+
+    0%,
+    100%{
+        opacity:1;
+        box-shadow:0 0 12px rgba(76,255,145,.03);
+    }
+
+    50%{
+        opacity:.82;
+        box-shadow:0 0 22px rgba(76,255,145,.12);
+    }
 }
 
 .wallet-main{
@@ -359,12 +536,38 @@ input{
 
     letter-spacing:-1px;
 
+    color:#fff;
+
     text-shadow:
-        0 0 22px rgba(76,255,145,.06);
+        0 0 24px rgba(76,255,145,.08);
 
     transition:
-        transform .2s ease,
-        opacity .2s ease;
+        transform .25s ease,
+        opacity .2s ease,
+        filter .2s ease;
+}
+
+.wallet-amount.balance-update{
+    animation:
+        balanceUpdate .4s ease;
+}
+
+@keyframes balanceUpdate{
+
+    0%{
+        transform:scale(1);
+        filter:brightness(1);
+    }
+
+    50%{
+        transform:scale(1.045);
+        filter:brightness(1.2);
+    }
+
+    100%{
+        transform:scale(1);
+        filter:brightness(1);
+    }
 }
 
 .eye-btn{
@@ -383,11 +586,11 @@ input{
         );
 
     color:#fff;
-
     font-size:17px;
 
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.04);
+        inset 0 1px 0 rgba(255,255,255,.045),
+        0 8px 22px rgba(0,0,0,.15);
 
     transition:
         transform .15s ease,
@@ -396,11 +599,7 @@ input{
 }
 
 .eye-btn:active{
-    transform:scale(.92);
-}
-
-.eye-btn:hover{
-    border-color:#365268;
+    transform:scale(.89);
 }
 
 .wallet-bottom{
@@ -409,7 +608,6 @@ input{
 
 .wallet-mini{
     flex:1;
-
     min-width:0;
 
     padding:10px;
@@ -419,22 +617,23 @@ input{
     background:
         linear-gradient(
             145deg,
-            #0b1824,
+            #0c1926,
             #09141f
         );
 
-    border:1px solid #1b2b3a;
+    border:1px solid #1c3040;
 
     box-shadow:
         inset 0 1px 0 rgba(255,255,255,.025);
 
     transition:
         transform .2s ease,
-        border-color .2s ease;
+        border-color .2s ease,
+        background .2s ease;
 }
 
 .wallet-mini:active{
-    transform:scale(.98);
+    transform:scale(.975);
 }
 
 .wallet-mini-label{
@@ -444,7 +643,6 @@ input{
 
 .wallet-mini-value{
     margin-top:5px;
-
     font-size:14px;
     font-weight:900;
 }
@@ -457,7 +655,6 @@ input{
 .actions{
     display:flex;
     gap:10px;
-
     margin:14px 0;
 }
 
@@ -466,79 +663,70 @@ input{
 
     height:50px;
 
+    position:relative;
+    overflow:hidden;
+
     border-radius:14px;
 
     font-size:13px;
     font-weight:900;
 
-    position:relative;
-    overflow:hidden;
-
     transition:
-        transform .15s ease,
+        transform .16s ease,
         filter .2s ease,
-        border-color .2s ease;
+        border-color .2s ease,
+        box-shadow .2s ease;
 }
 
-.action-btn::after,
-.primary-btn::after,
-.secondary-btn::after{
+.action-btn::before,
+.primary-btn::before,
+.secondary-btn::before{
     content:"";
 
     position:absolute;
-
-    top:0;
-    left:-120%;
-
-    width:70%;
-    height:100%;
+    inset:0;
 
     background:
         linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.14),
-            transparent
+            120deg,
+            transparent 20%,
+            rgba(255,255,255,.07) 45%,
+            transparent 70%
         );
 
-    transform:skewX(-20deg);
-
-    transition:left .5s ease;
+    transform:translateX(-120%);
+    transition:transform .55s ease;
 
     pointer-events:none;
+}
+
+.action-btn:hover::before,
+.primary-btn:hover::before,
+.secondary-btn:hover::before{
+    transform:translateX(120%);
 }
 
 .action-btn:active,
 .primary-btn:active,
 .secondary-btn:active{
-    transform:scale(.97);
-}
-
-.action-btn:active::after,
-.primary-btn:active::after,
-.secondary-btn:active::after{
-    left:140%;
+    transform:scale(.965);
 }
 
 .add-btn{
     color:#03120a;
 
-    border:1px solid rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
 
     background:
         linear-gradient(
             135deg,
-            #50ff94,
-            #16c866
+            #5aff9b,
+            #19c968
         );
 
     box-shadow:
-        0 8px 25px rgba(22,200,102,.12),
-        inset 0 1px 0 rgba(255,255,255,.25);
-}
-
-.add-btn:hover{
-    filter:brightness(1.06);
+        0 10px 30px rgba(22,200,102,.14),
+        inset 0 1px 0 rgba(255,255,255,.30);
 }
 
 .withdraw-btn{
@@ -547,36 +735,34 @@ input{
     background:
         linear-gradient(
             145deg,
-            #132332,
-            #101e2b
+            #142534,
+            #0e1c29
         );
 
-    border:1px solid #294052;
+    border:1px solid #2b4356;
 
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.03);
-}
-
-.withdraw-btn:hover{
-    border-color:#38536a;
+        inset 0 1px 0 rgba(255,255,255,.04),
+        0 8px 25px rgba(0,0,0,.16);
 }
 
 
 /* =========================================================
-   STATUS
+   STATUS CARDS
 ========================================================= */
 
 .status-card{
     display:flex;
     gap:10px;
-
     margin-bottom:20px;
 }
 
 .status-item{
     flex:1;
-
     min-width:0;
+
+    position:relative;
+    overflow:hidden;
 
     padding:13px;
 
@@ -585,22 +771,40 @@ input{
     background:
         linear-gradient(
             145deg,
-            #0b1722,
+            #0c1925,
             #09141f
         );
 
-    border:1px solid #1d2d3c;
+    border:1px solid #203243;
 
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.025);
+        inset 0 1px 0 rgba(255,255,255,.025),
+        0 8px 25px rgba(0,0,0,.12);
 
     transition:
         transform .2s ease,
         border-color .2s ease;
 }
 
-.status-item:active{
-    transform:translateY(1px);
+.status-item::after{
+    content:"";
+
+    position:absolute;
+
+    right:-25px;
+    bottom:-30px;
+
+    width:75px;
+    height:75px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(76,255,145,.045),
+            transparent 70%
+        );
 }
 
 .status-head{
@@ -613,7 +817,6 @@ input{
 
 .status-number{
     margin-top:8px;
-
     font-size:22px;
     font-weight:900;
 }
@@ -627,7 +830,6 @@ input{
     display:flex;
     align-items:center;
     justify-content:space-between;
-
     margin-bottom:11px;
 }
 
@@ -650,8 +852,6 @@ input{
     padding-bottom:8px;
 
     scrollbar-width:none;
-
-    overscroll-behavior-x:contain;
 }
 
 .filters::-webkit-scrollbar{
@@ -680,11 +880,14 @@ input{
     font-weight:900;
 
     transition:
-        .18s ease;
+        transform .16s ease,
+        border-color .2s ease,
+        color .2s ease,
+        box-shadow .2s ease;
 }
 
 .filter:active{
-    transform:scale(.95);
+    transform:scale(.94);
 }
 
 .filter.active{
@@ -700,8 +903,14 @@ input{
     border-color:#4cff91;
 
     box-shadow:
-        0 5px 18px rgba(76,255,145,.08);
+        0 6px 20px rgba(76,255,145,.10),
+        inset 0 1px 0 rgba(255,255,255,.25);
 }
+
+
+/* =========================================================
+   TRANSACTION HISTORY
+========================================================= */
 
 .history-list{
     margin-top:5px;
@@ -712,17 +921,23 @@ input{
     align-items:center;
     gap:11px;
 
-    padding:13px 2px;
+    margin-bottom:4px;
 
-    border-bottom:1px solid #142431;
+    padding:13px 8px;
+
+    border:1px solid transparent;
+    border-radius:13px;
+
+    border-bottom-color:#142431;
 
     transition:
         background .2s ease,
-        transform .2s ease;
+        transform .18s ease,
+        border-color .2s ease;
 }
 
 .history:active{
-    transform:scale(.99);
+    transform:scale(.985);
 }
 
 .tx-icon{
@@ -738,16 +953,16 @@ input{
     background:
         linear-gradient(
             145deg,
-            #0d1b27,
-            #0b1824
+            #0e1d2a,
+            #0a1722
         );
 
-    border:1px solid #1e3040;
+    border:1px solid #223749;
 
     flex:none;
 
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.025);
+        inset 0 1px 0 rgba(255,255,255,.03);
 }
 
 .tx-info{
@@ -766,7 +981,6 @@ input{
 
 .tx-time{
     margin-top:4px;
-
     color:#637587;
     font-size:9px;
 }
@@ -790,16 +1004,12 @@ input{
 
 .tx-amount{
     flex:none;
-
     font-size:13px;
     font-weight:900;
 }
 
 .tx-amount.credit{
     color:#4cff91;
-
-    text-shadow:
-        0 0 12px rgba(76,255,145,.05);
 }
 
 .tx-amount.debit{
@@ -808,33 +1018,49 @@ input{
 
 
 /* =========================================================
-   EMPTY STATE
+   EMPTY
 ========================================================= */
 
 .empty{
     text-align:center;
-    padding:45px 15px;
+    padding:48px 15px;
 }
 
 .empty-icon{
-    font-size:35px;
+    width:60px;
+    height:60px;
 
-    filter:
-        drop-shadow(
-            0 8px 20px rgba(255,255,255,.05)
+    margin:auto;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #0e1d2a,
+            #09141f
         );
+
+    border:1px solid #203546;
+
+    font-size:30px;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.22);
 }
 
 .empty-title{
-    margin-top:10px;
-
+    margin-top:12px;
     font-size:14px;
     font-weight:900;
 }
 
 .empty-text{
     margin-top:5px;
-
     color:#697b8c;
     font-size:10px;
 }
@@ -860,24 +1086,23 @@ input{
     background:
         radial-gradient(
             circle at center,
-            rgba(18,48,38,.08),
-            rgba(0,0,0,.82)
+            rgba(30,75,54,.10),
+            rgba(0,0,0,.86)
         );
 
-    backdrop-filter:blur(10px);
-    -webkit-backdrop-filter:blur(10px);
+    backdrop-filter:blur(13px);
+    -webkit-backdrop-filter:blur(13px);
 
     opacity:0;
 }
 
 .modal.show{
     display:flex;
-
-    animation:
-        modalFadeIn .20s ease forwards;
+    animation:modalFadeIn .20s ease forwards;
 }
 
 @keyframes modalFadeIn{
+
     from{
         opacity:0;
     }
@@ -896,75 +1121,60 @@ input{
 
     overflow-y:auto;
 
-    border-radius:22px;
+    border-radius:23px;
 
     padding:18px;
 
     background:
         radial-gradient(
             circle at top right,
-            rgba(76,255,145,.045),
+            rgba(76,255,145,.055),
             transparent 42%
         ),
         linear-gradient(
             145deg,
-            #091622,
-            #07111d
+            #0a1723,
+            #06101a
         );
 
-    border:1px solid #263a4c;
+    border:1px solid #2a4154;
 
     box-shadow:
-        0 25px 80px rgba(0,0,0,.60),
-        inset 0 1px 0 rgba(255,255,255,.035);
+        0 30px 100px rgba(0,0,0,.72),
+        0 0 35px rgba(76,255,145,.025),
+        inset 0 1px 0 rgba(255,255,255,.045);
 
     animation:
-        modalPop .25s cubic-bezier(.2,.8,.2,1);
+        modalPop .26s cubic-bezier(.2,.8,.2,1);
 
     scrollbar-width:thin;
     scrollbar-color:#24394a transparent;
 }
 
 @keyframes modalPop{
+
     from{
         opacity:0;
-        transform:
-            translateY(8px)
-            scale(.94);
+        transform:translateY(10px) scale(.93);
     }
 
     to{
         opacity:1;
-        transform:
-            translateY(0)
-            scale(1);
+        transform:translateY(0) scale(1);
     }
-}
-
-.modal-box::-webkit-scrollbar{
-    width:4px;
-}
-
-.modal-box::-webkit-scrollbar-track{
-    background:transparent;
-}
-
-.modal-box::-webkit-scrollbar-thumb{
-    background:#24394a;
-    border-radius:20px;
 }
 
 .modal-head{
     display:flex;
     align-items:center;
     justify-content:space-between;
-
     margin-bottom:18px;
 }
 
 .modal-title{
     font-size:18px;
     font-weight:900;
+    letter-spacing:-.2px;
 }
 
 .close-btn{
@@ -973,17 +1183,16 @@ input{
 
     border-radius:10px;
 
-    border:1px solid #26394a;
+    border:1px solid #2a4052;
 
     background:
         linear-gradient(
             145deg,
-            #10202d,
+            #112231,
             #0d1a27
         );
 
     color:#fff;
-
     font-size:23px;
 
     transition:
@@ -993,11 +1202,9 @@ input{
 }
 
 .close-btn:active{
-    transform:scale(.9) rotate(5deg);
-}
-
-.close-btn:hover{
-    border-color:#3b5368;
+    transform:
+        scale(.88)
+        rotate(6deg);
 }
 
 
@@ -1007,7 +1214,6 @@ input{
 
 .input-label{
     display:block;
-
     margin-bottom:7px;
 
     color:#8495a6;
@@ -1031,18 +1237,18 @@ input{
     background:
         linear-gradient(
             145deg,
-            #0b1925,
+            #0c1925,
             #091621
         );
 
     color:#fff;
-
     font-size:13px;
 
     transition:
         border-color .2s ease,
         box-shadow .2s ease,
-        background .2s ease;
+        background .2s ease,
+        transform .15s ease;
 }
 
 .input::placeholder{
@@ -1055,13 +1261,13 @@ input{
     background:#0a1824;
 
     box-shadow:
-        0 0 0 3px rgba(54,237,131,.06),
-        0 8px 25px rgba(0,0,0,.15);
+        0 0 0 3px rgba(54,237,131,.065),
+        0 10px 28px rgba(0,0,0,.18);
 }
 
 
 /* =========================================================
-   QUICK AMOUNT BUTTONS
+   QUICK AMOUNTS
 ========================================================= */
 
 .quick-grid{
@@ -1083,7 +1289,7 @@ input{
     background:
         linear-gradient(
             145deg,
-            #0d1b27,
+            #0e1d29,
             #0b1824
         );
 
@@ -1096,11 +1302,8 @@ input{
         transform .15s ease,
         border-color .2s ease,
         color .2s ease,
-        background .2s ease;
-}
-
-.quick-btn:active{
-    transform:scale(.94);
+        background .2s ease,
+        box-shadow .2s ease;
 }
 
 .quick-btn:hover{
@@ -1108,9 +1311,13 @@ input{
     border-color:#31516a;
 }
 
+.quick-btn:active{
+    transform:scale(.92);
+}
+
 
 /* =========================================================
-   PRIMARY / SECONDARY BUTTONS
+   PRIMARY / SECONDARY
 ========================================================= */
 
 .primary-btn,
@@ -1131,7 +1338,8 @@ input{
     transition:
         transform .15s ease,
         filter .2s ease,
-        border-color .2s ease;
+        border-color .2s ease,
+        box-shadow .2s ease;
 }
 
 .primary-btn{
@@ -1147,8 +1355,8 @@ input{
         );
 
     box-shadow:
-        0 8px 25px rgba(24,201,103,.10),
-        inset 0 1px 0 rgba(255,255,255,.25);
+        0 10px 28px rgba(24,201,103,.12),
+        inset 0 1px 0 rgba(255,255,255,.28);
 }
 
 .primary-btn:hover{
@@ -1166,10 +1374,9 @@ input{
         );
 
     color:#fff;
-}
 
-.secondary-btn:hover{
-    border-color:#3a566d;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.035);
 }
 
 .primary-btn:disabled,
@@ -1224,11 +1431,11 @@ input{
     background:
         linear-gradient(
             145deg,
-            #0c1925,
+            #0d1b27,
             #091722
         );
 
-    border:1px solid #1c3140;
+    border:1px solid #1e3443;
 
     box-shadow:
         inset 0 1px 0 rgba(255,255,255,.025);
@@ -1237,7 +1444,6 @@ input{
 .amount-label,
 .available-label{
     color:#6e8192;
-
     font-size:9px;
     font-weight:900;
 }
@@ -1245,26 +1451,28 @@ input{
 .amount-value,
 .available-value{
     margin-top:5px;
-
     font-size:24px;
     font-weight:900;
 }
 
 .available-value{
     color:#4cff91;
+
+    text-shadow:
+        0 0 18px rgba(76,255,145,.07);
 }
 
 
 /* =========================================================
-   UPI / QR
+   UPI BOX
 ========================================================= */
 
 .upi-box{
     margin-bottom:12px;
 
-    padding:10px;
+    padding:11px;
 
-    border-radius:10px;
+    border-radius:11px;
 
     background:
         linear-gradient(
@@ -1273,22 +1481,21 @@ input{
             #0b1925
         );
 
-    border:1px solid #213648;
+    border:1px solid #244153;
 
     color:#55ff99;
 
     font-size:11px;
-
     text-align:center;
 
     box-shadow:
-        0 0 20px rgba(76,255,145,.03);
+        0 0 25px rgba(76,255,145,.035),
+        inset 0 1px 0 rgba(255,255,255,.025);
 }
 
 .qr-wrap{
     display:flex;
     justify-content:center;
-
     margin:10px 0;
 }
 
@@ -1298,67 +1505,572 @@ input{
 
     object-fit:contain;
 
-    border-radius:12px;
+    border-radius:13px;
 
     background:#fff;
 
     padding:7px;
 
     box-shadow:
-        0 15px 45px rgba(0,0,0,.30);
+        0 18px 50px rgba(0,0,0,.38);
 
     transition:
-        transform .2s ease;
+        transform .2s ease,
+        box-shadow .2s ease;
 }
 
 .qr-wrap img:active{
-    transform:scale(.98);
+    transform:scale(.97);
 }
 
 
 /* =========================================================
-   PAYMENT APPS
+   ⭐ PREMIUM UPI PAYMENT APPS
+   IMAGE 2 STYLE
 ========================================================= */
 
 .payment-apps{
     display:grid;
 
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(2,minmax(0,1fr));
 
-    gap:8px;
+    gap:10px;
+
+    margin-top:14px;
+
+    width:100%;
 }
 
+
+/* ---------------------------------------------------------
+   PAYMENT CARD
+--------------------------------------------------------- */
+
 .app-btn{
-    height:43px;
+    position:relative;
 
-    border-radius:10px;
+    overflow:hidden;
 
-    border:1px solid #293e50;
+    min-height:78px;
+
+    padding:10px 10px 10px 11px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:flex-start;
+
+    gap:10px;
+
+    border-radius:15px;
+
+    border:1px solid #294355;
 
     color:#fff;
 
     background:
+        radial-gradient(
+            circle at 0% 100%,
+            rgba(0,217,255,.075),
+            transparent 52%
+        ),
         linear-gradient(
             145deg,
-            #10202d,
-            #0c1925
+            #102333,
+            #091722
         );
 
     font-size:11px;
     font-weight:900;
 
+    cursor:pointer;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.055),
+        inset 0 -1px 0 rgba(0,0,0,.35),
+        0 8px 25px rgba(0,0,0,.20);
+
     transition:
-        transform .15s ease,
-        border-color .2s ease,
-        background .2s ease;
+        transform .17s cubic-bezier(.2,.8,.2,1),
+        border-color .22s ease,
+        box-shadow .22s ease,
+        background .22s ease,
+        filter .22s ease;
 }
 
-.app-btn:active{
-    transform:scale(.94);
+
+/* top shine */
+
+.app-btn::before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-120%;
+
+    width:90%;
+    height:100%;
+
+    transform:skewX(-18deg);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.10),
+            transparent
+        );
+
+    transition:
+        left .65s ease;
+
+    pointer-events:none;
 }
+
+
+/* bottom glow */
+
+.app-btn::after{
+    content:"";
+
+    position:absolute;
+
+    width:90px;
+    height:90px;
+
+    right:-48px;
+    bottom:-48px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(76,255,145,.12),
+            transparent 68%
+        );
+
+    pointer-events:none;
+
+    transition:
+        transform .3s ease,
+        opacity .3s ease;
+}
+
+
+/* hover */
 
 .app-btn:hover{
-    border-color:#3a566d;
+    transform:translateY(-2px);
+
+    filter:brightness(1.07);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.065),
+        0 12px 30px rgba(0,0,0,.28);
+}
+
+.app-btn:hover::before{
+    left:140%;
+}
+
+.app-btn:hover::after{
+    transform:scale(1.35);
+}
+
+
+/* press */
+
+.app-btn:active{
+    transform:
+        translateY(1px)
+        scale(.965);
+
+    filter:brightness(.97);
+}
+
+
+/* ---------------------------------------------------------
+   LOGO HOLDER
+--------------------------------------------------------- */
+
+.payment-logo{
+    position:relative;
+
+    width:51px;
+    height:51px;
+
+    flex:none;
+
+    display:block;
+
+    object-fit:contain;
+
+    border-radius:14px;
+
+    background:#fff;
+
+    padding:7px;
+
+    border:1px solid rgba(255,255,255,.25);
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.30),
+        inset 0 1px 0 rgba(255,255,255,.75);
+
+    transition:
+        transform .22s ease,
+        box-shadow .22s ease;
+}
+
+
+/* logo hover */
+
+.app-btn:hover .payment-logo{
+    transform:
+        scale(1.055)
+        rotate(-1deg);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.38),
+        0 0 18px rgba(255,255,255,.05),
+        inset 0 1px 0 rgba(255,255,255,.80);
+}
+
+
+/* =========================================================
+   AUTO REAL LOGOS
+   CSS OVERRIDES IMG CONTENT
+========================================================= */
+
+.gpay-btn .payment-logo{
+    content:url("https://cdn.simpleicons.org/googlepay");
+}
+
+.phonepe-btn .payment-logo{
+    content:url("https://cdn.simpleicons.org/phonepe");
+}
+
+.paytm-btn .payment-logo{
+    content:url("https://cdn.simpleicons.org/paytm");
+}
+
+.fampay-btn .payment-logo{
+    content:url("https://cdn.simpleicons.org/fampay");
+}
+
+
+/* =========================================================
+   APP INFORMATION
+========================================================= */
+
+.payment-info{
+    min-width:0;
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    text-align:left;
+}
+
+.payment-name{
+    display:block;
+
+    color:#fff;
+
+    font-size:12px;
+
+    line-height:1.2;
+
+    font-weight:900;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+.payment-subtitle{
+    display:block;
+
+    margin-top:5px;
+
+    color:#8497ab;
+
+    font-size:9px;
+
+    line-height:1.2;
+
+    font-weight:700;
+
+    white-space:nowrap;
+}
+
+
+/* =========================================================
+   GREEN ARROW
+========================================================= */
+
+.payment-arrow{
+    width:28px;
+    height:28px;
+
+    flex:none;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    color:#4cff91;
+
+    background:
+        rgba(76,255,145,.08);
+
+    border:1px solid rgba(76,255,145,.55);
+
+    font-size:16px;
+    font-weight:900;
+
+    box-shadow:
+        0 0 16px rgba(76,255,145,.08),
+        inset 0 1px 0 rgba(255,255,255,.06);
+
+    transition:
+        transform .22s ease,
+        background .22s ease,
+        box-shadow .22s ease;
+}
+
+.app-btn:hover .payment-arrow{
+    transform:
+        translateX(2px)
+        scale(1.08);
+
+    background:
+        rgba(76,255,145,.15);
+
+    box-shadow:
+        0 0 22px rgba(76,255,145,.18);
+}
+
+
+/* =========================================================
+   G-PAY
+========================================================= */
+
+.gpay-btn{
+    border-color:
+        rgba(0,174,239,.50);
+
+    background:
+        radial-gradient(
+            circle at 0% 100%,
+            rgba(0,174,239,.10),
+            transparent 55%
+        ),
+        linear-gradient(
+            145deg,
+            #10283a,
+            #091722
+        );
+}
+
+.gpay-btn:hover{
+    border-color:
+        #00baf5;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.07),
+        0 12px 32px rgba(0,0,0,.30),
+        0 0 25px rgba(0,174,239,.12);
+}
+
+
+/* =========================================================
+   PHONEPE
+========================================================= */
+
+.phonepe-btn{
+    border-color:
+        rgba(139,92,255,.58);
+
+    background:
+        radial-gradient(
+            circle at 0% 100%,
+            rgba(139,92,255,.12),
+            transparent 55%
+        ),
+        linear-gradient(
+            145deg,
+            #17152e,
+            #0b1020
+        );
+}
+
+.phonepe-btn:hover{
+    border-color:
+        #a174ff;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.07),
+        0 12px 32px rgba(0,0,0,.30),
+        0 0 28px rgba(139,92,255,.14);
+}
+
+
+/* =========================================================
+   PAYTM
+========================================================= */
+
+.paytm-btn{
+    border-color:
+        rgba(0,174,239,.52);
+
+    background:
+        radial-gradient(
+            circle at 0% 100%,
+            rgba(0,174,239,.10),
+            transparent 55%
+        ),
+        linear-gradient(
+            145deg,
+            #10283a,
+            #091722
+        );
+}
+
+.paytm-btn:hover{
+    border-color:
+        #00c5ff;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.07),
+        0 12px 32px rgba(0,0,0,.30),
+        0 0 25px rgba(0,174,239,.12);
+}
+
+
+/* =========================================================
+   FAMPAY
+========================================================= */
+
+.fampay-btn{
+    border-color:
+        rgba(255,174,0,.65);
+
+    background:
+        radial-gradient(
+            circle at 0% 100%,
+            rgba(255,174,0,.10),
+            transparent 55%
+        ),
+        linear-gradient(
+            145deg,
+            #2a2010,
+            #12100b
+        );
+}
+
+.fampay-btn:hover{
+    border-color:
+        #ffb51b;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.07),
+        0 12px 32px rgba(0,0,0,.30),
+        0 0 28px rgba(255,174,0,.13);
+}
+
+
+/* =========================================================
+   SELECTED PAYMENT APP
+========================================================= */
+
+.app-btn.selected,
+.app-btn.active{
+    border-color:#4cff91;
+
+    background:
+        radial-gradient(
+            circle at 0% 100%,
+            rgba(76,255,145,.13),
+            transparent 55%
+        ),
+        linear-gradient(
+            145deg,
+            #102d20,
+            #091b15
+        );
+
+    box-shadow:
+        0 0 0 1px rgba(76,255,145,.12),
+        0 12px 32px rgba(0,0,0,.30),
+        0 0 28px rgba(76,255,145,.12);
+}
+
+.app-btn.selected .payment-arrow,
+.app-btn.active .payment-arrow{
+    background:#4cff91;
+    color:#03120a;
+
+    box-shadow:
+        0 0 20px rgba(76,255,145,.25);
+}
+
+
+/* =========================================================
+   PAYMENT DIVIDER
+========================================================= */
+
+.payment-divider{
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin:18px 5px 11px;
+
+    color:#7d91a6;
+
+    font-size:12px;
+    font-weight:900;
+}
+
+.payment-divider::before,
+.payment-divider::after{
+    content:"";
+
+    flex:1;
+
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #294052
+        );
+}
+
+.payment-divider::after{
+    background:
+        linear-gradient(
+            90deg,
+            #294052,
+            transparent
+        );
 }
 
 
@@ -1370,12 +2082,16 @@ input{
     position:fixed;
 
     left:50%;
+
     bottom:
-        calc(78px + env(safe-area-inset-bottom));
+        calc(
+            78px +
+            env(safe-area-inset-bottom)
+        );
 
     transform:
         translate(-50%,20px)
-        scale(.97);
+        scale(.96);
 
     opacity:0;
 
@@ -1386,26 +2102,31 @@ input{
     width:max-content;
     max-width:90%;
 
-    padding:12px 15px;
+    padding:12px 16px;
 
-    border-radius:12px;
+    border-radius:13px;
 
     background:
         linear-gradient(
             145deg,
-            #142633,
-            #10202d
+            rgba(20,38,51,.98),
+            rgba(12,27,38,.98)
         );
 
-    border:1px solid #2c4355;
+    border:1px solid #30495b;
 
     color:#fff;
 
     font-size:11px;
+
     text-align:center;
 
     box-shadow:
-        0 15px 40px rgba(0,0,0,.35);
+        0 18px 50px rgba(0,0,0,.45),
+        0 0 25px rgba(76,255,145,.025);
+
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
 
     transition:
         opacity .25s ease,
@@ -1422,7 +2143,7 @@ input{
 
 
 /* =========================================================
-   BOTTOM NAV
+   PREMIUM BOTTOM NAV
 ========================================================= */
 
 .bottom-nav{
@@ -1431,16 +2152,25 @@ input{
     z-index:4000;
 
     left:50%;
-    bottom:0;
+    bottom:8px;
 
     transform:translateX(-50%);
 
-    width:min(520px,100%);
+    width:
+        min(
+            calc(520px - 20px),
+            calc(100% - 20px)
+        );
 
     height:
-        calc(68px + env(safe-area-inset-bottom));
+        calc(
+            64px +
+            env(safe-area-inset-bottom)
+        );
 
-    padding-bottom:
+    padding:
+        0
+        4px
         env(safe-area-inset-bottom);
 
     display:flex;
@@ -1448,26 +2178,29 @@ input{
     align-items:center;
     justify-content:space-around;
 
+    border-radius:18px;
+
     background:
         linear-gradient(
             180deg,
-            rgba(7,17,29,.97),
-            rgba(3,10,17,.99)
+            rgba(11,25,37,.98),
+            rgba(5,13,21,.99)
         );
 
-    border-top:1px solid #1b2c3b;
+    border:1px solid #203748;
 
     box-shadow:
-        0 -10px 35px rgba(0,0,0,.20);
+        0 18px 55px rgba(0,0,0,.55),
+        inset 0 1px 0 rgba(255,255,255,.045);
 
-    backdrop-filter:blur(14px);
-    -webkit-backdrop-filter:blur(14px);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
 }
 
 .nav-item{
     flex:1;
 
-    height:68px;
+    height:60px;
 
     display:flex;
 
@@ -1487,9 +2220,12 @@ input{
     font-size:9px;
     font-weight:800;
 
+    border-radius:14px;
+
     transition:
         color .2s ease,
-        transform .15s ease;
+        transform .15s ease,
+        background .2s ease;
 }
 
 .nav-icon{
@@ -1501,21 +2237,28 @@ input{
 }
 
 .nav-item:active{
-    transform:scale(.94);
+    transform:scale(.93);
 }
 
 .nav-item.active{
     color:#4cff91;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(76,255,145,.055),
+            transparent
+        );
 }
 
 .nav-item.active .nav-icon{
     transform:
         translateY(-1px)
-        scale(1.06);
+        scale(1.08);
 
     filter:
         drop-shadow(
-            0 0 8px rgba(76,255,145,.25)
+            0 0 9px rgba(76,255,145,.28)
         );
 }
 
@@ -1525,9 +2268,9 @@ input{
     position:absolute;
 
     left:50%;
-    bottom:6px;
+    bottom:3px;
 
-    width:25px;
+    width:24px;
     height:3px;
 
     transform:translateX(-50%);
@@ -1537,27 +2280,12 @@ input{
     background:#4cff91;
 
     box-shadow:
-        0 0 12px rgba(76,255,145,.35);
-
-    animation:
-        navIndicator .22s ease;
-}
-
-@keyframes navIndicator{
-    from{
-        opacity:0;
-        width:10px;
-    }
-
-    to{
-        opacity:1;
-        width:25px;
-    }
+        0 0 14px rgba(76,255,145,.40);
 }
 
 
 /* =========================================================
-   ACCOUNT FREEZE
+   FREEZE OVERLAY
 ========================================================= */
 
 .freeze-overlay{
@@ -1576,29 +2304,17 @@ input{
     background:
         radial-gradient(
             circle at center,
-            rgba(255,50,70,.12),
-            rgba(0,0,0,.97) 65%
+            rgba(255,50,70,.14),
+            rgba(0,0,0,.98) 68%
         );
 
-    backdrop-filter:blur(16px);
-    -webkit-backdrop-filter:blur(16px);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
 }
 
 .freeze-overlay.show{
     display:flex;
-
-    animation:
-        freezeFade .25s ease;
-}
-
-@keyframes freezeFade{
-    from{
-        opacity:0;
-    }
-
-    to{
-        opacity:1;
-    }
+    animation:freezeFade .25s ease;
 }
 
 .freeze-box{
@@ -1613,35 +2329,24 @@ input{
     background:
         radial-gradient(
             circle at top center,
-            rgba(255,50,70,.08),
+            rgba(255,50,70,.10),
             transparent 45%
         ),
         linear-gradient(
             145deg,
-            #130b0e,
+            #160b0e,
             #080b10
         );
 
-    border:1px solid #6c2833;
+    border:1px solid #71313c;
 
     box-shadow:
-        0 25px 90px rgba(0,0,0,.75),
-        0 0 45px rgba(255,50,70,.08);
+        0 30px 100px rgba(0,0,0,.80),
+        0 0 50px rgba(255,50,70,.09),
+        inset 0 1px 0 rgba(255,255,255,.03);
 
     animation:
         freezePop .3s cubic-bezier(.2,.8,.2,1);
-}
-
-@keyframes freezePop{
-    from{
-        opacity:0;
-        transform:scale(.92);
-    }
-
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
 }
 
 .freeze-icon{
@@ -1659,7 +2364,7 @@ input{
     background:
         radial-gradient(
             circle,
-            rgba(255,95,112,.15),
+            rgba(255,95,112,.16),
             #281015
         );
 
@@ -1674,40 +2379,22 @@ input{
         freezePulse 2s ease-in-out infinite;
 }
 
-@keyframes freezePulse{
-    0%,
-    100%{
-        box-shadow:
-            0 0 25px rgba(255,50,70,.06);
-    }
-
-    50%{
-        box-shadow:
-            0 0 38px rgba(255,50,70,.16);
-    }
-}
-
 .freeze-title{
     color:#ff5f70;
-
     font-size:22px;
     font-weight:900;
 }
 
 .freeze-subtitle{
     margin-top:8px;
-
     color:#fff;
-
     font-size:13px;
     font-weight:800;
 }
 
 .freeze-text{
     margin-top:11px;
-
     color:#9b8990;
-
     font-size:11px;
     line-height:1.7;
 }
@@ -1732,13 +2419,105 @@ input{
 
     font-size:9px;
     font-weight:900;
-
     letter-spacing:.5px;
+}
+
+@keyframes freezeFade{
+
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+@keyframes freezePop{
+
+    from{
+        opacity:0;
+        transform:scale(.91);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+@keyframes freezePulse{
+
+    0%,
+    100%{
+        box-shadow:
+            0 0 25px rgba(255,50,70,.06);
+    }
+
+    50%{
+        box-shadow:
+            0 0 40px rgba(255,50,70,.18);
+    }
 }
 
 
 /* =========================================================
-   MOBILE RESPONSIVE
+   LOADING SHIMMER
+========================================================= */
+
+.loading-shimmer{
+    position:relative;
+    overflow:hidden;
+    background:#0b1824;
+}
+
+.loading-shimmer::after{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    transform:translateX(-100%);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.06),
+            transparent
+        );
+
+    animation:
+        shimmer 1.25s infinite;
+}
+
+@keyframes shimmer{
+
+    100%{
+        transform:translateX(100%);
+    }
+}
+
+
+/* =========================================================
+   PREMIUM PULSE
+========================================================= */
+
+.premium-pulse{
+    animation:
+        premiumPulse 2s ease-in-out infinite;
+}
+
+@keyframes premiumPulse{
+
+    0%,
+    100%{
+        filter:brightness(1);
+    }
+
+    50%{
+        filter:brightness(1.08);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
 ========================================================= */
 
 @media(max-width:380px){
@@ -1746,6 +2525,12 @@ input{
     .app{
         padding-left:11px;
         padding-right:11px;
+
+        padding-bottom:
+            calc(
+                102px +
+                env(safe-area-inset-bottom)
+            );
     }
 
     .wallet-card{
@@ -1780,6 +2565,55 @@ input{
         width:190px;
         height:190px;
     }
+
+    .bottom-nav{
+        bottom:6px;
+    }
+
+
+    /* PAYMENT */
+
+    .payment-apps{
+        gap:8px;
+    }
+
+    .app-btn{
+        min-height:72px;
+
+        padding:
+            9px
+            8px
+            9px
+            9px;
+
+        gap:8px;
+
+        border-radius:14px;
+    }
+
+    .payment-logo{
+        width:45px;
+        height:45px;
+
+        padding:6px;
+
+        border-radius:12px;
+    }
+
+    .payment-name{
+        font-size:11px;
+    }
+
+    .payment-subtitle{
+        font-size:8px;
+        margin-top:4px;
+    }
+
+    .payment-arrow{
+        width:25px;
+        height:25px;
+        font-size:14px;
+    }
 }
 
 
@@ -1811,12 +2645,63 @@ input{
     }
 
     .bottom-nav{
+        width:calc(100% - 12px);
+
+        bottom:4px;
+
         height:
-            calc(64px + env(safe-area-inset-bottom));
+            calc(
+                61px +
+                env(safe-area-inset-bottom)
+            );
     }
 
     .nav-item{
-        height:64px;
+        height:58px;
+    }
+
+    .nav-icon{
+        font-size:17px;
+    }
+
+
+    /* EXTRA SMALL PAYMENT */
+
+    .payment-apps{
+        gap:6px;
+    }
+
+    .app-btn{
+        min-height:66px;
+
+        padding:7px;
+
+        gap:6px;
+
+        border-radius:12px;
+    }
+
+    .payment-logo{
+        width:39px;
+        height:39px;
+
+        padding:5px;
+
+        border-radius:10px;
+    }
+
+    .payment-name{
+        font-size:10px;
+    }
+
+    .payment-subtitle{
+        font-size:7px;
+    }
+
+    .payment-arrow{
+        width:22px;
+        height:22px;
+        font-size:12px;
     }
 }
 
@@ -1835,16 +2720,6 @@ input{
         transition-duration:.01ms !important;
         scroll-behavior:auto !important;
     }
-}
-
-
-/* =========================================================
-   SELECTION
-========================================================= */
-
-::selection{
-    background:rgba(76,255,145,.22);
-    color:#fff;
 }
 
 
@@ -1872,24 +2747,32 @@ input{
 
 
 /* =========================================================
-   SAFE AREA / MOBILE HEIGHT FIX
+   SELECTION
 ========================================================= */
 
-@supports(height:100dvh){
-
-    html,
-    body{
-        min-height:100dvh;
-    }
-
-    .app{
-        min-height:100dvh;
-    }
+::selection{
+    background:rgba(76,255,145,.22);
+    color:#fff;
 }
 
 
 /* =========================================================
-   TOUCH OPTIMIZATION
+   NUMBER INPUT
+========================================================= */
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button{
+    -webkit-appearance:none;
+    margin:0;
+}
+
+input[type="number"]{
+    -moz-appearance:textfield;
+}
+
+
+/* =========================================================
+   TOUCH
 ========================================================= */
 
 button,
@@ -1902,7 +2785,22 @@ button,
 
 
 /* =========================================================
-   DISABLED STATES
+   FOCUS
+========================================================= */
+
+button:focus-visible,
+input:focus-visible,
+a:focus-visible{
+    outline:
+        2px solid
+        rgba(76,255,145,.55);
+
+    outline-offset:2px;
+}
+
+
+/* =========================================================
+   DISABLED
 ========================================================= */
 
 button:disabled{
@@ -1911,91 +2809,19 @@ button:disabled{
 
 
 /* =========================================================
-   FOCUS ACCESSIBILITY
+   SAFE AREA
 ========================================================= */
 
-button:focus-visible,
-input:focus-visible,
-a:focus-visible{
-    outline:2px solid rgba(76,255,145,.55);
-    outline-offset:2px;
-}
+@supports(height:100dvh){
 
-
-/* =========================================================
-   PREMIUM LOADING SHIMMER
-   Use class="loading-shimmer" where needed
-========================================================= */
-
-.loading-shimmer{
-    position:relative;
-    overflow:hidden;
-
-    background:#0b1824;
-}
-
-.loading-shimmer::after{
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    transform:translateX(-100%);
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.055),
-            transparent
-        );
-
-    animation:
-        shimmer 1.25s infinite;
-}
-
-@keyframes shimmer{
-    100%{
-        transform:translateX(100%);
-    }
-}
-
-
-/* =========================================================
-   PREMIUM PULSE UTILITY
-========================================================= */
-
-.premium-pulse{
-    animation:
-        premiumPulse 2s ease-in-out infinite;
-}
-
-@keyframes premiumPulse{
-
-    0%,
-    100%{
-        filter:brightness(1);
+    html,
+    body{
+        min-height:100dvh;
     }
 
-    50%{
-        filter:brightness(1.08);
+    .app{
+        min-height:100dvh;
     }
-}
-
-
-/* =========================================================
-   HIDE NUMBER INPUT ARROWS
-========================================================= */
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button{
-    -webkit-appearance:none;
-    margin:0;
-}
-
-input[type="number"]{
-    -moz-appearance:textfield;
 }
 
 
@@ -2227,7 +3053,9 @@ Please wait...
 </div>
 
 
-<!-- ADD MONEY -->
+<!-- =====================================================
+     ADD MONEY
+===================================================== -->
 
 <div id="addModal"
 class="modal"
@@ -2260,20 +3088,21 @@ id="depositAmount"
 class="input"
 type="number"
 inputmode="numeric"
-min="10"
+min="100"
 max="100000"
 placeholder="Enter amount">
+
 
 <div class="quick-grid">
 
 <button class="quick-btn"
-onclick="setDepositAmount(50)">
-₹50
+onclick="setDepositAmount(100)">
+₹100
 </button>
 
 <button class="quick-btn"
-onclick="setDepositAmount(100)">
-₹100
+onclick="setDepositAmount(200)">
+₹200
 </button>
 
 <button class="quick-btn"
@@ -2288,13 +3117,15 @@ onclick="setDepositAmount(1000)">
 
 </div>
 
+
 <button class="primary-btn"
 onclick="showPaymentOptions()">
 Continue to Payment
 </button>
 
+
 <div class="info-box">
-Minimum deposit ₹10<br>
+Minimum deposit ₹100<br>
 Maximum deposit ₹1,00,000
 </div>
 
@@ -2303,6 +3134,7 @@ Maximum deposit ₹1,00,000
 
 <div id="paymentStep2"
 style="display:none;">
+
 
 <div class="amount-display">
 
@@ -2317,10 +3149,12 @@ class="amount-value">
 
 </div>
 
+
 <div id="adminUPI"
 class="upi-box">
 Loading UPI...
 </div>
+
 
 <div class="qr-wrap">
 
@@ -2329,29 +3163,55 @@ alt="UPI QR">
 
 </div>
 
+
+<!-- ORIGINAL PAYMENT OPTIONS -->
+
 <div class="payment-apps">
 
-<button class="app-btn"
-onclick="payWithUPI('gpay')">
-GPay
-</button>
+    <button class="app-btn gpay-btn" type="button">
+        <img
+            class="payment-logo"
+            src="https://cdn.simpleicons.org/googlepay"
+            alt="Google Pay"
+        >
+        <span class="payment-name">Google Pay</span>
+    </button>
 
-<button class="app-btn"
-onclick="payWithUPI('phonepe')">
-PhonePe
-</button>
+    <button class="app-btn phonepe-btn" type="button">
+        <img
+            class="payment-logo"
+            src="https://cdn.simpleicons.org/phonepe"
+            alt="PhonePe"
+        >
+        <span class="payment-name">PhonePe</span>
+    </button>
 
-<button class="app-btn"
-onclick="payWithUPI('paytm')">
-Paytm
-</button>
+    <button class="app-btn paytm-btn" type="button">
+        <img
+            class="payment-logo"
+            src="https://cdn.simpleicons.org/paytm"
+            alt="Paytm"
+        >
+        <span class="payment-name">Paytm</span>
+    </button>
+
+    <button class="app-btn fampay-btn" type="button">
+        <img
+            class="payment-logo fampay-logo"
+            src="https://cdn.simpleicons.org/fampay"
+            alt="FamPay"
+        >
+        <span class="payment-name">FamPay</span>
+    </button>
 
 </div>
+
 
 <div class="input-label"
 style="margin-top:14px;">
 Transaction ID / UTR
 </div>
+
 
 <input
 id="utr"
@@ -2360,12 +3220,14 @@ type="text"
 autocomplete="off"
 placeholder="Enter UTR / Transaction ID">
 
+
 <button
 id="depositBtn"
 class="primary-btn"
 onclick="submitDeposit()">
 Submit Payment
 </button>
+
 
 <button
 class="secondary-btn"
@@ -2380,7 +3242,9 @@ onclick="backToAmount()">
 </div>
 
 
-<!-- WITHDRAW -->
+<!-- =====================================================
+     WITHDRAW
+===================================================== -->
 
 <div id="withdrawModal"
 class="modal"
@@ -2401,6 +3265,7 @@ onclick="closeWithdraw()">
 
 </div>
 
+
 <div class="available-card">
 
 <div class="available-label">
@@ -2412,25 +3277,33 @@ class="available-value">
 ₹0
 </div>
 
+<div class="wallet-maintain-note">
+₹50 wallet balance will be maintained
 </div>
+
+</div>
+
 
 <div class="input-label">
 Withdrawal Amount
 </div>
+
 
 <input
 id="withdrawAmount"
 class="input"
 type="number"
 inputmode="numeric"
-min="100"
+min="250"
 max="100000"
-placeholder="Minimum ₹100">
+placeholder="Minimum ₹250">
+
 
 <div class="input-label"
 style="margin-top:13px;">
 UPI ID
 </div>
+
 
 <input
 id="withdrawUPI"
@@ -2439,6 +3312,7 @@ type="text"
 autocomplete="off"
 placeholder="example@upi">
 
+
 <button
 id="withdrawBtn"
 class="primary-btn"
@@ -2446,8 +3320,10 @@ onclick="submitWithdraw()">
 Submit Withdraw
 </button>
 
+
 <div class="info-box">
-Minimum withdrawal ₹100<br>
+Minimum withdrawal ₹250<br>
+₹50 wallet balance must remain after withdrawal<br>
 Maximum withdrawal ₹1,00,000
 </div>
 
@@ -2456,7 +3332,9 @@ Maximum withdrawal ₹1,00,000
 </div>
 
 
-<!-- FREEZE OVERLAY -->
+<!-- =====================================================
+     FREEZE OVERLAY
+===================================================== -->
 
 <div id="freezeOverlay"
 class="freeze-overlay">
@@ -2494,6 +3372,10 @@ ACCOUNT STATUS : BLOCKED
 class="toast">
 </div>
 
+
+<!-- =====================================================
+     BOTTOM NAV
+===================================================== -->
 
 <nav class="bottom-nav">
 
@@ -2540,8 +3422,7 @@ import {
 
 import {
     getAuth,
-    onAuthStateChanged,
-    signOut
+    onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 import {
@@ -2591,6 +3472,29 @@ const auth =
 
 const db =
     getDatabase(app);
+
+
+/* =====================================================
+   CONSTANTS
+===================================================== */
+
+/* ADD MONEY */
+const MIN_DEPOSIT = 100;
+const MAX_DEPOSIT = 100000;
+
+
+/* WITHDRAW */
+const MIN_WITHDRAW = 250;
+const MAX_WITHDRAW = 100000;
+
+
+/*
+ * IMPORTANT
+ *
+ * Withdrawal ke baad ₹50 wallet mein
+ * minimum maintain rahega.
+ */
+const MIN_WALLET_REMAINING = 50;
 
 
 /* =====================================================
@@ -2645,12 +3549,8 @@ onAuthStateChanged(
             return;
         }
 
-        UID = user.uid;
-
-        /*
-         * FREEZE LISTENER
-         * Sabse pehle start hoga.
-         */
+        UID =
+            user.uid;
 
         listenAccountStatus();
 
@@ -2666,12 +3566,14 @@ onAuthStateChanged(
 
         loadPendingRequests();
 
+        createPaymentButtons();
+
     }
 );
 
 
 /* =====================================================
-   ACCOUNT BLOCK / FREEZE
+   ACCOUNT STATUS
 ===================================================== */
 
 function listenAccountStatus(){
@@ -2696,24 +3598,17 @@ function listenAccountStatus(){
             const user =
                 snapshot.val() || {};
 
-            /*
-             * Supported:
-             *
-             * blocked: true
-             * isBlocked: true
-             * accountStatus: blocked
-             * status: blocked
-             */
-
             const blocked =
                 user.blocked === true ||
                 user.isBlocked === true ||
                 String(
                     user.accountStatus || ""
-                ).toLowerCase() === "blocked" ||
+                ).toLowerCase() ===
+                    "blocked" ||
                 String(
                     user.status || ""
-                ).toLowerCase() === "blocked";
+                ).toLowerCase() ===
+                    "blocked";
 
             if(blocked){
 
@@ -2751,7 +3646,8 @@ function freezeAccount(){
         return;
     }
 
-    accountFrozen = true;
+    accountFrozen =
+        true;
 
     const overlay =
         document.getElementById(
@@ -2766,18 +3662,12 @@ function freezeAccount(){
 
     }
 
-    /*
-     * Disable actions
-     */
-
-    const ids = [
-
+    [
         "addMoneyAction",
-        "withdrawAction"
-
-    ];
-
-    ids.forEach(
+        "withdrawAction",
+        "depositBtn",
+        "withdrawBtn"
+    ].forEach(
         id=>{
 
             const element =
@@ -2795,10 +3685,6 @@ function freezeAccount(){
         }
     );
 
-
-    /*
-     * Close active modals
-     */
 
     document
         .querySelectorAll(
@@ -2836,7 +3722,8 @@ function unfreezeAccount(){
         return;
     }
 
-    accountFrozen = false;
+    accountFrozen =
+        false;
 
     const overlay =
         document.getElementById(
@@ -2930,8 +3817,11 @@ function parseWalletValue(
         typeof walletData ===
         "number"
     ){
+
         return walletData;
+
     }
+
 
     if(
         typeof walletData ===
@@ -2970,7 +3860,8 @@ function loadWallet(){
 
         snapshot=>{
 
-            let balance = 0;
+            let balance =
+                0;
 
             if(snapshot.exists()){
 
@@ -2985,7 +3876,10 @@ function loadWallet(){
                 !Number.isFinite(balance) ||
                 balance < 0
             ){
-                balance = 0;
+
+                balance =
+                    0;
+
             }
 
             currentWalletBalance =
@@ -3026,7 +3920,10 @@ function loadBonus(){
                 !Number.isFinite(bonus) ||
                 bonus < 0
             ){
-                bonus = 0;
+
+                bonus =
+                    0;
+
             }
 
             currentBonus =
@@ -3078,7 +3975,10 @@ function loadWithdrawable(){
                 !Number.isFinite(value) ||
                 value < 0
             ){
-                value = 0;
+
+                value =
+                    0;
+
             }
 
             currentWithdrawable =
@@ -3224,11 +4124,13 @@ function(){
     document.body.style.overflow =
         "hidden";
 
+    createPaymentButtons();
+
 };
 
 
 /* =====================================================
-   CLOSE
+   CLOSE ADD MONEY
 ===================================================== */
 
 window.closeAddMoney =
@@ -3256,6 +4158,10 @@ function(){
 
 };
 
+
+/* =====================================================
+   CLOSE WITHDRAW
+===================================================== */
 
 window.closeWithdraw =
 function(){
@@ -3294,6 +4200,37 @@ function(amount){
         return;
     }
 
+    amount =
+        Number(amount);
+
+    if(
+        !Number.isFinite(amount)
+    ){
+        return;
+    }
+
+    if(amount < MIN_DEPOSIT){
+
+        showToast(
+            "Minimum deposit is ₹100"
+        );
+
+        amount =
+            MIN_DEPOSIT;
+
+    }
+
+    if(amount > MAX_DEPOSIT){
+
+        showToast(
+            "Maximum deposit is ₹1,00,000"
+        );
+
+        amount =
+            MAX_DEPOSIT;
+
+    }
+
     const input =
         document.getElementById(
             "depositAmount"
@@ -3302,7 +4239,7 @@ function(amount){
     if(input){
 
         input.value =
-            amount;
+            Math.floor(amount);
 
     }
 
@@ -3334,20 +4271,22 @@ function(){
             input.value
         );
 
+
     if(
         !Number.isFinite(amount) ||
-        amount < 10
+        amount < MIN_DEPOSIT
     ){
 
         showToast(
-            "Minimum deposit is ₹10"
+            "Minimum deposit is ₹100"
         );
 
         return;
 
     }
 
-    if(amount > 100000){
+
+    if(amount > MAX_DEPOSIT){
 
         showToast(
             "Maximum deposit is ₹1,00,000"
@@ -3357,8 +4296,10 @@ function(){
 
     }
 
+
     selectedDepositAmount =
         Math.floor(amount);
+
 
     const selected =
         document.getElementById(
@@ -3374,26 +4315,46 @@ function(){
 
     }
 
-    document.getElementById(
-        "paymentStep1"
-    ).style.display =
-        "none";
 
-    document.getElementById(
-        "paymentStep2"
-    ).style.display =
-        "block";
+    const step1 =
+        document.getElementById(
+            "paymentStep1"
+        );
+
+    const step2 =
+        document.getElementById(
+            "paymentStep2"
+        );
+
+
+    if(step1){
+
+        step1.style.display =
+            "none";
+
+    }
+
+
+    if(step2){
+
+        step2.style.display =
+            "block";
+
+    }
+
 
     createQR(
         adminUPIValue,
         selectedDepositAmount
     );
 
+    createPaymentButtons();
+
 };
 
 
 /* =====================================================
-   BACK
+   BACK TO AMOUNT
 ===================================================== */
 
 window.backToAmount =
@@ -3403,15 +4364,29 @@ function(){
         return;
     }
 
-    document.getElementById(
-        "paymentStep2"
-    ).style.display =
-        "none";
+    const step2 =
+        document.getElementById(
+            "paymentStep2"
+        );
 
-    document.getElementById(
-        "paymentStep1"
-    ).style.display =
-        "block";
+    const step1 =
+        document.getElementById(
+            "paymentStep1"
+        );
+
+    if(step2){
+
+        step2.style.display =
+            "none";
+
+    }
+
+    if(step1){
+
+        step1.style.display =
+            "block";
+
+    }
 
 };
 
@@ -3441,9 +4416,11 @@ function loadAdminPayment(){
                     "adminQR"
                 );
 
+
             if(!upiBox || !qr){
                 return;
             }
+
 
             if(!snapshot.exists()){
 
@@ -3454,8 +4431,10 @@ function loadAdminPayment(){
 
             }
 
+
             const data =
                 snapshot.val() || {};
+
 
             adminUPIValue =
                 String(
@@ -3463,6 +4442,7 @@ function loadAdminPayment(){
                     data.upiId ??
                     ""
                 ).trim();
+
 
             if(!adminUPIValue){
 
@@ -3476,14 +4456,19 @@ function loadAdminPayment(){
 
             }
 
+
             upiBox.innerText =
                 "UPI : " +
                 adminUPIValue;
+
 
             createQR(
                 adminUPIValue,
                 selectedDepositAmount
             );
+
+
+            createPaymentButtons();
 
         }
 
@@ -3510,6 +4495,7 @@ function createQR(
         return;
     }
 
+
     if(!upi){
 
         qr.style.display =
@@ -3519,26 +4505,33 @@ function createQR(
 
     }
 
+
     let url =
         "upi://pay?pa=" +
         encodeURIComponent(upi) +
         "&pn=" +
-        encodeURIComponent("BGMI PAY") +
+        encodeURIComponent(
+            "BGMI PAY"
+        ) +
         "&cu=INR";
+
 
     if(amount > 0){
 
         url +=
             "&am=" +
             encodeURIComponent(
-                Number(amount).toFixed(2)
+                Number(amount)
+                    .toFixed(2)
             );
 
     }
 
+
     qr.src =
         "https://quickchart.io/qr?size=300&text=" +
         encodeURIComponent(url);
+
 
     qr.style.display =
         "block";
@@ -3547,7 +4540,288 @@ function createQR(
 
 
 /* =====================================================
-   UPI
+   PAYMENT BUTTONS
+   GPay / PhonePe / Paytm / FamPay
+===================================================== */
+
+function createPaymentButtons(){
+
+    const step2 =
+        document.getElementById(
+            "paymentStep2"
+        );
+
+    if(!step2){
+        return;
+    }
+
+
+    let container =
+        document.getElementById(
+            "upiPaymentApps"
+        );
+
+
+    if(!container){
+
+        container =
+            document.createElement(
+                "div"
+            );
+
+        container.id =
+            "upiPaymentApps";
+
+
+        const style =
+            document.createElement(
+                "style"
+            );
+
+        style.innerHTML = `
+
+        #upiPaymentApps{
+            width:100%;
+            margin:18px 0;
+            display:grid;
+            grid-template-columns:
+                repeat(2,1fr);
+            gap:12px;
+        }
+
+        .upi-app-btn{
+            width:100%;
+            min-height:68px;
+            border:1px solid
+                rgba(255,255,255,.10);
+            border-radius:16px;
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.07),
+                    rgba(255,255,255,.025)
+                );
+            color:#fff;
+            display:flex;
+            align-items:center;
+            gap:11px;
+            padding:10px 13px;
+            cursor:pointer;
+            transition:
+                .2s ease;
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,.22);
+        }
+
+        .upi-app-btn:active{
+            transform:
+                scale(.96);
+        }
+
+        .upi-app-logo{
+            width:42px;
+            height:42px;
+            min-width:42px;
+            object-fit:contain;
+            border-radius:11px;
+            background:#fff;
+            padding:5px;
+        }
+
+        .upi-app-info{
+            text-align:left;
+            min-width:0;
+        }
+
+        .upi-app-name{
+            display:block;
+            font-size:14px;
+            font-weight:800;
+            white-space:nowrap;
+        }
+
+        .upi-app-sub{
+            display:block;
+            margin-top:3px;
+            font-size:10px;
+            opacity:.60;
+        }
+
+        .upi-app-arrow{
+            margin-left:auto;
+            font-size:17px;
+            opacity:.65;
+        }
+
+        `;
+
+        document.head.appendChild(
+            style
+        );
+
+
+        const candidates =
+            step2.querySelectorAll(
+                "button"
+            );
+
+        let insertBefore =
+            candidates.length
+                ? candidates[0]
+                : null;
+
+
+        if(insertBefore){
+
+            step2.insertBefore(
+                container,
+                insertBefore
+            );
+
+        }else{
+
+            step2.appendChild(
+                container
+            );
+
+        }
+
+    }
+
+
+    container.innerHTML = `
+
+        <button
+            type="button"
+            class="upi-app-btn"
+            onclick="payWithUPI('gpay')"
+        >
+
+            <img
+                class="upi-app-logo"
+                src="https://cdn.simpleicons.org/googlepay"
+                alt="Google Pay"
+            >
+
+            <span class="upi-app-info">
+
+                <span class="upi-app-name">
+                    Google Pay
+                </span>
+
+                <span class="upi-app-sub">
+                    Pay securely
+                </span>
+
+            </span>
+
+            <span class="upi-app-arrow">
+                ›
+            </span>
+
+        </button>
+
+
+        <button
+            type="button"
+            class="upi-app-btn"
+            onclick="payWithUPI('phonepe')"
+        >
+
+            <img
+                class="upi-app-logo"
+                src="https://cdn.simpleicons.org/phonepe"
+                alt="PhonePe"
+            >
+
+            <span class="upi-app-info">
+
+                <span class="upi-app-name">
+                    PhonePe
+                </span>
+
+                <span class="upi-app-sub">
+                    Pay securely
+                </span>
+
+            </span>
+
+            <span class="upi-app-arrow">
+                ›
+            </span>
+
+        </button>
+
+
+        <button
+            type="button"
+            class="upi-app-btn"
+            onclick="payWithUPI('paytm')"
+        >
+
+            <img
+                class="upi-app-logo"
+                src="https://cdn.simpleicons.org/paytm"
+                alt="Paytm"
+            >
+
+            <span class="upi-app-info">
+
+                <span class="upi-app-name">
+                    Paytm
+                </span>
+
+                <span class="upi-app-sub">
+                    Pay securely
+                </span>
+
+            </span>
+
+            <span class="upi-app-arrow">
+                ›
+            </span>
+
+        </button>
+
+
+        <button
+            type="button"
+            class="upi-app-btn"
+            onclick="payWithUPI('fampay')"
+        >
+
+            <img
+                class="upi-app-logo"
+                src="https://cdn.simpleicons.org/fampay"
+                alt="FamPay"
+            >
+
+            <span class="upi-app-info">
+
+                <span class="upi-app-name">
+                    FamPay
+                </span>
+
+                <span class="upi-app-sub">
+                    Pay securely
+                </span>
+
+            </span>
+
+            <span class="upi-app-arrow">
+                ›
+            </span>
+
+        </button>
+
+    `;
+
+}
+
+
+/* =====================================================
+   UPI PAYMENT
 ===================================================== */
 
 window.payWithUPI =
@@ -3556,6 +4830,7 @@ function(appName){
     if(isAccountFrozen()){
         return;
     }
+
 
     if(!selectedDepositAmount){
 
@@ -3567,6 +4842,21 @@ function(appName){
 
     }
 
+
+    if(
+        selectedDepositAmount <
+        MIN_DEPOSIT
+    ){
+
+        showToast(
+            "Minimum deposit is ₹100"
+        );
+
+        return;
+
+    }
+
+
     if(!adminUPIValue){
 
         showToast(
@@ -3577,83 +4867,146 @@ function(appName){
 
     }
 
+
     const amount =
         Number(
             selectedDepositAmount
         ).toFixed(2);
+
 
     const pa =
         encodeURIComponent(
             adminUPIValue
         );
 
+
+    /*
+     * STANDARD UPI
+     */
+
     const standard =
         "upi://pay" +
-        "?pa=" + pa +
+        "?pa=" +
+        pa +
         "&pn=BGMI%20PAY" +
-        "&am=" + amount +
+        "&am=" +
+        amount +
         "&cu=INR";
+
 
     let url =
         standard;
+
 
     const name =
         String(
             appName || ""
         ).toLowerCase();
 
+
+    /*
+     * GOOGLE PAY
+     */
+
     if(name === "gpay"){
 
         url =
             "tez://upi/pay" +
-            "?pa=" + pa +
+            "?pa=" +
+            pa +
             "&pn=BGMI%20PAY" +
-            "&am=" + amount +
+            "&am=" +
+            amount +
             "&cu=INR";
 
     }
 
-    else if(name === "phonepe"){
+
+    /*
+     * PHONEPE
+     */
+
+    else if(
+        name === "phonepe"
+    ){
 
         url =
             "phonepe://pay" +
-            "?pa=" + pa +
+            "?pa=" +
+            pa +
             "&pn=BGMI%20PAY" +
-            "&am=" + amount +
+            "&am=" +
+            amount +
             "&cu=INR";
 
     }
 
-    else if(name === "paytm"){
+
+    /*
+     * PAYTM
+     */
+
+    else if(
+        name === "paytm"
+    ){
 
         url =
             "paytmmp://pay" +
-            "?pa=" + pa +
+            "?pa=" +
+            pa +
             "&pn=BGMI%20PAY" +
-            "&am=" + amount +
+            "&am=" +
+            amount +
             "&cu=INR";
 
     }
+
+
+    /*
+     * FAMPAY
+     *
+     * Standard UPI fallback
+     */
+
+    else if(
+        name === "fampay"
+    ){
+
+        url =
+            standard;
+
+    }
+
 
     try{
 
         location.href =
             url;
 
+
         setTimeout(
             ()=>{
+
                 if(
                     document.visibilityState ===
                     "visible"
                 ){
+
                     location.href =
                         standard;
+
                 }
+
             },
             1300
         );
 
-    }catch(error){
+    }
+    catch(error){
+
+        console.error(
+            error
+        );
 
         location.href =
             standard;
@@ -3664,7 +5017,7 @@ function(appName){
 
 
 /* =====================================================
-   DEPOSIT
+   DEPOSIT SUBMIT
 ===================================================== */
 
 window.submitDeposit =
@@ -3674,9 +5027,11 @@ async function(){
         return;
     }
 
+
     if(depositSubmitting){
         return;
     }
+
 
     const amountInput =
         document.getElementById(
@@ -3688,28 +5043,43 @@ async function(){
             "utr"
         );
 
-    const amount =
-        Number(
-            amountInput.value
-        );
 
-    const utr =
-        utrInput.value.trim();
-
-    if(
-        !Number.isFinite(amount) ||
-        amount < 10
-    ){
+    if(!amountInput || !utrInput){
 
         showToast(
-            "Minimum deposit is ₹10"
+            "Payment form not found"
         );
 
         return;
 
     }
 
-    if(amount > 100000){
+
+    const amount =
+        Number(
+            amountInput.value
+        );
+
+
+    const utr =
+        utrInput.value.trim();
+
+
+    if(
+        !Number.isFinite(amount) ||
+        amount < MIN_DEPOSIT
+    ){
+
+        showToast(
+            "Minimum deposit is ₹100"
+        );
+
+        return;
+
+    }
+
+
+    if(amount > MAX_DEPOSIT){
 
         showToast(
             "Maximum deposit is ₹1,00,000"
@@ -3718,6 +5088,7 @@ async function(){
         return;
 
     }
+
 
     if(!utr){
 
@@ -3729,6 +5100,7 @@ async function(){
 
     }
 
+
     if(utr.length < 6){
 
         showToast(
@@ -3739,13 +5111,16 @@ async function(){
 
     }
 
+
     depositSubmitting =
         true;
+
 
     const button =
         document.getElementById(
             "depositBtn"
         );
+
 
     if(button){
 
@@ -3757,11 +5132,11 @@ async function(){
 
     }
 
+
     try{
 
         /*
-         * Re-check block status
-         * before write.
+         * BLOCK CHECK
          */
 
         const userSnap =
@@ -3772,21 +5147,27 @@ async function(){
                 )
             );
 
+
         if(userSnap.exists()){
 
             const user =
                 userSnap.val() || {};
 
-            if(
+
+            const blocked =
                 user.blocked === true ||
                 user.isBlocked === true ||
                 String(
                     user.accountStatus || ""
-                ).toLowerCase() === "blocked" ||
+                ).toLowerCase() ===
+                    "blocked" ||
                 String(
                     user.status || ""
-                ).toLowerCase() === "blocked"
-            ){
+                ).toLowerCase() ===
+                    "blocked";
+
+
+            if(blocked){
 
                 freezeAccount();
 
@@ -3799,6 +5180,10 @@ async function(){
         }
 
 
+        /*
+         * DUPLICATE UTR CHECK
+         */
+
         const existing =
             await get(
                 ref(
@@ -3807,8 +5192,10 @@ async function(){
                 )
             );
 
+
         let duplicate =
             false;
+
 
         if(existing.exists()){
 
@@ -3817,6 +5204,7 @@ async function(){
 
                     const data =
                         item.val() || {};
+
 
                     if(
                         String(
@@ -3837,6 +5225,7 @@ async function(){
 
         }
 
+
         if(duplicate){
 
             throw new Error(
@@ -3846,6 +5235,10 @@ async function(){
         }
 
 
+        /*
+         * CREATE REQUEST
+         */
+
         const request =
             push(
                 ref(
@@ -3854,16 +5247,21 @@ async function(){
                 )
             );
 
+
         await set(
             request,
             {
 
-                uid:UID,
+                uid:
+                    UID,
 
                 amount:
-                    Math.floor(amount),
+                    Math.floor(
+                        amount
+                    ),
 
-                utr:utr,
+                utr:
+                    utr,
 
                 paymentMethod:
                     "UPI",
@@ -3882,7 +5280,9 @@ async function(){
             "Payment submitted successfully"
         );
 
+
         closeAddMoney();
+
 
         amountInput.value =
             "";
@@ -3893,8 +5293,8 @@ async function(){
         selectedDepositAmount =
             0;
 
-    }
 
+    }
     catch(error){
 
         console.error(
@@ -3907,11 +5307,11 @@ async function(){
         );
 
     }
-
     finally{
 
         depositSubmitting =
             false;
+
 
         if(button){
 
@@ -3941,10 +5341,12 @@ function(){
 
     updateWalletUI();
 
+
     const modal =
         document.getElementById(
             "withdrawModal"
         );
+
 
     if(modal){
 
@@ -3971,9 +5373,11 @@ async function(){
         return;
     }
 
+
     if(withdrawSubmitting){
         return;
     }
+
 
     const amountInput =
         document.getElementById(
@@ -3985,28 +5389,51 @@ async function(){
             "withdrawUPI"
         );
 
-    const amount =
-        Number(
-            amountInput.value
-        );
 
-    const upi =
-        upiInput.value.trim();
-
-    if(
-        !Number.isFinite(amount) ||
-        amount < 100
-    ){
+    if(!amountInput || !upiInput){
 
         showToast(
-            "Minimum withdrawal is ₹100"
+            "Withdrawal form not found"
         );
 
         return;
 
     }
 
-    if(amount > 100000){
+
+    const amount =
+        Number(
+            amountInput.value
+        );
+
+
+    const upi =
+        upiInput.value.trim();
+
+
+    /*
+     * MINIMUM ₹250
+     */
+
+    if(
+        !Number.isFinite(amount) ||
+        amount < MIN_WITHDRAW
+    ){
+
+        showToast(
+            "Minimum withdrawal is ₹250"
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * MAXIMUM ₹1,00,000
+     */
+
+    if(amount > MAX_WITHDRAW){
 
         showToast(
             "Maximum withdrawal is ₹1,00,000"
@@ -4015,6 +5442,7 @@ async function(){
         return;
 
     }
+
 
     if(!upi){
 
@@ -4026,8 +5454,10 @@ async function(){
 
     }
 
+
     const pattern =
         /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+$/;
+
 
     if(!pattern.test(upi)){
 
@@ -4039,26 +5469,59 @@ async function(){
 
     }
 
+
+    /*
+     * CURRENT BALANCE CHECK
+     *
+     * ₹50 wallet maintain hoga.
+     *
+     * Example:
+     *
+     * Balance ₹500
+     * Maximum withdraw = ₹450
+     *
+     * Balance ₹300
+     * Maximum withdraw = ₹250
+     *
+     * Balance ₹250
+     * Maximum withdraw = ₹200
+     * Isliye ₹250 minimum withdrawal possible
+     * tabhi hoga jab balance kam se kam ₹300 ho.
+     */
+
+    const maximumAllowedWithdraw =
+        Math.max(
+            0,
+            Number(
+                currentWithdrawable
+            ) -
+            MIN_WALLET_REMAINING
+        );
+
+
     if(
-        currentWithdrawable <
-        amount
+        amount >
+        maximumAllowedWithdraw
     ){
 
         showToast(
-            "Insufficient balance"
+            "₹50 wallet balance maintain karna zaroori hai"
         );
 
         return;
 
     }
 
+
     withdrawSubmitting =
         true;
+
 
     const button =
         document.getElementById(
             "withdrawBtn"
         );
+
 
     if(button){
 
@@ -4069,6 +5532,7 @@ async function(){
             "Submitting...";
 
     }
+
 
     try{
 
@@ -4084,6 +5548,7 @@ async function(){
                 )
             );
 
+
         if(!userSnap.exists()){
 
             throw new Error(
@@ -4092,19 +5557,25 @@ async function(){
 
         }
 
+
         const user =
             userSnap.val() || {};
 
-        if(
+
+        const blocked =
             user.blocked === true ||
             user.isBlocked === true ||
             String(
                 user.accountStatus || ""
-            ).toLowerCase() === "blocked" ||
+            ).toLowerCase() ===
+                "blocked" ||
             String(
                 user.status || ""
-            ).toLowerCase() === "blocked"
-        ){
+            ).toLowerCase() ===
+                "blocked";
+
+
+        if(blocked){
 
             freezeAccount();
 
@@ -4115,17 +5586,115 @@ async function(){
         }
 
 
+        /*
+         * REALTIME BALANCE RECHECK
+         */
+
+        let realtimeWithdrawable =
+            currentWithdrawable;
+
+
+        const withdrawSnap =
+            await get(
+                ref(
+                    db,
+                    "users/" +
+                    UID +
+                    "/withdrawable"
+                )
+            );
+
+
+        if(withdrawSnap.exists()){
+
+            realtimeWithdrawable =
+                parseWalletValue(
+                    withdrawSnap.val()
+                );
+
+        }
+        else{
+
+            const walletSnap =
+                await get(
+                    ref(
+                        db,
+                        "users/" +
+                        UID +
+                        "/wallet"
+                    )
+                );
+
+
+            if(walletSnap.exists()){
+
+                realtimeWithdrawable =
+                    parseWalletValue(
+                        walletSnap.val()
+                    );
+
+            }
+
+        }
+
+
         if(
-            currentWithdrawable <
-            amount
+            !Number.isFinite(
+                realtimeWithdrawable
+            ) ||
+            realtimeWithdrawable < 0
+        ){
+
+            realtimeWithdrawable =
+                0;
+
+        }
+
+
+        /*
+         * ₹50 MAINTENANCE CHECK
+         */
+
+        const realtimeMaximumAllowed =
+            Math.max(
+                0,
+                realtimeWithdrawable -
+                MIN_WALLET_REMAINING
+            );
+
+
+        if(
+            amount >
+            realtimeMaximumAllowed
         ){
 
             throw new Error(
-                "Insufficient withdrawable balance"
+                "₹50 wallet balance maintain karna zaroori hai"
             );
 
         }
 
+
+        /*
+         * MINIMUM ₹250 CHECK
+         *
+         * This is intentionally checked
+         * again after realtime balance
+         * verification.
+         */
+
+        if(amount < MIN_WITHDRAW){
+
+            throw new Error(
+                "Minimum withdrawal is ₹250"
+            );
+
+        }
+
+
+        /*
+         * DUPLICATE PENDING REQUEST
+         */
 
         const requests =
             await get(
@@ -4135,8 +5704,10 @@ async function(){
                 )
             );
 
+
         let duplicate =
             false;
+
 
         if(requests.exists()){
 
@@ -4146,23 +5717,26 @@ async function(){
                     const data =
                         item.val() || {};
 
+
                     if(
                         data.uid === UID &&
                         String(
                             data.status ||
                             "pending"
                         ).toLowerCase() ===
-                        "pending" &&
+                            "pending" &&
                         Number(
                             data.amount || 0
                         ) ===
-                        Math.floor(amount) &&
+                            Math.floor(
+                                amount
+                            ) &&
                         String(
                             data.upi || ""
                         )
                         .trim()
                         .toLowerCase() ===
-                        upi.toLowerCase()
+                            upi.toLowerCase()
                     ){
 
                         duplicate =
@@ -4175,6 +5749,7 @@ async function(){
 
         }
 
+
         if(duplicate){
 
             throw new Error(
@@ -4184,6 +5759,10 @@ async function(){
         }
 
 
+        /*
+         * CREATE REQUEST
+         */
+
         const request =
             push(
                 ref(
@@ -4192,16 +5771,21 @@ async function(){
                 )
             );
 
+
         await set(
             request,
             {
 
-                uid:UID,
+                uid:
+                    UID,
 
                 amount:
-                    Math.floor(amount),
+                    Math.floor(
+                        amount
+                    ),
 
-                upi:upi,
+                upi:
+                    upi,
 
                 status:
                     "pending",
@@ -4217,7 +5801,9 @@ async function(){
             "Withdraw request submitted"
         );
 
+
         closeWithdraw();
+
 
         amountInput.value =
             "";
@@ -4225,8 +5811,8 @@ async function(){
         upiInput.value =
             "";
 
-    }
 
+    }
     catch(error){
 
         console.error(
@@ -4239,11 +5825,11 @@ async function(){
         );
 
     }
-
     finally{
 
         withdrawSubmitting =
             false;
+
 
         if(button){
 
@@ -4261,27 +5847,31 @@ async function(){
 
 
 /* =====================================================
-   MODAL
+   MODAL OUTSIDE CLICK
 ===================================================== */
 
 window.closeOutside =
 function(event,id){
 
     if(
-        event.target.id === id
+        event.target.id !== id
     ){
 
-        if(id === "addModal"){
+        return;
 
-            closeAddMoney();
+    }
 
-        }
 
-        if(id === "withdrawModal"){
+    if(id === "addModal"){
 
-            closeWithdraw();
+        closeAddMoney();
 
-        }
+    }
+
+
+    if(id === "withdrawModal"){
+
+        closeWithdraw();
 
     }
 
@@ -4302,8 +5892,10 @@ function(
         return;
     }
 
+
     currentFilter =
         filter;
+
 
     document
         .querySelectorAll(
@@ -4311,11 +5903,14 @@ function(
         )
         .forEach(
             item=>{
+
                 item.classList.remove(
                     "active"
                 );
+
             }
         );
+
 
     if(button){
 
@@ -4324,6 +5919,7 @@ function(
         );
 
     }
+
 
     renderTransactions();
 
@@ -4354,8 +5950,10 @@ function loadHistory(){
                     )
                 );
 
+
             transactions =
                 [];
+
 
             if(snapshot.exists()){
 
@@ -4364,7 +5962,8 @@ function loadHistory(){
 
                         transactions.push({
 
-                            id:item.key,
+                            id:
+                                item.key,
 
                             ...(
                                 item.val() || {}
@@ -4376,6 +5975,7 @@ function loadHistory(){
                 );
 
             }
+
 
             transactions.sort(
                 (a,b)=>
@@ -4392,22 +5992,28 @@ function loadHistory(){
 
                 transactions.forEach(
                     tx=>{
+
                         previousTransactionIds.add(
                             tx.id
                         );
+
                     }
                 );
+
 
                 refundInitialized =
                     true;
 
-            }else{
+            }
+            else{
 
                 transactions.forEach(
                     tx=>{
 
                         if(
-                            !oldIds.has(tx.id) &&
+                            !oldIds.has(
+                                tx.id
+                            ) &&
                             !previousTransactionIds.has(
                                 tx.id
                             )
@@ -4422,15 +6028,19 @@ function loadHistory(){
                     }
                 );
 
+
                 transactions.forEach(
                     tx=>{
+
                         previousTransactionIds.add(
                             tx.id
                         );
+
                     }
                 );
 
             }
+
 
             renderTransactions();
 
@@ -4442,7 +6052,7 @@ function loadHistory(){
 
 
 /* =====================================================
-   TRANSACTION
+   NEW TRANSACTION
 ===================================================== */
 
 function handleNewTransaction(tx){
@@ -4452,6 +6062,7 @@ function handleNewTransaction(tx){
             tx.type || ""
         ).toLowerCase();
 
+
     const category =
         String(
             tx.category ||
@@ -4459,40 +6070,57 @@ function handleNewTransaction(tx){
             ""
         ).toLowerCase();
 
+
     const title =
         String(
             tx.title || ""
         ).toLowerCase();
 
+
     const isRefund =
         type === "credit" &&
         (
-            category.includes("refund") ||
-            category.includes("cancel") ||
-            title.includes("refund") ||
-            title.includes("cancel")
+            category.includes(
+                "refund"
+            ) ||
+            category.includes(
+                "cancel"
+            ) ||
+            title.includes(
+                "refund"
+            ) ||
+            title.includes(
+                "cancel"
+            )
         );
+
 
     if(!isRefund){
         return;
     }
+
 
     if(
         refundMessageShown.has(
             tx.id
         )
     ){
+
         return;
+
     }
+
 
     refundMessageShown.add(
         tx.id
     );
 
+
     const amount =
         Number(
             tx.amount || 0
         );
+
 
     showToast(
         amount > 0
@@ -4506,7 +6134,7 @@ function handleNewTransaction(tx){
 
 
 /* =====================================================
-   RENDER
+   RENDER TRANSACTIONS
 ===================================================== */
 
 function renderTransactions(){
@@ -4516,20 +6144,25 @@ function renderTransactions(){
             "historyList"
         );
 
+
     const count =
         document.getElementById(
             "historyCount"
         );
 
+
     if(!box){
         return;
     }
 
+
     let list =
         [...transactions];
 
+
     if(
-        currentFilter !== "all"
+        currentFilter !==
+        "all"
     ){
 
         list =
@@ -4541,6 +6174,7 @@ function renderTransactions(){
                             tx.type || ""
                         ).toLowerCase();
 
+
                     const category =
                         String(
                             tx.category ||
@@ -4548,31 +6182,40 @@ function renderTransactions(){
                             ""
                         ).toLowerCase();
 
+
                     const title =
                         String(
                             tx.title || ""
                         ).toLowerCase();
 
+
                     if(
                         currentFilter ===
                         "credit"
                     ){
+
                         return type ===
                             "credit";
+
                     }
+
 
                     if(
                         currentFilter ===
                         "debit"
                     ){
+
                         return type ===
                             "debit";
+
                     }
+
 
                     if(
                         currentFilter ===
                         "deposit"
                     ){
+
                         return (
                             category.includes(
                                 "deposit"
@@ -4581,12 +6224,15 @@ function renderTransactions(){
                                 "deposit"
                             )
                         );
+
                     }
+
 
                     if(
                         currentFilter ===
                         "withdraw"
                     ){
+
                         return (
                             category.includes(
                                 "withdraw"
@@ -4595,12 +6241,15 @@ function renderTransactions(){
                                 "withdraw"
                             )
                         );
+
                     }
+
 
                     if(
                         currentFilter ===
                         "match"
                     ){
+
                         return (
                             category.includes(
                                 "match"
@@ -4609,12 +6258,15 @@ function renderTransactions(){
                                 "match"
                             )
                         );
+
                     }
+
 
                     if(
                         currentFilter ===
                         "reward"
                     ){
+
                         return (
                             category.includes(
                                 "reward"
@@ -4635,7 +6287,9 @@ function renderTransactions(){
                                 "cashback"
                             )
                         );
+
                     }
+
 
                     return true;
 
@@ -4697,11 +6351,13 @@ function renderTransactions(){
                     tx.amount || 0
                 );
 
+
             const type =
                 String(
                     tx.type ||
                     "credit"
                 ).toLowerCase();
+
 
             const status =
                 String(
@@ -4709,59 +6365,81 @@ function renderTransactions(){
                     "completed"
                 ).toLowerCase();
 
+
             const title =
                 String(
                     tx.title ||
                     "Transaction"
                 );
 
+
             let icon =
                 "💳";
 
+
             const lower =
                 title.toLowerCase();
+
 
             if(
                 lower.includes(
                     "refund"
                 )
             ){
-                icon = "↩️";
+
+                icon =
+                    "↩️";
+
             }
             else if(
                 lower.includes(
                     "deposit"
                 )
             ){
-                icon = "🟢";
+
+                icon =
+                    "🟢";
+
             }
             else if(
                 lower.includes(
                     "withdraw"
                 )
             ){
-                icon = "💸";
+
+                icon =
+                    "💸";
+
             }
             else if(
                 lower.includes(
                     "match"
                 )
             ){
-                icon = "🎮";
+
+                icon =
+                    "🎮";
+
             }
             else if(
                 lower.includes(
                     "win"
                 )
             ){
-                icon = "🏆";
+
+                icon =
+                    "🏆";
+
             }
             else if(
                 lower.includes(
                     "reward"
                 )
             ){
-                icon = "🎁";
+
+                icon =
+                    "🎁";
+
             }
 
 
@@ -4774,21 +6452,36 @@ function renderTransactions(){
                     ).toLocaleString(
                         "en-IN",
                         {
-                            day:"2-digit",
-                            month:"short",
-                            year:"numeric",
-                            hour:"2-digit",
-                            minute:"2-digit"
+                            day:
+                                "2-digit",
+
+                            month:
+                                "short",
+
+                            year:
+                                "numeric",
+
+                            hour:
+                                "2-digit",
+
+                            minute:
+                                "2-digit"
                         }
                     )
                     : "--";
 
 
             const statusClass =
-                status === "pending"
+                status ===
+                "pending"
+
                     ? "pending-text"
-                    : status === "rejected"
+
+                    : status ===
+                      "rejected"
+
                         ? "rejected-text"
+
                         : "completed-text";
 
 
@@ -4797,8 +6490,10 @@ function renderTransactions(){
                     "div"
                 );
 
+
             row.className =
                 "history";
+
 
             row.innerHTML = `
 
@@ -4853,6 +6548,7 @@ function renderTransactions(){
 
             `;
 
+
             box.appendChild(
                 row
             );
@@ -4864,7 +6560,7 @@ function renderTransactions(){
 
 
 /* =====================================================
-   PENDING
+   PENDING REQUESTS
 ===================================================== */
 
 function loadPendingRequests(){
@@ -4878,7 +6574,9 @@ function loadPendingRequests(){
 
         snapshot=>{
 
-            let count = 0;
+            let count =
+                0;
+
 
             if(snapshot.exists()){
 
@@ -4888,15 +6586,18 @@ function loadPendingRequests(){
                         const data =
                             item.val() || {};
 
+
                         if(
                             data.uid === UID &&
                             String(
                                 data.status ||
                                 "pending"
                             ).toLowerCase() ===
-                            "pending"
+                                "pending"
                         ){
+
                             count++;
+
                         }
 
                     }
@@ -4904,10 +6605,12 @@ function loadPendingRequests(){
 
             }
 
+
             const element =
                 document.getElementById(
                     "pendingDeposits"
                 );
+
 
             if(element){
 
@@ -4930,7 +6633,9 @@ function loadPendingRequests(){
 
         snapshot=>{
 
-            let count = 0;
+            let count =
+                0;
+
 
             if(snapshot.exists()){
 
@@ -4940,15 +6645,18 @@ function loadPendingRequests(){
                         const data =
                             item.val() || {};
 
+
                         if(
                             data.uid === UID &&
                             String(
                                 data.status ||
                                 "pending"
                             ).toLowerCase() ===
-                            "pending"
+                                "pending"
                         ){
+
                             count++;
+
                         }
 
                     }
@@ -4956,10 +6664,12 @@ function loadPendingRequests(){
 
             }
 
+
             const element =
                 document.getElementById(
                     "pendingWithdraws"
                 );
+
 
             if(element){
 
@@ -4979,7 +6689,9 @@ function loadPendingRequests(){
    TOAST
 ===================================================== */
 
-let toastTimer = null;
+let toastTimer =
+    null;
+
 
 window.showToast =
 function(message){
@@ -4989,27 +6701,34 @@ function(message){
             "toast"
         );
 
+
     if(!toast){
         return;
     }
 
+
     toast.innerText =
         String(message);
+
 
     toast.classList.add(
         "show"
     );
 
+
     clearTimeout(
         toastTimer
     );
 
+
     toastTimer =
         setTimeout(
             ()=>{
+
                 toast.classList.remove(
                     "show"
                 );
+
             },
             2500
         );
@@ -5018,7 +6737,7 @@ function(message){
 
 
 /* =====================================================
-   ESCAPE
+   ESCAPE HTML
 ===================================================== */
 
 function escapeHTML(value){
@@ -5062,7 +6781,8 @@ document.addEventListener(
     event=>{
 
         if(
-            event.key === "Escape"
+            event.key ===
+            "Escape"
         ){
 
             if(!accountFrozen){
@@ -5080,7 +6800,7 @@ document.addEventListener(
 
 
 /* =====================================================
-   MODAL CLICK GUARD
+   FREEZE CLICK GUARD
 ===================================================== */
 
 document.addEventListener(
@@ -5091,13 +6811,10 @@ document.addEventListener(
             return;
         }
 
+
         const target =
             event.target;
 
-        /*
-         * Freeze hone ke baad
-         * kisi bhi action ko prevent.
-         */
 
         if(
             target.closest(
@@ -5123,6 +6840,22 @@ document.addEventListener(
 
 console.log(
     "BGMI PAY Wallet loaded."
+);
+
+console.log(
+    "Minimum Deposit: ₹100"
+);
+
+console.log(
+    "Minimum Withdrawal: ₹250"
+);
+
+console.log(
+    "Wallet Maintenance: ₹50"
+);
+
+console.log(
+    "UPI Apps: Google Pay / PhonePe / Paytm / FamPay"
 );
 
 console.log(
