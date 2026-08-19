@@ -3164,11 +3164,16 @@ alt="UPI QR">
 </div>
 
 
-<!-- ORIGINAL PAYMENT OPTIONS -->
+<!-- PAYMENT OPTIONS -->
 
 <div class="payment-apps">
 
-    <button class="app-btn gpay-btn" type="button">
+    <!-- GOOGLE PAY -->
+    <button
+        class="app-btn gpay-btn"
+        type="button"
+        onclick="openUPIApp('gpay')"
+    >
         <img
             class="payment-logo"
             src="https://cdn.simpleicons.org/googlepay"
@@ -3177,7 +3182,13 @@ alt="UPI QR">
         <span class="payment-name">Google Pay</span>
     </button>
 
-    <button class="app-btn phonepe-btn" type="button">
+
+    <!-- PHONEPE -->
+    <button
+        class="app-btn phonepe-btn"
+        type="button"
+        onclick="openUPIApp('phonepe')"
+    >
         <img
             class="payment-logo"
             src="https://cdn.simpleicons.org/phonepe"
@@ -3186,7 +3197,13 @@ alt="UPI QR">
         <span class="payment-name">PhonePe</span>
     </button>
 
-    <button class="app-btn paytm-btn" type="button">
+
+    <!-- PAYTM -->
+    <button
+        class="app-btn paytm-btn"
+        type="button"
+        onclick="openUPIApp('paytm')"
+    >
         <img
             class="payment-logo"
             src="https://cdn.simpleicons.org/paytm"
@@ -3195,7 +3212,13 @@ alt="UPI QR">
         <span class="payment-name">Paytm</span>
     </button>
 
-    <button class="app-btn fampay-btn" type="button">
+
+    <!-- FAMPAY -->
+    <button
+        class="app-btn fampay-btn"
+        type="button"
+        onclick="openUPIApp('fampay')"
+    >
         <img
             class="payment-logo fampay-logo"
             src="https://cdn.simpleicons.org/fampay"
