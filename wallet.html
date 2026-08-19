@@ -1525,246 +1525,125 @@ body::after{
 
 
 /* =========================================================
-   ⭐ PREMIUM UPI PAYMENT APPS
-   IMAGE 2 STYLE
+   PREMIUM PAYMENT APP CARDS — OPTION 2 DESIGN
 ========================================================= */
 
 .payment-apps{
     display:grid;
-
-    grid-template-columns:repeat(2,minmax(0,1fr));
-
-    gap:10px;
-
-    margin-top:14px;
-
-    width:100%;
+    grid-template-columns:repeat(2,1fr);
+    gap:9px;
+    margin-top:13px;
 }
-
-
-/* ---------------------------------------------------------
-   PAYMENT CARD
---------------------------------------------------------- */
 
 .app-btn{
     position:relative;
-
     overflow:hidden;
 
-    min-height:78px;
-
-    padding:10px 10px 10px 11px;
+    min-height:68px;
+    padding:10px 11px;
 
     display:flex;
-
     align-items:center;
 
-    justify-content:flex-start;
+    gap:9px;
 
-    gap:10px;
+    text-align:left;
 
     border-radius:15px;
-
-    border:1px solid #294355;
 
     color:#fff;
 
     background:
-        radial-gradient(
-            circle at 0% 100%,
-            rgba(0,217,255,.075),
-            transparent 52%
-        ),
         linear-gradient(
             145deg,
-            #102333,
-            #091722
+            #10202d,
+            #091621
         );
 
-    font-size:11px;
-    font-weight:900;
+    border:1px solid #263e50;
 
     cursor:pointer;
 
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.055),
-        inset 0 -1px 0 rgba(0,0,0,.35),
-        0 8px 25px rgba(0,0,0,.20);
+        inset 0 1px 0 rgba(255,255,255,.045),
+        0 8px 25px rgba(0,0,0,.18);
 
     transition:
-        transform .17s cubic-bezier(.2,.8,.2,1),
-        border-color .22s ease,
-        box-shadow .22s ease,
-        background .22s ease,
-        filter .22s ease;
+        transform .16s ease,
+        border-color .2s ease,
+        box-shadow .2s ease,
+        filter .2s ease;
 }
-
-
-/* top shine */
 
 .app-btn::before{
     content:"";
 
     position:absolute;
-
-    top:0;
-    left:-120%;
-
-    width:90%;
-    height:100%;
-
-    transform:skewX(-18deg);
+    inset:0;
 
     background:
         linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.10),
-            transparent
+            120deg,
+            transparent 20%,
+            rgba(255,255,255,.075) 48%,
+            transparent 76%
         );
 
-    transition:
-        left .65s ease;
-
-    pointer-events:none;
-}
-
-
-/* bottom glow */
-
-.app-btn::after{
-    content:"";
-
-    position:absolute;
-
-    width:90px;
-    height:90px;
-
-    right:-48px;
-    bottom:-48px;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(76,255,145,.12),
-            transparent 68%
-        );
-
-    pointer-events:none;
+    transform:translateX(-120%);
 
     transition:
-        transform .3s ease,
-        opacity .3s ease;
-}
+        transform .55s ease;
 
-
-/* hover */
-
-.app-btn:hover{
-    transform:translateY(-2px);
-
-    filter:brightness(1.07);
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.065),
-        0 12px 30px rgba(0,0,0,.28);
+    pointer-events:none;
 }
 
 .app-btn:hover::before{
-    left:140%;
+    transform:translateX(120%);
 }
 
-.app-btn:hover::after{
-    transform:scale(1.35);
+.app-btn:hover{
+    transform:translateY(-1px);
+
+    filter:brightness(1.06);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.06),
+        0 12px 30px rgba(0,0,0,.25);
 }
-
-
-/* press */
 
 .app-btn:active{
-    transform:
-        translateY(1px)
-        scale(.965);
-
-    filter:brightness(.97);
+    transform:scale(.95);
 }
 
 
-/* ---------------------------------------------------------
-   LOGO HOLDER
---------------------------------------------------------- */
+/* LOGO */
 
 .payment-logo{
-    position:relative;
-
-    width:51px;
-    height:51px;
+    width:36px;
+    height:36px;
 
     flex:none;
 
-    display:block;
-
     object-fit:contain;
 
-    border-radius:14px;
+    padding:5px;
+
+    border-radius:10px;
 
     background:#fff;
 
-    padding:7px;
-
-    border:1px solid rgba(255,255,255,.25);
-
     box-shadow:
-        0 8px 20px rgba(0,0,0,.30),
-        inset 0 1px 0 rgba(255,255,255,.75);
+        0 5px 16px rgba(0,0,0,.28);
 
-    transition:
-        transform .22s ease,
-        box-shadow .22s ease;
+    z-index:1;
+}
+
+.fampay-logo{
+    padding:4px;
 }
 
 
-/* logo hover */
-
-.app-btn:hover .payment-logo{
-    transform:
-        scale(1.055)
-        rotate(-1deg);
-
-    box-shadow:
-        0 10px 25px rgba(0,0,0,.38),
-        0 0 18px rgba(255,255,255,.05),
-        inset 0 1px 0 rgba(255,255,255,.80);
-}
-
-
-/* =========================================================
-   AUTO REAL LOGOS
-   CSS OVERRIDES IMG CONTENT
-========================================================= */
-
-.gpay-btn .payment-logo{
-    content:url("https://cdn.simpleicons.org/googlepay");
-}
-
-.phonepe-btn .payment-logo{
-    content:url("https://cdn.simpleicons.org/phonepe");
-}
-
-.paytm-btn .payment-logo{
-    content:url("https://cdn.simpleicons.org/paytm");
-}
-
-.fampay-btn .payment-logo{
-    content:url("https://cdn.simpleicons.org/fampay");
-}
-
-
-/* =========================================================
-   APP INFORMATION
-========================================================= */
+/* TEXT AREA */
 
 .payment-info{
     min-width:0;
@@ -1772,24 +1651,19 @@ body::after{
     flex:1;
 
     display:flex;
-
     flex-direction:column;
 
     justify-content:center;
 
-    text-align:left;
+    z-index:1;
 }
 
 .payment-name{
-    display:block;
-
-    color:#fff;
-
-    font-size:12px;
-
-    line-height:1.2;
+    font-size:11px;
 
     font-weight:900;
+
+    line-height:1.2;
 
     white-space:nowrap;
 
@@ -1798,824 +1672,201 @@ body::after{
     text-overflow:ellipsis;
 }
 
-.payment-subtitle{
-    display:block;
+.payment-sub{
+    margin-top:4px;
 
-    margin-top:5px;
+    color:#4cff91;
 
-    color:#8497ab;
+    font-size:8px;
 
-    font-size:9px;
-
-    line-height:1.2;
-
-    font-weight:700;
+    font-weight:800;
 
     white-space:nowrap;
 }
 
 
-/* =========================================================
-   GREEN ARROW
-========================================================= */
+/* ARROW */
 
 .payment-arrow{
-    width:28px;
-    height:28px;
-
     flex:none;
 
-    display:flex;
+    width:22px;
+    height:22px;
 
+    display:flex;
     align-items:center;
     justify-content:center;
 
-    border-radius:50%;
+    border-radius:7px;
+
+    color:#91a5b6;
+
+    background:
+        rgba(255,255,255,.035);
+
+    font-size:18px;
+
+    line-height:1;
+
+    z-index:1;
+
+    transition:
+        transform .2s ease,
+        color .2s ease,
+        background .2s ease;
+}
+
+.app-btn:hover .payment-arrow{
+    transform:translateX(2px);
 
     color:#4cff91;
 
     background:
-        rgba(76,255,145,.08);
-
-    border:1px solid rgba(76,255,145,.55);
-
-    font-size:16px;
-    font-weight:900;
-
-    box-shadow:
-        0 0 16px rgba(76,255,145,.08),
-        inset 0 1px 0 rgba(255,255,255,.06);
-
-    transition:
-        transform .22s ease,
-        background .22s ease,
-        box-shadow .22s ease;
-}
-
-.app-btn:hover .payment-arrow{
-    transform:
-        translateX(2px)
-        scale(1.08);
-
-    background:
-        rgba(76,255,145,.15);
-
-    box-shadow:
-        0 0 22px rgba(76,255,145,.18);
+        rgba(76,255,145,.07);
 }
 
 
-/* =========================================================
-   G-PAY
-========================================================= */
+/* GOOGLE PAY */
 
 .gpay-btn{
     border-color:
-        rgba(0,174,239,.50);
-
-    background:
-        radial-gradient(
-            circle at 0% 100%,
-            rgba(0,174,239,.10),
-            transparent 55%
-        ),
-        linear-gradient(
-            145deg,
-            #10283a,
-            #091722
-        );
+        rgba(66,133,244,.30);
 }
 
 .gpay-btn:hover{
     border-color:
-        #00baf5;
+        rgba(66,133,244,.70);
 
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.07),
-        0 12px 32px rgba(0,0,0,.30),
-        0 0 25px rgba(0,174,239,.12);
+        0 0 24px rgba(66,133,244,.10),
+        inset 0 1px 0 rgba(255,255,255,.05);
 }
 
 
-/* =========================================================
-   PHONEPE
-========================================================= */
+/* PHONEPE */
 
 .phonepe-btn{
     border-color:
-        rgba(139,92,255,.58);
-
-    background:
-        radial-gradient(
-            circle at 0% 100%,
-            rgba(139,92,255,.12),
-            transparent 55%
-        ),
-        linear-gradient(
-            145deg,
-            #17152e,
-            #0b1020
-        );
+        rgba(95,54,255,.30);
 }
 
 .phonepe-btn:hover{
     border-color:
-        #a174ff;
+        rgba(95,54,255,.70);
 
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.07),
-        0 12px 32px rgba(0,0,0,.30),
-        0 0 28px rgba(139,92,255,.14);
+        0 0 24px rgba(95,54,255,.12),
+        inset 0 1px 0 rgba(255,255,255,.05);
 }
 
 
-/* =========================================================
-   PAYTM
-========================================================= */
+/* PAYTM */
 
 .paytm-btn{
     border-color:
-        rgba(0,174,239,.52);
-
-    background:
-        radial-gradient(
-            circle at 0% 100%,
-            rgba(0,174,239,.10),
-            transparent 55%
-        ),
-        linear-gradient(
-            145deg,
-            #10283a,
-            #091722
-        );
+        rgba(0,186,242,.30);
 }
 
 .paytm-btn:hover{
     border-color:
-        #00c5ff;
+        rgba(0,186,242,.70);
 
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.07),
-        0 12px 32px rgba(0,0,0,.30),
-        0 0 25px rgba(0,174,239,.12);
+        0 0 24px rgba(0,186,242,.10),
+        inset 0 1px 0 rgba(255,255,255,.05);
 }
 
 
-/* =========================================================
-   FAMPAY
-========================================================= */
+/* FAMPAY */
 
 .fampay-btn{
     border-color:
-        rgba(255,174,0,.65);
-
-    background:
-        radial-gradient(
-            circle at 0% 100%,
-            rgba(255,174,0,.10),
-            transparent 55%
-        ),
-        linear-gradient(
-            145deg,
-            #2a2010,
-            #12100b
-        );
+        rgba(124,58,237,.30);
 }
 
 .fampay-btn:hover{
     border-color:
-        #ffb51b;
+        rgba(124,58,237,.70);
 
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.07),
-        0 12px 32px rgba(0,0,0,.30),
-        0 0 28px rgba(255,174,0,.13);
+        0 0 24px rgba(124,58,237,.12),
+        inset 0 1px 0 rgba(255,255,255,.05);
 }
 
 
-/* =========================================================
-   SELECTED PAYMENT APP
-========================================================= */
-
-.app-btn.selected,
-.app-btn.active{
-    border-color:#4cff91;
-
-    background:
-        radial-gradient(
-            circle at 0% 100%,
-            rgba(76,255,145,.13),
-            transparent 55%
-        ),
-        linear-gradient(
-            145deg,
-            #102d20,
-            #091b15
-        );
-
-    box-shadow:
-        0 0 0 1px rgba(76,255,145,.12),
-        0 12px 32px rgba(0,0,0,.30),
-        0 0 28px rgba(76,255,145,.12);
-}
-
-.app-btn.selected .payment-arrow,
-.app-btn.active .payment-arrow{
-    background:#4cff91;
-    color:#03120a;
-
-    box-shadow:
-        0 0 20px rgba(76,255,145,.25);
-}
-
-
-/* =========================================================
-   PAYMENT DIVIDER
-========================================================= */
-
-.payment-divider{
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    margin:18px 5px 11px;
-
-    color:#7d91a6;
-
-    font-size:12px;
-    font-weight:900;
-}
-
-.payment-divider::before,
-.payment-divider::after{
-    content:"";
-
-    flex:1;
-
-    height:1px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            #294052
-        );
-}
-
-.payment-divider::after{
-    background:
-        linear-gradient(
-            90deg,
-            #294052,
-            transparent
-        );
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-.toast{
-    position:fixed;
-
-    left:50%;
-
-    bottom:
-        calc(
-            78px +
-            env(safe-area-inset-bottom)
-        );
-
-    transform:
-        translate(-50%,20px)
-        scale(.96);
-
-    opacity:0;
-
-    pointer-events:none;
-
-    z-index:10000;
-
-    width:max-content;
-    max-width:90%;
-
-    padding:12px 16px;
-
-    border-radius:13px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(20,38,51,.98),
-            rgba(12,27,38,.98)
-        );
-
-    border:1px solid #30495b;
-
-    color:#fff;
-
-    font-size:11px;
-
-    text-align:center;
-
-    box-shadow:
-        0 18px 50px rgba(0,0,0,.45),
-        0 0 25px rgba(76,255,145,.025);
-
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-
-    transition:
-        opacity .25s ease,
-        transform .25s cubic-bezier(.2,.8,.2,1);
-}
-
-.toast.show{
-    opacity:1;
-
-    transform:
-        translate(-50%,0)
-        scale(1);
-}
-
-
-/* =========================================================
-   PREMIUM BOTTOM NAV
-========================================================= */
-
-.bottom-nav{
-    position:fixed;
-
-    z-index:4000;
-
-    left:50%;
-    bottom:8px;
-
-    transform:translateX(-50%);
-
-    width:
-        min(
-            calc(520px - 20px),
-            calc(100% - 20px)
-        );
-
-    height:
-        calc(
-            64px +
-            env(safe-area-inset-bottom)
-        );
-
-    padding:
-        0
-        4px
-        env(safe-area-inset-bottom);
-
-    display:flex;
-
-    align-items:center;
-    justify-content:space-around;
-
-    border-radius:18px;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(11,25,37,.98),
-            rgba(5,13,21,.99)
-        );
-
-    border:1px solid #203748;
-
-    box-shadow:
-        0 18px 55px rgba(0,0,0,.55),
-        inset 0 1px 0 rgba(255,255,255,.045);
-
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-}
-
-.nav-item{
-    flex:1;
-
-    height:60px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-    justify-content:center;
-
-    gap:3px;
-
-    position:relative;
-
-    color:#627486;
-
-    text-decoration:none;
-
-    font-size:9px;
-    font-weight:800;
-
-    border-radius:14px;
-
-    transition:
-        color .2s ease,
-        transform .15s ease,
-        background .2s ease;
-}
-
-.nav-icon{
-    font-size:18px;
-
-    transition:
-        transform .2s ease,
-        filter .2s ease;
-}
-
-.nav-item:active{
-    transform:scale(.93);
-}
-
-.nav-item.active{
-    color:#4cff91;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(76,255,145,.055),
-            transparent
-        );
-}
-
-.nav-item.active .nav-icon{
-    transform:
-        translateY(-1px)
-        scale(1.08);
-
-    filter:
-        drop-shadow(
-            0 0 9px rgba(76,255,145,.28)
-        );
-}
-
-.nav-item.active::after{
-    content:"";
-
-    position:absolute;
-
-    left:50%;
-    bottom:3px;
-
-    width:24px;
-    height:3px;
-
-    transform:translateX(-50%);
-
-    border-radius:10px;
-
-    background:#4cff91;
-
-    box-shadow:
-        0 0 14px rgba(76,255,145,.40);
-}
-
-
-/* =========================================================
-   FREEZE OVERLAY
-========================================================= */
-
-.freeze-overlay{
-    position:fixed;
-    inset:0;
-
-    z-index:999999;
-
-    display:none;
-
-    align-items:center;
-    justify-content:center;
-
-    padding:20px;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(255,50,70,.14),
-            rgba(0,0,0,.98) 68%
-        );
-
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-}
-
-.freeze-overlay.show{
-    display:flex;
-    animation:freezeFade .25s ease;
-}
-
-.freeze-box{
-    width:min(390px,100%);
-
-    padding:28px 22px;
-
-    text-align:center;
-
-    border-radius:24px;
-
-    background:
-        radial-gradient(
-            circle at top center,
-            rgba(255,50,70,.10),
-            transparent 45%
-        ),
-        linear-gradient(
-            145deg,
-            #160b0e,
-            #080b10
-        );
-
-    border:1px solid #71313c;
-
-    box-shadow:
-        0 30px 100px rgba(0,0,0,.80),
-        0 0 50px rgba(255,50,70,.09),
-        inset 0 1px 0 rgba(255,255,255,.03);
-
-    animation:
-        freezePop .3s cubic-bezier(.2,.8,.2,1);
-}
-
-.freeze-icon{
-    width:72px;
-    height:72px;
-
-    margin:0 auto 16px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:22px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,95,112,.16),
-            #281015
-        );
-
-    border:1px solid #74313c;
-
-    font-size:35px;
-
-    box-shadow:
-        0 0 30px rgba(255,50,70,.08);
-
-    animation:
-        freezePulse 2s ease-in-out infinite;
-}
-
-.freeze-title{
-    color:#ff5f70;
-    font-size:22px;
-    font-weight:900;
-}
-
-.freeze-subtitle{
-    margin-top:8px;
-    color:#fff;
-    font-size:13px;
-    font-weight:800;
-}
-
-.freeze-text{
-    margin-top:11px;
-    color:#9b8990;
-    font-size:11px;
-    line-height:1.7;
-}
-
-.freeze-status{
-    margin-top:17px;
-
-    padding:10px;
-
-    border-radius:10px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #1d0d11,
-            #1a0d11
-        );
-
-    border:1px solid #4c222b;
-
-    color:#ff6978;
-
-    font-size:9px;
-    font-weight:900;
-    letter-spacing:.5px;
-}
-
-@keyframes freezeFade{
-
-    from{opacity:0;}
-    to{opacity:1;}
-}
-
-@keyframes freezePop{
-
-    from{
-        opacity:0;
-        transform:scale(.91);
-    }
-
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
-}
-
-@keyframes freezePulse{
-
-    0%,
-    100%{
-        box-shadow:
-            0 0 25px rgba(255,50,70,.06);
-    }
-
-    50%{
-        box-shadow:
-            0 0 40px rgba(255,50,70,.18);
-    }
-}
-
-
-/* =========================================================
-   LOADING SHIMMER
-========================================================= */
-
-.loading-shimmer{
-    position:relative;
-    overflow:hidden;
-    background:#0b1824;
-}
-
-.loading-shimmer::after{
-    content:"";
-
-    position:absolute;
-    inset:0;
-
-    transform:translateX(-100%);
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.06),
-            transparent
-        );
-
-    animation:
-        shimmer 1.25s infinite;
-}
-
-@keyframes shimmer{
-
-    100%{
-        transform:translateX(100%);
-    }
-}
-
-
-/* =========================================================
-   PREMIUM PULSE
-========================================================= */
-
-.premium-pulse{
-    animation:
-        premiumPulse 2s ease-in-out infinite;
-}
-
-@keyframes premiumPulse{
-
-    0%,
-    100%{
-        filter:brightness(1);
-    }
-
-    50%{
-        filter:brightness(1.08);
-    }
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
+/* SMALL MOBILE */
 
 @media(max-width:380px){
 
-    .app{
-        padding-left:11px;
-        padding-right:11px;
-
-        padding-bottom:
-            calc(
-                102px +
-                env(safe-area-inset-bottom)
-            );
-    }
-
-    .wallet-card{
-        padding:16px;
-    }
-
-    .wallet-amount{
-        font-size:31px;
-    }
-
-    .header-title{
-        font-size:16px;
-    }
-
-    .status-item{
-        padding:11px;
-    }
-
-    .status-number{
-        font-size:20px;
-    }
-
-    .quick-grid{
-        gap:5px;
-    }
-
-    .quick-btn{
-        font-size:10px;
-    }
-
-    .qr-wrap img{
-        width:190px;
-        height:190px;
-    }
-
-    .bottom-nav{
-        bottom:6px;
-    }
-
-
-    /* PAYMENT */
-
     .payment-apps{
-        gap:8px;
+        gap:7px;
     }
 
     .app-btn{
-        min-height:72px;
+        min-height:64px;
 
         padding:
-            9px
-            8px
-            9px
-            9px;
+            9px 8px;
 
-        gap:8px;
-
-        border-radius:14px;
+        gap:7px;
     }
 
     .payment-logo{
-        width:45px;
-        height:45px;
+        width:32px;
+        height:32px;
 
-        padding:6px;
-
-        border-radius:12px;
+        padding:4px;
     }
 
     .payment-name{
-        font-size:11px;
+        font-size:10px;
     }
 
-    .payment-subtitle{
-        font-size:8px;
-        margin-top:4px;
+    .payment-sub{
+        font-size:7px;
     }
 
     .payment-arrow{
-        width:25px;
-        height:25px;
-        font-size:14px;
+        width:20px;
+        height:20px;
+
+        font-size:16px;
     }
 }
 
+
+/* VERY SMALL */
+
+@media(max-width:330px){
+
+    .payment-apps{
+        gap:6px;
+    }
+
+    .app-btn{
+        min-height:60px;
+
+        padding:
+            8px 7px;
+    }
+
+    .payment-logo{
+        width:29px;
+        height:29px;
+    }
+
+    .payment-name{
+        font-size:9px;
+    }
+
+    .payment-sub{
+        font-size:6.5px;
+    }
+
+    .payment-arrow{
+        display:none;
+    }
+}
 
 /* =========================================================
    VERY SMALL DEVICES
@@ -3164,7 +2415,9 @@ alt="UPI QR">
 </div>
 
 
-<!-- PAYMENT OPTIONS -->
+<!-- =========================================================
+     PREMIUM PAYMENT APPS
+========================================================= -->
 
 <div class="payment-apps">
 
@@ -3172,14 +2425,26 @@ alt="UPI QR">
     <button
         class="app-btn gpay-btn"
         type="button"
-        onclick="openUPIApp('gpay')"
+        onclick="payWithUPI('gpay')"
     >
         <img
             class="payment-logo"
-            src="https://cdn.simpleicons.org/googlepay"
+            src="https://cdn.simpleicons.org/googlepay/4285F4"
             alt="Google Pay"
+            onerror="this.style.display='none'"
         >
-        <span class="payment-name">Google Pay</span>
+
+        <span class="payment-info">
+            <span class="payment-name">
+                Google Pay
+            </span>
+
+            <span class="payment-sub">
+                Secure & Fast
+            </span>
+        </span>
+
+        <span class="payment-arrow">›</span>
     </button>
 
 
@@ -3187,14 +2452,26 @@ alt="UPI QR">
     <button
         class="app-btn phonepe-btn"
         type="button"
-        onclick="openUPIApp('phonepe')"
+        onclick="payWithUPI('phonepe')"
     >
         <img
             class="payment-logo"
-            src="https://cdn.simpleicons.org/phonepe"
+            src="https://cdn.simpleicons.org/phonepe/5F259F"
             alt="PhonePe"
+            onerror="this.style.display='none'"
         >
-        <span class="payment-name">PhonePe</span>
+
+        <span class="payment-info">
+            <span class="payment-name">
+                PhonePe
+            </span>
+
+            <span class="payment-sub">
+                Secure & Fast
+            </span>
+        </span>
+
+        <span class="payment-arrow">›</span>
     </button>
 
 
@@ -3202,14 +2479,26 @@ alt="UPI QR">
     <button
         class="app-btn paytm-btn"
         type="button"
-        onclick="openUPIApp('paytm')"
+        onclick="payWithUPI('paytm')"
     >
         <img
             class="payment-logo"
-            src="https://cdn.simpleicons.org/paytm"
+            src="https://cdn.simpleicons.org/paytm/00BAF2"
             alt="Paytm"
+            onerror="this.style.display='none'"
         >
-        <span class="payment-name">Paytm</span>
+
+        <span class="payment-info">
+            <span class="payment-name">
+                Paytm
+            </span>
+
+            <span class="payment-sub">
+                Secure & Fast
+            </span>
+        </span>
+
+        <span class="payment-arrow">›</span>
     </button>
 
 
@@ -3217,18 +2506,29 @@ alt="UPI QR">
     <button
         class="app-btn fampay-btn"
         type="button"
-        onclick="openUPIApp('fampay')"
+        onclick="payWithUPI('fampay')"
     >
         <img
             class="payment-logo fampay-logo"
-            src="https://cdn.simpleicons.org/fampay"
+            src="https://cdn.simpleicons.org/fampay/7C3AED"
             alt="FamPay"
+            onerror="this.style.display='none'"
         >
-        <span class="payment-name">FamPay</span>
+
+        <span class="payment-info">
+            <span class="payment-name">
+                FamPay
+            </span>
+
+            <span class="payment-sub">
+                Secure & Fast
+            </span>
+        </span>
+
+        <span class="payment-arrow">›</span>
     </button>
 
 </div>
-
 
 <div class="input-label"
 style="margin-top:14px;">
@@ -4847,38 +4147,22 @@ function createPaymentButtons(){
    UPI PAYMENT
 ===================================================== */
 
-window.payWithUPI =
-function(appName){
+/* =========================================================
+   OPEN SPECIFIC UPI APP
+   GPay / PhonePe / Paytm / FamPay
+========================================================= */
 
-    if(isAccountFrozen()){
-        return;
-    }
+window.payWithUPI = function(appName){
 
-
-    if(!selectedDepositAmount){
-
+    if(
+        !selectedDepositAmount ||
+        selectedDepositAmount < 10
+    ){
         showToast(
             "Please enter amount first"
         );
-
         return;
-
     }
-
-
-    if(
-        selectedDepositAmount <
-        MIN_DEPOSIT
-    ){
-
-        showToast(
-            "Minimum deposit is ₹100"
-        );
-
-        return;
-
-    }
-
 
     if(!adminUPIValue){
 
@@ -4887,7 +4171,6 @@ function(appName){
         );
 
         return;
-
     }
 
 
@@ -4903,22 +4186,23 @@ function(appName){
         );
 
 
+    const pn =
+        encodeURIComponent(
+            "BGMI PAY"
+        );
+
+
     /*
-     * STANDARD UPI
+     * Standard UPI URL
+     * This is our final fallback.
      */
 
-    const standard =
+    const standardUPI =
         "upi://pay" +
-        "?pa=" +
-        pa +
-        "&pn=BGMI%20PAY" +
-        "&am=" +
-        amount +
+        "?pa=" + pa +
+        "&pn=" + pn +
+        "&am=" + amount +
         "&cu=INR";
-
-
-    let url =
-        standard;
 
 
     const name =
@@ -4927,117 +4211,157 @@ function(appName){
         ).toLowerCase();
 
 
+    let packageName = "";
+
+
     /*
-     * GOOGLE PAY
+     * ANDROID PACKAGE
      */
 
     if(name === "gpay"){
 
-        url =
-            "tez://upi/pay" +
-            "?pa=" +
-            pa +
-            "&pn=BGMI%20PAY" +
-            "&am=" +
-            amount +
-            "&cu=INR";
+        packageName =
+            "com.google.android.apps.nbu.paisa.user";
 
     }
 
+    else if(name === "phonepe"){
+
+        packageName =
+            "com.phonepe.app";
+
+    }
+
+    else if(name === "paytm"){
+
+        packageName =
+            "net.one97.paytm";
+
+    }
 
     /*
-     * PHONEPE
+     * FamPay package can vary by app/version.
+     * We therefore use its direct scheme first,
+     * then standard UPI fallback.
      */
 
-    else if(
-        name === "phonepe"
-    ){
+    if(name === "fampay"){
 
-        url =
-            "phonepe://pay" +
-            "?pa=" +
-            pa +
-            "&pn=BGMI%20PAY" +
-            "&am=" +
-            amount +
+        const fampayURL =
+            "fampay://upi/pay" +
+            "?pa=" + pa +
+            "&pn=" + pn +
+            "&am=" + amount +
             "&cu=INR";
 
-    }
+
+        try{
+
+            window.location.href =
+                fampayURL;
+
+        }catch(error){
+
+            console.warn(
+                "FamPay deep link failed",
+                error
+            );
+
+            window.location.href =
+                standardUPI;
+        }
 
 
-    /*
-     * PAYTM
-     */
-
-    else if(
-        name === "paytm"
-    ){
-
-        url =
-            "paytmmp://pay" +
-            "?pa=" +
-            pa +
-            "&pn=BGMI%20PAY" +
-            "&am=" +
-            amount +
-            "&cu=INR";
-
-    }
-
-
-    /*
-     * FAMPAY
-     *
-     * Standard UPI fallback
-     */
-
-    else if(
-        name === "fampay"
-    ){
-
-        url =
-            standard;
-
-    }
-
-
-    try{
-
-        location.href =
-            url;
-
-
-        setTimeout(
-            ()=>{
-
-                if(
-                    document.visibilityState ===
-                    "visible"
-                ){
-
-                    location.href =
-                        standard;
-
-                }
-
-            },
-            1300
+        showToast(
+            "Open FamPay..."
         );
 
+        return;
     }
-    catch(error){
 
-        console.error(
-            error
+
+    /*
+     * SPECIFIC ANDROID APP
+     */
+
+    if(packageName){
+
+        const intentURL =
+            "intent://pay" +
+            "?pa=" + pa +
+            "&pn=" + pn +
+            "&am=" + amount +
+            "&cu=INR" +
+            "#Intent;" +
+            "scheme=upi;" +
+            "package=" +
+            packageName +
+            ";end";
+
+
+        try{
+
+            window.location.href =
+                intentURL;
+
+
+            /*
+             * If app is not installed
+             * or Android blocks the intent,
+             * use normal UPI chooser.
+             */
+
+            setTimeout(
+                function(){
+
+                    if(
+                        document.visibilityState ===
+                        "visible"
+                    ){
+
+                        window.location.href =
+                            standardUPI;
+
+                    }
+
+                },
+                1500
+            );
+
+
+        }catch(error){
+
+            console.error(
+                "UPI app launch error:",
+                error
+            );
+
+            window.location.href =
+                standardUPI;
+        }
+
+
+        showToast(
+            "continioue to payment"
         );
 
-        location.href =
-            standard;
-
+        return;
     }
+
+
+    /*
+     * FINAL FALLBACK
+     */
+
+    window.location.href =
+        standardUPI;
+
+
+    showToast(
+        "UPI payment open ho raha hai..."
+    );
 
 };
-
 
 /* =====================================================
    DEPOSIT SUBMIT
