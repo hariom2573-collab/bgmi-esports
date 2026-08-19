@@ -5243,19 +5243,47 @@ function createPaymentButtons(){
    GPay / PhonePe / Paytm / FamPay
 ========================================================= */
 
+/* =====================================================
+   DIRECT UPI APP PAYMENT
+   Admin UPI -> Selected Payment App
+===================================================== */
+
 window.payWithUPI = function(appName){
 
-    if(
-        !selectedDepositAmount ||
-        selectedDepositAmount < 10
-    ){
-        showToast(
-            "Please enter amount first"
-        );
+    if(isAccountFrozen()){
         return;
     }
 
-    if(!adminUPIValue){
+    /* -----------------------------
+       AMOUNT CHECK
+    ----------------------------- */
+
+    const amount = Number(
+        selectedDepositAmount
+    );
+
+    if(
+        !Number.isFinite(amount) ||
+        amount < MIN_DEPOSIT
+    ){
+
+        showToast(
+            "Please select payment amount first"
+        );
+
+        return;
+    }
+
+    /* -----------------------------
+       ADMIN UPI CHECK
+    ----------------------------- */
+
+    const adminUPI =
+        String(
+            adminUPIValue || ""
+        ).trim();
+
+    if(!adminUPI){
 
         showToast(
             "Admin UPI not available"
@@ -5264,192 +5292,145 @@ window.payWithUPI = function(appName){
         return;
     }
 
+    /* -----------------------------
+       NORMALIZE APP NAME
+    ----------------------------- */
 
-    const amount =
-        Number(
-            selectedDepositAmount
-        ).toFixed(2);
+    const app =
+        String(
+            appName || ""
+        ).toLowerCase()
+        .trim();
 
+    /* -----------------------------
+       UPI DATA
+    ----------------------------- */
 
     const pa =
         encodeURIComponent(
-            adminUPIValue
+            adminUPI
         );
-
 
     const pn =
         encodeURIComponent(
             "BGMI PAY"
         );
 
+    const tn =
+        encodeURIComponent(
+            "BGMI Wallet Deposit"
+        );
 
-    /*
-     * Standard UPI URL
-     * This is our final fallback.
-     */
-
-    const standardUPI =
-        "upi://pay" +
-        "?pa=" + pa +
-        "&pn=" + pn +
-        "&am=" + amount +
-        "&cu=INR";
+    const am =
+        Number(amount).toFixed(2);
 
 
-    const name =
-        String(
-            appName || ""
-        ).toLowerCase();
+    /* =================================================
+       GOOGLE PAY
+    ================================================= */
 
+    if(app === "gpay"){
 
-    let packageName = "";
+        const url =
+            "tez://upi/pay" +
+            "?pa=" + pa +
+            "&pn=" + pn +
+            "&am=" + am +
+            "&cu=INR" +
+            "&tn=" + tn;
 
+        showToast(
+            "Opening Google Pay..."
+        );
 
-    /*
-     * ANDROID PACKAGE
-     */
+        window.location.href =
+            url;
 
-    if(name === "gpay"){
-
-        packageName =
-            "com.google.android.apps.nbu.paisa.user";
-
+        return;
     }
 
-    else if(name === "phonepe"){
 
-        packageName =
-            "com.phonepe.app";
+    /* =================================================
+       PHONEPE
+    ================================================= */
 
+    if(app === "phonepe"){
+
+        const url =
+            "phonepe://pay" +
+            "?pa=" + pa +
+            "&pn=" + pn +
+            "&am=" + am +
+            "&cu=INR" +
+            "&tn=" + tn;
+
+        showToast(
+            "Opening PhonePe..."
+        );
+
+        window.location.href =
+            url;
+
+        return;
     }
 
-    else if(name === "paytm"){
 
-        packageName =
-            "net.one97.paytm";
+    /* =================================================
+       PAYTM
+    ================================================= */
 
+    if(app === "paytm"){
+
+        const url =
+            "paytmmp://pay" +
+            "?pa=" + pa +
+            "&pn=" + pn +
+            "&am=" + am +
+            "&cu=INR" +
+            "&tn=" + tn;
+
+        showToast(
+            "Opening Paytm..."
+        );
+
+        window.location.href =
+            url;
+
+        return;
     }
 
-    /*
-     * FamPay package can vary by app/version.
-     * We therefore use its direct scheme first,
-     * then standard UPI fallback.
-     */
 
-    if(name === "fampay"){
+    /* =================================================
+       FAMPAY
+    ================================================= */
 
-        const fampayURL =
+    if(app === "fampay"){
+
+        const url =
             "fampay://upi/pay" +
             "?pa=" + pa +
             "&pn=" + pn +
-            "&am=" + amount +
-            "&cu=INR";
-
-
-        try{
-
-            window.location.href =
-                fampayURL;
-
-        }catch(error){
-
-            console.warn(
-                "FamPay deep link failed",
-                error
-            );
-
-            window.location.href =
-                standardUPI;
-        }
-
-
-        showToast(
-            "Open FamPay..."
-        );
-
-        return;
-    }
-
-
-    /*
-     * SPECIFIC ANDROID APP
-     */
-
-    if(packageName){
-
-        const intentURL =
-            "intent://pay" +
-            "?pa=" + pa +
-            "&pn=" + pn +
-            "&am=" + amount +
+            "&am=" + am +
             "&cu=INR" +
-            "#Intent;" +
-            "scheme=upi;" +
-            "package=" +
-            packageName +
-            ";end";
-
-
-        try{
-
-            window.location.href =
-                intentURL;
-
-
-            /*
-             * If app is not installed
-             * or Android blocks the intent,
-             * use normal UPI chooser.
-             */
-
-            setTimeout(
-                function(){
-
-                    if(
-                        document.visibilityState ===
-                        "visible"
-                    ){
-
-                        window.location.href =
-                            standardUPI;
-
-                    }
-
-                },
-                1500
-            );
-
-
-        }catch(error){
-
-            console.error(
-                "UPI app launch error:",
-                error
-            );
-
-            window.location.href =
-                standardUPI;
-        }
-
+            "&tn=" + tn;
 
         showToast(
-            "continioue to payment"
+            "Opening FamPay..."
         );
+
+        window.location.href =
+            url;
 
         return;
     }
 
 
-    /*
-     * FINAL FALLBACK
-     */
-
-    window.location.href =
-        standardUPI;
-
+    /* =================================================
+       UNKNOWN APP
+    ================================================= */
 
     showToast(
-        "UPI payment open ho raha hai..."
+        "Payment app not supported"
     );
 
 };
