@@ -2824,7 +2824,349 @@ button:disabled{
     }
 }
 
+/* =========================================================
+   PREMIUM PAYMENT APP CARDS — OPTION 2 DESIGN
+========================================================= */
 
+.payment-apps{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:9px;
+    margin-top:13px;
+}
+
+.app-btn{
+    position:relative;
+    overflow:hidden;
+
+    min-height:68px;
+    padding:10px 11px;
+
+    display:flex;
+    align-items:center;
+
+    gap:9px;
+
+    text-align:left;
+
+    border-radius:15px;
+
+    color:#fff;
+
+    background:
+        linear-gradient(
+            145deg,
+            #10202d,
+            #091621
+        );
+
+    border:1px solid #263e50;
+
+    cursor:pointer;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.045),
+        0 8px 25px rgba(0,0,0,.18);
+
+    transition:
+        transform .16s ease,
+        border-color .2s ease,
+        box-shadow .2s ease,
+        filter .2s ease;
+}
+
+.app-btn::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent 20%,
+            rgba(255,255,255,.075) 48%,
+            transparent 76%
+        );
+
+    transform:translateX(-120%);
+
+    transition:
+        transform .55s ease;
+
+    pointer-events:none;
+}
+
+.app-btn:hover::before{
+    transform:translateX(120%);
+}
+
+.app-btn:hover{
+    transform:translateY(-1px);
+
+    filter:brightness(1.06);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.06),
+        0 12px 30px rgba(0,0,0,.25);
+}
+
+.app-btn:active{
+    transform:scale(.95);
+}
+
+
+/* LOGO */
+
+.payment-logo{
+    width:36px;
+    height:36px;
+
+    flex:none;
+
+    object-fit:contain;
+
+    padding:5px;
+
+    border-radius:10px;
+
+    background:#fff;
+
+    box-shadow:
+        0 5px 16px rgba(0,0,0,.28);
+
+    z-index:1;
+}
+
+.fampay-logo{
+    padding:4px;
+}
+
+
+/* TEXT AREA */
+
+.payment-info{
+    min-width:0;
+
+    flex:1;
+
+    display:flex;
+    flex-direction:column;
+
+    justify-content:center;
+
+    z-index:1;
+}
+
+.payment-name{
+    font-size:11px;
+
+    font-weight:900;
+
+    line-height:1.2;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+.payment-sub{
+    margin-top:4px;
+
+    color:#4cff91;
+
+    font-size:8px;
+
+    font-weight:800;
+
+    white-space:nowrap;
+}
+
+
+/* ARROW */
+
+.payment-arrow{
+    flex:none;
+
+    width:22px;
+    height:22px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:7px;
+
+    color:#91a5b6;
+
+    background:
+        rgba(255,255,255,.035);
+
+    font-size:18px;
+
+    line-height:1;
+
+    z-index:1;
+
+    transition:
+        transform .2s ease,
+        color .2s ease,
+        background .2s ease;
+}
+
+.app-btn:hover .payment-arrow{
+    transform:translateX(2px);
+
+    color:#4cff91;
+
+    background:
+        rgba(76,255,145,.07);
+}
+
+
+/* GOOGLE PAY */
+
+.gpay-btn{
+    border-color:
+        rgba(66,133,244,.30);
+}
+
+.gpay-btn:hover{
+    border-color:
+        rgba(66,133,244,.70);
+
+    box-shadow:
+        0 0 24px rgba(66,133,244,.10),
+        inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+
+/* PHONEPE */
+
+.phonepe-btn{
+    border-color:
+        rgba(95,54,255,.30);
+}
+
+.phonepe-btn:hover{
+    border-color:
+        rgba(95,54,255,.70);
+
+    box-shadow:
+        0 0 24px rgba(95,54,255,.12),
+        inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+
+/* PAYTM */
+
+.paytm-btn{
+    border-color:
+        rgba(0,186,242,.30);
+}
+
+.paytm-btn:hover{
+    border-color:
+        rgba(0,186,242,.70);
+
+    box-shadow:
+        0 0 24px rgba(0,186,242,.10),
+        inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+
+/* FAMPAY */
+
+.fampay-btn{
+    border-color:
+        rgba(124,58,237,.30);
+}
+
+.fampay-btn:hover{
+    border-color:
+        rgba(124,58,237,.70);
+
+    box-shadow:
+        0 0 24px rgba(124,58,237,.12),
+        inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+
+/* SMALL MOBILE */
+
+@media(max-width:380px){
+
+    .payment-apps{
+        gap:7px;
+    }
+
+    .app-btn{
+        min-height:64px;
+
+        padding:
+            9px 8px;
+
+        gap:7px;
+    }
+
+    .payment-logo{
+        width:32px;
+        height:32px;
+
+        padding:4px;
+    }
+
+    .payment-name{
+        font-size:10px;
+    }
+
+    .payment-sub{
+        font-size:7px;
+    }
+
+    .payment-arrow{
+        width:20px;
+        height:20px;
+
+        font-size:16px;
+    }
+}
+
+
+/* VERY SMALL */
+
+@media(max-width:330px){
+
+    .payment-apps{
+        gap:6px;
+    }
+
+    .app-btn{
+        min-height:60px;
+
+        padding:
+            8px 7px;
+    }
+
+    .payment-logo{
+        width:29px;
+        height:29px;
+    }
+
+    .payment-name{
+        font-size:9px;
+    }
+
+    .payment-sub{
+        font-size:6.5px;
+    }
+
+    .payment-arrow{
+        display:none;
+    }
+}
 /* =========================================================
    END
 ========================================================= */
