@@ -6885,6 +6885,128 @@ console.log(
     "Realtime account freeze protection enabled."
 );
 
+
+function openUPIApp(app){
+
+    /*
+      Ye values aapke existing payment system
+      se dynamically aani chahiye.
+    */
+
+    const upiId =
+        window.ADMIN_UPI_ID ||
+        "yourupi@upi";
+
+    const amount =
+        window.PAYMENT_AMOUNT ||
+        document.getElementById("paymentAmount")?.value ||
+        document.getElementById("amount")?.value ||
+        "0";
+
+    if(!upiId || upiId === "yourupi@upi"){
+
+        alert("UPI ID available nahi hai.");
+
+        return;
+    }
+
+    if(!amount || Number(amount) <= 0){
+
+        alert("Payment amount enter karo.");
+
+        return;
+    }
+
+
+    const encodedName =
+        encodeURIComponent("BGMI PAY");
+
+    const encodedNote =
+        encodeURIComponent("BGMI Wallet Payment");
+
+
+    const upiUrl =
+        `upi://pay?pa=${encodeURIComponent(upiId)}` +
+        `&pn=${encodedName}` +
+        `&am=${encodeURIComponent(amount)}` +
+        `&cu=INR` +
+        `&tn=${encodedNote}`;
+
+
+    /*
+      App-specific intent
+    */
+
+    let appUrl = upiUrl;
+
+
+    if(app === "gpay"){
+
+        appUrl =
+            `tez://upi/pay?pa=${encodeURIComponent(upiId)}` +
+            `&pn=${encodedName}` +
+            `&am=${encodeURIComponent(amount)}` +
+            `&cu=INR` +
+            `&tn=${encodedNote}`;
+    }
+
+
+    if(app === "phonepe"){
+
+        appUrl =
+            `phonepe://pay?pa=${encodeURIComponent(upiId)}` +
+            `&pn=${encodedName}` +
+            `&am=${encodeURIComponent(amount)}` +
+            `&cu=INR` +
+            `&tn=${encodedNote}`;
+    }
+
+
+    if(app === "paytm"){
+
+        appUrl =
+            `paytmmp://pay?pa=${encodeURIComponent(upiId)}` +
+            `&pn=${encodedName}` +
+            `&am=${encodeURIComponent(amount)}` +
+            `&cu=INR` +
+            `&tn=${encodedNote}`;
+    }
+
+
+    if(app === "fampay"){
+
+        appUrl =
+            `upi://pay?pa=${encodeURIComponent(upiId)}` +
+            `&pn=${encodedName}` +
+            `&am=${encodeURIComponent(amount)}` +
+            `&cu=INR` +
+            `&tn=${encodedNote}`;
+    }
+
+
+    /*
+      Try selected app
+    */
+
+    window.location.href = appUrl;
+
+
+    /*
+      Fallback:
+      agar selected app installed nahi hai,
+      normal UPI chooser open hoga.
+    */
+
+    setTimeout(() => {
+
+        window.location.href = upiUrl;
+
+    }, 1200);
+
+}
+
+
+
 </script>
 
 </body>
