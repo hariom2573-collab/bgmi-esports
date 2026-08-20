@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -11,7 +10,14 @@ content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no
 
 <meta name="theme-color" content="#050B18">
 
-<title>BGMI Admin Login</title>
+<title>Create Tournament</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+rel="stylesheet">
 
 <style>
 
@@ -19,506 +25,903 @@ content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial,Poppins,sans-serif;
+    font-family:Poppins,sans-serif;
     -webkit-tap-highlight-color:transparent;
 }
 
 html,
 body{
-    width:100%;
     min-height:100%;
 }
 
 body{
+    background:#050B18;
+    color:#fff;
+    overflow-x:hidden;
+}
 
-    min-height:100vh;
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-1;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    background:
+    radial-gradient(
+        circle at 0% 0%,
+        rgba(34,197,94,.16),
+        transparent 35%
+    ),
+    radial-gradient(
+        circle at 100% 0%,
+        rgba(37,99,235,.14),
+        transparent 35%
+    ),
+    radial-gradient(
+        circle at 50% 100%,
+        rgba(168,85,247,.08),
+        transparent 40%
+    ),
+    #050B18;
+}
+
+.app{
+    width:100%;
+    max-width:520px;
+    margin:auto;
+    padding:16px;
+    padding-bottom:40px;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+    position:relative;
+    overflow:hidden;
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(17,24,39,.98),
+        rgba(10,15,28,.98)
+    );
+
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:24px;
 
     padding:20px;
 
-    color:#fff;
-
-    background:
-        radial-gradient(
-            circle at 15% 15%,
-            rgba(34,197,94,.16),
-            transparent 32%
-        ),
-        radial-gradient(
-            circle at 85% 85%,
-            rgba(59,130,246,.13),
-            transparent 32%
-        ),
-        #050B18;
-
-    overflow:hidden;
-
-}
-
-
-/* =========================
-   BACKGROUND GLOW
-========================= */
-
-body::before{
-
-    content:"";
-
-    position:fixed;
-
-    width:260px;
-    height:260px;
-
-    left:-120px;
-    top:-120px;
-
-    background:rgba(34,197,94,.12);
-
-    filter:blur(70px);
-
-    border-radius:50%;
-
-    pointer-events:none;
-
-}
-
-body::after{
-
-    content:"";
-
-    position:fixed;
-
-    width:260px;
-    height:260px;
-
-    right:-120px;
-    bottom:-120px;
-
-    background:rgba(37,99,235,.12);
-
-    filter:blur(70px);
-
-    border-radius:50%;
-
-    pointer-events:none;
-
-}
-
-
-/* =========================
-   LOGIN BOX
-========================= */
-
-.login-box{
-
-    width:100%;
-    max-width:410px;
-
-    padding:25px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(17,24,39,.98),
-            rgba(10,15,28,.98)
-        );
-
-    border:1px solid rgba(255,255,255,.09);
-
-    border-radius:24px;
+    margin-bottom:16px;
 
     box-shadow:
-        0 25px 70px rgba(0,0,0,.45),
-        inset 0 1px 0 rgba(255,255,255,.04);
-
-    position:relative;
-
-    z-index:2;
-
+    0 18px 45px rgba(0,0,0,.28);
 }
 
+.header::after{
+    content:"";
+    position:absolute;
 
-/* =========================
-   LOGO
-========================= */
+    width:120px;
+    height:120px;
 
-.logo-wrap{
+    right:-45px;
+    top:-55px;
 
-    width:72px;
-    height:72px;
+    border-radius:50%;
 
-    margin:0 auto 15px;
+    background:
+    radial-gradient(
+        circle,
+        rgba(34,197,94,.20),
+        transparent 70%
+    );
 
+    pointer-events:none;
+}
+
+.headerTop{
     display:flex;
     align-items:center;
-    justify-content:center;
+    justify-content:space-between;
+    gap:12px;
+}
 
-    border-radius:22px;
+.header h1{
+    font-size:22px;
+    font-weight:800;
+    color:#22c55e;
+}
 
-    background:
-        linear-gradient(
-            135deg,
-            #22c55e,
-            #16a34a
-        );
+.header p{
+    margin-top:4px;
+    color:#94a3b8;
+    font-size:12px;
+}
 
-    box-shadow:
-        0 0 35px rgba(34,197,94,.28);
+.adminBadge{
+    flex-shrink:0;
 
-    font-size:34px;
+    padding:7px 11px;
 
+    border-radius:30px;
+
+    background:rgba(34,197,94,.10);
+    border:1px solid rgba(34,197,94,.25);
+
+    color:#22c55e;
+
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:.8px;
 }
 
 
 /* =========================
-   TITLE
+   FORM CARD
 ========================= */
 
-.title{
+.card{
+    background:
+    linear-gradient(
+        145deg,
+        rgba(17,24,39,.98),
+        rgba(12,18,31,.98)
+    );
 
-    text-align:center;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:24px;
 
-    font-size:25px;
+    padding:20px;
 
+    box-shadow:
+    0 18px 45px rgba(0,0,0,.25);
+}
+
+
+/* =========================
+   SECTION
+========================= */
+
+.section{
+    margin-bottom:20px;
+}
+
+.section:last-child{
+    margin-bottom:0;
+}
+
+.sectionTitle{
+    display:flex;
+    align-items:center;
+    gap:9px;
+
+    font-size:14px;
     font-weight:800;
 
     color:#fff;
 
+    margin-bottom:3px;
 }
 
-.subtitle{
+.sectionTitleIcon{
+    width:30px;
+    height:30px;
 
-    text-align:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-    margin-top:7px;
+    border-radius:9px;
+
+    background:#0f172a;
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.sectionSub{
+    color:#64748b;
+    font-size:11px;
+    margin-left:39px;
+    margin-bottom:12px;
+}
+
+
+/* =========================
+   LABEL
+========================= */
+
+label{
+    display:block;
+
+    font-size:12px;
+    font-weight:600;
 
     color:#94a3b8;
 
-    font-size:13px;
-
-}
-
-
-/* =========================
-   STATUS
-========================= */
-
-.firebase-status{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:7px;
-
-    margin:17px 0 22px;
-
-    color:#86efac;
-
-    font-size:12px;
-
-}
-
-.status-dot{
-
-    width:8px;
-    height:8px;
-
-    border-radius:50%;
-
-    background:#22c55e;
-
-    box-shadow:
-        0 0 10px rgba(34,197,94,.8);
-
-}
-
-
-/* =========================
-   INPUT GROUP
-========================= */
-
-.input-group{
-
-    margin-top:15px;
-
-}
-
-.input-label{
-
-    display:block;
-
+    margin-top:13px;
     margin-bottom:7px;
-
-    color:#cbd5e1;
-
-    font-size:12px;
-
-    font-weight:600;
-
 }
 
-.input-wrap{
 
-    position:relative;
+/* =========================
+   INPUT
+========================= */
 
-}
-
-.input-icon{
-
-    position:absolute;
-
-    left:14px;
-
-    top:50%;
-
-    transform:translateY(-50%);
-
-    font-size:17px;
-
-    opacity:.8;
-
-    pointer-events:none;
-
-}
-
-input{
-
+input,
+select{
     width:100%;
+    height:50px;
 
-    height:52px;
-
-    padding:0 45px;
-
-    border:1px solid rgba(255,255,255,.07);
-
+    border:1px solid rgba(255,255,255,.08);
     outline:none;
 
-    border-radius:14px;
+    border-radius:13px;
 
     background:#0f172a;
 
     color:#fff;
 
+    padding:0 14px;
+
     font-size:14px;
 
     transition:.2s;
+}
 
+input:focus,
+select:focus{
+    border-color:rgba(34,197,94,.55);
+
+    box-shadow:
+    0 0 0 3px rgba(34,197,94,.08);
 }
 
 input::placeholder{
-
     color:#64748b;
-
 }
 
-input:focus{
+select{
+    appearance:auto;
+}
 
-    border-color:rgba(34,197,94,.65);
-
-    box-shadow:
-        0 0 0 3px rgba(34,197,94,.08);
-
+input[type="date"],
+input[type="time"]{
+    color-scheme:dark;
 }
 
 
 /* =========================
-   PASSWORD BUTTON
+   MODE GRID
 ========================= */
 
-.password-toggle{
+.modeGrid{
+    display:grid;
 
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:8px;
+
+    margin-top:10px;
+}
+
+.modeOption{
+    position:relative;
+}
+
+.modeOption input{
     position:absolute;
+    opacity:0;
+    pointer-events:none;
+}
 
-    right:6px;
+.modeLabel{
+    height:52px;
 
-    top:6px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-    width:40px;
-    height:40px;
+    border-radius:13px;
 
-    border:none;
+    background:#0f172a;
 
-    background:transparent;
+    border:1px solid rgba(255,255,255,.08);
 
     color:#94a3b8;
 
-    border-radius:10px;
+    font-size:11px;
+    font-weight:800;
 
     cursor:pointer;
 
-    font-size:17px;
+    transition:.2s;
+}
 
+.modeOption input:checked + .modeLabel{
+    background:rgba(34,197,94,.12);
+
+    border-color:
+    rgba(34,197,94,.65);
+
+    color:#22c55e;
+
+    box-shadow:
+    inset 0 0 0 1px rgba(34,197,94,.12);
 }
 
 
 /* =========================
-   LOGIN BUTTON
+   MAP SELECTION
 ========================= */
 
-.login-btn{
+.mapBox{
+    margin-top:14px;
 
+    padding:14px;
+
+    border-radius:17px;
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(15,23,42,.95),
+        rgba(8,15,28,.95)
+    );
+
+    border:1px solid rgba(255,255,255,.07);
+}
+
+.mapHeader{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+
+    margin-bottom:10px;
+}
+
+.mapHeaderTitle{
+    font-size:12px;
+    font-weight:800;
+    color:#fff;
+}
+
+.mapCount{
+    padding:5px 9px;
+
+    border-radius:20px;
+
+    background:rgba(34,197,94,.09);
+
+    border:1px solid rgba(34,197,94,.18);
+
+    color:#22c55e;
+
+    font-size:9px;
+    font-weight:800;
+}
+
+.mapGrid{
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:8px;
+}
+
+.mapOption{
+    position:relative;
+}
+
+.mapOption input{
+    position:absolute;
+    opacity:0;
+    pointer-events:none;
+}
+
+.mapLabel{
+    min-height:48px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:8px;
+
+    padding:0 12px;
+
+    border-radius:12px;
+
+    background:#0b1424;
+
+    border:1px solid rgba(255,255,255,.07);
+
+    color:#94a3b8;
+
+    font-size:11px;
+    font-weight:800;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.mapCheck{
+    width:19px;
+    height:19px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:6px;
+
+    background:#111827;
+
+    border:1px solid rgba(255,255,255,.10);
+
+    color:transparent;
+
+    font-size:11px;
+
+    transition:.2s;
+}
+
+.mapOption input:checked + .mapLabel{
+    color:#22c55e;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(34,197,94,.13),
+        rgba(34,197,94,.04)
+    );
+
+    border-color:
+    rgba(34,197,94,.50);
+
+    box-shadow:
+    inset 0 0 0 1px rgba(34,197,94,.06);
+}
+
+.mapOption input:checked + .mapLabel .mapCheck{
+    background:#22c55e;
+
+    border-color:#22c55e;
+
+    color:#02100a;
+}
+
+.mapHint{
+    margin-top:9px;
+
+    color:#64748b;
+
+    font-size:10px;
+
+    line-height:1.5;
+}
+
+
+/* =========================
+   PRIZE GRID
+========================= */
+
+.prizeGrid{
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:9px;
+}
+
+.prizeItem{
+    background:#0f172a;
+
+    border:1px solid rgba(255,255,255,.07);
+
+    border-radius:14px;
+
+    padding:10px;
+}
+
+.prizeItem span{
+    display:block;
+
+    color:#64748b;
+
+    font-size:10px;
+    font-weight:700;
+
+    margin-bottom:7px;
+}
+
+.prizeItem input{
+    height:43px;
+    padding:0 9px;
+    font-size:13px;
+}
+
+
+/* =========================
+   TDM BOX
+========================= */
+
+.tdmBox{
+    display:none;
+
+    margin-top:14px;
+
+    padding:14px;
+
+    border-radius:16px;
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(37,99,235,.08),
+        rgba(34,197,94,.05)
+    );
+
+    border:1px solid rgba(37,99,235,.18);
+}
+
+.tdmBox.show{
+    display:block;
+}
+
+.rewardPreview{
+    margin-top:12px;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    background:#07111f;
+
+    border:1px solid rgba(34,197,94,.14);
+
+    text-align:center;
+}
+
+.rewardPreview small{
+    display:block;
+
+    color:#64748b;
+
+    font-size:10px;
+
+    margin-bottom:3px;
+}
+
+.rewardPreview strong{
+    color:#22c55e;
+
+    font-size:19px;
+}
+
+
+/* =========================
+   TWO COLUMN
+========================= */
+
+.twoCol{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:10px;
+}
+
+
+/* =========================
+   SUMMARY
+========================= */
+
+.summary{
+    margin-top:16px;
+
+    padding:15px;
+
+    border-radius:17px;
+
+    background:#080f1c;
+
+    border:1px solid rgba(255,255,255,.07);
+}
+
+.summaryTitle{
+    font-size:12px;
+    font-weight:800;
+
+    color:#fff;
+
+    margin-bottom:11px;
+}
+
+.summaryRow{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+
+    padding:8px 0;
+
+    border-bottom:
+    1px solid rgba(255,255,255,.06);
+}
+
+.summaryRow:last-child{
+    border-bottom:none;
+}
+
+.summaryLabel{
+    color:#64748b;
+    font-size:11px;
+}
+
+.summaryValue{
+    color:#fff;
+    font-size:12px;
+    font-weight:700;
+
+    text-align:right;
+
+    max-width:60%;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+
+/* =========================
+   SAVE BUTTON
+========================= */
+
+.saveBtn{
     width:100%;
-
     height:54px;
 
-    margin-top:23px;
+    margin-top:20px;
 
     border:none;
-
     border-radius:15px;
 
     background:
-        linear-gradient(
-            135deg,
-            #22c55e,
-            #16a34a
-        );
+    linear-gradient(
+        135deg,
+        #22c55e,
+        #16a34a
+    );
 
-    color:#02130a;
+    color:#020617;
 
     font-size:15px;
-
     font-weight:800;
 
     cursor:pointer;
 
     box-shadow:
-        0 10px 25px rgba(34,197,94,.18);
+    0 10px 25px rgba(34,197,94,.18);
 
     transition:.2s;
-
 }
 
-.login-btn:active{
-
+.saveBtn:active{
     transform:scale(.98);
-
 }
 
-.login-btn:disabled{
-
-    opacity:.65;
-
+.saveBtn:disabled{
+    opacity:.6;
     cursor:not-allowed;
-
 }
 
 
 /* =========================
-   LOGIN SPINNER
+   INFO
 ========================= */
 
-.spinner{
+.infoBox{
+    margin-top:13px;
 
-    display:inline-block;
-
-    width:18px;
-    height:18px;
-
-    border:2px solid rgba(0,0,0,.25);
-
-    border-top-color:#000;
-
-    border-radius:50%;
-
-    animation:spin .7s linear infinite;
-
-    vertical-align:middle;
-
-}
-
-@keyframes spin{
-
-    to{
-        transform:rotate(360deg);
-    }
-
-}
-
-
-/* =========================
-   MESSAGE
-========================= */
-
-#msg{
-
-    min-height:20px;
-
-    margin-top:14px;
-
-    text-align:center;
-
-    font-size:12px;
-
-    line-height:18px;
-
-}
-
-.msg-error{
-
-    color:#f87171;
-
-}
-
-.msg-success{
-
-    color:#4ade80;
-
-}
-
-.msg-info{
-
-    color:#60a5fa;
-
-}
-
-
-/* =========================
-   SECURITY BOX
-========================= */
-
-.security-box{
-
-    margin-top:20px;
-
-    padding:12px 13px;
+    padding:12px 14px;
 
     border-radius:13px;
 
-    background:rgba(15,23,42,.7);
+    background:rgba(34,197,94,.06);
 
-    border:1px solid rgba(255,255,255,.05);
+    border:1px solid rgba(34,197,94,.12);
 
-    color:#94a3b8;
+    color:#86efac;
 
     font-size:11px;
 
-    line-height:18px;
-
-    text-align:center;
-
+    line-height:1.6;
 }
 
 
 /* =========================
-   FOOTER
+   TOAST
 ========================= */
 
-.footer{
+.toast{
+    position:fixed;
+
+    left:50%;
+
+    bottom:20px;
+
+    transform:
+    translate(-50%,120px);
+
+    width:
+    calc(100% - 32px);
+
+    max-width:480px;
+
+    padding:13px 15px;
+
+    border-radius:14px;
+
+    background:#111827;
+
+    border:1px solid rgba(255,255,255,.10);
+
+    box-shadow:
+    0 15px 40px rgba(0,0,0,.4);
+
+    color:#fff;
+
+    font-size:12px;
+    font-weight:600;
 
     text-align:center;
 
-    margin-top:18px;
+    z-index:9999;
 
-    color:#475569;
+    opacity:0;
 
-    font-size:10px;
+    transition:.3s;
+}
+
+.toast.show{
+    opacity:1;
+
+    transform:
+    translate(-50%,0);
+}
+
+.toast.success{
+    border-color:
+    rgba(34,197,94,.35);
+}
+
+.toast.error{
+    border-color:
+    rgba(239,68,68,.35);
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.loadingOverlay{
+    position:fixed;
+
+    inset:0;
+
+    background:#050B18;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    flex-direction:column;
+
+    gap:12px;
+
+    z-index:9998;
+
+    transition:.3s;
+}
+
+.loadingOverlay.hide{
+    opacity:0;
+    pointer-events:none;
+}
+
+.loadingIcon{
+    width:58px;
+    height:58px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:18px;
+
+    background:#111827;
+
+    border:1px solid rgba(34,197,94,.2);
+
+    font-size:27px;
+}
+
+.loadingText{
+    color:#94a3b8;
+    font-size:12px;
+}
+
+.spinner{
+    width:25px;
+    height:25px;
+
+    border-radius:50%;
+
+    border:3px solid #1e293b;
+
+    border-top-color:#22c55e;
+
+    animation:
+    spin .8s linear infinite;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:380px){
+
+    .app{
+        padding:12px;
+    }
+
+    .card{
+        padding:15px;
+    }
+
+    .header{
+        padding:16px;
+    }
+
+    .header h1{
+        font-size:19px;
+    }
+
+    .modeGrid{
+        gap:5px;
+    }
+
+    .modeLabel{
+        font-size:10px;
+    }
+
+    .mapGrid{
+        gap:6px;
+    }
+
+    .mapLabel{
+        padding:0 9px;
+        font-size:10px;
+    }
+
+    .prizeGrid{
+        gap:6px;
+    }
 
 }
 
@@ -526,135 +929,1282 @@ input:focus{
 
 </head>
 
+
 <body>
 
-<div class="login-box">
 
+<div
+id="loadingOverlay"
+class="loadingOverlay">
 
-<div class="logo-wrap">
-    🎮
-</div>
+    <div class="loadingIcon">
+        🎮
+    </div>
 
+    <div class="loadingText">
+        Verifying Admin...
+    </div>
 
-<div class="title">
-    BGMI ADMIN
-</div>
-
-
-<div class="subtitle">
-    Secure Tournament Management
-</div>
-
-
-<div class="firebase-status">
-
-    <span class="status-dot"></span>
-
-    Firebase Authentication Ready
+    <div class="spinner"></div>
 
 </div>
 
 
+<div class="app">
 
-<!-- EMAIL -->
 
-<div class="input-group">
+<div class="header">
 
-    <label class="input-label">
-        ADMIN EMAIL
-    </label>
+    <div class="headerTop">
 
-    <div class="input-wrap">
+        <div>
 
-        <span class="input-icon">
-            ✉️
-        </span>
+            <h1>
+                🏆 Create Tournament
+            </h1>
 
-        <input
-            type="email"
-            id="email"
-            autocomplete="username"
-            placeholder="Enter admin email">
+            <p>
+                Create and publish a new BGMI match
+            </p>
+
+        </div>
+
+        <div class="adminBadge">
+            ADMIN
+        </div>
 
     </div>
 
 </div>
 
 
+<div class="card">
 
-<!-- PASSWORD -->
 
-<div class="input-group">
+<!-- BASIC INFORMATION -->
 
-    <label class="input-label">
-        PASSWORD
+<div class="section">
+
+    <div class="sectionTitle">
+
+        <div class="sectionTitleIcon">
+            📝
+        </div>
+
+        Basic Information
+
+    </div>
+
+    <div class="sectionSub">
+        Tournament name and banner
+    </div>
+
+
+    <label>
+        Tournament Title
     </label>
 
-    <div class="input-wrap">
+    <input
+    id="title"
+    type="text"
+    maxlength="80"
+    placeholder="BGMI Night Tournament">
 
-        <span class="input-icon">
-            🔐
-        </span>
 
-        <input
-            type="password"
-            id="password"
-            autocomplete="current-password"
-            placeholder="Enter password">
+    <label>
+        Banner Image URL
+    </label>
 
-        <button
-            type="button"
-            class="password-toggle"
-            id="togglePassword">
+    <input
+    id="image"
+    type="url"
+    placeholder="https://example.com/banner.jpg">
 
-            👁️
+</div>
 
-        </button>
+
+<!-- GAME MODE -->
+
+<div class="section">
+
+    <div class="sectionTitle">
+
+        <div class="sectionTitleIcon">
+            🎮
+        </div>
+
+        Game Mode
+
+    </div>
+
+    <div class="sectionSub">
+        Select the tournament format
+    </div>
+
+
+    <div class="modeGrid">
+
+        <label class="modeOption">
+            <input
+            type="radio"
+            name="gameMode"
+            value="solo"
+            checked>
+
+            <span class="modeLabel">
+                SOLO
+            </span>
+        </label>
+
+
+        <label class="modeOption">
+            <input
+            type="radio"
+            name="gameMode"
+            value="duo">
+
+            <span class="modeLabel">
+                DUO
+            </span>
+        </label>
+
+
+        <label class="modeOption">
+            <input
+            type="radio"
+            name="gameMode"
+            value="squad">
+
+            <span class="modeLabel">
+                SQUAD
+            </span>
+        </label>
+
+
+        <label class="modeOption">
+            <input
+            type="radio"
+            name="gameMode"
+            value="tdm">
+
+            <span class="modeLabel">
+                TDM
+            </span>
+        </label>
+
+    </div>
+
+
+    <!-- MAP SELECTION -->
+
+    <div
+    id="mapBox"
+    class="mapBox">
+
+        <div class="mapHeader">
+
+            <div class="mapHeaderTitle">
+                🗺️ Select Maps
+            </div>
+
+            <div
+            id="mapCount"
+            class="mapCount">
+                0 SELECTED
+            </div>
+
+        </div>
+
+
+        <div class="mapGrid">
+
+
+            <label class="mapOption">
+
+                <input
+                type="checkbox"
+                name="maps"
+                value="Erangel">
+
+                <span class="mapLabel">
+
+                    <span>
+                        🏝️ Erangel
+                    </span>
+
+                    <span class="mapCheck">
+                        ✓
+                    </span>
+
+                </span>
+
+            </label>
+
+
+            <label class="mapOption">
+
+                <input
+                type="checkbox"
+                name="maps"
+                value="Miramar">
+
+                <span class="mapLabel">
+
+                    <span>
+                        🏜️ Miramar
+                    </span>
+
+                    <span class="mapCheck">
+                        ✓
+                    </span>
+
+                </span>
+
+            </label>
+
+
+            <label class="mapOption">
+
+                <input
+                type="checkbox"
+                name="maps"
+                value="Sanhok">
+
+                <span class="mapLabel">
+
+                    <span>
+                        🌴 Sanhok
+                    </span>
+
+                    <span class="mapCheck">
+                        ✓
+                    </span>
+
+                </span>
+
+            </label>
+
+
+            <label class="mapOption">
+
+                <input
+                type="checkbox"
+                name="maps"
+                value="Vikendi">
+
+                <span class="mapLabel">
+
+                    <span>
+                        ❄️ Vikendi
+                    </span>
+
+                    <span class="mapCheck">
+                        ✓
+                    </span>
+
+                </span>
+
+            </label>
+
+
+            <!-- RONDO -->
+
+            <label class="mapOption">
+
+                <input
+                type="checkbox"
+                name="maps"
+                value="Rondo">
+
+                <span class="mapLabel">
+
+                    <span>
+                        🌏 Rondo
+                    </span>
+
+                    <span class="mapCheck">
+                        ✓
+                    </span>
+
+                </span>
+
+            </label>
+
+
+            <label class="mapOption">
+
+                <input
+                type="checkbox"
+                name="maps"
+                value="Livik">
+
+                <span class="mapLabel">
+
+                    <span>
+                        ⚡ Livik
+                    </span>
+
+                    <span class="mapCheck">
+                        ✓
+                    </span>
+
+                </span>
+
+            </label>
+
+
+            <label class="mapOption">
+
+                <input
+                type="checkbox"
+                name="maps"
+                value="Nusa">
+
+                <span class="mapLabel">
+
+                    <span>
+                        🏝️ Nusa
+                    </span>
+
+                    <span class="mapCheck">
+                        ✓
+                    </span>
+
+                </span>
+
+            </label>
+
+
+            <label class="mapOption">
+
+                <input
+                type="checkbox"
+                name="maps"
+                value="Karakin">
+
+                <span class="mapLabel">
+
+                    <span>
+                        🏜️ Karakin
+                    </span>
+
+                    <span class="mapCheck">
+                        ✓
+                    </span>
+
+                </span>
+
+            </label>
+
+
+            <label class="mapOption">
+
+                <input
+                type="checkbox"
+                name="maps"
+                value="Taego">
+
+                <span class="mapLabel">
+
+                    <span>
+                        🌄 Taego
+                    </span>
+
+                    <span class="mapCheck">
+                        ✓
+                    </span>
+
+                </span>
+
+            </label>
+
+
+        </div>
+
+
+        <div class="mapHint">
+            💡 You can select multiple maps for this tournament.
+        </div>
+
+    </div>
+
+
+    <!-- TDM SETTINGS -->
+
+    <div
+    id="tdmBox"
+    class="tdmBox">
+
+        <label>
+            TDM Format
+        </label>
+
+        <select id="tdmFormat">
+
+            <option value="1v1">
+                1 VS 1
+            </option>
+
+            <option value="2v2">
+                2 VS 2
+            </option>
+
+            <option value="4v4">
+                4 VS 4
+            </option>
+
+        </select>
+
+
+        <label>
+            TDM Reward
+        </label>
+
+        <select id="tdmReward">
+
+            <option
+            value="80"
+            data-entry="50">
+
+                Entry ₹50 → Win ₹80
+
+            </option>
+
+            <option
+            value="180"
+            data-entry="100">
+
+                Entry ₹100 → Win ₹180
+
+            </option>
+
+            <option
+            value="360"
+            data-entry="200">
+
+                Entry ₹200 → Win ₹360
+
+            </option>
+
+            <option
+            value="920"
+            data-entry="500">
+
+                Entry ₹500 → Win ₹920
+
+            </option>
+
+        </select>
+
+
+        <div class="rewardPreview">
+
+            <small>
+                Winning Amount
+            </small>
+
+            <strong id="rewardText">
+                ₹80
+            </strong>
+
+        </div>
 
     </div>
 
 </div>
 
+
+<!-- PRIZE -->
+
+<div
+id="normalPrize"
+class="section">
+
+    <div class="sectionTitle">
+
+        <div class="sectionTitleIcon">
+            🏆
+        </div>
+
+        Prize Pool
+
+    </div>
+
+    <div class="sectionSub">
+        Set prize amounts from 1st to 5th position
+    </div>
+
+
+    <div class="prizeGrid">
+
+        <div class="prizeItem">
+            <span>🥇 1ST PRIZE</span>
+
+            <input
+            id="firstPrize"
+            type="number"
+            min="0"
+            step="1"
+            placeholder="₹0">
+        </div>
+
+
+        <div class="prizeItem">
+            <span>🥈 2ND PRIZE</span>
+
+            <input
+            id="secondPrize"
+            type="number"
+            min="0"
+            step="1"
+            placeholder="₹0">
+        </div>
+
+
+        <div class="prizeItem">
+            <span>🥉 3RD PRIZE</span>
+
+            <input
+            id="thirdPrize"
+            type="number"
+            min="0"
+            step="1"
+            placeholder="₹0">
+        </div>
+
+
+        <div class="prizeItem">
+            <span>🏅 4TH PRIZE</span>
+
+            <input
+            id="fourthPrize"
+            type="number"
+            min="0"
+            step="1"
+            placeholder="₹0">
+        </div>
+
+
+        <div class="prizeItem">
+            <span>🏅 5TH PRIZE</span>
+
+            <input
+            id="fifthPrize"
+            type="number"
+            min="0"
+            step="1"
+            placeholder="₹0">
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ENTRY & SLOTS -->
+
+<div class="section">
+
+    <div class="sectionTitle">
+
+        <div class="sectionTitleIcon">
+            💰
+        </div>
+
+        Entry & Slots
+
+    </div>
+
+    <div class="sectionSub">
+        Set entry fee and maximum players
+    </div>
+
+
+    <div class="twoCol">
+
+        <div>
+
+            <label>
+                Entry Fee
+            </label>
+
+            <input
+            id="entry"
+            type="number"
+            min="0"
+            step="1"
+            placeholder="₹20">
+
+        </div>
+
+
+        <div>
+
+            <label>
+                Total Slots
+            </label>
+
+            <input
+            id="total"
+            type="number"
+            min="1"
+            step="1"
+            placeholder="25">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- DATE TIME -->
+
+<div class="section">
+
+    <div class="sectionTitle">
+
+        <div class="sectionTitleIcon">
+            🕒
+        </div>
+
+        Schedule
+
+    </div>
+
+    <div class="sectionSub">
+        Choose when the tournament will run
+    </div>
+
+
+    <div class="twoCol">
+
+        <div>
+
+            <label>
+                Tournament Date
+            </label>
+
+            <input
+            id="date"
+            type="date">
+
+        </div>
+
+
+        <div>
+
+            <label>
+                Tournament Time
+            </label>
+
+            <input
+            id="time"
+            type="time">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- STATUS -->
+
+<div class="section">
+
+    <div class="sectionTitle">
+
+        <div class="sectionTitleIcon">
+            📌
+        </div>
+
+        Tournament Status
+
+    </div>
+
+    <div class="sectionSub">
+        Choose the initial tournament state
+    </div>
+
+
+    <select id="status">
+
+        <option value="upcoming">
+            🟢 Upcoming
+        </option>
+
+        <option value="live">
+            🔥 Live
+        </option>
+
+        <option value="closed">
+            🔒 Closed
+        </option>
+
+    </select>
+
+</div>
+
+
+<!-- SUMMARY -->
+
+<div class="summary">
+
+    <div class="summaryTitle">
+        📋 Tournament Preview
+    </div>
+
+
+    <div class="summaryRow">
+
+        <span class="summaryLabel">
+            Title
+        </span>
+
+        <span
+        id="previewTitle"
+        class="summaryValue">
+            Not set
+        </span>
+
+    </div>
+
+
+    <div class="summaryRow">
+
+        <span class="summaryLabel">
+            Mode
+        </span>
+
+        <span
+        id="previewMode"
+        class="summaryValue">
+            SOLO
+        </span>
+
+    </div>
+
+
+    <div class="summaryRow">
+
+        <span class="summaryLabel">
+            Maps
+        </span>
+
+        <span
+        id="previewMaps"
+        class="summaryValue">
+            None
+        </span>
+
+    </div>
+
+
+    <div class="summaryRow">
+
+        <span class="summaryLabel">
+            Entry
+        </span>
+
+        <span
+        id="previewEntry"
+        class="summaryValue">
+            ₹0
+        </span>
+
+    </div>
+
+
+    <div class="summaryRow">
+
+        <span class="summaryLabel">
+            Slots
+        </span>
+
+        <span
+        id="previewSlots"
+        class="summaryValue">
+            0
+        </span>
+
+    </div>
+
+
+    <div class="summaryRow">
+
+        <span class="summaryLabel">
+            Prize Pool
+        </span>
+
+        <span
+        id="previewPrize"
+        class="summaryValue">
+            ₹0
+        </span>
+
+    </div>
+
+
+    <div class="summaryRow">
+
+        <span class="summaryLabel">
+            Schedule
+        </span>
+
+        <span
+        id="previewSchedule"
+        class="summaryValue">
+            Not set
+        </span>
+
+    </div>
+
+</div>
+
+
+<div class="infoBox">
+
+    💡 Check all details before saving.
+    Once created, the tournament will be stored
+    under Firebase <b>matches</b>.
+
+</div>
 
 
 <button
-    type="button"
-    class="login-btn"
-    id="loginBtn">
+id="saveBtn"
+class="saveBtn"
+type="button">
 
-    LOGIN TO ADMIN PANEL
+    🚀 SAVE TOURNAMENT
 
 </button>
 
 
-
-<div id="msg"></div>
-
-
-
-<div class="security-box">
-
-    🛡️ Admin access is restricted to the authorized
-    Firebase Admin account.
+</div>
 
 </div>
 
 
-<div class="footer">
+<div
+id="toast"
+class="toast">
 
-    BGMI ESPORTS • ADMIN PANEL • 2026
+    Message
 
 </div>
 
 
-</div>
+<script>
+
+/* =====================================================
+   COMMON HELPERS
+===================================================== */
+
+const $ = (id) =>
+document.getElementById(id);
+
+
+/* =====================================================
+   MODE
+===================================================== */
+
+function getMode(){
+
+    const selected =
+    document.querySelector(
+        'input[name="gameMode"]:checked'
+    );
+
+    return selected
+    ? selected.value
+    : "solo";
+
+}
+
+
+/* =====================================================
+   GET SELECTED MAPS
+===================================================== */
+
+function getSelectedMaps(){
+
+    return Array.from(
+        document.querySelectorAll(
+            'input[name="maps"]:checked'
+        )
+    ).map(
+        checkbox => checkbox.value
+    );
+
+}
+
+
+/* =====================================================
+   MAP COUNT
+===================================================== */
+
+function updateMapCount(){
+
+    const maps =
+    getSelectedMaps();
+
+    $("mapCount").innerText =
+    maps.length + " SELECTED";
+
+    updatePreview();
+
+}
+
+
+/* =====================================================
+   MAP EVENTS
+===================================================== */
+
+document
+.querySelectorAll(
+    'input[name="maps"]'
+)
+.forEach((checkbox)=>{
+
+    checkbox.addEventListener(
+        "change",
+        updateMapCount
+    );
+
+});
+
+
+/* =====================================================
+   MODE CHANGE
+===================================================== */
+
+document
+.querySelectorAll(
+    'input[name="gameMode"]'
+)
+.forEach((radio)=>{
+
+    radio.addEventListener(
+        "change",
+        ()=>{
+
+            const mode =
+            getMode();
+
+            const tdmBox =
+            $("tdmBox");
+
+            const normalPrize =
+            $("normalPrize");
+
+            if(mode === "tdm"){
+
+                tdmBox.classList.add(
+                    "show"
+                );
+
+                normalPrize.style.display =
+                "none";
+
+                updateTDMReward();
+
+            }else{
+
+                tdmBox.classList.remove(
+                    "show"
+                );
+
+                normalPrize.style.display =
+                "block";
+
+            }
+
+            updatePreview();
+
+        }
+    );
+
+});
+
+
+/* =====================================================
+   TDM REWARD
+===================================================== */
+
+function updateTDMReward(){
+
+    const reward =
+    $("tdmReward");
+
+    const option =
+    reward.options[
+        reward.selectedIndex
+    ];
+
+    const winning =
+    Number(
+        reward.value || 0
+    );
+
+    const entry =
+    Number(
+        option?.dataset.entry || 0
+    );
+
+    $("rewardText").innerText =
+    "₹" + winning;
+
+    $("entry").value =
+    entry;
+
+    updatePreview();
+
+}
+
+
+$("tdmReward")
+.addEventListener(
+    "change",
+    updateTDMReward
+);
+
+
+/* =====================================================
+   MONEY
+===================================================== */
+
+function formatMoney(value){
+
+    const number =
+    Number(value || 0);
+
+    return number.toLocaleString(
+        "en-IN",
+        {
+            maximumFractionDigits:0
+        }
+    );
+
+}
+
+
+/* =====================================================
+   PREVIEW
+===================================================== */
+
+function updatePreview(){
+
+    const title =
+    $("title").value.trim();
+
+    const mode =
+    getMode();
+
+    const entry =
+    Number(
+        $("entry").value || 0
+    );
+
+    const slots =
+    Number(
+        $("total").value || 0
+    );
+
+    let prize = 0;
+
+    if(mode === "tdm"){
+
+        prize =
+        Number(
+            $("tdmReward").value || 0
+        );
+
+    }else{
+
+        prize =
+        Number(
+            $("firstPrize").value || 0
+        ) +
+
+        Number(
+            $("secondPrize").value || 0
+        ) +
+
+        Number(
+            $("thirdPrize").value || 0
+        ) +
+
+        Number(
+            $("fourthPrize").value || 0
+        ) +
+
+        Number(
+            $("fifthPrize").value || 0
+        );
+
+    }
+
+
+    const maps =
+    getSelectedMaps();
+
+
+    const date =
+    $("date").value;
+
+    const time =
+    $("time").value;
+
+
+    let schedule =
+    "Not set";
+
+
+    if(date && time){
+
+        schedule =
+        `${date} • ${time}`;
+
+    }else if(date){
+
+        schedule =
+        date;
+
+    }
+
+
+    $("previewTitle").innerText =
+    title || "Not set";
+
+
+    $("previewMode").innerText =
+    mode.toUpperCase();
+
+
+    $("previewMaps").innerText =
+    maps.length
+    ? maps.join(", ")
+    : "None";
+
+
+    $("previewEntry").innerText =
+    "₹" + formatMoney(entry);
+
+
+    $("previewSlots").innerText =
+    slots;
+
+
+    $("previewPrize").innerText =
+    "₹" + formatMoney(prize);
+
+
+    $("previewSchedule").innerText =
+    schedule;
+
+}
+
+
+/* =====================================================
+   INPUT EVENTS
+===================================================== */
+
+[
+    "title",
+    "entry",
+    "total",
+    "date",
+    "time",
+    "firstPrize",
+    "secondPrize",
+    "thirdPrize",
+    "fourthPrize",
+    "fifthPrize"
+]
+.forEach((id)=>{
+
+    $(id).addEventListener(
+        "input",
+        updatePreview
+    );
+
+    $(id).addEventListener(
+        "change",
+        updatePreview
+    );
+
+});
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+window.showToast =
+function(message,type="success"){
+
+    const toast =
+    $("toast");
+
+    toast.innerText =
+    message;
+
+    toast.className =
+    "toast show " + type;
+
+    clearTimeout(
+        window.toastTimer
+    );
+
+    window.toastTimer =
+    setTimeout(()=>{
+
+        toast.className =
+        "toast";
+
+    },2800);
+
+};
+
+
+/* =====================================================
+   INITIAL DATE
+===================================================== */
+
+const today =
+new Date();
+
+const yyyy =
+today.getFullYear();
+
+const mm =
+String(
+    today.getMonth()+1
+).padStart(2,"0");
+
+const dd =
+String(
+    today.getDate()
+).padStart(2,"0");
+
+
+$("date").min =
+`${yyyy}-${mm}-${dd}`;
+
+
+updateMapCount();
+updatePreview();
+
+</script>
+
 
 <script type="module">
 
-
-/* =========================
-   FIREBASE IMPORT
-========================= */
+/* =====================================================
+   FIREBASE IMPORTS
+===================================================== */
 
 import {
     initializeApp
@@ -664,19 +2214,26 @@ from
 
 
 import {
+    getDatabase,
+    ref,
+    set,
+    push
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+
+import {
     getAuth,
-    signInWithEmailAndPassword,
-    onAuthStateChanged,
-    signOut
+    onAuthStateChanged
 }
 from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 
-
-/* =========================
+/* =====================================================
    FIREBASE CONFIG
-========================= */
+===================================================== */
 
 const firebaseConfig = {
 
@@ -704,109 +2261,66 @@ const firebaseConfig = {
 };
 
 
-
-/* =========================
-   FIREBASE INIT
-========================= */
-
 const app =
 initializeApp(firebaseConfig);
+
+
+const db =
+getDatabase(app);
+
 
 const auth =
 getAuth(app);
 
 
-
-/* =========================
+/* =====================================================
    ADMIN UID
-========================= */
+===================================================== */
 
 const ADMIN_UID =
 "VIAP56vYwndWPhJxktn0lRPTWnS2";
 
 
+let adminVerified =
+false;
 
-/* =========================
-   DOM
-========================= */
-
-const emailInput =
-document.getElementById("email");
-
-const passwordInput =
-document.getElementById("password");
-
-const loginBtn =
-document.getElementById("loginBtn");
-
-const msg =
-document.getElementById("msg");
-
-const togglePassword =
-document.getElementById("togglePassword");
+let saving =
+false;
 
 
+/* =====================================================
+   LOADING
+===================================================== */
 
-/* =========================
-   MESSAGE
-========================= */
+const loading =
+document.getElementById(
+    "loadingOverlay"
+);
 
-function showMessage(
-    text,
-    type="error"
-){
 
-    msg.textContent = text;
+function hideLoading(){
 
-    msg.className =
-        type === "success"
-        ? "msg-success"
-        : type === "info"
-        ? "msg-info"
-        : "msg-error";
+    if(!loading){
+        return;
+    }
+
+    loading.classList.add(
+        "hide"
+    );
+
+    setTimeout(()=>{
+
+        loading.style.display =
+        "none";
+
+    },350);
 
 }
 
 
-
-/* =========================
-   PASSWORD SHOW / HIDE
-========================= */
-
-togglePassword.addEventListener(
-    "click",
-    ()=>{
-
-        if(
-            passwordInput.type ===
-            "password"
-        ){
-
-            passwordInput.type =
-            "text";
-
-            togglePassword.textContent =
-            "🙈";
-
-        }
-        else{
-
-            passwordInput.type =
-            "password";
-
-            togglePassword.textContent =
-            "👁️";
-
-        }
-
-    }
-);
-
-
-
-/* =========================
-   AUTH STATE
-========================= */
+/* =====================================================
+   AUTH CHECK
+===================================================== */
 
 onAuthStateChanged(
     auth,
@@ -814,135 +2328,334 @@ onAuthStateChanged(
 
         if(!user){
 
-            return;
+            hideLoading();
 
-        }
-
-
-        /*
-         * Already logged-in ADMIN
-         */
-
-        if(
-            user.uid ===
-            ADMIN_UID
-        ){
-
-            showMessage(
-                "Admin session found. Opening dashboard...",
-                "success"
+            showToast(
+                "Admin login required",
+                "error"
             );
 
-            setTimeout(
-                ()=>{
-                    location.replace(
-                        "admin-dashboard.html"
-                    );
-                },
-                500
-            );
+            setTimeout(()=>{
+
+                location.replace(
+                    "admin.html"
+                );
+
+            },700);
 
             return;
 
         }
 
-
-        /*
-         * Logged-in non-admin
-         */
-
-        signOut(auth)
-        .catch(()=>{});
-
-    }
-);
-
-
-
-/* =========================
-   LOGIN
-========================= */
-
-async function login(){
-
-    if(loginBtn.disabled){
-        return;
-    }
-
-
-    const email =
-        emailInput.value.trim();
-
-    const password =
-        passwordInput.value;
-
-
-    if(!email){
-
-        showMessage(
-            "Please enter admin email."
-        );
-
-        emailInput.focus();
-
-        return;
-
-    }
-
-
-    if(!password){
-
-        showMessage(
-            "Please enter password."
-        );
-
-        passwordInput.focus();
-
-        return;
-
-    }
-
-
-    loginBtn.disabled = true;
-
-    loginBtn.innerHTML =
-        '<span class="spinner"></span> Checking...';
-
-
-    showMessage(
-        "Authenticating admin account...",
-        "info"
-    );
-
-
-    try{
-
-
-        const result =
-        await signInWithEmailAndPassword(
-            auth,
-            email,
-            password
-        );
-
-
-        const user =
-        result.user;
-
-
-        /*
-         * UID SECURITY CHECK
-         */
 
         if(
             user.uid !==
             ADMIN_UID
         ){
 
-            await signOut(auth);
+            hideLoading();
 
-            showMessage(
-                "Access denied. This account is not authorized as admin."
+            showToast(
+                "Access Denied",
+                "error"
+            );
+
+            setTimeout(()=>{
+
+                location.replace(
+                    "dashboard.html"
+                );
+
+            },700);
+
+            return;
+
+        }
+
+
+        adminVerified =
+        true;
+
+        hideLoading();
+
+    }
+);
+
+
+/* =====================================================
+   VALIDATION
+===================================================== */
+
+function validateTournament(){
+
+    const title =
+    $("title")
+    .value
+    .trim();
+
+
+    const image =
+    $("image")
+    .value
+    .trim();
+
+
+    const mode =
+    document.querySelector(
+        'input[name="gameMode"]:checked'
+    )?.value || "solo";
+
+
+    const entry =
+    Number(
+        $("entry").value || 0
+    );
+
+
+    const total =
+    Number(
+        $("total").value || 0
+    );
+
+
+    const date =
+    $("date").value;
+
+
+    const time =
+    $("time").value;
+
+
+    /*
+       IMPORTANT:
+       Get ALL selected maps.
+       Rondo bhi yahi se milega.
+    */
+
+    const maps =
+    Array.from(
+        document.querySelectorAll(
+            'input[name="maps"]:checked'
+        )
+    ).map(
+        checkbox => checkbox.value
+    );
+
+
+    if(!title){
+
+        throw new Error(
+            "Tournament title required"
+        );
+
+    }
+
+
+    if(title.length < 3){
+
+        throw new Error(
+            "Tournament title is too short"
+        );
+
+    }
+
+
+    if(image){
+
+        try{
+
+            new URL(image);
+
+        }catch{
+
+            throw new Error(
+                "Invalid banner image URL"
+            );
+
+        }
+
+    }
+
+
+    if(
+        !Number.isFinite(entry) ||
+        entry < 0
+    ){
+
+        throw new Error(
+            "Invalid entry fee"
+        );
+
+    }
+
+
+    if(
+        !Number.isFinite(total) ||
+        total < 1
+    ){
+
+        throw new Error(
+            "Total slots must be at least 1"
+        );
+
+    }
+
+
+    if(!date){
+
+        throw new Error(
+            "Tournament date required"
+        );
+
+    }
+
+
+    if(!time){
+
+        throw new Error(
+            "Tournament time required"
+        );
+
+    }
+
+
+    const selectedDateTime =
+    new Date(
+        `${date}T${time}`
+    );
+
+
+    if(
+        Number.isNaN(
+            selectedDateTime.getTime()
+        )
+    ){
+
+        throw new Error(
+            "Invalid tournament date/time"
+        );
+
+    }
+
+
+    if(
+        selectedDateTime.getTime() <
+        Date.now() - 60000
+    ){
+
+        throw new Error(
+            "Tournament date/time cannot be in the past"
+        );
+
+    }
+
+
+    /*
+       Maps required for
+       SOLO / DUO / SQUAD.
+    */
+
+    if(
+        mode !== "tdm" &&
+        maps.length === 0
+    ){
+
+        throw new Error(
+            "Please select at least one map"
+        );
+
+    }
+
+
+    if(mode !== "tdm"){
+
+        const first =
+        Number(
+            $("firstPrize")
+            .value || 0
+        );
+
+
+        const second =
+        Number(
+            $("secondPrize")
+            .value || 0
+        );
+
+
+        const third =
+        Number(
+            $("thirdPrize")
+            .value || 0
+        );
+
+
+        const fourth =
+        Number(
+            $("fourthPrize")
+            .value || 0
+        );
+
+
+        const fifth =
+        Number(
+            $("fifthPrize")
+            .value || 0
+        );
+
+
+        if(
+            first < 0 ||
+            second < 0 ||
+            third < 0 ||
+            fourth < 0 ||
+            fifth < 0
+        ){
+
+            throw new Error(
+                "Prize amount cannot be negative"
+            );
+
+        }
+
+    }
+
+
+    return {
+
+        title,
+        image,
+        mode,
+        entry,
+        total,
+        date,
+        time,
+        maps
+
+    };
+
+}
+
+
+/* =====================================================
+   SAVE TOURNAMENT
+===================================================== */
+
+$("saveBtn")
+.addEventListener(
+    "click",
+    async()=>{
+
+        if(saving){
+            return;
+        }
+
+
+        if(!adminVerified){
+
+            showToast(
+                "Admin verification pending",
+                "error"
             );
 
             return;
@@ -950,157 +2663,427 @@ async function login(){
         }
 
 
-        showMessage(
-            "Login successful. Opening admin dashboard...",
-            "success"
-        );
+        const btn =
+        $("saveBtn");
 
 
-        loginBtn.innerHTML =
-            "✓ ADMIN VERIFIED";
+        try{
+
+            saving =
+            true;
+
+            btn.disabled =
+            true;
+
+            btn.innerText =
+            "⏳ SAVING...";
 
 
-        setTimeout(
-            ()=>{
+            /*
+               Validate form
+            */
 
-                location.replace(
-                    "admin-dashboard.html"
+            const form =
+            validateTournament();
+
+
+            /* =========================================
+               PRIZE VALUES
+            ========================================= */
+
+            let prize =
+            0;
+
+            let firstPrize =
+            0;
+
+            let secondPrize =
+            0;
+
+            let thirdPrize =
+            0;
+
+            let fourthPrize =
+            0;
+
+            let fifthPrize =
+            0;
+
+
+            let tdmFormat =
+            "";
+
+            let winningAmount =
+            0;
+
+
+            if(
+                form.mode ===
+                "tdm"
+            ){
+
+                tdmFormat =
+                $("tdmFormat")
+                .value;
+
+
+                winningAmount =
+                Number(
+                    $("tdmReward")
+                    .value || 0
                 );
 
-            },
-            500
-        );
+
+                prize =
+                winningAmount;
+
+            }else{
+
+                firstPrize =
+                Number(
+                    $("firstPrize")
+                    .value || 0
+                );
 
 
-    }
-    catch(error){
-
-        console.error(
-            "Admin login error:",
-            error
-        );
+                secondPrize =
+                Number(
+                    $("secondPrize")
+                    .value || 0
+                );
 
 
-        let message =
-            "Login failed. Please try again.";
+                thirdPrize =
+                Number(
+                    $("thirdPrize")
+                    .value || 0
+                );
 
 
-        switch(error.code){
-
-            case "auth/invalid-credential":
-
-                message =
-                "Invalid email or password.";
-
-                break;
+                fourthPrize =
+                Number(
+                    $("fourthPrize")
+                    .value || 0
+                );
 
 
-            case "auth/invalid-email":
-
-                message =
-                "Please enter a valid email address.";
-
-                break;
-
-
-            case "auth/user-disabled":
-
-                message =
-                "This admin account is disabled.";
-
-                break;
+                fifthPrize =
+                Number(
+                    $("fifthPrize")
+                    .value || 0
+                );
 
 
-            case "auth/too-many-requests":
+                prize =
+                firstPrize +
+                secondPrize +
+                thirdPrize +
+                fourthPrize +
+                fifthPrize;
 
-                message =
-                "Too many attempts. Please try again later.";
-
-                break;
-
-
-            case "auth/network-request-failed":
-
-                message =
-                "Network error. Check your internet connection.";
-
-                break;
+            }
 
 
-            case "auth/operation-not-allowed":
+            /* =========================================
+               STATUS
+            ========================================= */
 
-                message =
-                "Email/password login is disabled in Firebase.";
+            const selectedStatus =
+            $("status")
+            .value;
 
-                break;
+
+            /* =========================================
+               NEW MATCH ID
+            ========================================= */
+
+            const matchRef =
+            push(
+                ref(
+                    db,
+                    "matches"
+                )
+            );
+
+
+            const tournamentId =
+            matchRef.key;
+
+
+            const now =
+            Date.now();
+
+
+            /* =========================================
+               MAP FIX
+            ========================================= */
+
+            const selectedMaps =
+            form.maps;
+
+
+            /*
+              IMPORTANT:
+
+              maps:
+              ["Erangel","Rondo"]
+
+              map:
+              "Erangel, Rondo"
+
+              mapList:
+              ["Erangel","Rondo"]
+
+              firstMap:
+              "Erangel"
+
+              Isse old aur new dono UI
+              compatibility maintain hogi.
+            */
+
+            const mapsString =
+            selectedMaps.join(", ");
+
+
+            const firstMap =
+            selectedMaps.length
+            ? selectedMaps[0]
+            : "";
+
+
+            /* =========================================
+               TOURNAMENT DATA
+            ========================================= */
+
+            const data = {
+
+                id:
+                tournamentId,
+
+
+                title:
+                form.title,
+
+
+                name:
+                form.title,
+
+
+                image:
+                form.image,
+
+
+                type:
+                form.mode,
+
+
+                mode:
+                form.mode,
+
+
+                /*
+                   ALL SELECTED MAPS
+                */
+
+                maps:
+                selectedMaps,
+
+
+                /*
+                   OLD COMPATIBILITY FIELD
+                   NOW STORES ALL MAPS
+                */
+
+                map:
+                mapsString,
+
+
+                /*
+                   EXTRA COMPATIBILITY
+                */
+
+                mapList:
+                selectedMaps,
+
+
+                firstMap:
+                firstMap,
+
+
+                entry:
+                form.entry,
+
+
+                entryFee:
+                form.entry,
+
+
+                total:
+                form.total,
+
+
+                totalSlots:
+                form.total,
+
+
+                maxSlots:
+                form.total,
+
+
+                booked:
+                0,
+
+
+                bookedSlots:
+                0,
+
+
+                date:
+                form.date,
+
+
+                time:
+                form.time,
+
+
+                status:
+                selectedStatus,
+
+
+                prize:
+                prize,
+
+
+                firstPrize:
+                firstPrize,
+
+
+                secondPrize:
+                secondPrize,
+
+
+                thirdPrize:
+                thirdPrize,
+
+
+                fourthPrize:
+                fourthPrize,
+
+
+                fifthPrize:
+                fifthPrize,
+
+
+                createdAt:
+                now,
+
+
+                updatedAt:
+                now,
+
+
+                createdBy:
+                ADMIN_UID
+
+            };
+
+
+            /* =========================================
+               TDM DATA
+            ========================================= */
+
+            if(
+                form.mode ===
+                "tdm"
+            ){
+
+                data.tdmFormat =
+                tdmFormat;
+
+
+                data.winningAmount =
+                winningAmount;
+
+            }
+
+
+            /* =========================================
+               SAVE
+            ========================================= */
+
+            await set(
+                matchRef,
+                data
+            );
+
+
+            console.log(
+                "Tournament Saved:",
+                data
+            );
+
+
+            /* =========================================
+               SUCCESS
+            ========================================= */
+
+            showToast(
+                "Tournament created successfully"
+            );
+
+
+            btn.innerText =
+            "✓ CREATED";
+
+
+            /*
+               IMPORTANT:
+               Redirect to exact page requested.
+            */
+
+            setTimeout(()=>{
+
+                location.replace(
+                    "admin-tournaments.html"
+                );
+
+            },700);
+
+
+        }
+        catch(error){
+
+            console.error(
+                "Create Tournament Error:",
+                error
+            );
+
+
+            showToast(
+                error?.message ||
+                "Failed to create tournament",
+                "error"
+            );
+
+
+            btn.disabled =
+            false;
+
+
+            btn.innerText =
+            "🚀 SAVE TOURNAMENT";
+
+
+            saving =
+            false;
 
         }
 
-
-        showMessage(message);
-
-
-        loginBtn.disabled = false;
-
-        loginBtn.textContent =
-            "LOGIN TO ADMIN PANEL";
-
-    }
-
-}
-
-
-
-/* =========================
-   LOGIN CLICK
-========================= */
-
-loginBtn.addEventListener(
-    "click",
-    login
-);
-
-
-
-/* =========================
-   ENTER KEY LOGIN
-========================= */
-
-emailInput.addEventListener(
-    "keydown",
-    (event)=>{
-
-        if(
-            event.key ===
-            "Enter"
-        ){
-
-            login();
-
-        }
-
     }
 );
-
-
-passwordInput.addEventListener(
-    "keydown",
-    (event)=>{
-
-        if(
-            event.key ===
-            "Enter"
-        ){
-
-            login();
-
-        }
-
-    }
-);
-
 
 </script>
+
 
 </body>
 
