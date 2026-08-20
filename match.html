@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -7,1696 +8,1898 @@
 <meta name="viewport"
 content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
 
-<meta name="theme-color" content="#050B18">
+<meta name="theme-color" content="#02070d">
 <meta name="color-scheme" content="dark">
 
 <title>Match Details</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link
-href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-rel="stylesheet">
-
 <style>
 
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Poppins,sans-serif;
-  -webkit-tap-highlight-color:transparent;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
 }
 
-html{
-  scroll-behavior:smooth;
+html,
+body{
+    width:100%;
+    min-height:100%;
+    background:#02070d;
+    color:#f8fafc;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-  background:#050B18;
-  color:#fff;
-  min-height:100vh;
-  overflow-x:hidden;
-  padding-bottom:30px;
-}
-
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:-2;
-  background:
-    radial-gradient(
-      circle at 0 0,
-      rgba(34,197,94,.12),
-      transparent 32%
-    ),
-    radial-gradient(
-      circle at 100% 10%,
-      rgba(37,99,235,.12),
-      transparent 30%
-    ),
-    #050B18;
-}
-
-body::after{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:-1;
-  pointer-events:none;
-  background:
-    linear-gradient(
-      rgba(255,255,255,.015) 1px,
-      transparent 1px
-    );
-  background-size:100% 4px;
-  opacity:.12;
+    overflow-x:hidden;
 }
 
 button,
-a{
-  font:inherit;
+input{
+    font:inherit;
 }
 
 button{
-  cursor:pointer;
+    border:0;
+    cursor:pointer;
+}
+
+button:disabled{
+    cursor:not-allowed;
+    opacity:.55;
 }
 
 .app{
-  width:100%;
-  max-width:500px;
-  margin:auto;
-  padding-bottom:35px;
+    width:100%;
+    max-width:620px;
+    min-height:100vh;
+    margin:auto;
+    padding-bottom:30px;
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(34,197,94,.12),
+            transparent 34%
+        ),
+        linear-gradient(
+            180deg,
+            #02070d 0%,
+            #050b12 100%
+        );
 }
 
-/* ================= HEADER ================= */
+/* =========================
+   HEADER
+========================= */
 
 .header{
-  height:76px;
-  padding:15px 18px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  position:sticky;
-  top:0;
-  z-index:20;
-  background:rgba(5,11,24,.88);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid rgba(255,255,255,.05);
-}
-
-.title{
-  font-size:19px;
-  font-weight:800;
-  letter-spacing:.2px;
+    height:62px;
+    display:flex;
+    align-items:center;
+    padding:0 14px;
+    border-bottom:1px solid rgba(255,255,255,.07);
+    background:rgba(2,7,13,.94);
+    position:sticky;
+    top:0;
+    z-index:50;
+    backdrop-filter:blur(14px);
 }
 
 .backBtn{
-  width:42px;
-  height:42px;
-  border:1px solid rgba(255,255,255,.09);
-  border-radius:14px;
-  background:#111827;
-  color:#fff;
-  font-size:25px;
-  line-height:1;
+    width:42px;
+    height:42px;
+    border-radius:13px;
+    background:rgba(255,255,255,.06);
+    color:#fff;
+    font-size:32px;
+    line-height:38px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
 .backBtn:active{
-  transform:scale(.94);
+    transform:scale(.94);
+}
+
+.title{
+    flex:1;
+    text-align:center;
+    font-size:17px;
+    font-weight:800;
+    letter-spacing:.3px;
 }
 
 .headerSpace{
-  width:42px;
+    width:42px;
 }
 
-/* ================= BANNER ================= */
+/* =========================
+   RULE BUTTON
+========================= */
+
+.topRulesBtn{
+    display:block;
+    margin:12px 14px 0 auto;
+    padding:9px 14px;
+    border-radius:11px;
+    background:linear-gradient(
+        135deg,
+        #ffd84d,
+        #f59e0b
+    );
+    color:#17110a;
+    font-size:11px;
+    font-weight:900;
+    box-shadow:0 8px 24px rgba(245,158,11,.18);
+}
+
+.topRulesBtn:active{
+    transform:scale(.96);
+}
+
+/* =========================
+   BANNER
+========================= */
 
 .banner{
-  margin:14px 18px 0;
-  height:205px;
-  border-radius:23px;
-  overflow:hidden;
-  position:relative;
-  border:1px solid rgba(255,255,255,.09);
-  box-shadow:0 18px 45px rgba(0,0,0,.4);
-  background:#0f172a;
+    position:relative;
+    margin:12px 14px 0;
+    height:210px;
+    overflow:hidden;
+    border-radius:20px;
+    background:#0b1118;
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 18px 50px rgba(0,0,0,.34);
 }
 
 .banner img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
 }
 
 .bannerShade{
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(
-      to top,
-      rgba(0,0,0,.82),
-      rgba(0,0,0,.05) 65%,
-      rgba(0,0,0,.22)
-    );
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0,0,0,.05) 15%,
+            rgba(0,0,0,.18) 42%,
+            rgba(0,0,0,.9) 100%
+        );
 }
 
 .liveBadge{
-  position:absolute;
-  top:14px;
-  left:14px;
-  padding:7px 12px;
-  border-radius:20px;
-  background:#22c55e;
-  color:#03100a;
-  font-size:10px;
-  font-weight:800;
-  box-shadow:0 7px 20px rgba(34,197,94,.25);
+    position:absolute;
+    top:12px;
+    left:12px;
+    padding:7px 10px;
+    border-radius:9px;
+    background:#22c55e;
+    color:#041109;
+    font-size:10px;
+    font-weight:900;
+    box-shadow:0 7px 20px rgba(34,197,94,.25);
 }
 
 .bannerBottom{
-  position:absolute;
-  left:16px;
-  right:16px;
-  bottom:14px;
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:12px;
+    position:absolute;
+    left:14px;
+    right:14px;
+    bottom:13px;
+    display:flex;
+    align-items:flex-end;
+    gap:10px;
 }
 
 .bannerTitle{
-  font-size:18px;
-  font-weight:800;
-  line-height:1.25;
-  text-shadow:0 2px 8px #000;
+    flex:1;
+    font-size:19px;
+    font-weight:900;
+    line-height:1.15;
+    text-shadow:0 3px 12px #000;
 }
 
 .bannerMode{
-  flex-shrink:0;
-  padding:6px 10px;
-  border-radius:10px;
-  background:rgba(255,255,255,.12);
-  border:1px solid rgba(255,255,255,.13);
-  font-size:9px;
-  font-weight:800;
-  backdrop-filter:blur(8px);
+    flex:none;
+    padding:7px 10px;
+    border-radius:8px;
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.13);
+    backdrop-filter:blur(10px);
+    font-size:10px;
+    font-weight:900;
 }
 
-/* ================= CARD ================= */
+/* =========================
+   CARD
+========================= */
 
-.card,
-.roomBox{
-  margin:18px;
-  background:
-    linear-gradient(
-      145deg,
-      #111827,
-      #0a1220
-    );
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:23px;
-  padding:19px;
-  box-shadow:0 15px 38px rgba(0,0,0,.26);
+.card{
+    margin:14px;
+    padding:16px;
+    border-radius:20px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(16,24,34,.98),
+            rgba(7,13,20,.98)
+        );
+    border:1px solid rgba(255,255,255,.07);
+    box-shadow:0 18px 45px rgba(0,0,0,.28);
 }
 
 .matchTitle{
-  font-size:22px;
-  font-weight:800;
-  line-height:1.3;
-  margin-bottom:18px;
+    font-size:20px;
+    font-weight:900;
+    margin-bottom:14px;
 }
 
 .row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  margin:13px 0;
+    min-height:40px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    border-bottom:1px solid rgba(255,255,255,.055);
+    font-size:13px;
 }
 
 .row span{
-  color:#94a3b8;
-  font-size:13px;
+    color:#94a3b8;
 }
 
 .row b{
-  font-size:13px;
-  text-align:right;
+    color:#f8fafc;
+    text-align:right;
 }
 
 .prizeValue{
-  color:#22c55e!important;
-  font-size:16px!important;
+    color:#ffd84d !important;
 }
 
-/* ================= INFO ================= */
-
 .infoGrid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:17px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:13px;
 }
 
 .infoBox{
-  padding:13px;
-  border-radius:15px;
-  background:#07111f;
-  border:1px solid rgba(255,255,255,.06);
+    padding:12px;
+    border-radius:13px;
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(255,255,255,.06);
 }
 
 .infoBox small{
-  display:block;
-  color:#64748b;
-  font-size:9px;
-  text-transform:uppercase;
+    display:block;
+    color:#64748b;
+    font-size:9px;
+    font-weight:800;
+    margin-bottom:5px;
 }
 
 .infoBox strong{
-  display:block;
-  margin-top:3px;
-  font-size:13px;
+    display:block;
+    font-size:12px;
 }
 
-/* ================= WALLET ================= */
+/* =========================
+   TEAM
+========================= */
+
+.teamBox{
+    display:none;
+}
+
+.teamInputWrap{
+    display:none;
+}
+
+.teamNameDisplay{
+    padding:13px;
+    border-radius:12px;
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(255,255,255,.07);
+    font-weight:800;
+}
+
+/* =========================
+   WALLET
+========================= */
 
 .walletInfo{
-  margin-top:18px;
-  padding:15px;
-  border-radius:17px;
-  background:#07111f;
-  border:1px solid rgba(34,197,94,.2);
+    margin-top:14px;
+    padding:14px;
+    border-radius:16px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(34,197,94,.09),
+            rgba(255,255,255,.025)
+        );
+    border:1px solid rgba(34,197,94,.13);
 }
 
 .walletTop{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
 }
 
 .walletLabel{
-  color:#94a3b8;
-  font-size:11px;
+    font-size:9px;
+    color:#94a3b8;
+    font-weight:900;
+    letter-spacing:.7px;
 }
 
 .walletBalance{
-  font-size:21px;
-  font-weight:800;
-  color:#22c55e;
+    margin-top:4px;
+    font-size:24px;
+    font-weight:900;
+    color:#22c55e;
 }
 
 .walletAfter{
-  margin-top:7px;
-  font-size:10px;
-  color:#64748b;
+    margin-top:10px;
+    padding-top:9px;
+    border-top:1px solid rgba(255,255,255,.06);
+    color:#94a3b8;
+    font-size:11px;
+}
+
+.joinBtn,
+.addMoneyBtn{
+    width:100%;
+    min-height:50px;
+    margin-top:13px;
+    border-radius:14px;
+    font-weight:900;
+    font-size:13px;
 }
 
 .joinBtn{
-  width:100%;
-  height:57px;
-  margin-top:19px;
-  border:0;
-  border-radius:16px;
-  background:
-    linear-gradient(
-      135deg,
-      #22c55e,
-      #16a34a
-    );
-  color:#03100a;
-  font-size:16px;
-  font-weight:800;
-  box-shadow:0 0 28px rgba(34,197,94,.25);
-  transition:.18s;
+    color:#031008;
+    background:
+        linear-gradient(
+            135deg,
+            #34d399,
+            #22c55e
+        );
+    box-shadow:
+        0 12px 28px rgba(34,197,94,.18);
 }
 
-.joinBtn:active{
-  transform:scale(.97);
-}
-
-.joinBtn:disabled{
-  background:#374151;
-  color:#94a3b8;
-  box-shadow:none;
-  cursor:not-allowed;
+.joinBtn:active,
+.addMoneyBtn:active{
+    transform:scale(.985);
 }
 
 .joinBtn.insufficient{
-  background:
-    linear-gradient(
-      135deg,
-      #f59e0b,
-      #d97706
-    );
-  color:#000;
+    background:#26303a;
+    color:#fbbf24;
+    box-shadow:none;
 }
 
 .addMoneyBtn{
-  display:none;
-  width:100%;
-  height:49px;
-  margin-top:10px;
-  border:0;
-  border-radius:14px;
-  background:#2563eb;
-  color:#fff;
-  font-size:13px;
-  font-weight:800;
+    color:#07111d;
+    background:
+        linear-gradient(
+            135deg,
+            #ffd84d,
+            #f59e0b
+        );
 }
 
-.addMoneyBtn:active{
-  transform:scale(.97);
+.registrationClosed{
+    margin-top:13px;
+    padding:13px;
+    border-radius:13px;
+    text-align:center;
+    background:rgba(239,68,68,.09);
+    border:1px solid rgba(239,68,68,.22);
+    color:#fca5a5;
+    font-size:12px;
+    font-weight:900;
 }
 
 .joinStatus{
-  display:none;
-  margin-top:11px;
-  padding:13px;
-  border-radius:14px;
-  text-align:center;
-  background:#052e16;
-  border:1px solid rgba(34,197,94,.25);
-  color:#86efac;
-  font-size:12px;
-  font-weight:700;
+    display:none;
+    margin-top:13px;
+    padding:13px;
+    border-radius:13px;
+    background:rgba(34,197,94,.08);
+    border:1px solid rgba(34,197,94,.18);
+    color:#86efac;
+    font-size:12px;
+    font-weight:800;
+    text-align:center;
 }
 
-/* ================= SECTION ================= */
-
-.sectionHead{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:14px;
-}
-
-.sectionTitle{
-  font-size:18px;
-  font-weight:800;
-}
-
-.sectionHint{
-  font-size:9px;
-  color:#64748b;
-}
-
-/* ================= PRIZES ================= */
+/* =========================
+   PRIZES
+========================= */
 
 .prizeBox{
-  margin:18px;
-  padding:18px;
-  border-radius:22px;
-  background:
-    linear-gradient(
-      145deg,
-      #171505,
-      #0d111b
-    );
-  border:1px solid rgba(255,215,0,.22);
-  box-shadow:0 14px 35px rgba(0,0,0,.24);
+    margin:14px;
+    padding:15px;
+    border-radius:20px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(22,18,8,.98),
+            rgba(10,12,14,.98)
+        );
+    border:1px solid rgba(255,216,77,.12);
+    box-shadow:0 18px 45px rgba(0,0,0,.28);
 }
 
 .prizeHeader{
-  text-align:center;
-  margin-bottom:16px;
+    display:grid;
+    grid-template-columns:38px 1fr;
+    column-gap:10px;
+    align-items:center;
+    margin-bottom:12px;
 }
 
 .prizeHeaderIcon{
-  font-size:28px;
+    width:38px;
+    height:38px;
+    border-radius:11px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(255,216,77,.08);
+    border:1px solid rgba(255,216,77,.13);
 }
 
 .prizeHeader h3{
-  color:#FFD700;
-  font-size:18px;
-  margin-top:3px;
+    font-size:16px;
 }
 
 .prizeHeader p{
-  color:#64748b;
-  font-size:9px;
-  margin-top:3px;
+    grid-column:2;
+    color:#78716c;
+    font-size:9px;
+    font-weight:800;
+    margin-top:2px;
 }
 
 .prizeCards{
-  display:grid;
-  grid-template-columns:1.1fr 1fr 1fr;
-  gap:8px;
+    display:flex;
+    flex-direction:column;
+    gap:7px;
 }
 
 .prizeItem{
-  position:relative;
-  text-align:center;
-  padding:14px 7px;
-  border-radius:16px;
-  background:#0b1220;
-  border:1px solid rgba(255,255,255,.06);
-  overflow:hidden;
+    display:none;
+    padding:11px 12px;
+    border-radius:12px;
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(255,255,255,.055);
 }
 
-.prizeItem:first-child{
-  border-color:rgba(255,215,0,.32);
-  transform:translateY(-4px);
+.prizeItemInner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.prizeLeft{
+    display:flex;
+    align-items:center;
+    gap:9px;
 }
 
 .prizeMedal{
-  font-size:22px;
+    width:27px;
+    height:27px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:8px;
+    background:rgba(255,216,77,.08);
+    font-size:15px;
 }
 
 .prizeRank{
-  font-size:9px;
-  color:#94a3b8;
-  margin-top:3px;
+    font-size:11px;
+    font-weight:900;
+    color:#e5e7eb;
 }
 
 .prizeMoney{
-  color:#FFD700;
-  font-size:15px;
-  font-weight:800;
-  margin-top:3px;
-  white-space:nowrap;
+    font-size:14px;
+    font-weight:900;
+    color:#ffd84d;
 }
 
 .prizePool{
-  margin-top:11px;
-  padding:11px;
-  border-radius:13px;
-  text-align:center;
-  background:rgba(255,215,0,.06);
-  border:1px solid rgba(255,215,0,.1);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px solid rgba(255,216,77,.1);
 }
 
 .prizePool span{
-  display:block;
-  color:#94a3b8;
-  font-size:9px;
+    color:#78716c;
+    font-size:9px;
+    font-weight:900;
 }
 
 .prizePool b{
-  display:block;
-  color:#FFD700;
-  font-size:18px;
-  margin-top:2px;
+    color:#ffd84d;
+    font-size:17px;
 }
 
-/* ================= ROOM ================= */
+/* =========================
+   JOINED VIEW
+========================= */
+
+#joinedContent{
+    display:none;
+}
+
+.sectionHead{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:12px;
+}
+
+.sectionTitle{
+    font-size:14px;
+    font-weight:900;
+}
+
+.sectionHint{
+    padding:5px 8px;
+    border-radius:7px;
+    background:rgba(34,197,94,.08);
+    color:#4ade80;
+    font-size:8px;
+    font-weight:900;
+}
 
 .roomBox{
-  padding:19px;
+    margin:14px;
+    padding:15px;
+    border-radius:20px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(16,24,34,.98),
+            rgba(7,13,20,.98)
+        );
+    border:1px solid rgba(255,255,255,.07);
 }
 
 .lock{
-  background:#0b1220;
-  padding:18px;
-  border-radius:15px;
-  text-align:center;
-  color:#facc15;
-  font-size:11px;
-  line-height:1.7;
-  border:1px solid rgba(250,204,21,.1);
+    padding:14px;
+    border-radius:13px;
+    background:rgba(245,158,11,.07);
+    border:1px solid rgba(245,158,11,.14);
+    color:#fbbf24;
+    font-size:11px;
+    line-height:1.5;
 }
 
 .roomData{
-  display:block;
+    display:block;
 }
 
-/* PASSWORD IS NEVER SHOWN AFTER JOIN */
-
-.roomPassBox{
-  display:none!important;
+.roomCodeBox{
+    margin-top:10px;
+    padding:14px;
+    border-radius:14px;
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(255,255,255,.06);
 }
 
-/* ================= WHATSAPP ================= */
+.roomCodeTitle{
+    color:#64748b;
+    font-size:9px;
+    font-weight:900;
+    margin-bottom:7px;
+}
+
+.roomCode{
+    font-size:22px;
+    font-weight:900;
+    letter-spacing:1px;
+    color:#f8fafc;
+    word-break:break-all;
+}
 
 .whatsappGroupBox{
-  display:none;
-  margin-top:0;
-  padding:15px;
-  border-radius:20px;
-  background:
-    linear-gradient(
-      145deg,
-      #0b2418,
-      #071b13
-    );
-  border:1px solid rgba(34,197,94,.22);
-  position:relative;
-  overflow:hidden;
+    margin-top:10px;
+    padding:13px;
+    border-radius:15px;
+    background:rgba(34,197,94,.06);
+    border:1px solid rgba(34,197,94,.13);
 }
 
 .whatsappHeader{
-  display:flex;
-  align-items:center;
-  gap:11px;
-  margin-bottom:13px;
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
 .whatsappIcon{
-  width:44px;
-  height:44px;
-  flex-shrink:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:13px;
-  background:
-    linear-gradient(
-      135deg,
-      #25D366,
-      #16a34a
-    );
-  box-shadow:0 8px 22px rgba(37,211,102,.22);
-}
-
-.whatsappIcon span{
-  font-size:21px;
+    width:38px;
+    height:38px;
+    border-radius:11px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#22c55e;
 }
 
 .whatsappText{
-  flex:1;
-  min-width:0;
+    flex:1;
 }
 
 .whatsappTitle{
-  font-size:14px;
-  font-weight:800;
+    font-size:12px;
+    font-weight:900;
 }
 
 .whatsappSubtitle{
-  margin-top:2px;
-  color:#86efac;
-  font-size:9px;
-  line-height:1.45;
+    margin-top:3px;
+    color:#64748b;
+    font-size:9px;
 }
 
 .whatsappArrow{
-  width:29px;
-  height:29px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:9px;
-  background:rgba(34,197,94,.1);
-  color:#4ade80;
-  font-weight:800;
+    color:#4ade80;
+    font-size:18px;
 }
 
 .groupBtn{
-  width:100%;
-  min-height:54px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  border-radius:15px;
-  background:
-    linear-gradient(
-      135deg,
-      #25D366,
-      #16a34a
-    );
-  color:#03100a;
-  text-decoration:none;
-  font-size:12px;
-  font-weight:800;
-  box-shadow:0 9px 25px rgba(37,211,102,.2);
-  transition:.18s;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    margin-top:11px;
+    min-height:43px;
+    border-radius:11px;
+    background:#22c55e;
+    color:#041109;
+    text-decoration:none;
+    font-size:10px;
+    font-weight:900;
 }
-
-.groupBtn:active{
-  transform:scale(.97);
-}
-
-/* ================= PLAYERS ================= */
 
 .players{
-  margin-top:16px;
-  background:#0f172a;
-  padding:17px;
-  border-radius:18px;
+    margin-top:15px;
 }
 
 .player{
-  padding:12px 0;
-  border-bottom:1px solid #1f2937;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-}
-
-.player:last-child{
-  border-bottom:0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:12px;
+    margin-top:7px;
+    border-radius:12px;
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(255,255,255,.05);
 }
 
 .playerName{
-  font-size:13px;
-  font-weight:700;
-}
-
-.playerId{
-  color:#64748b;
-  font-size:10px;
-  margin-top:3px;
+    font-size:12px;
+    font-weight:800;
 }
 
 .badge{
-  background:#22c55e;
-  color:#000;
-  padding:5px 9px;
-  border-radius:20px;
-  font-size:9px;
-  font-weight:800;
+    flex:none;
+    padding:5px 7px;
+    border-radius:7px;
+    background:rgba(34,197,94,.08);
+    color:#4ade80;
+    font-size:8px;
+    font-weight:900;
 }
 
-.loading,
-.empty{
-  color:#64748b;
-  text-align:center;
-  padding:16px 0;
-  font-size:11px;
+.empty,
+.loading{
+    padding:20px;
+    text-align:center;
+    color:#64748b;
+    font-size:11px;
 }
 
-/* ================= CENTER MODALS ================= */
+/* =========================
+   MODALS
+========================= */
 
 .modal{
-  position:fixed;
-  inset:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,.78);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:9999;
-  padding:18px;
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:rgba(0,0,0,.72);
+    backdrop-filter:blur(10px);
 }
 
 .modalBox{
-  width:100%;
-  max-width:470px;
-  max-height:90vh;
-  overflow-y:auto;
-  background:#111827;
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:24px;
-  padding:21px;
-  box-shadow:
-    0 25px 80px rgba(0,0,0,.65),
-    0 0 40px rgba(34,197,94,.06);
-
-  animation:modalIn .2s ease;
+    width:100%;
+    max-width:420px;
+    padding:20px;
+    border-radius:22px;
+    background:
+        linear-gradient(
+            145deg,
+            #111923,
+            #070c12
+        );
+    border:1px solid rgba(255,255,255,.1);
+    box-shadow:0 30px 80px rgba(0,0,0,.6);
+    animation:modalIn .18s ease-out;
 }
 
 @keyframes modalIn{
-
-  from{
-    opacity:0;
-    transform:scale(.94);
-  }
-
-  to{
-    opacity:1;
-    transform:scale(1);
-  }
-
+    from{
+        opacity:0;
+        transform:scale(.94) translateY(8px);
+    }
+    to{
+        opacity:1;
+        transform:scale(1) translateY(0);
+    }
 }
 
 .modalTitle{
-  font-size:19px;
-  font-weight:800;
-  margin-bottom:7px;
+    font-size:18px;
+    font-weight:900;
 }
 
+.teamModalText,
 .modalText{
-  color:#94a3b8;
-  font-size:11px;
-  line-height:1.6;
-  margin-bottom:16px;
+    margin-top:9px;
+    color:#94a3b8;
+    font-size:11px;
+    line-height:1.5;
 }
 
-.confirmAmount{
-  background:#07111f;
-  border-radius:15px;
-  padding:15px;
-  margin-bottom:13px;
-  text-align:center;
+.teamModalInput{
+    width:100%;
+    height:49px;
+    margin-top:15px;
+    padding:0 13px;
+    border-radius:13px;
+    outline:none;
+    color:#fff;
+    background:#050a10;
+    border:1px solid rgba(255,255,255,.1);
 }
 
-.confirmAmount small{
-  display:block;
-  color:#64748b;
-  font-size:9px;
-}
-
-.confirmAmount strong{
-  display:block;
-  color:#22c55e;
-  font-size:27px;
-  margin-top:3px;
+.teamModalInput:focus{
+    border-color:#22c55e;
 }
 
 .modalActions{
-  display:flex;
-  gap:9px;
-  margin-top:13px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+    margin-top:15px;
 }
 
 .modalBtn{
-  flex:1;
-  height:49px;
-  border:0;
-  border-radius:14px;
-  font-weight:800;
-  font-size:12px;
+    min-height:45px;
+    border-radius:12px;
+    font-size:10px;
+    font-weight:900;
 }
 
 .cancelBtn{
-  background:#374151;
-  color:#fff;
+    background:rgba(255,255,255,.06);
+    color:#cbd5e1;
 }
 
 .confirmBtn{
-  background:#22c55e;
-  color:#000;
+    background:linear-gradient(135deg,#34d399,#22c55e);
+    color:#031008;
 }
 
-.confirmBtn:disabled{
-  opacity:.6;
+.confirmAmount{
+    margin-top:12px;
+    padding:12px;
+    border-radius:12px;
+    background:rgba(255,255,255,.035);
 }
 
-/* REGISTRATION CLOSED */
-
-.closedModalBox{
-  text-align:center;
-  max-width:390px;
+.confirmAmount small{
+    display:block;
+    color:#64748b;
+    font-size:8px;
+    font-weight:900;
 }
 
-.closedIcon{
-  width:72px;
-  height:72px;
-  margin:0 auto 15px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:
-    rgba(245,158,11,.12);
-  border:1px solid rgba(245,158,11,.28);
-  font-size:34px;
+.confirmAmount strong{
+    display:block;
+    margin-top:4px;
+    font-size:17px;
 }
 
-.closedTitle{
-  color:#fbbf24;
-  font-size:21px;
-  font-weight:800;
+/* =========================
+   RULES MODAL
+========================= */
+
+.rulesModal{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:1100;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+    background:rgba(0,0,0,.75);
+    backdrop-filter:blur(10px);
 }
 
-.closedText{
-  color:#94a3b8;
-  font-size:11px;
-  line-height:1.7;
-  margin-top:8px;
+.rulesBox{
+    width:100%;
+    max-width:450px;
+    max-height:82vh;
+    overflow:hidden;
+    border-radius:21px;
+    background:#091019;
+    border:1px solid rgba(255,255,255,.1);
+    box-shadow:0 30px 80px rgba(0,0,0,.65);
 }
 
-.closedTime{
-  margin-top:15px;
-  padding:12px;
-  border-radius:14px;
-  background:#07111f;
-  border:1px solid rgba(245,158,11,.16);
-  color:#facc15;
-  font-size:11px;
-  font-weight:700;
+.rulesHeader{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:15px;
+    border-bottom:1px solid rgba(255,255,255,.07);
 }
 
-.closedBtn{
-  width:100%;
-  height:48px;
-  margin-top:15px;
-  border:0;
-  border-radius:14px;
-  background:#374151;
-  color:#fff;
-  font-size:12px;
-  font-weight:800;
+.rulesHeader h3{
+    font-size:16px;
 }
 
-/* CANCELLED */
-
-.cancelledModalBox{
-  text-align:center;
-  max-width:390px;
+.rulesClose{
+    width:34px;
+    height:34px;
+    border-radius:10px;
+    background:rgba(255,255,255,.06);
+    color:#fff;
 }
 
-.cancelIcon{
-  width:72px;
-  height:72px;
-  margin:0 auto 15px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(239,68,68,.12);
-  border:1px solid rgba(239,68,68,.28);
-  font-size:34px;
+.rulesContent{
+    max-height:58vh;
+    overflow:auto;
+    padding:15px;
+    white-space:pre-wrap;
+    color:#cbd5e1;
+    font-size:11px;
+    line-height:1.7;
 }
 
-.cancelTitle{
-  color:#f87171;
-  font-size:21px;
-  font-weight:800;
+.rulesEmpty{
+    color:#64748b;
 }
 
-.cancelText{
-  color:#94a3b8;
-  font-size:11px;
-  line-height:1.7;
-  margin-top:8px;
+.rulesFooter{
+    padding:12px 15px;
+    border-top:1px solid rgba(255,255,255,.07);
 }
 
-.refundText{
-  margin-top:14px;
-  padding:12px;
-  border-radius:14px;
-  background:#07111f;
-  border:1px solid rgba(34,197,94,.18);
-  color:#86efac;
-  font-size:11px;
-  font-weight:700;
+.rulesOk{
+    width:100%;
+    min-height:44px;
+    border-radius:12px;
+    background:linear-gradient(135deg,#ffd84d,#f59e0b);
+    color:#17110a;
+    font-size:10px;
+    font-weight:900;
 }
 
-.cancelClose{
-  width:100%;
-  height:48px;
-  margin-top:15px;
-  border:0;
-  border-radius:14px;
-  background:#374151;
-  color:#fff;
-  font-size:12px;
-  font-weight:800;
-}
-
-/* ================= TOAST ================= */
+/* =========================
+   TOAST
+========================= */
 
 .toast{
-  position:fixed;
-  left:50%;
-  bottom:23px;
-  transform:
-    translateX(-50%)
-    translateY(100px);
-
-  background:#111827;
-  border:1px solid rgba(255,255,255,.1);
-  color:#fff;
-  padding:12px 16px;
-  border-radius:14px;
-  font-size:11px;
-  font-weight:700;
-  z-index:10000;
-  opacity:0;
-  transition:.3s;
-  max-width:90%;
-  text-align:center;
+    position:fixed;
+    left:50%;
+    bottom:22px;
+    z-index:2000;
+    width:max-content;
+    max-width:calc(100% - 30px);
+    padding:12px 15px;
+    border-radius:12px;
+    background:#111923;
+    border:1px solid rgba(255,255,255,.1);
+    color:#fff;
+    font-size:11px;
+    font-weight:800;
+    box-shadow:0 15px 40px rgba(0,0,0,.5);
+    opacity:0;
+    pointer-events:none;
+    transform:translate(-50%,15px);
+    transition:.2s ease;
 }
 
 .toast.show{
-  opacity:1;
-  transform:
-    translateX(-50%)
-    translateY(0);
+    opacity:1;
+    transform:translate(-50%,0);
 }
 
 .toast.success{
-  border-color:rgba(34,197,94,.4);
+    border-color:rgba(34,197,94,.35);
 }
 
 .toast.error{
-  border-color:rgba(239,68,68,.4);
+    border-color:rgba(239,68,68,.35);
 }
-
-.toast.warning{
-  border-color:rgba(245,158,11,.4);
-}
-
-/* ================= SPINNER ================= */
 
 .spinner{
-  width:17px;
-  height:17px;
-  border:2px solid rgba(0,0,0,.2);
-  border-top-color:#03100a;
-  border-radius:50%;
-  display:inline-block;
-  vertical-align:-4px;
-  animation:spin .7s linear infinite;
-  margin-right:6px;
+    width:15px;
+    height:15px;
+    display:inline-block;
+    vertical-align:-3px;
+    margin-right:6px;
+    border:2px solid rgba(0,0,0,.2);
+    border-top-color:#031008;
+    border-radius:50%;
+    animation:spin .7s linear infinite;
 }
 
 @keyframes spin{
-
-  to{
-    transform:rotate(360deg);
-  }
-
-}
-
-/* ================= JOINED MODE ================= */
-
-/*
-After successful join:
-only WhatsApp + Players remain.
-*/
-
-body.joined-mode .banner{
-  display:none;
-}
-
-body.joined-mode .preJoinCard{
-  display:none;
-}
-
-body.joined-mode .prizeBox{
-  display:none;
-}
-
-body.joined-mode .roomBox{
-  margin-top:18px;
-}
-
-body.joined-mode .roomLocked{
-  display:none!important;
-}
-
-body.joined-mode .whatsappGroupBox{
-  display:block;
-}
-
-body.joined-mode .roomPassBox{
-  display:none!important;
-}
-
-/* ================= RESPONSIVE ================= */
-
-@media(max-width:360px){
-
-  .banner{
-    height:185px;
-  }
-
-  .prizeCards{
-    gap:6px;
-  }
-
-  .prizeMoney{
-    font-size:13px;
-  }
-
-  .prizeItem{
-    padding:12px 5px;
-  }
-
-  .card,
-  .roomBox,
-  .prizeBox{
-    margin-left:14px;
-    margin-right:14px;
-  }
-
+    to{
+        transform:rotate(360deg);
+    }
 }
 
 </style>
+
 </head>
 
 <body>
 
 <div class="app">
 
-  <!-- HEADER -->
+    <div class="header">
 
-  <div class="header">
+        <button
+            class="backBtn"
+            onclick="history.back()"
+            aria-label="Go back">
 
-    <button
-      class="backBtn"
-      onclick="history.back()"
-      aria-label="Go back">
-      ‹
-    </button>
+            ‹
 
-    <div class="title">
-      Match Details
-    </div>
+        </button>
 
-    <div class="headerSpace"></div>
-
-  </div>
-
-
-  <!-- BANNER -->
-
-  <div class="banner">
-
-    <img
-      id="matchImage"
-      src="https://via.placeholder.com/700x350"
-      alt="Match">
-
-    <div class="bannerShade"></div>
-
-    <div
-      id="liveBadge"
-      class="liveBadge">
-      UPCOMING
-    </div>
-
-    <div class="bannerBottom">
-
-      <div
-        id="bannerTitle"
-        class="bannerTitle">
-        Loading Match...
-      </div>
-
-      <div
-        id="bannerMode"
-        class="bannerMode">
-        SQUAD
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- MAIN DETAILS -->
-
-  <div class="card preJoinCard">
-
-    <div
-      id="matchTitle"
-      class="matchTitle">
-      Loading...
-    </div>
-
-
-    <div class="row">
-      <span>Mode</span>
-      <b id="mode">--</b>
-    </div>
-
-    <div class="row">
-      <span>Date</span>
-      <b id="date">--</b>
-    </div>
-
-    <div class="row">
-      <span>Time</span>
-      <b id="time">--</b>
-    </div>
-
-    <div class="row">
-      <span>Prize Pool</span>
-      <b
-        id="prize"
-        class="prizeValue">
-        ₹0
-      </b>
-    </div>
-
-    <div class="row">
-      <span>Entry Fee</span>
-      <b id="entry">₹0</b>
-    </div>
-
-    <div class="row">
-      <span>Slots</span>
-      <b id="slots">0/0</b>
-    </div>
-
-
-    <div class="infoGrid">
-
-      <div class="infoBox">
-
-        <small>
-          Match Status
-        </small>
-
-        <strong id="statusText">
-          Loading
-        </strong>
-
-      </div>
-
-
-      <div class="infoBox">
-
-        <small>
-          Match ID
-        </small>
-
-        <strong id="matchIdText">
-          --
-        </strong>
-
-      </div>
-
-    </div>
-
-
-    <!-- WALLET -->
-
-    <div class="walletInfo">
-
-      <div class="walletTop">
-
-        <div>
-
-          <div class="walletLabel">
-            YOUR WALLET
-          </div>
-
-          <div
-            id="walletBalance"
-            class="walletBalance">
-            ₹0
-          </div>
-
+        <div class="title">
+            Match Details
         </div>
 
-        <div
-          id="walletStatus"
-          class="walletLabel">
-          Checking...
-        </div>
-
-      </div>
-
-
-      <div
-        id="walletAfter"
-        class="walletAfter">
-        After joining: ₹0
-      </div>
+        <div class="headerSpace"></div>
 
     </div>
-
-
-    <!-- JOIN -->
-
-    <button
-      id="joinBtn"
-      class="joinBtn">
-      🎮 JOIN MATCH
-    </button>
 
 
     <button
-      id="addMoneyBtn"
-      class="addMoneyBtn"
-      onclick="location.href='wallet.html'">
-      💰 ADD MONEY TO WALLET
+        id="topRulesBtn"
+        class="topRulesBtn">
+
+        📜 RULES
+
     </button>
 
 
-    <div
-      id="joinStatus"
-      class="joinStatus">
-      ✓ You have already joined this match.
-    </div>
+    <!-- NORMAL MATCH -->
 
-  </div>
+    <div id="normalMatchContent">
 
+        <div class="banner">
 
-  <!-- PRIZE -->
+            <img
+                id="matchImage"
+                src="https://via.placeholder.com/700x350"
+                alt="Match">
 
-  <div class="prizeBox">
+            <div class="bannerShade"></div>
 
-    <div class="prizeHeader">
+            <div
+                id="liveBadge"
+                class="liveBadge">
 
-      <div class="prizeHeaderIcon">
-        🏆
-      </div>
+                UPCOMING
 
-      <h3>
-        Prize Distribution
-      </h3>
-
-      <p>
-        WINNING PRIZES
-      </p>
-
-    </div>
-
-
-    <div class="prizeCards">
-
-      <div class="prizeItem">
-
-        <div class="prizeMedal">
-          🥇
-        </div>
-
-        <div class="prizeRank">
-          1ST PRIZE
-        </div>
-
-        <div
-          id="firstPrize"
-          class="prizeMoney">
-          ₹0
-        </div>
-
-      </div>
-
-
-      <div class="prizeItem">
-
-        <div class="prizeMedal">
-          🥈
-        </div>
-
-        <div class="prizeRank">
-          2ND PRIZE
-        </div>
-
-        <div
-          id="secondPrize"
-          class="prizeMoney">
-          ₹0
-        </div>
-
-      </div>
-
-
-      <div class="prizeItem">
-
-        <div class="prizeMedal">
-          🥉
-        </div>
-
-        <div class="prizeRank">
-          3RD PRIZE
-        </div>
-
-        <div
-          id="thirdPrize"
-          class="prizeMoney">
-          ₹0
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="prizePool">
-
-      <span>
-        TOTAL PRIZE POOL
-      </span>
-
-      <b id="prizePoolBottom">
-        ₹0
-      </b>
-
-    </div>
-
-  </div>
-
-
-  <!-- ROOM / PLAYERS -->
-
-  <div class="roomBox">
-
-    <div class="sectionHead">
-
-      <div class="sectionTitle">
-        🎮 Room Details
-      </div>
-
-      <div class="sectionHint">
-        JOIN REQUIRED
-      </div>
-
-    </div>
-
-
-    <!-- BEFORE JOIN -->
-
-    <div
-      id="roomLocked"
-      class="lock">
-
-      🔒 Match join karne ke baad
-      WhatsApp Group Link milega.
-
-    </div>
-
-
-    <!-- AFTER JOIN -->
-
-    <div
-      id="roomData"
-      class="roomData">
-
-
-      <!-- WHATSAPP -->
-
-      <div
-        id="groupBox"
-        class="whatsappGroupBox">
-
-        <div class="whatsappHeader">
-
-          <div class="whatsappIcon">
-            <span>💬</span>
-          </div>
-
-          <div class="whatsappText">
-
-            <div class="whatsappTitle">
-              Join Match Group
             </div>
 
-            <div class="whatsappSubtitle">
-              Get match updates & room notifications
+            <div class="bannerBottom">
+
+                <div
+                    id="bannerTitle"
+                    class="bannerTitle">
+
+                    Loading Match...
+
+                </div>
+
+                <div
+                    id="bannerMode"
+                    class="bannerMode">
+
+                    SQUAD
+
+                </div>
+
             </div>
 
-          </div>
+        </div>
 
-          <div class="whatsappArrow">
-            →
-          </div>
+
+        <div class="card">
+
+            <div
+                id="matchTitle"
+                class="matchTitle">
+
+                Loading...
+
+            </div>
+
+
+            <div class="row">
+                <span>Mode</span>
+                <b id="mode">--</b>
+            </div>
+
+
+            <div class="row">
+                <span>Date</span>
+                <b id="date">--</b>
+            </div>
+
+
+            <div class="row">
+                <span>Time</span>
+                <b id="time">--</b>
+            </div>
+
+
+            <div class="row">
+                <span>Prize Pool</span>
+                <b id="prize" class="prizeValue">
+                    ₹0
+                </b>
+            </div>
+
+
+            <div class="row">
+                <span>Entry Fee</span>
+                <b id="entry">
+                    ₹0
+                </b>
+            </div>
+
+
+            <div class="row">
+                <span>Slots</span>
+                <b id="slots">
+                    0/0
+                </b>
+            </div>
+
+
+            <div class="infoGrid">
+
+                <div class="infoBox">
+
+                    <small>
+                        Match Status
+                    </small>
+
+                    <strong id="statusText">
+                        Loading
+                    </strong>
+
+                </div>
+
+
+                <div class="infoBox">
+
+                    <small>
+                        Match ID
+                    </small>
+
+                    <strong id="matchIdText">
+                        --
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- NO TEAM NAME BOX HERE -->
+
+
+            <div class="walletInfo">
+
+                <div class="walletTop">
+
+                    <div>
+
+                        <div class="walletLabel">
+                            YOUR WALLET
+                        </div>
+
+                        <div
+                            id="walletBalance"
+                            class="walletBalance">
+
+                            ₹0
+
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="walletStatus"
+                        class="walletLabel">
+
+                        Checking...
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="walletAfter"
+                    class="walletAfter">
+
+                    After joining: ₹0
+
+                </div>
+
+            </div>
+
+
+            <button
+                id="joinBtn"
+                class="joinBtn">
+
+                🎮 JOIN MATCH
+
+            </button>
+
+
+            <button
+                id="addMoneyBtn"
+                class="addMoneyBtn"
+                onclick="location.href='wallet.html'">
+
+                💰 ADD MONEY TO WALLET
+
+            </button>
+
+
+            <div
+                id="registrationClosed"
+                class="registrationClosed"
+                style="display:none">
+
+                🔒 Registration Closed
+
+            </div>
+
+
+            <div
+                id="joinStatus"
+                class="joinStatus">
+
+                ✓ You have already joined this match.
+
+            </div>
 
         </div>
 
 
-        <a
-          id="groupLink"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="groupBtn">
+        <!-- PRIZES -->
 
-          <span>🟢</span>
-          <span>JOIN WHATSAPP GROUP</span>
-          <span>↗</span>
+        <div class="prizeBox">
 
-        </a>
+            <div class="prizeHeader">
 
-      </div>
+                <div class="prizeHeaderIcon">
+                    🏆
+                </div>
+
+                <div>
+                    <h3>
+                        Prize Distribution
+                    </h3>
+
+                    <p>
+                        WINNING PRIZES
+                    </p>
+                </div>
+
+            </div>
 
 
-      <!-- PLAYERS -->
+            <div
+                id="prizeCards"
+                class="prizeCards">
 
-      <div class="players">
 
-        <div class="sectionHead">
+                <div
+                    id="prizeItem1"
+                    class="prizeItem">
 
-          <div class="sectionTitle">
-            👥 Players
-          </div>
+                    <div class="prizeItemInner">
 
-          <div class="sectionHint">
-            LIVE
-          </div>
+                        <div class="prizeLeft">
+
+                            <div class="prizeMedal">
+                                🥇
+                            </div>
+
+                            <div class="prizeRank">
+                                1ST PRIZE
+                            </div>
+
+                        </div>
+
+                        <div
+                            id="firstPrize"
+                            class="prizeMoney">
+
+                            ₹0
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="prizeItem2"
+                    class="prizeItem">
+
+                    <div class="prizeItemInner">
+
+                        <div class="prizeLeft">
+
+                            <div class="prizeMedal">
+                                🥈
+                            </div>
+
+                            <div class="prizeRank">
+                                2ND PRIZE
+                            </div>
+
+                        </div>
+
+                        <div
+                            id="secondPrize"
+                            class="prizeMoney">
+
+                            ₹0
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="prizeItem3"
+                    class="prizeItem">
+
+                    <div class="prizeItemInner">
+
+                        <div class="prizeLeft">
+
+                            <div class="prizeMedal">
+                                🥉
+                            </div>
+
+                            <div class="prizeRank">
+                                3RD PRIZE
+                            </div>
+
+                        </div>
+
+                        <div
+                            id="thirdPrize"
+                            class="prizeMoney">
+
+                            ₹0
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="prizeItem4"
+                    class="prizeItem">
+
+                    <div class="prizeItemInner">
+
+                        <div class="prizeLeft">
+
+                            <div class="prizeMedal">
+                                🏅
+                            </div>
+
+                            <div class="prizeRank">
+                                4TH PRIZE
+                            </div>
+
+                        </div>
+
+                        <div
+                            id="fourthPrize"
+                            class="prizeMoney">
+
+                            ₹0
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="prizeItem5"
+                    class="prizeItem">
+
+                    <div class="prizeItemInner">
+
+                        <div class="prizeLeft">
+
+                            <div class="prizeMedal">
+                                🎖️
+                            </div>
+
+                            <div class="prizeRank">
+                                5TH PRIZE
+                            </div>
+
+                        </div>
+
+                        <div
+                            id="fifthPrize"
+                            class="prizeMoney">
+
+                            ₹0
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="prizePool">
+
+                <span>
+                    TOTAL PRIZE POOL
+                </span>
+
+                <b id="prizePoolBottom">
+                    ₹0
+                </b>
+
+            </div>
 
         </div>
 
-        <div id="playerList">
-
-          <div class="loading">
-            Loading players...
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- ================= CONFIRM JOIN MODAL ================= -->
-
-<div
-  id="confirmModal"
-  class="modal">
-
-  <div class="modalBox">
-
-    <div class="modalTitle">
-      🎮 Confirm Match Join
-    </div>
-
-    <div class="modalText">
-      Aapke wallet se entry fee deduct hogi
-      aur aapka slot confirm ho jayega.
     </div>
 
 
-    <div class="confirmAmount">
-
-      <small>
-        ENTRY FEE
-      </small>
-
-      <strong id="confirmEntry">
-        ₹0
-      </strong>
-
-    </div>
-
-
-    <div class="row">
-
-      <span>
-        Current Wallet
-      </span>
-
-      <b id="confirmWallet">
-        ₹0
-      </b>
-
-    </div>
-
-
-    <div class="row">
-
-      <span>
-        Balance After Join
-      </span>
-
-      <b
-        id="confirmAfter"
-        style="color:#22c55e">
-        ₹0
-      </b>
-
-    </div>
-
-
-    <div class="modalActions">
-
-      <button
-        class="modalBtn cancelBtn"
-        onclick="closeConfirm()">
-        CANCEL
-      </button>
-
-      <button
-        id="confirmJoinBtn"
-        class="modalBtn confirmBtn">
-        ✓ CONFIRM JOIN
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- ================= REGISTRATION CLOSED MODAL ================= -->
-
-<div
-  id="closedModal"
-  class="modal">
-
-  <div class="modalBox closedModalBox">
-
-    <div class="closedIcon">
-      🔒
-    </div>
-
-    <div class="closedTitle">
-      REGISTRATION CLOSED
-    </div>
-
-    <div class="closedText">
-      Is match ka registration time
-      khatam ho gaya hai.
-      Ab new players match join nahi kar sakte.
-    </div>
+    <!-- JOINED CONTENT -->
 
     <div
-      id="closedTime"
-      class="closedTime">
-      Registration time completed
+        id="joinedContent"
+        style="display:none">
+
+        <div class="card">
+
+            <div class="sectionHead">
+
+                <div class="sectionTitle">
+                    🏆 Your Team
+                </div>
+
+                <div class="sectionHint">
+                    REGISTERED
+                </div>
+
+            </div>
+
+            <div
+                id="joinedTeamName"
+                class="teamNameDisplay">
+
+                --
+
+            </div>
+
+        </div>
+
+
+        <div class="roomBox">
+
+            <div class="sectionHead">
+
+                <div class="sectionTitle">
+                    🎮 Room Details
+                </div>
+
+                <div class="sectionHint">
+                    JOINED
+                </div>
+
+            </div>
+
+
+            <div
+                id="roomLocked"
+                class="lock">
+
+                🔒 Room details will be available after registration.
+
+            </div>
+
+
+            <div
+                id="roomData"
+                class="roomData">
+
+
+                <div
+                    id="roomIdBox"
+                    class="roomCodeBox">
+
+                    <div class="roomCodeTitle">
+                        ROOM ID
+                    </div>
+
+                    <div
+                        id="roomId"
+                        class="roomCode">
+
+                        --
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="roomPassBox"
+                    class="roomCodeBox">
+
+                    <div class="roomCodeTitle">
+                        ROOM PASSWORD
+                    </div>
+
+                    <div
+                        id="roomPassword"
+                        class="roomCode">
+
+                        --
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="groupBox"
+                    class="whatsappGroupBox">
+
+                    <div class="whatsappHeader">
+
+                        <div class="whatsappIcon">
+                            <span>💬</span>
+                        </div>
+
+                        <div class="whatsappText">
+
+                            <div class="whatsappTitle">
+                                Join Match Group
+                            </div>
+
+                            <div class="whatsappSubtitle">
+                                Get match updates & room notifications
+                            </div>
+
+                        </div>
+
+                        <div class="whatsappArrow">
+                            →
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        id="groupLink"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="groupBtn">
+
+                        <span>🟢</span>
+                        <span>JOIN WHATSAPP GROUP</span>
+                        <span>↗</span>
+
+                    </a>
+
+                </div>
+
+
+                <div class="players">
+
+                    <div class="sectionHead">
+
+                        <div class="sectionTitle">
+                            👥 Registered Teams
+                        </div>
+
+                        <div class="sectionHint">
+                            LIVE
+                        </div>
+
+                    </div>
+
+                    <div id="playerList">
+
+                        <div class="loading">
+                            Loading teams...
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
-
-    <button
-      class="closedBtn"
-      onclick="closeRegistrationModal()">
-      OK, GOT IT
-    </button>
-
-  </div>
 
 </div>
 
 
-<!-- ================= CANCELLED MODAL ================= -->
+<!-- TEAM NAME POPUP -->
 
 <div
-  id="cancelledModal"
-  class="modal">
+    id="teamModal"
+    class="modal">
 
-  <div class="modalBox cancelledModalBox">
+    <div class="modalBox">
 
-    <div class="cancelIcon">
-      ❌
+        <div class="modalTitle">
+            🏆 Enter Team Name
+        </div>
+
+        <div class="teamModalText">
+
+            Match join karne se pehle apna team name enter karein.
+
+        </div>
+
+
+        <input
+            id="teamModalInput"
+            class="teamModalInput"
+            maxlength="30"
+            autocomplete="off"
+            placeholder="Enter team name">
+
+
+        <div class="modalActions">
+
+            <button
+                class="modalBtn cancelBtn"
+                onclick="closeTeamModal()">
+
+                CANCEL
+
+            </button>
+
+
+            <button
+                id="teamContinueBtn"
+                class="modalBtn confirmBtn">
+
+                CONTINUE
+
+            </button>
+
+        </div>
+
     </div>
-
-    <div class="cancelTitle">
-      MATCH CANCELLED
-    </div>
-
-    <div class="cancelText">
-      Ye match admin ke dwara cancel
-      kar diya gaya hai.
-    </div>
-
-    <div
-      id="refundText"
-      class="refundText">
-      Checking refund...
-    </div>
-
-    <button
-      class="cancelClose"
-      onclick="closeCancelledModal()">
-      OK
-    </button>
-
-  </div>
 
 </div>
 
 
-<!-- ================= TOAST ================= -->
+<!-- CONFIRM POPUP -->
 
 <div
-  id="toast"
-  class="toast">
+    id="confirmModal"
+    class="modal">
+
+    <div class="modalBox">
+
+        <div class="modalTitle">
+            🎮 Confirm Match Join
+        </div>
+
+        <div class="modalText">
+
+            Aapke wallet se entry fee deduct hogi aur team registration confirm ho jayega.
+
+        </div>
+
+
+        <div class="confirmAmount">
+
+            <small>
+                TEAM NAME
+            </small>
+
+            <strong
+                id="confirmTeam">
+
+                --
+
+            </strong>
+
+        </div>
+
+
+        <div class="confirmAmount">
+
+            <small>
+                ENTRY FEE
+            </small>
+
+            <strong id="confirmEntry">
+                ₹0
+            </strong>
+
+        </div>
+
+
+        <div class="row">
+
+            <span>
+                Current Wallet
+            </span>
+
+            <b id="confirmWallet">
+                ₹0
+            </b>
+
+        </div>
+
+
+        <div class="row">
+
+            <span>
+                Balance After Join
+            </span>
+
+            <b
+                id="confirmAfter"
+                style="color:#22c55e">
+
+                ₹0
+
+            </b>
+
+        </div>
+
+
+        <div class="modalActions">
+
+            <button
+                class="modalBtn cancelBtn"
+                onclick="closeConfirm()">
+
+                CANCEL
+
+            </button>
+
+
+            <button
+                id="confirmJoinBtn"
+                class="modalBtn confirmBtn">
+
+                ✓ CONFIRM JOIN
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- RULES -->
+
+<div
+    id="rulesModal"
+    class="rulesModal">
+
+    <div class="rulesBox">
+
+        <div class="rulesHeader">
+
+            <h3>
+                📜 Match Rules
+            </h3>
+
+            <button
+                class="rulesClose"
+                onclick="closeRules()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="rulesContent"
+            class="rulesContent">
+
+            <div class="rulesEmpty">
+                Rules loading...
+            </div>
+
+        </div>
+
+
+        <div class="rulesFooter">
+
+            <button
+                class="rulesOk"
+                onclick="closeRules()">
+
+                ✓ GOT IT
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div
+    id="toast"
+    class="toast">
 </div>
 
 
 <script type="module">
 
 import {
-  initializeApp
-} from
+    initializeApp
+}
+from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 
 import {
-  getAuth,
-  onAuthStateChanged
-} from
+    getAuth,
+    onAuthStateChanged
+}
+from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 import {
-  getDatabase,
-  ref,
-  get,
-  onValue,
-  update,
-  runTransaction
-} from
+    getDatabase,
+    ref,
+    get,
+    onValue,
+    update,
+    runTransaction
+}
+from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 
-/* =====================================================
+/* =========================================================
    FIREBASE
-===================================================== */
+========================================================= */
 
 const firebaseConfig = {
 
-  apiKey:
-    "AIzaSyDsJUtZdIXcsB0w_2MQhMBXxIgbI3ijOvg",
+    apiKey:
+        "AIzaSyDsJUtZdIXcsB0w_2MQhMBXxIgbI3ijOvg",
 
-  authDomain:
-    "incoinpaysliveearning.firebaseapp.com",
+    authDomain:
+        "incoinpaysliveearning.firebaseapp.com",
 
-  databaseURL:
-    "https://incoinpaysliveearning-default-rtdb.firebaseio.com",
+    databaseURL:
+        "https://incoinpaysliveearning-default-rtdb.firebaseio.com",
 
-  projectId:
-    "incoinpaysliveearning",
+    projectId:
+        "incoinpaysliveearning",
 
-  storageBucket:
-    "incoinpaysliveearning.firebasestorage.app",
+    storageBucket:
+        "incoinpaysliveearning.firebasestorage.app",
 
-  messagingSenderId:
-    "971873814750",
+    messagingSenderId:
+        "971873814750",
 
-  appId:
-    "1:971873814750:web:7418c7da119e4725ed9a4f"
+    appId:
+        "1:971873814750:web:7418c7da119e4725ed9a4f"
 
 };
 
 
 const app =
-  initializeApp(firebaseConfig);
+    initializeApp(firebaseConfig);
 
 const auth =
-  getAuth(app);
+    getAuth(app);
 
 const db =
-  getDatabase(app);
+    getDatabase(app);
 
 
-/* ADMIN */
+/* =========================================================
+   ADMIN
+========================================================= */
 
 const ADMIN_UID =
-  "VIAP56vYwndWPhJxktn0lRPTWnS2";
+    "VIAP56vYwndWPhJxktn0lRPTWnS2";
 
 
-/* =====================================================
-   MATCH ID
-===================================================== */
+/* =========================================================
+   MATCH
+========================================================= */
 
 const params =
-  new URLSearchParams(location.search);
+    new URLSearchParams(
+        location.search
+    );
 
 const matchId =
-  params.get("id");
+    params.get("id");
 
 
-/* =====================================================
-   GLOBAL STATE
-===================================================== */
+/* =========================================================
+   STATE
+========================================================= */
 
 let user = null;
 
@@ -1706,11 +1909,7 @@ let currentWallet = 0;
 
 let joining = false;
 
-let alreadyJoined = false;
-
-let registrationClosed = false;
-
-let cancellationHandled = false;
+let selectedTeamName = "";
 
 let walletUnsubscribe = null;
 
@@ -1718,3151 +1917,3283 @@ let matchUnsubscribe = null;
 
 let playersUnsubscribe = null;
 
-let registrationTimer = null;
 
-
-/* =====================================================
-   HELPER
-===================================================== */
+/* =========================================================
+   ELEMENT
+========================================================= */
 
 const $ =
-  id => document.getElementById(id);
+    id =>
+        document.getElementById(id);
 
 
-$("matchIdText").innerText =
-  matchId || "--";
+/* =========================================================
+   NUMBER
+========================================================= */
 
+function number(value){
 
-/* =====================================================
-   MATCH ID CHECK
-===================================================== */
+    if(
+        value === null ||
+        value === undefined ||
+        value === ""
+    )
+        return 0;
 
-if(!matchId){
+    if(
+        typeof value === "string"
+    ){
 
-  showToast(
-    "Match ID missing",
-    "error"
-  );
-
-  setTimeout(
-    () => {
-      location.href =
-        "dashboard.html";
-    },
-    800
-  );
-
-}
-
-
-/* =====================================================
-   AUTH
-===================================================== */
-
-onAuthStateChanged(
-  auth,
-  async u => {
-
-    if(!u){
-
-      location.href =
-        "index.html";
-
-      return;
+        value =
+            value
+                .replace(/₹/g,"")
+                .replace(/,/g,"")
+                .trim();
 
     }
 
+    const n =
+        Number(value);
 
-    user = u;
+    return Number.isFinite(n)
+        ? n
+        : 0;
 
-    window.currentUser = u;
+}
 
-
-    loadMatch();
-
-    loadWallet();
-
-    loadPlayers();
-
-  }
-);
-
-
-/* =====================================================
-   NUMBER
-===================================================== */
 
 function formatNumber(value){
 
-  const n =
-    Number(value);
-
-  if(!Number.isFinite(n))
-    return "0";
-
-  return n.toLocaleString(
-    "en-IN",
-    {
-      maximumFractionDigits:0
-    }
-  );
+    return number(value)
+        .toLocaleString(
+            "en-IN",
+            {
+                maximumFractionDigits:0
+            }
+        );
 
 }
 
-
-/* =====================================================
-   SAFE TEXT
-===================================================== */
-
-function safeText(
-  value,
-  fallback="--"
-){
-
-  if(
-    value === null ||
-    value === undefined ||
-    value === ""
-  ){
-
-    return fallback;
-
-  }
-
-  return String(value);
-
-}
-
-
-/* =====================================================
-   STATUS
-===================================================== */
 
 function normalizeStatus(value){
 
-  return String(value || "")
+    return String(
+        value || ""
+    )
     .trim()
     .toLowerCase();
 
 }
 
 
-/* =====================================================
-   WALLET VALUE
-===================================================== */
+/* =========================================================
+   REGISTRATION CLOSE
+========================================================= */
 
-function getWalletBalance(
-  userData
-){
+function getRegistrationCloseTime(match){
 
-  if(!userData)
-    return 0;
+    if(!match)
+        return null;
 
 
-  const wallet =
-    userData.wallet;
+    const candidates = [
+
+        match.registrationCloseAt,
+        match.registrationCloseTime,
+        match.registrationEndAt,
+        match.registrationEndTime,
+        match.registerCloseAt,
+        match.registerCloseTime,
+        match.closeAt,
+        match.closeTime,
+        match.registrationDeadline,
+        match.deadline
+
+    ];
 
 
-  if(
-    wallet &&
-    typeof wallet === "object"
-  ){
+    for(
+        const value of candidates
+    ){
 
-    const balance =
-      Number(wallet.balance);
-
-    return Number.isFinite(balance)
-      ? Math.max(0,balance)
-      : 0;
-
-  }
-
-
-  const balance =
-    Number(wallet);
-
-
-  return Number.isFinite(balance)
-    ? Math.max(0,balance)
-    : 0;
-
-}
-
-
-/* =====================================================
-   LOAD WALLET
-===================================================== */
-
-function loadWallet(){
-
-  if(!user)
-    return;
-
-
-  if(walletUnsubscribe){
-    walletUnsubscribe();
-  }
-
-
-  walletUnsubscribe =
-    onValue(
-
-      ref(
-        db,
-        "users/" +
-        user.uid +
-        "/wallet"
-      ),
-
-      snapshot => {
-
-        const value =
-          snapshot.exists()
-            ? snapshot.val()
-            : 0;
+        if(
+            value === null ||
+            value === undefined ||
+            value === ""
+        )
+            continue;
 
 
         if(
-          value &&
-          typeof value === "object"
+            typeof value === "number"
         ){
 
-          currentWallet =
-            Number(
-              value.balance || 0
+            if(
+                value > 1000000000000
+            )
+                return value;
+
+            if(
+                value > 1000000000
+            )
+                return value * 1000;
+
+        }
+
+
+        const parsed =
+            Date.parse(
+                String(value)
             );
 
-        }else{
 
-          currentWallet =
-            Number(value || 0);
+        if(
+            Number.isFinite(parsed)
+        )
+            return parsed;
 
-        }
+    }
+
+
+    const date =
+        match.registrationCloseDate;
+
+    const time =
+        match.registrationCloseTimeOnly ||
+        match.registrationTime;
+
+
+    if(
+        date &&
+        time
+    ){
+
+        const parsed =
+            Date.parse(
+                `${date} ${time}`
+            );
 
 
         if(
-          !Number.isFinite(
-            currentWallet
-          )
-        ){
-
-          currentWallet = 0;
-
-        }
-
-
-        updateWalletUI();
-
-      },
-
-      error => {
-
-        console.error(
-          "Wallet error:",
-          error
-        );
-
-        currentWallet = 0;
-
-        updateWalletUI();
-
-      }
-
-    );
-
-}
-
-
-/* =====================================================
-   WALLET UI
-===================================================== */
-
-function updateWalletUI(){
-
-  $("walletBalance").innerText =
-    "₹" +
-    formatNumber(
-      currentWallet
-    );
-
-
-  const entry =
-    currentMatch
-      ? Number(
-          currentMatch.entry || 0
+            Number.isFinite(parsed)
         )
-      : 0;
-
-
-  const remaining =
-    Math.max(
-      0,
-      currentWallet - entry
-    );
-
-
-  $("walletAfter").innerText =
-    "After joining: ₹" +
-    formatNumber(
-      remaining
-    );
-
-
-  if(entry <= 0){
-
-    $("walletStatus").innerText =
-      "Invalid Entry Fee";
-
-    $("walletStatus").style.color =
-      "#f59e0b";
-
-  }
-
-  else if(
-    currentWallet < entry
-  ){
-
-    $("walletStatus").innerText =
-      "Insufficient Balance";
-
-    $("walletStatus").style.color =
-      "#f59e0b";
-
-  }
-
-  else{
-
-    $("walletStatus").innerText =
-      "Ready to Join";
-
-    $("walletStatus").style.color =
-      "#22c55e";
-
-  }
-
-
-  updateJoinButton();
-
-}
-
-
-/* =====================================================
-   LOAD MATCH
-===================================================== */
-
-function loadMatch(){
-
-  if(!matchId)
-    return;
-
-
-  if(matchUnsubscribe){
-    matchUnsubscribe();
-  }
-
-
-  matchUnsubscribe =
-    onValue(
-
-      ref(
-        db,
-        "matches/" +
-        matchId
-      ),
-
-      async snapshot => {
-
-        if(!snapshot.exists()){
-
-          showToast(
-            "Match Not Found",
-            "error"
-          );
-
-          setTimeout(
-            () => {
-              location.href =
-                "dashboard.html";
-            },
-            900
-          );
-
-          return;
-
-        }
-
-
-        currentMatch =
-          snapshot.val() || {};
-
-
-        renderMatch(
-          currentMatch
-        );
-
-
-        await checkAlreadyJoined();
-
-
-        /*
-        Automatically handle cancellation.
-        */
-
-        if(
-          normalizeStatus(
-            currentMatch.status
-          ) === "cancelled"
-        ){
-
-          await handleCancellation();
-
-        }
-
-      },
-
-      error => {
-
-        console.error(
-          "Match load error:",
-          error
-        );
-
-        showToast(
-          "Unable to load match",
-          "error"
-        );
-
-      }
-
-    );
-
-}
-
-
-/* =====================================================
-   RENDER MATCH
-===================================================== */
-
-function renderMatch(m){
-
-  const img =
-    $("matchImage");
-
-
-  let imageUrl =
-    m.image ||
-    "https://via.placeholder.com/700x350";
-
-
-  if(
-    imageUrl.includes(
-      "pexels.com/photo/"
-    )
-  ){
-
-    const matchData =
-      imageUrl.match(
-        /photo\/(?:.*-)?(\d+)\/?$/
-      );
-
-
-    if(matchData){
-
-      imageUrl =
-        "https://images.pexels.com/photos/" +
-        matchData[1] +
-        "/pexels-photo-" +
-        matchData[1] +
-        ".jpeg";
+            return parsed;
 
     }
 
-  }
-
-
-  img.src =
-    imageUrl;
-
-
-  img.onerror = () => {
-
-    img.onerror = null;
-
-    img.src =
-      "https://via.placeholder.com/700x350";
-
-  };
-
-
-  const title =
-    m.title ||
-    "BGMI MATCH";
-
-
-  const mode =
-    String(
-      m.type ||
-      "SQUAD"
-    ).toUpperCase();
-
-
-  $("matchTitle").innerText =
-    title;
-
-
-  $("bannerTitle").innerText =
-    title;
-
-
-  $("mode").innerText =
-    mode;
-
-
-  $("bannerMode").innerText =
-    mode;
-
-
-  $("date").innerText =
-    safeText(
-      m.date,
-      "-"
-    );
-
-
-  $("time").innerText =
-    safeText(
-      m.time,
-      "-"
-    );
-
-
-  const prizePool =
-    Number(
-      m.prize || 0
-    );
-
-
-  const entry =
-    Number(
-      m.entry || 0
-    );
-
-
-  $("prize").innerText =
-    "₹" +
-    formatNumber(
-      prizePool
-    );
-
-
-  $("entry").innerText =
-    "₹" +
-    formatNumber(
-      entry
-    );
-
-
-  $("firstPrize").innerText =
-    "₹" +
-    formatNumber(
-      Number(
-        m.firstPrize || 0
-      )
-    );
-
-
-  $("secondPrize").innerText =
-    "₹" +
-    formatNumber(
-      Number(
-        m.secondPrize || 0
-      )
-    );
-
-
-  $("thirdPrize").innerText =
-    "₹" +
-    formatNumber(
-      Number(
-        m.thirdPrize || 0
-      )
-    );
-
-
-  $("prizePoolBottom").innerText =
-    "₹" +
-    formatNumber(
-      prizePool
-    );
-
-
-  const status =
-    normalizeStatus(
-      m.status
-    );
-
-
-  const badge =
-    $("liveBadge");
-
-
-  if(status === "live"){
-
-    badge.innerText =
-      "🟢 LIVE";
-
-    $("statusText").innerText =
-      "LIVE";
-
-  }
-
-  else if(
-    status === "completed"
-  ){
-
-    badge.innerText =
-      "COMPLETED";
-
-    $("statusText").innerText =
-      "COMPLETED";
-
-  }
-
-  else if(
-    status === "closed"
-  ){
-
-    badge.innerText =
-      "CLOSED";
-
-    $("statusText").innerText =
-      "CLOSED";
-
-  }
-
-  else if(
-    status === "cancelled"
-  ){
-
-    badge.innerText =
-      "CANCELLED";
-
-    $("statusText").innerText =
-      "CANCELLED";
-
-  }
-
-  else{
-
-    badge.innerText =
-      "UPCOMING";
-
-    $("statusText").innerText =
-      "UPCOMING";
-
-  }
-
-
-  updateSlotCount();
-
-  updateWalletUI();
-
-  startRegistrationWatcher();
-
-}
-
-
-/* =====================================================
-   DATE/TIME PARSER
-===================================================== */
-
-function parseMatchDateTime(){
-
-  if(!currentMatch)
-    return null;
-
-
-  /*
-  Priority:
-  startAt
-  timestamp
-  date + time
-  */
-
-  const direct =
-    Number(
-      currentMatch.startAt ||
-      currentMatch.timestamp ||
-      0
-    );
-
-
-  if(
-    Number.isFinite(direct) &&
-    direct > 0
-  ){
-
-    return direct < 100000000000
-      ? direct * 1000
-      : direct;
-
-  }
-
-
-  const date =
-    String(
-      currentMatch.date || ""
-    ).trim();
-
-
-  const time =
-    String(
-      currentMatch.time || ""
-    ).trim();
-
-
-  if(!date || !time)
-    return null;
-
-
-  let d = null;
-
-
-  /*
-  YYYY-MM-DD
-  */
-
-  if(
-    /^\d{4}-\d{1,2}-\d{1,2}$/.test(date)
-  ){
-
-    const parts =
-      date.split("-").map(Number);
-
-
-    const y =
-      parts[0];
-
-    const m =
-      parts[1] - 1;
-
-    const day =
-      parts[2];
-
-
-    d =
-      new Date(
-        y,
-        m,
-        day
-      );
-
-  }
-
-
-  /*
-  DD/MM/YYYY
-  */
-
-  else if(
-    /^\d{1,2}\/\d{1,2}\/\d{4}$/.test(date)
-  ){
-
-    const parts =
-      date.split("/").map(Number);
-
-
-    d =
-      new Date(
-        parts[2],
-        parts[1] - 1,
-        parts[0]
-      );
-
-  }
-
-
-  /*
-  DD-MM-YYYY
-  */
-
-  else if(
-    /^\d{1,2}-\d{1,2}-\d{4}$/.test(date)
-  ){
-
-    const parts =
-      date.split("-").map(Number);
-
-
-    d =
-      new Date(
-        parts[2],
-        parts[1] - 1,
-        parts[0]
-      );
-
-  }
-
-
-  /*
-  Other browser-readable formats
-  */
-
-  else{
-
-    const parsed =
-      new Date(date);
-
-    if(
-      Number.isNaN(
-        parsed.getTime()
-      )
-    ){
-
-      return null;
-
-    }
-
-    d =
-      new Date(parsed);
-
-  }
-
-
-  if(!d)
-    return null;
-
-
-  /*
-  Parse 12 hour / 24 hour time
-  */
-
-  const match =
-    time.match(
-      /^(\d{1,2}):(\d{2})(?::(\d{2}))?\s*(AM|PM)?$/i
-    );
-
-
-  if(!match)
-    return null;
-
-
-  let hours =
-    Number(match[1]);
-
-  const minutes =
-    Number(match[2]);
-
-  const seconds =
-    Number(match[3] || 0);
-
-  const ampm =
-    match[4]
-      ? match[4].toUpperCase()
-      : null;
-
-
-  if(ampm === "PM" && hours < 12)
-    hours += 12;
-
-
-  if(ampm === "AM" && hours === 12)
-    hours = 0;
-
-
-  if(
-    hours < 0 ||
-    hours > 23 ||
-    minutes < 0 ||
-    minutes > 59
-  ){
 
     return null;
 
-  }
-
-
-  d.setHours(
-    hours,
-    minutes,
-    seconds,
-    0
-  );
-
-
-  return d.getTime();
-
 }
 
 
-/* =====================================================
-   REGISTRATION WATCHER
-===================================================== */
+function isRegistrationClosed(match){
 
-function startRegistrationWatcher(){
-
-  if(registrationTimer){
-
-    clearInterval(
-      registrationTimer
-    );
-
-  }
-
-
-  /*
-  If match already cancelled,
-  don't start registration timer.
-  */
-
-  const status =
-    normalizeStatus(
-      currentMatch?.status
-    );
-
-
-  if(status === "cancelled")
-    return;
-
-
-  checkRegistrationTime();
-
-
-  registrationTimer =
-    setInterval(
-      checkRegistrationTime,
-      1000
-    );
-
-}
-
-
-/* =====================================================
-   CHECK REGISTRATION TIME
-===================================================== */
-
-function checkRegistrationTime(){
-
-  if(!currentMatch)
-    return;
-
-
-  const status =
-    normalizeStatus(
-      currentMatch.status
-    );
-
-
-  if(
-    [
-      "cancelled",
-      "completed"
-    ].includes(status)
-  ){
-
-    return;
-
-  }
-
-
-  const startTime =
-    parseMatchDateTime();
-
-
-  if(!startTime)
-    return;
-
-
-  const now =
-    Date.now();
-
-
-  if(
-    now >= startTime
-  ){
-
-    if(!registrationClosed){
-
-      registrationClosed =
-        true;
-
-
-      disableRegistration();
-
-
-      /*
-      Only show popup if current user
-      has NOT already joined.
-      */
-
-      if(!alreadyJoined){
-
-        showRegistrationClosed();
-
-      }
-
-    }
-
-  }
-
-
-}
-
-
-/* =====================================================
-   DISABLE REGISTRATION
-===================================================== */
-
-function disableRegistration(){
-
-  const btn =
-    $("joinBtn");
-
-
-  btn.disabled =
-    true;
-
-
-  btn.classList.remove(
-    "insufficient"
-  );
-
-
-  btn.innerText =
-    "🔒 REGISTRATION CLOSED";
-
-
-  $("addMoneyBtn").style.display =
-    "none";
-
-
-  $("walletStatus").innerText =
-    "Registration Closed";
-
-
-  $("walletStatus").style.color =
-    "#f59e0b";
-
-
-  $("statusText").innerText =
-    "REGISTRATION CLOSED";
-
-
-  $("liveBadge").innerText =
-    "REGISTRATION CLOSED";
-
-}
-
-
-/* =====================================================
-   SHOW REGISTRATION CLOSED
-===================================================== */
-
-function showRegistrationClosed(){
-
-  const startTime =
-    parseMatchDateTime();
-
-
-  if(startTime){
-
-    const formatted =
-      new Date(
-        startTime
-      ).toLocaleString(
-        "en-IN",
-        {
-          dateStyle:"medium",
-          timeStyle:"short"
-        }
-      );
-
-
-    $("closedTime").innerText =
-      "Registration closed at " +
-      formatted;
-
-  }
-
-
-  $("closedModal").style.display =
-    "flex";
-
-}
-
-
-/* =====================================================
-   CLOSE REGISTRATION MODAL
-===================================================== */
-
-window.closeRegistrationModal =
-  () => {
-
-    $("closedModal").style.display =
-      "none";
-
-  };
-
-
-/* =====================================================
-   SLOT COUNT
-===================================================== */
-
-async function updateSlotCount(){
-
-  if(
-    !matchId ||
-    !currentMatch
-  ){
-
-    return;
-
-  }
-
-
-  try{
-
-    const snap =
-      await get(
-        ref(
-          db,
-          "matchPlayers/" +
-          matchId
-        )
-      );
-
-
-    const booked =
-      snap.exists()
-        ? Object.keys(
-            snap.val() || {}
-          ).length
-        : 0;
-
-
-    const total =
-      Number(
-        currentMatch.total || 0
-      );
-
-
-    $("slots").innerText =
-      booked +
-      "/" +
-      total;
-
-  }
-
-  catch(error){
-
-    console.error(
-      "Slot count error:",
-      error
-    );
-
-
-    $("slots").innerText =
-      "0/" +
-      Number(
-        currentMatch.total || 0
-      );
-
-  }
-
-}
-
-
-/* =====================================================
-   CHECK ALREADY JOINED
-===================================================== */
-
-async function checkAlreadyJoined(){
-
-  if(
-    !user ||
-    !matchId
-  ){
-
-    return false;
-
-  }
-
-
-  try{
-
-    const snap =
-      await get(
-        ref(
-          db,
-          "matchPlayers/" +
-          matchId +
-          "/" +
-          user.uid
-        )
-      );
-
-
-    alreadyJoined =
-      snap.exists();
-
-
-    if(alreadyJoined){
-
-      setJoinedMode();
-
-      return true;
-
-    }
-
-
-    setPreJoinMode();
-
-    return false;
-
-  }
-
-  catch(error){
-
-    console.error(
-      "Already joined check:",
-      error
-    );
-
-
-    return false;
-
-  }
-
-}
-
-
-/* =====================================================
-   PRE JOIN MODE
-===================================================== */
-
-function setPreJoinMode(){
-
-  document.body.classList.remove(
-    "joined-mode"
-  );
-
-
-  $("roomLocked").style.display =
-    "block";
-
-
-  $("groupBox").style.display =
-    "none";
-
-
-  /*
-  Player list remains visible.
-  */
-
-  $("joinStatus").style.display =
-    "none";
-
-
-  $("joinBtn").style.display =
-    "block";
-
-}
-
-
-/* =====================================================
-   JOINED MODE
-===================================================== */
-
-function setJoinedMode(){
-
-  alreadyJoined =
-    true;
-
-
-  document.body.classList.add(
-    "joined-mode"
-  );
-
-
-  $("joinBtn").style.display =
-    "none";
-
-
-  $("addMoneyBtn").style.display =
-    "none";
-
-
-  $("joinStatus").style.display =
-    "none";
-
-
-  $("roomLocked").style.display =
-    "none";
-
-
-  /*
-  Password stays hidden.
-  WhatsApp will be shown only
-  if groupLink exists.
-  */
-
-  if(
-    currentMatch &&
-    currentMatch.groupLink
-  ){
-
-    $("groupBox").style.display =
-      "block";
-
-    $("groupLink").href =
-      currentMatch.groupLink;
-
-  }
-
-  else{
-
-    $("groupBox").style.display =
-      "none";
-
-  }
-
-}
-
-
-/* =====================================================
-   JOIN BUTTON
-===================================================== */
-
-async function updateJoinButton(){
-
-  const btn =
-    $("joinBtn");
-
-
-  if(
-    !btn ||
-    !currentMatch ||
-    !user
-  ){
-
-    return;
-
-  }
-
-
-  if(joining)
-    return;
-
-
-  /*
-  Already joined
-  */
-
-  if(alreadyJoined){
-
-    setJoinedMode();
-
-    return;
-
-  }
-
-
-  /*
-  Registration time
-  */
-
-  const startTime =
-    parseMatchDateTime();
-
-
-  if(
-    startTime &&
-    Date.now() >= startTime
-  ){
-
-    registrationClosed =
-      true;
-
-    disableRegistration();
-
-    return;
-
-  }
-
-
-  /*
-  Match status
-  */
-
-  const status =
-    normalizeStatus(
-      currentMatch.status
-    );
-
-
-  if(
-    [
-      "completed",
-      "closed",
-      "cancelled"
-    ].includes(status)
-  ){
-
-    btn.disabled =
-      true;
-
-
-    btn.classList.remove(
-      "insufficient"
-    );
-
-
-    if(status === "completed"){
-
-      btn.innerText =
-        "MATCH COMPLETED";
-
-    }
-
-    else if(status === "cancelled"){
-
-      btn.innerText =
-        "MATCH CANCELLED";
-
-    }
-
-    else{
-
-      btn.innerText =
-        "MATCH CLOSED";
-
-    }
-
-
-    $("addMoneyBtn").style.display =
-      "none";
-
-
-    return;
-
-  }
-
-
-  /*
-  Entry
-  */
-
-  const entry =
-    Number(
-      currentMatch.entry || 0
-    );
-
-
-  if(
-    !Number.isFinite(entry) ||
-    entry <= 0
-  ){
-
-    btn.disabled =
-      true;
-
-
-    btn.innerText =
-      "ENTRY FEE INVALID";
-
-
-    $("addMoneyBtn").style.display =
-      "none";
-
-
-    return;
-
-  }
-
-
-  /*
-  Wallet
-  */
-
-  if(
-    currentWallet < entry
-  ){
-
-    btn.disabled =
-      true;
-
-
-    btn.classList.add(
-      "insufficient"
-    );
-
-
-    btn.innerText =
-      "💰 INSUFFICIENT BALANCE";
-
-
-    $("addMoneyBtn").style.display =
-      "block";
-
-
-    return;
-
-  }
-
-
-  btn.disabled =
-    false;
-
-
-  btn.classList.remove(
-    "insufficient"
-  );
-
-
-  btn.innerText =
-    "🎮 JOIN MATCH • ₹" +
-    formatNumber(entry);
-
-
-  $("addMoneyBtn").style.display =
-    "none";
-
-}
-
-
-/* =====================================================
-   OPEN CONFIRM
-===================================================== */
-
-$("joinBtn").onclick =
-  () => {
-
-    if(!joining){
-
-      openConfirm();
-
-    }
-
-  };
-
-
-async function openConfirm(){
-
-  if(!user){
-
-    showToast(
-      "Please login first",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  if(!currentMatch){
-
-    showToast(
-      "Match loading...",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  /*
-  Registration time check
-  */
-
-  const startTime =
-    parseMatchDateTime();
-
-
-  if(
-    startTime &&
-    Date.now() >= startTime
-  ){
-
-    registrationClosed =
-      true;
-
-    disableRegistration();
-
-    showRegistrationClosed();
-
-    return;
-
-  }
-
-
-  try{
-
-    const freshUserSnap =
-      await get(
-        ref(
-          db,
-          "users/" +
-          user.uid
-        )
-      );
-
-
-    if(
-      !freshUserSnap.exists()
-    ){
-
-      showToast(
-        "User account not found",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    currentWallet =
-      getWalletBalance(
-        freshUserSnap.val()
-      );
-
-
-    const latest =
-      await get(
-        ref(
-          db,
-          "matches/" +
-          matchId
-        )
-      );
-
-
-    if(
-      !latest.exists()
-    ){
-
-      showToast(
-        "Match not found",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    currentMatch =
-      latest.val() || {};
-
-
-    /*
-    Fresh time check
-    */
-
-    const latestStart =
-      parseMatchDateTime();
-
-
-    if(
-      latestStart &&
-      Date.now() >= latestStart
-    ){
-
-      registrationClosed =
-        true;
-
-      disableRegistration();
-
-      showRegistrationClosed();
-
-      return;
-
-    }
+    if(!match)
+        return false;
 
 
     const status =
-      normalizeStatus(
-        currentMatch.status
-      );
+        normalizeStatus(
+            match.status
+        );
 
 
     if(
-      [
-        "completed",
-        "closed",
-        "cancelled"
-      ].includes(status)
+        [
+            "closed",
+            "completed",
+            "cancelled",
+            "finished",
+            "ended",
+            "blocked"
+        ].includes(status)
+    )
+        return true;
+
+
+    if(
+        match.registrationOpen === false ||
+        match.registrationClosed === true ||
+        match.isRegistrationOpen === false
+    )
+        return true;
+
+
+    const closeTime =
+        getRegistrationCloseTime(
+            match
+        );
+
+
+    if(
+        closeTime &&
+        Date.now() >= closeTime
+    )
+        return true;
+
+
+    return false;
+
+}
+
+
+/* =========================================================
+   BLOCK USER
+   FAIL CLOSED
+========================================================= */
+
+async function isUserBlocked(){
+
+    if(
+        !user ||
+        !matchId
+    )
+        return true;
+
+
+    const paths = [
+
+        "matches/" +
+        matchId +
+        "/blockedUsers/" +
+        user.uid,
+
+        "matches/" +
+        matchId +
+        "/blocked/" +
+        user.uid,
+
+        "blockedUsers/" +
+        user.uid +
+        "/" +
+        matchId,
+
+        "users/" +
+        user.uid +
+        "/blockedMatches/" +
+        matchId
+
+    ];
+
+
+    let checkedAnyPath = false;
+
+
+    try{
+
+        for(
+            const path of paths
+        ){
+
+            try{
+
+                const snap =
+                    await get(
+                        ref(
+                            db,
+                            path
+                        )
+                    );
+
+
+                checkedAnyPath = true;
+
+
+                if(
+                    snap.exists()
+                ){
+
+                    const value =
+                        snap.val();
+
+
+                    if(
+                        value === true ||
+                        value === "true" ||
+                        value === 1 ||
+                        value === "1" ||
+                        (
+                            value &&
+                            typeof value === "object"
+                        )
+                    ){
+
+                        return true;
+
+                    }
+
+                }
+
+            }
+            catch(pathError){
+
+                /*
+                    Ek path read nahi ho paaya,
+                    doosre possible block paths
+                    check karenge.
+                */
+
+                console.warn(
+                    "Block path unavailable:",
+                    path,
+                    pathError
+                );
+
+            }
+
+        }
+
+        /*
+            Agar kam se kam paths check hue
+            aur koi block nahi mila,
+            user allowed hai.
+        */
+
+        return false;
+
+    }
+    catch(error){
+
+        console.error(
+            "Block check failed:",
+            error
+        );
+
+        /*
+            SECURITY:
+            Block verification fail hone par
+            join allow nahi karna.
+        */
+
+        return true;
+
+    }
+
+}
+
+
+/* =========================================================
+   AUTH
+========================================================= */
+
+if(!matchId){
+
+    showToast(
+        "Match ID missing",
+        "error"
+    );
+
+
+    setTimeout(
+        () =>
+            location.href =
+                "dashboard.html",
+        800
+    );
+
+}
+
+
+$("matchIdText").innerText =
+    matchId || "--";
+
+
+onAuthStateChanged(
+    auth,
+    async u => {
+
+        if(!u){
+
+            location.href =
+                "index.html";
+
+            return;
+
+        }
+
+
+        user = u;
+
+
+        loadMatch();
+
+        loadWallet();
+
+        loadPlayers();
+
+    }
+);
+
+
+/* =========================================================
+   WALLET
+========================================================= */
+
+function getWalletBalance(data){
+
+    if(!data)
+        return 0;
+
+
+    const wallet =
+        data.wallet;
+
+
+    if(
+        wallet &&
+        typeof wallet === "object"
     ){
 
-      showToast(
-        "Match is closed",
-        "error"
-      );
+        const balance =
+            Number(
+                wallet.balance ??
+                wallet.amount ??
+                wallet.withdrawable ??
+                0
+            );
 
-      return;
+
+        return Number.isFinite(balance)
+            ? Math.max(0,balance)
+            : 0;
+
+    }
+
+
+    const balance =
+        Number(
+            wallet ??
+            data.balance ??
+            data.walletBalance ??
+            data.amount ??
+            0
+        );
+
+
+    return Number.isFinite(balance)
+        ? Math.max(0,balance)
+        : 0;
+
+}
+
+
+function loadWallet(){
+
+    if(!user)
+        return;
+
+
+    if(walletUnsubscribe)
+        walletUnsubscribe();
+
+
+    walletUnsubscribe =
+        onValue(
+
+            ref(
+                db,
+                "users/" +
+                user.uid +
+                "/wallet"
+            ),
+
+            snapshot => {
+
+                const value =
+                    snapshot.exists()
+                        ? snapshot.val()
+                        : 0;
+
+
+                if(
+                    value &&
+                    typeof value === "object"
+                ){
+
+                    currentWallet =
+                        Number(
+                            value.balance ??
+                            value.amount ??
+                            value.withdrawable ??
+                            0
+                        );
+
+                }
+                else{
+
+                    currentWallet =
+                        Number(
+                            value || 0
+                        );
+
+                }
+
+
+                if(
+                    !Number.isFinite(
+                        currentWallet
+                    )
+                )
+                    currentWallet = 0;
+
+
+                updateWalletUI();
+
+            },
+
+            error => {
+
+                console.error(
+                    "Wallet:",
+                    error
+                );
+
+                currentWallet = 0;
+
+                updateWalletUI();
+
+            }
+
+        );
+
+}
+
+
+function updateWalletUI(){
+
+    $("walletBalance").innerText =
+        "₹" +
+        formatNumber(
+            currentWallet
+        );
+
+
+    const entry =
+        currentMatch
+            ? number(
+                currentMatch.entry ??
+                currentMatch.entryFee
+              )
+            : 0;
+
+
+    const remaining =
+        Math.max(
+            0,
+            currentWallet -
+            entry
+        );
+
+
+    $("walletAfter").innerText =
+        "After joining: ₹" +
+        formatNumber(
+            remaining
+        );
+
+
+    if(
+        entry <= 0
+    ){
+
+        $("walletStatus").innerText =
+            "Invalid Entry Fee";
+
+        $("walletStatus").style.color =
+            "#f59e0b";
+
+    }
+    else if(
+        currentWallet < entry
+    ){
+
+        $("walletStatus").innerText =
+            "Insufficient Balance";
+
+        $("walletStatus").style.color =
+            "#f59e0b";
+
+    }
+    else{
+
+        $("walletStatus").innerText =
+            "Ready to Join";
+
+        $("walletStatus").style.color =
+            "#22c55e";
+
+    }
+
+
+    updateJoinButton();
+
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+function getImage(match){
+
+    const fields = [
+
+        "image",
+        "imageUrl",
+        "imageURL",
+        "banner",
+        "bannerImage",
+        "bannerUrl",
+        "photo",
+        "photoURL",
+        "thumbnail",
+        "thumbnailUrl",
+        "tournamentImage",
+        "tournamentImageUrl",
+        "coverImage",
+        "coverImageUrl",
+        "poster",
+        "posterUrl",
+        "matchImage",
+        "matchImageUrl"
+
+    ];
+
+
+    for(
+        const field of fields
+    ){
+
+        const value =
+            match?.[field];
+
+
+        if(
+            typeof value === "string" &&
+            value.trim()
+        )
+            return value.trim();
+
+    }
+
+
+    if(
+        match?.image &&
+        typeof match.image === "object"
+    ){
+
+        return (
+            match.image.url ||
+            match.image.src ||
+            match.image.downloadURL ||
+            ""
+        );
+
+    }
+
+
+    return "https://images.pexels.com/photos/7915357/pexels-photo-7915357.jpeg";
+
+}
+
+
+/* =========================================================
+   LOAD MATCH
+========================================================= */
+
+function loadMatch(){
+
+    if(!matchId)
+        return;
+
+
+    if(matchUnsubscribe)
+        matchUnsubscribe();
+
+
+    matchUnsubscribe =
+        onValue(
+
+            ref(
+                db,
+                "matches/" +
+                matchId
+            ),
+
+            snapshot => {
+
+                if(
+                    !snapshot.exists()
+                ){
+
+                    showToast(
+                        "Match Not Found",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                currentMatch =
+                    snapshot.val() || {};
+
+
+                renderMatch(
+                    currentMatch
+                );
+
+
+                updateRegistrationUI();
+
+
+                checkAlreadyJoined();
+
+            },
+
+            error => {
+
+                console.error(
+                    "Match:",
+                    error
+                );
+
+                showToast(
+                    "Unable to load match",
+                    "error"
+                );
+
+            }
+
+        );
+
+}
+
+
+/* =========================================================
+   RENDER MATCH
+========================================================= */
+
+function renderMatch(m){
+
+    const img =
+        $("matchImage");
+
+
+    img.src =
+        getImage(m);
+
+
+    img.onerror =
+        () => {
+
+            img.onerror = null;
+
+            img.src =
+                "https://images.pexels.com/photos/7915357/pexels-photo-7915357.jpeg";
+
+        };
+
+
+    const title =
+        m.title ||
+        m.name ||
+        m.matchTitle ||
+        m.tournamentName ||
+        "BGMI MATCH";
+
+
+    const mode =
+        String(
+            m.type ||
+            m.matchType ||
+            m.category ||
+            m.mode ||
+            "SQUAD"
+        ).toUpperCase();
+
+
+    $("matchTitle").innerText =
+        title;
+
+
+    $("bannerTitle").innerText =
+        title;
+
+
+    $("mode").innerText =
+        mode;
+
+
+    $("bannerMode").innerText =
+        mode;
+
+
+    $("date").innerText =
+        m.date ||
+        m.matchDate ||
+        m.startDate ||
+        "-";
+
+
+    $("time").innerText =
+        m.time ||
+        m.matchTime ||
+        m.startTime ||
+        "-";
+
+
+    const prizePool =
+        number(
+            m.prize ??
+            m.prizePool ??
+            m.winningAmount ??
+            m.winPrize ??
+            m.reward ??
+            0
+        );
+
+
+    const entry =
+        number(
+            m.entry ??
+            m.entryFee ??
+            m.joinFee ??
+            m.registrationFee ??
+            0
+        );
+
+
+    $("prize").innerText =
+        "₹" +
+        formatNumber(
+            prizePool
+        );
+
+
+    $("entry").innerText =
+        "₹" +
+        formatNumber(
+            entry
+        );
+
+
+    renderPrize(
+        1,
+        m.firstPrize ??
+        m.prize1 ??
+        m["1stPrize"] ??
+        m.first ??
+        m.rank1
+    );
+
+
+    renderPrize(
+        2,
+        m.secondPrize ??
+        m.prize2 ??
+        m["2ndPrize"] ??
+        m.second ??
+        m.rank2
+    );
+
+
+    renderPrize(
+        3,
+        m.thirdPrize ??
+        m.prize3 ??
+        m["3rdPrize"] ??
+        m.third ??
+        m.rank3
+    );
+
+
+    renderPrize(
+        4,
+        m.fourthPrize ??
+        m.prize4 ??
+        m["4thPrize"] ??
+        m.fourth ??
+        m.rank4
+    );
+
+
+    renderPrize(
+        5,
+        m.fifthPrize ??
+        m.prize5 ??
+        m["5thPrize"] ??
+        m.fifth ??
+        m.rank5
+    );
+
+
+    $("prizePoolBottom").innerText =
+        "₹" +
+        formatNumber(
+            prizePool
+        );
+
+
+    updateStatus(m);
+
+    updateSlotCount();
+
+    updateWalletUI();
+
+    updateRegistrationUI();
+
+}
+
+
+/* =========================================================
+   PRIZE
+========================================================= */
+
+function renderPrize(
+    position,
+    value
+){
+
+    const item =
+        $("prizeItem" + position);
+
+
+    const ids = [
+        null,
+        "firstPrize",
+        "secondPrize",
+        "thirdPrize",
+        "fourthPrize",
+        "fifthPrize"
+    ];
+
+
+    const money =
+        $(ids[position]);
+
+
+    const amount =
+        number(value);
+
+
+    if(
+        amount > 0
+    ){
+
+        item.style.display =
+            "block";
+
+
+        money.innerText =
+            "₹" +
+            formatNumber(
+                amount
+            );
+
+    }
+    else{
+
+        item.style.display =
+            "none";
+
+    }
+
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+function updateStatus(m){
+
+    const status =
+        normalizeStatus(
+            m.status
+        );
+
+
+    const badge =
+        $("liveBadge");
+
+
+    badge.style.background =
+        "";
+
+
+    if(
+        status === "live"
+    ){
+
+        badge.innerText =
+            "🟢 LIVE";
+
+        $("statusText").innerText =
+            "LIVE";
+
+    }
+    else if(
+        status === "completed"
+    ){
+
+        badge.innerText =
+            "COMPLETED";
+
+        $("statusText").innerText =
+            "COMPLETED";
+
+    }
+    else if(
+        status === "closed"
+    ){
+
+        badge.innerText =
+            "CLOSED";
+
+        $("statusText").innerText =
+            "CLOSED";
+
+    }
+    else if(
+        status === "cancelled"
+    ){
+
+        badge.innerText =
+            "CANCELLED";
+
+        badge.style.background =
+            "#ef4444";
+
+        $("statusText").innerText =
+            "CANCELLED";
+
+    }
+    else if(
+        status === "blocked"
+    ){
+
+        badge.innerText =
+            "BLOCKED";
+
+        badge.style.background =
+            "#ef4444";
+
+        $("statusText").innerText =
+            "BLOCKED";
+
+    }
+    else{
+
+        badge.innerText =
+            "UPCOMING";
+
+        $("statusText").innerText =
+            "UPCOMING";
+
+    }
+
+}
+
+
+/* =========================================================
+   REGISTRATION UI
+========================================================= */
+
+async function updateRegistrationUI(){
+
+    if(
+        !currentMatch ||
+        !user
+    )
+        return;
+
+
+    const closed =
+        isRegistrationClosed(
+            currentMatch
+        );
+
+
+    const blocked =
+        await isUserBlocked();
+
+
+    if(
+        blocked
+    ){
+
+        $("joinBtn").disabled =
+            true;
+
+        $("joinBtn").innerText =
+            "🚫 JOIN BLOCKED";
+
+        $("registrationClosed").style.display =
+            "block";
+
+        $("registrationClosed").innerText =
+            "🚫 Aap is match me join nahi kar sakte.";
+
+        $("addMoneyBtn").style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    if(
+        closed
+    ){
+
+        $("joinBtn").disabled =
+            true;
+
+        $("joinBtn").innerText =
+            "🔒 REGISTRATION CLOSED";
+
+        $("registrationClosed").style.display =
+            "block";
+
+        $("registrationClosed").innerText =
+            "🔒 Registration close ho chuka hai.";
+
+        $("addMoneyBtn").style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    $("registrationClosed").style.display =
+        "none";
+
+
+    updateJoinButton();
+
+}
+
+
+/* =========================================================
+   SLOT COUNT
+========================================================= */
+
+async function updateSlotCount(){
+
+    if(
+        !matchId ||
+        !currentMatch
+    )
+        return;
+
+
+    try{
+
+        const snap =
+            await get(
+                ref(
+                    db,
+                    "matchPlayers/" +
+                    matchId
+                )
+            );
+
+
+        const booked =
+            snap.exists()
+                ? Object.keys(
+                    snap.val() || {}
+                  ).length
+                : 0;
+
+
+        const total =
+            number(
+                currentMatch.total ??
+                currentMatch.totalSlots ??
+                currentMatch.maxSlots ??
+                currentMatch.slots ??
+                25
+            );
+
+
+        $("slots").innerText =
+            booked +
+            "/" +
+            total;
+
+    }
+    catch(error){
+
+        console.error(
+            "Slots:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   JOINED DATA
+========================================================= */
+
+async function getJoinedData(){
+
+    if(
+        !user ||
+        !matchId
+    )
+        return null;
+
+
+    try{
+
+        const snap =
+            await get(
+                ref(
+                    db,
+                    "matchPlayers/" +
+                    matchId +
+                    "/" +
+                    user.uid
+                )
+            );
+
+
+        return snap.exists()
+            ? snap.val()
+            : null;
+
+    }
+    catch(error){
+
+        console.error(
+            "Joined:",
+            error
+        );
+
+        return null;
+
+    }
+
+}
+
+
+/* =========================================================
+   ALREADY JOINED
+========================================================= */
+
+async function checkAlreadyJoined(){
+
+    const data =
+        await getJoinedData();
+
+
+    if(
+        data
+    ){
+
+        selectedTeamName =
+            data.teamName ||
+            data.team ||
+            "";
+
+
+        $("joinedTeamName").innerText =
+            selectedTeamName ||
+            "Registered Team";
+
+
+        $("joinBtn").style.display =
+            "none";
+
+
+        $("addMoneyBtn").style.display =
+            "none";
+
+
+        $("joinStatus").style.display =
+            "block";
+
+
+        showJoinedView();
+
+
+        return true;
+
+    }
+
+
+    $("joinStatus").style.display =
+        "none";
+
+
+    $("joinedContent").style.display =
+        "none";
+
+
+    $("normalMatchContent").style.display =
+        "block";
+
+
+    updateRegistrationUI();
+
+
+    return false;
+
+}
+
+
+/* =========================================================
+   JOIN BUTTON
+========================================================= */
+
+async function updateJoinButton(){
+
+    const btn =
+        $("joinBtn");
+
+
+    if(
+        !btn ||
+        !currentMatch ||
+        !user ||
+        joining
+    )
+        return;
+
+
+    const closed =
+        isRegistrationClosed(
+            currentMatch
+        );
+
+
+    if(
+        closed
+    ){
+
+        btn.disabled =
+            true;
+
+        btn.innerText =
+            "🔒 REGISTRATION CLOSED";
+
+        $("addMoneyBtn").style.display =
+            "none";
+
+        $("registrationClosed").style.display =
+            "block";
+
+        $("registrationClosed").innerText =
+            "🔒 Registration close ho chuka hai.";
+
+        return;
+
+    }
+
+
+    const blocked =
+        await isUserBlocked();
+
+
+    if(
+        blocked
+    ){
+
+        btn.disabled =
+            true;
+
+        btn.innerText =
+            "🚫 JOIN BLOCKED";
+
+        $("addMoneyBtn").style.display =
+            "none";
+
+        $("registrationClosed").style.display =
+            "block";
+
+        $("registrationClosed").innerText =
+            "🚫 Aap is match me join nahi kar sakte.";
+
+        return;
+
+    }
+
+
+    const joined =
+        await getJoinedData();
+
+
+    if(
+        joined
+    ){
+
+        btn.style.display =
+            "none";
+
+        $("joinStatus").style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    btn.style.display =
+        "block";
+
+
+    const status =
+        normalizeStatus(
+            currentMatch.status
+        );
+
+
+    if(
+        [
+            "completed",
+            "closed",
+            "cancelled",
+            "finished",
+            "ended",
+            "blocked"
+        ].includes(status)
+    ){
+
+        btn.disabled =
+            true;
+
+        btn.innerText =
+            status === "cancelled"
+                ? "MATCH CANCELLED"
+                : status === "blocked"
+                    ? "JOIN BLOCKED"
+                    : "MATCH CLOSED";
+
+        $("addMoneyBtn").style.display =
+            "none";
+
+        return;
 
     }
 
 
     const entry =
-      Number(
-        currentMatch.entry || 0
-      );
+        number(
+            currentMatch.entry ??
+            currentMatch.entryFee ??
+            currentMatch.joinFee
+        );
 
 
     if(
-      !Number.isFinite(entry) ||
-      entry <= 0
+        entry <= 0
     ){
 
-      showToast(
-        "Invalid entry fee",
-        "error"
-      );
+        btn.disabled =
+            true;
 
-      return;
+        btn.innerText =
+            "ENTRY FEE INVALID";
+
+        $("addMoneyBtn").style.display =
+            "none";
+
+        return;
 
     }
 
 
     if(
-      currentWallet < entry
+        currentWallet < entry
     ){
 
-      showToast(
-        "Wallet balance insufficient",
-        "error"
-      );
+        btn.disabled =
+            true;
 
+        btn.classList.add(
+            "insufficient"
+        );
 
-      $("addMoneyBtn").style.display =
-        "block";
+        btn.innerText =
+            "💰 INSUFFICIENT BALANCE";
 
+        $("addMoneyBtn").style.display =
+            "block";
 
-      return;
-
-    }
-
-
-    /*
-    Players
-    */
-
-    const playersSnap =
-      await get(
-        ref(
-          db,
-          "matchPlayers/" +
-          matchId
-        )
-      );
-
-
-    const booked =
-      playersSnap.exists()
-        ? Object.keys(
-            playersSnap.val() || {}
-          ).length
-        : 0;
-
-
-    const total =
-      Number(
-        currentMatch.total || 0
-      );
-
-
-    if(
-      total > 0 &&
-      booked >= total
-    ){
-
-      showToast(
-        "Match is full",
-        "error"
-      );
-
-      return;
+        return;
 
     }
 
 
-    /*
-    Duplicate
-    */
+    btn.disabled =
+        false;
 
-    const already =
-      await get(
-        ref(
-          db,
-          "matchPlayers/" +
-          matchId +
-          "/" +
-          user.uid
-        )
-      );
-
-
-    if(already.exists()){
-
-      alreadyJoined =
-        true;
-
-      setJoinedMode();
-
-      showToast(
-        "Already joined",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    $("confirmEntry").innerText =
-      "₹" +
-      formatNumber(entry);
-
-
-    $("confirmWallet").innerText =
-      "₹" +
-      formatNumber(
-        currentWallet
-      );
-
-
-    $("confirmAfter").innerText =
-      "₹" +
-      formatNumber(
-        currentWallet - entry
-      );
-
-
-    $("confirmModal").style.display =
-      "flex";
-
-  }
-
-  catch(error){
-
-    console.error(
-      "Open confirm error:",
-      error
+    btn.classList.remove(
+        "insufficient"
     );
 
+    btn.innerText =
+        "🎮 JOIN MATCH • ₹" +
+        formatNumber(entry);
 
-    showToast(
-      "Unable to verify match",
-      "error"
-    );
-
-  }
+    $("addMoneyBtn").style.display =
+        "none";
 
 }
 
 
-/* =====================================================
-   CLOSE CONFIRM
-===================================================== */
+/* =========================================================
+   JOIN CLICK
+   ONLY THEN TEAM POPUP
+========================================================= */
 
-window.closeConfirm =
-  () => {
+$("joinBtn").onclick =
+    async () => {
 
-    if(joining)
-      return;
-
-
-    $("confirmModal").style.display =
-      "none";
-
-  };
+        if(joining)
+            return;
 
 
-/* =====================================================
-   CONFIRM JOIN
-===================================================== */
-
-$("confirmJoinBtn").onclick =
-  async () => {
-
-    if(joining)
-      return;
+        if(
+            !currentMatch ||
+            !user
+        )
+            return;
 
 
-    joining =
-      true;
+        if(
+            isRegistrationClosed(
+                currentMatch
+            )
+        ){
+
+            showToast(
+                "Registration closed",
+                "error"
+            );
+
+            updateRegistrationUI();
+
+            return;
+
+        }
 
 
-    $("confirmJoinBtn").disabled =
-      true;
+        const blocked =
+            await isUserBlocked();
 
 
-    $("confirmJoinBtn").innerHTML =
-      '<span class="spinner"></span>JOINING...';
+        if(
+            blocked
+        ){
+
+            showToast(
+                "Aap is match me join nahi kar sakte.",
+                "error"
+            );
+
+            updateRegistrationUI();
+
+            return;
+
+        }
+
+
+        const entry =
+            number(
+                currentMatch.entry ??
+                currentMatch.entryFee ??
+                currentMatch.joinFee
+            );
+
+
+        if(
+            currentWallet < entry
+        ){
+
+            showToast(
+                "Wallet balance insufficient",
+                "error"
+            );
+
+            $("addMoneyBtn").style.display =
+                "block";
+
+            return;
+
+        }
+
+
+        /*
+            IMPORTANT:
+            Team name page par nahi dikhega.
+            Sirf JOIN button click karne ke
+            baad popup open hoga.
+        */
+
+        $("teamModalInput").value =
+            "";
+
+
+        $("teamModal").style.display =
+            "flex";
+
+
+        setTimeout(
+            () =>
+                $("teamModalInput").focus(),
+            100
+        );
+
+    };
+
+
+/* =========================================================
+   TEAM MODAL
+========================================================= */
+
+window.closeTeamModal =
+    () => {
+
+        $("teamModal").style.display =
+            "none";
+
+    };
+
+
+$("teamModal").addEventListener(
+    "click",
+    event => {
+
+        if(
+            event.target ===
+            $("teamModal")
+        )
+            closeTeamModal();
+
+    }
+);
+
+
+/* =========================================================
+   TEAM CONTINUE
+========================================================= */
+
+$("teamContinueBtn").onclick =
+    async () => {
+
+        const name =
+            $("teamModalInput")
+                .value
+                .trim();
+
+
+        if(
+            !name
+        ){
+
+            showToast(
+                "Team name enter karein",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if(
+            name.length < 2
+        ){
+
+            showToast(
+                "Team name too short",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        const blocked =
+            await isUserBlocked();
+
+
+        if(
+            blocked
+        ){
+
+            closeTeamModal();
+
+            showToast(
+                "Aap is match me join nahi kar sakte.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        selectedTeamName =
+            name;
+
+
+        closeTeamModal();
+
+
+        openConfirm(
+            name
+        );
+
+    };
+
+
+/* =========================================================
+   OPEN CONFIRM
+========================================================= */
+
+async function openConfirm(
+    teamName
+){
+
+    if(!user){
+
+        showToast(
+            "Please login first",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const name =
+        String(
+            teamName ||
+            selectedTeamName ||
+            ""
+        ).trim();
+
+
+    if(!name){
+
+        showToast(
+            "Team name required",
+            "error"
+        );
+
+        return;
+
+    }
 
 
     try{
 
-      await performJoin();
-
-    }
-
-    catch(error){
-
-      console.error(
-        "JOIN ERROR:",
-        error
-      );
-
-
-      showToast(
-        error.message ||
-        "Unable to join match",
-        "error"
-      );
-
-    }
-
-    finally{
-
-      joining =
-        false;
-
-
-      $("confirmJoinBtn").disabled =
-        false;
-
-
-      $("confirmJoinBtn").innerText =
-        "✓ CONFIRM JOIN";
-
-    }
-
-  };
-
-
-/* =====================================================
-   PERFORM JOIN
-===================================================== */
-
-async function performJoin(){
-
-  if(!user){
-
-    throw new Error(
-      "Login Required"
-    );
-
-  }
-
-
-  /*
-  Fresh user
-  */
-
-  const userSnap =
-    await get(
-      ref(
-        db,
-        "users/" +
-        user.uid
-      )
-    );
-
-
-  if(
-    !userSnap.exists()
-  ){
-
-    throw new Error(
-      "User account not found"
-    );
-
-  }
-
-
-  const u =
-    userSnap.val() || {};
-
-
-  /*
-  Fresh match
-  */
-
-  const matchSnap =
-    await get(
-      ref(
-        db,
-        "matches/" +
-        matchId
-      )
-    );
-
-
-  if(
-    !matchSnap.exists()
-  ){
-
-    throw new Error(
-      "Match not found"
-    );
-
-  }
-
-
-  const match =
-    matchSnap.val() || {};
-
-
-  currentMatch =
-    match;
-
-
-  /*
-  REGISTRATION TIME
-  */
-
-  const startTime =
-    parseMatchDateTime();
-
-
-  if(
-    startTime &&
-    Date.now() >= startTime
-  ){
-
-    registrationClosed =
-      true;
-
-
-    disableRegistration();
-
-
-    showRegistrationClosed();
-
-
-    throw new Error(
-      "Registration Closed"
-    );
-
-  }
-
-
-  /*
-  STATUS
-  */
-
-  const status =
-    normalizeStatus(
-      match.status
-    );
-
-
-  if(
-    [
-      "completed",
-      "closed",
-      "cancelled"
-    ].includes(status)
-  ){
-
-    throw new Error(
-      "Match is closed"
-    );
-
-  }
-
-
-  /*
-  ENTRY
-  */
-
-  const entryFee =
-    Number(
-      match.entry || 0
-    );
-
-
-  if(
-    !Number.isFinite(entryFee) ||
-    entryFee <= 0
-  ){
-
-    throw new Error(
-      "Invalid entry fee"
-    );
-
-  }
-
-
-  /*
-  DUPLICATE
-  */
-
-  const already =
-    await get(
-      ref(
-        db,
-        "matchPlayers/" +
-        matchId +
-        "/" +
-        user.uid
-      )
-    );
-
-
-  if(already.exists()){
-
-    alreadyJoined =
-      true;
-
-    setJoinedMode();
-
-    throw new Error(
-      "Already Joined"
-    );
-
-  }
-
-
-  /*
-  PLAYERS
-  */
-
-  const playersSnap =
-    await get(
-      ref(
-        db,
-        "matchPlayers/" +
-        matchId
-      )
-    );
-
-
-  const playersData =
-    playersSnap.exists()
-      ? (
-          playersSnap.val() || {}
-        )
-      : {};
-
-
-  const booked =
-    Object.keys(
-      playersData
-    ).length;
-
-
-  const total =
-    Number(
-      match.total || 0
-    );
-
-
-  if(
-    total > 0 &&
-    booked >= total
-  ){
-
-    throw new Error(
-      "Match is full"
-    );
-
-  }
-
-
-  /*
-  WALLET
-  */
-
-  const walletBalance =
-    getWalletBalance(u);
-
-
-  if(
-    walletBalance < entryFee
-  ){
-
-    throw new Error(
-      "Insufficient Wallet Balance"
-    );
-
-  }
-
-
-  const newBalance =
-    walletBalance -
-    entryFee;
-
-
-  /*
-  PLAYER
-  */
-
-  const playerData = {
-
-    uid:
-      user.uid,
-
-    name:
-      u.name ||
-      u.displayName ||
-      user.displayName ||
-      "Player",
-
-    bgmiId:
-      u.bgmiId ||
-      u.bgmiID ||
-      "-",
-
-    entryFee:
-      entryFee,
-
-    joinedAt:
-      Date.now(),
-
-    refunded:
-      false
-
-  };
-
-
-  /*
-  TRANSACTION
-  */
-
-  const transactionId =
-    "txn_" +
-    Date.now() +
-    "_" +
-    user.uid.slice(0,6);
-
-
-  /*
-  MISSION
-  */
-
-  const oldMission =
-    Number(
-      u.missionMatches || 0
-    );
-
-
-  const missionCount =
-    Math.min(
-      100,
-      oldMission + 1
-    );
-
-
-  /*
-  MULTI PATH UPDATE
-  */
-
-  const updates = {};
-
-
-  /*
-  PLAYER
-  */
-
-  updates[
-    "matchPlayers/" +
-    matchId +
-    "/" +
-    user.uid
-  ] =
-    playerData;
-
-
-  /*
-  WALLET
-  */
-
-  updates[
-    "users/" +
-    user.uid +
-    "/wallet/balance"
-  ] =
-    newBalance;
-
-
-  /*
-  TRANSACTION
-  */
-
-  updates[
-    "users/" +
-    user.uid +
-    "/transactions/" +
-    transactionId
-  ] = {
-
-    title:
-      "Match Entry Fee",
-
-    amount:
-      entryFee,
-
-    type:
-      "debit",
-
-    time:
-      Date.now(),
-
-    matchId:
-      matchId,
-
-    matchTitle:
-      match.title ||
-      "BGMI Match",
-
-    balanceBefore:
-      walletBalance,
-
-    balanceAfter:
-      newBalance
-
-  };
-
-
-  /*
-  MISSION
-  */
-
-  updates[
-    "users/" +
-    user.uid +
-    "/missionMatches"
-  ] =
-    missionCount;
-
-
-  /*
-  ONE UPDATE
-  */
-
-  await update(
-    ref(db),
-    updates
-  );
-
-
-  /*
-  SUCCESS
-  */
-
-  $("confirmModal").style.display =
-    "none";
-
-
-  currentWallet =
-    newBalance;
-
-
-  alreadyJoined =
-    true;
-
-
-  updateWalletUI();
-
-
-  /*
-  IMPORTANT:
-  Joined mode hides everything
-  except WhatsApp + players.
-  */
-
-  setJoinedMode();
-
-
-  showToast(
-    "✓ Match Joined Successfully!",
-    "success"
-  );
-
-
-  await updateSlotCount();
-
-
-  loadPlayers();
-
-
-  /*
-  Immediately check WhatsApp
-  */
-
-  if(match.groupLink){
-
-    $("groupBox").style.display =
-      "block";
-
-    $("groupLink").href =
-      match.groupLink;
-
-  }
-
-}
-
-
-/* =====================================================
-   LOAD PLAYERS
-===================================================== */
-
-function loadPlayers(){
-
-  if(!matchId)
-    return;
-
-
-  if(playersUnsubscribe){
-
-    playersUnsubscribe();
-
-  }
-
-
-  playersUnsubscribe =
-    onValue(
-
-      ref(
-        db,
-        "matchPlayers/" +
-        matchId
-      ),
-
-      snapshot => {
-
-        const box =
-          $("playerList");
-
-
-        box.innerHTML =
-          "";
+        const blocked =
+            await isUserBlocked();
 
 
         if(
-          !snapshot.exists()
+            blocked
         ){
 
-          box.innerHTML =
-            '<div class="empty">No Players Joined</div>';
+            showToast(
+                "Aapka join blocked hai",
+                "error"
+            );
 
-
-          updateSlotCount();
-
-          return;
+            return;
 
         }
 
 
-        let no = 1;
-
-
-        snapshot.forEach(
-          item => {
-
-            const p =
-              item.val() || {};
-
-
-            const div =
-              document.createElement(
-                "div"
-              );
-
-
-            div.className =
-              "player";
-
-
-            const left =
-              document.createElement(
-                "div"
-              );
-
-
-            const name =
-              document.createElement(
-                "div"
-              );
-
-
-            name.className =
-              "playerName";
-
-
-            name.innerText =
-              no +
-              ". " +
-              (
-                p.name ||
-                "Player"
-              );
-
-
-            const id =
-              document.createElement(
-                "div"
-              );
-
-
-            id.className =
-              "playerId";
-
-
-            id.innerText =
-              "BGMI ID: " +
-              (
-                p.bgmiId ||
-                "-"
-              );
-
-
-            left.appendChild(
-              name
+        const latest =
+            await get(
+                ref(
+                    db,
+                    "matches/" +
+                    matchId
+                )
             );
 
 
-            left.appendChild(
-              id
+        if(
+            !latest.exists()
+        ){
+
+            showToast(
+                "Match not found",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        currentMatch =
+            latest.val() || {};
+
+
+        if(
+            isRegistrationClosed(
+                currentMatch
+            )
+        ){
+
+            showToast(
+                "Registration closed",
+                "error"
+            );
+
+            updateRegistrationUI();
+
+            return;
+
+        }
+
+
+        const entry =
+            number(
+                currentMatch.entry ??
+                currentMatch.entryFee ??
+                currentMatch.joinFee
             );
 
 
-            const badge =
-              document.createElement(
-                "div"
-              );
+        if(
+            entry <= 0
+        ){
+
+            showToast(
+                "Invalid entry fee",
+                "error"
+            );
+
+            return;
+
+        }
 
 
-            badge.className =
-              "badge";
-
-
-            badge.innerText =
-              "JOINED";
-
-
-            div.appendChild(
-              left
+        const userSnap =
+            await get(
+                ref(
+                    db,
+                    "users/" +
+                    user.uid
+                )
             );
 
 
-            div.appendChild(
-              badge
+        if(
+            !userSnap.exists()
+        ){
+
+            showToast(
+                "User account not found",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        currentWallet =
+            getWalletBalance(
+                userSnap.val()
             );
 
 
-            box.appendChild(
-              div
+        if(
+            currentWallet < entry
+        ){
+
+            showToast(
+                "Wallet balance insufficient",
+                "error"
+            );
+
+            $("addMoneyBtn").style.display =
+                "block";
+
+            return;
+
+        }
+
+
+        const playersSnap =
+            await get(
+                ref(
+                    db,
+                    "matchPlayers/" +
+                    matchId
+                )
             );
 
 
-            no++;
+        const players =
+            playersSnap.exists()
+                ? playersSnap.val() || {}
+                : {};
 
-          }
-        );
+
+        const total =
+            number(
+                currentMatch.total ??
+                currentMatch.totalSlots ??
+                currentMatch.maxSlots ??
+                currentMatch.slots ??
+                25
+            );
 
 
-        updateSlotCount();
+        if(
+            total > 0 &&
+            Object.keys(players).length >= total
+        ){
 
-      },
+            showToast(
+                "Match is full",
+                "error"
+            );
 
-      error => {
+            return;
+
+        }
+
+
+        const already =
+            await get(
+                ref(
+                    db,
+                    "matchPlayers/" +
+                    matchId +
+                    "/" +
+                    user.uid
+                )
+            );
+
+
+        if(
+            already.exists()
+        ){
+
+            await checkAlreadyJoined();
+
+            showToast(
+                "Already joined",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        $("confirmTeam").innerText =
+            name;
+
+
+        $("confirmEntry").innerText =
+            "₹" +
+            formatNumber(entry);
+
+
+        $("confirmWallet").innerText =
+            "₹" +
+            formatNumber(
+                currentWallet
+            );
+
+
+        $("confirmAfter").innerText =
+            "₹" +
+            formatNumber(
+                currentWallet -
+                entry
+            );
+
+
+        $("confirmModal").style.display =
+            "flex";
+
+    }
+    catch(error){
 
         console.error(
-          "Players error:",
-          error
+            "Confirm:",
+            error
         );
 
+        showToast(
+            "Unable to verify match",
+            "error"
+        );
 
-        $("playerList").innerHTML =
-          '<div class="empty">Unable to load players</div>';
-
-      }
-
-    );
+    }
 
 }
 
 
-/* =====================================================
-   CANCELLATION REFUND
-===================================================== */
+/* =========================================================
+   CONFIRM CLOSE
+========================================================= */
 
-/*
-  IMPORTANT:
+window.closeConfirm =
+    () => {
 
-  Refund is stored as:
+        $("confirmModal").style.display =
+            "none";
 
-  users/{uid}/refunds/{matchId}
-
-  This prevents the same user from receiving
-  the cancellation refund multiple times.
-
-  Wallet becomes:
-
-  users/{uid}/wallet/balance
-
-  Refund transaction:
-
-  users/{uid}/transactions/refund_matchId_timestamp
-
-*/
+    };
 
 
-async function handleCancellation(){
+$("confirmModal").addEventListener(
+    "click",
+    event => {
 
-  if(
-    !user ||
-    !matchId ||
-    !currentMatch
-  ){
-
-    return;
-
-  }
-
-
-  if(cancellationHandled)
-    return;
-
-
-  const status =
-    normalizeStatus(
-      currentMatch.status
-    );
-
-
-  if(status !== "cancelled")
-    return;
-
-
-  try{
-
-    const playerSnap =
-      await get(
-        ref(
-          db,
-          "matchPlayers/" +
-          matchId +
-          "/" +
-          user.uid
+        if(
+            event.target ===
+            $("confirmModal")
         )
-      );
-
-
-    /*
-    User was not registered.
-    */
-
-    if(
-      !playerSnap.exists()
-    ){
-
-      cancellationHandled =
-        true;
-
-      return;
+            closeConfirm();
 
     }
+);
 
 
-    const player =
-      playerSnap.val() || {};
+/* =========================================================
+   CONFIRM JOIN
+========================================================= */
+
+$("confirmJoinBtn").onclick =
+    async () => {
+
+        if(joining)
+            return;
 
 
-    /*
-    Entry fee saved during join.
-
-    For old players who joined before this
-    updated code, fallback to current match entry.
-    */
-
-    const refundAmount =
-      Number(
-        player.entryFee ||
-        currentMatch.entry ||
-        0
-      );
+        joining = true;
 
 
-    if(
-      !Number.isFinite(
-        refundAmount
-      ) ||
-      refundAmount <= 0
-    ){
-
-      cancellationHandled =
-        true;
-
-      showCancelledModal(
-        "Refund amount could not be determined."
-      );
-
-      return;
-
-    }
+        $("confirmJoinBtn").disabled =
+            true;
 
 
-    /*
-    Check existing refund marker.
-    */
-
-    const refundMarkerSnap =
-      await get(
-        ref(
-          db,
-          "users/" +
-          user.uid +
-          "/refunds/" +
-          matchId
-        )
-      );
+        $("confirmJoinBtn").innerHTML =
+            '<span class="spinner"></span>JOINING...';
 
 
-    if(
-      refundMarkerSnap.exists()
-    ){
+        try{
 
-      cancellationHandled =
-        true;
+            await performJoin();
 
-
-      await update(
-        ref(
-          db,
-          "matchPlayers/" +
-          matchId +
-          "/" +
-          user.uid
-        ),
-        {
-          refunded:true
         }
-      );
+        catch(error){
+
+            console.error(
+                "JOIN ERROR:",
+                error
+            );
 
 
-      showCancelledModal(
-        "₹" +
-        formatNumber(
-          refundAmount
-        ) +
-        " refund already processed."
-      );
+            showToast(
+                error.message ||
+                "Unable to join match",
+                "error"
+            );
+
+        }
+        finally{
+
+            joining = false;
 
 
-      return;
+            $("confirmJoinBtn").disabled =
+                false;
 
-    }
+
+            $("confirmJoinBtn").innerText =
+                "✓ CONFIRM JOIN";
+
+        }
+
+    };
+
+
+/* =========================================================
+   PERFORM JOIN
+========================================================= */
+
+async function performJoin(){
+
+    if(!user)
+        throw new Error(
+            "Login Required"
+        );
 
 
     /*
-    IMPORTANT:
-
-    Read current user fresh.
+        FINAL BLOCK CHECK
     */
 
-    const freshUserSnap =
-      await get(
-        ref(
-          db,
-          "users/" +
-          user.uid
-        )
-      );
+    const blocked =
+        await isUserBlocked();
 
 
     if(
-      !freshUserSnap.exists()
-    ){
-
-      throw new Error(
-        "User account not found"
-      );
-
-    }
+        blocked
+    )
+        throw new Error(
+            "You are blocked from this match"
+        );
 
 
-    const freshUser =
-      freshUserSnap.val() || {};
+    const matchSnap =
+        await get(
+            ref(
+                db,
+                "matches/" +
+                matchId
+            )
+        );
 
 
-    const before =
-      getWalletBalance(
-        freshUser
-      );
+    if(
+        !matchSnap.exists()
+    )
+        throw new Error(
+            "Match not found"
+        );
 
 
-    const after =
-      before +
-      refundAmount;
+    const match =
+        matchSnap.val() || {};
 
 
-    const refundTransactionId =
-      "refund_" +
-      matchId +
-      "_" +
-      Date.now();
+    currentMatch =
+        match;
 
 
-    /*
-    Single multi-path update.
-
-    Refund marker + wallet + transaction
-    */
-
-    const refundUpdates = {};
-
-
-    refundUpdates[
-      "users/" +
-      user.uid +
-      "/wallet/balance"
-    ] =
-      after;
+    if(
+        isRegistrationClosed(
+            match
+        )
+    )
+        throw new Error(
+            "Registration Closed"
+        );
 
 
-    refundUpdates[
-      "users/" +
-      user.uid +
-      "/refunds/" +
-      matchId
-    ] = {
+    const entryFee =
+        number(
+            match.entry ??
+            match.entryFee ??
+            match.joinFee
+        );
 
-      amount:
-        refundAmount,
 
-      time:
-        Date.now(),
+    if(
+        entryFee <= 0
+    )
+        throw new Error(
+            "Invalid entry fee"
+        );
 
-      matchId:
-        matchId,
 
-      status:
-        "refunded"
+    const userSnap =
+        await get(
+            ref(
+                db,
+                "users/" +
+                user.uid
+            )
+        );
+
+
+    if(
+        !userSnap.exists()
+    )
+        throw new Error(
+            "User account not found"
+        );
+
+
+    const u =
+        userSnap.val() || {};
+
+
+    const walletBalance =
+        getWalletBalance(u);
+
+
+    if(
+        walletBalance < entryFee
+    )
+        throw new Error(
+            "Insufficient Wallet Balance"
+        );
+
+
+    const already =
+        await get(
+            ref(
+                db,
+                "matchPlayers/" +
+                matchId +
+                "/" +
+                user.uid
+            )
+        );
+
+
+    if(
+        already.exists()
+    )
+        throw new Error(
+            "Already Joined"
+        );
+
+
+    const playersSnap =
+        await get(
+            ref(
+                db,
+                "matchPlayers/" +
+                matchId
+            )
+        );
+
+
+    const playersData =
+        playersSnap.exists()
+            ? playersSnap.val() || {}
+            : {};
+
+
+    const booked =
+        Object.keys(
+            playersData
+        ).length;
+
+
+    const total =
+        number(
+            match.total ??
+            match.totalSlots ??
+            match.maxSlots ??
+            match.slots ??
+            25
+        );
+
+
+    if(
+        total > 0 &&
+        booked >= total
+    )
+        throw new Error(
+            "Match is full"
+        );
+
+
+    const teamName =
+        String(
+            selectedTeamName || ""
+        ).trim();
+
+
+    if(
+        !teamName
+    )
+        throw new Error(
+            "Team Name Required"
+        );
+
+
+    const playerData = {
+
+        uid:
+            user.uid,
+
+        name:
+            u.name ||
+            u.displayName ||
+            user.displayName ||
+            "Player",
+
+        bgmiId:
+            u.bgmiId ||
+            u.bgmiID ||
+            "-",
+
+        teamName:
+            teamName,
+
+        joinedAt:
+            Date.now()
 
     };
 
 
-    refundUpdates[
-      "users/" +
-      user.uid +
-      "/transactions/" +
-      refundTransactionId
-    ] = {
-
-      title:
-        "Match Cancelled Refund",
-
-      amount:
-        refundAmount,
-
-      type:
-        "credit",
-
-      time:
-        Date.now(),
-
-      matchId:
-        matchId,
-
-      matchTitle:
-        currentMatch.title ||
-        "BGMI Match",
-
-      balanceBefore:
-        before,
-
-      balanceAfter:
-        after
-
-    };
+    const newBalance =
+        walletBalance -
+        entryFee;
 
 
-    /*
-    Apply refund.
-    */
+    const transactionId =
+        "txn_" +
+        Date.now() +
+        "_" +
+        user.uid.slice(
+            0,
+            6
+        );
 
-    await update(
-      ref(db),
-      refundUpdates
-    );
+
+    const missionCount =
+        Math.min(
+            100,
+            number(
+                u.missionMatches
+            ) + 1
+        );
 
 
-    /*
-    Mark player as refunded.
-    */
+    const updates = {};
 
-    await update(
-      ref(
-        db,
+
+    updates[
         "matchPlayers/" +
         matchId +
         "/" +
         user.uid
-      ),
-      {
-        refunded:true
-      }
+    ] =
+        playerData;
+
+
+    updates[
+        "users/" +
+        user.uid +
+        "/wallet/balance"
+    ] =
+        newBalance;
+
+
+    updates[
+        "users/" +
+        user.uid +
+        "/transactions/" +
+        transactionId
+    ] = {
+
+        title:
+            "Match Entry Fee",
+
+        amount:
+            entryFee,
+
+        type:
+            "debit",
+
+        time:
+            Date.now(),
+
+        matchId:
+            matchId,
+
+        matchTitle:
+            match.title ||
+            "BGMI Match",
+
+        teamName:
+            teamName,
+
+        balanceBefore:
+            walletBalance,
+
+        balanceAfter:
+            newBalance
+
+    };
+
+
+    updates[
+        "users/" +
+        user.uid +
+        "/missionMatches"
+    ] =
+        missionCount;
+
+
+    await update(
+        ref(db),
+        updates
     );
 
 
     currentWallet =
-      after;
+        newBalance;
 
 
-    updateWalletUI();
-
-
-    cancellationHandled =
-      true;
-
-
-    showCancelledModal(
-      "₹" +
-      formatNumber(
-        refundAmount
-      ) +
-      " entry fee wallet me refund kar diya gaya hai."
-    );
+    $("confirmModal").style.display =
+        "none";
 
 
     showToast(
-      "₹" +
-      formatNumber(
-        refundAmount
-      ) +
-      " refund received",
-      "success"
-    );
-
-  }
-
-  catch(error){
-
-    console.error(
-      "Refund error:",
-      error
+        "✓ Match Joined Successfully!",
+        "success"
     );
 
 
-    showCancelledModal(
-      "Refund processing me error aaya. Please check wallet."
-    );
+    $("joinedTeamName").innerText =
+        teamName;
 
-  }
+
+    selectedTeamName =
+        teamName;
+
+
+    await checkAlreadyJoined();
+
+    loadPlayers();
 
 }
 
 
-/* =====================================================
-   CANCELLED MODAL
-===================================================== */
+/* =========================================================
+   JOINED VIEW
+========================================================= */
 
-function showCancelledModal(
-  message
-){
+function showJoinedView(){
 
-  $("refundText").innerText =
-    message;
+    $("normalMatchContent").style.display =
+        "none";
 
 
-  $("cancelledModal").style.display =
-    "flex";
+    $("joinedContent").style.display =
+        "block";
+
+
+    $("topRulesBtn").style.display =
+        "block";
+
+
+    loadJoinedRoom();
 
 }
 
 
-window.closeCancelledModal =
-  () => {
+/* =========================================================
+   ROOM
+========================================================= */
 
-    $("cancelledModal").style.display =
-      "none";
+async function loadJoinedRoom(){
 
-  };
+    if(
+        !user ||
+        !matchId
+    )
+        return;
 
 
-/* =====================================================
-   MODAL OUTSIDE CLICK
-===================================================== */
+    try{
 
-$("confirmModal")
-  .addEventListener(
-    "click",
-    e => {
+        const joined =
+            await getJoinedData();
 
-      if(
-        e.target ===
-        $("confirmModal")
-      ){
 
-        if(!joining){
+        if(
+            !joined
+        ){
 
-          closeConfirm();
+            $("roomLocked").style.display =
+                "block";
+
+            $("roomData").style.display =
+                "none";
+
+            return;
 
         }
 
-      }
+
+        const matchSnap =
+            await get(
+                ref(
+                    db,
+                    "matches/" +
+                    matchId
+                )
+            );
+
+
+        if(
+            !matchSnap.exists()
+        )
+            return;
+
+
+        const match =
+            matchSnap.val() || {};
+
+
+        const roomId =
+            match.roomId ||
+            match.roomID ||
+            match.room ||
+            match.gameRoomId ||
+            "";
+
+
+        const password =
+            match.roomPassword ||
+            match.password ||
+            match.roomPass ||
+            match.roomPasswordValue ||
+            "";
+
+
+        const groupLink =
+            match.groupLink ||
+            match.whatsappLink ||
+            match.whatsappGroup ||
+            match.whatsapp ||
+            "";
+
+
+        $("roomLocked").style.display =
+            "none";
+
+
+        $("roomData").style.display =
+            "block";
+
+
+        if(roomId){
+
+            $("roomIdBox").style.display =
+                "block";
+
+            $("roomId").innerText =
+                roomId;
+
+        }
+        else{
+
+            $("roomIdBox").style.display =
+                "none";
+
+        }
+
+
+        if(password){
+
+            $("roomPassBox").style.display =
+                "block";
+
+            $("roomPassword").innerText =
+                password;
+
+        }
+        else{
+
+            $("roomPassBox").style.display =
+                "none";
+
+        }
+
+
+        if(groupLink){
+
+            $("groupBox").style.display =
+                "block";
+
+            $("groupLink").href =
+                groupLink;
+
+        }
+        else{
+
+            $("groupBox").style.display =
+                "none";
+
+        }
 
     }
-  );
+    catch(error){
 
-
-$("closedModal")
-  .addEventListener(
-    "click",
-    e => {
-
-      if(
-        e.target ===
-        $("closedModal")
-      ){
-
-        closeRegistrationModal();
-
-      }
+        console.error(
+            "Room:",
+            error
+        );
 
     }
-  );
-
-
-$("cancelledModal")
-  .addEventListener(
-    "click",
-    e => {
-
-      if(
-        e.target ===
-        $("cancelledModal")
-      ){
-
-        closeCancelledModal();
-
-      }
-
-    }
-  );
-
-
-/* =====================================================
-   ESC
-===================================================== */
-
-document.addEventListener(
-  "keydown",
-  e => {
-
-    if(
-      e.key === "Escape" &&
-      !joining
-    ){
-
-      closeConfirm();
-
-      closeRegistrationModal();
-
-      closeCancelledModal();
-
-    }
-
-  }
-);
-
-
-/* =====================================================
-   TOAST
-===================================================== */
-
-function showToast(
-  message,
-  type=""
-){
-
-  const toast =
-    $("toast");
-
-
-  toast.innerText =
-    message;
-
-
-  toast.className =
-    "toast show " +
-    type;
-
-
-  clearTimeout(
-    window.toastTimer
-  );
-
-
-  window.toastTimer =
-    setTimeout(
-      () => {
-
-        toast.className =
-          "toast";
-
-      },
-      2600
-    );
 
 }
 
 
-/* =====================================================
-   CLEANUP
-===================================================== */
+/* =========================================================
+   PLAYERS
+========================================================= */
 
-window.addEventListener(
-  "beforeunload",
-  () => {
+function loadPlayers(){
 
-    if(walletUnsubscribe)
-      walletUnsubscribe();
-
-
-    if(matchUnsubscribe)
-      matchUnsubscribe();
+    if(!matchId)
+        return;
 
 
     if(playersUnsubscribe)
-      playersUnsubscribe();
+        playersUnsubscribe();
 
 
-    if(registrationTimer)
-      clearInterval(
-        registrationTimer
-      );
+    playersUnsubscribe =
+        onValue(
 
-  }
+            ref(
+                db,
+                "matchPlayers/" +
+                matchId
+            ),
+
+            snapshot => {
+
+                const box =
+                    $("playerList");
+
+
+                box.innerHTML =
+                    "";
+
+
+                if(
+                    !snapshot.exists()
+                ){
+
+                    box.innerHTML =
+                        '<div class="empty">No Teams Joined</div>';
+
+                    updateSlotCount();
+
+                    return;
+
+                }
+
+
+                let no = 1;
+
+
+                snapshot.forEach(
+                    item => {
+
+                        const p =
+                            item.val() || {};
+
+
+                        const team =
+                            p.teamName ||
+                            p.team ||
+                            "Team " +
+                            no;
+
+
+                        const div =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        div.className =
+                            "player";
+
+
+                        const left =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        const name =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        name.className =
+                            "playerName";
+
+
+                        name.innerText =
+                            no +
+                            ". " +
+                            team;
+
+
+                        left.appendChild(
+                            name
+                        );
+
+
+                        const badge =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        badge.className =
+                            "badge";
+
+
+                        badge.innerText =
+                            "REGISTERED";
+
+
+                        div.appendChild(
+                            left
+                        );
+
+
+                        div.appendChild(
+                            badge
+                        );
+
+
+                        box.appendChild(
+                            div
+                        );
+
+
+                        no++;
+
+                    }
+                );
+
+
+                updateSlotCount();
+
+            },
+
+            error => {
+
+                console.error(
+                    "Players:",
+                    error
+                );
+
+
+                $("playerList").innerHTML =
+                    '<div class="empty">Unable to load teams</div>';
+
+            }
+
+        );
+
+}
+
+
+/* =========================================================
+   RULES
+========================================================= */
+
+$("topRulesBtn").onclick =
+    async () => {
+
+        if(
+            !currentMatch
+        ){
+
+            showToast(
+                "Rules loading...",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        const rules =
+            currentMatch.rules ??
+            currentMatch.matchRules ??
+            currentMatch.rule ??
+            currentMatch.rulesText ??
+            currentMatch.description ??
+            "";
+
+
+        $("rulesContent").innerText =
+            String(
+                rules ||
+                "Is match ke rules admin ne abhi add nahi kiye hain."
+            );
+
+
+        $("rulesModal").style.display =
+            "flex";
+
+    };
+
+
+window.closeRules =
+    () => {
+
+        $("rulesModal").style.display =
+            "none";
+
+    };
+
+
+$("rulesModal").addEventListener(
+    "click",
+    event => {
+
+        if(
+            event.target ===
+            $("rulesModal")
+        )
+            closeRules();
+
+    }
 );
 
 
-/* =====================================================
-   GLOBAL
-===================================================== */
+/* =========================================================
+   CANCELLATION REFUND
+========================================================= */
 
-window.checkRoomAccess =
-  () => {
+async function processCancellationRefund(
+    match
+){
 
     if(
-      alreadyJoined
-    ){
+        !user ||
+        !matchId ||
+        !match
+    )
+        return;
 
-      setJoinedMode();
+
+    try{
+
+        const playerSnap =
+            await get(
+                ref(
+                    db,
+                    "matchPlayers/" +
+                    matchId +
+                    "/" +
+                    user.uid
+                )
+            );
+
+
+        if(
+            !playerSnap.exists()
+        )
+            return;
+
+
+        const entryFee =
+            number(
+                match.entry ??
+                match.entryFee ??
+                match.joinFee ??
+                0
+            );
+
+
+        if(
+            entryFee <= 0
+        )
+            return;
+
+
+        const refundRef =
+            ref(
+                db,
+                "matchRefunds/" +
+                matchId +
+                "/" +
+                user.uid
+            );
+
+
+        const refundSnap =
+            await get(
+                refundRef
+            );
+
+
+        if(
+            refundSnap.exists()
+        )
+            return;
+
+
+        const userRef =
+            ref(
+                db,
+                "users/" +
+                user.uid
+            );
+
+
+        const userSnap =
+            await get(
+                userRef
+            );
+
+
+        if(
+            !userSnap.exists()
+        )
+            return;
+
+
+        const userData =
+            userSnap.val() || {};
+
+
+        const oldBalance =
+            getWalletBalance(
+                userData
+            );
+
+
+        const claim =
+            await runTransaction(
+                refundRef,
+                current => {
+
+                    if(
+                        current !== null
+                    )
+                        return;
+
+
+                    return {
+
+                        status:
+                            "processing",
+
+                        amount:
+                            entryFee,
+
+                        uid:
+                            user.uid,
+
+                        matchId:
+                            matchId,
+
+                        createdAt:
+                            Date.now()
+
+                    };
+
+                }
+            );
+
+
+        if(
+            !claim.committed
+        )
+            return;
+
+
+        const newBalance =
+            oldBalance +
+            entryFee;
+
+
+        const refundTxnId =
+            "refund_" +
+            Date.now() +
+            "_" +
+            user.uid.slice(
+                0,
+                6
+            );
+
+
+        const updates = {};
+
+
+        updates[
+            "users/" +
+            user.uid +
+            "/wallet/balance"
+        ] =
+            newBalance;
+
+
+        updates[
+            "users/" +
+            user.uid +
+            "/transactions/" +
+            refundTxnId
+        ] = {
+
+            title:
+                "Match Cancellation Refund",
+
+            amount:
+                entryFee,
+
+            type:
+                "credit",
+
+            time:
+                Date.now(),
+
+            matchId:
+                matchId,
+
+            matchTitle:
+                match.title ||
+                "BGMI Match",
+
+            balanceBefore:
+                oldBalance,
+
+            balanceAfter:
+                newBalance
+
+        };
+
+
+        updates[
+            "matchRefunds/" +
+            matchId +
+            "/" +
+            user.uid
+        ] = {
+
+            status:
+                "refunded",
+
+            amount:
+                entryFee,
+
+            uid:
+                user.uid,
+
+            matchId:
+                matchId,
+
+            refundedAt:
+                Date.now(),
+
+            transactionId:
+                refundTxnId
+
+        };
+
+
+        await update(
+            ref(db),
+            updates
+        );
+
+
+        currentWallet =
+            newBalance;
+
+
+        updateWalletUI();
+
+
+        showToast(
+            "₹" +
+            formatNumber(entryFee) +
+            " refund wallet me aa gaya.",
+            "success"
+        );
+
+    }
+    catch(error){
+
+        console.error(
+            "Refund:",
+            error
+        );
 
     }
 
-  };
+}
 
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(
+    message,
+    type = ""
+){
+
+    const toast =
+        $("toast");
+
+
+    toast.innerText =
+        message;
+
+
+    toast.className =
+        "toast show " +
+        type;
+
+
+    clearTimeout(
+        window.toastTimer
+    );
+
+
+    window.toastTimer =
+        setTimeout(
+            () => {
+
+                toast.className =
+                    "toast";
+
+            },
+            2800
+        );
+
+}
+
+
+/* =========================================================
+   AUTO REGISTRATION CHECK
+========================================================= */
+
+setInterval(
+    async () => {
+
+        if(
+            !currentMatch ||
+            !user
+        )
+            return;
+
+
+        /*
+            Time-based registration close
+            har second check hoga.
+        */
+
+        if(
+            isRegistrationClosed(
+                currentMatch
+            )
+        ){
+
+            $("joinBtn").disabled =
+                true;
+
+            $("joinBtn").innerText =
+                "🔒 REGISTRATION CLOSED";
+
+            $("registrationClosed").style.display =
+                "block";
+
+            $("registrationClosed").innerText =
+                "🔒 Registration close ho chuka hai.";
+
+            $("addMoneyBtn").style.display =
+                "none";
+
+            return;
+
+        }
+
+
+        const blocked =
+            await isUserBlocked();
+
+
+        if(
+            blocked
+        ){
+
+            $("joinBtn").disabled =
+                true;
+
+            $("joinBtn").innerText =
+                "🚫 JOIN BLOCKED";
+
+            $("registrationClosed").style.display =
+                "block";
+
+            $("registrationClosed").innerText =
+                "🚫 Aap is match me join nahi kar sakte.";
+
+            $("addMoneyBtn").style.display =
+                "none";
+
+            return;
+
+        }
+
+
+        $("registrationClosed").style.display =
+            "none";
+
+
+        updateJoinButton();
+
+    },
+    1000
+);
+
+
+/* =========================================================
+   CLEANUP
+========================================================= */
+
+window.addEventListener(
+    "beforeunload",
+    () => {
+
+        if(walletUnsubscribe)
+            walletUnsubscribe();
+
+        if(matchUnsubscribe)
+            matchUnsubscribe();
+
+        if(playersUnsubscribe)
+            playersUnsubscribe();
+
+    }
+);
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+window.closeRules =
+    closeRules;
+
+window.closeConfirm =
+    closeConfirm;
+
+window.closeTeamModal =
+    closeTeamModal;
 
 </script>
 
 </body>
+
 </html>
