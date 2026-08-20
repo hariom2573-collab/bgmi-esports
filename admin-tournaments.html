@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -11,7 +10,7 @@ content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no
 
 <meta name="theme-color" content="#050B18">
 
-<title>BGMI Admin • Manage Tournaments</title>
+<title>Manage Tournaments</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -19,14 +18,16 @@ content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no
 href="https://fonts.gstatic.com"
 crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
 rel="stylesheet">
+
 
 <style>
 
-/* =====================================================
+/* =========================================================
    RESET
-===================================================== */
+========================================================= */
 
 *{
     margin:0;
@@ -36,175 +37,234 @@ rel="stylesheet">
     -webkit-tap-highlight-color:transparent;
 }
 
-html{
-    background:#050B18;
+html,
+body{
+    width:100%;
+    min-height:100%;
 }
 
 body{
-    background:
-    radial-gradient(circle at top right,#102a22 0%,transparent 35%),
-    radial-gradient(circle at bottom left,#111b35 0%,transparent 35%),
-    #050B18;
-
+    background:#050B18;
     color:#fff;
-    min-height:100vh;
+    overflow-x:hidden;
 }
 
 
-/* =====================================================
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+body::before{
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:-2;
+
+    pointer-events:none;
+
+    background:
+    radial-gradient(
+        circle at 0% 0%,
+        rgba(34,197,94,.16),
+        transparent 35%
+    ),
+
+    radial-gradient(
+        circle at 100% 0%,
+        rgba(37,99,235,.14),
+        transparent 35%
+    ),
+
+    radial-gradient(
+        circle at 50% 100%,
+        rgba(168,85,247,.08),
+        transparent 40%
+    ),
+
+    #050B18;
+}
+
+
+/* =========================================================
    APP
-===================================================== */
+========================================================= */
 
 .app{
     width:100%;
-    max-width:560px;
+    max-width:540px;
+
     margin:auto;
+
     padding:14px;
-    padding-bottom:40px;
+
+    padding-bottom:45px;
 }
 
 
-/* =====================================================
+/* =========================================================
    HEADER
-===================================================== */
+========================================================= */
 
 .header{
     position:relative;
 
-    padding:20px;
+    overflow:hidden;
 
-    border-radius:24px;
+    padding:18px;
+
+    margin-bottom:13px;
+
+    border-radius:22px;
 
     background:
     linear-gradient(
         145deg,
-        rgba(20,34,55,.98),
-        rgba(10,18,31,.98)
+        rgba(17,24,39,.98),
+        rgba(10,15,28,.98)
     );
 
     border:1px solid rgba(255,255,255,.08);
 
     box-shadow:
-    0 20px 50px rgba(0,0,0,.35);
-
-    overflow:hidden;
+    0 18px 45px rgba(0,0,0,.30);
 }
 
-.header::before{
+.header::after{
     content:"";
+
     position:absolute;
 
-    width:180px;
-    height:180px;
+    width:150px;
+    height:150px;
 
-    right:-80px;
-    top:-90px;
-
-    background:#22c55e;
-
-    opacity:.08;
+    right:-65px;
+    top:-75px;
 
     border-radius:50%;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(34,197,94,.22),
+        transparent 70%
+    );
+
+    pointer-events:none;
 }
 
 .headerTop{
     position:relative;
+    z-index:2;
 
     display:flex;
+
+    align-items:center;
+
     justify-content:space-between;
-    align-items:flex-start;
 
     gap:10px;
 }
 
-.headerTitle{
-    font-size:22px;
+.header h1{
+    color:#22c55e;
+
+    font-size:21px;
+
     font-weight:800;
-    letter-spacing:.2px;
 }
 
-.headerSub{
+.header p{
     margin-top:4px;
 
+    color:#64748b;
+
     font-size:11px;
-    color:#94a3b8;
 }
 
 .adminBadge{
-    display:flex;
-    align-items:center;
-    gap:6px;
+    flex-shrink:0;
 
     padding:7px 10px;
 
-    border-radius:20px;
-
-    background:rgba(34,197,94,.10);
-    border:1px solid rgba(34,197,94,.22);
+    border-radius:30px;
 
     color:#22c55e;
 
-    font-size:10px;
+    background:rgba(34,197,94,.09);
+
+    border:1px solid rgba(34,197,94,.22);
+
+    font-size:9px;
+
     font-weight:800;
-}
 
-.adminDot{
-    width:7px;
-    height:7px;
-
-    border-radius:50%;
-
-    background:#22c55e;
-
-    box-shadow:0 0 10px #22c55e;
+    letter-spacing:.8px;
 }
 
 
-/* =====================================================
-   HEADER ACTIONS
-===================================================== */
+/* =========================================================
+   TOP ACTIONS
+========================================================= */
 
-.headerActions{
-    display:flex;
+.topActions{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
     gap:9px;
 
-    margin-top:18px;
+    margin-bottom:13px;
 }
 
-.headerBtn{
-    flex:1;
-
-    height:42px;
+.actionBtn{
+    height:46px;
 
     border:none;
-    border-radius:12px;
+
+    border-radius:13px;
+
+    background:#111827;
+
+    border:1px solid rgba(255,255,255,.08);
 
     color:#fff;
 
-    background:#172235;
+    font-size:11px;
 
-    border:1px solid rgba(255,255,255,.07);
-
-    font-size:12px;
-    font-weight:700;
+    font-weight:800;
 
     cursor:pointer;
+
+    transition:.2s;
 }
 
-.headerBtn:active{
-    transform:scale(.98);
+.actionBtn:active{
+    transform:scale(.97);
 }
 
-.logoutBtn{
-    color:#f87171;
-    background:rgba(239,68,68,.08);
-    border-color:rgba(239,68,68,.15);
+.createBtn{
+    background:
+    linear-gradient(
+        135deg,
+        #22c55e,
+        #16a34a
+    );
+
+    color:#021008;
+
+    border-color:transparent;
+
+    box-shadow:
+    0 9px 22px rgba(34,197,94,.16);
 }
 
 
-/* =====================================================
+/* =========================================================
    STATS
-===================================================== */
+========================================================= */
 
 .stats{
     display:grid;
@@ -212,719 +272,553 @@ body{
     grid-template-columns:
     repeat(4,1fr);
 
-    gap:8px;
+    gap:7px;
 
-    margin-top:14px;
+    margin-bottom:13px;
 }
 
 .stat{
     min-width:0;
 
-    padding:13px 7px;
+    padding:11px 7px;
+
+    border-radius:14px;
 
     text-align:center;
 
-    border-radius:16px;
+    background:
+    linear-gradient(
+        145deg,
+        #111827,
+        #0c1422
+    );
 
-    background:#0d1728;
-
-    border:1px solid rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.07);
 }
 
-.statIcon{
-    font-size:17px;
-}
-
-.statNumber{
-    margin-top:5px;
+.stat strong{
+    display:block;
 
     font-size:18px;
+
     font-weight:800;
+
+    color:#fff;
 }
 
-.statLabel{
+.stat span{
+    display:block;
+
     margin-top:2px;
 
     color:#64748b;
 
     font-size:8px;
-    font-weight:700;
 
-    white-space:nowrap;
-}
-
-.green{
-    color:#22c55e;
-}
-
-.blue{
-    color:#38bdf8;
-}
-
-.orange{
-    color:#fb923c;
-}
-
-.purple{
-    color:#c084fc;
-}
-
-.red{
-    color:#ef4444;
-}
-
-
-/* =====================================================
-   SEARCH
-===================================================== */
-
-.tools{
-    margin-top:14px;
-
-    padding:13px;
-
-    border-radius:18px;
-
-    background:#0d1728;
-
-    border:1px solid rgba(255,255,255,.06);
-}
-
-.searchBox{
-    position:relative;
-}
-
-.searchBox input{
-    width:100%;
-    height:45px;
-
-    border:none;
-    outline:none;
-
-    border-radius:12px;
-
-    padding:0 14px 0 42px;
-
-    background:#111d30;
-
-    color:#fff;
-
-    border:1px solid rgba(255,255,255,.06);
-
-    font-size:13px;
-}
-
-.searchBox input::placeholder{
-    color:#64748b;
-}
-
-.searchIcon{
-    position:absolute;
-
-    left:14px;
-    top:12px;
-
-    font-size:17px;
-
-    color:#64748b;
-}
-
-.filters{
-    display:flex;
-
-    gap:7px;
-
-    margin-top:10px;
-
-    overflow-x:auto;
-
-    scrollbar-width:none;
-}
-
-.filters::-webkit-scrollbar{
-    display:none;
-}
-
-.filterBtn{
-    flex-shrink:0;
-
-    height:34px;
-
-    padding:0 13px;
-
-    border-radius:10px;
-
-    border:1px solid rgba(255,255,255,.06);
-
-    background:#111d30;
-
-    color:#94a3b8;
-
-    font-size:10px;
-    font-weight:700;
-}
-
-.filterBtn.active{
-    color:#03130a;
-
-    background:#22c55e;
-
-    border-color:#22c55e;
-}
-
-
-/* =====================================================
-   SECTION HEADER
-===================================================== */
-
-.sectionHead{
-    display:flex;
-
-    align-items:center;
-    justify-content:space-between;
-
-    margin:18px 2px 10px;
-}
-
-.sectionTitle{
-    font-size:14px;
-    font-weight:800;
-}
-
-.resultCount{
-    color:#64748b;
-    font-size:10px;
-}
-
-
-/* =====================================================
-   TOURNAMENT CARD
-===================================================== */
-
-.tournament{
-    position:relative;
-
-    margin-bottom:12px;
-
-    padding:16px;
-
-    border-radius:20px;
-
-    background:
-    linear-gradient(
-        145deg,
-        rgba(17,29,48,.98),
-        rgba(10,19,33,.98)
-    );
-
-    border:1px solid rgba(255,255,255,.07);
-
-    box-shadow:
-    0 12px 30px rgba(0,0,0,.20);
-
-    overflow:hidden;
-}
-
-.tournament.liveCard{
-    border-color:rgba(34,197,94,.25);
-}
-
-.tournament.liveCard::before{
-    content:"";
-
-    position:absolute;
-
-    top:0;
-    left:0;
-
-    width:100%;
-    height:2px;
-
-    background:#22c55e;
-
-    box-shadow:0 0 14px #22c55e;
-}
-
-
-/* =====================================================
-   CARD TOP
-===================================================== */
-
-.cardTop{
-    display:flex;
-
-    align-items:flex-start;
-    justify-content:space-between;
-
-    gap:10px;
-}
-
-.cardTitleWrap{
-    min-width:0;
-}
-
-.cardTitle{
-    font-size:17px;
-    font-weight:800;
-
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
-
-.cardId{
-    margin-top:3px;
-
-    color:#475569;
-
-    font-size:9px;
-
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
-
-.statusBadge{
-    flex-shrink:0;
-
-    padding:6px 9px;
-
-    border-radius:20px;
-
-    font-size:9px;
-    font-weight:800;
-}
-
-.status-upcoming{
-    color:#38bdf8;
-    background:rgba(56,189,248,.10);
-    border:1px solid rgba(56,189,248,.18);
-}
-
-.status-live{
-    color:#22c55e;
-    background:rgba(34,197,94,.10);
-    border:1px solid rgba(34,197,94,.20);
-}
-
-.status-completed{
-    color:#c084fc;
-    background:rgba(192,132,252,.10);
-    border:1px solid rgba(192,132,252,.18);
-}
-
-.status-closed{
-    color:#fb923c;
-    background:rgba(251,146,60,.10);
-    border:1px solid rgba(251,146,60,.18);
-}
-
-
-/* =====================================================
-   CARD INFO
-===================================================== */
-
-.infoGrid{
-    display:grid;
-
-    grid-template-columns:
-    repeat(2,1fr);
-
-    gap:8px;
-
-    margin-top:14px;
-}
-
-.info{
-    padding:10px;
-
-    border-radius:12px;
-
-    background:#0b1424;
-
-    border:1px solid rgba(255,255,255,.045);
-}
-
-.infoLabel{
-    color:#64748b;
-
-    font-size:8px;
     font-weight:700;
 
     text-transform:uppercase;
 }
 
-.infoValue{
-    margin-top:3px;
+.stat.upcoming strong{
+    color:#22c55e;
+}
 
-    color:#e2e8f0;
+.stat.live strong{
+    color:#f97316;
+}
+
+.stat.cancelled strong{
+    color:#ef4444;
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+.filterBox{
+    padding:12px;
+
+    margin-bottom:13px;
+
+    border-radius:17px;
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(17,24,39,.98),
+        rgba(12,18,31,.98)
+    );
+
+    border:1px solid rgba(255,255,255,.07);
+}
+
+.searchBox{
+    position:relative;
+
+    margin-bottom:10px;
+}
+
+.searchBox input{
+    width:100%;
+
+    height:46px;
+
+    border-radius:12px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    outline:none;
+
+    background:#0b1424;
+
+    color:#fff;
+
+    padding:0 13px 0 39px;
 
     font-size:12px;
-    font-weight:700;
+}
+
+.searchBox input:focus{
+    border-color:rgba(34,197,94,.45);
+
+    box-shadow:
+    0 0 0 3px rgba(34,197,94,.07);
+}
+
+.searchIcon{
+    position:absolute;
+
+    left:13px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:#64748b;
+
+    font-size:14px;
+}
+
+.filters{
+    display:grid;
+
+    grid-template-columns:
+    repeat(5,1fr);
+
+    gap:5px;
+}
+
+.filterBtn{
+    height:36px;
+
+    border-radius:10px;
+
+    border:1px solid rgba(255,255,255,.07);
+
+    background:#0b1424;
+
+    color:#64748b;
+
+    font-size:8px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.filterBtn.active{
+    color:#22c55e;
+
+    border-color:rgba(34,197,94,.40);
+
+    background:rgba(34,197,94,.10);
+}
+
+
+/* =========================================================
+   MATCH CARD
+========================================================= */
+
+.matchCard{
+    position:relative;
+
+    overflow:hidden;
+
+    margin-bottom:12px;
+
+    padding:14px;
+
+    border-radius:19px;
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(17,24,39,.99),
+        rgba(10,17,29,.99)
+    );
+
+    border:1px solid rgba(255,255,255,.075);
+
+    box-shadow:
+    0 12px 32px rgba(0,0,0,.22);
+}
+
+.matchCard.cancelled{
+    border-color:
+    rgba(239,68,68,.22);
+}
+
+.matchTop{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    gap:10px;
+
+    margin-bottom:11px;
+}
+
+.matchInfo{
+    min-width:0;
+}
+
+.matchTitle{
+    color:#fff;
+
+    font-size:14px;
+
+    font-weight:800;
+
+    line-height:1.35;
 
     word-break:break-word;
 }
 
-.infoValue.money{
+.matchId{
+    margin-top:3px;
+
+    color:#475569;
+
+    font-size:8px;
+
+    font-weight:600;
+
+    word-break:break-all;
+}
+
+.status{
+    flex-shrink:0;
+
+    padding:5px 8px;
+
+    border-radius:20px;
+
+    font-size:8px;
+
+    font-weight:800;
+
+    text-transform:uppercase;
+}
+
+.status.upcoming{
     color:#22c55e;
+
+    background:rgba(34,197,94,.10);
+
+    border:1px solid rgba(34,197,94,.20);
 }
 
-.infoValue.slots{
-    color:#38bdf8;
+.status.live{
+    color:#fb923c;
+
+    background:rgba(249,115,22,.10);
+
+    border:1px solid rgba(249,115,22,.20);
+}
+
+.status.completed{
+    color:#60a5fa;
+
+    background:rgba(59,130,246,.10);
+
+    border:1px solid rgba(59,130,246,.20);
+}
+
+.status.closed{
+    color:#94a3b8;
+
+    background:rgba(148,163,184,.08);
+
+    border:1px solid rgba(148,163,184,.15);
+}
+
+.status.cancelled{
+    color:#f87171;
+
+    background:rgba(239,68,68,.10);
+
+    border:1px solid rgba(239,68,68,.20);
 }
 
 
-/* =====================================================
-   DATE ROW
-===================================================== */
+/* =========================================================
+   MATCH META
+========================================================= */
 
-.dateRow{
-    display:flex;
+.matchMeta{
+    display:grid;
 
-    gap:8px;
+    grid-template-columns:
+    repeat(2,1fr);
 
-    margin-top:9px;
+    gap:6px;
+
+    margin-bottom:10px;
 }
 
-.dateItem{
-    flex:1;
-
-    display:flex;
-    align-items:center;
-
-    gap:7px;
-
-    min-width:0;
-
+.meta{
     padding:9px;
 
     border-radius:11px;
 
     background:#0b1424;
 
-    color:#94a3b8;
-
-    font-size:9px;
+    border:1px solid rgba(255,255,255,.055);
 }
 
-.dateItem b{
+.meta span{
+    display:block;
+
+    color:#475569;
+
+    font-size:8px;
+
+    font-weight:700;
+}
+
+.meta strong{
+    display:block;
+
+    margin-top:2px;
+
     color:#e2e8f0;
+
     font-size:10px;
-}
 
-
-/* =====================================================
-   PROGRESS
-===================================================== */
-
-.progressWrap{
-    margin-top:13px;
-}
-
-.progressHead{
-    display:flex;
-    justify-content:space-between;
-
-    color:#64748b;
-
-    font-size:9px;
-    font-weight:600;
-}
-
-.progressHead b{
-    color:#e2e8f0;
-}
-
-.progress{
-    width:100%;
-    height:6px;
-
-    margin-top:6px;
+    font-weight:800;
 
     overflow:hidden;
 
-    border-radius:20px;
+    text-overflow:ellipsis;
 
-    background:#172235;
-}
-
-.progressBar{
-    height:100%;
-
-    border-radius:20px;
-
-    background:#22c55e;
-
-    transition:width .4s ease;
+    white-space:nowrap;
 }
 
 
-/* =====================================================
-   LIVE BOX
-===================================================== */
+/* =========================================================
+   MAP TAGS
+========================================================= */
 
-.liveBox{
+.mapTags{
     display:flex;
 
-    align-items:center;
-    justify-content:space-between;
+    flex-wrap:wrap;
 
-    gap:8px;
+    gap:5px;
 
-    margin-top:12px;
-
-    padding:11px;
-
-    border-radius:12px;
-
-    background:rgba(34,197,94,.06);
-
-    border:1px solid rgba(34,197,94,.14);
+    margin-bottom:10px;
 }
 
-.liveInfo{
-    min-width:0;
-}
+.mapTag{
+    padding:5px 8px;
 
-.liveLabel{
-    color:#64748b;
+    border-radius:8px;
+
+    background:rgba(34,197,94,.07);
+
+    border:1px solid rgba(34,197,94,.13);
+
+    color:#86efac;
 
     font-size:8px;
+
     font-weight:700;
 }
 
-.liveTime{
+
+/* =========================================================
+   ROOM STATUS
+========================================================= */
+
+.roomInfo{
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:5px;
+
+    margin-bottom:10px;
+}
+
+.roomItem{
+    padding:8px 5px;
+
+    text-align:center;
+
+    border-radius:10px;
+
+    background:#07111f;
+
+    border:1px solid rgba(255,255,255,.055);
+}
+
+.roomItem span{
+    display:block;
+
+    color:#475569;
+
+    font-size:7px;
+
+    font-weight:700;
+}
+
+.roomItem strong{
+    display:block;
+
     margin-top:2px;
 
+    color:#94a3b8;
+
+    font-size:9px;
+
+    font-weight:800;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+}
+
+.roomItem.available strong{
     color:#22c55e;
-
-    font-size:11px;
-    font-weight:800;
-}
-
-.roomStatus{
-    flex-shrink:0;
-
-    color:#22c55e;
-
-    font-size:9px;
-    font-weight:800;
 }
 
 
-/* =====================================================
-   ROOM / GROUP
-===================================================== */
+/* =========================================================
+   ACTION BUTTONS
+========================================================= */
 
-.roomBox{
-    margin-top:12px;
-
-    padding:12px;
-
-    border-radius:13px;
-
-    background:#0b1424;
-
-    border:1px solid rgba(255,255,255,.05);
-}
-
-.roomLabel{
-    color:#64748b;
-
-    font-size:9px;
-    font-weight:700;
-}
-
-.roomRow{
-    display:flex;
-
-    gap:7px;
-
-    margin-top:7px;
-}
-
-.roomInput{
-    flex:1;
-
-    min-width:0;
-
-    height:40px;
-
-    border:none;
-    outline:none;
-
-    border-radius:10px;
-
-    padding:0 10px;
-
-    background:#111d30;
-
-    color:#e2e8f0;
-
-    font-size:10px;
-}
-
-.copyBtn{
-    flex-shrink:0;
-
-    width:72px;
-
-    height:40px;
-
-    border:none;
-
-    border-radius:10px;
-
-    background:#1f2937;
-
-    color:#fff;
-
-    font-size:10px;
-    font-weight:800;
-}
-
-
-/* =====================================================
-   EDIT AREA
-===================================================== */
-
-.editBox{
-    margin-top:12px;
-
-    padding:12px;
-
-    border-radius:14px;
-
-    background:#0b1424;
-
-    border:1px solid rgba(255,255,255,.05);
-}
-
-.editLabel{
-    color:#64748b;
-
-    font-size:9px;
-    font-weight:700;
-}
-
-.statusSelect{
-    width:100%;
-
-    height:42px;
-
-    margin-top:7px;
-
-    border:none;
-    outline:none;
-
-    border-radius:10px;
-
-    padding:0 10px;
-
-    background:#111d30;
-
-    color:#fff;
-
-    font-size:11px;
-    font-weight:700;
-}
-
-.editRoomInput{
-    width:100%;
-
-    height:42px;
-
-    margin-top:8px;
-
-    border:none;
-    outline:none;
-
-    border-radius:10px;
-
-    padding:0 11px;
-
-    background:#111d30;
-
-    color:#fff;
-
-    font-size:10px;
-}
-
-
-/* =====================================================
-   ACTIONS
-===================================================== */
-
-.actions{
+.cardActions{
     display:grid;
 
     grid-template-columns:
     1fr 1fr;
 
-    gap:8px;
-
-    margin-top:11px;
+    gap:7px;
 }
 
-.actionBtn{
-    height:42px;
-
-    border:none;
+.cardBtn{
+    height:40px;
 
     border-radius:11px;
 
-    font-size:10px;
+    border:1px solid rgba(255,255,255,.07);
+
+    background:#111827;
+
+    color:#cbd5e1;
+
+    font-size:9px;
+
     font-weight:800;
 
     cursor:pointer;
+
+    transition:.2s;
 }
 
-.saveBtn{
-    background:#22c55e;
-    color:#03130a;
+.cardBtn:active{
+    transform:scale(.97);
+}
+
+.manageBtn{
+    color:#22c55e;
+
+    border-color:rgba(34,197,94,.18);
+
+    background:rgba(34,197,94,.06);
+}
+
+.cancelBtn{
+    color:#f87171;
+
+    border-color:rgba(239,68,68,.18);
+
+    background:rgba(239,68,68,.06);
+}
+
+.restoreBtn{
+    color:#60a5fa;
+
+    border-color:rgba(59,130,246,.18);
+
+    background:rgba(59,130,246,.06);
 }
 
 .deleteBtn{
-    background:rgba(239,68,68,.10);
-
     color:#f87171;
 
-    border:1px solid rgba(239,68,68,.15);
-}
+    border-color:rgba(239,68,68,.15);
 
-.actionBtn:disabled{
-    opacity:.55;
-    cursor:not-allowed;
+    background:rgba(239,68,68,.05);
 }
 
 
-/* =====================================================
+/* =========================================================
    EMPTY
-===================================================== */
+========================================================= */
 
 .empty{
-    padding:45px 20px;
+    display:none;
+
+    padding:40px 20px;
 
     text-align:center;
 
-    border-radius:20px;
+    border-radius:18px;
 
-    background:#0d1728;
+    background:#0d1727;
 
-    border:1px solid rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.07);
+}
+
+.empty.show{
+    display:block;
 }
 
 .emptyIcon{
-    font-size:35px;
+    font-size:34px;
+
+    margin-bottom:8px;
 }
 
-.emptyTitle{
-    margin-top:10px;
+.empty strong{
+    display:block;
 
-    font-size:15px;
-    font-weight:800;
+    font-size:14px;
 }
 
-.emptyText{
+.empty span{
+    display:block;
+
     margin-top:4px;
 
     color:#64748b;
@@ -933,88 +827,484 @@ body{
 }
 
 
-/* =====================================================
-   LOADER
-===================================================== */
+/* =========================================================
+   MODAL
+========================================================= */
 
-.loader{
-    padding:45px 20px;
+.modal{
+    position:fixed;
 
+    inset:0;
+
+    z-index:10000;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:14px;
+
+    background:rgba(0,0,0,.72);
+
+    backdrop-filter:blur(8px);
+
+    -webkit-backdrop-filter:blur(8px);
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modalBox{
+    width:100%;
+
+    max-width:500px;
+
+    max-height:
+    calc(100vh - 28px);
+
+    overflow-y:auto;
+
+    border-radius:22px;
+
+    padding:18px;
+
+    background:
+    linear-gradient(
+        145deg,
+        #111827,
+        #0a111e
+    );
+
+    border:1px solid rgba(255,255,255,.09);
+
+    box-shadow:
+    0 25px 70px rgba(0,0,0,.55);
+
+    animation:
+    modalIn .22s ease;
+}
+
+@keyframes modalIn{
+
+    from{
+        opacity:0;
+        transform:scale(.96);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+
+}
+
+.modalHeader{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:15px;
+}
+
+.modalHeader h2{
+    color:#22c55e;
+
+    font-size:17px;
+
+    font-weight:800;
+}
+
+.closeBtn{
+    width:35px;
+    height:35px;
+
+    border-radius:10px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    background:#0b1424;
+
+    color:#94a3b8;
+
+    font-size:17px;
+
+    cursor:pointer;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.formGroup{
+    margin-bottom:12px;
+}
+
+.formGroup label{
+    display:block;
+
+    margin-bottom:6px;
+
+    color:#94a3b8;
+
+    font-size:10px;
+
+    font-weight:700;
+}
+
+.formGroup input,
+.formGroup textarea,
+.formGroup select{
+    width:100%;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    outline:none;
+
+    border-radius:12px;
+
+    background:#0b1424;
+
+    color:#fff;
+
+    font-size:12px;
+}
+
+.formGroup input,
+.formGroup select{
+    height:46px;
+
+    padding:0 12px;
+}
+
+.formGroup textarea{
+    min-height:105px;
+
+    resize:vertical;
+
+    padding:11px 12px;
+
+    line-height:1.6;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus,
+.formGroup select:focus{
+    border-color:rgba(34,197,94,.45);
+
+    box-shadow:
+    0 0 0 3px rgba(34,197,94,.06);
+}
+
+.formHint{
+    margin-top:5px;
+
+    color:#475569;
+
+    font-size:8px;
+
+    line-height:1.5;
+}
+
+
+/* =========================================================
+   ROOM PANEL
+========================================================= */
+
+.roomPanel{
+    padding:13px;
+
+    margin-bottom:14px;
+
+    border-radius:15px;
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(34,197,94,.07),
+        rgba(37,99,235,.04)
+    );
+
+    border:1px solid rgba(34,197,94,.13);
+}
+
+.roomPanelTitle{
+    margin-bottom:10px;
+
+    color:#86efac;
+
+    font-size:11px;
+
+    font-weight:800;
+}
+
+
+/* =========================================================
+   SAVE
+========================================================= */
+
+.modalActions{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:8px;
+
+    margin-top:15px;
+}
+
+.modalBtn{
+    height:47px;
+
+    border-radius:12px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    background:#111827;
+
+    color:#cbd5e1;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    cursor:pointer;
+}
+
+.modalSave{
+    background:
+    linear-gradient(
+        135deg,
+        #22c55e,
+        #16a34a
+    );
+
+    color:#021008;
+
+    border:none;
+}
+
+
+/* =========================================================
+   CONFIRM MODAL
+========================================================= */
+
+.confirmBox{
     text-align:center;
+}
 
-    border-radius:20px;
+.confirmIcon{
+    width:60px;
+    height:60px;
 
-    background:#0d1728;
+    display:flex;
 
+    align-items:center;
+
+    justify-content:center;
+
+    margin:0 auto 12px;
+
+    border-radius:18px;
+
+    background:rgba(239,68,68,.09);
+
+    border:1px solid rgba(239,68,68,.18);
+
+    font-size:28px;
+}
+
+.confirmBox h3{
+    font-size:16px;
+
+    font-weight:800;
+}
+
+.confirmBox p{
+    margin-top:7px;
+
+    color:#64748b;
+
+    font-size:10px;
+
+    line-height:1.6;
+}
+
+.confirmActions{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:8px;
+
+    margin-top:16px;
+}
+
+.confirmCancel{
+    height:44px;
+
+    border-radius:11px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    background:#111827;
+
+    color:#cbd5e1;
+
+    font-size:10px;
+
+    font-weight:800;
+}
+
+.confirmDanger{
+    height:44px;
+
+    border-radius:11px;
+
+    border:none;
+
+    background:#dc2626;
+
+    color:#fff;
+
+    font-size:10px;
+
+    font-weight:800;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loadingOverlay{
+    position:fixed;
+
+    inset:0;
+
+    z-index:20000;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:11px;
+
+    background:#050B18;
+
+    transition:.3s;
+}
+
+.loadingOverlay.hide{
+    opacity:0;
+
+    pointer-events:none;
+}
+
+.loadingIcon{
+    width:60px;
+    height:60px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:19px;
+
+    background:#111827;
+
+    border:1px solid rgba(34,197,94,.20);
+
+    font-size:28px;
+}
+
+.loadingText{
     color:#94a3b8;
 
     font-size:11px;
 }
 
 .spinner{
-    width:28px;
-    height:28px;
+    width:25px;
+    height:25px;
 
-    margin:0 auto 12px;
+    border-radius:50%;
 
     border:3px solid #1e293b;
 
     border-top-color:#22c55e;
 
-    border-radius:50%;
-
-    animation:spin .8s linear infinite;
+    animation:
+    spin .8s linear infinite;
 }
 
 @keyframes spin{
+
     to{
         transform:rotate(360deg);
     }
+
 }
 
 
-/* =====================================================
+/* =========================================================
    TOAST
-===================================================== */
+========================================================= */
 
 .toast{
     position:fixed;
 
+    z-index:30000;
+
     left:50%;
-    bottom:22px;
 
-    z-index:9999;
+    bottom:20px;
 
-    transform:
-    translate(-50%,20px);
+    width:
+    calc(100% - 28px);
 
-    width:calc(100% - 30px);
-    max-width:430px;
+    max-width:500px;
 
-    padding:13px 16px;
+    padding:12px 14px;
 
     border-radius:13px;
 
     background:#111827;
 
-    border:1px solid rgba(34,197,94,.25);
+    border:1px solid rgba(255,255,255,.10);
 
     color:#fff;
 
     text-align:center;
 
     font-size:11px;
-    font-weight:700;
 
-    box-shadow:
-    0 15px 40px rgba(0,0,0,.45);
+    font-weight:700;
 
     opacity:0;
 
     pointer-events:none;
 
-    transition:
-    .25s ease;
+    transform:
+    translate(-50%,100px);
+
+    transition:.3s;
+
+    box-shadow:
+    0 15px 40px rgba(0,0,0,.4);
 }
 
 .toast.show{
@@ -1024,39 +1314,57 @@ body{
     translate(-50%,0);
 }
 
+.toast.success{
+    border-color:
+    rgba(34,197,94,.35);
+}
+
 .toast.error{
-    border-color:rgba(239,68,68,.30);
+    border-color:
+    rgba(239,68,68,.35);
 }
 
 
-/* =====================================================
-   DESKTOP BLOCK
-===================================================== */
+/* =========================================================
+   SMALL SCREEN
+========================================================= */
 
-@media(min-width:700px){
-
-    body::before{
-        content:"Mobile Admin Panel";
-        position:fixed;
-
-        inset:0;
-
-        display:flex;
-        align-items:center;
-        justify-content:center;
-
-        background:#050B18;
-
-        color:#22c55e;
-
-        font-size:20px;
-        font-weight:800;
-
-        z-index:100000;
-    }
+@media(max-width:380px){
 
     .app{
-        display:none;
+        padding:10px;
+    }
+
+    .header{
+        padding:15px;
+    }
+
+    .header h1{
+        font-size:18px;
+    }
+
+    .stats{
+        gap:5px;
+    }
+
+    .stat{
+        padding:9px 4px;
+    }
+
+    .stat strong{
+        font-size:16px;
+    }
+
+    .filters{
+        gap:4px;
+    }
+
+    .filterBtn{
+        font-size:7px;
+    }
+
+    .matchCard{
+        padding:12px;
     }
 
 }
@@ -1065,12 +1373,37 @@ body{
 
 </head>
 
+
 <body>
+
+
+<!-- ======================================================
+     LOADING
+======================================================= -->
+
+<div
+id="loadingOverlay"
+class="loadingOverlay">
+
+    <div class="loadingIcon">
+        🎮
+    </div>
+
+    <div class="loadingText">
+        Verifying Admin...
+    </div>
+
+    <div class="spinner"></div>
+
+</div>
+
 
 <div class="app">
 
 
-<!-- HEADER -->
+<!-- ======================================================
+     HEADER
+======================================================= -->
 
 <div class="header">
 
@@ -1078,147 +1411,115 @@ body{
 
         <div>
 
-            <div class="headerTitle">
-                🏆 Manage Tournaments
-            </div>
+            <h1>
+                🎮 Manage Tournaments
+            </h1>
 
-            <div class="headerSub">
-                BGMI Tournament Control Center
-            </div>
+            <p>
+                Manage matches, room details & rules
+            </p>
 
         </div>
 
         <div class="adminBadge">
-
-            <span class="adminDot"></span>
-
             ADMIN
-
         </div>
-
-    </div>
-
-
-    <div class="headerActions">
-
-        <button
-        class="headerBtn"
-        onclick="location.href='admin-create-tournament.html'">
-
-            ➕ Create Match
-
-        </button>
-
-
-        <button
-        class="headerBtn"
-        id="refreshBtn"
-        type="button">
-
-            🔄 Refresh
-
-        </button>
-
-
-        <button
-        class="headerBtn logoutBtn"
-        id="logoutBtn"
-        type="button">
-
-            🚪 Logout
-
-        </button>
 
     </div>
 
 </div>
 
 
-<!-- STATS -->
+<!-- ======================================================
+     ACTIONS
+======================================================= -->
+
+<div class="topActions">
+
+    <button
+    class="actionBtn createBtn"
+    id="createBtn">
+
+        ➕ CREATE MATCH
+
+    </button>
+
+    <button
+    class="actionBtn"
+    id="refreshBtn">
+
+        🔄 REFRESH
+
+    </button>
+
+</div>
+
+
+<!-- ======================================================
+     STATS
+======================================================= -->
 
 <div class="stats">
 
     <div class="stat">
 
-        <div class="statIcon">
-            🏆
-        </div>
-
-        <div
-        id="totalCount"
-        class="statNumber green">
+        <strong id="totalCount">
             0
-        </div>
+        </strong>
 
-        <div class="statLabel">
-            TOTAL
-        </div>
+        <span>
+            Total
+        </span>
 
     </div>
 
 
-    <div class="stat">
+    <div class="stat upcoming">
 
-        <div class="statIcon">
-            ⏳
-        </div>
-
-        <div
-        id="upcomingCount"
-        class="statNumber blue">
+        <strong id="upcomingCount">
             0
-        </div>
+        </strong>
 
-        <div class="statLabel">
-            UPCOMING
-        </div>
+        <span>
+            Upcoming
+        </span>
 
     </div>
 
 
-    <div class="stat">
+    <div class="stat live">
 
-        <div class="statIcon">
-            🔥
-        </div>
-
-        <div
-        id="liveCount"
-        class="statNumber green">
+        <strong id="liveCount">
             0
-        </div>
+        </strong>
 
-        <div class="statLabel">
-            LIVE
-        </div>
+        <span>
+            Live
+        </span>
 
     </div>
 
 
-    <div class="stat">
+    <div class="stat cancelled">
 
-        <div class="statIcon">
-            ✅
-        </div>
-
-        <div
-        id="completedCount"
-        class="statNumber purple">
+        <strong id="cancelledCount">
             0
-        </div>
+        </strong>
 
-        <div class="statLabel">
-            DONE
-        </div>
+        <span>
+            Cancelled
+        </span>
 
     </div>
 
 </div>
 
 
-<!-- SEARCH / FILTER -->
+<!-- ======================================================
+     FILTER
+======================================================= -->
 
-<div class="tools">
+<div class="filterBox">
 
     <div class="searchBox">
 
@@ -1229,8 +1530,7 @@ body{
         <input
         id="searchInput"
         type="search"
-        autocomplete="off"
-        placeholder="Search tournament...">
+        placeholder="Search tournament, ID, mode...">
 
     </div>
 
@@ -1245,7 +1545,6 @@ body{
 
         </button>
 
-
         <button
         class="filterBtn"
         data-filter="upcoming">
@@ -1253,7 +1552,6 @@ body{
             UPCOMING
 
         </button>
-
 
         <button
         class="filterBtn"
@@ -1263,21 +1561,19 @@ body{
 
         </button>
 
-
         <button
         class="filterBtn"
         data-filter="completed">
 
-            COMPLETED
+            DONE
 
         </button>
-
 
         <button
         class="filterBtn"
-        data-filter="closed">
+        data-filter="cancelled">
 
-            CLOSED
+            CANCELLED
 
         </button>
 
@@ -1286,52 +1582,340 @@ body{
 </div>
 
 
-<!-- LIST -->
+<!-- ======================================================
+     MATCH LIST
+======================================================= -->
 
-<div class="sectionHead">
+<div id="matchList"></div>
 
-    <div class="sectionTitle">
-        Tournament List
+
+<div
+id="empty"
+class="empty">
+
+    <div class="emptyIcon">
+        🏆
     </div>
 
-    <div
-    id="resultCount"
-    class="resultCount">
+    <strong>
+        No tournaments found
+    </strong>
 
-        0 matches
+    <span>
+        Create a tournament or change the filter.
+    </span>
+
+</div>
+
+
+</div>
+
+
+<!-- ======================================================
+     MANAGE MODAL
+======================================================= -->
+
+<div
+id="manageModal"
+class="modal">
+
+    <div class="modalBox">
+
+        <div class="modalHeader">
+
+            <h2>
+                ⚙️ Manage Match
+            </h2>
+
+            <button
+            class="closeBtn"
+            id="closeManage">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <div
+        id="manageMatchName"
+        style="
+        color:#64748b;
+        font-size:10px;
+        margin-bottom:14px;
+        ">
+            Tournament
+        </div>
+
+
+        <!-- ROOM -->
+
+        <div class="roomPanel">
+
+            <div class="roomPanelTitle">
+                🔐 ROOM DETAILS
+            </div>
+
+
+            <div class="formGroup">
+
+                <label>
+                    Room ID
+                </label>
+
+                <input
+                id="roomId"
+                type="text"
+                placeholder="Example: 12345678">
+
+            </div>
+
+
+            <div class="formGroup">
+
+                <label>
+                    Room Password
+                </label>
+
+                <input
+                id="roomPassword"
+                type="text"
+                placeholder="Example: 9876">
+
+            </div>
+
+
+            <div class="formGroup">
+
+                <label>
+                    Room Link
+                </label>
+
+                <input
+                id="roomLink"
+                type="url"
+                placeholder="https://...">
+
+                <div class="formHint">
+                    Optional. Add BGMI room/join link if available.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RULES -->
+
+        <div class="formGroup">
+
+            <label>
+                📜 MATCH RULES / INSTRUCTIONS
+            </label>
+
+            <textarea
+            id="rules"
+            placeholder="Enter match rules here...
+
+Example:
+1. Room will open 10 minutes before match.
+2. Only registered players can join.
+3. No emulator.
+4. Finish screenshot must be submitted."></textarea>
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <div class="formGroup">
+
+            <label>
+                📌 MATCH STATUS
+            </label>
+
+            <select id="manageStatus">
+
+                <option value="upcoming">
+                    🟢 Upcoming
+                </option>
+
+                <option value="live">
+                    🔥 Live
+                </option>
+
+                <option value="completed">
+                    ✅ Completed
+                </option>
+
+                <option value="closed">
+                    🔒 Closed
+                </option>
+
+                <option value="cancelled">
+                    ❌ Cancelled
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- ACTION -->
+
+        <div class="modalActions">
+
+            <button
+            class="modalBtn"
+            id="cancelManage">
+
+                CANCEL
+
+            </button>
+
+            <button
+            class="modalBtn modalSave"
+            id="saveManage">
+
+                💾 SAVE DETAILS
+
+            </button>
+
+        </div>
 
     </div>
 
 </div>
 
 
-<div id="tournamentList">
+<!-- ======================================================
+     CANCEL CONFIRM
+======================================================= -->
 
-    <div class="loader">
+<div
+id="confirmModal"
+class="modal">
 
-        <div class="spinner"></div>
+    <div class="modalBox">
 
-        Loading tournaments...
+        <div class="confirmBox">
+
+            <div class="confirmIcon">
+                ⚠️
+            </div>
+
+            <h3 id="confirmTitle">
+                Cancel Match?
+            </h3>
+
+            <p id="confirmText">
+                This tournament will be marked as cancelled.
+            </p>
+
+
+            <div class="confirmActions">
+
+                <button
+                class="confirmCancel"
+                id="confirmNo">
+
+                    NO
+
+                </button>
+
+                <button
+                class="confirmDanger"
+                id="confirmYes">
+
+                    YES, CANCEL
+
+                </button>
+
+            </div>
+
+        </div>
 
     </div>
 
 </div>
 
+
+<!-- ======================================================
+     DELETE CONFIRM
+======================================================= -->
+
+<div
+id="deleteModal"
+class="modal">
+
+    <div class="modalBox">
+
+        <div class="confirmBox">
+
+            <div class="confirmIcon">
+                🗑️
+            </div>
+
+            <h3>
+                Delete Match?
+            </h3>
+
+            <p>
+                This will permanently delete this tournament
+                from Firebase. This action cannot be undone.
+            </p>
+
+
+            <div class="confirmActions">
+
+                <button
+                class="confirmCancel"
+                id="deleteNo">
+
+                    NO
+
+                </button>
+
+                <button
+                class="confirmDanger"
+                id="deleteYes">
+
+                    DELETE
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
 
-<!-- TOAST -->
+
+<!-- ======================================================
+     TOAST
+======================================================= -->
 
 <div
 id="toast"
 class="toast">
 
+    Message
+
 </div>
+
+
+<!-- ======================================================
+     JAVASCRIPT
+======================================================= -->
 
 <script type="module">
 
-/* =====================================================
-   FIREBASE IMPORTS
-===================================================== */
+/* =========================================================
+   FIREBASE
+========================================================= */
 
 import {
     initializeApp
@@ -1353,16 +1937,15 @@ from
 
 import {
     getAuth,
-    onAuthStateChanged,
-    signOut
+    onAuthStateChanged
 }
 from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 
-/* =====================================================
-   FIREBASE CONFIG
-===================================================== */
+/* =========================================================
+   CONFIG
+========================================================= */
 
 const firebaseConfig = {
 
@@ -1390,392 +1973,218 @@ const firebaseConfig = {
 };
 
 
-/* =====================================================
-   INITIALIZE
-===================================================== */
-
 const app =
 initializeApp(firebaseConfig);
 
+
 const db =
 getDatabase(app);
+
 
 const auth =
 getAuth(app);
 
 
-/* =====================================================
+/* =========================================================
    ADMIN
-===================================================== */
+========================================================= */
 
 const ADMIN_UID =
 "VIAP56vYwndWPhJxktn0lRPTWnS2";
 
 
-/* =====================================================
-   DOM
-===================================================== */
-
-const list =
-document.getElementById(
-    "tournamentList"
-);
-
-const searchInput =
-document.getElementById(
-    "searchInput"
-);
-
-const resultCount =
-document.getElementById(
-    "resultCount"
-);
-
-const toast =
-document.getElementById(
-    "toast"
-);
+let adminVerified =
+false;
 
 
-/* =====================================================
-   STATE
-===================================================== */
-
-let allTournaments = [];
-
-let currentFilter = "all";
-
-let databaseListener = null;
-
-const processing =
-new Set();
+let matches = {};
 
 
-/* =====================================================
-   AUTH
-===================================================== */
-
-onAuthStateChanged(
-    auth,
-    (user) => {
-
-        if(!user){
-
-            location.replace(
-                "index.html"
-            );
-
-            return;
-        }
+let currentFilter =
+"all";
 
 
-        if(user.uid !== ADMIN_UID){
-
-            showToast(
-                "Access Denied",
-                true
-            );
-
-            setTimeout(
-                () => {
-
-                    location.replace(
-                        "index.html"
-                    );
-
-                },
-                800
-            );
-
-            return;
-        }
+let currentManageId =
+null;
 
 
-        loadTournaments();
-
-    }
-);
+let pendingCancelId =
+null;
 
 
-/* =====================================================
-   LOAD
-===================================================== */
+let pendingDeleteId =
+null;
 
-function loadTournaments(){
 
-    if(databaseListener){
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const $ =
+id => document.getElementById(id);
+
+
+const loading =
+$("loadingOverlay");
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+function hideLoading(){
+
+    if(!loading){
         return;
     }
 
+    loading.classList.add("hide");
 
-    databaseListener =
-    onValue(
+    setTimeout(()=>{
 
-        ref(db,"matches"),
+        loading.style.display =
+        "none";
 
-        (snapshot) => {
+    },350);
 
-            allTournaments = [];
-
-
-            if(snapshot.exists()){
-
-                snapshot.forEach(
-                    (item) => {
-
-                        allTournaments.push({
-
-                            id:item.key,
-
-                            ...(item.val() || {})
-
-                        });
-
-                    }
-                );
-
-            }
+}
 
 
-            allTournaments.sort(
-                (a,b) => {
+/* =========================================================
+   TOAST
+========================================================= */
 
-                    const ta =
-                    Number(
-                        a.createdAt ||
-                        a.timestamp ||
-                        0
-                    );
+function showToast(
+    message,
+    type="success"
+){
 
-                    const tb =
-                    Number(
-                        b.createdAt ||
-                        b.timestamp ||
-                        0
-                    );
+    const toast =
+    $("toast");
 
-                    return tb - ta;
+    toast.innerText =
+    message;
 
-                }
+    toast.className =
+    "toast show " +
+    type;
+
+    clearTimeout(
+        window.toastTimer
+    );
+
+    window.toastTimer =
+    setTimeout(()=>{
+
+        toast.className =
+        "toast";
+
+    },2800);
+
+}
+
+
+/* =========================================================
+   AUTH CHECK
+========================================================= */
+
+onAuthStateChanged(
+    auth,
+    user => {
+
+        if(!user){
+
+            hideLoading();
+
+            showToast(
+                "Admin login required",
+                "error"
             );
 
+            setTimeout(()=>{
 
-            updateStats();
+                location.replace(
+                    "admin.html"
+                );
 
-            render();
+            },700);
+
+            return;
+        }
+
+
+        if(
+            user.uid !==
+            ADMIN_UID
+        ){
+
+            hideLoading();
+
+            showToast(
+                "Access Denied",
+                "error"
+            );
+
+            setTimeout(()=>{
+
+                location.replace(
+                    "dashboard.html"
+                );
+
+            },700);
+
+            return;
+        }
+
+
+        adminVerified =
+        true;
+
+        loadMatches();
+
+    }
+);
+
+
+/* =========================================================
+   LOAD MATCHES
+========================================================= */
+
+function loadMatches(){
+
+    const matchesRef =
+    ref(
+        db,
+        "matches"
+    );
+
+
+    onValue(
+        matchesRef,
+        snapshot => {
+
+            matches =
+            snapshot.val() || {};
+
+            renderStats();
+
+            renderMatches();
+
+            hideLoading();
 
         },
 
-        (error) => {
+        error => {
 
             console.error(
                 error
             );
 
-            list.innerHTML = `
-
-                <div class="empty">
-
-                    <div class="emptyIcon">
-                        ⚠️
-                    </div>
-
-                    <div class="emptyTitle">
-                        Firebase Error
-                    </div>
-
-                    <div class="emptyText">
-                        ${escapeHTML(error.message)}
-                    </div>
-
-                </div>
-
-            `;
+            hideLoading();
 
             showToast(
-                "Firebase load failed",
-                true
-            );
-
-        }
-
-    );
-
-}
-
-
-/* =====================================================
-   STATS
-===================================================== */
-
-function updateStats(){
-
-    let total = 0;
-    let upcoming = 0;
-    let live = 0;
-    let completed = 0;
-
-
-    allTournaments.forEach(
-        (item) => {
-
-            total++;
-
-            const status =
-            normalizeStatus(
-                item.status
-            );
-
-
-            if(status === "upcoming"){
-                upcoming++;
-            }
-
-            else if(status === "live"){
-                live++;
-            }
-
-            else if(
-                status === "completed"
-            ){
-
-                completed++;
-
-            }
-
-        }
-    );
-
-
-    setText(
-        "totalCount",
-        total
-    );
-
-    setText(
-        "upcomingCount",
-        upcoming
-    );
-
-    setText(
-        "liveCount",
-        live
-    );
-
-    setText(
-        "completedCount",
-        completed
-    );
-
-}
-
-
-/* =====================================================
-   RENDER
-===================================================== */
-
-function render(){
-
-    const query =
-    String(
-        searchInput.value || ""
-    )
-    .trim()
-    .toLowerCase();
-
-
-    const filtered =
-    allTournaments.filter(
-        (item) => {
-
-            const status =
-            normalizeStatus(
-                item.status
-            );
-
-
-            const title =
-            String(
-                item.title ||
-                item.name ||
-                item.matchName ||
-                ""
-            ).toLowerCase();
-
-
-            const type =
-            String(
-                item.type || ""
-            ).toLowerCase();
-
-
-            const matchesSearch =
-            !query ||
-            title.includes(query) ||
-            type.includes(query) ||
-            String(item.id)
-            .toLowerCase()
-            .includes(query);
-
-
-            const matchesFilter =
-            currentFilter === "all" ||
-            status === currentFilter;
-
-
-            return (
-                matchesSearch &&
-                matchesFilter
-            );
-
-        }
-    );
-
-
-    resultCount.innerText =
-    filtered.length +
-    (
-        filtered.length === 1
-        ? " match"
-        : " matches"
-    );
-
-
-    if(filtered.length === 0){
-
-        list.innerHTML = `
-
-            <div class="empty">
-
-                <div class="emptyIcon">
-                    🔍
-                </div>
-
-                <div class="emptyTitle">
-                    No Tournament Found
-                </div>
-
-                <div class="emptyText">
-                    Try another search or filter.
-                </div>
-
-            </div>
-
-        `;
-
-        return;
-    }
-
-
-    list.innerHTML = "";
-
-
-    filtered.forEach(
-        (item) => {
-
-            list.insertAdjacentHTML(
-                "beforeend",
-                createTournamentHTML(item)
+                "Failed to load tournaments",
+                "error"
             );
 
         }
@@ -1784,1168 +2193,191 @@ function render(){
 }
 
 
-/* =====================================================
-   CREATE CARD HTML
-===================================================== */
+/* =========================================================
+   NORMALIZE STATUS
+========================================================= */
 
-function createTournamentHTML(item){
+function normalizeStatus(match){
 
-    const id =
-    escapeAttr(item.id);
+    return String(
+        match?.status ||
+        "upcoming"
+    ).toLowerCase();
 
-
-    const title =
-    item.title ||
-    item.name ||
-    item.matchName ||
-    "BGMI Tournament";
+}
 
 
-    const type =
-    String(
-        item.type || "squad"
-    ).toUpperCase();
+/* =========================================================
+   GET MAPS
+========================================================= */
 
-
-    const status =
-    normalizeStatus(
-        item.status
-    );
-
-
-    const entry =
-    Number(
-        item.entry ||
-        item.entryFee ||
-        0
-    );
-
-
-    const total =
-    Number(
-        item.total ||
-        item.totalSlots ||
-        item.maxSlots ||
-        0
-    );
-
-
-    let booked =
-    Number(
-        item.booked || 0
-    );
-
+function getMaps(match){
 
     /*
-       If booked isn't available,
-       count players/bookings.
+       New data:
+       maps: ["Erangel","Rondo"]
+
+       Old data:
+       map: "Erangel"
     */
 
     if(
-        !booked &&
-        item.players &&
-        typeof item.players === "object"
-    ){
-
-        booked =
-        Object.keys(
-            item.players
-        ).length;
-
-    }
-
-
-    if(
-        !booked &&
-        item.bookings &&
-        typeof item.bookings === "object"
-    ){
-
-        booked =
-        Object.keys(
-            item.bookings
-        ).length;
-
-    }
-
-
-    const percent =
-    total > 0
-    ? Math.min(
-        100,
-        Math.round(
-            (booked / total) * 100
+        Array.isArray(
+            match?.maps
         )
-    )
-    : 0;
-
-
-    const prize =
-    getPrize(item);
-
-
-    const date =
-    formatDate(
-        item.date
-    );
-
-
-    const time =
-    formatClock(
-        item.time
-    );
-
-
-    const created =
-    Number(
-        item.createdAt ||
-        item.timestamp ||
-        0
-    );
-
-
-    const liveAt =
-    Number(
-        item.liveAt || 0
-    );
-
-
-    const groupLink =
-    String(
-        item.groupLink || ""
-    );
-
-
-    const cardClass =
-    status === "live"
-    ? "tournament liveCard"
-    : "tournament";
-
-
-    return `
-
-        <div
-        class="${cardClass}"
-        data-id="${id}">
-
-            <!-- CARD TOP -->
-
-            <div class="cardTop">
-
-                <div class="cardTitleWrap">
-
-                    <div class="cardTitle">
-
-                        ${escapeHTML(title)}
-
-                    </div>
-
-                    <div class="cardId">
-
-                        ID:
-                        ${escapeHTML(item.id)}
-
-                    </div>
-
-                </div>
-
-
-                <div
-                class="statusBadge status-${escapeHTML(status)}">
-
-                    ${statusLabel(status)}
-
-                </div>
-
-            </div>
-
-
-            <!-- INFO -->
-
-            <div class="infoGrid">
-
-                <div class="info">
-
-                    <div class="infoLabel">
-                        Game Mode
-                    </div>
-
-                    <div class="infoValue">
-                        ${escapeHTML(type)}
-                    </div>
-
-                </div>
-
-
-                <div class="info">
-
-                    <div class="infoLabel">
-                        Entry Fee
-                    </div>
-
-                    <div class="infoValue money">
-                        ₹${formatMoney(entry)}
-                    </div>
-
-                </div>
-
-
-                <div class="info">
-
-                    <div class="infoLabel">
-                        Prize
-                    </div>
-
-                    <div class="infoValue money">
-                        ₹${formatMoney(prize)}
-                    </div>
-
-                </div>
-
-
-                <div class="info">
-
-                    <div class="infoLabel">
-                        Players
-                    </div>
-
-                    <div class="infoValue slots">
-                        ${booked}/${total}
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- DATE -->
-
-            <div class="dateRow">
-
-                <div class="dateItem">
-
-                    📅
-
-                    <span>
-                        ${escapeHTML(date)}
-                    </span>
-
-                </div>
-
-
-                <div class="dateItem">
-
-                    🕐
-
-                    <span>
-                        ${escapeHTML(time)}
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <!-- PROGRESS -->
-
-            <div class="progressWrap">
-
-                <div class="progressHead">
-
-                    <span>
-                        Slot Occupancy
-                    </span>
-
-                    <b>
-                        ${percent}%
-                    </b>
-
-                </div>
-
-                <div class="progress">
-
-                    <div
-                    class="progressBar"
-                    style="width:${percent}%">
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            ${
-                status === "live"
-                ? `
-
-                    <div class="liveBox">
-
-                        <div class="liveInfo">
-
-                            <div class="liveLabel">
-                                TOURNAMENT STATUS
-                            </div>
-
-                            <div
-                            class="liveTime"
-                            data-live-at="${liveAt}">
-
-                                🔥 LIVE NOW
-
-                            </div>
-
-                        </div>
-
-                        <div class="roomStatus">
-                            ● ACTIVE
-                        </div>
-
-                    </div>
-
-                `
-                : ""
-            }
-
-
-            ${
-                groupLink
-                ? `
-
-                    <div class="roomBox">
-
-                        <div class="roomLabel">
-                            GROUP / ROOM LINK
-                        </div>
-
-                        <div class="roomRow">
-
-                            <input
-                            class="roomInput"
-                            readonly
-                            value="${escapeAttr(groupLink)}">
-
-                            <button
-                            class="copyBtn"
-                            type="button"
-                            data-copy="${escapeAttr(groupLink)}">
-
-                                📋 Copy
-
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                `
-                : ""
-            }
-
-
-            <!-- EDIT -->
-
-            <div class="editBox">
-
-                <div class="editLabel">
-                    CHANGE TOURNAMENT STATUS
-                </div>
-
-                <select
-                class="statusSelect"
-                id="status_${id}">
-
-                    <option
-                    value="upcoming"
-                    ${status === "upcoming" ? "selected" : ""}>
-
-                        ⏳ Upcoming
-
-                    </option>
-
-                    <option
-                    value="live"
-                    ${status === "live" ? "selected" : ""}>
-
-                        🔥 Live
-
-                    </option>
-
-                    <option
-                    value="completed"
-                    ${status === "completed" ? "selected" : ""}>
-
-                        ✅ Completed
-
-                    </option>
-
-                    <option
-                    value="closed"
-                    ${status === "closed" ? "selected" : ""}>
-
-                        🔒 Closed
-
-                    </option>
-
-                </select>
-
-
-                <input
-                class="editRoomInput"
-                id="group_${id}"
-                value="${escapeAttr(groupLink)}"
-                placeholder="WhatsApp / Telegram / Room Link">
-
-
-                <div class="actions">
-
-                    <button
-                    class="actionBtn saveBtn"
-                    type="button"
-                    data-save="${id}">
-
-                        💾 Save Changes
-
-                    </button>
-
-
-                    <button
-                    class="actionBtn deleteBtn"
-                    type="button"
-                    data-delete="${id}">
-
-                        🗑 Delete
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    `;
-
-}
-
-
-/* =====================================================
-   SAVE
-===================================================== */
-
-async function saveTournament(id){
-
-    if(processing.has(id)){
-        return;
-    }
-
-
-    const statusElement =
-    document.getElementById(
-        "status_" + id
-    );
-
-
-    const groupElement =
-    document.getElementById(
-        "group_" + id
-    );
-
-
-    if(!statusElement){
-        return;
-    }
-
-
-    const status =
-    normalizeStatus(
-        statusElement.value
-    );
-
-
-    const groupLink =
-    groupElement
-    ? groupElement.value.trim()
-    : "";
-
-
-    const tournament =
-    allTournaments.find(
-        item => item.id === id
-    );
-
-
-    if(!tournament){
-
-        showToast(
-            "Tournament not found",
-            true
-        );
-
-        return;
-    }
-
-
-    processing.add(id);
-
-
-    const button =
-    document.querySelector(
-        `[data-save="${cssEscape(id)}"]`
-    );
-
-
-    if(button){
-
-        button.disabled = true;
-
-        button.innerText =
-        "Saving...";
-
-    }
-
-
-    try{
-
-        const updateData = {
-
-            status:status,
-
-            groupLink:groupLink,
-
-            updatedAt:Date.now()
-
-        };
-
-
-        /*
-           LIVE start time only when
-           changing into LIVE.
-        */
-
-        const oldStatus =
-        normalizeStatus(
-            tournament.status
-        );
-
-
-        if(
-            status === "live" &&
-            oldStatus !== "live"
-        ){
-
-            updateData.liveAt =
-            Date.now();
-
-        }
-
-
-        /*
-           Remove liveAt after leaving LIVE.
-        */
-
-        if(
-            status !== "live"
-        ){
-
-            updateData.liveAt =
-            null;
-
-        }
-
-
-        await update(
-            ref(
-                db,
-                "matches/" + id
-            ),
-            updateData
-        );
-
-
-        showToast(
-            "Tournament updated successfully"
-        );
-
-    }
-    catch(error){
-
-        console.error(
-            "Save error:",
-            error
-        );
-
-        showToast(
-            error.message ||
-            "Update failed",
-            true
-        );
-
-    }
-    finally{
-
-        processing.delete(id);
-
-        if(button){
-
-            button.disabled = false;
-
-            button.innerText =
-            "💾 Save Changes";
-
-        }
-
-    }
-
-}
-
-
-/* =====================================================
-   DELETE
-===================================================== */
-
-async function deleteTournament(id){
-
-    if(processing.has(id)){
-        return;
-    }
-
-
-    const tournament =
-    allTournaments.find(
-        item => item.id === id
-    );
-
-
-    const title =
-    tournament
-    ? (
-        tournament.title ||
-        tournament.name ||
-        "this tournament"
-    )
-    : "this tournament";
-
-
-    const confirmed =
-    confirm(
-        `Delete "${title}"?\n\nThis action cannot be undone.`
-    );
-
-
-    if(!confirmed){
-        return;
-    }
-
-
-    processing.add(id);
-
-
-    const button =
-    document.querySelector(
-        `[data-delete="${cssEscape(id)}"]`
-    );
-
-
-    if(button){
-
-        button.disabled = true;
-
-        button.innerText =
-        "Deleting...";
-
-    }
-
-
-    try{
-
-        await remove(
-            ref(
-                db,
-                "matches/" + id
-            )
-        );
-
-
-        showToast(
-            "Tournament deleted"
-        );
-
-    }
-    catch(error){
-
-        console.error(
-            "Delete error:",
-            error
-        );
-
-        showToast(
-            error.message ||
-            "Delete failed",
-            true
-        );
-
-    }
-    finally{
-
-        processing.delete(id);
-
-    }
-
-}
-
-
-/* =====================================================
-   COPY LINK
-===================================================== */
-
-async function copyLink(link){
-
-    if(!link){
-        return;
-    }
-
-
-    try{
-
-        if(
-            navigator.clipboard &&
-            window.isSecureContext
-        ){
-
-            await navigator.clipboard.writeText(
-                link
-            );
-
-        }
-        else{
-
-            const input =
-            document.createElement(
-                "textarea"
-            );
-
-            input.value = link;
-
-            input.style.position =
-            "fixed";
-
-            input.style.opacity =
-            "0";
-
-            document.body.appendChild(
-                input
-            );
-
-            input.focus();
-
-            input.select();
-
-            document.execCommand(
-                "copy"
-            );
-
-            input.remove();
-
-        }
-
-
-        showToast(
-            "Link copied"
-        );
-
-    }
-    catch(error){
-
-        showToast(
-            "Copy failed",
-            true
+    ){
+
+        return match.maps
+        .filter(Boolean)
+        .map(
+            String
         );
 
     }
 
-}
 
-
-/* =====================================================
-   EVENT DELEGATION
-===================================================== */
-
-document.addEventListener(
-    "click",
-    (event) => {
-
-        const saveButton =
-        event.target.closest(
-            "[data-save]"
-        );
-
-
-        if(saveButton){
-
-            saveTournament(
-                saveButton.dataset.save
-            );
-
-            return;
-        }
-
-
-        const deleteButton =
-        event.target.closest(
-            "[data-delete]"
-        );
-
-
-        if(deleteButton){
-
-            deleteTournament(
-                deleteButton.dataset.delete
-            );
-
-            return;
-        }
-
-
-        const copyButton =
-        event.target.closest(
-            "[data-copy]"
-        );
-
-
-        if(copyButton){
-
-            copyLink(
-                copyButton.dataset.copy
-            );
-
-            return;
-        }
-
-    }
-);
-
-
-/* =====================================================
-   SEARCH
-===================================================== */
-
-searchInput.addEventListener(
-    "input",
-    () => {
-
-        render();
-
-    }
-);
-
-
-/* =====================================================
-   FILTER
-===================================================== */
-
-document
-.querySelectorAll(
-    ".filterBtn"
-)
-.forEach(
-    (button) => {
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                document
-                .querySelectorAll(
-                    ".filterBtn"
-                )
-                .forEach(
-                    item => {
-
-                        item.classList.remove(
-                            "active"
-                        );
-
-                    }
-                );
-
-
-                button.classList.add(
-                    "active"
-                );
-
-
-                currentFilter =
-                button.dataset.filter ||
-                "all";
-
-
-                render();
-
-            }
-        );
-
-    }
-);
-
-
-/* =====================================================
-   REFRESH
-===================================================== */
-
-document
-.getElementById(
-    "refreshBtn"
-)
-.addEventListener(
-    "click",
-    () => {
-
-        render();
-
-        showToast(
-            "Dashboard refreshed"
-        );
-
-    }
-);
-
-
-/* =====================================================
-   LOGOUT
-===================================================== */
-
-document
-.getElementById(
-    "logoutBtn"
-)
-.addEventListener(
-    "click",
-    async () => {
-
-        const confirmed =
-        confirm(
-            "Logout from admin panel?"
-        );
-
-
-        if(!confirmed){
-            return;
-        }
-
-
-        try{
-
-            await signOut(auth);
-
-            location.replace(
-                "admin.html"
-            );
-
-        }
-        catch(error){
-
-            showToast(
-                error.message ||
-                "Logout failed",
-                true
-            );
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   LIVE TIMER
-===================================================== */
-
-setInterval(
-    () => {
-
-        document
-        .querySelectorAll(
-            "[data-live-at]"
+    if(
+        typeof match?.maps ===
+        "string"
+    ){
+
+        return match.maps
+        .split(",")
+        .map(
+            item =>
+            item.trim()
         )
-        .forEach(
-            (element) => {
-
-                const liveAt =
-                Number(
-                    element.dataset.liveAt
-                );
-
-
-                if(!liveAt){
-                    return;
-                }
-
-
-                const diff =
-                Math.max(
-                    0,
-                    Date.now() - liveAt
-                );
-
-
-                const totalSeconds =
-                Math.floor(
-                    diff / 1000
-                );
-
-
-                const hours =
-                Math.floor(
-                    totalSeconds / 3600
-                );
-
-
-                const minutes =
-                Math.floor(
-                    (
-                        totalSeconds % 3600
-                    ) / 60
-                );
-
-
-                const seconds =
-                totalSeconds % 60;
-
-
-                element.innerText =
-                `🔥 LIVE • ${
-                    String(hours).padStart(2,"0")
-                }:${
-                    String(minutes).padStart(2,"0")
-                }:${
-                    String(seconds).padStart(2,"0")
-                }`;
-
-            }
-        );
-
-    },
-    1000
-);
-
-
-/* =====================================================
-   HELPERS
-===================================================== */
-
-function normalizeStatus(value){
-
-    const status =
-    String(
-        value || "upcoming"
-    ).toLowerCase();
-
-
-    if(
-        status === "live"
-    ){
-        return "live";
-    }
-
-
-    if(
-        status === "completed" ||
-        status === "finished" ||
-        status === "played"
-    ){
-
-        return "completed";
+        .filter(Boolean);
 
     }
 
 
-    if(
-        status === "closed"
-    ){
+    if(match?.map){
 
-        return "closed";
+        return [
+            String(match.map)
+        ];
 
     }
 
 
-    return "upcoming";
+    return [];
 
 }
 
 
-function statusLabel(status){
+/* =========================================================
+   MAP ICON
+========================================================= */
 
-    const labels = {
+function mapIcon(map){
 
-        upcoming:"⏳ UPCOMING",
-
-        live:"🔥 LIVE",
-
-        completed:"✅ COMPLETED",
-
-        closed:"🔒 CLOSED"
-
-    };
+    const name =
+    String(map)
+    .toLowerCase();
 
 
-    return (
-        labels[status] ||
-        "⏳ UPCOMING"
+    if(
+        name.includes("erangel")
+    ){
+        return "🏝️";
+    }
+
+    if(
+        name.includes("miramar")
+    ){
+        return "🏜️";
+    }
+
+    if(
+        name.includes("sanhok")
+    ){
+        return "🌴";
+    }
+
+    if(
+        name.includes("vikendi")
+    ){
+        return "❄️";
+    }
+
+    if(
+        name.includes("rondo")
+    ){
+        return "🌏";
+    }
+
+    if(
+        name.includes("livik")
+    ){
+        return "⚡";
+    }
+
+    if(
+        name.includes("nusa")
+    ){
+        return "🏝️";
+    }
+
+    if(
+        name.includes("karakin")
+    ){
+        return "🏜️";
+    }
+
+    if(
+        name.includes("taego")
+    ){
+        return "🌄";
+    }
+
+    return "🗺️";
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(value){
+
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
     );
 
 }
 
 
-function getPrize(data){
+/* =========================================================
+   FORMAT MONEY
+========================================================= */
 
-    if(
-        data.prize !== undefined &&
-        data.prize !== null
-    ){
+function money(value){
 
-        return Number(
-            data.prize || 0
-        );
-
-    }
-
-
-    if(
-        data.winningAmount !== undefined
-    ){
-
-        return Number(
-            data.winningAmount || 0
-        );
-
-    }
-
-
-    return (
-        Number(data.firstPrize || 0) +
-        Number(data.secondPrize || 0) +
-        Number(data.thirdPrize || 0)
-    );
-
-}
-
-
-function formatMoney(value){
-
-    const number =
-    Number(value || 0);
-
-
-    if(
-        !Number.isFinite(number)
-    ){
-
-        return "0";
-
-    }
-
-
-    return number.toLocaleString(
+    return Number(
+        value || 0
+    ).toLocaleString(
         "en-IN",
         {
             maximumFractionDigits:0
@@ -2955,238 +2387,1645 @@ function formatMoney(value){
 }
 
 
-function formatDate(value){
+/* =========================================================
+   FORMAT DATE
+========================================================= */
 
-    if(!value){
-        return "Date not set";
+function formatDateTime(match){
+
+    const date =
+    match?.date || "";
+
+    const time =
+    match?.time || "";
+
+
+    if(
+        date &&
+        time
+    ){
+
+        return (
+            date +
+            " • " +
+            time
+        );
+
+    }
+
+
+    return (
+        date ||
+        time ||
+        "Not set"
+    );
+
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+function renderStats(){
+
+    const list =
+    Object.values(matches);
+
+
+    let upcoming =
+    0;
+
+    let live =
+    0;
+
+    let cancelled =
+    0;
+
+
+    list.forEach(
+        match => {
+
+            const status =
+            normalizeStatus(
+                match
+            );
+
+
+            if(
+                status ===
+                "upcoming"
+            ){
+                upcoming++;
+            }
+
+
+            if(
+                status ===
+                "live"
+            ){
+                live++;
+            }
+
+
+            if(
+                status ===
+                "cancelled"
+            ){
+                cancelled++;
+            }
+
+        }
+    );
+
+
+    $("totalCount")
+    .innerText =
+    list.length;
+
+
+    $("upcomingCount")
+    .innerText =
+    upcoming;
+
+
+    $("liveCount")
+    .innerText =
+    live;
+
+
+    $("cancelledCount")
+    .innerText =
+    cancelled;
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+function matchesSearch(
+    id,
+    match
+){
+
+    const query =
+    $("searchInput")
+    .value
+    .trim()
+    .toLowerCase();
+
+
+    if(!query){
+        return true;
+    }
+
+
+    const maps =
+    getMaps(match)
+    .join(" ");
+
+
+    const text =
+    [
+        id,
+        match?.title,
+        match?.name,
+        match?.type,
+        match?.mode,
+        match?.status,
+        match?.roomId,
+        match?.roomPassword,
+        maps
+    ]
+    .join(" ")
+    .toLowerCase();
+
+
+    return text.includes(
+        query
+    );
+
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+function filterMatch(
+    id,
+    match
+){
+
+    if(
+        !matchesSearch(
+            id,
+            match
+        )
+    ){
+
+        return false;
+
+    }
+
+
+    const status =
+    normalizeStatus(
+        match
+    );
+
+
+    if(
+        currentFilter ===
+        "all"
+    ){
+
+        return true;
+
+    }
+
+
+    if(
+        currentFilter ===
+        "completed"
+    ){
+
+        return (
+            status ===
+            "completed"
+        );
+
+    }
+
+
+    return (
+        status ===
+        currentFilter
+    );
+
+}
+
+
+/* =========================================================
+   RENDER MATCHES
+========================================================= */
+
+function renderMatches(){
+
+    const list =
+    $("matchList");
+
+    list.innerHTML =
+    "";
+
+
+    const entries =
+    Object.entries(
+        matches
+    )
+    .filter(
+        ([id,match]) =>
+        filterMatch(
+            id,
+            match
+        )
+    )
+    .sort(
+        (
+            [,a],
+            [,b]
+        ) => {
+
+            return Number(
+                b?.createdAt ||
+                0
+            ) -
+            Number(
+                a?.createdAt ||
+                0
+            );
+
+        }
+    );
+
+
+    if(
+        entries.length ===
+        0
+    ){
+
+        $("empty")
+        .classList
+        .add("show");
+
+        return;
+
+    }
+
+
+    $("empty")
+    .classList
+    .remove("show");
+
+
+    entries.forEach(
+        ([id,match]) => {
+
+            list.appendChild(
+                createMatchCard(
+                    id,
+                    match
+                )
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   CREATE CARD
+========================================================= */
+
+function createMatchCard(
+    id,
+    match
+){
+
+    const card =
+    document.createElement(
+        "div"
+    );
+
+
+    const status =
+    normalizeStatus(
+        match
+    );
+
+
+    card.className =
+    "matchCard " +
+    (
+        status ===
+        "cancelled"
+        ? "cancelled"
+        : ""
+    );
+
+
+    const maps =
+    getMaps(match);
+
+
+    const mapHtml =
+    maps.length
+    ?
+    maps.map(
+        map =>
+        `<span class="mapTag">
+            ${mapIcon(map)}
+            ${escapeHtml(map)}
+        </span>`
+    ).join("")
+    :
+    `<span class="mapTag">
+        🗺️ No Map
+    </span>`;
+
+
+    const booked =
+    Number(
+        match?.bookedSlots ??
+        match?.booked ??
+        0
+    );
+
+
+    const total =
+    Number(
+        match?.totalSlots ??
+        match?.total ??
+        match?.maxSlots ??
+        0
+    );
+
+
+    const roomId =
+    match?.roomId ||
+    match?.roomID ||
+    "";
+
+
+    const roomPassword =
+    match?.roomPassword ||
+    match?.password ||
+    "";
+
+
+    const roomLink =
+    match?.roomLink ||
+    match?.link ||
+    "";
+
+
+    const statusText =
+    status;
+
+
+    card.innerHTML = `
+
+        <div class="matchTop">
+
+            <div class="matchInfo">
+
+                <div class="matchTitle">
+                    ${escapeHtml(
+                        match?.title ||
+                        match?.name ||
+                        "Untitled Tournament"
+                    )}
+                </div>
+
+                <div class="matchId">
+                    ID: ${escapeHtml(id)}
+                </div>
+
+            </div>
+
+
+            <div class="status ${escapeHtml(status)}">
+
+                ${escapeHtml(statusText)}
+
+            </div>
+
+        </div>
+
+
+        <div class="matchMeta">
+
+            <div class="meta">
+
+                <span>
+                    MODE
+                </span>
+
+                <strong>
+                    ${escapeHtml(
+                        String(
+                            match?.type ||
+                            match?.mode ||
+                            "SOLO"
+                        ).toUpperCase()
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="meta">
+
+                <span>
+                    ENTRY
+                </span>
+
+                <strong>
+                    ₹${money(
+                        match?.entry ??
+                        match?.entryFee
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="meta">
+
+                <span>
+                    PRIZE
+                </span>
+
+                <strong>
+                    ₹${money(
+                        match?.prize
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="meta">
+
+                <span>
+                    DATE / TIME
+                </span>
+
+                <strong>
+                    ${escapeHtml(
+                        formatDateTime(
+                            match
+                        )
+                    )}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="mapTags">
+
+            ${mapHtml}
+
+        </div>
+
+
+        <div class="roomInfo">
+
+            <div class="
+                roomItem
+                ${roomId ? "available" : ""}
+            ">
+
+                <span>
+                    ROOM ID
+                </span>
+
+                <strong>
+                    ${roomId
+                        ? escapeHtml(roomId)
+                        : "Not Set"
+                    }
+                </strong>
+
+            </div>
+
+
+            <div class="
+                roomItem
+                ${roomPassword ? "available" : ""}
+            ">
+
+                <span>
+                    PASSWORD
+                </span>
+
+                <strong>
+                    ${roomPassword
+                        ? "••••••"
+                        : "Not Set"
+                    }
+                </strong>
+
+            </div>
+
+
+            <div class="
+                roomItem
+                ${roomLink ? "available" : ""}
+            ">
+
+                <span>
+                    ROOM LINK
+                </span>
+
+                <strong>
+                    ${roomLink
+                        ? "Available"
+                        : "Not Set"
+                    }
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="matchMeta">
+
+            <div class="meta">
+
+                <span>
+                    SLOTS
+                </span>
+
+                <strong>
+                    ${booked} / ${total}
+                </strong>
+
+            </div>
+
+
+            <div class="meta">
+
+                <span>
+                    1ST PRIZE
+                </span>
+
+                <strong>
+                    ₹${money(
+                        match?.firstPrize
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="meta">
+
+                <span>
+                    2ND PRIZE
+                </span>
+
+                <strong>
+                    ₹${money(
+                        match?.secondPrize
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="meta">
+
+                <span>
+                    MAPS
+                </span>
+
+                <strong>
+                    ${maps.length}
+                    Selected
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="cardActions">
+
+            <button
+            class="cardBtn manageBtn"
+            data-action="manage"
+            data-id="${escapeHtml(id)}">
+
+                ⚙️ MANAGE
+
+            </button>
+
+
+            ${
+                status ===
+                "cancelled"
+
+                ?
+
+                `<button
+                class="cardBtn restoreBtn"
+                data-action="restore"
+                data-id="${escapeHtml(id)}">
+
+                    🔄 RESTORE
+
+                </button>`
+
+                :
+
+                `<button
+                class="cardBtn cancelBtn"
+                data-action="cancel"
+                data-id="${escapeHtml(id)}">
+
+                    ❌ CANCEL MATCH
+
+                </button>`
+            }
+
+
+            <button
+            class="cardBtn deleteBtn"
+            data-action="delete"
+            data-id="${escapeHtml(id)}">
+
+                🗑️ DELETE
+
+            </button>
+
+
+            <button
+            class="cardBtn"
+            data-action="view"
+            data-id="${escapeHtml(id)}">
+
+                👁️ VIEW DATA
+
+            </button>
+
+        </div>
+
+    `;
+
+
+    card
+    .querySelectorAll(
+        "button[data-action]"
+    )
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    handleAction(
+                        button.dataset.action,
+                        button.dataset.id
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    return card;
+
+}
+
+
+/* =========================================================
+   ACTION HANDLER
+========================================================= */
+
+function handleAction(
+    action,
+    id
+){
+
+    if(
+        !matches[id]
+    ){
+
+        showToast(
+            "Tournament not found",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        action ===
+        "manage"
+    ){
+
+        openManage(
+            id
+        );
+
+        return;
+
+    }
+
+
+    if(
+        action ===
+        "cancel"
+    ){
+
+        openCancel(
+            id
+        );
+
+        return;
+
+    }
+
+
+    if(
+        action ===
+        "restore"
+    ){
+
+        restoreMatch(
+            id
+        );
+
+        return;
+
+    }
+
+
+    if(
+        action ===
+        "delete"
+    ){
+
+        openDelete(
+            id
+        );
+
+        return;
+
+    }
+
+
+    if(
+        action ===
+        "view"
+    ){
+
+        viewData(
+            id
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   OPEN MANAGE
+========================================================= */
+
+function openManage(id){
+
+    const match =
+    matches[id];
+
+
+    currentManageId =
+    id;
+
+
+    $("manageMatchName")
+    .innerText =
+    (
+        match?.title ||
+        match?.name ||
+        "Tournament"
+    );
+
+
+    $("roomId")
+    .value =
+    match?.roomId ||
+    match?.roomID ||
+    "";
+
+
+    $("roomPassword")
+    .value =
+    match?.roomPassword ||
+    match?.password ||
+    "";
+
+
+    $("roomLink")
+    .value =
+    match?.roomLink ||
+    match?.link ||
+    "";
+
+
+    $("rules")
+    .value =
+    match?.rules ||
+    match?.matchRules ||
+    match?.instructions ||
+    "";
+
+
+    $("manageStatus")
+    .value =
+    normalizeStatus(
+        match
+    );
+
+
+    $("manageModal")
+    .classList
+    .add("show");
+
+}
+
+
+/* =========================================================
+   CLOSE MANAGE
+========================================================= */
+
+function closeManage(){
+
+    currentManageId =
+    null;
+
+    $("manageModal")
+    .classList
+    .remove("show");
+
+}
+
+
+$("closeManage")
+.addEventListener(
+    "click",
+    closeManage
+);
+
+
+$("cancelManage")
+.addEventListener(
+    "click",
+    closeManage
+);
+
+
+/* =========================================================
+   SAVE MANAGE
+========================================================= */
+
+$("saveManage")
+.addEventListener(
+    "click",
+    async()=>{
+
+        if(
+            !currentManageId
+        ){
+
+            return;
+
+        }
+
+
+        const id =
+        currentManageId;
+
+
+        const roomId =
+        $("roomId")
+        .value
+        .trim();
+
+
+        const roomPassword =
+        $("roomPassword")
+        .value
+        .trim();
+
+
+        const roomLink =
+        $("roomLink")
+        .value
+        .trim();
+
+
+        const rules =
+        $("rules")
+        .value
+        .trim();
+
+
+        const status =
+        $("manageStatus")
+        .value;
+
+
+        if(roomLink){
+
+            try{
+
+                new URL(
+                    roomLink
+                );
+
+            }
+            catch{
+
+                showToast(
+                    "Invalid room link",
+                    "error"
+                );
+
+                return;
+
+            }
+
+        }
+
+
+        const btn =
+        $("saveManage");
+
+
+        try{
+
+            btn.disabled =
+            true;
+
+            btn.innerText =
+            "⏳ SAVING...";
+
+
+            const updates = {
+
+                roomId:
+                roomId,
+
+                roomPassword:
+                roomPassword,
+
+                roomLink:
+                roomLink,
+
+                rules:
+                rules,
+
+                /*
+                   Compatibility fields
+                */
+
+                roomID:
+                roomId,
+
+                password:
+                roomPassword,
+
+                link:
+                roomLink,
+
+                matchRules:
+                rules,
+
+                instructions:
+                rules,
+
+                status:
+                status,
+
+                updatedAt:
+                Date.now(),
+
+                updatedBy:
+                ADMIN_UID
+
+            };
+
+
+            await update(
+                ref(
+                    db,
+                    "matches/" +
+                    id
+                ),
+                updates
+            );
+
+
+            showToast(
+                "Match details saved"
+            );
+
+
+            closeManage();
+
+        }
+        catch(error){
+
+            console.error(
+                error
+            );
+
+            showToast(
+                error?.message ||
+                "Failed to save details",
+                "error"
+            );
+
+        }
+        finally{
+
+            btn.disabled =
+            false;
+
+            btn.innerText =
+            "💾 SAVE DETAILS";
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CANCEL MATCH
+========================================================= */
+
+function openCancel(id){
+
+    const match =
+    matches[id];
+
+
+    pendingCancelId =
+    id;
+
+
+    $("confirmTitle")
+    .innerText =
+    "Cancel Match?";
+
+
+    $("confirmText")
+    .innerText =
+    (
+        `"${match?.title ||
+        match?.name ||
+        "This tournament"}" `
+        +
+        "will be marked as cancelled."
+    );
+
+
+    $("confirmModal")
+    .classList
+    .add("show");
+
+}
+
+
+$("confirmNo")
+.addEventListener(
+    "click",
+    ()=>{
+
+        pendingCancelId =
+        null;
+
+        $("confirmModal")
+        .classList
+        .remove("show");
+
+    }
+);
+
+
+/* =========================================================
+   CONFIRM CANCEL
+========================================================= */
+
+$("confirmYes")
+.addEventListener(
+    "click",
+    async()=>{
+
+        if(
+            !pendingCancelId
+        ){
+
+            return;
+
+        }
+
+
+        const id =
+        pendingCancelId;
+
+
+        const btn =
+        $("confirmYes");
+
+
+        try{
+
+            btn.disabled =
+            true;
+
+            btn.innerText =
+            "CANCELLING...";
+
+
+            await update(
+                ref(
+                    db,
+                    "matches/" +
+                    id
+                ),
+                {
+
+                    status:
+                    "cancelled",
+
+                    cancelledAt:
+                    Date.now(),
+
+                    cancelledBy:
+                    ADMIN_UID,
+
+                    updatedAt:
+                    Date.now(),
+
+                    updatedBy:
+                    ADMIN_UID
+
+                }
+            );
+
+
+            $("confirmModal")
+            .classList
+            .remove("show");
+
+
+            pendingCancelId =
+            null;
+
+
+            showToast(
+                "Match cancelled successfully"
+            );
+
+        }
+        catch(error){
+
+            console.error(
+                error
+            );
+
+            showToast(
+                error?.message ||
+                "Failed to cancel match",
+                "error"
+            );
+
+        }
+        finally{
+
+            btn.disabled =
+            false;
+
+            btn.innerText =
+            "YES, CANCEL";
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   RESTORE MATCH
+========================================================= */
+
+async function restoreMatch(id){
+
+    const match =
+    matches[id];
+
+
+    if(!match){
+
+        return;
+
     }
 
 
     try{
 
-        const date =
-        new Date(
-            value + "T00:00:00"
+        await update(
+            ref(
+                db,
+                "matches/" +
+                id
+            ),
+            {
+
+                status:
+                "upcoming",
+
+                cancelledAt:
+                null,
+
+                cancelledBy:
+                null,
+
+                updatedAt:
+                Date.now(),
+
+                updatedBy:
+                ADMIN_UID
+
+            }
         );
 
 
+        showToast(
+            "Match restored"
+        );
+
+    }
+    catch(error){
+
+        console.error(
+            error
+        );
+
+        showToast(
+            error?.message ||
+            "Failed to restore match",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+function openDelete(id){
+
+    pendingDeleteId =
+    id;
+
+
+    $("deleteModal")
+    .classList
+    .add("show");
+
+}
+
+
+$("deleteNo")
+.addEventListener(
+    "click",
+    ()=>{
+
+        pendingDeleteId =
+        null;
+
+        $("deleteModal")
+        .classList
+        .remove("show");
+
+    }
+);
+
+
+/* =========================================================
+   CONFIRM DELETE
+========================================================= */
+
+$("deleteYes")
+.addEventListener(
+    "click",
+    async()=>{
+
         if(
-            Number.isNaN(
-                date.getTime()
-            )
+            !pendingDeleteId
         ){
 
-            return String(value);
+            return;
 
         }
 
 
-        return date.toLocaleDateString(
-            "en-IN",
-            {
-                day:"2-digit",
-                month:"short",
-                year:"numeric"
+        const id =
+        pendingDeleteId;
+
+
+        const btn =
+        $("deleteYes");
+
+
+        try{
+
+            btn.disabled =
+            true;
+
+            btn.innerText =
+            "DELETING...";
+
+
+            await remove(
+                ref(
+                    db,
+                    "matches/" +
+                    id
+                )
+            );
+
+
+            $("deleteModal")
+            .classList
+            .remove("show");
+
+
+            pendingDeleteId =
+            null;
+
+
+            showToast(
+                "Tournament deleted"
+            );
+
+        }
+        catch(error){
+
+            console.error(
+                error
+            );
+
+            showToast(
+                error?.message ||
+                "Failed to delete tournament",
+                "error"
+            );
+
+        }
+        finally{
+
+            btn.disabled =
+            false;
+
+            btn.innerText =
+            "DELETE";
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   VIEW RAW DATA
+========================================================= */
+
+function viewData(id){
+
+    const match =
+    matches[id];
+
+
+    const json =
+    JSON.stringify(
+        match,
+        null,
+        2
+    );
+
+
+    /*
+       Browser prompt is used here so
+       no extra popup library is required.
+    */
+
+    window.prompt(
+        "Tournament Firebase Data",
+        json
+    );
+
+}
+
+
+/* =========================================================
+   FILTER BUTTONS
+========================================================= */
+
+document
+.querySelectorAll(
+    ".filterBtn"
+)
+.forEach(
+    button => {
+
+        button.addEventListener(
+            "click",
+            ()=>{
+
+                document
+                .querySelectorAll(
+                    ".filterBtn"
+                )
+                .forEach(
+                    item =>
+                    item.classList
+                    .remove("active")
+                );
+
+
+                button
+                .classList
+                .add("active");
+
+
+                currentFilter =
+                button.dataset.filter;
+
+
+                renderMatches();
+
             }
         );
 
     }
-    catch{
-
-        return String(value);
-
-    }
-
-}
+);
 
 
-function formatClock(value){
+/* =========================================================
+   SEARCH EVENT
+========================================================= */
 
-    if(!value){
-        return "Time not set";
-    }
-
-
-    const parts =
-    String(value).split(":");
-
-
-    if(
-        parts.length < 2
-    ){
-
-        return String(value);
-
-    }
+$("searchInput")
+.addEventListener(
+    "input",
+    renderMatches
+);
 
 
-    let hour =
-    Number(parts[0]);
+/* =========================================================
+   REFRESH
+========================================================= */
 
-    const minute =
-    parts[1];
+$("refreshBtn")
+.addEventListener(
+    "click",
+    ()=>{
 
+        renderStats();
 
-    if(
-        !Number.isFinite(hour)
-    ){
+        renderMatches();
 
-        return String(value);
-
-    }
-
-
-    const suffix =
-    hour >= 12
-    ? "PM"
-    : "AM";
-
-
-    hour =
-    hour % 12 || 12;
-
-
-    return (
-        String(hour) +
-        ":" +
-        minute +
-        " " +
-        suffix
-    );
-
-}
-
-
-function setText(
-    id,
-    value
-){
-
-    const element =
-    document.getElementById(id);
-
-
-    if(element){
-
-        element.innerText =
-        value;
-
-    }
-
-}
-
-
-function escapeHTML(value){
-
-    return String(
-        value ?? ""
-    )
-    .replaceAll(
-        "&",
-        "&amp;"
-    )
-    .replaceAll(
-        "<",
-        "&lt;"
-    )
-    .replaceAll(
-        ">",
-        "&gt;"
-    )
-    .replaceAll(
-        '"',
-        "&quot;"
-    )
-    .replaceAll(
-        "'",
-        "&#039;"
-    );
-
-}
-
-
-function escapeAttr(value){
-
-    return escapeHTML(
-        value
-    );
-
-}
-
-
-/*
-   Used only for querySelector
-   with dynamically generated IDs.
-*/
-
-function cssEscape(value){
-
-    if(
-        window.CSS &&
-        CSS.escape
-    ){
-
-        return CSS.escape(
-            String(value)
+        showToast(
+            "Tournament list refreshed"
         );
 
     }
+);
 
 
-    return String(value)
-    .replace(
-        /([^\w-])/g,
-        "\\$1"
-    );
+/* =========================================================
+   CREATE
+========================================================= */
 
-}
+$("createBtn")
+.addEventListener(
+    "click",
+    ()=>{
 
+        location.href =
+        "admin-create-tournament.html";
 
-/* =====================================================
-   INITIAL TOAST
-===================================================== */
-
-function showToast(
-    message,
-    error = false
-){
-
-    toast.innerText =
-    message;
+    }
+);
 
 
-    toast.classList.toggle(
-        "error",
-        error
-    );
+/* =========================================================
+   CLOSE MODALS ON BACKDROP
+========================================================= */
+
+$("manageModal")
+.addEventListener(
+    "click",
+    event => {
+
+        if(
+            event.target ===
+            $("manageModal")
+        ){
+
+            closeManage();
+
+        }
+
+    }
+);
 
 
-    toast.classList.add(
-        "show"
-    );
+$("confirmModal")
+.addEventListener(
+    "click",
+    event => {
+
+        if(
+            event.target ===
+            $("confirmModal")
+        ){
+
+            $("confirmModal")
+            .classList
+            .remove("show");
+
+            pendingCancelId =
+            null;
+
+        }
+
+    }
+);
 
 
-    clearTimeout(
-        window.__toastTimer
-    );
+$("deleteModal")
+.addEventListener(
+    "click",
+    event => {
+
+        if(
+            event.target ===
+            $("deleteModal")
+        ){
+
+            $("deleteModal")
+            .classList
+            .remove("show");
+
+            pendingDeleteId =
+            null;
+
+        }
+
+    }
+);
 
 
-    window.__toastTimer =
-    setTimeout(
-        () => {
+/* =========================================================
+   ESCAPE KEY
+========================================================= */
 
-            toast.classList.remove(
-                "show"
-            );
+document.addEventListener(
+    "keydown",
+    event => {
 
-        },
-        2500
-    );
+        if(
+            event.key ===
+            "Escape"
+        ){
 
-}
+            closeManage();
+
+            $("confirmModal")
+            .classList
+            .remove("show");
+
+            $("deleteModal")
+            .classList
+            .remove("show");
+
+        }
+
+    }
+);
 
 </script>
 
 </body>
-
 </html>
