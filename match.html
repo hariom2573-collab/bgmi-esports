@@ -12,7 +12,50 @@ content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no
 <meta name="color-scheme" content="dark">
 
 <title>Match Details</title>
+<!-- =====================================================
+     ONESIGNAL WEB PUSH NOTIFICATIONS
+===================================================== -->
 
+<script
+src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js"
+defer>
+</script>
+
+<script>
+
+window.OneSignalDeferred =
+    window.OneSignalDeferred || [];
+
+OneSignalDeferred.push(
+    async function(OneSignal){
+
+        try{
+
+            await OneSignal.init({
+
+                appId:
+                "801a921c-3e3f-4102-90d5-f675d2fed578"
+
+            });
+
+            console.log(
+                "OneSignal initialized successfully"
+            );
+
+        }
+        catch(error){
+
+            console.error(
+                "OneSignal initialization error:",
+                error
+            );
+
+        }
+
+    }
+);
+
+</script>
 <style>
 
 *{
@@ -1004,7 +1047,9 @@ button:disabled{
     </button>
 
 
-    <!-- NORMAL MATCH -->
+    <!-- =====================================================
+         NORMAL MATCH
+    ====================================================== -->
 
     <div id="normalMatchContent">
 
@@ -1131,9 +1176,6 @@ button:disabled{
             </div>
 
 
-            <!-- NO TEAM NAME BOX HERE -->
-
-
             <div class="walletInfo">
 
                 <div class="walletTop">
@@ -1216,7 +1258,9 @@ button:disabled{
         </div>
 
 
-        <!-- PRIZES -->
+        <!-- =================================================
+             PRIZES
+        ================================================== -->
 
         <div class="prizeBox">
 
@@ -1418,7 +1462,9 @@ button:disabled{
     </div>
 
 
-    <!-- JOINED CONTENT -->
+    <!-- =====================================================
+         JOINED CONTENT
+    ====================================================== -->
 
     <div
         id="joinedContent"
@@ -1478,6 +1524,8 @@ button:disabled{
                 class="roomData">
 
 
+                <!-- ROOM ID -->
+
                 <div
                     id="roomIdBox"
                     class="roomCodeBox">
@@ -1496,6 +1544,8 @@ button:disabled{
 
                 </div>
 
+
+                <!-- ROOM PASSWORD -->
 
                 <div
                     id="roomPassBox"
@@ -1516,9 +1566,14 @@ button:disabled{
                 </div>
 
 
+                <!-- =================================================
+                     WHATSAPP GROUP
+                ================================================== -->
+
                 <div
                     id="groupBox"
-                    class="whatsappGroupBox">
+                    class="whatsappGroupBox"
+                    style="display:none">
 
                     <div class="whatsappHeader">
 
@@ -1547,6 +1602,7 @@ button:disabled{
 
                     <a
                         id="groupLink"
+                        href="#"
                         target="_blank"
                         rel="noopener noreferrer"
                         class="groupBtn">
@@ -1559,6 +1615,8 @@ button:disabled{
 
                 </div>
 
+
+                <!-- PLAYERS -->
 
                 <div class="players">
 
@@ -1593,7 +1651,9 @@ button:disabled{
 </div>
 
 
-<!-- TEAM NAME POPUP -->
+<!-- =====================================================
+     TEAM NAME POPUP
+====================================================== -->
 
 <div
     id="teamModal"
@@ -1646,7 +1706,9 @@ button:disabled{
 </div>
 
 
-<!-- CONFIRM POPUP -->
+<!-- =====================================================
+     CONFIRM POPUP
+====================================================== -->
 
 <div
     id="confirmModal"
@@ -1671,11 +1733,8 @@ button:disabled{
                 TEAM NAME
             </small>
 
-            <strong
-                id="confirmTeam">
-
+            <strong id="confirmTeam">
                 --
-
             </strong>
 
         </div>
@@ -1750,7 +1809,9 @@ button:disabled{
 </div>
 
 
-<!-- RULES -->
+<!-- =====================================================
+     RULES
+====================================================== -->
 
 <div
     id="rulesModal"
@@ -1817,12 +1878,14 @@ import {
 from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 
+
 import {
     getAuth,
     onAuthStateChanged
 }
 from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
 
 import {
     getDatabase,
@@ -1867,10 +1930,14 @@ const firebaseConfig = {
 
 
 const app =
-    initializeApp(firebaseConfig);
+    initializeApp(
+        firebaseConfig
+    );
+
 
 const auth =
     getAuth(app);
+
 
 const db =
     getDatabase(app);
@@ -1885,13 +1952,14 @@ const ADMIN_UID =
 
 
 /* =========================================================
-   MATCH
+   MATCH ID
 ========================================================= */
 
 const params =
     new URLSearchParams(
         location.search
     );
+
 
 const matchId =
     params.get("id");
@@ -1940,6 +2008,7 @@ function number(value){
     )
         return 0;
 
+
     if(
         typeof value === "string"
     ){
@@ -1952,8 +2021,10 @@ function number(value){
 
     }
 
+
     const n =
         Number(value);
+
 
     return Number.isFinite(n)
         ? n
@@ -1968,7 +2039,7 @@ function formatNumber(value){
         .toLocaleString(
             "en-IN",
             {
-                maximumFractionDigits:0
+                maximumFractionDigits: 0
             }
         );
 
@@ -2033,6 +2104,7 @@ function getRegistrationCloseTime(match){
             )
                 return value;
 
+
             if(
                 value > 1000000000
             )
@@ -2057,6 +2129,7 @@ function getRegistrationCloseTime(match){
 
     const date =
         match.registrationCloseDate;
+
 
     const time =
         match.registrationCloseTimeOnly ||
@@ -2140,7 +2213,6 @@ function isRegistrationClosed(match){
 
 /* =========================================================
    BLOCK USER
-   FAIL CLOSED
 ========================================================= */
 
 async function isUserBlocked(){
@@ -2177,9 +2249,6 @@ async function isUserBlocked(){
     ];
 
 
-    let checkedAnyPath = false;
-
-
     try{
 
         for(
@@ -2195,9 +2264,6 @@ async function isUserBlocked(){
                             path
                         )
                     );
-
-
-                checkedAnyPath = true;
 
 
                 if(
@@ -2217,38 +2283,23 @@ async function isUserBlocked(){
                             value &&
                             typeof value === "object"
                         )
-                    ){
-
+                    )
                         return true;
-
-                    }
 
                 }
 
             }
-            catch(pathError){
-
-                /*
-                    Ek path read nahi ho paaya,
-                    doosre possible block paths
-                    check karenge.
-                */
+            catch(error){
 
                 console.warn(
                     "Block path unavailable:",
-                    path,
-                    pathError
+                    path
                 );
 
             }
 
         }
 
-        /*
-            Agar kam se kam paths check hue
-            aur koi block nahi mila,
-            user allowed hai.
-        */
 
         return false;
 
@@ -2259,12 +2310,6 @@ async function isUserBlocked(){
             "Block check failed:",
             error
         );
-
-        /*
-            SECURITY:
-            Block verification fail hone par
-            join allow nahi karna.
-        */
 
         return true;
 
@@ -2286,9 +2331,10 @@ if(!matchId){
 
 
     setTimeout(
-        () =>
+        () => {
             location.href =
-                "dashboard.html",
+                "dashboard.html";
+        },
         800
     );
 
@@ -2448,6 +2494,7 @@ function loadWallet(){
                     "Wallet:",
                     error
                 );
+
 
                 currentWallet = 0;
 
@@ -2659,6 +2706,7 @@ function loadMatch(){
                     "Match:",
                     error
                 );
+
 
                 showToast(
                     "Unable to load match",
@@ -3291,9 +3339,6 @@ async function updateJoinButton(){
         $("registrationClosed").style.display =
             "block";
 
-        $("registrationClosed").innerText =
-            "🔒 Registration close ho chuka hai.";
-
         return;
 
     }
@@ -3318,9 +3363,6 @@ async function updateJoinButton(){
 
         $("registrationClosed").style.display =
             "block";
-
-        $("registrationClosed").innerText =
-            "🚫 Aap is match me join nahi kar sakte.";
 
         return;
 
@@ -3376,6 +3418,7 @@ async function updateJoinButton(){
                 : status === "blocked"
                     ? "JOIN BLOCKED"
                     : "MATCH CLOSED";
+
 
         $("addMoneyBtn").style.display =
             "none";
@@ -3440,9 +3483,11 @@ async function updateJoinButton(){
         "insufficient"
     );
 
+
     btn.innerText =
         "🎮 JOIN MATCH • ₹" +
         formatNumber(entry);
+
 
     $("addMoneyBtn").style.display =
         "none";
@@ -3452,7 +3497,6 @@ async function updateJoinButton(){
 
 /* =========================================================
    JOIN CLICK
-   ONLY THEN TEAM POPUP
 ========================================================= */
 
 $("joinBtn").onclick =
@@ -3480,6 +3524,7 @@ $("joinBtn").onclick =
                 "error"
             );
 
+
             updateRegistrationUI();
 
             return;
@@ -3499,6 +3544,7 @@ $("joinBtn").onclick =
                 "Aap is match me join nahi kar sakte.",
                 "error"
             );
+
 
             updateRegistrationUI();
 
@@ -3524,20 +3570,15 @@ $("joinBtn").onclick =
                 "error"
             );
 
+
             $("addMoneyBtn").style.display =
                 "block";
+
 
             return;
 
         }
 
-
-        /*
-            IMPORTANT:
-            Team name page par nahi dikhega.
-            Sirf JOIN button click karne ke
-            baad popup open hoga.
-        */
 
         $("teamModalInput").value =
             "";
@@ -3634,10 +3675,12 @@ $("teamContinueBtn").onclick =
 
             closeTeamModal();
 
+
             showToast(
                 "Aap is match me join nahi kar sakte.",
                 "error"
             );
+
 
             return;
 
@@ -3757,6 +3800,7 @@ async function openConfirm(
                 "error"
             );
 
+
             updateRegistrationUI();
 
             return;
@@ -3825,8 +3869,10 @@ async function openConfirm(
                 "error"
             );
 
+
             $("addMoneyBtn").style.display =
                 "block";
+
 
             return;
 
@@ -3892,10 +3938,12 @@ async function openConfirm(
 
             await checkAlreadyJoined();
 
+
             showToast(
                 "Already joined",
                 "error"
             );
+
 
             return;
 
@@ -3936,6 +3984,7 @@ async function openConfirm(
             "Confirm:",
             error
         );
+
 
         showToast(
             "Unable to verify match",
@@ -4044,10 +4093,6 @@ async function performJoin(){
             "Login Required"
         );
 
-
-    /*
-        FINAL BLOCK CHECK
-    */
 
     const blocked =
         await isUserBlocked();
@@ -4365,7 +4410,17 @@ async function performJoin(){
         teamName;
 
 
+    /*
+       IMPORTANT:
+       Join complete hone ke turant baad
+       joined room + WhatsApp load hoga.
+    */
+
     await checkAlreadyJoined();
+
+
+    await loadJoinedRoom();
+
 
     loadPlayers();
 
@@ -4390,13 +4445,415 @@ function showJoinedView(){
         "block";
 
 
+    /*
+       Room + WhatsApp immediately load
+    */
+
     loadJoinedRoom();
 
 }
 
 
 /* =========================================================
-   ROOM
+   WHATSAPP LINK FINDER
+========================================================= */
+
+function extractWhatsAppLink(match){
+
+    if(
+        !match ||
+        typeof match !== "object"
+    )
+        return "";
+
+
+    /*
+       DIRECT FIELD NAMES
+    */
+
+    const directFields = [
+
+        "groupLink",
+        "whatsappGroupLink",
+        "whatsappLink",
+        "whatsappGroupUrl",
+        "whatsappUrl",
+        "whatsappURL",
+        "groupUrl",
+        "groupURL",
+        "whatsappLinkUrl",
+        "whatsappGroup",
+        "whatsapp",
+        "group"
+
+    ];
+
+
+    for(
+        const field of directFields
+    ){
+
+        const value =
+            match[field];
+
+
+        if(
+            typeof value === "string" &&
+            value.trim()
+        ){
+
+            const link =
+                value.trim();
+
+
+            if(
+                link.includes(
+                    "whatsapp.com"
+                ) ||
+                link.includes(
+                    "wa.me"
+                )
+            )
+                return link;
+
+        }
+
+
+        /*
+           Object support
+        */
+
+        if(
+            value &&
+            typeof value === "object"
+        ){
+
+            const nested =
+                value.link ??
+                value.url ??
+                value.href ??
+                value.whatsappLink ??
+                value.groupLink ??
+                value.whatsappGroupLink ??
+                "";
+
+
+            if(
+                typeof nested === "string" &&
+                nested.trim()
+            ){
+
+                const link =
+                    nested.trim();
+
+
+                if(
+                    link.includes(
+                        "whatsapp.com"
+                    ) ||
+                    link.includes(
+                        "wa.me"
+                    )
+                )
+                    return link;
+
+            }
+
+        }
+
+    }
+
+
+    /*
+       SECOND LEVEL:
+       room object / social object etc.
+    */
+
+    const possibleObjects = [
+
+        match.room,
+        match.roomDetails,
+        match.social,
+        match.links,
+        match.contact,
+        match.contacts
+
+    ];
+
+
+    for(
+        const obj of possibleObjects
+    ){
+
+        if(
+            !obj ||
+            typeof obj !== "object"
+        )
+            continue;
+
+
+        const nestedFields = [
+
+            "groupLink",
+            "whatsappGroupLink",
+            "whatsappLink",
+            "whatsappGroupUrl",
+            "whatsappUrl",
+            "url",
+            "link",
+            "href",
+            "group"
+
+        ];
+
+
+        for(
+            const field of nestedFields
+        ){
+
+            const value =
+                obj[field];
+
+
+            if(
+                typeof value === "string" &&
+                value.trim()
+            ){
+
+                const link =
+                    value.trim();
+
+
+                if(
+                    link.includes(
+                        "whatsapp.com"
+                    ) ||
+                    link.includes(
+                        "wa.me"
+                    )
+                )
+                    return link;
+
+            }
+
+        }
+
+    }
+
+
+    /*
+       Recursive fallback:
+       Firebase ke nested object mein kahin bhi
+       WhatsApp URL ho to find karega.
+    */
+
+    const visited =
+        new Set();
+
+
+    function recursiveFind(
+        obj,
+        depth = 0
+    ){
+
+        if(
+            !obj ||
+            typeof obj !== "object" ||
+            depth > 5
+        )
+            return "";
+
+
+        if(
+            visited.has(obj)
+        )
+            return "";
+
+
+        visited.add(obj);
+
+
+        for(
+            const key of Object.keys(obj)
+        ){
+
+            const value =
+                obj[key];
+
+
+            if(
+                typeof value === "string"
+            ){
+
+                const text =
+                    value.trim();
+
+
+                if(
+                    (
+                        text.includes(
+                            "https://chat.whatsapp.com/"
+                        ) ||
+                        text.includes(
+                            "http://chat.whatsapp.com/"
+                        ) ||
+                        text.includes(
+                            "https://wa.me/"
+                        ) ||
+                        text.includes(
+                            "http://wa.me/"
+                        )
+                    )
+                )
+                    return text;
+
+            }
+
+
+            if(
+                value &&
+                typeof value === "object"
+            ){
+
+                const result =
+                    recursiveFind(
+                        value,
+                        depth + 1
+                    );
+
+
+                if(result)
+                    return result;
+
+            }
+
+        }
+
+
+        return "";
+
+    }
+
+
+    return recursiveFind(
+        match
+    );
+
+}
+
+
+/* =========================================================
+   NORMALIZE WHATSAPP LINK
+========================================================= */
+
+function normalizeWhatsAppLink(
+    value
+){
+
+    if(
+        value === null ||
+        value === undefined
+    )
+        return "";
+
+
+    let link =
+        String(
+            value
+        ).trim();
+
+
+    if(!link)
+        return "";
+
+
+    /*
+       Remove accidental spaces
+    */
+
+    link =
+        link.replace(
+            /\s+/g,
+            ""
+        );
+
+
+    /*
+       WhatsApp invitation links
+    */
+
+    if(
+        link.startsWith(
+            "chat.whatsapp.com/"
+        )
+    ){
+
+        link =
+            "https://" +
+            link;
+
+    }
+
+
+    if(
+        link.startsWith(
+            "www.chat.whatsapp.com/"
+        )
+    ){
+
+        link =
+            "https://" +
+            link;
+
+    }
+
+
+    if(
+        link.startsWith(
+            "wa.me/"
+        )
+    ){
+
+        link =
+            "https://" +
+            link;
+
+    }
+
+
+    if(
+        !/^https?:\/\//i.test(
+            link
+        )
+    ){
+
+        /*
+           Agar Firebase mein sirf
+           WhatsApp invite code saved hai.
+        */
+
+        if(
+            /^[A-Za-z0-9_-]{10,}$/.test(
+                link
+            )
+        ){
+
+            link =
+                "https://chat.whatsapp.com/" +
+                link;
+
+        }
+
+    }
+
+
+    return link;
+
+}
+
+
+/* =========================================================
+   ROOM + WHATSAPP
 ========================================================= */
 
 async function loadJoinedRoom(){
@@ -4410,6 +4867,11 @@ async function loadJoinedRoom(){
 
     try{
 
+        /*
+           FIRST:
+           Check that user actually joined
+        */
+
         const joined =
             await getJoinedData();
 
@@ -4421,13 +4883,23 @@ async function loadJoinedRoom(){
             $("roomLocked").style.display =
                 "block";
 
+
             $("roomData").style.display =
                 "none";
+
+
+            $("groupBox").style.display =
+                "none";
+
 
             return;
 
         }
 
+
+        /*
+           Load latest match data
+        */
 
         const matchSnap =
             await get(
@@ -4441,37 +4913,98 @@ async function loadJoinedRoom(){
 
         if(
             !matchSnap.exists()
-        )
+        ){
+
+            console.warn(
+                "Match not found:",
+                matchId
+            );
+
+
             return;
+
+        }
 
 
         const match =
             matchSnap.val() || {};
 
 
+        /*
+           DEBUG:
+           Browser console mein Firebase
+           ka complete match data dikhega.
+        */
+
+        console.log(
+            "MATCH DATA:",
+            match
+        );
+
+
+        /* =================================================
+           ROOM ID
+        ================================================== */
+
         const roomId =
-            match.roomId ||
-            match.roomID ||
-            match.room ||
-            match.gameRoomId ||
+            match.roomId ??
+            match.roomID ??
+            match.room ??
+            match.gameRoomId ??
+            match.gameRoomID ??
             "";
 
+
+        /* =================================================
+           ROOM PASSWORD
+        ================================================== */
 
         const password =
-            match.roomPassword ||
-            match.password ||
-            match.roomPass ||
-            match.roomPasswordValue ||
+            match.roomPassword ??
+            match.password ??
+            match.roomPass ??
+            match.roomPasswordValue ??
+            match.roomPasscode ??
             "";
 
 
-        const groupLink =
-            match.groupLink ||
-            match.whatsappLink ||
-            match.whatsappGroup ||
-            match.whatsapp ||
-            "";
+        /* =================================================
+           WHATSAPP
+        ================================================== */
 
+        let groupLink =
+            extractWhatsAppLink(
+                match
+            );
+
+
+        groupLink =
+            normalizeWhatsAppLink(
+                groupLink
+            );
+
+
+        console.log(
+            "DETECTED WHATSAPP LINK:",
+            groupLink
+        );
+
+
+        /*
+           Joined content visible
+        */
+
+        $("joinedContent").style.display =
+            "block";
+
+
+        $("normalMatchContent").style.display =
+            "none";
+
+
+        /*
+           Room data visible
+        */
 
         $("roomLocked").style.display =
             "none";
@@ -4481,13 +5014,20 @@ async function loadJoinedRoom(){
             "block";
 
 
+        /* =================================================
+           ROOM ID
+        ================================================== */
+
         if(roomId){
 
             $("roomIdBox").style.display =
                 "block";
 
+
             $("roomId").innerText =
-                roomId;
+                String(
+                    roomId
+                );
 
         }
         else{
@@ -4497,14 +5037,21 @@ async function loadJoinedRoom(){
 
         }
 
+
+        /* =================================================
+           ROOM PASSWORD
+        ================================================== */
 
         if(password){
 
             $("roomPassBox").style.display =
                 "block";
 
+
             $("roomPassword").innerText =
-                password;
+                String(
+                    password
+                );
 
         }
         else{
@@ -4515,19 +5062,71 @@ async function loadJoinedRoom(){
         }
 
 
-        if(groupLink){
+        /* =================================================
+           WHATSAPP GROUP
+        ================================================== */
+
+        if(
+            groupLink
+        ){
 
             $("groupBox").style.display =
                 "block";
 
+
             $("groupLink").href =
                 groupLink;
+
+
+            $("groupLink").setAttribute(
+                "href",
+                groupLink
+            );
+
+
+            $("groupLink").target =
+                "_blank";
+
+
+            $("groupLink").rel =
+                "noopener noreferrer";
+
+
+            /*
+               Ensure browser treats it as
+               external WhatsApp link.
+            */
+
+            $("groupLink").onclick =
+                event => {
+
+                    event.stopPropagation();
+
+                };
+
+
+            console.log(
+                "WhatsApp button enabled:",
+                groupLink
+            );
 
         }
         else{
 
             $("groupBox").style.display =
                 "none";
+
+
+            $("groupLink").removeAttribute(
+                "href"
+            );
+
+
+            console.warn(
+                "WhatsApp Group Link NOT FOUND.",
+                "Firebase match data:",
+                match
+            );
 
         }
 
@@ -4535,9 +5134,13 @@ async function loadJoinedRoom(){
     catch(error){
 
         console.error(
-            "Room:",
+            "loadJoinedRoom ERROR:",
             error
         );
+
+
+        $("groupBox").style.display =
+            "none";
 
     }
 
@@ -4584,7 +5187,9 @@ function loadPlayers(){
                     box.innerHTML =
                         '<div class="empty">No Teams Joined</div>';
 
+
                     updateSlotCount();
+
 
                     return;
 
@@ -4683,6 +5288,7 @@ function loadPlayers(){
                 updateSlotCount();
 
             },
+
 
             error => {
 
@@ -5015,7 +5621,9 @@ async function processCancellationRefund(
 
         showToast(
             "₹" +
-            formatNumber(entryFee) +
+            formatNumber(
+                entryFee
+            ) +
             " refund wallet me aa gaya.",
             "success"
         );
@@ -5088,11 +5696,6 @@ setInterval(
             return;
 
 
-        /*
-            Time-based registration close
-            har second check hoga.
-        */
-
         if(
             isRegistrationClosed(
                 currentMatch
@@ -5102,17 +5705,22 @@ setInterval(
             $("joinBtn").disabled =
                 true;
 
+
             $("joinBtn").innerText =
                 "🔒 REGISTRATION CLOSED";
+
 
             $("registrationClosed").style.display =
                 "block";
 
+
             $("registrationClosed").innerText =
                 "🔒 Registration close ho chuka hai.";
 
+
             $("addMoneyBtn").style.display =
                 "none";
+
 
             return;
 
@@ -5130,17 +5738,22 @@ setInterval(
             $("joinBtn").disabled =
                 true;
 
+
             $("joinBtn").innerText =
                 "🚫 JOIN BLOCKED";
+
 
             $("registrationClosed").style.display =
                 "block";
 
+
             $("registrationClosed").innerText =
                 "🚫 Aap is match me join nahi kar sakte.";
 
+
             $("addMoneyBtn").style.display =
                 "none";
+
 
             return;
 
@@ -5169,8 +5782,10 @@ window.addEventListener(
         if(walletUnsubscribe)
             walletUnsubscribe();
 
+
         if(matchUnsubscribe)
             matchUnsubscribe();
+
 
         if(playersUnsubscribe)
             playersUnsubscribe();
@@ -5186,8 +5801,10 @@ window.addEventListener(
 window.closeRules =
     closeRules;
 
+
 window.closeConfirm =
     closeConfirm;
+
 
 window.closeTeamModal =
     closeTeamModal;
