@@ -29,59 +29,79 @@ rel="stylesheet">
     -webkit-tap-highlight-color:transparent;
 }
 
-html,
-body{
+html{
+    width:100%;
     min-height:100%;
+    background:#050B18;
 }
 
 body{
+    width:100%;
+    min-height:100dvh;
+    margin:0;
+    padding:0;
     background:#050B18;
     color:#fff;
     overflow-x:hidden;
+    -webkit-text-size-adjust:100%;
 }
 
 body::before{
     content:"";
     position:fixed;
     inset:0;
-    pointer-events:none;
     z-index:-1;
+    pointer-events:none;
 
     background:
     radial-gradient(
         circle at 0% 0%,
-        rgba(34,197,94,.16),
-        transparent 35%
+        rgba(34,197,94,.14),
+        transparent 34%
     ),
     radial-gradient(
         circle at 100% 0%,
-        rgba(37,99,235,.14),
-        transparent 35%
+        rgba(37,99,235,.12),
+        transparent 34%
     ),
     radial-gradient(
         circle at 50% 100%,
-        rgba(168,85,247,.08),
+        rgba(168,85,247,.07),
         transparent 40%
     ),
     #050B18;
 }
 
+
+/* =========================================
+   MOBILE APP CONTAINER
+========================================= */
+
 .app{
     width:100%;
     max-width:520px;
-    margin:auto;
-    padding:16px;
-    padding-bottom:40px;
+    min-height:100dvh;
+
+    margin:0 auto;
+
+    padding:
+    max(12px, env(safe-area-inset-top))
+    12px
+    max(24px, env(safe-area-inset-bottom));
+
+    overflow-x:hidden;
 }
 
 
-/* =========================
+/* =========================================
    HEADER
-========================= */
+========================================= */
 
 .header{
     position:relative;
     overflow:hidden;
+
+    width:100%;
 
     background:
     linear-gradient(
@@ -90,33 +110,33 @@ body::before{
         rgba(10,15,28,.98)
     );
 
-    border:1px solid rgba(255,255,255,.09);
-    border-radius:24px;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:19px;
 
-    padding:20px;
+    padding:15px;
 
-    margin-bottom:16px;
+    margin-bottom:11px;
 
     box-shadow:
-    0 18px 45px rgba(0,0,0,.28);
+    0 12px 30px rgba(0,0,0,.25);
 }
 
 .header::after{
     content:"";
     position:absolute;
 
-    width:120px;
-    height:120px;
+    width:100px;
+    height:100px;
 
-    right:-45px;
-    top:-55px;
+    right:-40px;
+    top:-50px;
 
     border-radius:50%;
 
     background:
     radial-gradient(
         circle,
-        rgba(34,197,94,.20),
+        rgba(34,197,94,.18),
         transparent 70%
     );
 
@@ -124,47 +144,59 @@ body::before{
 }
 
 .headerTop{
+    position:relative;
+    z-index:1;
+
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:12px;
+
+    gap:10px;
 }
 
 .header h1{
-    font-size:22px;
+    font-size:18px;
+    line-height:1.2;
     font-weight:800;
+
     color:#22c55e;
 }
 
 .header p{
     margin-top:4px;
+
     color:#94a3b8;
-    font-size:12px;
+
+    font-size:10px;
+    line-height:1.4;
 }
 
 .adminBadge{
     flex-shrink:0;
 
-    padding:7px 11px;
+    padding:6px 9px;
 
     border-radius:30px;
 
-    background:rgba(34,197,94,.10);
-    border:1px solid rgba(34,197,94,.25);
+    background:rgba(34,197,94,.09);
+    border:1px solid rgba(34,197,94,.22);
 
     color:#22c55e;
 
-    font-size:10px;
+    font-size:8px;
     font-weight:800;
-    letter-spacing:.8px;
+
+    letter-spacing:.7px;
 }
 
 
-/* =========================
-   FORM CARD
-========================= */
+/* =========================================
+   MAIN CARD
+========================================= */
 
 .card{
+    width:100%;
+
     background:
     linear-gradient(
         145deg,
@@ -172,22 +204,24 @@ body::before{
         rgba(12,18,31,.98)
     );
 
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:24px;
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:19px;
 
-    padding:20px;
+    padding:14px;
 
     box-shadow:
-    0 18px 45px rgba(0,0,0,.25);
+    0 12px 32px rgba(0,0,0,.22);
+
+    overflow:hidden;
 }
 
 
-/* =========================
+/* =========================================
    SECTION
-========================= */
+========================================= */
 
 .section{
-    margin-bottom:20px;
+    margin-bottom:15px;
 }
 
 .section:last-child{
@@ -197,94 +231,107 @@ body::before{
 .sectionTitle{
     display:flex;
     align-items:center;
-    gap:9px;
 
-    font-size:14px;
+    gap:7px;
+
+    font-size:12px;
     font-weight:800;
 
     color:#fff;
 
-    margin-bottom:3px;
+    margin-bottom:2px;
 }
 
 .sectionTitleIcon{
-    width:30px;
-    height:30px;
+    width:27px;
+    height:27px;
+
+    flex:0 0 27px;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    border-radius:9px;
+    border-radius:8px;
 
     background:#0f172a;
-    border:1px solid rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.07);
+
+    font-size:13px;
 }
 
 .sectionSub{
+    margin-left:34px;
+    margin-bottom:8px;
+
     color:#64748b;
-    font-size:11px;
-    margin-left:39px;
-    margin-bottom:12px;
+
+    font-size:9px;
+    line-height:1.35;
 }
 
 
-/* =========================
+/* =========================================
    LABEL
-========================= */
+========================================= */
 
 label{
     display:block;
 
-    font-size:12px;
+    font-size:10px;
     font-weight:600;
 
     color:#94a3b8;
 
-    margin-top:13px;
-    margin-bottom:7px;
+    margin-top:9px;
+    margin-bottom:5px;
 }
 
 
-/* =========================
-   INPUT
-========================= */
+/* =========================================
+   INPUT / SELECT
+========================================= */
 
 input,
 select{
     width:100%;
-    height:50px;
+    max-width:100%;
 
-    border:1px solid rgba(255,255,255,.08);
+    height:44px;
+
+    border:1px solid rgba(255,255,255,.07);
     outline:none;
 
-    border-radius:13px;
+    border-radius:11px;
 
     background:#0f172a;
 
     color:#fff;
 
-    padding:0 14px;
+    padding:
+    0 11px;
 
-    font-size:14px;
+    font-size:12px;
 
-    transition:.2s;
+    appearance:auto;
+
+    transition:
+    border-color .18s,
+    box-shadow .18s;
 }
 
 input:focus,
 select:focus{
-    border-color:rgba(34,197,94,.55);
+    border-color:
+    rgba(34,197,94,.5);
 
     box-shadow:
-    0 0 0 3px rgba(34,197,94,.08);
+    0 0 0 2px
+    rgba(34,197,94,.07);
 }
 
 input::placeholder{
     color:#64748b;
-}
-
-select{
-    appearance:auto;
 }
 
 input[type="date"],
@@ -293,77 +340,90 @@ input[type="time"]{
 }
 
 
-/* =========================
+/* =========================================
    MODE GRID
-========================= */
+========================================= */
 
 .modeGrid{
+    width:100%;
+
     display:grid;
 
     grid-template-columns:
-    repeat(4,1fr);
+    repeat(4,minmax(0,1fr));
 
-    gap:8px;
+    gap:6px;
 
-    margin-top:10px;
+    margin-top:8px;
 }
 
 .modeOption{
     position:relative;
+
+    min-width:0;
 }
 
 .modeOption input{
     position:absolute;
+
+    width:1px;
+    height:1px;
+
     opacity:0;
     pointer-events:none;
 }
 
 .modeLabel{
-    height:52px;
+    width:100%;
+    height:43px;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    border-radius:13px;
+    border-radius:10px;
 
     background:#0f172a;
 
-    border:1px solid rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.07);
 
     color:#94a3b8;
 
-    font-size:11px;
+    font-size:9px;
     font-weight:800;
 
     cursor:pointer;
 
-    transition:.2s;
+    transition:.18s;
 }
 
 .modeOption input:checked + .modeLabel{
-    background:rgba(34,197,94,.12);
+    background:
+    rgba(34,197,94,.11);
 
     border-color:
-    rgba(34,197,94,.65);
+    rgba(34,197,94,.55);
 
     color:#22c55e;
 
     box-shadow:
-    inset 0 0 0 1px rgba(34,197,94,.12);
+    inset 0 0 0 1px
+    rgba(34,197,94,.08);
 }
 
 
-/* =========================
-   MAP SELECTION
-========================= */
+/* =========================================
+   MAP BOX
+========================================= */
 
 .mapBox{
-    margin-top:14px;
+    width:100%;
 
-    padding:14px;
+    margin-top:10px;
 
-    border-radius:17px;
+    padding:10px;
+
+    border-radius:13px;
 
     background:
     linear-gradient(
@@ -372,104 +432,119 @@ input[type="time"]{
         rgba(8,15,28,.95)
     );
 
-    border:1px solid rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.06);
 }
 
 .mapHeader{
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    gap:10px;
+    justify-content:space-between;
 
-    margin-bottom:10px;
+    gap:8px;
+
+    margin-bottom:7px;
 }
 
 .mapHeaderTitle{
-    font-size:12px;
+    font-size:10px;
     font-weight:800;
+
     color:#fff;
 }
 
 .mapCount{
-    padding:5px 9px;
+    padding:4px 7px;
 
     border-radius:20px;
 
-    background:rgba(34,197,94,.09);
+    background:
+    rgba(34,197,94,.08);
 
-    border:1px solid rgba(34,197,94,.18);
+    border:1px solid
+    rgba(34,197,94,.15);
 
     color:#22c55e;
 
-    font-size:9px;
+    font-size:7px;
     font-weight:800;
 }
 
 .mapGrid{
+    width:100%;
+
     display:grid;
 
     grid-template-columns:
-    repeat(2,1fr);
+    repeat(2,minmax(0,1fr));
 
-    gap:8px;
+    gap:6px;
 }
 
 .mapOption{
     position:relative;
+
+    min-width:0;
 }
 
 .mapOption input{
     position:absolute;
+
+    width:1px;
+    height:1px;
+
     opacity:0;
     pointer-events:none;
 }
 
 .mapLabel{
-    min-height:48px;
+    width:100%;
+    min-height:40px;
 
     display:flex;
     align-items:center;
     justify-content:space-between;
 
-    gap:8px;
+    gap:5px;
 
-    padding:0 12px;
+    padding:
+    0 9px;
 
-    border-radius:12px;
+    border-radius:9px;
 
     background:#0b1424;
 
-    border:1px solid rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.06);
 
     color:#94a3b8;
 
-    font-size:11px;
+    font-size:9px;
     font-weight:800;
 
     cursor:pointer;
 
-    transition:.2s;
+    transition:.18s;
 }
 
 .mapCheck{
-    width:19px;
-    height:19px;
+    width:17px;
+    height:17px;
+
+    flex:0 0 17px;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    border-radius:6px;
+    border-radius:5px;
 
     background:#111827;
 
-    border:1px solid rgba(255,255,255,.10);
+    border:1px solid
+    rgba(255,255,255,.09);
 
     color:transparent;
 
-    font-size:11px;
-
-    transition:.2s;
+    font-size:9px;
 }
 
 .mapOption input:checked + .mapLabel{
@@ -478,18 +553,17 @@ input[type="time"]{
     background:
     linear-gradient(
         135deg,
-        rgba(34,197,94,.13),
-        rgba(34,197,94,.04)
+        rgba(34,197,94,.12),
+        rgba(34,197,94,.035)
     );
 
     border-color:
-    rgba(34,197,94,.50);
-
-    box-shadow:
-    inset 0 0 0 1px rgba(34,197,94,.06);
+    rgba(34,197,94,.48);
 }
 
-.mapOption input:checked + .mapLabel .mapCheck{
+.mapOption input:checked
++ .mapLabel
+.mapCheck{
     background:#22c55e;
 
     border-color:#22c55e;
@@ -498,78 +572,38 @@ input[type="time"]{
 }
 
 .mapHint{
-    margin-top:9px;
+    margin-top:6px;
 
     color:#64748b;
 
-    font-size:10px;
+    font-size:8px;
 
-    line-height:1.5;
+    line-height:1.4;
 }
 
 
-/* =========================
-   PRIZE GRID
-========================= */
-
-.prizeGrid{
-    display:grid;
-
-    grid-template-columns:
-    repeat(2,1fr);
-
-    gap:9px;
-}
-
-.prizeItem{
-    background:#0f172a;
-
-    border:1px solid rgba(255,255,255,.07);
-
-    border-radius:14px;
-
-    padding:10px;
-}
-
-.prizeItem span{
-    display:block;
-
-    color:#64748b;
-
-    font-size:10px;
-    font-weight:700;
-
-    margin-bottom:7px;
-}
-
-.prizeItem input{
-    height:43px;
-    padding:0 9px;
-    font-size:13px;
-}
-
-
-/* =========================
-   TDM BOX
-========================= */
+/* =========================================
+   TDM
+========================================= */
 
 .tdmBox{
     display:none;
 
-    margin-top:14px;
+    margin-top:10px;
 
-    padding:14px;
+    padding:10px;
 
-    border-radius:16px;
+    border-radius:13px;
 
     background:
     linear-gradient(
         145deg,
-        rgba(37,99,235,.08),
-        rgba(34,197,94,.05)
+        rgba(37,99,235,.07),
+        rgba(34,197,94,.04)
     );
 
-    border:1px solid rgba(37,99,235,.18);
+    border:1px solid
+    rgba(37,99,235,.15);
 }
 
 .tdmBox.show{
@@ -577,15 +611,16 @@ input[type="time"]{
 }
 
 .rewardPreview{
-    margin-top:12px;
+    margin-top:8px;
 
-    padding:12px;
+    padding:9px;
 
-    border-radius:12px;
+    border-radius:10px;
 
     background:#07111f;
 
-    border:1px solid rgba(34,197,94,.14);
+    border:1px solid
+    rgba(34,197,94,.12);
 
     text-align:center;
 }
@@ -595,65 +630,125 @@ input[type="time"]{
 
     color:#64748b;
 
-    font-size:10px;
+    font-size:8px;
 
-    margin-bottom:3px;
+    margin-bottom:1px;
 }
 
 .rewardPreview strong{
     color:#22c55e;
 
-    font-size:19px;
+    font-size:16px;
 }
 
 
-/* =========================
-   TWO COLUMN
-========================= */
+/* =========================================
+   PRIZE GRID
+========================================= */
 
-.twoCol{
+.prizeGrid{
     display:grid;
 
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:
+    repeat(2,minmax(0,1fr));
 
-    gap:10px;
+    gap:6px;
+}
+
+.prizeItem{
+    min-width:0;
+
+    background:#0f172a;
+
+    border:1px solid
+    rgba(255,255,255,.06);
+
+    border-radius:10px;
+
+    padding:7px;
+}
+
+.prizeItem span{
+    display:block;
+
+    color:#64748b;
+
+    font-size:8px;
+    font-weight:700;
+
+    margin-bottom:4px;
+}
+
+.prizeItem input{
+    height:37px;
+
+    padding:0 8px;
+
+    font-size:11px;
 }
 
 
-/* =========================
+/* =========================================
+   TWO COLUMN
+========================================= */
+
+.twoCol{
+    width:100%;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+    gap:7px;
+}
+
+.twoCol > div{
+    min-width:0;
+}
+
+
+/* =========================================
    SUMMARY
-========================= */
+========================================= */
 
 .summary{
-    margin-top:16px;
+    width:100%;
 
-    padding:15px;
+    margin-top:11px;
 
-    border-radius:17px;
+    padding:10px;
+
+    border-radius:13px;
 
     background:#080f1c;
 
-    border:1px solid rgba(255,255,255,.07);
+    border:1px solid
+    rgba(255,255,255,.06);
 }
 
 .summaryTitle{
-    font-size:12px;
+    font-size:10px;
     font-weight:800;
 
     color:#fff;
 
-    margin-bottom:11px;
+    margin-bottom:6px;
 }
 
 .summaryRow{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
+    min-height:30px;
 
-    padding:8px 0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:8px;
+
+    padding:5px 0;
 
     border-bottom:
-    1px solid rgba(255,255,255,.06);
+    1px solid rgba(255,255,255,.05);
 }
 
 .summaryRow:last-child{
@@ -662,35 +757,72 @@ input[type="time"]{
 
 .summaryLabel{
     color:#64748b;
-    font-size:11px;
+
+    font-size:9px;
+
+    flex-shrink:0;
 }
 
 .summaryValue{
+    min-width:0;
+
     color:#fff;
-    font-size:12px;
+
+    font-size:9px;
     font-weight:700;
 
     text-align:right;
 
-    max-width:60%;
+    max-width:68%;
+
     overflow:hidden;
+
     text-overflow:ellipsis;
+
     white-space:nowrap;
 }
 
 
-/* =========================
+/* =========================================
+   INFO
+========================================= */
+
+.infoBox{
+    margin-top:9px;
+
+    padding:9px 10px;
+
+    border-radius:10px;
+
+    background:
+    rgba(34,197,94,.05);
+
+    border:1px solid
+    rgba(34,197,94,.10);
+
+    color:#86efac;
+
+    font-size:8px;
+
+    line-height:1.5;
+}
+
+
+/* =========================================
    SAVE BUTTON
-========================= */
+========================================= */
 
 .saveBtn{
     width:100%;
-    height:54px;
+    max-width:100%;
 
-    margin-top:20px;
+    height:47px;
+
+    margin-top:11px;
 
     border:none;
-    border-radius:15px;
+
+    border-radius:12px;
 
     background:
     linear-gradient(
@@ -701,15 +833,18 @@ input[type="time"]{
 
     color:#020617;
 
-    font-size:15px;
+    font-size:12px;
     font-weight:800;
 
     cursor:pointer;
 
     box-shadow:
-    0 10px 25px rgba(34,197,94,.18);
+    0 8px 20px
+    rgba(34,197,94,.16);
 
-    transition:.2s;
+    transition:
+    transform .15s,
+    opacity .15s;
 }
 
 .saveBtn:active{
@@ -718,66 +853,47 @@ input[type="time"]{
 
 .saveBtn:disabled{
     opacity:.6;
+
     cursor:not-allowed;
 }
 
 
-/* =========================
-   INFO
-========================= */
-
-.infoBox{
-    margin-top:13px;
-
-    padding:12px 14px;
-
-    border-radius:13px;
-
-    background:rgba(34,197,94,.06);
-
-    border:1px solid rgba(34,197,94,.12);
-
-    color:#86efac;
-
-    font-size:11px;
-
-    line-height:1.6;
-}
-
-
-/* =========================
+/* =========================================
    TOAST
-========================= */
+========================================= */
 
 .toast{
     position:fixed;
 
     left:50%;
 
-    bottom:20px;
+    bottom:
+    max(14px,env(safe-area-inset-bottom));
 
     transform:
-    translate(-50%,120px);
+    translate(-50%,100px);
 
     width:
-    calc(100% - 32px);
+    calc(100% - 24px);
 
     max-width:480px;
 
-    padding:13px 15px;
+    padding:11px 13px;
 
-    border-radius:14px;
+    border-radius:11px;
 
     background:#111827;
 
-    border:1px solid rgba(255,255,255,.10);
+    border:1px solid
+    rgba(255,255,255,.08);
 
     box-shadow:
-    0 15px 40px rgba(0,0,0,.4);
+    0 12px 30px
+    rgba(0,0,0,.4);
 
     color:#fff;
 
-    font-size:12px;
+    font-size:10px;
     font-weight:600;
 
     text-align:center;
@@ -786,7 +902,7 @@ input[type="time"]{
 
     opacity:0;
 
-    transition:.3s;
+    transition:.25s;
 }
 
 .toast.show{
@@ -807,14 +923,17 @@ input[type="time"]{
 }
 
 
-/* =========================
+/* =========================================
    LOADING
-========================= */
+========================================= */
 
 .loadingOverlay{
     position:fixed;
 
     inset:0;
+
+    width:100%;
+    height:100dvh;
 
     background:#050B18;
 
@@ -825,7 +944,7 @@ input[type="time"]{
 
     flex-direction:column;
 
-    gap:12px;
+    gap:9px;
 
     z-index:9998;
 
@@ -834,34 +953,37 @@ input[type="time"]{
 
 .loadingOverlay.hide{
     opacity:0;
+
     pointer-events:none;
 }
 
 .loadingIcon{
-    width:58px;
-    height:58px;
+    width:48px;
+    height:48px;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    border-radius:18px;
+    border-radius:14px;
 
     background:#111827;
 
-    border:1px solid rgba(34,197,94,.2);
+    border:1px solid
+    rgba(34,197,94,.18);
 
-    font-size:27px;
+    font-size:23px;
 }
 
 .loadingText{
     color:#94a3b8;
-    font-size:12px;
+
+    font-size:10px;
 }
 
 .spinner{
-    width:25px;
-    height:25px;
+    width:22px;
+    height:22px;
 
     border-radius:50%;
 
@@ -880,51 +1002,175 @@ input[type="time"]{
 }
 
 
-/* =========================
-   MOBILE
-========================= */
+/* =========================================
+   VERY SMALL PHONES
+========================================= */
 
-@media(max-width:380px){
+@media(max-width:360px){
 
     .app{
-        padding:12px;
-    }
-
-    .card{
-        padding:15px;
+        padding-left:9px;
+        padding-right:9px;
     }
 
     .header{
-        padding:16px;
+        padding:13px;
+        border-radius:16px;
     }
 
     .header h1{
-        font-size:19px;
+        font-size:16px;
+    }
+
+    .header p{
+        font-size:9px;
+    }
+
+    .adminBadge{
+        font-size:7px;
+        padding:5px 7px;
+    }
+
+    .card{
+        padding:11px;
+        border-radius:16px;
+    }
+
+    .section{
+        margin-bottom:13px;
     }
 
     .modeGrid{
-        gap:5px;
+        gap:4px;
     }
 
     .modeLabel{
-        font-size:10px;
+        height:40px;
+        font-size:8px;
     }
 
     .mapGrid{
-        gap:6px;
+        gap:5px;
     }
 
     .mapLabel{
-        padding:0 9px;
-        font-size:10px;
+        min-height:38px;
+        padding:0 7px;
+        font-size:8px;
     }
 
-    .prizeGrid{
-        gap:6px;
+    .mapCheck{
+        width:15px;
+        height:15px;
+        flex-basis:15px;
     }
 
+    input,
+    select{
+        height:41px;
+        font-size:11px;
+    }
+
+    .saveBtn{
+        height:44px;
+        font-size:11px;
+    }
 }
 
+
+/* =========================================
+   PREVENT IOS INPUT ZOOM
+========================================= */
+
+@media(max-width:600px){
+
+    input,
+    select,
+    textarea{
+        font-size:16px;
+    }
+
+    .prizeItem input{
+        font-size:14px;
+    }
+
+    .summaryValue,
+    .summaryLabel,
+    .mapLabel,
+    .modeLabel,
+    .sectionSub,
+    .infoBox,
+    .header p,
+    .adminBadge{
+        font-size:10px;
+    }
+}
+
+
+/* =========================================
+   LANDSCAPE MOBILE
+========================================= */
+
+@media(
+    max-height:500px
+) and (
+    orientation:landscape
+){
+
+    .app{
+        padding-top:8px;
+        padding-bottom:15px;
+    }
+
+    .header{
+        padding:10px 13px;
+        margin-bottom:8px;
+    }
+
+    .card{
+        padding:11px;
+    }
+
+    .section{
+        margin-bottom:10px;
+    }
+
+    .sectionSub{
+        margin-bottom:5px;
+    }
+
+    input,
+    select{
+        height:38px;
+    }
+
+    .modeLabel{
+        height:37px;
+    }
+
+    .mapLabel{
+        min-height:36px;
+    }
+
+    .saveBtn{
+        height:42px;
+        margin-top:8px;
+    }
+}
+
+
+/* =========================================
+   REMOVE OUTER SCROLLBAR
+========================================= */
+
+::-webkit-scrollbar{
+    width:0;
+    height:0;
+}
+
+*{
+    scrollbar-width:none;
+}
 </style>
 
 </head>
